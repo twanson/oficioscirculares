@@ -959,9 +959,59 @@ p {
         display: flex;
     }
     
+    /* ===== HERO MOBILE IMPROVEMENTS ===== */
+    .hero {
+        padding: 0 1rem;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 40px 20px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .hero-title {
+        font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+        line-height: 1.15;
+        margin-bottom: 32px;
+        max-width: 100%;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+        margin-bottom: 24px;
+        max-width: 100%;
+        line-height: 1.5;
+    }
+    
+    .hero-description {
+        font-size: clamp(1rem, 4vw, 1.2rem);
+        margin-bottom: 40px;
+        max-width: 100%;
+        line-height: 1.6;
+    }
+    
     .hero-ctas {
         flex-direction: column;
         align-items: center;
+        gap: 16px;
+        margin-top: 8px;
+    }
+    
+    .hero-ctas .btn {
+        width: auto;
+        min-width: 220px;
+        max-width: 300px;
+        justify-content: center;
+        padding: 16px 32px;
     }
     
     .about-content {
@@ -1023,6 +1073,46 @@ p {
 }
 
 @media (max-width: 480px) {
+    /* ===== HERO EXTRA SMALL MOBILE ===== */
+    .hero {
+        padding: 0 0.75rem;
+        min-height: 100vh;
+    }
+    
+    .hero-content {
+        padding: 30px 16px;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.9rem, 9vw, 2.8rem) !important;
+        line-height: 1.1;
+        margin-bottom: 28px;
+    }
+    
+    .title-line {
+        display: block;
+        margin-bottom: 4px;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1rem, 5vw, 1.25rem);
+        margin-bottom: 20px;
+        line-height: 1.45;
+    }
+    
+    .hero-description {
+        font-size: clamp(0.9rem, 4.2vw, 1.1rem);
+        margin-bottom: 32px;
+        line-height: 1.55;
+    }
+    
+    .hero-ctas .btn {
+        padding: 14px 28px;
+        font-size: 0.95rem;
+        min-width: 200px;
+    }
+    
+    /* ===== OTHER MOBILE IMPROVEMENTS ===== */
     .benefits-grid {
         grid-template-columns: 1fr;
     }
