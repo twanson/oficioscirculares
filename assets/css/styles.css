@@ -663,6 +663,14 @@ p {
     color: var(--arena);
 }
 
+.service-card.featured .service-description {
+    color: white;
+}
+
+.service-card.featured .service-features li {
+    color: white;
+}
+
 .service-description {
     margin-bottom: 24px;
 }
@@ -907,6 +915,7 @@ p {
     font-size: 1.125rem;
     margin-bottom: 24px;
     line-height: 1.7;
+    color: white;
 }
 
 .cta-question {
