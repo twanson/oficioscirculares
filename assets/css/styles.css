@@ -267,6 +267,11 @@ p {
     padding-left: 2rem;
 }
 
+/* CSS TEST - Temporal para verificar que se aplica */
+.hero-title {
+    border: 2px solid red !important;
+}
+
 .hero-background {
     position: absolute;
     top: 0;
@@ -283,26 +288,26 @@ p {
     object-position: center;
 }
 
-.hero-overlay {
-    position: absolute;
+.hero .hero-overlay {
+    position: absolute !important;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: linear-gradient(
         to right,
-        rgba(20, 20, 20, 0.8) 0%,      /* Muy oscuro al inicio para contraste perfecto */
-        rgba(20, 20, 20, 0.6) 25%,     /* Gradualmente menos oscuro */
-        rgba(20, 20, 20, 0.3) 50%,     /* Medio punto equilibrado */
-        rgba(20, 20, 20, 0.1) 75%,     /* Muy claro hacia el artesano */
-        rgba(0, 0, 0, 0) 100%          /* Completamente transparente al final */
-    );
-    z-index: -1;
+        rgba(15, 15, 15, 0.85) 0%,      /* MUY oscuro detrás del texto */
+        rgba(15, 15, 15, 0.6) 30%,      /* Gradualmente menos oscuro */
+        rgba(15, 15, 15, 0.25) 60%,     /* Mucho más claro */
+        rgba(0, 0, 0, 0.05) 85%,        /* Casi transparente */
+        rgba(0, 0, 0, 0) 100%           /* Completamente transparente */
+    ) !important;
+    z-index: 1 !important;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 10 !important;
     color: white;
     text-align: left !important;
     width: 55%;
