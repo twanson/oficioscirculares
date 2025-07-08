@@ -1,0 +1,16 @@
+{
+  "name": "oficios-circulares-website",
+  "version": "1.0.0",
+  "description": "Sitio web estático de Oficios Circulares",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -s . -l $PORT",
+    "dev": "npx serve -s . -l 3000"
+  },
+  "keywords": ["static", "website", "oficios", "circulares"],
+  "author": "Oficios Circulares",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+} 
