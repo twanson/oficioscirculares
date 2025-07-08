@@ -267,11 +267,6 @@ p {
     padding-left: 2rem;
 }
 
-/* CSS TEST - Temporal para verificar que se aplica */
-.hero-title {
-    border: 2px solid red !important;
-}
-
 .hero-background {
     position: absolute;
     top: 0;
