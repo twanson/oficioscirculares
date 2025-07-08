@@ -608,6 +608,7 @@ p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
+    align-items: stretch;
 }
 
 .service-card {
@@ -617,6 +618,9 @@ p {
     box-shadow: 0 8px 32px rgba(31, 75, 63, 0.08);
     transition: var(--transition-smooth);
     position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
@@ -665,6 +669,7 @@ p {
 
 .service-features {
     list-style: none;
+    flex-grow: 1;
 }
 
 .service-features li {
@@ -692,6 +697,7 @@ p {
     color: inherit;
     display: block;
     transition: var(--transition-smooth);
+    height: 100%;
 }
 
 .service-card-link:hover {
@@ -712,6 +718,7 @@ p {
 
 .methodology-steps {
     margin-top: 24px;
+    flex-grow: 1;
 }
 
 .step {
