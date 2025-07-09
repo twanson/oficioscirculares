@@ -5,10 +5,19 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Configuración de MailChimp
-const MAILCHIMP_API_KEY = 'c8070e12fca98a38ab7600fd6193eb0a-us2';
-const MAILCHIMP_AUDIENCE_ID = '947779';
-const MAILCHIMP_SERVER_PREFIX = 'us2';
+// Configuración de MailChimp (usando variables de entorno)
+const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
+const MAILCHIMP_AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID || '947779';
+const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX || 'us2';
+
+// Validar que las variables de entorno estén configuradas
+if (!MAILCHIMP_API_KEY) {
+    console.error('❌ Error: MAILCHIMP_API_KEY no está configurada');
+    console.log('📝 Configura las variables de entorno en Railway:');
+    console.log('   - MAILCHIMP_API_KEY: tu_nueva_api_key');
+    console.log('   - MAILCHIMP_AUDIENCE_ID: 947779');
+    console.log('   - MAILCHIMP_SERVER_PREFIX: us2');
+}
 
 // Middleware
 app.use(express.json());
