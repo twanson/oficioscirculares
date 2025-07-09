@@ -1,16 +1,21 @@
 {
   "name": "oficios-circulares-website",
   "version": "1.0.0",
-  "description": "Sitio web estático de Oficios Circulares",
-  "main": "index.html",
+  "description": "Sitio web de Oficios Circulares con backend Node.js",
+  "main": "server.js",
   "scripts": {
-    "start": "npx serve -s . -l $PORT",
-    "dev": "npx serve -s . -l 3000"
+    "start": "node server.js",
+    "dev": "node server.js",
+    "static": "npx serve -s . -l 3000"
   },
-  "keywords": ["static", "website", "oficios", "circulares"],
+  "keywords": ["website", "oficios", "circulares", "mailchimp", "leads"],
   "author": "Oficios Circulares",
   "license": "MIT",
   "dependencies": {
-    "serve": "^14.2.1"
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 } 
