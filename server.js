@@ -116,6 +116,9 @@ app.get('/test-mailchimp', async (req, res) => {
         serverPrefix: MAILCHIMP_SERVER_PREFIX,
         apiKeyLength: MAILCHIMP_API_KEY ? MAILCHIMP_API_KEY.length : 0,
         nodeEnv: process.env.NODE_ENV || 'undefined',
+        nodeEnvLength: (process.env.NODE_ENV || '').length,
+        nodeEnvType: typeof process.env.NODE_ENV,
+        isProduction: process.env.NODE_ENV === 'production',
         tagToUse: process.env.NODE_ENV === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING'
     };
     
