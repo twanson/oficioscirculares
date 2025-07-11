@@ -3,7 +3,7 @@ const path = require('path');
 const fetch = require('node-fetch');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // Configuración de MailChimp (usando variables de entorno)
 const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
