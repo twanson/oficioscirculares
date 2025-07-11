@@ -524,10 +524,20 @@
         // Auto-abrir modal si viene de Instagram con parámetro guia=open
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
+            
             if (urlParams.get('guia') === 'open') {
+                // Viene de Instagram - abrir modal
                 openRecursosModal();
+            } else {
+                // Navegación normal - siempre ir al top
+                window.scrollTo(0, 0);
             }
         });
+        
+        // También forzar scroll al top antes de que cargue la página
+        if (window.history.scrollRestoration) {
+            window.history.scrollRestoration = 'manual';
+        }
     </script>
     <script>
         function openRecursosModal() {
