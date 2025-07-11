@@ -68,7 +68,7 @@ app.post('/subscribe', async (req, res) => {
             merge_fields: {
                 FNAME: firstName,
             },
-            tags: ['Diagnóstico Circular Express']
+            tags: [process.env.NODE_ENV === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING']
         };
         
         const response = await fetch(url, {
