@@ -521,6 +521,15 @@
     <!-- Scripts -->
     <script src="assets/js/script.js"></script>
     <script>
+        // Auto-abrir modal si viene de Instagram con parámetro guia=open
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('guia') === 'open') {
+                openRecursosModal();
+            }
+        });
+    </script>
+    <script>
         function openRecursosModal() {
             document.getElementById('recursos-modal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -583,6 +592,17 @@
                     setTimeout(() => {
                         closeRecursosModal();
                         alert('¡Gracias! La guía se ha descargado y recibirás recursos exclusivos en tu email.');
+                        
+                        // Si viene de Instagram, scroll al hero para mostrar la propuesta de valor
+                        const urlParams = new URLSearchParams(window.location.search);
+                        if (urlParams.get('guia') === 'open') {
+                            setTimeout(() => {
+                                document.getElementById('hero').scrollIntoView({ 
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }, 1000);
+                        }
                     }, 1500);
                     
                 } else {
@@ -604,6 +624,17 @@
                 setTimeout(() => {
                     closeRecursosModal();
                     alert('¡Guía descargada! Para recibir más recursos, por favor suscríbete a nuestra newsletter.');
+                    
+                    // Si viene de Instagram, scroll al hero para mostrar la propuesta de valor
+                    const urlParams = new URLSearchParams(window.location.search);
+                    if (urlParams.get('guia') === 'open') {
+                        setTimeout(() => {
+                            document.getElementById('hero').scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }, 1000);
+                    }
                 }, 1000);
             }
         });
