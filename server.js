@@ -68,7 +68,7 @@ app.post('/subscribe', async (req, res) => {
             merge_fields: {
                 FNAME: firstName,
             },
-            tags: [process.env.NODE_ENV === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING']
+            tags: [(process.env.NODE_ENV || '').trim() === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING']
         };
         
         const response = await fetch(url, {
@@ -118,8 +118,8 @@ app.get('/test-mailchimp', async (req, res) => {
         nodeEnv: process.env.NODE_ENV || 'undefined',
         nodeEnvLength: (process.env.NODE_ENV || '').length,
         nodeEnvType: typeof process.env.NODE_ENV,
-        isProduction: process.env.NODE_ENV === 'production',
-        tagToUse: process.env.NODE_ENV === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING'
+        isProduction: (process.env.NODE_ENV || '').trim() === 'production',
+        tagToUse: (process.env.NODE_ENV || '').trim() === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING'
     };
     
     if (!MAILCHIMP_API_KEY) {
