@@ -31,11 +31,11 @@ if (!MAILCHIMP_API_KEY) {
 
 // Middleware
 app.use(express.json());
-app.use(express.static('.'));
+app.use(express.static('public'));
 
 // Servir archivos estáticos
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Endpoint para suscripción a MailChimp
