@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "static": "npx serve -s . -l 3000"
+    "build": "echo 'No build needed'"
   },
-  "keywords": ["website", "oficios", "circulares", "mailchimp", "leads"],
+  "keywords": ["website", "oficios", "circulares", "mailchimp", "leads", "express", "nodejs"],
   "author": "Oficios Circulares",
   "license": "MIT",
   "dependencies": {
