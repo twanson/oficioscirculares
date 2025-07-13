@@ -10,6 +10,47 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.transform = 'none';
     });
     
+    // Símbolo de circularidad - animación por CSS + respaldo JavaScript
+    const simbolo = document.querySelector('.circularity-symbol');
+    if (simbolo) {
+        console.log('Símbolo encontrado, iniciando animación');
+        
+        // Forzar animación con JavaScript como respaldo
+        let scale = 1;
+        let opacity = 1;
+        let increasing = false;
+        
+        function animateSymbol() {
+            if (increasing) {
+                scale += 0.003;
+                opacity += 0.007;
+                if (scale >= 1) {
+                    increasing = false;
+                }
+            } else {
+                scale -= 0.003;
+                opacity -= 0.007;
+                if (scale <= 0.85) {
+                    increasing = true;
+                }
+            }
+            
+            // Mantener opacidad entre 0.3 y 1
+            opacity = Math.max(0.3, Math.min(1, opacity));
+            
+            simbolo.style.transform = `scale(${scale})`;
+            simbolo.style.opacity = opacity;
+            
+            requestAnimationFrame(animateSymbol);
+        }
+        
+        // Iniciar animación JavaScript solo como respaldo
+        setTimeout(() => {
+            console.log('Iniciando animación JavaScript como respaldo');
+            animateSymbol();
+        }, 1000);
+    }
+    
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('a[href^="#"]');
     
