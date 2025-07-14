@@ -703,7 +703,6 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .profile-avatar:hover {
@@ -712,15 +711,12 @@ p {
 }
 
 .profile-photo {
-    width: 110%;
-    height: 110%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    object-position: center 40%;
+    object-position: center 30%;
     border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: scale(1.2);
 }
 
 .profile-name {
@@ -1263,13 +1259,10 @@ p {
     }
     
     .profile-photo {
-        width: 110% !important;
-        height: 110% !important;
-        object-position: center 40% !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-position: center 30% !important;
+        transform: scale(1.2) !important;
     }
 }
 
@@ -1438,19 +1431,18 @@ p {
         margin-bottom: 20px !important;
         border-radius: 50% !important;
         overflow: hidden !important;
-        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     
     .profile-photo {
-        width: 110% !important;
-        height: 110% !important;
+        width: 100% !important;
+        height: 100% !important;
         object-fit: cover !important;
-        object-position: center 40% !important;
+        object-position: center 25% !important;
         border-radius: 50% !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        transform: scale(1.3) !important;
     }
     
     .services-grid {
@@ -1589,19 +1581,18 @@ p {
         margin-bottom: 18px !important;
         border-radius: 50% !important;
         overflow: hidden !important;
-        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     
     .profile-photo {
-        width: 110% !important;
-        height: 110% !important;
+        width: 100% !important;
+        height: 100% !important;
         object-fit: cover !important;
-        object-position: center 40% !important;
+        object-position: center 20% !important;
         border-radius: 50% !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
+        transform: scale(1.4) !important;
     }
     
     .service-card {
