@@ -692,13 +692,13 @@ p {
 
 .profile-avatar {
     font-size: 4rem;
-    margin-bottom: 32px;
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 32px;
+    margin-bottom: 24px;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 24px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 12px 40px rgba(31, 75, 63, 0.25);
+    box-shadow: 0 8px 32px rgba(31, 75, 63, 0.2);
     transition: var(--transition-smooth);
     display: flex;
     align-items: center;
@@ -706,8 +706,8 @@ p {
 }
 
 .profile-avatar:hover {
-    transform: scale(1.08);
-    box-shadow: 0 16px 48px rgba(31, 75, 63, 0.35);
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(31, 75, 63, 0.3);
 }
 
 .profile-photo {
@@ -1538,9 +1538,9 @@ p {
     }
     
     .profile-avatar {
-        width: 140px;
-        height: 140px;
-        margin-bottom: 24px;
+        width: 90px;
+        height: 90px;
+        margin-bottom: 20px;
     }
     
     .service-card {
