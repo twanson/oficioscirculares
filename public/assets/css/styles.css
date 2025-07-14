@@ -1249,6 +1249,16 @@ p {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
+/* Tablets y iPads */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .profile-avatar {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Móviles y tablets pequeños */
 @media (max-width: 768px) {
     :root {
         --section-padding: 80px 0;
@@ -1407,6 +1417,22 @@ p {
         grid-template-columns: 1fr;
     }
     
+    .profile-avatar {
+        width: 85px !important;
+        height: 85px !important;
+        margin-bottom: 20px !important;
+        border-radius: 50% !important;
+        overflow: hidden !important;
+    }
+    
+    .profile-photo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 50% !important;
+    }
+    
     .services-grid {
         grid-template-columns: 1fr;
     }
@@ -1538,9 +1564,19 @@ p {
     }
     
     .profile-avatar {
-        width: 90px;
-        height: 90px;
-        margin-bottom: 20px;
+        width: 80px !important;
+        height: 80px !important;
+        margin-bottom: 16px !important;
+        border-radius: 50% !important;
+        overflow: hidden !important;
+    }
+    
+    .profile-photo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 50% !important;
     }
     
     .service-card {
