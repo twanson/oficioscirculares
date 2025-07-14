@@ -693,8 +693,8 @@ p {
 .profile-avatar {
     font-size: 4rem;
     margin-bottom: 24px;
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     margin: 0 auto 24px;
     border-radius: 50%;
     overflow: hidden;
@@ -703,6 +703,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .profile-avatar:hover {
@@ -711,11 +712,15 @@ p {
 }
 
 .profile-photo {
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
     object-fit: cover;
-    object-position: center center;
+    object-position: center 40%;
     border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .profile-name {
@@ -1252,13 +1257,19 @@ p {
 /* Tablets y iPads */
 @media (max-width: 1024px) and (min-width: 769px) {
     .profile-avatar {
-        width: 110px;
-        height: 110px;
+        width: 130px;
+        height: 130px;
         margin-bottom: 20px;
     }
     
     .profile-photo {
-        object-position: center center;
+        width: 110% !important;
+        height: 110% !important;
+        object-position: center 40% !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
 }
 
@@ -1422,19 +1433,24 @@ p {
     }
     
     .profile-avatar {
-        width: 100px !important;
-        height: 100px !important;
+        width: 115px !important;
+        height: 115px !important;
         margin-bottom: 20px !important;
         border-radius: 50% !important;
         overflow: hidden !important;
+        position: relative !important;
     }
     
     .profile-photo {
-        width: 100% !important;
-        height: 100% !important;
+        width: 110% !important;
+        height: 110% !important;
         object-fit: cover !important;
-        object-position: center center !important;
+        object-position: center 40% !important;
         border-radius: 50% !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
     
     .services-grid {
@@ -1568,19 +1584,24 @@ p {
     }
     
     .profile-avatar {
-        width: 95px !important;
-        height: 95px !important;
+        width: 110px !important;
+        height: 110px !important;
         margin-bottom: 18px !important;
         border-radius: 50% !important;
         overflow: hidden !important;
+        position: relative !important;
     }
     
     .profile-photo {
-        width: 100% !important;
-        height: 100% !important;
+        width: 110% !important;
+        height: 110% !important;
         object-fit: cover !important;
-        object-position: center center !important;
+        object-position: center 40% !important;
         border-radius: 50% !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
     
     .service-card {
