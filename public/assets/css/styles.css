@@ -672,17 +672,21 @@ p {
 
 .profiles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: stretch;
 }
 
 .profile-card {
     background: white;
     border-radius: var(--border-radius);
-    padding: 40px;
+    padding: 32px 24px;
     box-shadow: 0 12px 48px rgba(31, 75, 63, 0.1);
     transition: var(--transition-smooth);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .profile-card:hover {
@@ -731,9 +735,16 @@ p {
     margin-bottom: 20px;
 }
 
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .profile-description {
     margin-bottom: 24px;
     text-align: left;
+    flex-grow: 1;
 }
 
 .profile-quote {
@@ -745,6 +756,7 @@ p {
     padding-left: 20px;
     margin: 0;
     text-align: left;
+    margin-top: auto;
 }
 
 /* ===== SERVICES SECTION ===== */
@@ -1251,6 +1263,11 @@ p {
 /* ===== RESPONSIVE DESIGN ===== */
 /* Tablets y iPads */
 @media (max-width: 1024px) and (min-width: 769px) {
+    .profiles-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
     .profile-avatar {
         width: 140px;
         height: 140px;

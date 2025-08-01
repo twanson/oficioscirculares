@@ -5,6 +5,23 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware para redirigir dominio naked a www
+app.use((req, res, next) => {
+    const host = req.get('host');
+    
+    // Si es el dominio naked (sin www), redirigir a www
+    if (host === 'oficioscirculares.com') {
+        return res.redirect(301, `https://www.oficioscirculares.com${req.originalUrl}`);
+    }
+    
+    // Si no es HTTPS en producción, forzar HTTPS
+    if (req.header('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === 'production') {
+        return res.redirect(301, `https://${req.get('host')}${req.originalUrl}`);
+    }
+    
+    next();
+});
+
 // Configuración de MailChimp (usando variables de entorno)
 const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
 const MAILCHIMP_AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID || '947779';
