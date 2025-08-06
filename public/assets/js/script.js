@@ -418,16 +418,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto advance slides every 5 seconds
     let slideInterval = setInterval(nextSlide, 5000);
 
-    // Pause on hover
-    const heroSection = document.querySelector('.hero');
-    if (heroSection) {
-        heroSection.addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
-        });
+    // Slider continues even on hover - no pause functionality
+    // const heroSection = document.querySelector('.hero');
+    // if (heroSection) {
+    //     heroSection.addEventListener('mouseenter', () => {
+    //         clearInterval(slideInterval);
+    //     });
 
-        heroSection.addEventListener('mouseleave', () => {
-            slideInterval = setInterval(nextSlide, 5000);
-        });
-    }
+    //     heroSection.addEventListener('mouseleave', () => {
+    //         slideInterval = setInterval(nextSlide, 5000);
+    //     });
+    // }
 });
 
