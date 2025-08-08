@@ -942,7 +942,13 @@ p {
 
 /* Reducir tamaño visual de imágenes dentro del artículo en escritorio */
 @media (min-width: 900px) {
-  .article-content figure { max-width: 720px; }
+  .article-content figure { max-width: 640px; }
+}
+
+/* Galería del caso: dos columnas en escritorio y figuras más contenidas */
+@media (min-width: 900px) {
+  .page-case .gallery { grid-template-columns: repeat(2, 1fr) !important; gap: 20px; }
+  .page-case .gallery figure { max-width: 640px; margin: 0 auto; }
 }
 
 /* ===== OC Post utility classes ===== */
