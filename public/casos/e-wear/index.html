@@ -74,10 +74,10 @@
   }, true);
   </script>
 
-  <div class="page">
-    <div class="container">
+  <div class="page oc-container oc-prose">
+    <div class="container" style="max-width:none;padding:0;">
       <section class="section" id="hero">
-        <h1 class="section-title">E‑WEAR: de RAEE a joya con trazabilidad que se comprueba</h1>
+        <h1 class="section-title oc-h1">E‑WEAR: de RAEE a joya con trazabilidad que se comprueba</h1>
         <div class="post-subhead">
           <p id="post-meta" class="post-meta">Jose Moscardó · <span data-date>2025-08-08</span> · <span id="reading-time">—</span></p>
           <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -88,6 +88,7 @@
             <span aria-current="page">E‑WEAR</span>
           </nav>
         </div>
+        <p class="oc-sub">Diseño que emociona. Trazabilidad que se comprueba.</p>
         <figure class="hero-figure">
           <img 
             src="/assets/images/cases/e-wear/hero-packaging-movil-concha.jpg" 
@@ -100,27 +101,27 @@
 
       <aside id="toc" class="toc" aria-label="Índice"></aside>
 
-      <article id="post-content" class="section article-content">
-        <section>
+      <article id="post-content" class="article-content">
+        <section class="oc-section">
           <div class="card" style="padding:16px 18px;">
             <p class="lead" style="margin:0 0 6px 0;"><strong>Resumen en 3 líneas</strong></p>
-            <p style="margin:4px 0;"><strong>El reto.</strong> Convertir plata de RAEE en una joya deseable y demostrable.</p>
+            <p style="margin:4px 0;"><strong>El reto.</strong> Convertir plata de RAEE (e-waste) en una joya deseable y demostrable.</p>
             <p style="margin:4px 0;"><strong>Qué hicimos.</strong> Marca clara, trazabilidad por lote y packaging que cuenta el origen.</p>
             <p style="margin:4px 0;"><strong>Pruebas.</strong> Ensayo de pureza por lote y ficha descargable con datos clave.</p>
           </div>
         </section>
 
-        <h2 id="contexto">Contexto</h2>
+        <h2 id="contexto" class="oc-section">Contexto</h2>
         <p>E‑WEAR fabrica joyería con <strong>plata 100% reciclada a partir de RAEE</strong>. Necesitaba <strong>deseabilidad</strong> y <strong>confianza</strong> en una sola experiencia: que el diseño emocione y la trazabilidad se compruebe.</p>
 
-        <h2 id="el-reto">El reto</h2>
+        <h2 id="el-reto" class="oc-section">El reto</h2>
         <ol>
           <li>Explicar el <strong>origen</strong> sin restar atractivo.</li>
           <li>Mostrar <strong>pruebas simples</strong> y verificables.</li>
           <li>Evitar <strong>promesas vacías</strong> y alinear relato, producto y packaging.</li>
         </ol>
 
-        <h2 id="que-hicimos">Qué hicimos (4 pilares)</h2>
+        <h2 id="que-hicimos" class="oc-section">Qué hicimos (4 pilares)</h2>
         <h3 id="marca-lenguaje">1) Marca y lenguaje</h3>
         <ul>
           <li>Mensajes cortos y comprobables: “plata reciclada por lote con ficha y ensayo”.</li>
@@ -145,41 +146,73 @@
           <li>Cartón reciclado y <strong>tarjeta plantable</strong> que resume el origen.</li>
         </ul>
 
-        <blockquote class="pull">“Fui circuito y memoria. Hoy soy plata limpia con nueva vida.”<br/><em>(Mensaje breve de la tarjeta plantable.)</em></blockquote>
+        <blockquote class="oc-quote">Fui circuito y memoria. Me apagaron y caí en un cajón. Me desmontaron con cuidado, entré en el fuego y perdí lo que sobraba. Quedó lo que soy: plata limpia con historia. Hoy vuelvo como joya con origen y trazabilidad que se comprueba.</blockquote>
 
-        <h2 id="proceso">Proceso (cómo ocurre)</h2>
-        <h3 id="origen">1) Origen</h3>
-        <p>Recogemos placas y componentes de RAEE por lotes. Cada lote lleva <strong>fecha y procedencia</strong>.</p>
-        <figure>
-          <img src="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Etiquetamos el lote de RAEE con fecha y procedencia." />
-        </figure>
+        <h2 id="proceso" class="oc-section">Proceso (cómo ocurre)</h2>
+        <div class="oc-steps">
+          <div class="oc-step" id="origen">
+            <h4>Origen</h4>
+            <p>Recogemos placas y componentes de RAEE por lotes. Cada lote lleva <strong>fecha y procedencia</strong>.</p>
+            <figure>
+              <picture>
+                <source srcset="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.avif" type="image/avif" />
+                <source srcset="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.webp" type="image/webp" />
+                <img src="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Etiquetamos el lote de RAEE con fecha y procedencia." />
+              </picture>
+            </figure>
+          </div>
 
-        <h3 id="rescate">2) Rescate</h3>
-        <p>Desmontamos de forma segura y separamos metales. Lo no recuperable va a su canal de reciclaje.</p>
-        <figure>
-          <img src="/assets/images/cases/e-wear/puesto-desmontaje-seguro.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Realizamos desmontaje seguro y separación de metales." />
-        </figure>
+          <div class="oc-step" id="rescate">
+            <h4>Rescate</h4>
+            <p>Desmontamos de forma segura y separamos metales. Lo no recuperable va a su canal de reciclaje.</p>
+            <figure>
+              <picture>
+                <source srcset="/assets/images/cases/e-wear/puesto-desmontaje-seguro.avif" type="image/avif" />
+                <source srcset="/assets/images/cases/e-wear/puesto-desmontaje-seguro.webp" type="image/webp" />
+                <img src="/assets/images/cases/e-wear/puesto-desmontaje-seguro.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Realizamos desmontaje seguro y separación de metales." />
+              </picture>
+            </figure>
+          </div>
 
-        <h3 id="transformacion">3) Transformación</h3>
-        <p>Refinamos en <strong>lotes pequeños</strong>. Realizamos <strong>ensayo de pureza</strong> por lote.</p>
-        <figure>
-          <img src="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Mostramos el ensayo de pureza del lote." />
-        </figure>
+          <div class="oc-step" id="transformacion">
+            <h4>Transformación</h4>
+            <p>Refinamos en <strong>lotes pequeños</strong>. Realizamos <strong>ensayo de pureza</strong> por lote.</p>
+            <figure>
+              <picture>
+                <source srcset="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.avif" type="image/avif" />
+                <source srcset="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.webp" type="image/webp" />
+                <img src="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Mostramos el ensayo de pureza del lote." />
+              </picture>
+            </figure>
+          </div>
 
-        <h3 id="renacer">4) Renacer</h3>
-        <p>Diseño, prototipos, pruebas de confort. Mostramos <strong>antes/después</strong>.</p>
-        <figure>
-          <img src="/assets/images/cases/e-wear/prototipo-vs-final-anillo.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Comparamos el prototipo con la pieza final para validar comodidad." />
-        </figure>
+          <div class="oc-step" id="renacer">
+            <h4>Renacer</h4>
+            <p>Diseño, prototipos, pruebas de confort. Mostramos <strong>antes/después</strong>.</p>
+            <figure>
+              <picture>
+                <source srcset="/assets/images/cases/e-wear/prototipo-vs-final-anillo.avif" type="image/avif" />
+                <source srcset="/assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" type="image/webp" />
+                <img src="/assets/images/cases/e-wear/prototipo-vs-final-anillo.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Comparamos el prototipo con la pieza final para validar comodidad." />
+              </picture>
+            </figure>
+          </div>
 
-        <h3 id="entrega">5) Entrega</h3>
-        <p>Packaging <strong>TV</strong> o <strong>móvil concha</strong>. Incluye <strong>tarjeta plantable</strong> con el mensaje de origen.</p>
-        <figure>
-          <img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Packaging móvil concha que refuerza el origen y evita plásticos." />
-        </figure>
+          <div class="oc-step" id="entrega">
+            <h4>Entrega</h4>
+            <p>Packaging <strong>TV</strong> o <strong>móvil concha</strong>. Incluye <strong>tarjeta plantable</strong> con el mensaje de origen.</p>
+            <figure>
+              <picture>
+                <source srcset="/assets/images/cases/e-wear/packaging-movil-concha.avif" type="image/avif" />
+                <source srcset="/assets/images/cases/e-wear/packaging-movil-concha.webp" type="image/webp" />
+                <img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Abrimos el móvil concha y se ve el anillo." />
+              </picture>
+            </figure>
+          </div>
+        </div>
 
-        <h2 id="pruebas-metricas">Pruebas y métricas</h2>
-        <ul>
+        <h2 id="pruebas-metricas" class="oc-section">Pruebas y métricas</h2>
+        <ul class="oc-check">
           <li><strong>Plata reciclada:</strong> 100% del metal principal proviene de RAEE.</li>
           <li><strong>Ficha de lote (PDF):</strong> origen, reciclador, ensayo y fecha. <a id="link-ficha" class="btn-outline" style="margin-left:6px" href="/assets/docs/e-wear-ficha.pdf" target="_blank" rel="noopener">Descargar ficha de lote (PDF)</a></li>
           <li><strong>Qué falta hoy:</strong> cierres y cadenas aún no son reciclados; en pruebas.</li>
@@ -187,24 +220,37 @@
           <li><strong>Ensayo de pureza:</strong> <a id="link-ensayo" class="btn-outline" style="margin-left:6px" href="/assets/docs/e-wear-ensayo.pdf" target="_blank" rel="noopener">Ensayo de pureza (PDF)</a></li>
         </ul>
 
-        <h2 id="sistema-contenidos">Sistema de contenidos (lo que mostramos)</h2>
+        <h2 id="sistema-contenidos" class="oc-section">Sistema de contenidos (lo que mostramos)</h2>
         <ul>
           <li><strong>Antes / Rescate / Renacer:</strong> un lote en tres actos.</li>
           <li><strong>Del prototipo al OK:</strong> decisiones de diseño y comodidad.</li>
           <li><strong>Cómo leer la ficha de lote:</strong> guía rápida de 1 minuto.</li>
         </ul>
 
-        <h2 id="faq">Preguntas rápidas</h2>
+        <h2 id="faq" class="oc-section">Preguntas rápidas</h2>
         <p><strong>¿Cómo sé que la pieza es de plata reciclada?</strong> Por la <strong>ficha de lote</strong> y el <strong>ensayo</strong> asociados.</p>
         <p><strong>¿Qué pasa si se daña?</strong> Repulido y reparación. Si decides cerrarle el ciclo, <strong>recompramos</strong> para re‑fundir.</p>
         <p><strong>¿Por qué la caja parece una TV o un móvil concha?</strong> Porque el <strong>embalaje cuenta el origen</strong> y evita plásticos.</p>
 
-        <h2 id="cta">Hablemos</h2>
-        <div class="card" style="padding:18px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
-          <a class="btn btn-primary" href="/#contacto">Agenda 15 minutos</a>
+        <h2 id="cta" class="oc-section">Hablemos</h2>
+        <div class="oc-cta">
+          <a class="oc-btn btn-primary" href="/#contacto">Agenda 15 minutos</a>
           <a href="/donar" class="link-secondary">Quiero donar un dispositivo</a>
         </div>
       </article>
+
+      <section class="oc-section" id="galeria">
+        <h2>Galería</h2>
+        <div class="gallery">
+          <figure><img src="/assets/images/cases/e-wear/moodboard-paleta-e-wear.jpg" loading="lazy" decoding="async" alt="Moodboard y paleta: definimos el lenguaje visual de E‑WEAR." /></figure>
+          <figure><img src="/assets/images/cases/e-wear/prototipo-vs-final-anillo.jpg" loading="lazy" decoding="async" alt="Comparación: prototipo vs pieza final para asegurar comodidad." /></figure>
+          <figure><img src="/assets/images/cases/e-wear/macro-textura-plata.jpg" loading="lazy" decoding="async" alt="Macro: textura de la plata reciclada en la pieza." /></figure>
+          <figure><img src="/assets/images/cases/e-wear/packaging-tv-retro.jpg" loading="lazy" decoding="async" alt="Packaging TV: evocamos memoria compartida sin plásticos." /></figure>
+          <figure><img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" loading="lazy" decoding="async" alt="Abrimos el móvil concha y se ve el anillo." /></figure>
+          <figure><img src="/assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.jpg" loading="lazy" decoding="async" alt="Tarjeta plantable con el mensaje de origen." /></figure>
+          <figure><img src="/assets/images/cases/e-wear/ficha-lote-ejemplo-redactada.jpg" loading="lazy" decoding="async" alt="Ficha de lote redactada: origen, reciclador y fecha." /></figure>
+        </div>
+      </section>
     </div>
   </div>
 
