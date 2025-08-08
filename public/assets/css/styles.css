@@ -37,6 +37,8 @@ body {
     --section-padding: 80px 0;
     --container-padding: 0 24px;
     --border-radius: 16px;
+    --card-radius: 14px;
+    --card-padding: 24px;
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -767,15 +769,15 @@ p {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 32px;
     align-items: stretch;
 }
 
 .service-card {
     background: white;
-    border-radius: var(--border-radius);
-    padding: 40px;
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
     box-shadow: 0 8px 32px rgba(31, 75, 63, 0.08);
     transition: var(--transition-smooth);
     position: relative;
@@ -869,13 +871,44 @@ p {
     height: 100%;
 }
 
+/* ===== BLOG & CASE PAGES ===== */
+.page-blog .container { max-width: 1000px; }
+.page-blog .service-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background: #e5e5e5;
+}
+.page-blog h1 { margin-bottom: 6px; }
+.page-blog .lead { margin-bottom: 18px; }
+
+.page-case .page { padding: 80px 0; }
+.page-case .section { padding: 28px 0; }
+.page-case figure { margin: 0; }
+.page-case figure img {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+}
+.page-case .hero-figure img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #e5e5e5;
+}
+.page-case figcaption { color: #6b7280; font-size: .95rem; margin-top: 6px; }
+.page-case .card h3 { margin-bottom: 6px; }
+.page-case ul { padding-left: 1.1rem; }
+.page-case li { margin: 6px 0; }
+
 .service-card-link:hover {
     text-decoration: none;
     color: inherit;
 }
 
 .service-card-link:hover .service-card {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-6px) scale(1.01);
     box-shadow: 0 20px 60px rgba(31, 75, 63, 0.2);
     cursor: pointer;
 }
@@ -1608,9 +1641,7 @@ p {
         border-radius: 50% !important;
     }
     
-    .service-card {
-        padding: 24px;
-    }
+    .service-card { padding: 20px; }
     
     .testimonial-card {
         padding: 24px;
