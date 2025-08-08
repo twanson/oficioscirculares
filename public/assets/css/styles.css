@@ -965,6 +965,9 @@ p {
 .oc-cta{display:flex;gap:12px;align-items:center;margin-top:var(--s3);flex-wrap:wrap} 
 .oc-btn{padding:12px 20px;border-radius:999px;border:1px solid #111;text-decoration:none;font-weight:600;display:inline-block}
 
+/* Reusable micro-narrative block */
+.storybeat{background:#fafafa;border:1px solid #e9e9e9;border-left:4px solid #111;padding:16px 20px;border-radius:12px;font-style:italic;margin:24px 0}
+
 .service-card-link:hover {
     text-decoration: none;
     color: inherit;
