@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Datos locales mínimos por ahora (sin fetch)
     allPosts = [
       {
-        slug: '/blog/casos/e-wear/',
+        slug: '/casos/e-wear/',
         title: 'E‑WEAR: cómo convertimos e‑waste en lujo circular',
         excerpt: 'Caso real de diseño, trazabilidad y relato sin greenwashing.',
         date: '2025-08-08',
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
     container.innerHTML = list.map(p => `
-      <a href="${p.slug.startsWith('/blog/') ? p.slug : 'post.html?slug='+encodeURIComponent(p.slug)}" class="service-card-link">
+      <a href="${p.slug}" class="service-card-link">
         <div class="service-card">
           ${p.cover ? `<img src="${p.cover}" data-fallback="/assets/images/cases/e-wear/placeholder-16x9.jpg" alt="${p.title}" style="width:100%;border-radius:12px;margin-bottom:12px;" onerror="this.onerror=null;this.src=this.dataset.fallback;"/>` : ''}
           <h3>${p.title}</h3>
