@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caso E‑WEAR — Oficios Circulares</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <style>
+    .page { padding: 60px 0; }
+    .section { padding: 40px 0; }
+    .grid-2 { display:grid; grid-template-columns: 1fr; gap:24px; }
+    @media (min-width: 900px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
+    .cards { display:grid; gap:16px; grid-template-columns: 1fr; }
+    @media (min-width: 900px){ .cards{ grid-template-columns: repeat(4,1fr);} }
+    .card { background:#fff; border-radius:16px; padding:18px; box-shadow:0 8px 24px rgba(0,0,0,.08); border:1px solid #eee; }
+    .pull { border-left:4px solid var(--terracota); padding-left:16px; font-style:italic; color:var(--verde-hoja); }
+    .timeline { position:relative; border-left:2px solid #e5e5e5; margin-left:8px; }
+    .timeline .item { position:relative; margin-left:16px; margin-bottom:28px; }
+    .timeline .dot { position:absolute; left:-26px; top:4px; width:12px; height:12px; background:var(--verde-hoja); border-radius:50%; }
+    .gallery { display:grid; gap:16px; grid-template-columns: 1fr; }
+    @media (min-width: 900px){ .gallery{ grid-template-columns: repeat(3,1fr);} }
+    .cta-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+    .btn-outline { border:1px solid #dedede; padding:12px 18px; border-radius:12px; }
+    .mini-carousel { position:relative; }
+    .mini-carousel figure{ margin:0; }
+    .mini-carousel .nav{ position:absolute; inset:0; display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
+    .mini-carousel button{ pointer-events:auto; background:#fff; border:1px solid #ddd; border-radius:999px; width:36px; height:36px; }
+    figure img{ width:100%; height:auto; border-radius:12px; display:block; }
+    figcaption{ font-size:.9rem; color:#666; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo" />
+        <span class="logo-text">Oficios Circulares</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+  document.addEventListener('error', function(e){
+    const img = e.target; 
+    if (img && img.tagName === 'IMG' && img.dataset.fallback){
+      img.onerror = null; 
+      img.src = img.dataset.fallback;
+    }
+  }, true);
+  </script>
+
+  <div class="page">
+    <div class="container">
+      <section class="section" id="hero">
+        <h1 class="section-title">E‑WEAR: cómo convertimos e‑waste en lujo circular</h1>
+        <p class="lead">Diseño que emociona. Trazabilidad que se comprueba.</p>
+        <figure style="margin-top:16px;">
+          <img 
+            src="/assets/images/cases/e-wear/hero-packaging-movil-concha.jpg" 
+            alt="Caja de anillo con forma de móvil concha en cartón reciclado, con anillo de plata en su interior."
+            data-fallback="/assets/images/cases/e-wear/placeholder-16x9.jpg" 
+            loading="lazy" />
+          <figcaption>Packaging “móvil concha”.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="ficha-rapida">
+        <div class="cards">
+          <div class="card"><h3>Cliente</h3><p>E‑WEAR (joyería con plata 100% reciclada de residuos electrónicos).</p></div>
+          <div class="card"><h3>Reto</h3><p>Transformar RAEE en una marca deseable y medible sin greenwashing.</p></div>
+          <div class="card"><h3>Solución</h3><p>Identidad visual, narrativa, trazabilidad y packaging con sentido.</p></div>
+          <div class="card"><h3>Activos clave</h3><p>Logo y paleta; packaging TV y móvil concha; tarjeta plantable; sistema gráfico.</p></div>
+        </div>
+        <div style="margin-top:16px; text-align:center;">
+          <a class="btn btn-secondary" href="/docs/e-wear.pdf" target="_blank" rel="noopener">Descargar PDF del caso</a>
+        </div>
+      </section>
+
+      <section class="section" id="prologo">
+        <blockquote class="pull">“Fui parte de un circuito que almacenaba recuerdos.
+Hoy soy una joya que cuenta los suyos propios.
+Fabricada con plata recuperada de residuos electrónicos,
+transformada con oficio y pasión
+en una pieza que une tecnología, historia y belleza.”</blockquote>
+        <p class="lead" style="margin-top:18px;">No siempre fui una joya. Fui circuito y memoria en un móvil. Me apagaron. Caí en un cajón. Pasé años callado. Un día me sacaron a la luz. Me miraron con atención. Dijeron: “Aquí hay vida”. Me desmontaron con cuidado. Entré en el fuego. Perdí lo que sobraba. Quedó lo que soy: plata limpia. Materia con historia.</p>
+        <p>La mesa del taller se despejó. El lápiz probó líneas. El borde encontró su mejor forma. Pesé en la mano. Ajusté en el dedo. Cuando estuve listo, me guardaron en una caja que también cuenta de dónde vengo. Abrirla es abrir mi pasado: una TV que guarda memoria compartida o un móvil concha que se abre como un recuerdo.</p>
+        <p>Hoy brillo sin prisa. Si me cuidas, te acompaño años. Y si un día decides cerrar mi ciclo, volveré al inicio. Aquí, nada termina en la basura por costumbre.</p>
+      </section>
+
+      <section class="section" id="timeline">
+        <div class="timeline">
+          <div class="item">
+            <span class="dot"></span>
+            <h3>1) Origen</h3>
+            <p>Recogemos placas y componentes en puntos de reparación y donaciones. Etiquetamos cada lote con fecha y procedencia.</p>
+            <figure>
+              <img src="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.jpg" alt="Placas electrónicas clasificadas por lotes con etiquetas visibles." data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" />
+              <figcaption>Lote #EW-03: procedencia documentada.</figcaption>
+            </figure>
+          </div>
+          <div class="item">
+            <span class="dot"></span>
+            <h3>2) Rescate</h3>
+            <p>Desmontaje seguro. Separación de metales. Lo no recuperable entra en su canal de reciclaje.</p>
+            <figure>
+              <img src="/assets/images/cases/e-wear/puesto-desmontaje-seguro.jpg" alt="Puesto de desmontaje con componentes separados en un entorno de seguridad." data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" />
+              <figcaption>Desmontaje y clasificación en entorno seguro.</figcaption>
+            </figure>
+          </div>
+          <div class="item">
+            <span class="dot"></span>
+            <h3>3) Transformación</h3>
+            <p>Refinado en lotes pequeños con reciclador certificado. Ensayo de pureza por lote.</p>
+            <figure>
+              <img src="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.jpg" alt="Acta de pureza parcial mostrando el porcentaje de plata del lote." data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" />
+              <figcaption>Ensayo de pureza: la calidad se mide.</figcaption>
+            </figure>
+          </div>
+          <div class="item">
+            <span class="dot"></span>
+            <h3>4) Renacer</h3>
+            <p>Bocetos → prototipos → pruebas de talla y comodidad. Si no es cómodo, no pasa.</p>
+            <figure>
+              <img src="/assets/images/cases/e-wear/prototipo-vs-final-anillo.jpg" alt="Prototipo vs final" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" />
+              <figcaption>Prototipo, prueba y pieza final.</figcaption>
+            </figure>
+          </div>
+          <div class="item">
+            <span class="dot"></span>
+            <h3>5) Entrega</h3>
+            <p>Packaging con alma: TV (memoria compartida) y móvil concha (gesto de abrir). Cartón reciclado, sin plásticos, fibras recicladas. Tarjeta plantable con el mensaje que has leído.</p>
+            <figure>
+              <img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" alt="Packaging móvil concha" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" />
+              <figcaption>Packaging móvil concha.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="identidad">
+        <figure>
+          <img src="/assets/images/cases/e-wear/moodboard-paleta-e-wear.jpg" alt="Logotipo E-WEAR con paleta colorida y referencias visuales retro." data-fallback="/assets/images/cases/e-wear/placeholder-5x3.jpg" loading="lazy" />
+          <figcaption>Moodboard y paleta E‑WEAR.</figcaption>
+        </figure>
+        <div class="grid-2" style="margin-top:18px;">
+          <figure>
+            <img src="/assets/images/cases/e-wear/packaging-tv-retro.jpg" alt="Packaging TV" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" />
+            <figcaption>Packaging TV.</figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" alt="Packaging móvil concha" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" />
+            <figcaption>Packaging móvil concha.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="compromiso">
+        <div class="card">
+          <h3>Nuestro Compromiso</h3>
+          <ul style="margin-top:8px;">
+            <li>Plata 100% reciclada de RAEE. Cada pieza tiene ficha de lote: origen, reciclador y ensayo de pureza.</li>
+            <li>Qué falta hoy: algunos cierres y cadenas aún no son reciclados. Estamos probando proveedores.</li>
+            <li>Objetivo: llegar al 100% de componentes reciclados en los próximos 12 meses. Si cambia, lo diremos y explicaremos por qué.</li>
+            <li>Impacto: publicamos métricas por colección y la metodología usada.</li>
+          </ul>
+          <div style="margin-top:12px;"><a class="btn-outline" href="/fichas/e-wear">Ver ejemplo de ficha de lote</a></div>
+        </div>
+      </section>
+
+      <section class="section" id="activacion">
+        <div class="grid-2" style="grid-template-columns: 1fr; gap:18px;">
+          <div class="card">
+            <h3>Educación radical</h3>
+            <ul style="margin-top:8px;">
+              <li>Mito vs realidad: “La calidad se mide: ensayo de pureza.”</li>
+              <li>Trazabilidad 101: cómo leer la ficha de lote.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Relato en acción</h3>
+            <ul style="margin-top:8px;">
+              <li>Serie “Antes / Rescate / Renacer”: un lote, tres actos.</li>
+              <li>Del prototipo al OK: decisiones de diseño y comodidad.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Inspiración</h3>
+            <ul style="margin-top:8px;">
+              <li>Historias de cajones: quien dona su dispositivo y por qué.</li>
+              <li>1 pieza · 3 vidas: trabajo, calle, noche.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mini-carousel" style="margin-top:18px;">
+          <figure id="mc-frame">
+            <img id="mc-img" src="/assets/images/cases/e-wear/slide1-caso-e-wear.jpg" alt="Slide 1" data-fallback="/assets/images/cases/e-wear/placeholder-16x9.jpg" loading="lazy" />
+            <figcaption id="mc-cap"></figcaption>
+          </figure>
+          <div class="nav">
+            <button type="button" id="mc-prev" aria-label="Anterior">‹</button>
+            <button type="button" id="mc-next" aria-label="Siguiente">›</button>
+          </div>
+        </div>
+        <script>
+          (function(){
+            const slides = [
+              {src:'/assets/images/cases/e-wear/slide1-caso-e-wear.jpg', cap:''},
+              {src:'/assets/images/cases/e-wear/slide2-decisiones-diseno.jpg', cap:''},
+              {src:'/assets/images/cases/e-wear/slide3-identidad-paleta.jpg', cap:''},
+              {src:'/assets/images/cases/e-wear/slide4-del-residuo-al-proposito.jpg', cap:''},
+              {src:'/assets/images/cases/e-wear/slide5-cta-ver-caso.jpg', cap:''},
+            ];
+            let i=0; const img=document.getElementById('mc-img'); const cap=document.getElementById('mc-cap');
+            function show(idx){ i=(idx+slides.length)%slides.length; img.src=slides[i].src; img.dataset.fallback='/assets/images/cases/e-wear/placeholder-16x9.jpg'; cap.textContent=slides[i].cap; }
+            document.getElementById('mc-prev').addEventListener('click',()=>show(i-1));
+            document.getElementById('mc-next').addEventListener('click',()=>show(i+1));
+          })();
+        </script>
+      </section>
+
+      <section class="section" id="aprendizajes">
+        <ul>
+          <li><strong>La prueba manda:</strong> ensayo y ficha de lote son los contenidos más consultados.</li>
+          <li><strong>Diseño útil:</strong> descartamos dos prototipos por comodidad. Fue lo correcto.</li>
+          <li><strong>Relato sin promesas:</strong> contar límites genera confianza.</li>
+          <li><strong>Siguiente paso:</strong> cerrar proveedores de cierres/cadenas reciclados y documentar su trazabilidad.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="galeria">
+        <div class="gallery">
+          <figure><img src="/assets/images/cases/e-wear/packaging-tv-retro.jpg" alt="Packaging TV" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" /><figcaption>Packaging TV.</figcaption></figure>
+          <figure><img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" alt="Packaging móvil concha" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" /><figcaption>Packaging móvil concha.</figcaption></figure>
+          <figure><img src="/assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.jpg" alt="Tarjeta con mensaje y textura de papel con semillas." data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" /><figcaption>Tarjeta plantable.</figcaption></figure>
+          <figure><img src="/assets/images/cases/e-wear/moodboard-paleta-e-wear.jpg" alt="Paleta y referencias visuales E‑WEAR." data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" /><figcaption>Paleta y referencias.</figcaption></figure>
+          <figure><img src="/assets/images/cases/e-wear/macro-textura-plata.jpg" alt="Detalle de superficie de anillo de plata reciclada." data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" /><figcaption>Textura de la pieza.</figcaption></figure>
+          <figure><img src="/assets/images/cases/e-wear/ficha-lote-ejemplo-redactada.jpg" alt="Documento parcial de trazabilidad del lote." data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" /><figcaption>Ficha de lote (datos ocultos).</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="section" id="cierre" style="text-align:center;">
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/contacto">Quiero explorar mi caso</a>
+          <a class="btn btn-secondary" href="/donaciones">Quiero donar un dispositivo</a>
+        </div>
+        <div class="card" style="margin-top:18px; text-align:left;">
+          <h3>Preguntas rápidas</h3>
+          <dl style="margin-top:8px;">
+            <dt>¿Cómo sé que mi pieza es de plata reciclada?</dt>
+            <dd>Por la ficha de lote y el ensayo de pureza asociados.</dd>
+            <dt>¿Qué pasa si se daña mi joya?</dt>
+            <dd>Ofrecemos repulido y reparación; si decides cerrar su ciclo, recompramos para re‑fundir.</dd>
+            <dt>¿Por qué la caja tiene forma de TV o móvil concha?</dt>
+            <dd>Porque el embalaje también cuenta la historia. Evitamos plásticos y usamos cartón reciclado.</dd>
+          </dl>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+
