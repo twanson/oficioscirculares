@@ -20,21 +20,16 @@
   <section class="container" style="padding: 80px 0;">
     <h1>Blog</h1>
     <p class="lead">Historias, aprendizajes y metodologías para proyectos con propósito.</p>
-    <div class="services-grid" style="margin-top:24px;">
-      <a href="/casos/e-wear/" class="service-card-link">
-        <div class="service-card">
-          <img src="/assets/images/cases/e-wear/hero-packaging-movil-concha.jpg" data-fallback="/assets/images/cases/e-wear/placeholder-16x9.jpg" alt="E‑WEAR: cómo convertimos e‑waste en lujo circular" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback;" />
-          <h3>E‑WEAR: cómo convertimos e‑waste en lujo circular</h3>
-          <p class="profile-example">8/8/2025 · ~8 min</p>
-          <p>Caso real de diseño, trazabilidad y relato sin greenwashing.</p>
-          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
-            <span style='background:#E8D5B7;color:#1F4B3F;padding:4px 8px;border-radius:8px;font-size:.85rem;'>#Casos</span>
-            <span style='background:#E8D5B7;color:#1F4B3F;padding:4px 8px;border-radius:8px;font-size:.85rem;'>#Estrategia</span>
-            <span style='background:#E8D5B7;color:#1F4B3F;padding:4px 8px;border-radius:8px;font-size:.85rem;'>#Circularidad</span>
-          </div>
-        </div>
-      </a>
+    <div class="card" style="padding:14px 16px; margin:14px 0 18px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <input id="filter-input" type="search" placeholder="Buscar por título..." style="flex:1; min-width:220px; padding:10px 12px; border-radius:10px; border:1px solid #ddd;" />
+      <select id="tag-select" style="min-width:200px; padding:10px 12px; border-radius:10px; border:1px solid #ddd;">
+        <option value="">Todas las etiquetas</option>
+        <option value="casos">Casos</option>
+        <option value="estrategia">Estrategia</option>
+        <option value="circularidad">Circularidad</option>
+      </select>
     </div>
+    <div id="posts" class="services-grid" style="margin-top:12px;"></div>
   </section>
 
   <script>
@@ -43,6 +38,7 @@
       const img = e.target; if(img.tagName==='IMG' && img.dataset.fallback){ img.onerror=null; img.src=img.dataset.fallback; }
     }, true);
   </script>
+  <script src="/assets/js/blog.js"></script>
 </body>
 </html>
 

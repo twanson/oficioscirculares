@@ -886,12 +886,15 @@ p {
 
 .page-case .page { padding: 80px 0; }
 .page-case .section { padding: 28px 0; }
+.page-case .container { max-width: 1000px; }
+.page-case .section-title { font-size: clamp(2rem, 3.8vw, 2.6rem); line-height: 1.15; margin-bottom: 10px; }
 .page-case figure { margin: 0; }
 .page-case figure img {
     width: 100%;
     border-radius: 12px;
     display: block;
 }
+.page-case .hero-figure figcaption { color:#6b7280; font-size:.9rem; margin-top:6px; }
 .page-case .hero-figure img {
     aspect-ratio: 16 / 9;
     object-fit: cover;
@@ -901,6 +904,41 @@ p {
 .page-case .card h3 { margin-bottom: 6px; }
 .page-case ul { padding-left: 1.1rem; }
 .page-case li { margin: 6px 0; }
+
+/* Post meta, breadcrumbs y TOC */
+.post-subhead { display:flex; flex-direction:column; gap:6px; margin: 10px 0 12px; }
+.post-meta { color:#6b7280; font-size:.95rem; }
+.breadcrumbs { display:flex; gap:8px; align-items:center; color:#6b7280; font-size:.9rem; }
+.breadcrumbs a{ color:#1F4B3F; text-decoration:none; }
+.breadcrumbs a:hover{ text-decoration:underline; }
+
+.toc { background:#fff; border:1px solid #eee; border-radius:12px; padding:14px 16px; box-shadow:0 4px 16px rgba(0,0,0,.03); margin: 16px 0 12px; }
+.toc-title { font-weight:700; color:#1F4B3F; margin-bottom:8px; }
+.toc-list { list-style:none; padding-left:0; display:grid; gap:6px; }
+.toc-item a { color:#1F4B3F; text-decoration:none; font-size:.95rem; }
+.toc-item a:hover { text-decoration:underline; }
+.toc-item.depth-2 a { opacity:.8; font-size:.9rem; }
+
+/* Contenido del artículo */
+.article-content { max-width: 860px; margin: 0 auto; }
+.article-content h2 { margin-top: 28px; margin-bottom: 10px; font-size: clamp(1.35rem, 2.6vw, 1.7rem); line-height:1.25; }
+.article-content h3 { margin-top: 18px; margin-bottom: 6px; font-size: clamp(1.1rem, 2.1vw, 1.25rem); line-height:1.3; }
+.article-content p { margin: 10px 0 6px; font-size: 1.05rem; }
+.article-content ul, .article-content ol { margin: 8px 0 14px 1.25rem; }
+.article-content li { margin: 6px 0; }
+.article-content figure { margin: 10px auto 16px; }
+.article-content figure img { display:block; width:100%; height:auto; }
+.article-content .pull { margin: 12px 0 8px; }
+.link-secondary { color: var(--verde-profundo); text-decoration: underline; }
+.link-secondary:hover { color: var(--terracota); }
+
+/* Tarjetas en páginas de caso */
+.page-case .card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 18px 20px; box-shadow: 0 4px 18px rgba(0,0,0,.04); margin: 10px 0 14px; }
+
+/* Reducir tamaño visual de imágenes dentro del artículo en escritorio */
+@media (min-width: 900px) {
+  .article-content figure { max-width: 720px; }
+}
 
 .service-card-link:hover {
     text-decoration: none;
