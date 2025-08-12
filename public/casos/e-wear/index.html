@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E‑WEAR: de RAEE a joya con trazabilidad que se comprueba — Oficios Circulares</title>
-  <meta name="description" content="Caso E‑WEAR: RAEE a joya deseable con trazabilidad por lote. Marca clara, pruebas visibles (ensayo y ficha), y packaging que cuenta el origen." />
+  <title>E‑WEAR: de RAEE a joya | Trazabilidad por lote que se comprueba</title>
+  <meta name="description" content="Plata 100% reciclada de RAEE con ficha de lote y ensayo de pureza. Diseño que emociona y datos verificables. Mira un ejemplo y entiende el proceso en 1 minuto." />
   <link rel="canonical" href="https://www.oficioscirculares.com/casos/e-wear/" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Oficios Circulares" />
-  <meta property="og:title" content="E‑WEAR: de RAEE a joya con trazabilidad que se comprueba" />
-  <meta property="og:description" content="RAEE a joya deseable con pruebas visibles: ensayo de pureza y ficha de lote descargable." />
+  <meta property="og:title" content="E‑WEAR: de RAEE a joya | Trazabilidad por lote que se comprueba" />
+  <meta property="og:description" content="Plata 100% reciclada de RAEE con ficha de lote y ensayo de pureza. Diseño que emociona y datos verificables." />
   <meta property="og:url" content="https://www.oficioscirculares.com/casos/e-wear/" />
   <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/placeholder-16x9.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="E‑WEAR: de RAEE a joya con trazabilidad que se comprueba" />
-  <meta name="twitter:description" content="Caso E‑WEAR: RAEE a joya con trazabilidad por lote y pruebas visibles." />
+  <meta name="twitter:title" content="E‑WEAR: de RAEE a joya | Trazabilidad por lote que se comprueba" />
+  <meta name="twitter:description" content="Plata 100% reciclada de RAEE con ficha de lote y ensayo de pureza. Diseño que emociona y datos verificables." />
   <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/placeholder-16x9.jpg" />
   <link rel="stylesheet" href="../../assets/css/styles.css" />
   <link rel="stylesheet" href="../../assets/css/animations.css" />
@@ -61,6 +61,17 @@
       --transition-slow: 0.4s ease;
     }
     
+    /* CTA sticky */
+    .sticky-cta { position: fixed; inset-inline: 0; bottom: 0; display: none; background: rgba(31,75,63,.95); padding: 10px 14px; z-index: 9999; box-shadow: 0 -6px 20px rgba(0,0,0,.18); }
+    .sticky-cta .wrap { display: flex; gap: 12px; align-items: center; justify-content: center; }
+    .sticky-cta button { background: #E8D5B7; color: #1F4B3F; border: 0; border-radius: 999px; padding: 12px 20px; font-weight: 700; }
+    @media (max-width: 768px){ .sticky-cta{ display: block; } }
+    @media (min-width: 900px){
+      .sticky-cta{ display:none; }
+      .sticky-cta-desktop{ position: fixed; right: 24px; bottom: 24px; z-index: 9999; }
+      .sticky-cta-desktop button{ background:#1F4B3F; color:#fff; border:0; border-radius:999px; padding:14px 22px; box-shadow:0 8px 24px rgba(0,0,0,.2); }
+    }
+
     /* Base Layout */
     .page { 
       padding: 0;
@@ -679,6 +690,41 @@
       transform: scale(1.02);
     }
   </style>
+  <!-- JSON-LD extra: Breadcrumb, CaseStudy y FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Inicio","item":"https://www.oficioscirculares.com/"},
+      {"@type":"ListItem","position":2,"name":"Casos","item":"https://www.oficioscirculares.com/blog/"},
+      {"@type":"ListItem","position":3,"name":"E‑WEAR"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CaseStudy",
+    "headline":"E‑WEAR: de RAEE a joya con trazabilidad comprobable",
+    "image":"https://www.oficioscirculares.com/assets/images/cases/e-wear/placeholder-16x9.jpg",
+    "author":{"@type":"Organization","name":"Oficios Circulares"},
+    "datePublished":"2025-08-08",
+    "articleSection":"Diseño circular y trazabilidad",
+    "url":"https://www.oficioscirculares.com/casos/e-wear/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"¿Cómo sé que la pieza es de plata reciclada?","acceptedAnswer":{"@type":"Answer","text":"Cada lote tiene ficha y ensayo de pureza accesibles desde esta página."}},
+      {"@type":"Question","name":"¿Qué pasa si se daña?","acceptedAnswer":{"@type":"Answer","text":"Ofrecemos repulido y reparación; también recompra para re‑fundir si decides cerrar el ciclo."}},
+      {"@type":"Question","name":"¿Por qué el packaging parece una TV o un móvil concha?","acceptedAnswer":{"@type":"Answer","text":"Porque el embalaje cuenta el origen tecnológico y evita plásticos; refuerza la historia de regeneración."}}
+    ]
+  }
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -738,8 +784,11 @@
           <span aria-current="page" style="color: white; font-weight: 600;">E‑WEAR</span>
         </nav>
         
-        <h1 class="case-title">E‑WEAR: de RAEE a joya con trazabilidad que se comprueba</h1>
-        <p class="case-subtitle">Diseño que emociona. Trazabilidad que se comprueba.</p>
+        <h1 class="case-title">E‑WEAR: de RAEE a joya con trazabilidad comprobable</h1>
+        <p class="case-subtitle">Plata reciclada por lote, con ficha y ensayo visibles en 1 clic.</p>
+        <p style="margin: 12px 0 0;">
+          <button id="openPdfHero" class="cta-secondary-btn" aria-haspopup="dialog" aria-controls="pdfModal">Ver ficha de lote de ejemplo</button>
+        </p>
         
         <div class="case-meta">
           <span>👨‍💻 Jose Moscardó</span>
@@ -749,6 +798,12 @@
       </div>
     </div>
   </section>
+  <!-- Banner transparencia -->
+  <div class="oc-container" style="margin-top: -24px;">
+    <div role="status" aria-live="polite" style="background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;border-radius:12px;padding:12px 16px;box-shadow:0 4px 12px rgba(0,0,0,.04);font-size:.95rem;">
+      <strong>Transparencia:</strong> Hoy: los cierres y cadenas no son reciclados; estamos en pruebas. Próximo hito: 100% componentes reciclados en 12 meses.
+    </div>
+  </div>
   
   <div class="page oc-container oc-prose">
     <div class="container" style="max-width:none;padding:0;">
@@ -767,6 +822,44 @@
       <aside id="toc" class="toc" aria-label="Índice"></aside>
 
       <article id="post-content" class="article-content">
+        <!-- CTA sticky móvil -->
+        <div class="sticky-cta" id="stickyCta" aria-hidden="false">
+          <div class="wrap">
+            <button id="openPdfStickyMobile" aria-haspopup="dialog" aria-controls="pdfModal">Ver ficha de lote de ejemplo</button>
+          </div>
+        </div>
+        <!-- CTA sticky desktop -->
+        <div class="sticky-cta-desktop" id="stickyCtaDesktop">
+          <button id="openPdfStickyDesktop" aria-haspopup="dialog" aria-controls="pdfModal">Ver ficha de lote de ejemplo</button>
+        </div>
+        <!-- Modal PDF accesible -->
+        <div id="pdfModal" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+          <div style="background:#fff;max-width:960px;width:100%;max-height:90vh;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #eee;">
+              <h2 id="pdfModalTitle" style="margin:0;font-size:1.1rem;color:#1F4B3F;">Ficha de lote de ejemplo</h2>
+              <button id="closePdf" class="btn" style="background:#1F4B3F;color:#fff;padding:8px 12px;border-radius:8px;" aria-label="Cerrar modal de ficha">Cerrar</button>
+            </div>
+            <div style="flex:1;overflow:auto;background:#f8f9fa;">
+              <object data="../../assets/ewear/ficha-lote-ejemplo.pdf" type="application/pdf" width="100%" height="600">
+                <p>Tu navegador no puede mostrar el PDF. <a href="../../assets/ewear/ficha-lote-ejemplo.pdf" download>Descargar ficha de lote</a>.</p>
+              </object>
+            </div>
+          </div>
+        </div>
+        <!-- Modal PDF accesible -->
+        <div id="pdfModal" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+          <div style="background:#fff;max-width:960px;width:100%;max-height:90vh;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #eee;">
+              <h2 id="pdfModalTitle" style="margin:0;font-size:1.1rem;color:#1F4B3F;">Ficha de lote de ejemplo</h2>
+              <button id="closePdf" class="btn" style="background:#1F4B3F;color:#fff;padding:8px 12px;border-radius:8px;" aria-label="Cerrar modal de ficha">Cerrar</button>
+            </div>
+            <div style="flex:1;overflow:auto;background:#f8f9fa;">
+              <object data="../../assets/ewear/ficha-lote-ejemplo.pdf" type="application/pdf" width="100%" height="600">
+                <p>Tu navegador no puede mostrar el PDF. <a href="../../assets/ewear/ficha-lote-ejemplo.pdf" download>Descargar ficha de lote</a>.</p>
+              </object>
+            </div>
+          </div>
+        </div>
         <section class="oc-section">
           <div class="card">
             <h3 style="margin: 0 0 20px 0; color: var(--verde-profundo); font-size: 1.3em;">✨ Resumen ejecutivo</h3>
@@ -936,6 +1029,18 @@
             </div>
           </div>
         </div>
+        <!-- Micro-form leads -->
+        <section aria-labelledby="lead-title" style="margin: 28px 0 12px;">
+          <h3 id="lead-title">Recibe un ejemplo de ficha + checklist de trazabilidad (PDF)</h3>
+          <form id="leadForm" action="https://formspree.io/f/XXXXXXXX" method="POST" style="display:grid;gap:12px;max-width:520px;" novalidate>
+            <input type="text" name="name" placeholder="Nombre*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;" />
+            <input type="email" name="email" placeholder="Email*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;" />
+            <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true" />
+            <button id="leadSubmit" class="btn" style="background:#1F4B3F;color:#fff;padding:12px 18px;border-radius:10px;width:fit-content;">Enviar y recibir PDF</button>
+            <p style="font-size:.9rem;color:#666;">Al enviar, aceptas nuestra <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</p>
+            <p id="leadMsg" role="status" aria-live="polite" style="margin:0;color:#1F4B3F;font-weight:600;display:none;">Te hemos enviado el PDF y el checklist.</p>
+          </form>
+        </section>
         <p class="storybeat" role="note" aria-label="StoryBeat">Hechos, trazabilidad y mejora continua: ficha de lote por pieza, ensayo de pureza, embalaje sin plásticos y objetivos con fecha. Si cambia el plan, lo diremos y explicaremos por qué.</p>
 
         <h2 id="sistema-contenidos" class="oc-section">Sistema de contenidos (lo que mostramos)</h2>
@@ -980,7 +1085,7 @@
           
           <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
             <a class="cta-primary-btn" href="/#contacto">
-              📅 Agenda 15 minutos
+              📅 Agenda 15 minutos con Oficios Circulares
             </a>
             
             <a class="cta-secondary-btn" href="/donar">
@@ -1037,6 +1142,57 @@
   <script>
     // Enhanced interactions and animations
     document.addEventListener('DOMContentLoaded', function() {
+      // Modal accesible + CTAs sticky
+      const modal = document.getElementById('pdfModal');
+      const closeBtn = document.getElementById('closePdf');
+      const openers = ['openPdfHero','openPdfStickyMobile','openPdfStickyDesktop']
+        .map(id=>document.getElementById(id)).filter(Boolean);
+      const stickyMobile = document.getElementById('stickyCta');
+      const stickyDesktop = document.getElementById('stickyCtaDesktop');
+      let lastFocus = null;
+      function openModal(btn){
+        lastFocus = btn || document.activeElement;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+        if (stickyMobile) stickyMobile.style.display = 'none';
+        if (stickyDesktop) stickyDesktop.style.display = 'none';
+      }
+      function closeModal(){
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+        if (stickyMobile && window.innerWidth < 900) stickyMobile.style.display = 'block';
+        if (stickyDesktop && window.innerWidth >= 900) stickyDesktop.style.display = 'block';
+      }
+      openers.forEach(btn=>btn && btn.addEventListener('click',()=>openModal(btn)));
+      closeBtn && closeBtn.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.style.display==='flex'){ closeModal(); }});
+      modal && modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+
+      // Micro-form (Formspree + honeypot + doble submit)
+      const leadForm = document.getElementById('leadForm');
+      const leadBtn = document.getElementById('leadSubmit');
+      const leadMsg = document.getElementById('leadMsg');
+      if (leadForm) {
+        leadForm.addEventListener('submit', async (e)=>{
+          if (leadForm.company && leadForm.company.value) { e.preventDefault(); return; }
+          leadBtn.disabled = true;
+          leadBtn.textContent = 'Enviando...';
+          try {
+            // Permitir comportamiento normal de Formspree si hay network CORS
+          } finally {
+            // Mostrar mensaje y abrir modal
+            leadMsg.style.display = 'block';
+            openModal(leadBtn);
+            // Desencadenar descarga del checklist
+            const a = document.createElement('a');
+            a.href='../../assets/ewear/checklist-trazabilidad.pdf';
+            a.download='checklist-trazabilidad.pdf';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          }
+        }, { once: true });
+      }
       // Reading progress bar
       const progressBar = document.querySelector('.reading-progress');
       
