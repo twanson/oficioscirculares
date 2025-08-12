@@ -36,6 +36,7 @@ body {
     /* Spacing */
     --section-padding: 80px 0;
     --container-padding: 0 24px;
+    --section-gap: 64px;
     --border-radius: 16px;
     --card-radius: 14px;
     --card-padding: 24px;
@@ -980,6 +981,7 @@ p {
 .oc-container{max-width:var(--maxw);margin:0 auto;padding:0 var(--mx);} 
 .oc-prose{font-size:var(--text);line-height:var(--lh);} 
 .oc-section{padding:var(--s4) 0;border-top:1px solid var(--border);} 
+.page-case .oc-section{padding: var(--section-gap) 0;}
 .oc-h1{font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 var(--s2);} 
 .oc-sub{font-size:clamp(16px,2.1vw,20px);color:#555;margin:0 0 var(--s3);} 
 .oc-quote{background:#fff;border:1px solid var(--border);border-left:4px solid #111;padding:var(--s3);border-radius:12px;font-style:italic;} 
@@ -997,6 +999,10 @@ p {
 
 /* Timeline vertical en móvil para "Cómo ocurre" */
 @media (max-width: 768px) {
+  :root { --container-padding: 0 20px; --section-gap: 48px; }
+  .container { padding: var(--container-padding); }
+  .page-case .container { padding: 0 20px; }
+  .article-content { padding: 0 8px; }
   .page-case .oc-steps { position: relative; grid-template-columns: 1fr; }
   .page-case .oc-steps::before {
     content: '';
