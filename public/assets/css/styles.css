@@ -600,6 +600,7 @@ p {
     grid-template-columns: repeat(4, 1fr);
     gap: 32px;
     margin-top: 20px;
+    align-items: stretch;
 }
 
 .about-quote-section {
@@ -642,6 +643,7 @@ p {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .feature-item:hover {
@@ -669,6 +671,9 @@ p {
     opacity: 0.85;
     line-height: 1.6;
     flex-grow: 1;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 /* ===== PROFILES SECTION ===== */
@@ -694,6 +699,7 @@ p {
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: hidden;
 }
 
 .profile-card:hover {
@@ -752,6 +758,9 @@ p {
     margin-bottom: 24px;
     text-align: left;
     flex-grow: 1;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .profile-quote {
@@ -789,6 +798,7 @@ p {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .service-card:hover {
@@ -799,11 +809,13 @@ p {
 .service-card.featured {
     background: linear-gradient(135deg, var(--verde-profundo), var(--verde-hoja));
     color: white;
-    transform: scale(1.05);
+    /* Evitar escalado que deforma el grid */
+    outline: 2px solid rgba(232, 213, 183, 0.35);
+    box-shadow: 0 16px 56px rgba(31, 75, 63, 0.16);
 }
 
 .service-card.featured:hover {
-    transform: scale(1.05) translateY(-6px);
+    transform: translateY(-6px);
 }
 
 .service-icon {
@@ -841,6 +853,9 @@ p {
 
 .service-description {
     margin-bottom: 24px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .service-features {
@@ -885,6 +900,16 @@ p {
     border-radius: 12px;
     margin-bottom: 12px;
     background: #e5e5e5;
+}
+/* Imagen de tarjeta de post generada desde JS */
+.post-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: #e5e5e5;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .page-blog h1 { margin-bottom: 6px; }
 .page-blog .lead { margin-bottom: 18px; }
@@ -959,9 +984,67 @@ p {
 .oc-sub{font-size:clamp(16px,2.1vw,20px);color:#555;margin:0 0 var(--s3);} 
 .oc-quote{background:#fff;border:1px solid var(--border);border-left:4px solid #111;padding:var(--s3);border-radius:12px;font-style:italic;} 
 .oc-check{background:var(--muted);border:1px solid var(--border);padding:var(--s3);border-radius:16px;} 
-.oc-steps{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));counter-reset:step;} 
-.oc-step{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff;} 
-.oc-step::before{counter-increment:step;content:"0" counter(step);font-weight:700;display:block;margin-bottom:8px;color:var(--verde-profundo);} 
+/* Escopado para no interferir con páginas que definan su propio estilo de pasos */
+.page-case .oc-steps{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+.page-case .oc-step{border:1px solid var(--border);border-radius:16px;padding:16px;background:#fff;display:flex;flex-direction:column}
+/* Ocultar numeración global para evitar duplicados con el badge del título */
+.page-case .oc-steps{counter-reset:step-counter}
+.page-case .oc-step::before{content:none !important;display:none}
+
+/* Homogeneizar forma: imágenes con relación 4:3 y radios coherentes */
+.page-case .oc-step picture, .page-case .oc-step img{display:block;border-radius:12px}
+.page-case .oc-step img{aspect-ratio:4/3;object-fit:cover;background:#e5e5e5}
+
+/* Timeline vertical en móvil para "Cómo ocurre" */
+@media (max-width: 768px) {
+  .page-case .oc-steps { position: relative; grid-template-columns: 1fr; }
+  .page-case .oc-steps::before {
+    content: '';
+    position: absolute;
+    left: 24px; top: 0; bottom: 0;
+    width: 2px; background: #e5e7eb;
+  }
+  .page-case .oc-step { position: relative; padding-left: 64px; }
+  .page-case .oc-step h4 { display: block; margin-bottom: 8px; }
+  .page-case .oc-step h4 .num {
+    position: absolute;
+    left: 10px; top: 14px;
+    width: 28px; height: 28px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+}
+
+/* Timeline alterno en desktop (línea central, tarjetas izquierda/derecha) */
+@media (min-width: 900px) {
+  .page-case .oc-steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 60px;
+    padding: 10px 0;
+  }
+  .page-case .oc-steps::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 2px; background: #e5e7eb;
+    transform: translateX(-1px);
+  }
+  .page-case .oc-step { position: relative; }
+  .page-case .oc-step:nth-child(odd) { grid-column: 1; padding-right: 40px; }
+  .page-case .oc-step:nth-child(even) { grid-column: 2; padding-left: 40px; }
+  .page-case .oc-step h4 { position: relative; }
+  .page-case .oc-step h4 .num {
+    position: absolute;
+    left: calc(50% - 14px);
+    top: -6px;
+    width: 28px; height: 28px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    z-index: 1;
+  }
+}
 .oc-cta{display:flex;gap:12px;align-items:center;margin-top:var(--s3);flex-wrap:wrap} 
 .oc-btn{padding:12px 20px;border-radius:999px;border:1px solid #111;text-decoration:none;font-weight:600;display:inline-block}
 
@@ -977,13 +1060,13 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 }
 
 .service-card-link:hover .service-card {
-    transform: translateY(-6px) scale(1.01);
+    transform: translateY(-6px);
     box-shadow: 0 20px 60px rgba(31, 75, 63, 0.2);
     cursor: pointer;
 }
 
 .service-card-link:hover .service-card.featured {
-    transform: scale(1.07) translateY(-8px);
+    transform: translateY(-8px);
     box-shadow: 0 24px 72px rgba(31, 75, 63, 0.25);
 }
 

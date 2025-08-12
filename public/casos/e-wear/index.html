@@ -11,35 +11,673 @@
   <meta property="og:title" content="E‑WEAR: de RAEE a joya con trazabilidad que se comprueba" />
   <meta property="og:description" content="RAEE a joya deseable con pruebas visibles: ensayo de pureza y ficha de lote descargable." />
   <meta property="og:url" content="https://www.oficioscirculares.com/casos/e-wear/" />
-  <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/hero-packaging-movil-concha.jpg" />
+  <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/placeholder-16x9.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="E‑WEAR: de RAEE a joya con trazabilidad que se comprueba" />
   <meta name="twitter:description" content="Caso E‑WEAR: RAEE a joya con trazabilidad por lote y pruebas visibles." />
-  <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/hero-packaging-movil-concha.jpg" />
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="stylesheet" href="/assets/css/animations.css" />
+  <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/placeholder-16x9.jpg" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+  <link rel="stylesheet" href="../../assets/css/animations.css" />
   <style>
-    .page { padding: 60px 0; }
-    .section { padding: 40px 0; }
-    .grid-2 { display:grid; grid-template-columns: 1fr; gap:24px; }
-    @media (min-width: 900px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
-    .cards { display:grid; gap:16px; grid-template-columns: 1fr; }
-    @media (min-width: 900px){ .cards{ grid-template-columns: repeat(4,1fr);} }
-    .card { background:#fff; border-radius:16px; padding:18px; box-shadow:0 8px 24px rgba(0,0,0,.08); border:1px solid #eee; }
-    .pull { border-left:4px solid var(--terracota); padding-left:16px; font-style:italic; color:var(--verde-hoja); }
-    .timeline { position:relative; border-left:2px solid #e5e5e5; margin-left:8px; }
-    .timeline .item { position:relative; margin-left:16px; margin-bottom:28px; }
-    .timeline .dot { position:absolute; left:-26px; top:4px; width:12px; height:12px; background:var(--verde-hoja); border-radius:50%; }
-    .gallery { display:grid; gap:16px; grid-template-columns: 1fr; }
-    @media (min-width: 900px){ .gallery{ grid-template-columns: repeat(3,1fr);} }
-    .cta-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
-    .btn-outline { border:1px solid #dedede; padding:12px 18px; border-radius:12px; }
-    .mini-carousel { position:relative; }
-    .mini-carousel figure{ margin:0; }
-    .mini-carousel .nav{ position:absolute; inset:0; display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
-    .mini-carousel button{ pointer-events:auto; background:#fff; border:1px solid #ddd; border-radius:999px; width:36px; height:36px; }
-    figure img{ width:100%; height:auto; border-radius:12px; display:block; }
-    figcaption{ font-size:.9rem; color:#666; margin-top:6px; }
+    /* Enhanced E-WEAR Case Study Styles */
+    :root {
+      /* E-WEAR Brand Colors */
+      --ew-primary: #1F4B3F;
+      --ew-secondary: #2D5F4F;
+      --ew-accent: #D17B49;
+      --ew-light: #E8D5B7;
+      --ew-neutral: #f8f9fa;
+      
+      /* OC Brand Integration */
+      --verde-profundo: var(--ew-primary);
+      --verde-hoja: #4A7C59;
+      --terracota: var(--ew-accent);
+      --arena: var(--ew-light);
+      
+      /* Typography & Spacing */
+      --text-primary: #1a1a1a;
+      --text-secondary: #4a4a4a;
+      --text-light: #6a6a6a;
+      --text-muted: #8e8e8e;
+      
+      /* Shadows & Effects */
+      --shadow-sm: 0 2px 8px rgba(31, 75, 63, 0.08);
+      --shadow-md: 0 8px 24px rgba(31, 75, 63, 0.12);
+      --shadow-lg: 0 16px 40px rgba(31, 75, 63, 0.16);
+      --gradient-primary: linear-gradient(135deg, var(--ew-primary) 0%, var(--ew-secondary) 100%);
+      
+      /* Layout */
+      --border-radius: 16px;
+      --border-radius-lg: 24px;
+      --spacing-xs: 8px;
+      --spacing-sm: 16px;
+      --spacing-md: 24px;
+      --spacing-lg: 32px;
+      --spacing-xl: 48px;
+      
+      /* Transitions */
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+      --transition-slow: 0.4s ease;
+    }
+    
+    /* Base Layout */
+    .page { 
+      padding: 0;
+      max-width: none;
+      line-height: 1.65;
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+    
+    .oc-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+    
+    /* Enhanced Typography System */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--ew-primary);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    
+    h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+    h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+    h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+    
+    p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0 0 1.5rem;
+    }
+    
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+    
+    /* Professional Cards */
+    .card { 
+      background: white; 
+      border-radius: 20px; 
+      padding: 32px; 
+      box-shadow: 0 8px 32px var(--shadow-light); 
+      border: 1px solid var(--border-light); 
+      margin: 32px 0;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      box-shadow: 0 16px 48px var(--shadow-medium);
+      transform: translateY(-4px);
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .card:hover::before {
+      opacity: 1;
+    }
+    
+    /* Enhanced StoryBeats */
+    .storybeat {
+      background: linear-gradient(135deg, var(--soft-gray) 0%, #f1f3f5 100%);
+      border-left: 6px solid var(--accent-terracotta);
+      padding: 32px;
+      margin: 40px 0;
+      border-radius: 0 20px 20px 0;
+      font-style: italic;
+      color: var(--primary-green);
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .storybeat::before {
+      content: '💭';
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      background: white;
+      padding: 8px 12px;
+      border-radius: 50%;
+      font-size: 1.2em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .storybeat::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-terracotta);
+      opacity: 0.3;
+    }
+    
+    /* Enhanced Gallery */
+    .gallery { 
+      display: grid; 
+      gap: 32px; 
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      margin: 60px 0;
+      padding: 0;
+    }
+    
+    .gallery figure {
+      margin: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px var(--shadow-light);
+      transition: all 0.4s ease;
+      background: white;
+    }
+    
+    .gallery figure:hover {
+      box-shadow: 0 20px 60px var(--shadow-medium);
+      transform: translateY(-8px);
+    }
+    
+    .gallery img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    
+    .gallery figure:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery figcaption {
+      padding: 20px 24px;
+      background: white;
+      font-size: 0.95rem;
+      color: var(--text-medium);
+      line-height: 1.5;
+    }
+    
+    .gallery figcaption strong {
+      display: block;
+      color: var(--primary-green);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    
+    /* Enhanced Hero Section */
+    .case-hero {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('../../assets/images/artesana\ blanco\ y\ negro.jpg') center/cover;
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .case-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .case-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      margin: 0 0 24px;
+      letter-spacing: -0.02em;
+      color: white;
+    }
+    
+    .case-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin: 0 0 40px;
+      font-weight: 300;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0,0,0,.35);
+      opacity: 1;
+    }
+    
+    .case-meta {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+    
+    /* Hero figure */
+    .hero-figure {
+      margin: 60px 0;
+      text-align: center;
+      position: relative;
+    }
+    
+    .hero-figure img {
+      max-width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .hero-figure:hover img {
+      transform: scale(1.02);
+    }
+    
+    .hero-figure figcaption {
+      margin-top: 16px;
+      color: var(--text-light);
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+    
+    /* Enhanced Buttons */
+    .btn-outline { 
+      border: 2px solid var(--accent-terracotta); 
+      padding: 16px 24px; 
+      border-radius: 12px; 
+      text-decoration: none;
+      color: var(--accent-terracotta);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px;
+      transition: all 0.3s ease;
+      background: white;
+      box-shadow: 0 4px 12px rgba(209, 123, 73, 0.2);
+    }
+    
+    .btn-outline:hover {
+      background: var(--accent-terracotta);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(209, 123, 73, 0.3);
+    }
+    
+    /* Enhanced CTA Buttons */
+    .cta-primary-btn, .cta-secondary-btn {
+      padding: 18px 32px;
+      border-radius: 30px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-primary-btn {
+      background: white;
+      color: var(--primary-green);
+      border: 2px solid white;
+      box-shadow: 0 8px 24px rgba(255,255,255,0.3);
+    }
+    
+    .cta-primary-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(255,255,255,0.4);
+    }
+    
+    .cta-secondary-btn {
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      border: 2px solid rgba(255,255,255,0.85);
+      text-shadow: 0 1px 6px rgba(0,0,0,.35);
+    }
+    
+    .cta-secondary-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Forzar contraste alto en la CTA final del caso */
+    .cta-contrast, .cta-contrast * {
+      color: #ffffff !important;
+      text-shadow: 0 2px 10px rgba(0,0,0,.35);
+      opacity: 1 !important;
+    }
+    
+    /* Enhanced TOC */
+    .toc {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 32px var(--shadow-light);
+      margin: 40px 0;
+      border: 1px solid var(--border-light);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .toc-title {
+      font-weight: 700;
+      color: var(--primary-green);
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .toc-title::before {
+      content: '📎';
+      font-size: 1.2rem;
+    }
+    
+    .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .toc-item a {
+      display: block;
+      padding: 12px 16px;
+      color: var(--text-medium);
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+    
+    .toc-item a:hover {
+      background: var(--soft-gray);
+      color: var(--primary-green);
+      border-left-color: var(--accent-terracotta);
+      transform: translateX(4px);
+    }
+    
+    .toc-item.depth-2 a {
+      padding-left: 32px;
+      font-size: 0.9rem;
+    }
+    
+    /* Enhanced Navbar */
+    .enhanced-navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .enhanced-navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .nav-link {
+      color: var(--text-medium);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary-green);
+    }
+    
+    .nav-cta {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(31, 75, 63, 0.3);
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    }
+    
+    /* Adjust body for fixed navbar */
+    body {
+      padding-top: 0;
+    }
+    
+    /* Enhanced Responsive Design */
+    @media (max-width: 768px) {
+      .nav-actions {
+        gap: 8px;
+      }
+      
+      .nav-link {
+        display: none;
+      }
+      
+      .case-hero {
+        padding: 120px 0 40px;
+      }
+      
+      .container { 
+        padding: 0 16px; 
+      }
+      
+      .card {
+        padding: 24px;
+        margin: 24px 0;
+      }
+      
+      .storybeat {
+        padding: 24px;
+        margin: 32px 0;
+      }
+      
+      .gallery { 
+        grid-template-columns: 1fr; 
+        gap: 24px;
+        margin: 40px 0;
+      }
+      
+      .gallery img {
+        height: 220px;
+      }
+      
+      .toc {
+        position: relative;
+        top: auto;
+        margin: 32px 0;
+        padding: 24px;
+      }
+      
+      .cta-primary-btn, .cta-secondary-btn {
+        width: 100%;
+        justify-content: center;
+        margin: 8px 0;
+      }
+      
+      .back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+      }
+    }
+    
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Progress indicator */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+      z-index: 1000;
+      transition: width 0.3s ease;
+    }
+    
+    /* Enhanced Process Steps */
+    .oc-steps {
+      display: grid;
+      gap: 48px;
+      margin: 60px 0;
+    }
+    
+    .oc-step {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px var(--shadow-light);
+      border: 1px solid var(--border-light);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .oc-step:hover {
+      box-shadow: 0 16px 48px var(--shadow-medium);
+      transform: translateY(-4px);
+    }
+    
+    .oc-steps { counter-reset: step-counter; }
+    .oc-step h4 {
+      color: var(--primary-green);
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 10px;
+    }
+    .oc-step h4 .num {
+      counter-increment: step-counter;
+      content: counter(step-counter, decimal-leading-zero);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--verde-profundo);
+      color: #fff;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+    
+    .oc-step figure {
+      margin: 24px 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px var(--shadow-light);
+    }
+    
+    .oc-step img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .oc-step:hover img {
+      transform: scale(1.02);
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -49,20 +687,31 @@
     "description": "Caso E‑WEAR: RAEE a joya deseable con trazabilidad por lote. Marca clara, pruebas visibles y packaging que cuenta el origen.",
     "author": {"@type": "Person", "name": "Jose Moscardó"},
     "datePublished": "2025-08-08",
-    "image": "https://www.oficioscirculares.com/assets/images/cases/e-wear/hero-packaging-movil-concha.jpg",
+    "image": "https://www.oficioscirculares.com/assets/images/cases/e-wear/placeholder-16x9.jpg",
     "url": "https://www.oficioscirculares.com/casos/e-wear/"
   }
   </script>
 </head>
 <body class="page-case">
-  <nav class="navbar">
+  <nav class="navbar enhanced-navbar">
     <div class="nav-container">
-      <a href="/" class="nav-logo">
-        <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo" />
+      <a href="../../" class="nav-logo">
+        <img src="../../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo" />
         <span class="logo-text">Oficios Circulares</span>
       </a>
+      <div class="nav-actions">
+        <a href="../../blog/" class="nav-link">Blog</a>
+        <a href="../../#contacto" class="nav-cta">Únete</a>
+      </div>
     </div>
   </nav>
+  
+  <!-- Back to top button -->
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 15l-6-6-6 6"></path>
+    </svg>
+  </button>
 
   <script>
   document.addEventListener('error', function(e){
@@ -74,40 +723,67 @@
   }, true);
   </script>
 
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress"></div>
+  
+  <!-- Enhanced Hero Section -->
+  <section class="case-hero">
+    <div class="case-hero-content">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb" style="margin-bottom: 32px; opacity: 0.8;">
+          <a href="../../" style="color: rgba(255,255,255,0.8); text-decoration: none;">Inicio</a>
+          <span aria-hidden="true" style="margin: 0 12px;">›</span>
+          <a href="../../blog/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Casos</a>
+          <span aria-hidden="true" style="margin: 0 12px;">›</span>
+          <span aria-current="page" style="color: white; font-weight: 600;">E‑WEAR</span>
+        </nav>
+        
+        <h1 class="case-title">E‑WEAR: de RAEE a joya con trazabilidad que se comprueba</h1>
+        <p class="case-subtitle">Diseño que emociona. Trazabilidad que se comprueba.</p>
+        
+        <div class="case-meta">
+          <span>👨‍💻 Jose Moscardó</span>
+          <span>📅 <span data-date>2025-08-08</span></span>
+          <span>⏱️ <span id="reading-time">—</span> min de lectura</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <div class="page oc-container oc-prose">
     <div class="container" style="max-width:none;padding:0;">
-      <section class="section" id="hero">
-        <h1 class="section-title oc-h1">E‑WEAR: de RAEE a joya con trazabilidad que se comprueba</h1>
-        <div class="post-subhead">
-          <p id="post-meta" class="post-meta">Jose Moscardó · <span data-date>2025-08-08</span> · <span id="reading-time">—</span></p>
-          <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <a href="/">Inicio</a>
-            <span aria-hidden="true">›</span>
-            <a href="/blog/">Casos</a>
-            <span aria-hidden="true">›</span>
-            <span aria-current="page">E‑WEAR</span>
-          </nav>
-        </div>
-        <p class="oc-sub">Diseño que emociona. Trazabilidad que se comprueba.</p>
-        <figure class="hero-figure">
+      
+      <figure class="hero-figure fade-in">
+        <picture>
+          <source srcset="../../assets/images/cases/e-wear/hero-packaging-movil-concha.webp" type="image/webp" />
           <img 
-            src="/assets/images/cases/e-wear/hero-packaging-movil-concha.jpg" 
+            src="../../assets/images/cases/e-wear/placeholder-16x9.jpg" 
             alt="Abrimos el móvil concha: caja de cartón reciclado con la pieza en su interior."
-            data-fallback="/assets/images/cases/e-wear/placeholder-16x9.jpg" 
             loading="lazy" decoding="async" />
-          <figcaption>Packaging “móvil concha”.</figcaption>
-        </figure>
-      </section>
+        </picture>
+        <figcaption>Packaging "móvil concha" que cuenta la historia del origen tecnológico.</figcaption>
+      </figure>
 
       <aside id="toc" class="toc" aria-label="Índice"></aside>
 
       <article id="post-content" class="article-content">
         <section class="oc-section">
-          <div class="card" style="padding:16px 18px;">
-            <p class="lead" style="margin:0 0 6px 0;"><strong>Resumen en 3 líneas</strong></p>
-            <p style="margin:4px 0;"><strong>El reto.</strong> Convertir plata de RAEE (e-waste) en una joya deseable y demostrable.</p>
-            <p style="margin:4px 0;"><strong>Qué hicimos.</strong> Marca clara, trazabilidad por lote y packaging que cuenta el origen.</p>
-            <p style="margin:4px 0;"><strong>Pruebas.</strong> Ensayo de pureza por lote y ficha descargable con datos clave.</p>
+          <div class="card">
+            <h3 style="margin: 0 0 20px 0; color: var(--verde-profundo); font-size: 1.3em;">✨ Resumen ejecutivo</h3>
+            <div style="display: grid; gap: 16px;">
+              <div>
+                <h4 style="margin: 0 0 8px 0; color: var(--terracota); font-size: 1em;">🎯 El reto</h4>
+                <p style="margin: 0; font-size: 1em; line-height: 1.5;">Convertir plata de RAEE (e-waste) en una joya deseable y demostrable.</p>
+              </div>
+              <div>
+                <h4 style="margin: 0 0 8px 0; color: var(--terracota); font-size: 1em;">🛠️ Qué hicimos</h4>
+                <p style="margin: 0; font-size: 1em; line-height: 1.5;">Marca clara, trazabilidad por lote y packaging que cuenta el origen.</p>
+              </div>
+              <div>
+                <h4 style="margin: 0 0 8px 0; color: var(--terracota); font-size: 1em;">✅ Pruebas</h4>
+                <p style="margin: 0; font-size: 1em; line-height: 1.5;">Ensayo de pureza por lote y ficha descargable con datos clave.</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -123,107 +799,143 @@
         </ol>
         <p class="storybeat" role="note" aria-label="StoryBeat">Laura nos llamó con un propósito claro: crear piezas con plata 100% reciclada de RAEE. Entramos en su taller y dibujamos el mapa del viaje.</p>
 
-        <h2 id="que-hicimos" class="oc-section">Qué hicimos (4 pilares)</h2>
-        <h3 id="marca-lenguaje">1) Marca y lenguaje</h3>
-        <ul>
-          <li>Mensajes cortos y comprobables: “plata reciclada por lote con ficha y ensayo”.</li>
-          <li>Paleta y referencias retro que conectan con “tecnología con memoria”.</li>
-        </ul>
+        <h2 id="que-hicimos" class="oc-section">🎨 Qué hicimos (4 pilares)</h2>
+        
+        <div style="display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin: 40px 0;">
+          <div class="card" style="border-left: 5px solid var(--verde-hoja);">
+            <h3 id="marca-lenguaje" style="margin: 0 0 16px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+              🏷️ <span>1. Marca y lenguaje</span>
+            </h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+              <li style="margin-bottom: 8px;">Mensajes cortos y comprobables: "plata reciclada por lote con ficha y ensayo".</li>
+              <li style="margin-bottom: 8px;">Paleta y referencias retro que conectan con "tecnología con memoria".</li>
+            </ul>
+          </div>
 
-        <h3 id="trazabilidad-pruebas">2) Trazabilidad y pruebas</h3>
-        <ul>
-          <li>Producción en <strong>lotes pequeños</strong> con reciclador certificado.</li>
-          <li><strong>Ensayo de pureza</strong> por lote y <strong>ficha descargable</strong>: origen, reciclador, resultados y fecha.</li>
-        </ul>
+          <div class="card" style="border-left: 5px solid var(--terracota);">
+            <h3 id="trazabilidad-pruebas" style="margin: 0 0 16px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+              🔍 <span>2. Trazabilidad y pruebas</span>
+            </h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+              <li style="margin-bottom: 8px;">Producción en <strong>lotes pequeños</strong> con reciclador certificado.</li>
+              <li style="margin-bottom: 8px;"><strong>Ensayo de pureza</strong> por lote y <strong>ficha descargable</strong>: origen, reciclador, resultados y fecha.</li>
+            </ul>
+          </div>
 
-        <h3 id="producto-confort">3) Producto y confort</h3>
-        <ul>
-          <li>Bocetos → prototipos → pruebas de talla y uso.</li>
-          <li>Si una pieza <strong>no es cómoda</strong>, no se lanza. Mostramos <strong>prototipo vs final</strong>.</li>
-        </ul>
+          <div class="card" style="border-left: 5px solid var(--arena);">
+            <h3 id="producto-confort" style="margin: 0 0 16px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+              ✨ <span>3. Producto y confort</span>
+            </h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+              <li style="margin-bottom: 8px;">Bocetos → prototipos → pruebas de talla y uso.</li>
+              <li style="margin-bottom: 8px;">Si una pieza <strong>no es cómoda</strong>, no se lanza. Mostramos <strong>prototipo vs final</strong>.</li>
+            </ul>
+          </div>
 
-        <h3 id="packaging-con-sentido">4) Packaging con sentido</h3>
-        <ul>
-          <li>Dos formatos: <strong>TV</strong> (memoria compartida) y <strong>móvil concha</strong> (gesto de abrir).</li>
-          <li>Cartón reciclado y <strong>tarjeta plantable</strong> que resume el origen.</li>
-        </ul>
+          <div class="card" style="border-left: 5px solid #6c757d;">
+            <h3 id="packaging-con-sentido" style="margin: 0 0 16px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+              📦 <span>4. Packaging con sentido</span>
+            </h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+              <li style="margin-bottom: 8px;">Dos formatos: <strong>TV</strong> (memoria compartida) y <strong>móvil concha</strong> (gesto de abrir).</li>
+              <li style="margin-bottom: 8px;">Cartón reciclado y <strong>tarjeta plantable</strong> que resume el origen.</li>
+            </ul>
+          </div>
+        </div>
         <p class="storybeat" role="note" aria-label="StoryBeat">La tarjeta plantable no es adorno: cuenta el origen y ayuda a cerrar el círculo con un gesto simple.</p>
 
         <h2 id="proceso" class="oc-section">Proceso (cómo ocurre)</h2>
-        <div class="oc-steps">
+        <div class="oc-steps numbered">
           <div class="oc-step" id="origen">
-            <h4>Origen</h4>
+            <h4><span class="num"></span> Origen</h4>
             <p>Recogemos placas y componentes de RAEE por lotes. Cada lote lleva <strong>fecha y procedencia</strong>.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">Empezamos por el origen: puntos de reparación, donaciones y lotes etiquetados. Tres preguntas para cada pieza: de dónde viene, cómo se recuperó y qué puede seguir diciendo hoy.</p>
             <figure>
               <picture>
-                <source srcset="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.avif" type="image/avif" />
-                <source srcset="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.webp" type="image/webp" />
-                <img src="/assets/images/cases/e-wear/lote-origen-placas-etiquetadas.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Etiquetamos el lote de RAEE con fecha y procedencia." />
+                <source srcset="../../assets/images/cases/e-wear/lote-origen-placas-etiquetadas.webp" type="image/webp" />
+                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Etiquetamos el lote de RAEE con fecha y procedencia." />
               </picture>
             </figure>
           </div>
 
           <div class="oc-step" id="rescate">
-            <h4>Rescate</h4>
+            <h4><span class="num"></span> Rescate</h4>
             <p>Desmontamos de forma segura y separamos metales. Lo no recuperable va a su canal de reciclaje.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">El rescate fue método: clasificación, desmontaje seguro y separación. Recuperamos plata con reciclador certificado en lotes pequeños. Cada paso deja rastro y puede mostrarse.</p>
             <figure>
               <picture>
-                <source srcset="/assets/images/cases/e-wear/puesto-desmontaje-seguro.avif" type="image/avif" />
-                <source srcset="/assets/images/cases/e-wear/puesto-desmontaje-seguro.webp" type="image/webp" />
-                <img src="/assets/images/cases/e-wear/puesto-desmontaje-seguro.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Realizamos desmontaje seguro y separación de metales." />
+                <source srcset="../../assets/images/cases/e-wear/puesto-desmontaje-seguro.webp" type="image/webp" />
+                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Realizamos desmontaje seguro y separación de metales." />
               </picture>
             </figure>
           </div>
 
           <div class="oc-step" id="transformacion">
-            <h4>Transformación</h4>
+            <h4><span class="num"></span> Transformación</h4>
             <p>Refinamos en <strong>lotes pequeños</strong>. Realizamos <strong>ensayo de pureza</strong> por lote.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">La transformación tuvo dos fuegos: el que purifica y el que crea. Diseño esencial, sin cliché. Prototipos, pruebas y comodidad primero.</p>
             <figure>
               <picture>
-                <source srcset="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.avif" type="image/avif" />
-                <source srcset="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.webp" type="image/webp" />
-                <img src="/assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Mostramos el ensayo de pureza del lote." />
+                <source srcset="../../assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.webp" type="image/webp" />
+                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Mostramos el ensayo de pureza del lote." />
               </picture>
             </figure>
           </div>
 
           <div class="oc-step" id="renacer">
-            <h4>Renacer</h4>
+            <h4><span class="num"></span> Renacer</h4>
             <p>Diseño, prototipos, pruebas de confort. Mostramos <strong>antes/después</strong>.</p>
             <figure>
               <picture>
-                <source srcset="/assets/images/cases/e-wear/prototipo-vs-final-anillo.avif" type="image/avif" />
-                <source srcset="/assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" type="image/webp" />
-                <img src="/assets/images/cases/e-wear/prototipo-vs-final-anillo.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Comparamos el prototipo con la pieza final para validar comodidad." />
+                <source srcset="../../assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" type="image/webp" />
+                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Comparamos el prototipo con la pieza final para validar comodidad." />
               </picture>
             </figure>
           </div>
 
           <div class="oc-step" id="entrega">
-            <h4>Entrega</h4>
+            <h4><span class="num"></span> Entrega</h4>
             <p>Packaging <strong>TV</strong> o <strong>móvil concha</strong>. Incluye <strong>tarjeta plantable</strong> con el mensaje de origen.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">La entrega cierra el arco: packaging en cartón reciclado con forma de móvil concha o tele retro. El gesto de abrir cuenta de dónde venimos.</p>
             <figure>
               <picture>
-                <source srcset="/assets/images/cases/e-wear/packaging-movil-concha.avif" type="image/avif" />
-                <source srcset="/assets/images/cases/e-wear/packaging-movil-concha.webp" type="image/webp" />
-                <img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" loading="lazy" decoding="async" data-fallback="/assets/images/cases/e-wear/placeholder-4x3.jpg" alt="Abrimos el móvil concha y se ve el anillo." />
+                <source srcset="../../assets/images/cases/e-wear/packaging-movil-concha.webp" type="image/webp" />
+                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Abrimos el móvil concha y se ve el anillo." />
               </picture>
             </figure>
           </div>
         </div>
 
-        <h2 id="pruebas-metricas" class="oc-section">Pruebas y métricas</h2>
-        <ul class="oc-check">
-          <li><strong>Plata reciclada:</strong> 100% del metal principal proviene de RAEE.</li>
-          <li><strong>Ficha de lote (PDF):</strong> origen, reciclador, ensayo y fecha. <a id="link-ficha" class="btn-outline" style="margin-left:6px" href="/assets/docs/e-wear-ficha.pdf" target="_blank" rel="noopener">Descargar ficha de lote (PDF)</a></li>
-          <li><strong>Qué falta hoy:</strong> cierres y cadenas aún no son reciclados; en pruebas.</li>
-          <li><strong>Objetivo 12 meses:</strong> <strong>100% de componentes reciclados</strong>. Actualizaremos avances aquí.</li>
-          <li><strong>Ensayo de pureza:</strong> <a id="link-ensayo" class="btn-outline" style="margin-left:6px" href="/assets/docs/e-wear-ensayo.pdf" target="_blank" rel="noopener">Ensayo de pureza (PDF)</a></li>
-        </ul>
+        <h2 id="pruebas-metricas" class="oc-section">📊 Pruebas y métricas</h2>
+        <div class="metrics-container">
+          <div class="metrics-grid">
+            <div class="card" style="margin: 0; padding: 20px; border: 2px solid var(--verde-hoja); border-radius: 16px;">
+              <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+                ✅ <span>Plata 100% reciclada</span>
+              </h4>
+              <p style="margin: 0; font-size: 0.95em; line-height: 1.5;">Todo el metal principal proviene de RAEE certificado.</p>
+            </div>
+            
+            <div class="card" style="margin: 0; padding: 20px; border: 2px solid var(--terracota); border-radius: 16px;">
+              <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+                📄 <span>Documentación completa</span>
+              </h4>
+              <p style="margin: 0 0 16px 0; font-size: 0.95em; line-height: 1.5;">Ficha de lote y ensayo de pureza descargables.</p>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <a id="link-ficha" class="btn-outline" href="../../assets/docs/e-wear-ficha.pdf" target="_blank" rel="noopener">Ficha de lote</a>
+                <a id="link-ensayo" class="btn-outline" href="../../assets/docs/e-wear-ensayo.pdf" target="_blank" rel="noopener">Ensayo pureza</a>
+              </div>
+            </div>
+            
+            <div class="card" style="margin: 0; padding: 20px; border: 2px solid #ffc107; border-radius: 16px;">
+              <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+                ⏳ <span>En desarrollo</span>
+              </h4>
+              <p style="margin: 0 0 8px 0; font-size: 0.95em; line-height: 1.5;">Cierres y cadenas aún no son reciclados.</p>
+              <p style="margin: 0; font-size: 0.9em; color: #666; font-weight: 600;">Objetivo 12 meses: 100% componentes reciclados</p>
+            </div>
+          </div>
+        </div>
         <p class="storybeat" role="note" aria-label="StoryBeat">Hechos, trazabilidad y mejora continua: ficha de lote por pieza, ensayo de pureza, embalaje sin plásticos y objetivos con fecha. Si cambia el plan, lo diremos y explicaremos por qué.</p>
 
         <h2 id="sistema-contenidos" class="oc-section">Sistema de contenidos (lo que mostramos)</h2>
@@ -233,36 +945,173 @@
           <li><strong>Cómo leer la ficha de lote:</strong> guía rápida de 1 minuto.</li>
         </ul>
 
-        <h2 id="faq" class="oc-section">Preguntas rápidas</h2>
-        <p><strong>¿Cómo sé que la pieza es de plata reciclada?</strong> Por la <strong>ficha de lote</strong> y el <strong>ensayo</strong> asociados.</p>
-        <p><strong>¿Qué pasa si se daña?</strong> Repulido y reparación. Si decides cerrarle el ciclo, <strong>recompramos</strong> para re‑fundir.</p>
-        <p><strong>¿Por qué la caja parece una TV o un móvil concha?</strong> Porque el <strong>embalaje cuenta el origen</strong> y evita plásticos.</p>
+        <h2 id="faq" class="oc-section">❓ Preguntas frecuentes</h2>
+        
+        <div style="display: grid; gap: 24px; margin: 32px 0;">
+          <div class="card" style="border-left: 4px solid var(--verde-hoja);">
+            <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); font-size: 1.1em;">
+              🔍 ¿Cómo sé que la pieza es de plata reciclada?
+            </h4>
+            <p style="margin: 0; line-height: 1.6;">Por la <strong>ficha de lote</strong> y el <strong>ensayo de pureza</strong> que puedes descargar. Cada pieza tiene su documentación completa y verificable.</p>
+          </div>
+          
+          <div class="card" style="border-left: 4px solid var(--terracota);">
+            <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); font-size: 1.1em;">
+              🔧 ¿Qué pasa si se daña?
+            </h4>
+            <p style="margin: 0; line-height: 1.6;">Ofrecemos repulido y reparación. Si decides cerrarle el ciclo, <strong>recompramos la pieza</strong> para volver a fundirla y darle una nueva vida.</p>
+          </div>
+          
+          <div class="card" style="border-left: 4px solid var(--arena);">
+            <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); font-size: 1.1em;">
+              📦 ¿Por qué la caja parece una TV o un móvil concha?
+            </h4>
+            <p style="margin: 0; line-height: 1.6;">El <strong>embalaje cuenta el origen</strong>: tu joya vivió en esos dispositivos. Además, evitamos plásticos y usamos cartón 100% reciclado.</p>
+          </div>
+        </div>
 
         <p class="storybeat" role="note" aria-label="StoryBeat">Conocí cajones y cables, hornos y manos. Hoy soy borde y luz en tu dedo. Si un día cierras mi ciclo, vuelvo al origen.</p>
-        <p id="relato-link" style="margin-top:8px;"><a href="/assets/docs/relato-e-wear.pdf" target="_blank" rel="noopener">Leer el relato completo (PDF)</a></p>
-        <h2 id="cta" class="oc-section">Hablemos</h2>
-        <div class="oc-cta">
-          <a class="oc-btn btn-primary" href="/#contacto">Agenda 15 minutos</a>
-          <a href="/donar" class="link-secondary">Quiero donar un dispositivo</a>
+        <p id="relato-link" style="margin-top:8px;"><a href="../../assets/docs/relato-e-wear.pdf" target="_blank" rel="noopener">Leer el relato completo (PDF)</a></p>
+        <h2 id="cta" class="oc-section">💬 ¡Hablemos!</h2>
+        
+        <div class="cta-contrast" style="background: linear-gradient(135deg, var(--verde-profundo) 0%, var(--verde-hoja) 100%); border-radius: 24px; padding: 48px 32px; text-align: center; color: white; margin: 48px 0;">
+          <h3 style="margin: 0 0 16px 0; color: white; font-size: 1.5em;">✨ ¿Te inspira este proyecto?</h3>
+          <p style="margin: 0 0 32px 0; font-size: 1.1em; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">Charlemos sobre cómo dar nueva vida a tus materiales y crear productos con propósito y trazabilidad.</p>
+          
+          <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
+            <a class="cta-primary-btn" href="/#contacto">
+              📅 Agenda 15 minutos
+            </a>
+            
+            <a class="cta-secondary-btn" href="/donar">
+              📱 Quiero donar un dispositivo
+            </a>
+          </div>
         </div>
       </article>
 
       <section class="oc-section" id="galeria">
-        <h2>Galería</h2>
+        <h2>🖼️ Galería del proceso</h2>
+        <p style="text-align: center; color: #666; margin: 0 0 40px 0; font-size: 1.1em;">Un vistazo detrás del proyecto: del concepto al resultado final</p>
+        
         <div class="gallery">
-          <figure><img src="/assets/images/cases/e-wear/moodboard-paleta-e-wear.jpg" loading="lazy" decoding="async" alt="Moodboard y paleta: definimos el lenguaje visual de E‑WEAR." /></figure>
-          <figure><img src="/assets/images/cases/e-wear/prototipo-vs-final-anillo.jpg" loading="lazy" decoding="async" alt="Comparación: prototipo vs pieza final para asegurar comodidad." /></figure>
-          <figure><img src="/assets/images/cases/e-wear/macro-textura-plata.jpg" loading="lazy" decoding="async" alt="Macro: textura de la plata reciclada en la pieza." /></figure>
-          <figure><img src="/assets/images/cases/e-wear/packaging-tv-retro.jpg" loading="lazy" decoding="async" alt="Packaging TV: evocamos memoria compartida sin plásticos." /></figure>
-          <figure><img src="/assets/images/cases/e-wear/packaging-movil-concha.jpg" loading="lazy" decoding="async" alt="Abrimos el móvil concha y se ve el anillo." /></figure>
-          <figure><img src="/assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.jpg" loading="lazy" decoding="async" alt="Tarjeta plantable con el mensaje de origen." /></figure>
-          <figure><img src="/assets/images/cases/e-wear/ficha-lote-ejemplo-redactada.jpg" loading="lazy" decoding="async" alt="Ficha de lote redactada: origen, reciclador y fecha." /></figure>
+          <figure>
+            <img src="../../assets/images/cases/e-wear/moodboard-paleta-e-wear.webp" loading="lazy" decoding="async" alt="Moodboard y paleta: definimos el lenguaje visual de E‑WEAR." />
+            <figcaption><strong>Moodboard y paleta</strong><br>Definimos el lenguaje visual de E‑WEAR conectando con la memoria tecnológica.</figcaption>
+          </figure>
+          
+          <figure>
+            <img src="../../assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" loading="lazy" decoding="async" alt="Comparación: prototipo vs pieza final para asegurar comodidad." />
+            <figcaption><strong>Prototipo vs Final</strong><br>Comparación para asegurar que el diseño es cómodo y funcional.</figcaption>
+          </figure>
+          
+          <figure>
+            <img src="../../assets/images/cases/e-wear/macro-textura-plata.webp" loading="lazy" decoding="async" alt="Macro: textura de la plata reciclada en la pieza." />
+            <figcaption><strong>Textura de la plata</strong><br>Detalle macro de la plata 100% reciclada de RAEE.</figcaption>
+          </figure>
+          
+          <figure>
+            <img src="../../assets/images/cases/e-wear/packaging-tv-retro.webp" loading="lazy" decoding="async" alt="Packaging TV: evocamos memoria compartida sin plásticos." />
+            <figcaption><strong>Packaging TV retro</strong><br>Evocamos memoria compartida con materiales sostenibles.</figcaption>
+          </figure>
+          
+          <figure>
+            <img src="../../assets/images/cases/e-wear/packaging-movil-concha.webp" loading="lazy" decoding="async" alt="Abrimos el móvil concha y se ve el anillo." />
+            <figcaption><strong>Móvil concha abierto</strong><br>El gesto de abrir revela la joya y cuenta su origen.</figcaption>
+          </figure>
+          
+          <figure>
+            <img src="../../assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.webp" loading="lazy" decoding="async" alt="Tarjeta plantable con el mensaje de origen." />
+            <figcaption><strong>Tarjeta plantable</strong><br>Cierra el círculo con un mensaje de origen y semillas.</figcaption>
+          </figure>
+          
+          <figure>
+            <img src="../../assets/images/cases/e-wear/ficha-lote-ejemplo-redactada.webp" loading="lazy" decoding="async" alt="Ficha de lote redactada: origen, reciclador y fecha." />
+            <figcaption><strong>Ficha de lote</strong><br>Documentación completa: origen, reciclador y fecha de procesado.</figcaption>
+          </figure>
         </div>
       </section>
     </div>
   </div>
 
   <script>
+    // Enhanced interactions and animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Reading progress bar
+      const progressBar = document.querySelector('.reading-progress');
+      
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+      }
+      
+      window.addEventListener('scroll', updateProgress);
+      
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+      
+      // Observe all fade-in elements
+      document.querySelectorAll('.fade-in, .card, .storybeat, .oc-step, .gallery figure').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+      });
+      
+      // Smooth scrolling for TOC links
+      document.addEventListener('click', function(e) {
+        if (e.target.matches('.toc-item a')) {
+          e.preventDefault();
+          const target = document.querySelector(e.target.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+      
+      // Enhanced date formatting
+      document.querySelectorAll('[data-date]').forEach(el => {
+        const date = new Date(el.textContent || el.dataset.date);
+        el.textContent = date.toLocaleDateString('es-ES', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      });
+      
+      // Enhanced navbar behavior
+      const navbar = document.querySelector('.enhanced-navbar');
+      const backToTop = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          if (navbar) navbar.classList.add('scrolled');
+          if (backToTop) backToTop.classList.add('visible');
+        } else {
+          if (navbar) navbar.classList.remove('scrolled');
+          if (backToTop) backToTop.classList.remove('visible');
+        }
+      });
+      
+      // Back to top functionality
+      if (backToTop) {
+        backToTop.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+
     // Utilidades
     function slugify(text){
       return text.toString().toLowerCase()
