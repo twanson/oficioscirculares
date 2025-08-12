@@ -689,6 +689,33 @@
     .oc-step:hover img {
       transform: scale(1.02);
     }
+
+    /* Case E‑WEAR: tipografía y ritmo (scoped al contenido) */
+    :root{ --space-8:8px; --space-12:12px; --space-16:16px; --space-24:24px; --space-32:32px; --space-40:40px; --space-48:48px; --space-56:56px; --max-ch:68ch; --accent:#1ea672; }
+    .page-case .article-content{ max-width: var(--max-ch); margin-inline:auto; }
+    .page-case .article-content h1{ font-weight:800; font-size:clamp(32px,4.5vw,44px); line-height:1.15; letter-spacing:-0.01em; margin:0 0 var(--space-16); }
+    .page-case .article-content h2{ font-weight:700; font-size:clamp(24px,3vw,32px); line-height:1.2; margin:var(--space-56) 0 var(--space-16); }
+    .page-case .article-content h3{ font-weight:600; font-size:clamp(20px,2.2vw,24px); line-height:1.25; margin:var(--space-24) 0 var(--space-12); }
+    .page-case .article-content p, .page-case .article-content li{ font-weight:400; font-size:18px; line-height:1.7; max-width:var(--max-ch); margin:0 0 var(--space-12); }
+    .page-case .article-content ul{ margin:0 0 var(--space-16); padding-left:1.1rem; }
+    .page-case .article-content li{ margin-bottom:var(--space-8); }
+    .summary-3lines{ display:grid; row-gap:var(--space-8); margin:0 0 var(--space-32); }
+    .summary-3lines .label{ font-weight:600; margin-right:6px; }
+    .process-step h3{ margin-bottom:var(--space-8); }
+    .process-step p{ margin-bottom:var(--space-12); }
+    .process-step figure{ margin:0 0 var(--space-24); }
+    .process-step img{ display:block; width:100%; height:auto; border-radius:12px; aspect-ratio:4/3; object-fit:cover; }
+    .process-step figcaption{ font-size:14px; line-height:1.4; color:rgba(0,0,0,.75); margin-top:6px; }
+    .metrics{ margin-top:var(--space-40); }
+    .metrics .row{ display:flex; gap:var(--space-12); align-items:baseline; margin-bottom:10px; }
+    .metrics .row .key{ font-weight:600; min-width:180px; }
+    .metrics .note{ margin-top:var(--space-16); padding:12px 16px; border-radius:8px; background:rgba(0,0,0,.04); }
+    .cta-block{ margin-top:var(--space-48); display:flex; gap:var(--space-16); flex-wrap:wrap; }
+    .btn{ font-weight:600; font-size:16px; padding:12px 18px; line-height:1; border-radius:10px; }
+    .btn--primary{ background:var(--accent); color:#fff; border:none; }
+    .btn--secondary{ background:transparent; border:1px solid var(--accent); color:var(--accent); }
+    .byline-time{ color:rgba(0,0,0,.65); font-size:14px; }
+    @media (max-width:768px){ .page-case .article-content h2{ margin-top:var(--space-40); } .page-case .article-content p, .page-case .article-content li{ font-size:17px; line-height:1.65; } }
   </style>
   <!-- JSON-LD extra: Breadcrumb, CaseStudy y FAQ -->
   <script type="application/ld+json">
@@ -939,7 +966,7 @@
 
         <h2 id="proceso" class="oc-section">Proceso (cómo ocurre)</h2>
         <div class="oc-steps numbered">
-          <div class="oc-step" id="origen">
+          <div class="oc-step process-step" id="origen">
             <h4><span class="num"></span> Origen</h4>
             <p>Recogemos placas y componentes de RAEE por lotes. Cada lote lleva <strong>fecha y procedencia</strong>.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">Empezamos por el origen: puntos de reparación, donaciones y lotes etiquetados. Tres preguntas para cada pieza: de dónde viene, cómo se recuperó y qué puede seguir diciendo hoy.</p>
@@ -951,7 +978,7 @@
             </figure>
           </div>
 
-          <div class="oc-step" id="rescate">
+          <div class="oc-step process-step" id="rescate">
             <h4><span class="num"></span> Rescate</h4>
             <p>Desmontamos de forma segura y separamos metales. Lo no recuperable va a su canal de reciclaje.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">El rescate fue método: clasificación, desmontaje seguro y separación. Recuperamos plata con reciclador certificado en lotes pequeños. Cada paso deja rastro y puede mostrarse.</p>
@@ -963,7 +990,7 @@
             </figure>
           </div>
 
-          <div class="oc-step" id="transformacion">
+          <div class="oc-step process-step" id="transformacion">
             <h4><span class="num"></span> Transformación</h4>
             <p>Refinamos en <strong>lotes pequeños</strong>. Realizamos <strong>ensayo de pureza</strong> por lote.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">La transformación tuvo dos fuegos: el que purifica y el que crea. Diseño esencial, sin cliché. Prototipos, pruebas y comodidad primero.</p>
@@ -975,7 +1002,7 @@
             </figure>
           </div>
 
-          <div class="oc-step" id="renacer">
+          <div class="oc-step process-step" id="renacer">
             <h4><span class="num"></span> Renacer</h4>
             <p>Diseño, prototipos, pruebas de confort. Mostramos <strong>antes/después</strong>.</p>
             <figure>
@@ -986,7 +1013,7 @@
             </figure>
           </div>
 
-          <div class="oc-step" id="entrega">
+          <div class="oc-step process-step" id="entrega">
             <h4><span class="num"></span> Entrega</h4>
             <p>Packaging <strong>TV</strong> o <strong>móvil concha</strong>. Incluye <strong>tarjeta plantable</strong> con el mensaje de origen.</p>
             <p class="storybeat" role="note" aria-label="StoryBeat">La entrega cierra el arco: packaging en cartón reciclado con forma de móvil concha o tele retro. El gesto de abrir cuenta de dónde venimos.</p>
@@ -1276,16 +1303,16 @@
         .trim().replace(/\s+/g,'-');
     }
 
-    // Tiempo de lectura
-    (function(){
-      const article = document.getElementById('post-content');
-      if (!article) return;
-      const text = article.innerText || article.textContent || '';
-      const words = text.trim().split(/\s+/).length;
-      const minutes = Math.max(1, Math.round(words / 200));
-      const rt = document.getElementById('reading-time');
-      if (rt) rt.textContent = minutes + ' min';
-    })();
+      // Tiempo de lectura (si está vacío, calcular sobre .page-case)
+      (function(){
+        const container = document.querySelector('.page-case') || document.getElementById('post-content');
+        if (!container) return;
+        const text = container.innerText || container.textContent || '';
+        const words = text.trim().split(/\s+/).length;
+        const minutes = Math.max(1, Math.round(words / 200));
+        const rt = document.getElementById('reading-time');
+        if (rt) rt.textContent = minutes + ' min';
+      })();
 
     // TOC (H2/H3)
     (function(){
