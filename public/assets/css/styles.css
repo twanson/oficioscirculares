@@ -146,11 +146,11 @@ p {
 
 .section-header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 56px;
 }
 
 .section-title {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     position: relative;
 }
 
@@ -964,7 +964,7 @@ p {
 .link-secondary:hover { color: var(--terracota); }
 
 /* Tarjetas en páginas de caso */
-.page-case .card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 18px 20px; box-shadow: 0 4px 18px rgba(0,0,0,.04); margin: 10px 0 14px; }
+.page-case .card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 18px 20px; box-shadow: 0 4px 18px rgba(0,0,0,.04); margin: 12px 0 16px; }
 
 /* Reducir tamaño visual de imágenes dentro del artículo en escritorio */
 @media (min-width: 900px) {
@@ -981,7 +981,17 @@ p {
 .oc-container{max-width:var(--maxw);margin:0 auto;padding:0 var(--mx);} 
 .oc-prose{font-size:var(--text);line-height:var(--lh);} 
 .oc-section{padding:var(--s4) 0;border-top:1px solid var(--border);} 
+/* Para páginas de caso, usar un ritmo vertical consistente */
 .page-case .oc-section{padding: var(--section-gap) 0;}
+/* Pero cuando .oc-section se usa como encabezado (h2), no debe llevar padding */
+.article-content h2.oc-section{
+  padding: 0 !important;
+  border-top: 1px solid var(--border);
+  margin: var(--section-gap) 0 16px !important;
+}
+.article-content h2.oc-section:first-of-type{
+  margin-top: 32px !important;
+}
 .oc-h1{font-size:clamp(28px,3.6vw,44px);line-height:1.2;margin:0 0 var(--s2);} 
 .oc-sub{font-size:clamp(16px,2.1vw,20px);color:#555;margin:0 0 var(--s3);} 
 .oc-quote{background:#fff;border:1px solid var(--border);border-left:4px solid #111;padding:var(--s3);border-radius:12px;font-style:italic;} 
