@@ -18,6 +18,7 @@
   <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/placeholder-16x9.jpg" />
   <link rel="stylesheet" href="../../assets/css/styles.css" />
   <link rel="stylesheet" href="../../assets/css/animations.css" />
+  <link rel="stylesheet" href="../../assets/css/case-article.css" />
   <style>
     /* Enhanced E-WEAR Case Study Styles */
     :root {
@@ -306,29 +307,37 @@
       font-size: 0.95rem;
     }
     
-    /* Hero figure */
+    /* Hero figure - más moderado */
     .hero-figure {
-      margin: 60px 0;
+      margin: 40px 0;
       text-align: center;
       position: relative;
     }
     
     .hero-figure img {
-      max-width: 100%;
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      max-width: 92%; /* Tamaño intermedio - más grande que antes */
+      max-height: 500px; /* Altura intermedia controlada */
+      width: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
       transition: transform 0.3s ease;
+      margin: 0 auto;
+      display: block;
     }
     
     .hero-figure:hover img {
-      transform: scale(1.02);
+      transform: scale(1.01); /* Menos movimiento */
     }
     
     .hero-figure figcaption {
-      margin-top: 16px;
+      margin-top: 12px;
       color: var(--text-light);
       font-style: italic;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     /* Enhanced Buttons */
@@ -723,6 +732,367 @@
     .page-case .article-content .gallery{ gap:24px; }
     .page-case .article-content .gallery figure{ margin:0; }
     .page-case .article-content .gallery figcaption{ font-size:14px; line-height:1.4; color:rgba(0,0,0,.75); margin-top:6px; }
+
+    /* Desktop layout amplio y legible */
+    @media (min-width: 1024px) {
+      /* 1. Aprovechar mucho más ancho disponible */
+      .oc-container { max-width: none; padding: 0; }
+      .container { max-width: 95vw; margin-inline: auto; padding-inline: 2vw; }
+      
+      /* 2. Tipografía equilibrada para competir con las imágenes - OVERRIDE */
+      .page-case .article-content { font-size: 1.25rem !important; line-height: 1.65 !important; max-width: none !important; }
+      .page-case .article-content h2 { font-size: 2.5rem !important; font-weight: 700 !important; margin: 3.5rem 0 1.5rem !important; letter-spacing: -0.02em !important; }
+      .page-case .article-content h3 { font-size: 1.75rem !important; font-weight: 600 !important; margin: 2.5rem 0 1rem !important; }
+      .page-case .article-content h4 { font-size: 1.375rem !important; font-weight: 600 !important; margin: 2rem 0 0.75rem !important; }
+      .page-case .article-content p { margin-bottom: 1.25rem !important; max-width: none !important; font-size: 1.25rem !important; line-height: 1.65 !important; }
+      .page-case .article-content li { font-size: 1.25rem !important; line-height: 1.65 !important; max-width: none !important; margin-bottom: 0.75rem !important; }
+      .article-content section { margin: 4rem 0; }
+      
+      /* Organización mejorada de secciones */
+      .page-case .article-content > section:first-of-type { margin-top: 2rem; }
+      .page-case .article-content > section:last-of-type { margin-bottom: 2rem; }
+      .page-case .oc-section { 
+        scroll-margin-top: 120px; /* Para navegación suave */
+        margin-bottom: 1.5rem !important; 
+      }
+      
+      /* Espaciado específico para elementos de contenido */
+      .page-case .content-image { margin: 2.5rem auto !important; }
+      .page-case .content-images-grid { margin: 3rem auto !important; }
+      .page-case .storybeat { margin: 2rem 0 !important; }
+      
+      /* 3. TOC más prominente */
+      .toc { 
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+        border: 1px solid #d1d5db; border-radius: 20px; 
+        padding: 0; margin: 4rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      }
+      .toc summary { 
+        padding: 28px 36px; cursor: pointer; font-weight: 700; font-size: 1.5rem;
+        background: #fff; border-radius: 20px; border: none;
+        display: flex; align-items: center; gap: 12px; transition: all 0.3s ease;
+      }
+      .toc summary:hover { background: #f1f5f9; transform: translateY(-1px); }
+      .toc[open] summary { border-bottom: 1px solid #d1d5db; border-radius: 20px 20px 0 0; }
+      .toc-content { padding: 28px 36px; font-size: 1.125rem; }
+      .toc-content a { font-size: 1.125rem !important; line-height: 1.6 !important; }
+      
+      /* 4. Timeline con progresión descendente */
+      .oc-steps { 
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+        gap: 2.5rem; margin: 5rem 0; 
+      }
+      .oc-step { 
+        padding: 3rem; border-radius: 24px; 
+        box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+        border: 2px solid #f1f5f9; background: #ffffff;
+        transition: all 0.3s ease; position: relative; overflow: hidden;
+      }
+      .oc-step:hover { 
+        transform: translateY(-4px); 
+        box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        border-color: #e5e7eb;
+      }
+      
+      /* Progresión descendente más pronunciada del timeline */
+      .oc-step:nth-child(1) { margin-top: 0; }
+      .oc-step:nth-child(2) { margin-top: 2.5rem; }
+      .oc-step:nth-child(3) { margin-top: 5rem; }
+      .oc-step:nth-child(4) { margin-top: 7.5rem; }
+      .oc-step:nth-child(5) { margin-top: 10rem; }
+      
+      /* Puntos del timeline ajustados a la nueva progresión */
+      .oc-step::before {
+        content: ''; position: absolute; left: -20px; top: 50%;
+        width: 12px; height: 12px; border-radius: 50%;
+        background: var(--verde-hoja); transform: translateY(-50%);
+        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); z-index: 1;
+      }
+      .oc-steps { position: relative; }
+      .oc-step h4 { 
+        font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; 
+        color: var(--verde-profundo); display: flex; align-items: center; gap: 12px;
+      }
+      .oc-step h4 .num { 
+        font-size: 1rem; width: 32px; height: 32px; 
+        background: linear-gradient(135deg, var(--verde-profundo), var(--verde-hoja));
+        color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-weight: 800; box-shadow: 0 4px 12px rgba(31,75,63,0.3);
+      }
+      .oc-step p { font-size: 1.25rem; line-height: 1.75; margin-bottom: 2rem; color: #374151; }
+      .oc-step figure { 
+        margin: 2rem 0; border-radius: 16px; overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      }
+      .oc-step img { 
+        width: 100%; height: 280px; object-fit: cover; 
+        transition: transform 0.3s ease;
+      }
+      .oc-step:hover img { transform: scale(1.02); }
+      
+      /* 5. Cards y contenido más espacioso - OVERRIDE */
+      .page-case .article-content .card { 
+        padding: 2.5rem !important; margin: 2.5rem 0 !important; border-radius: 16px !important;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.06) !important; border: 1px solid #f3f4f6 !important;
+        background: #ffffff !important; font-size: 1.125rem !important;
+      }
+      .page-case .article-content .card h3 { font-size: 1.375rem !important; margin-bottom: 1rem !important; font-weight: 600 !important; }
+      .page-case .article-content .card h4 { font-size: 1.25rem !important; margin-bottom: 1rem !important; font-weight: 600 !important; }
+      .page-case .article-content .card p { font-size: 1.125rem !important; line-height: 1.6 !important; }
+      .metrics-container { margin: 3rem 0; }
+      .metrics-grid { gap: 2rem; }
+      .metrics-grid .card { padding: 3rem; }
+      
+      /* 6. Listas más legibles - OVERRIDE */
+      .page-case .article-content ul, .page-case .article-content ol { margin: 1.5rem 0 !important; padding-left: 1.5rem !important; }
+      .page-case .article-content li { 
+        margin-bottom: 0.75rem !important; font-size: 1.25rem !important; line-height: 1.65 !important; 
+        max-width: none !important;
+      }
+      
+      /* 7. Gallery más impactante */
+      .gallery { 
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+        gap: 3rem; margin: 5rem 0; 
+      }
+      .gallery figure { margin: 0; }
+      .gallery img { 
+        width: 100%; height: 300px; object-fit: cover;
+        border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        transition: transform 0.3s ease;
+      }
+      .gallery figure:hover img { transform: scale(1.02); }
+      .gallery figcaption { font-size: 1.125rem; margin-top: 1rem; line-height: 1.6; }
+      
+      /* 8. StoryBeats equilibrados - OVERRIDE COMPLETO */
+      .page-case .storybeat { 
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+        border-left: 6px solid var(--verde-hoja) !important; 
+        padding: 1.5rem 2rem !important; 
+        border-radius: 0 12px 12px 0 !important; 
+        margin: 2.5rem 0 !important;
+        font-style: italic !important; 
+        font-size: 1.125rem !important; 
+        line-height: 1.6 !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.05) !important; 
+        position: relative !important;
+      }
+      /* Ocultar todos los pseudoelementos problemáticos */
+      .page-case .storybeat::before,
+      .page-case .storybeat::after {
+        display: none !important;
+      }
+      
+      /* 9. Imágenes intercaladas - más organizadas y estéticas */
+      .content-image { 
+        margin: 4rem auto; max-width: 90%; float: none; clear: both;
+        text-align: center;
+      }
+      .content-image img { 
+        width: 100%; height: auto; border-radius: 16px; 
+        box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .content-image:hover img {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      }
+      .content-image figcaption { 
+        font-size: 1rem; margin-top: 1rem; line-height: 1.5; 
+        text-align: center; color: #6b7280; font-style: italic;
+        max-width: 90%; margin-left: auto; margin-right: auto;
+      }
+      
+      /* 10. Grid de imágenes - más equilibrado */
+      .content-images-grid { 
+        display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; 
+        margin: 4rem auto; max-width: 90%;
+      }
+      .content-images-grid figure { margin: 0; }
+      .content-images-grid img { 
+        width: 100%; height: 220px; object-fit: cover;
+        border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+      }
+      .content-images-grid figure:hover img {
+        transform: scale(1.02);
+      }
+      .content-images-grid figcaption { 
+        font-size: 0.9rem; margin-top: 0.75rem; line-height: 1.4; 
+        text-align: center; color: #6b7280; font-style: italic;
+      }
+      
+      /* 11. Imágenes flotantes - perfectamente integradas */
+      .content-image.float-right { 
+        float: right; max-width: 38%; margin: 0 0 1.5rem 2rem; 
+        clear: none; z-index: 1; position: relative;
+      }
+      .content-image.float-left { 
+        float: left; max-width: 38%; margin: 0 2rem 1.5rem 0; 
+        clear: none; z-index: 1; position: relative;
+      }
+      .content-image.float-right,
+      .content-image.float-left {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        transform: rotate(-1deg);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .content-image.float-right:hover,
+      .content-image.float-left:hover {
+        transform: rotate(0deg) translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      }
+      .content-image.float-right img,
+      .content-image.float-left img {
+        border-radius: 12px; width: 100%; height: auto;
+      }
+      .content-image.float-right figcaption,
+      .content-image.float-left figcaption {
+        font-size: 0.85rem; line-height: 1.4; margin-top: 0.5rem;
+        text-align: center; color: #666; font-style: italic;
+      }
+      
+      /* Clearfix para el contenedor padre */
+      .article-content::after,
+      section::after {
+        content: ""; display: table; clear: both;
+      }
+      
+      /* 12. Formulario más grande y legible */
+      .page-case form { font-size: 1.125rem !important; }
+      .page-case form h3 { font-size: 1.5rem !important; margin-bottom: 1.5rem !important; font-weight: 600 !important; }
+      .page-case form label { font-size: 1.125rem !important; font-weight: 500 !important; margin-bottom: 0.5rem !important; display: block; }
+      .page-case form input, .page-case form textarea { 
+        font-size: 1.125rem !important; padding: 12px 16px !important; 
+        border: 2px solid #e5e7eb !important; border-radius: 8px !important;
+        width: 100% !important; margin-bottom: 1rem !important;
+        transition: border-color 0.3s ease !important;
+      }
+      .page-case form input:focus, .page-case form textarea:focus { 
+        border-color: var(--verde-hoja) !important; outline: none !important;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+      }
+      .page-case form button { 
+        font-size: 1.125rem !important; padding: 14px 28px !important; 
+        font-weight: 600 !important; border-radius: 8px !important;
+      }
+      .page-case form p { font-size: 1rem !important; line-height: 1.5 !important; }
+      
+      /* 13. FAQ más grande y legible - TARGETING ESTRUCTURA REAL */
+      .page-case #faq { font-size: 2.25rem !important; margin-bottom: 2rem !important; }
+      .page-case #faq + div .card,
+      .page-case h2#faq + div .card { 
+        padding: 2rem !important; margin-bottom: 1.5rem !important; 
+        border-radius: 12px !important; background: #fff !important;
+      }
+      .page-case #faq + div .card h4,
+      .page-case h2#faq + div .card h4 { 
+        font-size: 1.5rem !important; font-weight: 600 !important; 
+        margin: 0 0 1rem 0 !important; color: var(--verde-profundo) !important;
+        line-height: 1.3 !important;
+      }
+      .page-case #faq + div .card p,
+      .page-case h2#faq + div .card p { 
+        font-size: 1.25rem !important; line-height: 1.6 !important; 
+        margin: 0 !important; color: #374151 !important;
+      }
+      
+      /* 14. Métricas más grandes - OVERRIDE AGRESIVO */
+      .page-case .metrics-grid .card,
+      .page-case .metrics-container .card { 
+        padding: 2rem !important; margin: 1.5rem 0 !important; 
+        font-size: 1.25rem !important; border-radius: 12px !important;
+      }
+      .page-case .metrics-grid .card h3,
+      .page-case .metrics-container .card h3 { 
+        font-size: 1.5rem !important; font-weight: 600 !important; 
+        margin-bottom: 1rem !important;
+      }
+      .page-case .metrics-grid .card p,
+      .page-case .metrics-container .card p { 
+        font-size: 1.25rem !important; line-height: 1.6 !important; 
+        margin: 0 !important;
+      }
+    }
+    
+    /* Responsive breakpoints adicionales - OVERRIDE */
+    @media (min-width: 1440px) {
+      .container { max-width: 92vw; }
+      .oc-steps { grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); }
+      .page-case .article-content h2 { font-size: 2.75rem !important; }
+      .page-case .article-content h3 { font-size: 1.875rem !important; }
+      .page-case .article-content h4 { font-size: 1.5rem !important; }
+      .page-case .article-content { font-size: 1.375rem !important; }
+      .page-case .article-content p { font-size: 1.375rem !important; }
+      .page-case .article-content li { font-size: 1.375rem !important; }
+      .page-case .storybeat { font-size: 1.25rem !important; }
+      .page-case form { font-size: 1.25rem !important; }
+      .page-case #faq + div .card h4,
+      .page-case h2#faq + div .card h4 { font-size: 1.625rem !important; }
+      .page-case #faq + div .card p,
+      .page-case h2#faq + div .card p { font-size: 1.375rem !important; }
+      .page-case .metrics-grid .card h3,
+      .page-case .metrics-container .card h3 { font-size: 1.625rem !important; }
+      .page-case .metrics-grid .card p,
+      .page-case .metrics-container .card p { font-size: 1.375rem !important; }
+      .toc summary { font-size: 1.625rem !important; }
+      .toc-content a { font-size: 1.25rem !important; }
+    }
+    
+    @media (min-width: 1920px) {
+      .container { max-width: 90vw; }
+      .page-case .article-content h2 { font-size: 3rem !important; }
+      .page-case .article-content h3 { font-size: 2rem !important; }
+      .page-case .article-content h4 { font-size: 1.625rem !important; }
+      .page-case .article-content { font-size: 1.5rem !important; }
+      .page-case .article-content p { font-size: 1.5rem !important; }
+      .page-case .article-content li { font-size: 1.5rem !important; }
+      .page-case .storybeat { font-size: 1.375rem !important; }
+      .page-case form { font-size: 1.375rem !important; }
+      .page-case #faq + div .card h4,
+      .page-case h2#faq + div .card h4 { font-size: 1.75rem !important; }
+      .page-case #faq + div .card p,
+      .page-case h2#faq + div .card p { font-size: 1.5rem !important; }
+      .page-case .metrics-grid .card h3,
+      .page-case .metrics-container .card h3 { font-size: 1.75rem !important; }
+      .page-case .metrics-grid .card p,
+      .page-case .metrics-container .card p { font-size: 1.5rem !important; }
+      .toc summary { font-size: 1.75rem !important; }
+      .toc-content a { font-size: 1.375rem !important; }
+    }
+    
+    /* Estilos para móvil/tablet - mejor organización */
+    @media (max-width: 1023px) {
+      .hero-figure img { max-width: 98%; max-height: 350px; }
+      
+      .content-image { margin: 2.5rem auto; max-width: 95%; }
+      .content-image img { border-radius: 12px; }
+      .content-image figcaption { font-size: 0.9rem; text-align: center; }
+      
+      .content-images-grid { 
+        grid-template-columns: 1fr; gap: 1.5rem; margin: 2.5rem auto; 
+        max-width: 95%;
+      }
+      .content-images-grid img { height: 180px; border-radius: 12px; }
+      
+      .content-image.float-right, 
+      .content-image.float-left { 
+        float: none; max-width: 95%; margin: 2.5rem auto; 
+        transform: none !important; /* Sin rotación en móvil */
+      }
+      
+      /* Timeline sin progresión en móvil */
+      .oc-step:nth-child(1),
+      .oc-step:nth-child(2),
+      .oc-step:nth-child(3),
+      .oc-step:nth-child(4),
+      .oc-step:nth-child(5) { 
+        margin-top: 0 !important; 
+      }
+      
+      .article-content section { margin: 3rem 0; }
+      .page-case .article-content h2 { margin: 2.5rem 0 1rem !important; }
+    }
   </style>
   <!-- JSON-LD extra: Breadcrumb, CaseStudy y FAQ -->
   <script type="application/ld+json">
@@ -832,12 +1202,7 @@
       </div>
     </div>
   </section>
-  <!-- Banner transparencia -->
-  <div class="oc-container" style="margin-top: 16px;">
-    <div role="status" aria-live="polite" style="background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;border-radius:12px;padding:12px 16px;box-shadow:0 4px 12px rgba(0,0,0,.04);font-size:.95rem;">
-      <strong>Transparencia:</strong> Hoy: los cierres y cadenas no son reciclados; estamos en pruebas. Próximo hito: 100% componentes reciclados en 12 meses.
-    </div>
-  </div>
+
   
   <div class="page oc-container oc-prose">
     <div class="container" style="max-width:none;padding:0 16px;">
@@ -853,7 +1218,11 @@
         <figcaption>Packaging "móvil concha" que cuenta la historia del origen tecnológico.</figcaption>
       </figure>
 
-      <aside id="toc" class="toc" aria-label="Índice"></aside>
+      <!-- TOC como acordeón debajo del hero -->
+      <details id="toc" class="toc" aria-label="Índice" open>
+        <summary class="toc-title">📖 Contenido</summary>
+        <div class="toc-content"></div>
+      </details>
 
       <article id="post-content" class="article-content">
         <!-- CTA sticky móvil -->
@@ -885,13 +1254,52 @@
         <p>El desafío que Laura nos planteó era sencillo de enunciar y complejo de ejecutar: <strong>transformar un residuo en una joya sin ocultar su pasado.</strong> Explicar de dónde viene cada anillo sin que pierda atractivo. Proporcionar datos claros —origen, reciclador, fecha, porcentaje de pureza— para que nadie tenga que fiarse solo de nuestra palabra. Para abordarlo, acompañamos a Laura en su taller, mapeamos el viaje del material en cinco actos (origen, rescate, transformación, renacer y entrega) y acordamos que cada pieza contaría la ruta que la trajo hasta aquí.</p>
 
         <h2 id="que-hicimos" class="oc-section">Qué hicimos (4 pilares)</h2>
-        <p>En esta etapa nos centramos en cuatro pilares. Primero, definimos la <strong>marca y su lenguaje</strong>: nos aseguramos de que la voz de E‑WEAR conectara con su pasado tecnológico sin perder claridad, creando mensajes sencillos y verificables. Después, trabajamos la <strong>trazabilidad</strong>: clasificamos y etiquetamos los lotes de RAEE, colaboramos con un reciclador certificado y refinamos la plata en pequeños lotes. Cada lote tiene su ficha y su ensayo de pureza accesibles. También dedicamos tiempo a los <strong>prototipos</strong>: desde dibujos hasta modelos físicos, probamos la comodidad y el diseño con usuarias y sólo lanzamos lo que cumple con el estándar de confort. Por último, diseñamos un <strong>packaging con sentido</strong>: una TV retro y un móvil concha en cartón reciclado que cuentan de dónde vienen estas piezas, acompañados por una tarjeta plantable que cierra el círculo.</p>
+        
+        <p>En esta etapa nos centramos en cuatro pilares. Primero, definimos la <strong>marca y su lenguaje</strong>: nos aseguramos de que la voz de E‑WEAR conectara con su pasado tecnológico sin perder claridad, creando mensajes sencillos y verificables.</p>
+        
+        <figure class="content-image">
+          <img src="../../assets/images/cases/e-wear/moodboard-paleta-e-wear.webp" loading="lazy" decoding="async" alt="Moodboard y paleta: definimos el lenguaje visual de E‑WEAR." />
+          <figcaption><strong>Moodboard y paleta</strong><br>Definimos el lenguaje visual de E‑WEAR conectando con la memoria tecnológica.</figcaption>
+        </figure>
+        
+        <p>Después, trabajamos la <strong>trazabilidad</strong>: clasificamos y etiquetamos los lotes de RAEE, colaboramos con un reciclador certificado y refinamos la plata en pequeños lotes. Cada lote tiene su ficha y su ensayo de pureza accesibles.</p>
+        
+        <p>También dedicamos tiempo a los <strong>prototipos</strong>: desde dibujos hasta modelos físicos, probamos la comodidad y el diseño con usuarias y sólo lanzamos lo que cumple con el estándar de confort.</p>
+        
+        <figure class="content-image">
+          <img src="../../assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" loading="lazy" decoding="async" alt="Comparación: prototipo vs pieza final para asegurar comodidad." />
+          <figcaption><strong>Prototipo vs Final</strong><br>Comparación para asegurar que el diseño es cómodo y funcional.</figcaption>
+        </figure>
+        
+        <p>Por último, diseñamos un <strong>packaging con sentido</strong>: una TV retro y un móvil concha en cartón reciclado que cuentan de dónde vienen estas piezas, acompañados por una tarjeta plantable que cierra el círculo.</p>
+        
+        <div class="content-images-grid">
+          <figure>
+            <img src="../../assets/images/cases/e-wear/packaging-tv-retro.webp" loading="lazy" decoding="async" alt="Packaging TV: evocamos memoria compartida sin plásticos." />
+            <figcaption><strong>Packaging TV retro</strong><br>Evocamos memoria compartida con materiales sostenibles.</figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.webp" loading="lazy" decoding="async" alt="Tarjeta plantable con el mensaje de origen." />
+            <figcaption><strong>Tarjeta plantable</strong><br>Cierra el círculo con un mensaje de origen y semillas.</figcaption>
+          </figure>
+        </div>
+        
         <ul>
           <li><strong>Marca y lenguaje.</strong> Mensajes claros y verificables que conectan con el pasado técnico.</li>
           <li><strong>Trazabilidad y pruebas.</strong> Lotes pequeños, reciclador certificado, ficha y ensayo de pureza por lote.</li>
           <li><strong>Producto y confort.</strong> Bocetos, prototipos, pruebas de uso; lanzamos solo cuando la pieza es cómoda.</li>
           <li><strong>Packaging con sentido.</strong> Cajas TV y móvil concha en cartón reciclado, tarjeta plantable con mensaje de origen.</li>
         </ul>
+
+        <!-- Imagen destacada del packaging móvil concha -->
+        <figure class="content-image">
+          <img src="../../assets/images/cases/e-wear/packaging-movil-concha.webp" 
+               alt="Packaging 'móvil concha' que cuenta la historia del origen tecnológico" 
+               loading="lazy" 
+               width="800" 
+               height="600">
+          <figcaption><strong>Packaging "móvil concha"</strong><br>Diseñado para contar la historia del origen tecnológico de cada pieza.</figcaption>
+        </figure>
 
         <h2 id="proceso" class="oc-section">Proceso (cómo ocurre)</h2>
         <p>En Oficios Circulares acompañamos a Laura en cada etapa del viaje. En el <strong>origen</strong>, visitamos con ella talleres y puntos de reparación para diseñar cómo recoger RAEE y cómo etiquetar los lotes con su procedencia y fecha. Durante el <strong>rescate</strong>, establecimos el procedimiento de desmontaje seguro: uso de guantes, tapetes ESD, clasificación y recuperación de la plata, y reciclaje adecuado del resto. En la fase de <strong>transformación</strong>, coordinamos la refinación en lotes pequeños con un reciclador certificado y participamos en la iteración de prototipos; orientamos el diseño y las pruebas hasta que Laura obtuvo la pieza final. El <strong>renacer</strong> ocurre cuando la joya toma forma: Laura ajusta la pieza para que cumpla sus criterios de confort y estética, y nosotros verificamos que la historia y la trazabilidad acompañen su decisión. La <strong>entrega</strong> cierra el círculo: diseñamos la experiencia de unboxing con un packaging inspirado en televisores retro o móviles concha de cartón reciclado e incluimos una tarjeta plantable que cuenta el origen.</p>
@@ -984,6 +1392,17 @@
               <p style="margin: 0; font-size: 0.9em; color: #666; font-weight: 600;">Objetivo 12 meses: 100% componentes reciclados</p>
             </div>
           </div>
+          
+          <!-- Banner transparencia con formato consistente -->
+          <div class="card" style="margin: 2rem 0; padding: 20px; border: 2px solid #fed7aa; border-radius: 16px; background: #fff7ed;">
+            <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
+              ⚠️ <span>Transparencia</span>
+            </h4>
+            <p style="margin: 0; font-size: 0.95em; line-height: 1.5; color: #7c2d12;">Hoy: los cierres y cadenas no son reciclados; estamos en pruebas. Próximo hito: 100% componentes reciclados en 12 meses.</p>
+          </div>
+          
+          <!-- StoryBeat que cierra la sección de métricas -->
+          <p class="storybeat" role="note" aria-label="StoryBeat" style="margin: 2rem 0;">Hechos, trazabilidad y mejora continua: ficha de lote por pieza, ensayo de pureza, embalaje sin plásticos y objetivos con fecha. Si cambia el plan, lo diremos y explicaremos por qué.</p>
         </div>
         </section>
         <!-- Micro-form leads -->
@@ -998,10 +1417,6 @@
             <p id="leadMsg" role="status" aria-live="polite" style="margin:0;color:#1F4B3F;font-weight:600;display:none;">Te hemos enviado el PDF y el checklist.</p>
           </form>
         </section>
-        <p class="storybeat" role="note" aria-label="StoryBeat">Hechos, trazabilidad y mejora continua: ficha de lote por pieza, ensayo de pureza, embalaje sin plásticos y objetivos con fecha. Si cambia el plan, lo diremos y explicaremos por qué.</p>
-
-        
-
         <h2 id="faq" class="oc-section">❓ Preguntas frecuentes</h2>
         
         <div style="display: grid; gap: 24px; margin: 32px 0;">
@@ -1027,8 +1442,8 @@
           <h3 style="margin: 0 0 16px 0; color: white; font-size: 1.5em;">✨ ¿Te inspira este proyecto?</h3>
           <p style="margin: 0 0 32px 0; font-size: 1.1em; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">¿Te gustaría dar una nueva vida a tus materiales y demostrar su origen como hacemos en E‑WEAR? Cuéntanos tu caso y te ayudaremos a darle forma.</p>
           
-          <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
-            <a class="cta-primary-btn" href="/contacto">Agenda 15 minutos</a>
+          <div class="case-cta" style="display: grid; gap: .75rem; justify-content: center; align-items: center;">
+            <a class="cta-primary-btn btn-primary" href="/contacto">Agenda 15 minutos</a>
             
             <a class="cta-secondary-btn" href="/donar">
               📱 Quiero donar un dispositivo
@@ -1037,47 +1452,7 @@
         </div>
       </article>
 
-      <section class="oc-section" id="galeria">
-        <h2>🖼️ Galería del proceso</h2>
-        <p style="text-align: center; color: #666; margin: 0 0 40px 0; font-size: 1.1em;">Un vistazo detrás del proyecto: del concepto al resultado final</p>
-        
-        <div class="gallery">
-          <figure>
-            <img src="../../assets/images/cases/e-wear/moodboard-paleta-e-wear.webp" loading="lazy" decoding="async" alt="Moodboard y paleta: definimos el lenguaje visual de E‑WEAR." />
-            <figcaption><strong>Moodboard y paleta</strong><br>Definimos el lenguaje visual de E‑WEAR conectando con la memoria tecnológica.</figcaption>
-          </figure>
-          
-          <figure>
-            <img src="../../assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" loading="lazy" decoding="async" alt="Comparación: prototipo vs pieza final para asegurar comodidad." />
-            <figcaption><strong>Prototipo vs Final</strong><br>Comparación para asegurar que el diseño es cómodo y funcional.</figcaption>
-          </figure>
-          
-          <figure>
-            <img src="../../assets/images/cases/e-wear/macro-textura-plata.webp" loading="lazy" decoding="async" alt="Macro: textura de la plata reciclada en la pieza." />
-            <figcaption><strong>Textura de la plata</strong><br>Detalle macro de la plata 100% reciclada de RAEE.</figcaption>
-          </figure>
-          
-          <figure>
-            <img src="../../assets/images/cases/e-wear/packaging-tv-retro.webp" loading="lazy" decoding="async" alt="Packaging TV: evocamos memoria compartida sin plásticos." />
-            <figcaption><strong>Packaging TV retro</strong><br>Evocamos memoria compartida con materiales sostenibles.</figcaption>
-          </figure>
-          
-          <figure>
-            <img src="../../assets/images/cases/e-wear/packaging-movil-concha.webp" loading="lazy" decoding="async" alt="Abrimos el móvil concha y se ve el anillo." />
-            <figcaption><strong>Móvil concha abierto</strong><br>El gesto de abrir revela la joya y cuenta su origen.</figcaption>
-          </figure>
-          
-          <figure>
-            <img src="../../assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.webp" loading="lazy" decoding="async" alt="Tarjeta plantable con el mensaje de origen." />
-            <figcaption><strong>Tarjeta plantable</strong><br>Cierra el círculo con un mensaje de origen y semillas.</figcaption>
-          </figure>
-          
-          <figure>
-            <img src="../../assets/images/cases/e-wear/ficha-lote-ejemplo-redactada.webp" loading="lazy" decoding="async" alt="Ficha de lote redactada: origen, reciclador y fecha." />
-            <figcaption><strong>Ficha de lote</strong><br>Documentación completa: origen, reciclador y fecha de procesado.</figcaption>
-          </figure>
-        </div>
-      </section>
+
     </div>
   </div>
 
@@ -1229,27 +1604,30 @@
         if (rt) rt.textContent = minutes + ' min';
       })();
 
-    // TOC (H2/H3)
+    // TOC (H2/H3) - para acordeón
     (function(){
       const article = document.getElementById('post-content');
       const tocEl = document.getElementById('toc');
-      if (!article || !tocEl) return;
+      const tocContent = tocEl?.querySelector('.toc-content');
+      if (!article || !tocEl || !tocContent) return;
       const headings = Array.from(article.querySelectorAll('h2, h3'));
       if (!headings.length) { tocEl.remove(); return; }
       const list = document.createElement('ul');
       list.className = 'toc-list';
+      list.style.cssText = 'list-style: none; padding: 0; margin: 0;';
       headings.forEach(h => {
         if (!h.id) { h.id = slugify(h.textContent); }
         const li = document.createElement('li');
         li.className = h.tagName.toLowerCase() === 'h3' ? 'toc-item depth-2' : 'toc-item depth-1';
-        li.innerHTML = `<a href=\"#${h.id}\">${h.textContent}</a>`;
+        li.style.cssText = h.tagName.toLowerCase() === 'h3' ? 'margin: 4px 0 4px 16px;' : 'margin: 8px 0;';
+        const a = document.createElement('a');
+        a.href = `#${h.id}`;
+        a.textContent = h.textContent;
+        a.style.cssText = 'color: #374151; text-decoration: none; font-size: 0.9rem; line-height: 1.5;';
+        li.appendChild(a);
         list.appendChild(li);
       });
-      const title = document.createElement('div');
-      title.className = 'toc-title';
-      title.textContent = 'Contenido';
-      tocEl.appendChild(title);
-      tocEl.appendChild(list);
+      tocContent.appendChild(list);
     })();
 
     // Comprobar existencia de PDFs y ocultar botones si no existen; añadir noindex si faltan pruebas
