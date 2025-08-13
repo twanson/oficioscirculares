@@ -1393,8 +1393,8 @@
               </h4>
               <p style="margin: 0 0 16px 0; font-size: 0.95em; line-height: 1.5;">Ficha de lote y ensayo de pureza descargables.</p>
               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                <a id="link-ficha" class="btn-outline" href="../../assets/docs/e-wear-ficha.pdf" target="_blank" rel="noopener">Ficha de lote</a>
-                <a id="link-ensayo" class="btn-outline" href="../../assets/docs/e-wear-ensayo.pdf" target="_blank" rel="noopener">Ensayo pureza</a>
+                <a id="link-ficha" class="btn-outline" href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" target="_blank" rel="noopener">Ficha de lote</a>
+                <a id="link-ensayo" class="btn-outline" href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" target="_blank" rel="noopener">Checklist trazabilidad</a>
               </div>
             </div>
             
@@ -1516,11 +1516,19 @@
             // Mostrar mensaje y abrir modal
             leadMsg.style.display = 'block';
             openModal(leadBtn);
-            // Desencadenar descarga del checklist
-            const a = document.createElement('a');
-            a.href='../../assets/ewear/checklist-trazabilidad.pdf';
-            a.download='checklist-trazabilidad.pdf';
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            // Desencadenar descarga de ambos documentos
+            setTimeout(() => {
+              const ficha = document.createElement('a');
+              ficha.href='../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+              ficha.download='ficha_lote_oficios_circulares_web.pdf';
+              document.body.appendChild(ficha); ficha.click(); document.body.removeChild(ficha);
+            }, 500);
+            setTimeout(() => {
+              const checklist = document.createElement('a');
+              checklist.href='../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+              checklist.download='checklist_trazabilidad_oficios_circulares_web.pdf';
+              document.body.appendChild(checklist); checklist.click(); document.body.removeChild(checklist);
+            }, 1000);
           }
         }, { once: true });
       }
@@ -1670,6 +1678,24 @@
       }
     })();
   </script>
+
+  <!-- Modal PDF para ficha de lote -->
+  <div id="pdfModal" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
+    <div style="background: white; border-radius: 16px; max-width: 95vw; max-height: 95vh; overflow: hidden; position: relative;">
+      <div style="padding: 20px; border-bottom: 1px solid #e5e5e5; display: flex; justify-content: space-between; align-items: center;">
+        <h3 id="pdfModalTitle" style="margin: 0; color: var(--verde-profundo);">📄 Ficha de lote - Ejemplo</h3>
+        <button id="closePdf" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px;" aria-label="Cerrar modal">×</button>
+      </div>
+      <div style="width: 80vw; height: 70vh; max-width: 800px;">
+        <iframe src="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" width="100%" height="100%" style="border: none;"></iframe>
+      </div>
+      <div style="padding: 15px 20px; background: #f8f9fa; text-align: center;">
+        <a href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" download="ficha_lote_oficios_circulares_web.pdf" class="btn-outline" style="margin-right: 10px;">📥 Descargar PDF</a>
+        <a href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" download="checklist_trazabilidad_oficios_circulares_web.pdf" class="btn-outline">📋 Descargar Checklist</a>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
 
