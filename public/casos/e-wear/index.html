@@ -180,27 +180,14 @@
       line-height: 1.7;
     }
     
+    /* StoryBeat emoji global - DESACTIVADO para evitar solapamiento */
     .storybeat::before {
-      content: '💬';
-      position: absolute;
-      top: 12px;
-      left: 16px;
-      background: white;
-      padding: 6px 8px;
-      border-radius: 50%;
-      font-size: 1.1em;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: none !important;
     }
     
+    /* StoryBeat fondo - DESACTIVADO */
     .storybeat::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--accent-terracotta);
-      opacity: 0.3;
+      display: none !important;
     }
     
     /* Enhanced Gallery */
@@ -1112,6 +1099,12 @@
       .article-content section { margin: 3.5rem 0; }
       .page-case .article-content p { margin-bottom: 1.5rem !important; }
       .page-case .storybeat { margin: 3.5rem 0 !important; padding: 1.5rem !important; }
+      
+      /* Ocultar emojis problemáticos también en móvil */
+      .storybeat::before,
+      .storybeat::after {
+        display: none !important;
+      }
       .page-case .article-content h2 { margin: 2.5rem 0 1rem !important; }
     }
   </style>
