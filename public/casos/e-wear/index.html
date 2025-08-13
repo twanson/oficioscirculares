@@ -379,15 +379,16 @@
     }
     
     .cta-primary-btn {
-      background: white;
-      color: var(--primary-green);
-      border: 2px solid white;
-      box-shadow: 0 8px 24px rgba(255,255,255,0.3);
+      background: var(--primary-green);
+      color: white;
+      border: 2px solid var(--primary-green);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
     
     .cta-primary-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(255,255,255,0.4);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+      background: var(--verde-profundo);
     }
     
     .cta-secondary-btn {
@@ -1212,10 +1213,10 @@
           <source srcset="../../assets/images/cases/e-wear/hero-packaging-movil-concha.webp" type="image/webp" />
           <img 
             src="../../assets/images/cases/e-wear/placeholder-16x9.jpg" 
-            alt="Abrimos el móvil concha: caja de cartón reciclado con la pieza en su interior."
+            alt="Packaging TV retro: caja de cartón reciclado con anillo que evoca la nostalgia tecnológica."
             loading="lazy" decoding="async" />
         </picture>
-        <figcaption>Packaging "móvil concha" que cuenta la historia del origen tecnológico.</figcaption>
+        <figcaption>Packaging "TV retro" que evoca la memoria compartida del origen tecnológico.</figcaption>
       </figure>
 
       <!-- TOC como acordeón debajo del hero -->
@@ -1394,7 +1395,7 @@
           </div>
           
           <!-- Banner transparencia con formato consistente -->
-          <div class="card" style="margin: 2rem 0; padding: 20px; border: 2px solid #fed7aa; border-radius: 16px; background: #fff7ed;">
+          <div class="card" role="status" style="margin: 2rem 0; padding: 20px; border: 2px solid #fed7aa; border-radius: 16px; background: #fff7ed;">
             <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
               ⚠️ <span>Transparencia</span>
             </h4>
