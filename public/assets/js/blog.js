@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       slug: '../casos/e-wear/',
       title: 'E-WEAR: De basura electrónica a joya premium con historia verificable',
-      excerpt: 'Los consumidores pagan hasta un 30% más por productos genuinamente sostenibles. Pero solo si creen que lo son.',
+      excerpt: 'Los consumidores pagan hasta un 30% más por productos genuinamente sostenibles. Pero solo si tienen evidencia de que lo son.',
       date: '2025-08-08',
       readingMinutes: 8,
       cover: ASSETS_BASE + '/images/cases/e-wear/hero-packaging-movil-concha.webp',
