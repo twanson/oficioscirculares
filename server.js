@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 
 // Endpoint para suscripción a MailChimp
 app.post('/subscribe', async (req, res) => {
-    const { firstName, email } = req.body;
+    const { firstName, email, tags } = req.body;
     
     console.log(`📧 Intento de suscripción: ${firstName} - ${email}`);
     
@@ -79,13 +79,17 @@ app.post('/subscribe', async (req, res) => {
         
         console.log(`🔗 URL de Mailchimp: ${url}`);
         
+        // Usar tags personalizados si se proporcionan, sino usar el tag por defecto
+        const defaultTag = (process.env.NODE_ENV || '').trim() === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING';
+        const finalTags = tags && Array.isArray(tags) && tags.length > 0 ? tags : [defaultTag];
+        
         const data = {
             email_address: email,
             status: 'subscribed',
             merge_fields: {
                 FNAME: firstName,
             },
-            tags: [(process.env.NODE_ENV || '').trim() === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING']
+            tags: finalTags
         };
         
         const response = await fetch(url, {

@@ -1656,21 +1656,28 @@
                 document.body.removeChild(checklist);
               }, 1500);
               
-              // Envío adicional a nuestro endpoint de Mailchimp (si existe)
+              // Envío adicional a nuestro endpoint de Mailchimp
               try {
-                await fetch('/api/subscribe', {
+                const mailchimpResponse = await fetch('/subscribe', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
                   },
                   body: JSON.stringify({
+                    firstName: name,
                     email: email,
-                    name: name,
-                    tags: ['E-WEAR Case Study', 'Ficha Trazabilidad']
+                    tags: ['E-WEAR Case Study', 'Ficha Trazabilidad', 'Joyería Circular']
                   })
                 });
+                
+                if (mailchimpResponse.ok) {
+                  console.log('✅ Usuario suscrito a Mailchimp correctamente');
+                } else {
+                  console.log('⚠️ Error al suscribir a Mailchimp, pero formulario procesado');
+                }
               } catch (mailchimpError) {
-                console.log('Mailchimp no configurado aún:', mailchimpError);
+                console.log('⚠️ Error de red con Mailchimp:', mailchimpError);
+                // No mostramos error al usuario, el formulario principal funcionó
               }
               
             } else {
