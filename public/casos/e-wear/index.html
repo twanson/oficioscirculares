@@ -1555,9 +1555,17 @@
         if (btn) {
           btn.addEventListener('click', () => {
             if (!formSubmitted) {
-              // Si no se ha completado el formulario, ir al formulario
-              document.getElementById('leadForm').scrollIntoView({ behavior: 'smooth' });
-              alert('Para ver los documentos, primero completa el formulario de abajo.');
+              // Si no se ha completado el formulario, ir al formulario con mejor posicionamiento
+              const formElement = document.getElementById('leadForm');
+              const formPosition = formElement.getBoundingClientRect().top + window.pageYOffset;
+              const offset = window.innerWidth <= 768 ? 60 : 80; // Offset reducido para mostrar mejor el contexto
+              window.scrollTo({
+                top: formPosition - offset,
+                behavior: 'smooth'
+              });
+              setTimeout(() => {
+                alert('Para ver los documentos, primero completa el formulario.');
+              }, 500); // Delay para que se vea mejor el scroll
             } else {
               // Si ya se completó, abrir modal
               openModal(btn);
@@ -1573,8 +1581,15 @@
       // Función para verificar si el formulario fue enviado
       function checkFormSubmission() {
         if (!formSubmitted) {
-          alert('Para descargar los documentos, primero debes completar el formulario de arriba.');
-          document.getElementById('leadForm').scrollIntoView({ behavior: 'smooth' });
+          alert('Para descargar los documentos, primero debes completar el formulario de abajo.');
+          // Scroll al título del formulario para mejor contexto
+          const formTitle = document.getElementById('lead-title');
+          const formPosition = formTitle.getBoundingClientRect().top + window.pageYOffset;
+          const offset = window.innerWidth <= 768 ? 60 : 80; // Offset reducido para mostrar mejor el contexto
+          window.scrollTo({
+            top: formPosition - offset,
+            behavior: 'smooth'
+          });
           return false;
         }
         return true;
