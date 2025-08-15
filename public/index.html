@@ -679,6 +679,152 @@
             }
         });
     </script>
+
+    <!-- Popup promocional del blog -->
+    <div id="blogPopup" style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 320px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        z-index: 9999;
+        display: none;
+        overflow: hidden;
+        animation: slideInUp 0.5s ease-out;
+        border: 1px solid #e5e5e5;
+    ">
+        <!-- Imagen del caso -->
+        <div style="position: relative;">
+            <img src="assets/images/cases/e-wear/packaging-movil-concha.webp" 
+                 alt="Caso E-WEAR: packaging sostenible" 
+                 style="width: 100%; height: 160px; object-fit: cover;">
+            <button id="closeBlogPopup" style="
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba(0,0,0,0.7);
+                color: white;
+                border: none;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            " onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.7)'">×</button>
+        </div>
+        
+        <!-- Contenido -->
+        <div style="padding: 20px;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <span style="background: #1F4B3F; color: white; font-size: 11px; padding: 3px 8px; border-radius: 12px; font-weight: 600; margin-right: 8px;">NUEVO CASO</span>
+                <span style="color: #666; font-size: 12px;">📖 8 min de lectura</span>
+            </div>
+            <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; line-height: 1.3; color: #1F4B3F;">
+                E-WEAR: De basura electrónica a joya premium
+            </h4>
+            <p style="margin: 0 0 15px 0; font-size: 14px; color: #666; line-height: 1.4;">
+                Descubre cómo convertimos residuos electrónicos en joyas de lujo con historia verificable.
+            </p>
+            <a href="casos/e-wear/" style="
+                display: inline-block;
+                background: #1F4B3F;
+                color: white;
+                text-decoration: none;
+                padding: 10px 16px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            " onmouseover="this.style.background='#2d6b55'" onmouseout="this.style.background='#1F4B3F'">
+                📖 Leer caso completo
+            </a>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutDown {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #blogPopup {
+                width: calc(100vw - 40px);
+                bottom: 15px;
+                right: 20px;
+                left: 20px;
+            }
+        }
+    </style>
+
+    <script>
+        // Control del popup del blog
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('blogPopup');
+            const closeBtn = document.getElementById('closeBlogPopup');
+            
+            // Verificar si ya se mostró el popup en esta sesión
+            const popupShown = sessionStorage.getItem('blogPopupShown');
+            
+            if (!popupShown) {
+                // Mostrar popup después de 8 segundos
+                setTimeout(() => {
+                    popup.style.display = 'block';
+                    sessionStorage.setItem('blogPopupShown', 'true');
+                }, 8000);
+            }
+            
+            // Cerrar popup
+            function closePopup() {
+                popup.style.animation = 'slideOutDown 0.4s ease-out';
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 400);
+            }
+            
+            closeBtn.addEventListener('click', closePopup);
+            
+            // Cerrar con Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && popup.style.display === 'block') {
+                    closePopup();
+                }
+            });
+            
+            // Auto-cerrar después de 15 segundos (opcional)
+            setTimeout(() => {
+                if (popup.style.display === 'block') {
+                    closePopup();
+                }
+            }, 23000); // 8s delay + 15s show = 23s total
+        });
+    </script>
 </body>
 </html>
 
