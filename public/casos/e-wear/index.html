@@ -1584,7 +1584,6 @@
       openers.forEach(btn => {
         if (btn) {
           btn.addEventListener('click', () => {
-            console.log('🖱️ Click en botón:', btn.id, 'formSubmitted:', formSubmitted);
             if (!formSubmitted) {
               // Si no se ha completado el formulario, abrir modal de formulario
               openLeadModal();
@@ -1605,13 +1604,9 @@
       const closeLeadModalBtn = document.getElementById('closeLeadModal');
       
       function openLeadModal() {
-        console.log('🔍 Intentando abrir modal de formulario');
         if (leadModal) {
           leadModal.style.display = 'flex';
           document.body.style.overflow = 'hidden';
-          console.log('✅ Modal abierto correctamente');
-        } else {
-          console.error('❌ Modal no encontrado');
         }
       }
       
