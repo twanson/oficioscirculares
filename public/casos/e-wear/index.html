@@ -1518,6 +1518,36 @@
     </div>
   </div>
 
+  <!-- Modal para formulario de leads -->
+  <div id="leadModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; align-items: center; justify-content: center;">
+    <div style="background: white; border-radius: 15px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+        <h3 style="margin: 0; color: #1F4B3F;">📥 Descarga documentos de trazabilidad</h3>
+        <button id="closeLeadModal" class="close-btn" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">&times;</button>
+      </div>
+      
+      <p style="margin-bottom: 20px; color: #666; font-size: 0.95rem;">
+        Completa el formulario para descargar la ficha de lote y el checklist de trazabilidad. Recibirás los documentos inmediatamente.
+      </p>
+      
+      <form id="leadFormModal" style="display:grid;gap:15px;" novalidate>
+        <input type="text" name="name" placeholder="Nombre*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;font-size:16px;" />
+        <input type="email" name="email" placeholder="Email*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;font-size:16px;" />
+        <input type="text" name="honeypot" style="display:none;" tabindex="-1" autocomplete="off" />
+        
+        <button type="submit" id="leadBtnModal" style="background:#1F4B3F;color:white;padding:14px;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.3s ease;">
+          📥 Enviar y recibir documentos
+        </button>
+        
+        <div id="leadMsgModal" style="display:none;margin-top:10px;font-size:14px;padding:12px;border-radius:8px;background:#f0f9f0;color:#1F4B3F;text-align:center;"></div>
+      </form>
+      
+      <p style="margin-top: 20px; font-size: 0.85rem; color: #888; text-align: center;">
+        Al enviar, aceptas nuestra <a href="../../privacidad/" target="_blank" style="color: #1F4B3F;">política de privacidad</a>.
+      </p>
+    </div>
+  </div>
+
   <script>
     // Enhanced interactions and animations
     document.addEventListener('DOMContentLoaded', function() {
@@ -1554,20 +1584,12 @@
       openers.forEach(btn => {
         if (btn) {
           btn.addEventListener('click', () => {
+            console.log('🖱️ Click en botón:', btn.id, 'formSubmitted:', formSubmitted);
             if (!formSubmitted) {
-              // Si no se ha completado el formulario, ir al formulario con mejor posicionamiento
-              const formElement = document.getElementById('leadForm');
-              const formPosition = formElement.getBoundingClientRect().top + window.pageYOffset;
-              const offset = window.innerWidth <= 768 ? 60 : 80; // Offset reducido para mostrar mejor el contexto
-              window.scrollTo({
-                top: formPosition - offset,
-                behavior: 'smooth'
-              });
-              setTimeout(() => {
-                alert('Para ver los documentos, primero completa el formulario.');
-              }, 500); // Delay para que se vea mejor el scroll
+              // Si no se ha completado el formulario, abrir modal de formulario
+              openLeadModal();
             } else {
-              // Si ya se completó, abrir modal
+              // Si ya se completó, abrir modal de PDFs
               openModal(btn);
             }
           });
@@ -1578,32 +1600,144 @@
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.style.display==='flex'){ closeModal(); }});
       modal && modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
       
-      // Función para verificar si el formulario fue enviado
-      function checkFormSubmission() {
-        if (!formSubmitted) {
-          alert('Para descargar los documentos, primero debes completar el formulario de abajo.');
-          // Scroll al título del formulario para mejor contexto
-          const formTitle = document.getElementById('lead-title');
-          const formPosition = formTitle.getBoundingClientRect().top + window.pageYOffset;
-          const offset = window.innerWidth <= 768 ? 60 : 80; // Offset reducido para mostrar mejor el contexto
-          window.scrollTo({
-            top: formPosition - offset,
-            behavior: 'smooth'
-          });
-          return false;
+      // Gestión del modal de formulario
+      const leadModal = document.getElementById('leadModal');
+      const closeLeadModalBtn = document.getElementById('closeLeadModal');
+      
+      function openLeadModal() {
+        console.log('🔍 Intentando abrir modal de formulario');
+        if (leadModal) {
+          leadModal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+          console.log('✅ Modal abierto correctamente');
+        } else {
+          console.error('❌ Modal no encontrado');
         }
-        return true;
       }
+      
+      function closeLeadModal() {
+        leadModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+      
+      closeLeadModalBtn && closeLeadModalBtn.addEventListener('click', closeLeadModal);
+      
+      // Cerrar modal con Escape o clic fuera
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && leadModal.style.display === 'flex') {
+          closeLeadModal();
+        }
+      });
+      
+      leadModal && leadModal.addEventListener('click', (e) => {
+        if (e.target === leadModal) closeLeadModal();
+      });
       
       // Interceptar todos los enlaces de descarga
       document.querySelectorAll('a[href*=".pdf"], #link-ficha, #link-ensayo, #modal-download-ficha, #modal-download-checklist').forEach(link => {
         link.addEventListener('click', (e) => {
-          if (!checkFormSubmission()) {
+          if (!formSubmitted) {
             e.preventDefault();
+            openLeadModal();
           }
         });
       });
       
+      // Formulario del modal
+      const leadFormModal = document.getElementById('leadFormModal');
+      const leadBtnModal = document.getElementById('leadBtnModal');
+      const leadMsgModal = document.getElementById('leadMsgModal');
+
+      if (leadFormModal) {
+        leadFormModal.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const name = leadFormModal.querySelector('input[name="name"]').value.trim();
+          const email = leadFormModal.querySelector('input[name="email"]').value.trim();
+          const honeypot = leadFormModal.querySelector('input[name="honeypot"]').value;
+
+          // Validación anti-spam
+          if (honeypot) {
+            console.log('🚫 Spam detectado');
+            return;
+          }
+
+          // Validaciones básicas
+          if (!name || !email) {
+            leadMsgModal.style.display = 'block';
+            leadMsgModal.textContent = 'Por favor, completa todos los campos obligatorios.';
+            leadMsgModal.style.color = '#dc2626';
+            return;
+          }
+
+          leadBtnModal.disabled = true;
+          leadBtnModal.textContent = 'Enviando...';
+
+          try {
+            const response = await fetch('/subscribe', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                firstName: name,
+                email: email,
+                tags: ['E-WEAR Case Study', 'Ficha Trazabilidad', 'Joyería Circular']
+              })
+            });
+
+            const responseData = await response.json();
+            console.log('Respuesta servidor:', response.status, responseData);
+
+            if (response.ok) {
+              formSubmitted = true;
+              leadMsgModal.style.display = 'block';
+              leadMsgModal.textContent = '¡Perfecto! Cerrando modal y descargando documentos...';
+              leadMsgModal.style.color = '#1F4B3F';
+              
+              // Cerrar modal después de 1 segundo y iniciar descargas
+              setTimeout(() => {
+                closeLeadModal();
+                
+                // Iniciar descargas automáticas
+                const fichaLink = document.createElement('a');
+                fichaLink.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+                fichaLink.download = 'ficha_lote_oficios_circulares_web.pdf';
+                fichaLink.click();
+                
+                setTimeout(() => {
+                  const checklistLink = document.createElement('a');
+                  checklistLink.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+                  checklistLink.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
+                  checklistLink.click();
+                }, 500);
+              }, 1500);
+              
+              console.log('✅ Usuario suscrito a Mailchimp desde modal');
+            } else {
+              console.error('Error servidor:', response.status, responseData);
+              throw new Error(`Error: ${responseData.error || responseData.message || 'Error desconocido'}`);
+            }
+          } catch (error) {
+            console.error('Error completo:', error);
+            leadMsgModal.style.display = 'block';
+            
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+              leadMsgModal.textContent = 'Error de conexión. Verifica tu internet y vuelve a intentar.';
+            } else if (error.message.includes('400')) {
+              leadMsgModal.textContent = 'Datos inválidos. Verifica tu email y vuelve a intentar.';
+            } else if (error.message.includes('500')) {
+              leadMsgModal.textContent = 'Servicio temporalmente no disponible. Inténtalo en unos minutos.';
+            } else {
+              leadMsgModal.textContent = 'Error inesperado. Contacta con soporte si persiste.';
+            }
+            
+            leadMsgModal.style.color = '#dc2626';
+          } finally {
+            leadBtnModal.disabled = false;
+            leadBtnModal.textContent = '📥 Enviar y recibir documentos';
+          }
+        });
+      }
+
       // Micro-form mejorado (Formspree + Mailchimp + validaciones)
       const leadForm = document.getElementById('leadForm');
       const leadBtn = document.getElementById('leadSubmit');
