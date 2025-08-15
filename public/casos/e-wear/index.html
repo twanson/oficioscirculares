@@ -1445,7 +1445,7 @@
         <section aria-labelledby="lead-title" style="margin: 28px 0 12px;">
           <h3 id="lead-title">📥 Descarga un ejemplo de ficha de trazabilidad</h3>
           <p style="margin-bottom: 1rem; color: #666; font-size: 0.95rem;">Completa el formulario para descargar la ficha de lote y el checklist de trazabilidad. Recibirás los documentos inmediatamente.</p>
-          <form id="leadForm" action="https://formspree.io/f/mdkowaop" method="POST" style="display:grid;gap:12px;max-width:520px;" novalidate>
+          <form id="leadForm" style="display:grid;gap:12px;max-width:520px;" novalidate>
             <input type="text" name="name" placeholder="Nombre*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;" />
             <input type="email" name="email" placeholder="Email*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;" />
             <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true" />
@@ -1617,14 +1617,21 @@
           leadBtn.textContent = 'Enviando...';
           
           try {
-            // Enviar a Formspree
-            const response = await fetch(leadForm.action, {
+            // Enviar directamente a nuestro endpoint de Mailchimp
+            const response = await fetch('/subscribe', {
               method: 'POST',
-              body: formData,
               headers: {
-                'Accept': 'application/json'
-              }
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                firstName: name,
+                email: email,
+                tags: ['E-WEAR Case Study', 'Ficha Trazabilidad', 'Joyería Circular']
+              })
             });
+            
+            const responseData = await response.json();
+            console.log('Respuesta servidor:', response.status, responseData);
             
             if (response.ok) {
               // Marcar formulario como enviado
@@ -1633,6 +1640,7 @@
               // Mostrar mensaje de éxito
               leadMsg.style.display = 'block';
               leadMsg.textContent = '¡Perfecto! Descargando documentos...';
+              leadMsg.style.color = '#1F4B3F';
               
               // Abrir modal
               openModal(leadBtn);
@@ -1656,38 +1664,26 @@
                 document.body.removeChild(checklist);
               }, 1500);
               
-              // Envío adicional a nuestro endpoint de Mailchimp
-              try {
-                const mailchimpResponse = await fetch('/subscribe', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    firstName: name,
-                    email: email,
-                    tags: ['E-WEAR Case Study', 'Ficha Trazabilidad', 'Joyería Circular']
-                  })
-                });
-                
-                if (mailchimpResponse.ok) {
-                  console.log('✅ Usuario suscrito a Mailchimp correctamente');
-                } else {
-                  console.log('⚠️ Error al suscribir a Mailchimp, pero formulario procesado');
-                }
-              } catch (mailchimpError) {
-                console.log('⚠️ Error de red con Mailchimp:', mailchimpError);
-                // No mostramos error al usuario, el formulario principal funcionó
-              }
+              console.log('✅ Usuario suscrito a Mailchimp y documentos descargados');
               
             } else {
-              throw new Error('Error en el envío');
+              console.error('Error servidor:', response.status, responseData);
+              throw new Error(`Error: ${responseData.error || responseData.message || 'Error desconocido'}`);
             }
             
           } catch (error) {
-            console.error('Error:', error);
+            console.error('Error completo:', error);
             leadMsg.style.display = 'block';
-            leadMsg.textContent = 'Error al enviar. Por favor, inténtalo de nuevo.';
+            
+            // Mensaje más específico según el tipo de error
+            if (error.message.includes('NetworkError') || error.message.includes('fetch')) {
+              leadMsg.textContent = 'Error de conexión. Verifica tu internet e inténtalo de nuevo.';
+            } else if (error.message.includes('Configuración de Mailchimp incompleta')) {
+              leadMsg.textContent = 'Servicio temporalmente no disponible. Inténtalo más tarde.';
+            } else {
+              leadMsg.textContent = 'Error al procesar. Inténtalo de nuevo o contáctanos directamente.';
+            }
+            
             leadMsg.style.color = '#dc2626';
           } finally {
             leadBtn.disabled = false;
