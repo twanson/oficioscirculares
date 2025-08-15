@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const posts = [
     {
       slug: '../casos/e-wear/',
-      title: 'E-WEAR: cómo convertimos e-waste en lujo circular',
-      excerpt: 'Caso real de diseño, trazabilidad y relato sin greenwashing.',
+      title: 'E-WEAR: De basura electrónica a joya premium con historia verificable',
+      excerpt: 'Los consumidores pagan hasta un 30% más por productos genuinamente sostenibles. Pero solo si creen que lo son.',
       date: '2025-08-08',
       readingMinutes: 8,
       cover: ASSETS_BASE + '/images/cases/e-wear/hero-packaging-movil-concha.webp',

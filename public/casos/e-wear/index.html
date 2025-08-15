@@ -1215,7 +1215,7 @@
         <h1 class="case-title">E-WEAR: De basura electrónica a joya premium con historia verificable</h1>
         <p class="case-subtitle">Los consumidores pagan hasta un 30% más por productos genuinamente sostenibles. Pero solo si creen que lo son. Te mostramos cómo lo conseguimos con E-WEAR.</p>
         <p style="margin: 12px 0 0;">
-          <button id="openPdfHero" class="cta-secondary-btn" aria-haspopup="dialog" aria-controls="pdfModal">Descarga un ejemplo de ficha de trazabilidad</button>
+          <button id="openPdfHero" class="cta-secondary-btn" aria-haspopup="dialog" aria-controls="pdfModal">📥 Descarga ficha de trazabilidad (formulario requerido)</button>
         </p>
         
         <div class="case-meta">
@@ -1252,12 +1252,12 @@
         <!-- CTA sticky móvil -->
         <div class="sticky-cta" id="stickyCta" aria-hidden="false">
           <div class="wrap">
-            <button id="openPdfStickyMobile" aria-haspopup="dialog" aria-controls="pdfModal">Descarga un ejemplo de ficha de trazabilidad</button>
+            <button id="openPdfStickyMobile" aria-haspopup="dialog" aria-controls="pdfModal">📥 Descarga ficha de trazabilidad</button>
           </div>
         </div>
         <!-- CTA sticky desktop -->
         <div class="sticky-cta-desktop" id="stickyCtaDesktop">
-          <button id="openPdfStickyDesktop" aria-haspopup="dialog" aria-controls="pdfModal">Descarga un ejemplo de ficha de trazabilidad</button>
+          <button id="openPdfStickyDesktop" aria-haspopup="dialog" aria-controls="pdfModal">📥 Descarga ficha de trazabilidad</button>
         </div>
         <h2 id="resumen-ejecutivo" class="oc-section">Resumen ejecutivo</h2>
         <p>El desafío de Laura era real: tenía plata 100% reciclada de dispositivos electrónicos, pero sus clientes no se lo creían. Le faltaba credibilidad para justificar precios premium y no sabía cómo comunicar sostenibilidad sin sonar a marketing vacío.</p>
@@ -1443,14 +1443,15 @@
         </section>
         <!-- Micro-form leads -->
         <section aria-labelledby="lead-title" style="margin: 28px 0 12px;">
-          <h3 id="lead-title">Descarga un ejemplo de ficha de trazabilidad</h3>
-          <form id="leadForm" action="https://formspree.io/f/XXXXXXXX" method="POST" style="display:grid;gap:12px;max-width:520px;" novalidate>
+          <h3 id="lead-title">📥 Descarga un ejemplo de ficha de trazabilidad</h3>
+          <p style="margin-bottom: 1rem; color: #666; font-size: 0.95rem;">Completa el formulario para descargar la ficha de lote y el checklist de trazabilidad. Recibirás los documentos inmediatamente.</p>
+          <form id="leadForm" action="https://formspree.io/f/mdkowaop" method="POST" style="display:grid;gap:12px;max-width:520px;" novalidate>
             <input type="text" name="name" placeholder="Nombre*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;" />
             <input type="email" name="email" placeholder="Email*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;" />
             <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true" />
-            <button id="leadSubmit" class="btn" style="background:#1F4B3F;color:#fff;padding:12px 18px;border-radius:10px;width:fit-content;">Enviar y recibir PDF</button>
+            <button id="leadSubmit" class="btn" style="background:#1F4B3F;color:#fff;padding:12px 18px;border-radius:10px;width:fit-content;">📥 Enviar y recibir documentos</button>
             <p style="font-size:.9rem;color:#666;">Al enviar, aceptas nuestra <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.</p>
-            <p id="leadMsg" role="status" aria-live="polite" style="margin:0;color:#1F4B3F;font-weight:600;display:none;">Te hemos enviado el PDF y el checklist.</p>
+            <p id="leadMsg" role="status" aria-live="polite" style="margin:0;color:#1F4B3F;font-weight:600;display:none;">¡Perfecto! Descargando documentos...</p>
           </form>
         </section>
         <h2 id="faq" class="oc-section">❓ Preguntas frecuentes</h2>
@@ -1520,6 +1521,9 @@
   <script>
     // Enhanced interactions and animations
     document.addEventListener('DOMContentLoaded', function() {
+      // Control de descarga con formulario obligatorio
+      let formSubmitted = false;
+      
       // Modal accesible + CTAs sticky
       const modal = document.getElementById('pdfModal');
       const closeBtn = document.getElementById('closePdf');
@@ -1528,6 +1532,7 @@
       const stickyMobile = document.getElementById('stickyCta');
       const stickyDesktop = document.getElementById('stickyCtaDesktop');
       let lastFocus = null;
+      
       function openModal(btn){
         lastFocus = btn || document.activeElement;
         modal.style.display = 'flex';
@@ -1536,6 +1541,7 @@
         if (stickyMobile) stickyMobile.style.display = 'none';
         if (stickyDesktop) stickyDesktop.style.display = 'none';
       }
+      
       function closeModal(){
         modal.style.display = 'none';
         document.body.style.overflow = '';
@@ -1543,41 +1549,144 @@
         if (stickyMobile && window.innerWidth < 900) stickyMobile.style.display = 'block';
         if (stickyDesktop && window.innerWidth >= 900) stickyDesktop.style.display = 'block';
       }
-      openers.forEach(btn=>btn && btn.addEventListener('click',()=>openModal(btn)));
+      
+      // Manejar clics en botones de modal/hero
+      openers.forEach(btn => {
+        if (btn) {
+          btn.addEventListener('click', () => {
+            if (!formSubmitted) {
+              // Si no se ha completado el formulario, ir al formulario
+              document.getElementById('leadForm').scrollIntoView({ behavior: 'smooth' });
+              alert('Para ver los documentos, primero completa el formulario de abajo.');
+            } else {
+              // Si ya se completó, abrir modal
+              openModal(btn);
+            }
+          });
+        }
+      });
+      
       closeBtn && closeBtn.addEventListener('click', closeModal);
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.style.display==='flex'){ closeModal(); }});
       modal && modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
-
-      // Micro-form (Formspree + honeypot + doble submit)
+      
+      // Función para verificar si el formulario fue enviado
+      function checkFormSubmission() {
+        if (!formSubmitted) {
+          alert('Para descargar los documentos, primero debes completar el formulario de arriba.');
+          document.getElementById('leadForm').scrollIntoView({ behavior: 'smooth' });
+          return false;
+        }
+        return true;
+      }
+      
+      // Interceptar todos los enlaces de descarga
+      document.querySelectorAll('a[href*=".pdf"], #link-ficha, #link-ensayo, #modal-download-ficha, #modal-download-checklist').forEach(link => {
+        link.addEventListener('click', (e) => {
+          if (!checkFormSubmission()) {
+            e.preventDefault();
+          }
+        });
+      });
+      
+      // Micro-form mejorado (Formspree + Mailchimp + validaciones)
       const leadForm = document.getElementById('leadForm');
       const leadBtn = document.getElementById('leadSubmit');
       const leadMsg = document.getElementById('leadMsg');
+      
       if (leadForm) {
-        leadForm.addEventListener('submit', async (e)=>{
-          if (leadForm.company && leadForm.company.value) { e.preventDefault(); return; }
+        leadForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          // Verificar honeypot
+          if (leadForm.company && leadForm.company.value) { 
+            return; 
+          }
+          
+          const formData = new FormData(leadForm);
+          const name = formData.get('name');
+          const email = formData.get('email');
+          
+          // Validación básica
+          if (!name || !email) {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return;
+          }
+          
           leadBtn.disabled = true;
           leadBtn.textContent = 'Enviando...';
+          
           try {
-            // Permitir comportamiento normal de Formspree si hay network CORS
-          } finally {
-            // Mostrar mensaje y abrir modal
+            // Enviar a Formspree
+            const response = await fetch(leadForm.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            });
+            
+            if (response.ok) {
+              // Marcar formulario como enviado
+              formSubmitted = true;
+              
+              // Mostrar mensaje de éxito
+              leadMsg.style.display = 'block';
+              leadMsg.textContent = '¡Perfecto! Descargando documentos...';
+              
+              // Abrir modal
+              openModal(leadBtn);
+              
+              // Descargar documentos después de un momento
+              setTimeout(() => {
+                const ficha = document.createElement('a');
+                ficha.href='../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+                ficha.download='ficha_lote_oficios_circulares_web.pdf';
+                document.body.appendChild(ficha); 
+                ficha.click(); 
+                document.body.removeChild(ficha);
+              }, 1000);
+              
+              setTimeout(() => {
+                const checklist = document.createElement('a');
+                checklist.href='../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+                checklist.download='checklist_trazabilidad_oficios_circulares_web.pdf';
+                document.body.appendChild(checklist); 
+                checklist.click(); 
+                document.body.removeChild(checklist);
+              }, 1500);
+              
+              // Envío adicional a nuestro endpoint de Mailchimp (si existe)
+              try {
+                await fetch('/api/subscribe', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    tags: ['E-WEAR Case Study', 'Ficha Trazabilidad']
+                  })
+                });
+              } catch (mailchimpError) {
+                console.log('Mailchimp no configurado aún:', mailchimpError);
+              }
+              
+            } else {
+              throw new Error('Error en el envío');
+            }
+            
+          } catch (error) {
+            console.error('Error:', error);
             leadMsg.style.display = 'block';
-            openModal(leadBtn);
-            // Desencadenar descarga de ambos documentos
-            setTimeout(() => {
-              const ficha = document.createElement('a');
-              ficha.href='../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
-              ficha.download='ficha_lote_oficios_circulares_web.pdf';
-              document.body.appendChild(ficha); ficha.click(); document.body.removeChild(ficha);
-            }, 500);
-            setTimeout(() => {
-              const checklist = document.createElement('a');
-              checklist.href='../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
-              checklist.download='checklist_trazabilidad_oficios_circulares_web.pdf';
-              document.body.appendChild(checklist); checklist.click(); document.body.removeChild(checklist);
-            }, 1000);
+            leadMsg.textContent = 'Error al enviar. Por favor, inténtalo de nuevo.';
+            leadMsg.style.color = '#dc2626';
+          } finally {
+            leadBtn.disabled = false;
+            leadBtn.textContent = '📥 Enviar y recibir documentos';
           }
-        }, { once: true });
+        });
       }
       // Reading progress bar
       const progressBar = document.querySelector('.reading-progress');
@@ -1737,8 +1846,8 @@
         <iframe src="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" width="100%" height="100%" style="border: none;"></iframe>
       </div>
       <div style="padding: 15px 20px; background: #f8f9fa; text-align: center;">
-        <a href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" download="ficha_lote_oficios_circulares_web.pdf" class="btn-outline" style="margin-right: 10px;">📥 Descargar PDF</a>
-        <a href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" download="checklist_trazabilidad_oficios_circulares_web.pdf" class="btn-outline">📋 Descargar Checklist</a>
+        <a id="modal-download-ficha" href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" download="ficha_lote_oficios_circulares_web.pdf" class="btn-outline" style="margin-right: 10px;">📥 Descargar PDF</a>
+        <a id="modal-download-checklist" href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" download="checklist_trazabilidad_oficios_circulares_web.pdf" class="btn-outline">📋 Descargar Checklist</a>
       </div>
     </div>
   </div>
