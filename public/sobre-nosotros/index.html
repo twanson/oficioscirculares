@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - Oficios Circulares</title>
+    <meta name="description" content="Conoce la historia, metodología y filosofía de Oficios Circulares. Consultoría estratégica para proyectos con propósito, sostenibilidad e impacto real.">
+    <meta name="keywords" content="oficios circulares, consultoría sostenible, economía circular, José Moscardó, metodología 3D, proyectos con propósito">
+    <meta name="author" content="Oficios Circulares">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.oficioscirculares.com/sobre-nosotros/">
+    <meta property="og:title" content="Sobre Nosotros - Oficios Circulares">
+    <meta property="og:description" content="Conoce la historia, metodología y filosofía de Oficios Circulares. Consultoría estratégica para proyectos con propósito, sostenibilidad e impacto real.">
+    <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/artesano innovador.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.oficioscirculares.com/sobre-nosotros/">
+    <meta property="twitter:title" content="Sobre Nosotros - Oficios Circulares">
+    <meta property="twitter:description" content="Conoce la historia, metodología y filosofía de Oficios Circulares. Consultoría estratégica para proyectos con propósito, sostenibilidad e impacto real.">
+    <meta property="twitter:image" content="https://www.oficioscirculares.com/assets/images/artesano innovador.png">
+
+    <link rel="canonical" href="https://www.oficioscirculares.com/sobre-nosotros/">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <style>
+        /* Hero Section */
+        .hero-about {
+            background: linear-gradient(135deg, #1F4B3F 0%, #2D5F4F 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../assets/images/artesano innovador.png') center/cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        /* Main Content */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .content-section {
+            margin-bottom: 2rem;
+            padding: 0.5rem 0;
+        }
+
+        .section-title {
+            color: #1F4B3F;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.3rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #E0B894;
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .section-content p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-content p + p {
+            margin-top: 0.4rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #E0B894;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .about-me-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 0.8rem;
+        }
+
+        .about-photo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .profile-photo {
+            width: 220px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(31, 75, 63, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            object-fit: cover;
+        }
+
+        .profile-photo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(31, 75, 63, 0.25);
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .methodology-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .methodology-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #1F4B3F 0%, #E0B894 100%);
+        }
+
+        .methodology-card:hover {
+            border-color: #1F4B3F;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(31, 75, 63, 0.1);
+        }
+
+        .card-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #1F4B3F;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1F4B3F;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .quote-section {
+            background: linear-gradient(135deg, #1F4B3F 0%, #2D5F4F 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8rem;
+            opacity: 0.1;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+            color: white !important;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #E0B894 0%, #d4a574 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1F4B3F;
+        }
+
+        .btn-primary:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #E0B894;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            line-height: 1.6;
+            color: #cccccc;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .footer-column h4 {
+            color: #E0B894;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: #E0B894;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding: 30px 0 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #999999;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-about {
+                padding: 100px 0 60px;
+            }
+
+            .about-content {
+                padding: 40px 20px;
+            }
+            
+            .content-section {
+                margin-bottom: 1.5rem;
+                padding: 0.25rem 0;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-me-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-photo {
+                order: -1;
+                justify-content: center;
+            }
+
+            .profile-photo {
+                width: 180px;
+                max-width: 100%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo">
+                <span class="logo-text">Oficios Circulares</span>
+            </a>
+            <div class="nav-menu">
+                <a href="../#que-es" class="nav-link">¿Qué es?</a>
+                <a href="../#para-quien" class="nav-link">¿Para quién?</a>
+                <a href="../#ofrecemos" class="nav-link">Qué ofrecemos</a>
+                <a href="../#comunidad" class="nav-link">Comunidad</a>
+                <a href="../blog/" class="nav-link">Blog</a>
+                <a href="../faqs/" class="nav-link">FAQs</a>
+                <a href="./" class="nav-link active">Sobre Nosotros</a>
+                <a href="https://tally.so/r/mOyV98" target="_blank" class="btn btn-primary btn-small">Únete</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-about">
+        <div class="hero-content">
+            <h1 class="hero-title">Sobre Nosotros</h1>
+            <p class="hero-subtitle">La historia, metodología y filosofía detrás de Oficios Circulares</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="about-content">
+        <!-- Qué hacemos -->
+        <section class="content-section">
+            <h2 class="section-title">Qué hacemos</h2>
+            <div class="section-content">
+                <p>Oficios Circulares nace como una iniciativa para acompañar a proyectos con propósito a ganar claridad, impacto y sostenibilidad. No desde fórmulas vacías, sino desde la escucha, la estrategia y la conexión real con lo que les hace únicos.</p>
+            </div>
+        </section>
+
+        <!-- Qué somos -->
+        <section class="content-section">
+            <h2 class="section-title">Qué somos</h2>
+            <div class="section-content">
+                <p>Una consultora estratégica independiente. Trabajamos con marcas, iniciativas y personas comprometidas con su entorno, que quieren construir desde el propósito y la sostenibilidad. Ofrecemos acompañamiento personalizado para que cada proyecto purifique, ordene y haga crecer tu proyecto sin perder tu esencia.</p>
+            </div>
+        </section>
+
+        <!-- Nuestra forma de trabajar -->
+        <section class="content-section">
+            <h2 class="section-title">Nuestra forma de trabajar</h2>
+            <div class="section-content">
+                <p>No creemos en las soluciones estándar. Preferimos hacer preguntas difíciles, pensar contigo y diseñar caminos a medida. Cada proyecto es distinto, pero eso adaptamos nuestro enfoque, aunque siempre seguimos aplicando nuestra misma metodología: el Círculo de Valor 3D.</p>
+            </div>
+        </section>
+
+        <!-- Metodología: Círculo de Valor 3D -->
+        <section class="content-section">
+            <h2 class="section-title">Nuestra metodología: Círculo de Valor 3D</h2>
+            <div class="section-content">
+                <p>Trabajamos en tres fases complementarias: <strong>Diagnosticar, Diseñar y Difundir</strong>. Primero entendemos la realidad. Luego creamos estrategias circulares. Finalmente, te ayudamos a contar ese nuevo valor con claridad y honestidad.</p>
+            </div>
+
+            <div class="methodology-grid">
+                <div class="methodology-card">
+                    <div class="card-number">1</div>
+                    <h3 class="card-title">Diagnosticar</h3>
+                    <p class="card-description">Entender la Realidad. Lo primero que hago siempre es una fase de Diagnóstico. No aplico soluciones genéricas. Me sumerjo para entender a fondo el proyecto: analizo los materiales que se usan, desde su origen hasta su fin de vida; estudio los procesos para identificar puntos de mejora en colaboración con el cliente; y comprendo la comunicación actual de la marca.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="card-number">2</div>
+                    <h3 class="card-title">Diseñar</h3>
+                    <p class="card-description">Crear la Estrategia Circular. Una vez que tenemos el mapa de la situación, entramos en la fase de Diseño. Aquí es donde co-creamos soluciones a medida para hacer el proyecto más circular. Esto puede incluir desde aplicar estrategias de Diseño de Producto (para que duren más o se reparen mejor) hasta idear nuevos Modelos de Negocio (como sistemas de retorno o servicios de reparación) que generen nuevos ingresos.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="card-number">3</div>
+                    <h3 class="card-title">Difundir</h3>
+                    <p class="card-description">Contar la Nueva Historia. Y finalmente, la fase de Difusión. De nada sirve ser circular si nadie lo sabe o no se entiende. En esta última fase, transformamos todas esas mejoras operativas en un relato potente y honesto y en una estrategia de marketing y branding que realmente conecte con el cliente, comunique el valor y diferencie a la marca sin caer nunca en el greenwashing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre mí -->
+        <section class="content-section">
+            <h2 class="section-title">Sobre mí</h2>
+            <div class="about-me-content">
+                <div class="about-text">
+                    <p>Soy José Moscardó, fundador de Oficios Circulares. Llevo más de diez años trabajando en estrategia, marketing y sostenibilidad, tanto en grandes empresas como en proyectos personales. Después de años trabajando en proyectos relacionados con el desarrollo personal, el bienestar emocional y la sostenibilidad, sentí que necesitaba dar un paso más. Quería enfocar mi carrera en algo con más sentido, algo propio, que integrara todas esas experiencias y aprendizajes acumulados.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>Oficios Circulares nació como una forma de poner en valor todo lo que he aprendido y de acompañar a quienes están construyendo algo con propósito, desde la autenticidad y con ganas de hacer las cosas bien. Proyectos que mezclan lo humano con lo estratégico. Lo artesanal con lo innovador.</strong></p>
+                </div>
+
+                <p>Poco a poco, fui dándole forma a esta idea: una consultora centrada en proyectos con alma, comprometidos con su entorno y con ganas de hacer las cosas bien. Proyectos que mezclan lo humano con lo estratégico. Lo artesanal con lo innovador.</p>
+
+                    <p>Así nació Oficios Circulares. Como una forma de poner en valor todo lo que he aprendido, y de acompañar a quienes están construyendo algo con propósito, desde la autenticidad y con ganas de dejar huella.</p>
+                </div>
+                <div class="about-photo">
+                    <img src="../assets/images/fotosobrenosotrosOC.png" alt="José Moscardó, fundador de Oficios Circulares" class="profile-photo">
+                </div>
+            </div>
+        </section>
+
+        <!-- Lo que nos mueve -->
+        <section class="content-section">
+            <h2 class="section-title">Lo que nos mueve</h2>
+            <div class="section-content">
+                <p>Creemos en el poder de las buenas preguntas, en la estrategia con alma y en los proyectos que van más allá del beneficio económico. Nos mueve la claridad, la conexión humana y los proyectos que no necesitan parecer lo que no son. Nos mueve que hacer las cosas bien no sea un lujo, sino una forma natural de trabajar.</p>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <div class="quote-section">
+            <p class="quote-text">"Creemos en un futuro donde la creación con propósito sea pilar de una nueva economía: más conectada con el territorio, las personas y el planeta."</p>
+        </div>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h3>¿Listo para hacer crecer tu proyecto con propósito?</h3>
+            <p>Conversemos sobre cómo podemos ayudarte a clarificar tu estrategia, fortalecer tu impacto y contar tu historia de manera auténtica.</p>
+            <div class="cta-buttons">
+                <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="btn-cta btn-primary">📅 Agenda una llamada gratuita</a>
+                <a href="../#contacto" class="btn-cta btn-secondary">✉️ Escríbenos directamente</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="footer-logo">
+                <p class="footer-tagline">
+                    "Creemos en un futuro donde la creación con propósito sea pilar de una nueva economía: más conectada con el territorio, las personas y el planeta."
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="../#que-es">¿Qué es?</a></li>
+                        <li><a href="../#para-quien">¿Para quién?</a></li>
+                        <li><a href="../#ofrecemos">Qué ofrecemos</a></li>
+                        <li><a href="../#comunidad">Comunidad</a></li>
+                        <li><a href="../blog/">Blog</a></li>
+                        <li><a href="../faqs/">FAQs</a></li>
+                        <li><a href="./">Sobre Nosotros</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="../#ofrecemos">Metodología 3D</a></li>
+                        <li><a href="../#ofrecemos">Consultoría</a></li>
+                        <li><a href="../#ofrecemos">Recursos</a></li>
+                        <li><a href="../#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Conecta</h4>
+                    <ul>
+                        <li><a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a></li>
+                        <li><a href="#" target="_blank">📷 Instagram</a></li>
+                        <li><a href="#" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Oficios Circulares - Donde la tradición abraza el futuro</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        // Mobile menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animations to content sections
+        document.querySelectorAll('.content-section, .methodology-card').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
