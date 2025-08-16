@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - Oficios Circulares</title>
+    <meta name="description" content="Encuentra respuestas a todas tus preguntas sobre Oficios Circulares: servicios, metodología, procesos y cómo podemos ayudar a tu proyecto sostenible.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Preguntas Frecuentes - Oficios Circulares">
+    <meta property="og:description" content="Encuentra respuestas a todas tus preguntas sobre Oficios Circulares: servicios, metodología, procesos y cómo podemos ayudar a tu proyecto sostenible.">
+    <meta property="og:url" content="https://www.oficioscirculares.com/faqs/">
+    <meta property="og:site_name" content="Oficios Circulares">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Preguntas Frecuentes - Oficios Circulares">
+    <meta name="twitter:description" content="Encuentra respuestas a todas tus preguntas sobre Oficios Circulares: servicios, metodología, procesos y cómo podemos ayudar a tu proyecto sostenible.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    
+    <!-- FAQ Specific Styles -->
+    <style>
+        .faqs-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .faqs-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .faqs-header h1 {
+            color: #1F4B3F;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faqs-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #1F4B3F;
+        }
+        
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+        
+        .faq-category {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            color: #1F4B3F;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1F4B3F;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            border-color: #1F4B3F;
+            box-shadow: 0 4px 12px rgba(31, 75, 63, 0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1F4B3F;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #e8f5e8;
+        }
+        
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            margin: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            display: none;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #1F4B3F 0%, #2d6b55 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .cta-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .cta-section p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #1F4B3F;
+        }
+        
+        .btn-primary:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #1F4B3F;
+        }
+        
+        @media (max-width: 768px) {
+            .faqs-header h1 {
+                font-size: 2rem;
+            }
+            
+            .faq-question {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .faq-answer {
+                padding: 0 1rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo">
+                <span class="logo-text">Oficios Circulares</span>
+            </a>
+            <div class="nav-menu">
+                <a href="../#que-es" class="nav-link">¿Qué es?</a>
+                <a href="../#para-quien" class="nav-link">¿Para quién?</a>
+                <a href="../#ofrecemos" class="nav-link">Qué ofrecemos</a>
+                <a href="../#comunidad" class="nav-link">Comunidad</a>
+                <a href="../blog/" class="nav-link">Blog</a>
+                <a href="./" class="nav-link active">FAQs</a>
+                <a href="https://tally.so/r/mOyV98" target="_blank" class="btn btn-primary btn-small">Únete</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="faqs-container">
+        <header class="faqs-header">
+            <h1>❓ Preguntas Frecuentes</h1>
+            <p>Encuentra respuestas a todas tus dudas sobre Oficios Circulares, nuestros servicios y cómo podemos ayudar a que tu proyecto sostenible tenga el impacto que merece.</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Busca tu pregunta...">
+        </div>
+
+        <div class="no-results" id="no-results">
+            <h3>😔 No encontramos resultados</h3>
+            <p>Intenta con otras palabras clave o <a href="mailto:hola@oficioscirculares.com">contáctanos directamente</a>.</p>
+        </div>
+
+        <!-- Categoría: Sobre Nosotros -->
+        <section class="faq-category" data-category="nosotros">
+            <h2 class="category-title">🏢 Sobre Nosotros</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">¿Oficios Circulares es una agencia?</h3>
+                <div class="faq-answer">
+                    <p>No exactamente. Oficios Circulares es una consultora estratégica especializada en proyectos con propósito. Aunque ayudamos a mejorar comunicación, marca y estrategia, no funcionamos como una agencia de ejecución, sino como guía experta para que tomes decisiones más claras y sostenibles.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Es solo para artesanos?</h3>
+                <div class="faq-answer">
+                    <p>No. Aunque gran parte de nuestra comunidad y experiencia está vinculada al mundo artesanal, trabajamos con todo tipo de proyectos con propósito: marcas locales, iniciativas culturales, asociaciones, colectivos, proyectos de sostenibilidad... Lo importante es que quieras hacer las cosas con cabeza, corazón y compromiso.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Con quién voy a trabajar?</h3>
+                <div class="faq-answer">
+                    <p>Trabajarás directamente conmigo, José Moscardó, fundador de Oficios Circulares. Tengo más de 15 años de experiencia en comunicación, marca y sostenibilidad, y especialización en negocio con cercanía y criterio.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Cómo puedo saber si esto es para mí?</h3>
+                <div class="faq-answer">
+                    <p>Si tienes un proyecto genuino o propósito y lo quieres hacerlo más claro, rentable o sostenible, seguramente sí. Escribimos sin compromiso y te orientamos con honestidad.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Puedo unirme a la comunidad sin contratar un acompañamiento?</h3>
+                <div class="faq-answer">
+                    <p>Sí. Oficios Circulares no es solo una consultora, también es una red de apoyo. Puedes suscribirte al newsletter o seguirnos en redes para estar al tanto de todo lo que vamos construyendo.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Hay algún compromiso al reservar la sesión gratuita?</h3>
+                <div class="faq-answer">
+                    <p>Ninguno. Es una llamada para conocernos y entender tu situación. Si vemos que podemos ayudarte, te lo diremos sin compromiso. Si no, también. Queremos que trabajes con nosotros solo si tiene sentido.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categoría: Sobre los Servicios -->
+        <section class="faq-category" data-category="servicios">
+            <h2 class="category-title">⚙️ Sobre los Servicios</h2>
+            
+            <div class="faq-item">
+                <h3 class="faq-question">¿Qué tipo de resultados puedo esperar?</h3>
+                <div class="faq-answer">
+                    <p>Depende de tu proyecto y objetivos, pero normalmente ayudamos a clarificar ideas, reducir el caos y tener foco; reposicionar la marca con una narrativa más clara; aumentar visibilidad online y offline; crear procesos más eficientes; conectar con audiencias genuinamente interesadas; desarrollar productos o servicios más alineados con propósito y mercado.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Cuánto tiempo dura el proceso?</h3>
+                <div class="faq-answer">
+                    <p>Varía según necesidades y ritmo. Tenemos procesos desde 4 semanas (para clarificación rápida) hasta 6 meses (para transformaciones más profundas). En la primera llamada te damos una estimación realista.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Trabajáis también la parte técnica/web/redes?</h3>
+                <div class="faq-answer">
+                    <p>Nos enfocamos en estrategia, pero tenemos colaboradores de confianza para ejecución técnica cuando es necesario. Preferimos asegurar que la estrategia esté clara antes de implementar.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Ofrecéis servicios de financiación o inversión?</h3>
+                <div class="faq-answer">
+                    <p>No directamente, pero sí ayudamos a preparar proyectos para presentar a inversores, grants o subvenciones. También conectamos con nuestra red cuando vemos oportunidades de colaboración.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Qué incluye la metodología 3D?</h3>
+                <div class="faq-answer">
+                    <p>Nuestra metodología se basa en el "Círculo de Valor 3D" con 3 fases:</p>
+                    <p><strong>1. Diagnosticar:</strong> Analizamos materiales, procesos del taller y comunicación actual para entender la realidad del proyecto a fondo.</p>
+                    <p><strong>2. Diseñar:</strong> Co-creamos soluciones circulares a medida, desde estrategias de diseño de producto hasta nuevos modelos de negocio que generen ingresos adicionales.</p>
+                    <p><strong>3. Difundir:</strong> Transformamos las mejoras operativas en un relato potente y una estrategia de marketing que conecte con el cliente y diferencie la marca sin greenwashing.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Trabajáis con proyectos internacionales?</h3>
+                <div class="faq-answer">
+                    <p>Sí, especialmente en España y Latinoamérica. La mayoría de nuestro trabajo es online, así que la distancia no es problema. Lo importante es que compartamos idioma y valores.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Qué pasa si mi proyecto no es viable?</h3>
+                <div class="faq-answer">
+                    <p>Te lo diremos en la primera llamada. Preferimos ser honestos desde el principio que prometerte algo que no podemos cumplir. Si hay potencial pero necesita ajustes, te orientamos sobre cómo mejorar la propuesta.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">¿Ofrecéis garantías de resultados?</h3>
+                <div class="faq-answer">
+                    <p>Garantizamos metodología probada, dedicación completa y honestidad total. Los resultados dependen también de tu compromiso y del mercado, pero trabajamos hasta asegurar que tengas herramientas claras para avanzar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h3>¿No encontraste tu respuesta?</h3>
+            <p>Estamos aquí para resolver todas tus dudas. Agenda una llamada gratuita o escríbenos directamente.</p>
+            <div class="cta-buttons">
+                <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="btn-cta btn-primary">📅 Agenda una llamada gratuita</a>
+                <a href="mailto:hola@oficioscirculares.com" class="btn-cta btn-secondary">✉️ Escríbenos directamente</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="footer-logo" style="max-width: 120px; height: auto;">
+                <p class="footer-tagline">
+                    "Creemos en un futuro donde la creación con propósito sea pilar de una nueva economía: más conectada con el territorio, las personas y el planeta."
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="../#que-es">¿Qué es?</a></li>
+                        <li><a href="../#para-quien">¿Para quién?</a></li>
+                        <li><a href="../#ofrecemos">Qué ofrecemos</a></li>
+                        <li><a href="../#comunidad">Comunidad</a></li>
+                        <li><a href="../blog/">Blog</a></li>
+                        <li><a href="./">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="../#ofrecemos">Metodología 3D</a></li>
+                        <li><a href="../#ofrecemos">Consultoría</a></li>
+                        <li><a href="../#ofrecemos">Recursos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Conecta</h4>
+                    <ul>
+                        <li><a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a></li>
+                        <li><a href="#" target="_blank">📷 Instagram</a></li>
+                        <li><a href="#" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Oficios Circulares - Donde la tradición abraza el futuro</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            const searchInput = document.getElementById('search-input');
+            const noResults = document.getElementById('no-results');
+            const categories = document.querySelectorAll('.faq-category');
+            
+            // Toggle FAQ items
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let hasVisibleResults = false;
+                
+                if (searchTerm === '') {
+                    // Show all categories and items
+                    categories.forEach(category => {
+                        category.style.display = 'block';
+                    });
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    noResults.style.display = 'none';
+                    return;
+                }
+                
+                categories.forEach(category => {
+                    let categoryHasVisibleItems = false;
+                    const itemsInCategory = category.querySelectorAll('.faq-item');
+                    
+                    itemsInCategory.forEach(item => {
+                        const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                        
+                        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                            item.style.display = 'block';
+                            categoryHasVisibleItems = true;
+                            hasVisibleResults = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    category.style.display = categoryHasVisibleItems ? 'block' : 'none';
+                });
+                
+                noResults.style.display = hasVisibleResults ? 'none' : 'block';
+            });
+            
+            // Mobile menu functionality
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
