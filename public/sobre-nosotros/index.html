@@ -156,16 +156,49 @@
 
         .profile-photo {
             width: 220px;
-            height: auto;
-            border-radius: 12px;
+            height: 220px;
+            border-radius: 20px;
             box-shadow: 0 8px 24px rgba(31, 75, 63, 0.15);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             object-fit: cover;
+            object-position: center center;
         }
 
         .profile-photo:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 32px rgba(31, 75, 63, 0.25);
+        }
+
+        .about-photo {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-quote {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #1F4B3F;
+            text-align: center;
+            margin-top: 1.5rem;
+            line-height: 1.5;
+            max-width: 250px;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border-left: 3px solid #E0B894;
+            position: relative;
+        }
+
+        .photo-quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 2rem;
+            color: #E0B894;
+            font-family: serif;
         }
 
         .methodology-grid {
@@ -424,12 +457,29 @@
 
             .about-photo {
                 order: -1;
-                justify-content: center;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
             }
 
             .profile-photo {
-                width: 180px;
-                max-width: 100%;
+                width: 150px !important;
+                height: 150px !important;
+                max-width: 150px !important;
+                min-width: 150px !important;
+                border-radius: 15px !important;
+                display: block !important;
+                flex-shrink: 0 !important;
+                object-fit: cover !important;
+                object-position: center center !important;
+            }
+
+            .photo-quote {
+                max-width: 280px !important;
+                font-size: 0.75rem !important;
+                margin-top: 1rem !important;
+                padding: 0.75rem !important;
             }
 
             .cta-buttons {
@@ -440,11 +490,11 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
-                text-align: center;
+                text-align: left;
             }
 
             .footer-brand {
-                align-items: center;
+                align-items: flex-start;
             }
 
             .footer-links {
@@ -453,7 +503,7 @@
             }
 
             .footer-column {
-                text-align: center;
+                text-align: left;
             }
         }
     </style>
@@ -506,7 +556,7 @@
         <section class="content-section">
             <h2 class="section-title">Qué somos</h2>
             <div class="section-content">
-                <p>Una consultora estratégica independiente. Trabajamos con marcas, iniciativas y personas comprometidas con su entorno, que quieren construir desde el propósito y la sostenibilidad. Ofrecemos acompañamiento personalizado para que cada proyecto purifique, ordene y haga crecer tu proyecto sin perder tu esencia.</p>
+                <p>Una consultora estratégica independiente. Trabajamos con marcas, iniciativas y personas comprometidas con su entorno, que quieren construir desde el propósito y la sostenibilidad. Ofrecemos acompañamiento personalizado para ayudarte a enfocar, ordenar y hacer crecer tu proyecto sin perder tu esencia.</p>
             </div>
         </section>
 
@@ -522,7 +572,7 @@
         <section class="content-section">
             <h2 class="section-title">Nuestra metodología: Círculo de Valor 3D</h2>
             <div class="section-content">
-                <p>Trabajamos en tres fases complementarias: <strong>Diagnosticar, Diseñar y Difundir</strong>. Primero entendemos la realidad. Luego creamos estrategias circulares. Finalmente, te ayudamos a contar ese nuevo valor con claridad y honestidad.</p>
+                <p>Trabajamos en tres fases complementarias: <strong>Diagnosticar, Diseñar y Difundir</strong>. Primero entendemos a fondo tu realidad. Luego co-creamos soluciones circulares reales. Y finalmente, te ayudamos a contar ese nuevo valor con claridad y honestidad.</p>
             </div>
 
             <div class="methodology-grid">
@@ -551,18 +601,16 @@
             <h2 class="section-title">Sobre mí</h2>
             <div class="about-me-content">
                 <div class="about-text">
-                    <p>Soy José Moscardó, fundador de Oficios Circulares. Llevo más de diez años trabajando en estrategia, marketing y sostenibilidad, tanto en grandes empresas como en proyectos personales. Después de años trabajando en proyectos relacionados con el desarrollo personal, el bienestar emocional y la sostenibilidad, sentí que necesitaba dar un paso más. Quería enfocar mi carrera en algo con más sentido, algo propio, que integrara todas esas experiencias y aprendizajes acumulados.</p>
+                    <p>Soy José Moscardó, fundador de Oficios Circulares. Llevo más de diez años trabajando en estrategia, marketing y sostenibilidad, tanto en grandes empresas como en proyectos personales. Después de años trabajando en proyectos relacionados con el desarrollo profesional y personal, el bienestar emocional y la sostenibilidad, sentí que necesitaba dar un paso más. Quería enfocar mi carrera en algo con más sentido, algo propio, que integrara todas esas experiencias y aprendizajes acumulados.</p>
 
                     <p>Poco a poco, fui dándole forma a esta idea: una consultora centrada en proyectos con alma, comprometidos con su entorno y con ganas de hacer las cosas bien. Proyectos que mezclan lo humano con lo estratégico. Lo artesanal con lo innovador.</p>
 
                     <p>Así nació Oficios Circulares. Como una forma de poner en valor todo lo que he aprendido, y de acompañar a quienes están construyendo algo con propósito, desde la autenticidad y con ganas de dejar huella.</p>
                 
-                    <div class="highlight-box">
-                        <p><strong>Oficios Circulares nació como una forma de poner en valor todo lo que he aprendido y de acompañar a quienes están construyendo algo con propósito, desde la autenticidad y con ganas de hacer las cosas bien. Proyectos que mezclan lo humano con lo estratégico. Lo artesanal con lo innovador.</strong></p>
-                    </div>
                 </div>
                 <div class="about-photo">
                     <img src="../assets/images/fotosobrenosotrosOC.png?v=centrado" alt="José Moscardó, fundador de Oficios Circulares" class="profile-photo">
+                    <p class="photo-quote">Oficios Circulares nació para acompañar a Proyectos que mezclan lo humano con lo estratégico. Lo artesanal con lo innovador.</p>
                 </div>
             </div>
         </section>
@@ -571,7 +619,7 @@
         <section class="content-section">
             <h2 class="section-title">Lo que nos mueve</h2>
             <div class="section-content">
-                <p>Creemos en el poder de las buenas preguntas, en la estrategia con alma y en los proyectos que van más allá del beneficio económico. Nos mueve la claridad, la conexión humana y los proyectos que no necesitan parecer lo que no son. Nos mueve que hacer las cosas bien no sea un lujo, sino una forma natural de trabajar.</p>
+                <p>Creemos en el poder de las buenas preguntas, en la estrategia con alma y en los proyectos que no necesitan parecer lo que no son. Nos mueve la claridad, la conexión humana y el deseo de que hacer las cosas bien no sea un lujo, sino una forma natural de trabajar.</p>
             </div>
         </section>
 
