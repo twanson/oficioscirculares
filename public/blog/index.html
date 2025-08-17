@@ -288,8 +288,15 @@
     }
     
     /* Adjust body for fixed navbar */
+    html, body {
+      height: 100%;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
     body {
       padding-top: 80px;
+      overflow-x: hidden;
     }
     
     @media (max-width: 768px) {
