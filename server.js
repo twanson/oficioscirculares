@@ -61,6 +61,9 @@ app.post('/subscribe', async (req, res) => {
     
     console.log(`📧 Intento de suscripción: ${firstName} - ${email}`);
     console.log(`🏷️ Etiquetas recibidas: ${tags ? JSON.stringify(tags) : 'ninguna'}`);
+    console.log(`🔍 Tipo de tags:`, typeof tags);
+    console.log(`🔍 Es array?:`, Array.isArray(tags));
+    console.log(`🔍 Length:`, tags ? tags.length : 'N/A');
     
     if (!firstName || !email) {
         return res.status(400).json({ error: 'Nombre y email son requeridos' });
