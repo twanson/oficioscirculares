@@ -83,18 +83,21 @@ app.post('/subscribe', async (req, res) => {
         
         console.log(`🔗 URL de Mailchimp: ${url}`);
         
-        // Lógica optimizada para coordinación con Make
-        let finalTags;
+        // SOLO usar etiquetas que vienen desde Make/frontend - SIN etiquetas automáticas
+        let finalTags = [];
         
         if (tags && Array.isArray(tags) && tags.length > 0) {
-            // Si vienen etiquetas específicas (desde Make/frontend), usar SOLO esas
+            // Usar ÚNICAMENTE las etiquetas que vienen desde Make/frontend
             finalTags = tags;
-            console.log(`🏷️ Usando etiquetas específicas: ${JSON.stringify(tags)}`);
+            console.log(`🏷️ Usando etiquetas desde Make/frontend: ${JSON.stringify(tags)}`);
+        } else if (tags && typeof tags === 'string' && tags.trim() !== '') {
+            // Si viene como string, convertir a array
+            finalTags = [tags.trim()];
+            console.log(`🏷️ Usando etiqueta string desde Make/frontend: ${tags}`);
         } else {
-            // Solo aplicar etiqueta por defecto si NO hay etiquetas específicas
-            const defaultTag = 'Diagnóstico Circular Express';
-            finalTags = [defaultTag];
-            console.log(`🏷️ Aplicando etiqueta por defecto: ${defaultTag}`);
+            // NO añadir ninguna etiqueta automática - dejar vacío
+            finalTags = [];
+            console.log(`🏷️ Sin etiquetas - NO se añaden etiquetas automáticas`);
         }
         
         const data = {
@@ -155,7 +158,7 @@ app.get('/test-mailchimp', async (req, res) => {
         nodeEnvLength: (process.env.NODE_ENV || '').length,
         nodeEnvType: typeof process.env.NODE_ENV,
         isProduction: (process.env.NODE_ENV || '').trim() === 'production',
-        tagToUse: (process.env.NODE_ENV || '').trim() === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING'
+        tagLogic: 'Etiquetas gestionadas completamente desde Make - sin etiquetas automáticas'
     };
     
     if (!MAILCHIMP_API_KEY) {
