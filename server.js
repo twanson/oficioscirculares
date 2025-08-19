@@ -60,6 +60,7 @@ app.post('/subscribe', async (req, res) => {
     const { firstName, email, tags } = req.body;
     
     console.log(`📧 Intento de suscripción: ${firstName} - ${email}`);
+    console.log(`🏷️ Etiquetas recibidas: ${tags ? JSON.stringify(tags) : 'ninguna'}`);
     
     if (!firstName || !email) {
         return res.status(400).json({ error: 'Nombre y email son requeridos' });
@@ -79,9 +80,19 @@ app.post('/subscribe', async (req, res) => {
         
         console.log(`🔗 URL de Mailchimp: ${url}`);
         
-        // Usar tags personalizados si se proporcionan, sino usar el tag por defecto
-        const defaultTag = (process.env.NODE_ENV || '').trim() === 'production' ? 'Diagnóstico Circular Express' : 'Diagnóstico Circular Express - STAGING';
-        const finalTags = tags && Array.isArray(tags) && tags.length > 0 ? tags : [defaultTag];
+        // Lógica optimizada para coordinación con Make
+        let finalTags;
+        
+        if (tags && Array.isArray(tags) && tags.length > 0) {
+            // Si vienen etiquetas específicas (desde Make/frontend), usar SOLO esas
+            finalTags = tags;
+            console.log(`🏷️ Usando etiquetas específicas: ${JSON.stringify(tags)}`);
+        } else {
+            // Solo aplicar etiqueta por defecto si NO hay etiquetas específicas
+            const defaultTag = 'Diagnóstico Circular Express';
+            finalTags = [defaultTag];
+            console.log(`🏷️ Aplicando etiqueta por defecto: ${defaultTag}`);
+        }
         
         const data = {
             email_address: email,
@@ -104,6 +115,7 @@ app.post('/subscribe', async (req, res) => {
         const result = await response.json();
         
         console.log(`📊 Respuesta de Mailchimp [${response.status}]:`, result);
+        console.log(`🏷️ Etiquetas finales enviadas a Mailchimp: ${JSON.stringify(finalTags)}`);
         
         if (response.ok) {
             console.log('✅ Suscripción exitosa a Mailchimp');
