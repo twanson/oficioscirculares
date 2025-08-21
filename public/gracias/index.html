@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Bienvenido a la Comunidad! — Oficios Circulares</title>
+    <meta name="description" content="Gracias por unirte a la comunidad de Oficios Circulares. Descubre los próximos pasos y recursos exclusivos para hacer tu oficio más circular y sostenible.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="¡Bienvenido a la Comunidad! — Oficios Circulares">
+    <meta property="og:description" content="Gracias por unirte a la comunidad de Oficios Circulares. Descubre recursos exclusivos para hacer tu oficio más circular y sostenible.">
+    <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/artesano innovador.png">
+    <meta property="og:url" content="https://www.oficioscirculares.com/gracias/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="¡Bienvenido a la Comunidad! — Oficios Circulares">
+    <meta property="twitter:description" content="Gracias por unirte a la comunidad de Oficios Circulares. Descubre recursos exclusivos para hacer tu oficio más circular y sostenible.">
+    <meta property="twitter:image" content="https://www.oficioscirculares.com/assets/images/artesano innovador.png">
+
+    <link rel="canonical" href="https://www.oficioscirculares.com/gracias/">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero-gracias {
+            background: linear-gradient(135deg, rgba(31, 75, 63, 0.85) 0%, rgba(45, 95, 79, 0.9) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-gracias::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../assets/images/artesanos en taller.jpg') center/cover;
+            opacity: 0.25;
+            z-index: 1;
+        }
+        
+        .hero-gracias-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            margin: 0 0 20px;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin: 0 0 40px;
+            color: #E0B894;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .hero-description {
+            font-size: 1.125rem;
+            margin: 0 0 50px;
+            opacity: 0.95;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+        }
+        
+        /* Próximos pasos */
+        .next-steps {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #1F4B3F;
+            margin-bottom: 3rem;
+            font-weight: 800;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .step-card {
+            background: #FAF9F7;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid #E8D5B7;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(31, 75, 63, 0.1);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1F4B3F 0%, #3E7C59 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            color: #1F4B3F;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .step-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-action {
+            color: #D17B49;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid #D17B49;
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .step-action:hover {
+            background: #D17B49;
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* CTA Final */
+        .cta-final {
+            background: linear-gradient(135deg, #E0B894 0%, #D17B49 50%, #B8613A 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cta-final::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(224, 184, 148, 0.9) 0%, rgba(209, 123, 73, 0.95) 50%, rgba(184, 97, 58, 0.9) 100%);
+            z-index: 1;
+        }
+        
+        .cta-final .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .cta-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-cta {
+            display: inline-block;
+            background: white;
+            color: #D17B49;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+        
+        .btn-cta:hover {
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            line-height: 1.6;
+            color: #cccccc;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .footer-column h4 {
+            color: #E0B894;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: #E0B894;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding: 30px 0 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #999999;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-gracias {
+                padding: 80px 0 60px;
+                min-height: 90vh;
+            }
+            
+            .success-icon {
+                font-size: 4rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .step-card {
+                padding: 1.5rem;
+            }
+            
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: left;
+            }
+
+            .footer-brand {
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-column {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar enhanced-navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo" />
+                <span class="logo-text">Oficios Circulares</span>
+            </a>
+            <div class="nav-menu">
+                <a href="../#que-es" class="nav-link">¿Qué es?</a>
+                <a href="../#para-quien" class="nav-link">¿Para quién?</a>
+                <a href="../#ofrecemos" class="nav-link">Qué ofrecemos</a>
+                <a href="../#comunidad" class="nav-link">Comunidad</a>
+                <a href="../blog/" class="nav-link">Blog</a>
+                <a href="../faqs/" class="nav-link">FAQs</a>
+                <a href="../sobre-nosotros/" class="nav-link">Sobre Nosotros</a>
+                <a href="https://tally.so/r/mOyV98" target="_blank" class="btn btn-primary btn-small">Únete</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gracias">
+        <div class="hero-gracias-content">
+            <div class="success-icon">🎉</div>
+            <h1 class="hero-title">¡Bienvenido a la Comunidad!</h1>
+            <p class="hero-subtitle">Ya formas parte de Oficios Circulares</p>
+            <p class="hero-description">
+                Gracias por unirte a nuestra comunidad de artesanos, diseñadores y emprendedores comprometidos con la sostenibilidad y la circularidad. Estás a punto de descubrir nuevas formas de hacer crecer tu proyecto de manera consciente.
+            </p>
+        </div>
+    </section>
+
+    <!-- Próximos pasos -->
+    <section class="next-steps">
+        <div class="container">
+            <h2 class="section-title">¿Qué puedes esperar ahora?</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Revisa tu email</h3>
+                    <p class="step-description">
+                        En los próximos minutos recibirás un email de confirmación con recursos exclusivos para empezar a hacer tu proyecto más circular.
+                    </p>
+                    <a href="mailto:" class="step-action">Abrir email</a>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Explora nuestros casos</h3>
+                    <p class="step-description">
+                        Descubre cómo otros proyectos han aplicado la circularidad con casos reales, desde joyería hasta textiles sostenibles.
+                    </p>
+                    <a href="../blog/" class="step-action">Ver casos</a>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Diagnóstico gratuito</h3>
+                    <p class="step-description">
+                        Descarga nuestro Diagnóstico Circular Express y descubre en 5 minutos qué tan circular es tu proyecto ahora mismo.
+                    </p>
+                    <a href="../#recursos" class="step-action">Descargar guía</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <h2 class="cta-title">¿Listo para dar el siguiente paso?</h2>
+            <p class="cta-description">
+                Si quieres acelerar tu transformación hacia la circularidad, agenda una llamada estratégica gratuita de 30 minutos para explorar cómo podemos ayudarte.
+            </p>
+            <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="btn-cta">📅 Agenda tu llamada gratuita</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="footer-logo">
+                <p class="footer-tagline">
+                    "Creemos en un futuro donde la creación con propósito sea pilar de una nueva economía: más conectada con el territorio, las personas y el planeta."
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="../#que-es">¿Qué es?</a></li>
+                        <li><a href="../#para-quien">¿Para quién?</a></li>
+                        <li><a href="../#ofrecemos">Qué ofrecemos</a></li>
+                        <li><a href="../#comunidad">Comunidad</a></li>
+                        <li><a href="../blog/">Blog</a></li>
+                        <li><a href="../faqs/">FAQs</a></li>
+                        <li><a href="../sobre-nosotros/">Sobre Nosotros</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="../#ofrecemos">Metodología 3D</a></li>
+                        <li><a href="../#ofrecemos">Consultoría</a></li>
+                        <li><a href="../#ofrecemos">Recursos</a></li>
+                        <li><a href="mailto:hola@oficioscirculares.com">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Conecta</h4>
+                    <ul>
+                        <li><a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a></li>
+                        <li><a href="https://instagram.com/oficioscirculares" target="_blank">📷 Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/company/oficios-circulares/" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Oficios Circulares. Todos los derechos reservados. | <a href="../privacidad/" style="color: #999999;">Política de Privacidad</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate cards on scroll
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Auto-scroll suave desde Tally si viene con parámetro
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('from') === 'tally') {
+                // Pequeño delay para que la página cargue completamente
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>
