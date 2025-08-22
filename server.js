@@ -54,14 +54,24 @@ app.set('views', path.join(__dirname, 'views'));
 // Middleware
 app.use(express.json());
 
-// Redirecciones 301 para archivos PDF movidos
-app.get('/Diagnostico_Circular_Express_Oficios_Circulares.pdf', (req, res) => {
-  res.redirect(301, '/downloads/Circular_Express_Oficios_Circulares_2025.pdf');
-});
-
-// Si el nombre original lleva tildes o variantes, añade rutas espejo:
-app.get('/Diagnóstico_Circular_Express_Oficios_Circulares.pdf', (req, res) => {
-  res.redirect(301, '/downloads/Circular_Express_Oficios_Circulares_2025.pdf');
+// Middleware para redirecciones PDF (maneja varias codificaciones)
+app.use('/', (req, res, next) => {
+  const url = req.path;
+  
+  // Lista de variantes del nombre del PDF original
+  const pdfVariants = [
+    '/Diagnostico_Circular_Express_Oficios_Circulares.pdf',
+    '/Diagnóstico_Circular_Express_Oficios_Circulares.pdf',
+    '/Diagn%C3%B3stico_Circular_Express_Oficios_Circulares.pdf',
+    '/Diagn%C2%B3stico_Circular_Express_Oficios_Circulares.pdf'
+  ];
+  
+  // Si la URL coincide con alguna variante, redirigir
+  if (pdfVariants.includes(url) || url.includes('Diagn') && url.includes('stico_Circular_Express') && url.endsWith('.pdf')) {
+    return res.redirect(301, '/downloads/Circular_Express_Oficios_Circulares_2025.pdf');
+  }
+  
+  next();
 });
 
 // Función para preservar query parameters en redirecciones
