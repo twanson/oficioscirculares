@@ -1,0 +1,36 @@
+<%- include('partials/head-meta', { title, description, canonical }) %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <section class="recursos-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Recursos descargables</h1>
+                <p class="section-subtitle">Guías, tests y herramientas para aplicar circularidad con criterio.</p>
+            </div>
+            
+            <div class="recursos-grid">
+                <% recursos.forEach(r => { %>
+                <article class="recurso-card">
+                    <a href="/recursos/<%= r.slug %>" class="recurso-link">
+                        <div class="recurso-image">
+                            <img loading="lazy" src="<%= r.cover %>" alt="<%= r.title %>">
+                        </div>
+                        <div class="recurso-content">
+                            <h2 class="recurso-title"><%= r.title %></h2>
+                            <p class="recurso-summary"><%= r.summary %></p>
+                            <span class="btn btn-secondary">Ver recurso</span>
+                        </div>
+                    </a>
+                </article>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<script src="/assets/js/script.js"></script>
+</body>
+</html>

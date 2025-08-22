@@ -2002,3 +2002,272 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     }
 }
 
+/* ===== ESTILOS PARA SISTEMA EJS RECURSOS ===== */
+
+/* --- Páginas generales --- */
+.main-content {
+    min-height: 80vh;
+    padding-top: 80px; /* Compensar navbar fija */
+}
+
+/* --- Lista de recursos (/recursos) --- */
+.recursos-section {
+    padding: var(--section-padding);
+}
+
+.recursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.recurso-card {
+    background: white;
+    border-radius: var(--card-radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(31, 75, 63, 0.08);
+}
+
+.recurso-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.recurso-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.recurso-image {
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
+.recurso-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: var(--transition-smooth);
+}
+
+.recurso-card:hover .recurso-image img {
+    transform: scale(1.05);
+}
+
+.recurso-content {
+    padding: var(--card-padding);
+}
+
+.recurso-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--verde-profundo);
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+}
+
+.recurso-summary {
+    color: var(--negro-verdoso);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- Detalle de recurso (/recursos/:slug) --- */
+.recurso-detail-section {
+    padding: var(--section-padding);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.recurso-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.recurso-header .recurso-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--verde-profundo);
+    margin-bottom: 1rem;
+}
+
+.recurso-description {
+    font-size: 1.2rem;
+    color: var(--negro-verdoso);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.recurso-visual {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.recurso-cover {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.recurso-cta {
+    background: linear-gradient(135deg, var(--verde-profundo) 0%, var(--verde-hoja) 100%);
+    border-radius: var(--border-radius);
+    padding: 3rem 2rem;
+    color: white;
+    text-align: center;
+}
+
+.cta-container h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.cta-container p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.tally-form-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.fallback-download {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* --- Página de gracias (/gracias/:slug) --- */
+.gracias-section {
+    padding: var(--section-padding);
+    text-align: center;
+}
+
+.gracias-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.gracias-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.gracias-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--verde-profundo);
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.gracias-subtitle {
+    font-size: 1.2rem;
+    color: var(--negro-verdoso);
+    margin-bottom: 2.5rem;
+}
+
+.download-action {
+    margin-bottom: 4rem;
+}
+
+.btn-large {
+    font-size: 1.2rem;
+    padding: 1.2rem 2.5rem;
+}
+
+.next-steps {
+    margin-top: 4rem;
+}
+
+.next-steps h2 {
+    font-family: var(--font-heading);
+    color: var(--verde-profundo);
+    margin-bottom: 2rem;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.step-card {
+    background: white;
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    border: 1px solid rgba(31, 75, 63, 0.1);
+    text-align: left;
+}
+
+.step-card h3 {
+    font-family: var(--font-heading);
+    color: var(--verde-profundo);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-card p {
+    color: var(--negro-verdoso);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 60px;
+    }
+    
+    .recursos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .recurso-detail-section {
+        padding: 2rem 1rem;
+    }
+    
+    .recurso-cta {
+        padding: 2rem 1.5rem;
+    }
+    
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .gracias-section {
+        padding: 2rem 1rem;
+    }
+}
+
+/* ===== FIN ESTILOS SISTEMA EJS RECURSOS ===== */
+

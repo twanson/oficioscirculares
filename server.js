@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
+const recursos = require('./lib/recursos');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -46,6 +47,10 @@ if (!MAILCHIMP_API_KEY) {
     console.log('\n⚠️  Mientras tanto, los emails no se guardarán en Mailchimp\n');
 }
 
+// Configurar EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 // Middleware
 app.use(express.json());
 
@@ -57,6 +62,56 @@ app.get('/Diagnostico_Circular_Express_Oficios_Circulares.pdf', (req, res) => {
 // Si el nombre original lleva tildes o variantes, añade rutas espejo:
 app.get('/Diagnóstico_Circular_Express_Oficios_Circulares.pdf', (req, res) => {
   res.redirect(301, '/downloads/Circular_Express_Oficios_Circulares_2025.pdf');
+});
+
+// Función para preservar query parameters en redirecciones
+function redirectWithQuery(target, req, res) {
+  const q = req.url.split('?')[1];
+  res.redirect(301, q ? `${target}?${q}` : target);
+}
+
+// Redirecciones vanity
+app.get('/guia', (req, res) => {
+  redirectWithQuery('/recursos/guia-materiales', req, res);
+});
+
+app.get('/circular-express', (req, res) => {
+  redirectWithQuery('/recursos/circular-express', req, res);
+});
+
+// Rutas de recursos
+app.get('/recursos', (req, res) => {
+  const all = recursos.getAllRecursos();
+  res.render('recursos-list', {
+    title: 'Recursos descargables',
+    description: 'Guías, tests y herramientas para aplicar circularidad con criterio.',
+    canonical: '/recursos',
+    recursos: all
+  });
+});
+
+app.get('/recursos/:slug', (req, res) => {
+  const r = recursos.getRecursoBySlug(req.params.slug);
+  if (!r) return res.status(404).send('Recurso no encontrado');
+  res.render('recurso-detail', {
+    title: r.title,
+    description: r.summary,
+    canonical: `/recursos/${r.slug}`,
+    recurso: r
+  });
+});
+
+app.get('/gracias/:slug', (req, res) => {
+  const r = recursos.getRecursoBySlug(req.params.slug);
+  if (!r) return res.status(404).send('Recurso no encontrado');
+  res.set('X-Robots-Tag', 'noindex, nofollow');
+  res.render('gracias', {
+    title: `Gracias – ${r.title}`,
+    description: 'Tu descarga está lista.',
+    canonical: `/gracias/${r.slug}`,
+    recurso: r,
+    noindex: true
+  });
 });
 
 app.use(express.static('public'));

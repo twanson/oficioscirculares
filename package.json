@@ -6,18 +6,31 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "build": "echo 'No build needed'"
+    "build": "echo 'No build needed'",
+    "convert-images": "node scripts/convert-images.js",
+    "convert-recurso": "node scripts/convert-images.js",
+    "help-images": "node scripts/convert-images.js --help"
   },
-  "keywords": ["website", "oficios", "circulares", "mailchimp", "leads", "express", "nodejs"],
+  "keywords": [
+    "website",
+    "oficios",
+    "circulares",
+    "mailchimp",
+    "leads",
+    "express",
+    "nodejs"
+  ],
   "author": "Oficios Circulares",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.18.2",
-    "node-fetch": "^2.6.7",
     "gray-matter": "^4.0.3",
-    "marked": "^4.3.0"
+    "marked": "^4.3.0",
+    "node-fetch": "^2.6.7",
+    "sharp": "^0.34.3"
   },
   "engines": {
     "node": ">=16.0.0"
   }
-} 
+}

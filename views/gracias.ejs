@@ -1,0 +1,54 @@
+<%- include('partials/head-meta', { title, description, canonical, noindex: true }) %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <section class="gracias-section">
+        <div class="container">
+            <div class="gracias-content">
+                <div class="gracias-icon">🎉</div>
+                <h1 class="gracias-title">¡Gracias!</h1>
+                <p class="gracias-subtitle">Tu descarga está lista. Esperamos que te sea de gran valor.</p>
+                
+                <div class="download-action">
+                    <a href="<%= recurso.pdf %>" id="btn-download" class="btn btn-primary btn-large">
+                        <span class="btn-icon">📥</span>
+                        Descargar PDF
+                    </a>
+                </div>
+
+                <section class="next-steps">
+                    <h2>Siguientes pasos recomendados</h2>
+                    <div class="steps-grid">
+                        <div class="step-card">
+                            <h3>📂 Explora más recursos</h3>
+                            <p>Descubre otras guías y herramientas</p>
+                            <a href="/recursos" class="btn btn-secondary">Ver todos los recursos</a>
+                        </div>
+                        <div class="step-card">
+                            <h3>🏢 Directorio vivo</h3>
+                            <p>Encuentra proveedores sostenibles</p>
+                            <a href="/dir" class="btn btn-secondary">Acceder al directorio</a>
+                        </div>
+                        <div class="step-card">
+                            <h3>📋 Plantillas útiles</h3>
+                            <p>Herramientas prácticas para tu proyecto</p>
+                            <a href="/plantillas" class="btn btn-secondary">Ver plantillas</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<script src="/assets/js/script.js"></script>
+<script>
+    document.getElementById('btn-download')?.addEventListener('click', function(){
+        // Aquí puedes disparar un evento de analítica si usas GTM/GA4
+        console.log('Descarga iniciada:', '<%= recurso.title %>');
+    });
+</script>
+</body>
+</html>

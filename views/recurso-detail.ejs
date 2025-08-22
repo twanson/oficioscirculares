@@ -1,0 +1,53 @@
+<%- include('partials/head-meta', { title, description, canonical }) %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <section class="recurso-detail-section">
+        <div class="container">
+            <div class="recurso-detail">
+                <header class="recurso-header">
+                    <h1 class="recurso-title"><%= recurso.title %></h1>
+                    <p class="recurso-description"><%= recurso.summary %></p>
+                </header>
+                
+                <div class="recurso-visual">
+                    <img loading="lazy" src="<%= recurso.cover %>" alt="<%= recurso.title %>" class="recurso-cover">
+                </div>
+
+                <!-- FORMULARIO (FASE 2 activamos Tally). Mientras tanto, fallback al PDF -->
+                <section class="recurso-cta">
+                    <div class="cta-container">
+                        <h3>Completa el formulario para recibir el recurso</h3>
+                        <p>Descarga inmediata después de completar los datos</p>
+
+                        <!-- Placeholder del embed de Tally -->
+                        <div id="tally-embed" class="tally-form-container" aria-live="polite"></div>
+                        <script defer>
+                            (function(){
+                                var s=document.createElement('script');
+                                s.src='https://tally.so/widgets/embed.js';
+                                s.onload=function(){ if(window.Tally) Tally.loadEmbeds(); };
+                                document.body.appendChild(s);
+                            }());
+                        </script>
+
+                        <!-- Fallback por si aún no hay form: descarga directa -->
+                        <div class="fallback-download">
+                            <p>¿No ves el formulario? Puedes descargar directamente:</p>
+                            <a href="<%= recurso.pdf %>" class="btn btn-primary download-btn">
+                                <span class="btn-icon">📥</span>
+                                <%= recurso.cta || 'Descargar' %>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<script src="/assets/js/script.js"></script>
+</body>
+</html>
