@@ -48,6 +48,17 @@ if (!MAILCHIMP_API_KEY) {
 
 // Middleware
 app.use(express.json());
+
+// Redirecciones 301 para archivos PDF movidos
+app.get('/Diagnostico_Circular_Express_Oficios_Circulares.pdf', (req, res) => {
+  res.redirect(301, '/downloads/Circular_Express_Oficios_Circulares_2025.pdf');
+});
+
+// Si el nombre original lleva tildes o variantes, añade rutas espejo:
+app.get('/Diagnóstico_Circular_Express_Oficios_Circulares.pdf', (req, res) => {
+  res.redirect(301, '/downloads/Circular_Express_Oficios_Circulares_2025.pdf');
+});
+
 app.use(express.static('public'));
 
 // Servir archivos estáticos
