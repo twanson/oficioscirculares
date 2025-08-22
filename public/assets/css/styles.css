@@ -2010,6 +2010,8 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     padding-top: 80px; /* Compensar navbar fija */
 }
 
+/* --- Header funciona exactamente igual que en la página principal --- */
+
 /* --- Lista de recursos (/recursos) --- */
 .recursos-section {
     padding: var(--section-padding);
@@ -2130,19 +2132,26 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
+    color: white; /* Asegurar que sea blanco */
 }
 
 .cta-container p {
     margin-bottom: 2rem;
     opacity: 0.9;
+    color: white; /* Asegurar que sea blanco */
+}
+
+.fallback-download p {
+    color: white; /* Texto blanco en sección verde */
 }
 
 .tally-form-container {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white; /* Todo el texto dentro del formulario en blanco */
 }
 
 .fallback-download {
