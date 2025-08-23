@@ -215,14 +215,15 @@ p {
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 80px;
     position: relative;
+    width: 100%;
 }
 
 .nav-logo {
@@ -231,6 +232,7 @@ p {
     gap: 12px;
     text-decoration: none;
     transition: var(--transition-smooth);
+    margin-right: 2rem;
 }
 
 .nav-logo:hover {
@@ -253,7 +255,8 @@ p {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 28px;
+    flex-wrap: nowrap;
 }
 
 .nav-link {
@@ -263,6 +266,8 @@ p {
     text-decoration: none;
     transition: var(--transition-smooth);
     position: relative;
+    white-space: nowrap;
+    font-size: 0.95rem;
 }
 
 .nav-link:hover {
@@ -1587,120 +1592,42 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     }
     
     .hero-subtitle {
-        font-size: clamp(1.2rem, 4vw, 1.5rem);
-        margin-bottom: 44px;
+        font-size: clamp(1rem, 4vw, 1.2rem) !important;
+        line-height: 1.4;
+        margin-bottom: 32px;
         max-width: 100%;
-        line-height: 1.35;
-        opacity: 0.95;
     }
     
     .hero-ctas {
         flex-direction: column;
-        align-items: center;
         gap: 16px;
-        margin-top: 8px;
-    }
-    
-        .hero-ctas .btn {
-        width: auto;
-        min-width: 220px;
-        max-width: 300px;
-        justify-content: center;
-        padding: 16px 32px;
-    }
-
-    /* Símbolo de circularidad en mobile - versión tablet */
-    .circularity-symbol {
-        left: calc(100% - 115px);
-        top: 145px;
-        width: 120px;
-        height: 120px;
-    }
-
-        .about-intro {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .about-text {
-        padding-right: 0;
-    }
-
-    .about-quote-section {
-        flex-direction: column;
-        gap: 24px;
-        margin-top: 40px;
-        text-align: center;
-    }
-
-    .about-img-small {
-        width: 180px;
-        height: 180px;
-    }
-
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-    }
-    
-    .profiles-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-avatar {
-        width: 125px !important;
-        height: 125px !important;
-        margin-bottom: 20px !important;
-        border-radius: 50% !important;
-        overflow: hidden !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-    
-    .profile-photo {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        object-position: center 15% !important;
-        border-radius: 50% !important;
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .service-card.featured {
-        transform: none;
-    }
-    
-    .service-card.featured:hover {
-        transform: translateY(-6px);
-    }
-    
-    .testimonials-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .cta-buttons {
-        flex-direction: column;
         align-items: center;
     }
     
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .footer-links {
-        grid-template-columns: 1fr;
-        gap: 32px;
+    .hero-ctas .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
     }
 }
+
+/* Tablets medianas - optimizar header sin wrap */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .nav-menu {
+        gap: 20px;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+    }
+    
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+}
+
+/* Tablets medianas - evitar texto en dos líneas */
+/* Eliminada media query problemática que causaba header muy pequeño */
 
 @media (max-width: 480px) {
     /* ===== HERO EXTRA SMALL MOBILE ===== */
@@ -1815,10 +1742,39 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         border-radius: 50% !important;
     }
     
-    .service-card { padding: 20px; }
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
     
-    .testimonial-card {
-        padding: 24px;
+    .service-card.featured {
+        transform: none;
+    }
+    
+    .service-card.featured:hover {
+        transform: translateY(-6px);
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 32px;
     }
 }
 
@@ -2268,6 +2224,47 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         padding: 2rem 1.5rem;
     }
     
+    .recurso-header {
+        margin-bottom: 2rem;
+    }
+    
+    .recurso-header .recurso-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+    
+    .recurso-description {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .recurso-visual {
+        margin-bottom: 2rem;
+    }
+    
+    .recurso-cover {
+        max-width: 90%;
+        border-radius: 12px;
+    }
+    
+    .cta-container h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .cta-container p {
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .tally-form-container {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-info {
+        padding: 0 0.5rem;
+    }
+    
     .steps-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -2275,6 +2272,108 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     
     .gracias-section {
         padding: 2rem 1rem;
+    }
+    
+    .gracias-content {
+        padding: 0 1rem;
+    }
+    
+    .gracias-title {
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+    
+    .gracias-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    .download-action {
+        margin-bottom: 3rem;
+    }
+    
+    .btn-large {
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .next-steps h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .step-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .step-card .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .recurso-detail-section {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .recurso-cta {
+        padding: 1.5rem 1rem;
+        margin: 0 0.5rem;
+        border-radius: 12px;
+    }
+    
+    .recurso-header .recurso-title {
+        font-size: 1.6rem;
+        padding: 0 0.5rem;
+    }
+    
+    .recurso-description {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+    }
+    
+    .recurso-cover {
+        max-width: 95%;
+    }
+    
+    .cta-container h3 {
+        font-size: 1.3rem;
+    }
+    
+    .cta-container p {
+        font-size: 0.95rem;
+    }
+    
+    .tally-form-container {
+        padding: 0.75rem;
+    }
+    
+    .gracias-section {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .gracias-content {
+        padding: 0 0.5rem;
+    }
+    
+    .gracias-title {
+        font-size: 1.8rem;
+    }
+    
+    .gracias-subtitle {
+        font-size: 1rem;
+    }
+    
+    .btn-large {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .step-card {
+        padding: 1.25rem;
     }
 }
 

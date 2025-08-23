@@ -49,6 +49,7 @@
                 <a href="#ofrecemos" class="nav-link">Qué ofrecemos</a>
                 <a href="#comunidad" class="nav-link">Comunidad</a>
                 <a href="blog/" class="nav-link">Blog</a>
+                <a href="recursos" class="nav-link">Recursos</a>
                 <a href="faqs/" class="nav-link">FAQs</a>
                 <a href="sobre-nosotros/" class="nav-link">Sobre Nosotros</a>
                 <a href="#contacto" class="nav-link cta-nav">Únete</a>
@@ -325,7 +326,7 @@
                     </div>
                 </a>
                 
-                <a href="javascript:void(0)" onclick="openRecursosModal()" class="service-card-link">
+                <a href="/recursos" class="service-card-link">
                     <div class="service-card">
                         <div class="service-icon">📚</div>
                         <h3 class="service-title">Recursos Formativos</h3>
@@ -507,182 +508,19 @@
         </div>
     </footer>
 
-    <!-- Modal Descarga Guía -->
-    <div id="recursos-modal" class="modal-overlay" style="display: none;">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeRecursosModal()">&times;</button>
-            <div class="guia-download-content">
-                <div style="font-size: 4rem; margin-bottom: 24px; text-align: center;">📋</div>
-                <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); margin-bottom: 16px; font-weight: 700; color: white; text-align: center;">
-                    Diagnóstico Circular Express
-                </h1>
-                <p style="font-size: 1.125rem; margin-bottom: 8px; color: #D17B49; text-align: center; font-weight: 600;">
-                    Descubre qué tan circular es tu oficio en 5 minutos
-                </p>
-                <p style="font-size: 1rem; margin-bottom: 32px; opacity: 0.9; line-height: 1.6; color: white; text-align: center;">
-                    Una herramienta práctica que te ayudará a identificar dónde estás ahora y qué pasos específicos puedes dar para hacer tu oficio más sostenible y rentable.
-                </p>
-                
-                <div style="background: rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; margin-bottom: 32px; backdrop-filter: blur(10px);">
-                    <h3 style="color: #E8D5B7; margin-bottom: 20px; font-size: 1.3rem; text-align: center;">¿Qué encontrarás en la guía?</h3>
-                    <ul style="text-align: left; max-width: 420px; margin: 0 auto; line-height: 1.8; color: white; list-style: none; padding: 0;">
-                        <li style="color: white; margin-bottom: 8px;">✅ Test de autodiagnóstico paso a paso</li>
-                        <li style="color: white; margin-bottom: 8px;">📊 Sistema de puntuación personalizada</li>
-                        <li style="color: white; margin-bottom: 8px;">🎯 Recomendaciones específicas por área</li>
-                        <li style="color: white; margin-bottom: 8px;">🗂️ Plantilla para plan de acción</li>
-                    </ul>
-                </div>
-
-                <!-- Formulario de descarga -->
-                <form id="download-form" style="max-width: 400px; margin: 0 auto;">
-                    <div style="margin-bottom: 20px;">
-                        <input type="text" id="firstName" name="firstName" placeholder="Tu nombre" required 
-                               style="width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 1rem; margin-bottom: 16px; font-family: 'Manrope', sans-serif;">
-                        <input type="email" id="email" name="email" placeholder="Tu email" required 
-                               style="width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 1rem; font-family: 'Manrope', sans-serif;">
-                    </div>
-                    <button type="submit" id="download-btn" class="btn btn-primary btn-large" style="width: 100%; margin-bottom: 16px;">
-                        Descargar Guía Gratuita
-                    </button>
-                </form>
-
-                <p style="margin-top: 20px; font-size: 0.85rem; opacity: 0.7; color: white; text-align: center; max-width: 380px; margin-left: auto; margin-right: auto;">
-                    Al descargar recibirás recursos exclusivos para artesanos circulares. Puedes darte de baja cuando quieras.
-                </p>
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts -->
     <script src="assets/js/script.js"></script>
     <script>
-        // Auto-abrir modal si viene de Instagram con parámetro guia=open
+        // Auto-scroll al top en navegación normal
         document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            
-            if (urlParams.get('guia') === 'open') {
-                // Viene de Instagram - abrir modal
-                openRecursosModal();
-            } else {
-                // Navegación normal - siempre ir al top
-                window.scrollTo(0, 0);
-            }
+            // Navegación normal - siempre ir al top
+            window.scrollTo(0, 0);
         });
         
         // También forzar scroll al top antes de que cargue la página
         if (window.history.scrollRestoration) {
             window.history.scrollRestoration = 'manual';
         }
-    </script>
-    <script>
-        function openRecursosModal() {
-            document.getElementById('recursos-modal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeRecursosModal() {
-            document.getElementById('recursos-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            // Reset form
-            document.getElementById('download-form').reset();
-            document.getElementById('download-btn').innerHTML = 'Descargar Guía Gratuita';
-            document.getElementById('download-btn').disabled = false;
-        }
-        
-        // Cerrar modal al hacer clic fuera
-        document.getElementById('recursos-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeRecursosModal();
-            }
-        });
-
-        // Manejar envío del formulario
-        document.getElementById('download-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const firstName = document.getElementById('firstName').value;
-            const email = document.getElementById('email').value;
-            const downloadBtn = document.getElementById('download-btn');
-            
-            // Cambiar estado del botón
-            downloadBtn.innerHTML = 'Procesando...';
-            downloadBtn.disabled = true;
-            
-            try {
-                // Aquí se integrará con MailChimp
-                const response = await fetch('/subscribe', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        firstName: firstName,
-                        email: email
-                    })
-                });
-                
-                if (response.ok) {
-                    // Éxito - descargar PDF
-                    downloadBtn.innerHTML = '¡Descargando...!';
-                    
-                    // Crear enlace de descarga
-                    const link = document.createElement('a');
-                    link.href = 'assets/Diagnóstico_Circular_Express_Oficios Circulares.pdf';
-                    link.download = 'Diagnostico_Circular_Express_OfficiosCirculares.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    
-                    // Cerrar modal después de un momento
-                    setTimeout(() => {
-                        closeRecursosModal();
-                        alert('¡Gracias! La guía se ha descargado y recibirás recursos exclusivos en tu email.');
-                        
-                        // Si viene de Instagram, scroll al hero para mostrar la propuesta de valor
-                        const urlParams = new URLSearchParams(window.location.search);
-                        if (urlParams.get('guia') === 'open') {
-                            setTimeout(() => {
-                                document.getElementById('hero').scrollIntoView({ 
-                                    behavior: 'smooth',
-                                    block: 'start'
-                                });
-                            }, 1000);
-                        }
-                    }, 1500);
-                    
-                } else {
-                    throw new Error('Error al suscribir');
-                }
-                
-            } catch (error) {
-                console.error('Error:', error);
-                // En caso de error, permitir descarga directa
-                downloadBtn.innerHTML = 'Descargando...';
-                
-                const link = document.createElement('a');
-                link.href = 'assets/Diagnóstico_Circular_Express_Oficios Circulares.pdf';
-                link.download = 'Diagnostico_Circular_Express_OfficiosCirculares.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                setTimeout(() => {
-                    closeRecursosModal();
-                    alert('¡Guía descargada! Para recibir más recursos, por favor suscríbete a nuestra newsletter.');
-                    
-                    // Si viene de Instagram, scroll al hero para mostrar la propuesta de valor
-                    const urlParams = new URLSearchParams(window.location.search);
-                    if (urlParams.get('guia') === 'open') {
-                        setTimeout(() => {
-                            document.getElementById('hero').scrollIntoView({ 
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }, 1000);
-                    }
-                }, 1000);
-            }
-        });
     </script>
 
     <!-- Popup promocional del blog -->
