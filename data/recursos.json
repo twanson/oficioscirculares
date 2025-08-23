@@ -1,14 +1,14 @@
 [
   {
     "slug": "guia-materiales",
-    "title": "Guía de Materiales por oficios",
+    "title": "Guía de Materiales · Completa",
     "type": "guia",
     "summary": "Qué preferir/evitar por oficio, checklist, marco legal exprés y acceso al Directorio vivo.",
     "tags": ["materiales","textil","ceramica","madera","joyeria"],
-    "cover": "/img/recursos/guia-materiales-cover.webp",
+    "cover": "/img/recursos/covers/guia-materiales-cover-larga.webp",
     "pdf": "/downloads/OC_Guia_Materiales_Completa_2025.pdf",
     "form_tally_id": "wgloqM",
-    "cta": "Descargar Guía",
+    "cta": "Descargar Guía Completa",
     "updated_at": "2025-08-22"
   },
   {
@@ -17,10 +17,23 @@
     "type": "test",
     "summary": "Auto-diagnóstico rápido y plan de mejora inmediata.",
     "tags": ["diagnostico","evaluacion"],
-    "cover": "/img/recursos/circular-express-cover.webp",
+    "cover": "/img/recursos/covers/circular-express-cover.webp",
     "pdf": "/downloads/Circular_Express_Oficios_Circulares_2025.pdf",
     "form_tally_id": "mVeedv",
     "cta": "Descargar",
     "updated_at": "2025-08-22"
+  },
+  {
+    "slug": "guia-materiales-corta",
+    "title": "Guía de Materiales · Corta (Resumen)",
+    "type": "guia",
+    "summary": "Lo esencial para elegir materiales y comprar mejor. Incluye QR a la guía completa.",
+    "tags": ["materiales","intro"],
+    "cover": "/img/recursos/covers/guia-materiales-cover-corta.webp",
+    "pdf": "/downloads/OC_Guia_Materiales_Corta_2025.pdf",
+    "form_tally_id": "npEE2y",
+    "cta": "Descargar Guía Corta",
+    "listed": false,
+    "updated_at": "2025-08-23"
   }
 ]

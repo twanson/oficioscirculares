@@ -91,12 +91,12 @@ app.get('/circular-express', (req, res) => {
 
 // Rutas de recursos
 app.get('/recursos', (req, res) => {
-  const all = recursos.getAllRecursos();
+  const visibles = recursos.getAllRecursos().filter(r => r.listed !== false);
   res.render('recursos-list', {
     title: 'Recursos descargables',
     description: 'Guías, tests y herramientas para aplicar circularidad con criterio.',
     canonical: '/recursos',
-    recursos: all
+    recursos: visibles
   });
 });
 
@@ -122,6 +122,11 @@ app.get('/gracias/:slug', (req, res) => {
     recurso: r,
     noindex: true
   });
+});
+
+app.get('/guia-corta', (req, res) => {
+  const q = req.originalUrl.split('?')[1];
+  res.redirect(301, q ? `/recursos/guia-materiales-corta?${q}` : '/recursos/guia-materiales-corta');
 });
 
 app.use(express.static('public'));
