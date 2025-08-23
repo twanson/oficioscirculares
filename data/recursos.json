@@ -7,7 +7,7 @@
     "tags": ["materiales","textil","ceramica","madera","joyeria"],
     "cover": "/img/recursos/guia-materiales-cover.webp",
     "pdf": "/downloads/OC_Guia_Materiales_Completa_2025.pdf",
-    "form_tally_id": "TALLY_GUIA_MATERIALES",
+    "form_tally_id": "wgloqM",
     "cta": "Descargar Guía",
     "updated_at": "2025-08-22"
   },
@@ -19,7 +19,7 @@
     "tags": ["diagnostico","evaluacion"],
     "cover": "/img/recursos/circular-express-cover.webp",
     "pdf": "/downloads/Circular_Express_Oficios_Circulares_2025.pdf",
-    "form_tally_id": "TALLY_CIRCULAR_EXPRESS",
+    "form_tally_id": "mVeedv",
     "cta": "Descargar",
     "updated_at": "2025-08-22"
   }

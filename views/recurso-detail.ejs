@@ -20,8 +20,10 @@
                         <h3>Completa el formulario para recibir el recurso</h3>
                         <p>Descarga inmediata después de completar los datos</p>
 
-                        <!-- Placeholder del embed de Tally -->
-                        <div id="tally-embed" class="tally-form-container" aria-live="polite"></div>
+                        <!-- Embed de Tally -->
+                        <div id="tally-embed" class="tally-form-container" aria-live="polite">
+                            <iframe data-tally-src="https://tally.so/embed/<%= recurso.form_tally_id %>?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="<%= recurso.title %>"></iframe>
+                        </div>
                         <script defer>
                             (function(){
                                 var s=document.createElement('script');
