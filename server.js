@@ -76,7 +76,7 @@ app.use('/', (req, res, next) => {
 
 // Función para preservar query parameters en redirecciones
 function redirectWithQuery(target, req, res) {
-  const q = req.url.split('?')[1];
+  const q = req.originalUrl.split('?')[1];
   res.redirect(301, q ? `${target}?${q}` : target);
 }
 
