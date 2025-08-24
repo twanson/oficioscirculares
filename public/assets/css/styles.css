@@ -2379,3 +2379,115 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 
 /* ===== FIN ESTILOS SISTEMA EJS RECURSOS ===== */
 
+/* ===== RESPONSIVE FIXES PARA MÓVIL ===== */
+
+/* Arreglar sección about en móvil */
+@media (max-width: 768px) {
+    .about-content {
+        gap: 40px;
+        margin-top: 40px;
+    }
+    
+    .about-intro {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .about-text {
+        padding-right: 0;
+        order: 1;
+    }
+    
+    .about-video {
+        order: 2;
+    }
+    
+    .video-container {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    
+    /* Arreglar tarjetas de perfiles */
+    .profiles-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+    .profile-card {
+        text-align: center;
+        padding: 24px 20px;
+    }
+    
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+    }
+    
+    /* Arreglar sección de quote con imagen */
+    .about-quote-section {
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 40px;
+        padding: 0 20px;
+        text-align: center;
+    }
+    
+    .about-img-small {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
+    }
+    
+    /* Arreglar features grid */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+    .feature-item {
+        padding: 24px 20px;
+    }
+}
+
+/* Arreglos específicos para móviles muy pequeños */
+@media (max-width: 480px) {
+    .about-content {
+        gap: 30px;
+        margin-top: 30px;
+    }
+    
+    .about-intro {
+        gap: 30px;
+    }
+    
+    .profiles-grid {
+        padding: 0 16px;
+    }
+    
+    .profile-card {
+        padding: 20px 16px;
+    }
+    
+    .about-quote-section {
+        padding: 0 16px;
+        gap: 25px;
+    }
+    
+    .about-img-small {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .features-grid {
+        padding: 0 16px;
+    }
+    
+    .feature-item {
+        padding: 20px 16px;
+    }
+}
+
