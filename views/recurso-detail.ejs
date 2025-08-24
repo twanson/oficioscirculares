@@ -14,23 +14,43 @@
                     <img loading="lazy" src="<%= recurso.cover %>" alt="<%= recurso.title %>" class="recurso-cover">
                 </div>
 
-                <!-- FORMULARIO (FASE 2 activamos Tally). Mientras tanto, fallback al PDF -->
+                <!-- FORMULARIO TALLY con parámetros optimizados -->
                 <section class="recurso-cta">
                     <div class="cta-container">
                         <h3>Completa el formulario para recibir el recurso</h3>
                         <p>Descarga inmediata después de completar los datos</p>
 
+                        <!-- Constante base con parámetros del servidor -->
+                        <% const base = `https://tally.so/embed/${recurso.form_tally_id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&resource_id=${recurso.slug}&source=web`; %>
+
                         <!-- Embed de Tally -->
                         <div id="tally-embed" class="tally-form-container" aria-live="polite">
-                            <iframe data-tally-src="https://tally.so/embed/<%= recurso.form_tally_id %>?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="<%= recurso.title %>"></iframe>
+                            <iframe data-tally-src="<%= base %>" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="<%= recurso.title %>"></iframe>
                         </div>
                         <script defer>
                             (function(){
                                 var s=document.createElement('script');
                                 s.src='https://tally.so/widgets/embed.js';
-                                s.onload=function(){ if(window.Tally) Tally.loadEmbeds(); };
+                                s.onload=function(){ 
+                                    if(window.Tally) {
+                                        Tally.loadEmbeds();
+                                        
+                                        // Script optimizado: solo page_url, UTMs se heredan automáticamente
+                                        window.addEventListener('message', function(e) {
+                                            if (e.data.type === 'tally-form-submitted') {
+                                                const url = new URL(window.location.href);
+                                                const params = new URLSearchParams();
+                                                params.set('page_url', url.href);
+                                                // UTMs se heredan de window.location.search tal cual
+                                                
+                                                // Redirigir a la página de gracias
+                                                window.location.href = `/gracias/${recurso.slug}?${params.toString()}`;
+                                            }
+                                        });
+                                    }
+                                };
                                 document.body.appendChild(s);
-                            }());
+                            })();
                         </script>
 
                         <!-- Información adicional -->
