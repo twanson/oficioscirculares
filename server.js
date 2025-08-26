@@ -119,21 +119,25 @@ app.get('/recursos/:slug', (req, res) => {
 app.get('/gracias', (req, res) => {
   const isDir = req.query.resource === 'dir';
   const rawEmail = (req.query.email || '').trim();
-  function maskEmail(e) {
-    const [u, d] = (e || '').split('@');
-    if (!u || !d) return e || '';
-    const u2 = u.length <= 3 ? u : (u.slice(0, 3) + '•••');
-    const dot = d.lastIndexOf('.');
-    const dom = dot > 0 ? d.slice(0, 3) + '•••' + d.slice(dot) : d;
-    return `${u2}@${dom}`;
+  
+  // Función mejorada para enmascarar email
+  function maskEmail(email) {
+    if (!email) return '';
+    const [u, d] = email.split('@');
+    if (!d) return email;
+    const dom = d.split('.');
+    const base = dom[0] ? dom[0].slice(0, 3) + '•••' : d;
+    const tail = dom.slice(1).join('.');
+    return `${u}@${base}${tail ? '.' + tail : ''}`;
   }
+  
   const viewModel = {
     isDir,
-    emailShown: maskEmail(rawEmail),
+    maskedEmail: isDir ? maskEmail(rawEmail) : null,
     q: req.query,
     noindex: isDir,
-    title: isDir ? 'Revisa tu email para acceder al Directorio' : '¡Gracias!',
-    description: isDir ? 'Te hemos enviado un email con tu enlace de acceso al Directorio.' : 'Tu solicitud se ha enviado correctamente.',
+    title: isDir ? 'Ya formas parte de la comunidad' : '¡Gracias!',
+    description: isDir ? 'Te hemos enviado tu enlace de acceso al Directorio y recibirás un email de bienvenida en 24-48h.' : 'Tu solicitud se ha enviado correctamente.',
     canonical: req.originalUrl
   };
   res.render('gracias', viewModel);

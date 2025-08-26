@@ -4,30 +4,37 @@
 <% if (typeof isDir !== 'undefined' && isDir) { %>
   <main class="main-content">
     <section class="gracias-section">
-      <div class="container" style="max-width:760px;margin:0 auto;padding:2rem 1rem;">
-        <h1 style="font-size:1.6rem;margin:0 0 .5rem;">Directorio — Confirma tu acceso</h1>
-        <p style="margin:0 0 1rem;">
-          Te hemos enviado un enlace seguro al correo
-          <% if (emailShown) { %><strong><%= emailShown %></strong><% } else { %>que nos indicaste<% } %>.
-        </p>
-        <ul style="line-height:1.7;margin:0 0 1rem;padding-left:1.2rem;">
-          <li>Abre el email y pulsa el enlace para entrar.</li>
-          <li>El acceso es válido 60 días y se renueva automáticamente cuando lo usas.</li>
-          <li>Si no lo ves, revisa <strong>Spam/Promociones</strong> o espera 2 minutos.</li>
-        </ul>
-        <div style="margin-top:1rem;">
-          <a href="/dir" class="btn" style="display:inline-block;padding:.7rem 1rem;border:1px solid #222;border-radius:10px;text-decoration:none;">Volver al Directorio</a>
-          <a href="/" class="btn" style="display:inline-block;margin-left:.5rem;padding:.7rem 1rem;border:1px solid #ccc;border-radius:10px;text-decoration:none;">Ir al inicio</a>
+      <div class="container">
+        <div class="gracias-content">
+          <div class="gracias-icon">🎉</div>
+          <h1 class="gracias-title"><%= title %></h1>
+          
+          <p class="text-lg" style="font-size: 1.1rem; line-height: 1.6; margin: 1.5rem 0;">
+            <strong>Listo: ya formas parte de la comunidad.</strong>
+            Te hemos enviado un email con tu <strong>enlace de acceso al Directorio</strong>. Además,
+            <strong>en las próximas 24–48 h</strong> recibirás un correo de bienvenida con recursos y siguientes pasos.
+          </p>
+          
+          <% if (maskedEmail) { %>
+            <p class="muted" style="color: #666; margin: 1rem 0;">Hemos enviado el enlace a <strong><%= maskedEmail %></strong>.</p>
+          <% } %>
+          
+          <div class="actions" style="margin: 2rem 0;">
+            <a href="/dir" class="btn btn-primary" style="margin-right: 1rem;">Volver al Directorio</a>
+            <a href="/" class="btn btn-secondary">Ir al inicio</a>
+          </div>
+          
+          <p class="note" style="font-size: 0.9rem; color: #666; margin-top: 2rem;">
+            Tu enlace es válido durante <strong>60 días</strong> y se renueva automáticamente cada vez que accedes.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Analytics opcional -->
+    <!-- Analytics -->
     <script>
-      (function(){
-        window.dataLayer = window.dataLayer || [];
-        dataLayer.push({ event: 'dir_signup_complete' });
-      })();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'dir_signup_complete' });
     </script>
   </main>
 <% } else { %>
