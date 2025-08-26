@@ -6,41 +6,85 @@
     noindex: typeof noindex !== 'undefined' ? noindex : false
   })
 %>
-  <header class="container">
-    <h1>Directorio de Proveedores — Solo para miembros</h1>
-    <p>Únete gratis a Oficios Circulares para acceder al directorio vivo de proveedores, con materiales, mínimos, plazos y más.</p>
-    <ul>
-      <li>✅ Acceso inmediato por email (sin contraseña)</li>
-      <li>✅ Enlace seguro, válido 60 días (se renueva automáticamente cuando lo usas)</li>
-    </ul>
-  </header>
+<%- include('partials/header') %>
 
-  <main class="container">
-    <!-- Gate: se muestra si NO hay cookie o token válido -->
-    <section id="gate" style="display:none;">
-      <div class="card" style="padding:16px;">
-        <!-- Embed Tally - MISMO FORM, forzando contexto dir -->
-        <iframe
-          src="https://tally.so/embed/mOyV98?alignLeft=1&hideTitle=1&transparentBackground=1&resource_id=dir&source=web&utm_medium=gate<% if (q && q.utm_source) { %>&utm_source=<%= encodeURIComponent(q.utm_source) %><% } %><% if (q && q.utm_campaign) { %>&utm_campaign=<%= encodeURIComponent(q.utm_campaign) %><% } %><% if (q && q.utm_content) { %>&utm_content=<%= encodeURIComponent(q.utm_content) %><% } %><% if (q && q.page_url) { %>&page_url=<%= encodeURIComponent(q.page_url) %><% } %>"
-          width="100%" height="640" frameborder="0" marginheight="0" marginwidth="0" title="Únete">
-        </iframe>
+<main class="main-content">
+    <section class="recurso-detail-section">
+        <div class="container">
+            <div class="recurso-detail">
+                <!-- Gate: se muestra si NO hay cookie o token válido -->
+                <div id="gate" style="display:none;">
+                    <header class="recurso-header">
+                        <h1 class="recurso-title">Directorio de Proveedores</h1>
+                        <p class="recurso-description">Accede gratis al directorio vivo de proveedores, con materiales, mínimos, plazos y más. Solo para miembros de Oficios Circulares.</p>
+                    </header>
+                    
+                    <div class="recurso-visual">
+                        <img loading="lazy" src="/img/recursos/covers/guia-materiales-cover-larga.webp" alt="Directorio de Proveedores" class="recurso-cover">
+                    </div>
 
-        <p style="margin-top:12px;font-size:0.95rem;color:#555;">
-          Al enviar el formulario, te redirigiremos a la página de confirmación y recibirás un email con tu enlace de acceso.
-        </p>
-      </div>
+                    <section class="recurso-cta">
+                        <div class="cta-container">
+                            <h3>Únete gratis para acceder al directorio</h3>
+                            <p>Acceso inmediato por email, sin contraseñas</p>
+                            
+                            <div class="benefits-list" style="margin: 1.5rem 0;">
+                                <p style="margin-bottom: 0.5rem;"><strong>¿Qué incluye el acceso?</strong></p>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #22c55e;">✅</span>
+                                        Directorio completo de proveedores sostenibles
+                                    </li>
+                                    <li style="margin: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #22c55e;">✅</span>
+                                        Información detallada: materiales, mínimos, plazos
+                                    </li>
+                                    <li style="margin: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #22c55e;">✅</span>
+                                        Acceso válido 60 días (se renueva automáticamente cuando lo usas)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Embed de Tally -->
+                            <div class="tally-form-container">
+                                <iframe
+                                  src="https://tally.so/embed/mOyV98?alignLeft=1&hideTitle=1&transparentBackground=1&resource_id=dir&source=web&utm_medium=gate<% if (q && q.utm_source) { %>&utm_source=<%= encodeURIComponent(q.utm_source) %><% } %><% if (q && q.utm_campaign) { %>&utm_campaign=<%= encodeURIComponent(q.utm_campaign) %><% } %><% if (q && q.utm_content) { %>&utm_content=<%= encodeURIComponent(q.utm_content) %><% } %><% if (q && q.page_url) { %>&page_url=<%= encodeURIComponent(q.page_url) %><% } %>"
+                                  width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Únete a Oficios Circulares">
+                                </iframe>
+                            </div>
+
+                            <!-- Información adicional -->
+                            <div class="form-info">
+                                <p><small>🔒 Tus datos están seguros. Solo los usamos para enviarte el enlace de acceso y contenido relacionado ocasionalmente.</small></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Contenido protegido: lo controla el script (token/cookie) -->
+                <div id="dir-content" style="display:none;">
+                    <header class="recurso-header">
+                        <h1 class="recurso-title">Directorio de Proveedores</h1>
+                        <p class="recurso-description">Bienvenido/a al directorio vivo de proveedores sostenibles. Tu acceso está activo.</p>
+                    </header>
+                    
+                    <!-- TODO: aquí va el contenido del directorio real -->
+                    <div class="recurso-cta">
+                        <div class="cta-container">
+                            <h3>🚧 Directorio en construcción</h3>
+                            <p>Estamos preparando una experiencia increíble para ti. Muy pronto tendrás acceso completo al directorio.</p>
+                            <p><small>Mientras tanto, puedes explorar nuestros otros recursos.</small></p>
+                            <a href="/recursos" class="btn btn-primary">Ver recursos disponibles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+</main>
 
-    <!-- Contenido protegido: lo controla el script (token/cookie) -->
-    <section id="dir-content" style="display:none;">
-      <!-- TODO: aquí va el contenido del directorio ya existente -->
-      <div class="card" style="padding:16px;">
-        <h2>Directorio</h2>
-        <p>Bienvenido/a. Tu acceso está activo.</p>
-        <!-- Render de tu directorio real -->
-      </div>
-    </section>
-  </main>
+<%- include('partials/footer') %>
 
   <script>
   (function () {
