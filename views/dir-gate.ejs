@@ -11,7 +11,7 @@
     <p>Únete gratis a Oficios Circulares para acceder al directorio vivo de proveedores, con materiales, mínimos, plazos y más.</p>
     <ul>
       <li>✅ Acceso inmediato por email (sin contraseña)</li>
-      <li>✅ Enlace seguro, válido 7 días</li>
+      <li>✅ Enlace seguro, válido 60 días (se renueva automáticamente cuando lo usas)</li>
     </ul>
   </header>
 
@@ -51,7 +51,8 @@
     function show(el){ el && (el.style.display='block'); }
     function hide(el){ el && (el.style.display='none'); }
     function setMemberCookie(){
-      document.cookie = "oc_member=1; Max-Age=7776000; Path=/; SameSite=Lax";
+      // Cookie de sesión de miembro: 60 días
+      document.cookie = "oc_member=1; Max-Age=5184000; Path=/; SameSite=Lax";
     }
     function hasMemberCookie(){
       return document.cookie.split(';').some(c => c.trim().startsWith('oc_member=1'));
