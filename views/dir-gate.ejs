@@ -1,0 +1,79 @@
+<%-
+  include('partials/head-meta', {
+    title: 'Directorio de Proveedores — Solo miembros | Oficios Circulares',
+    description: 'Accede gratis al directorio vivo de proveedores (materiales, mínimos, plazos y más). Enlace por email, sin contraseñas.',
+    canonical: '/dir',
+    noindex: typeof noindex !== 'undefined' ? noindex : false
+  })
+%>
+  <header class="container">
+    <h1>Directorio de Proveedores — Solo para miembros</h1>
+    <p>Únete gratis a Oficios Circulares para acceder al directorio vivo de proveedores, con materiales, mínimos, plazos y más.</p>
+    <ul>
+      <li>✅ Acceso inmediato por email (sin contraseña)</li>
+      <li>✅ Enlace seguro, válido 7 días</li>
+    </ul>
+  </header>
+
+  <main class="container">
+    <!-- Gate: se muestra si NO hay cookie o token válido -->
+    <section id="gate" style="display:none;">
+      <div class="card" style="padding:16px;">
+        <!-- Embed Tally - MISMO FORM, forzando contexto dir -->
+        <iframe
+          src="https://tally.so/embed/mOyV98?alignLeft=1&hideTitle=1&transparentBackground=1&resource_id=dir&source=web&utm_medium=gate<% if (q && q.utm_source) { %>&utm_source=<%= encodeURIComponent(q.utm_source) %><% } %><% if (q && q.utm_campaign) { %>&utm_campaign=<%= encodeURIComponent(q.utm_campaign) %><% } %><% if (q && q.utm_content) { %>&utm_content=<%= encodeURIComponent(q.utm_content) %><% } %><% if (q && q.page_url) { %>&page_url=<%= encodeURIComponent(q.page_url) %><% } %>"
+          width="100%" height="640" frameborder="0" marginheight="0" marginwidth="0" title="Únete">
+        </iframe>
+
+        <p style="margin-top:12px;font-size:0.95rem;color:#555;">
+          Al enviar el formulario, te redirigiremos a la página de confirmación y recibirás un email con tu enlace de acceso.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contenido protegido: lo controla el script (token/cookie) -->
+    <section id="dir-content" style="display:none;">
+      <!-- TODO: aquí va el contenido del directorio ya existente -->
+      <div class="card" style="padding:16px;">
+        <h2>Directorio</h2>
+        <p>Bienvenido/a. Tu acceso está activo.</p>
+        <!-- Render de tu directorio real -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function () {
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('dir-content');
+    const VALIDATE_URL = "https://hook.eu2.make.com/1li6x48yx19frcc13566ai2wd3ia402c"; // Make Custom Webhook
+
+    function show(el){ el && (el.style.display='block'); }
+    function hide(el){ el && (el.style.display='none'); }
+    function setMemberCookie(){
+      document.cookie = "oc_member=1; Max-Age=7776000; Path=/; SameSite=Lax";
+    }
+    function hasMemberCookie(){
+      return document.cookie.split(';').some(c => c.trim().startsWith('oc_member=1'));
+    }
+
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+
+    if (hasMemberCookie()) { show(content); hide(gate); return; }
+
+    if (token) {
+      fetch(VALIDATE_URL + "?token=" + encodeURIComponent(token), { method:"GET", credentials:"omit" })
+        .then(r => r.json())
+        .then(j => {
+          if (j && j.ok) { setMemberCookie(); show(content); hide(gate); }
+          else { show(gate); hide(content); }
+        })
+        .catch(() => { show(gate); hide(content); });
+    } else {
+      show(gate); hide(content);
+    }
+  })();
+  </script>
+</body>
+</html>

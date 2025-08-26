@@ -1,0 +1,22 @@
+<%-
+  include('partials/head-meta', {
+    title: 'Confirma tu acceso — Directorio | Oficios Circulares',
+    description: 'Te hemos enviado un email con tu enlace de acceso al Directorio.',
+    canonical: '/dir/confirmacion',
+    noindex: typeof noindex !== 'undefined' ? noindex : true
+  })
+%>
+  <main class="container">
+    <div class="card" style="padding:24px;text-align:center;">
+      <h1>Revisa tu email</h1>
+      <p>Te hemos enviado un enlace de acceso al Directorio. Si no lo ves, revisa también la carpeta de spam.</p>
+      <% if (q && q.email) { %>
+        <p><small>Lo enviamos a: <strong><%= q.email %></strong></small></p>
+      <% } %>
+      <p style="margin-top:20px;">
+        <a class="btn" href="/">Volver al inicio</a>
+      </p>
+    </div>
+  </main>
+</body>
+</html>

@@ -10,6 +10,11 @@ const PORT = process.env.PORT || 3000;
 app.use((req, res, next) => {
     const host = req.get('host');
     
+    // Si es localhost, permitir sin redirecciones
+    if (host && host.startsWith('localhost')) {
+        return next();
+    }
+    
     // Si es el dominio naked (sin www), redirigir a www
     if (host === 'oficioscirculares.com') {
         return res.redirect(301, `https://www.oficioscirculares.com${req.originalUrl}`);
@@ -111,6 +116,29 @@ app.get('/recursos/:slug', (req, res) => {
   });
 });
 
+app.get('/gracias', (req, res) => {
+  const isDir = req.query.resource === 'dir';
+  const rawEmail = (req.query.email || '').trim();
+  function maskEmail(e) {
+    const [u, d] = (e || '').split('@');
+    if (!u || !d) return e || '';
+    const u2 = u.length <= 3 ? u : (u.slice(0, 3) + '•••');
+    const dot = d.lastIndexOf('.');
+    const dom = dot > 0 ? d.slice(0, 3) + '•••' + d.slice(dot) : d;
+    return `${u2}@${dom}`;
+  }
+  const viewModel = {
+    isDir,
+    emailShown: maskEmail(rawEmail),
+    q: req.query,
+    noindex: isDir,
+    title: isDir ? 'Revisa tu email para acceder al Directorio' : '¡Gracias!',
+    description: isDir ? 'Te hemos enviado un email con tu enlace de acceso al Directorio.' : 'Tu solicitud se ha enviado correctamente.',
+    canonical: req.originalUrl
+  };
+  res.render('gracias', viewModel);
+});
+
 app.get('/gracias/:slug', (req, res) => {
   const r = recursos.getRecursoBySlug(req.params.slug);
   if (!r) return res.status(404).send('Recurso no encontrado');
@@ -127,6 +155,17 @@ app.get('/gracias/:slug', (req, res) => {
 app.get('/guia-corta', (req, res) => {
   const q = req.originalUrl.split('?')[1];
   res.redirect(301, q ? `/recursos/guia-materiales-corta?${q}` : '/recursos/guia-materiales-corta');
+});
+
+// --- /dir (gate) y /dir/confirmacion
+app.get('/dir', (req, res) => {
+  // Pasamos q=req.query para preservar UTM y cualquier param (utm_source, utm_medium, utm_campaign, utm_content, page_url)
+  res.render('dir-gate', { q: req.query, noindex: false });
+});
+
+app.get('/dir/confirmacion', (req, res) => {
+  // Página simple de "revisa tu email" con noindex
+  res.render('dir-confirmacion', { q: req.query, noindex: true });
 });
 
 app.use(express.static('public'));
