@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
 const recursos = require('./lib/recursos');
+const tokenValidator = require('./lib/tokenValidator');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -162,14 +164,69 @@ app.get('/guia-corta', (req, res) => {
 });
 
 // --- /dir (gate) y /dir/confirmacion
-app.get('/dir', (req, res) => {
-  // Pasamos q=req.query para preservar UTM y cualquier param (utm_source, utm_medium, utm_campaign, utm_content, page_url)
+app.get('/dir', async (req, res) => {
+  const token = req.query.token;
+  
+  // Si hay token, intentar validación
+  if (token) {
+    try {
+      console.log(`🔍 Validating token: ${token}`);
+      const validation = await tokenValidator.validateAndRenewToken(token);
+      
+      if (validation.valid) {
+        console.log(`✅ Token valid, rendering directorio for ${validation.email}`);
+        return res.render('directorio', { 
+          email: validation.email,
+          expiresAt: validation.expiresAt,
+          q: req.query 
+        });
+      } else {
+        console.log(`❌ Token invalid: ${validation.error}`);
+        return res.redirect('/renovar-acceso?error=' + encodeURIComponent(validation.error));
+      }
+    } catch (error) {
+      console.error('💥 Error during token validation:', error);
+      return res.redirect('/renovar-acceso?error=validation_failed');
+    }
+  }
+  
+  // Si no hay token, mostrar gate normal
   res.render('dir-gate', { q: req.query, noindex: false });
 });
 
 app.get('/dir/confirmacion', (req, res) => {
   // Página simple de "revisa tu email" con noindex
   res.render('dir-confirmacion', { q: req.query, noindex: true });
+});
+
+// --- Validación de tokens y renovación de acceso
+app.get('/renovar-acceso', (req, res) => {
+  const error = req.query.error;
+  res.render('renovar-acceso', { 
+    error,
+    q: req.query,
+    noindex: true,
+    title: 'Renovar acceso al Directorio',
+    description: 'Renueva tu acceso al directorio de proveedores.',
+    canonical: '/renovar-acceso'
+  });
+});
+
+// API endpoint para validación AJAX (opcional)
+app.get('/api/validate-token', async (req, res) => {
+  const token = req.query.token;
+  
+  if (!token) {
+    return res.status(400).json({ valid: false, error: 'Token required' });
+  }
+
+  try {
+    const validation = await tokenValidator.validateAndRenewToken(token);
+    res.json(validation);
+  } catch (error) {
+    console.error('API validation error:', error);
+    res.status(500).json({ valid: false, error: 'Internal server error' });
+  }
 });
 
 app.use(express.static('public'));

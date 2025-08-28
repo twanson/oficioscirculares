@@ -1,0 +1,101 @@
+<%- include('partials/head-meta', { 
+  title: 'Renovar acceso — Directorio | Oficios Circulares',
+  description: 'Renueva tu acceso al directorio de proveedores de Oficios Circulares.',
+  canonical: '/renovar-acceso',
+  noindex: true
+}) %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <section class="renovar-acceso-section">
+        <div class="container">
+            <div class="renovar-content" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 2rem 1rem;">
+                <div class="access-icon" style="font-size: 4rem; margin-bottom: 1rem;">🔐</div>
+                
+                <h1 class="renovar-title" style="margin-bottom: 1rem;">Acceso requerido</h1>
+                
+                <% if (error) { %>
+                    <div class="error-message" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 1rem; margin: 1.5rem 0; color: #dc2626;">
+                        <p style="margin: 0; font-weight: 500;">
+                            <% if (error === 'Token not found') { %>
+                                🔍 <strong>Enlace no encontrado:</strong> El enlace que usaste no es válido.
+                            <% } else if (error === 'Token expired') { %>
+                                ⏰ <strong>Enlace expirado:</strong> Tu enlace de acceso ha caducado.
+                            <% } else if (error === 'Token revoked') { %>
+                                🚫 <strong>Acceso revocado:</strong> Este enlace ha sido desactivado.
+                            <% } else { %>
+                                ❌ <strong>Error de acceso:</strong> <%= error.replace(/_/g, ' ') %>
+                            <% } %>
+                        </p>
+                    </div>
+                <% } %>
+                
+                <div class="renovar-message">
+                    <p style="font-size: 1.1rem; color: #666; line-height: 1.6; margin-bottom: 2rem;">
+                        Para acceder al <strong>Directorio de Proveedores</strong> necesitas un enlace válido. 
+                        Si tu enlace ha expirado o tienes problemas, únete de nuevo a la comunidad.
+                    </p>
+                </div>
+
+                <div class="solutions" style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: left;">
+                    <h3 style="margin: 0 0 1rem; text-align: center;">¿Qué puedes hacer?</h3>
+                    <div class="solution-options" style="display: grid; gap: 1rem;">
+                        <div class="solution-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <span style="color: #22c55e; font-size: 1.2rem; margin-top: 0.1rem;">✅</span>
+                            <div>
+                                <strong>Solicitar nuevo acceso:</strong>
+                                <p style="margin: 0.25rem 0 0; color: #666; font-size: 0.9rem;">Únete de nuevo para recibir un enlace fresco válido por 60 días.</p>
+                            </div>
+                        </div>
+                        <div class="solution-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <span style="color: #3b82f6; font-size: 1.2rem; margin-top: 0.1rem;">📧</span>
+                            <div>
+                                <strong>Revisa tu email:</strong>
+                                <p style="margin: 0.25rem 0 0; color: #666; font-size: 0.9rem;">Busca el email más reciente de Oficios Circulares con tu enlace de acceso.</p>
+                            </div>
+                        </div>
+                        <div class="solution-item" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                            <span style="color: #f59e0b; font-size: 1.2rem; margin-top: 0.1rem;">🔍</span>
+                            <div>
+                                <strong>Verifica el enlace:</strong>
+                                <p style="margin: 0.25rem 0 0; color: #666; font-size: 0.9rem;">Asegúrate de usar el enlace completo sin cortar o modificar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section" style="margin: 2rem 0;">
+                    <a href="/dir" class="btn btn-primary" style="margin-right: 1rem; margin-bottom: 0.5rem;">
+                        Solicitar nuevo acceso
+                    </a>
+                    <a href="/recursos" class="btn btn-secondary" style="margin-right: 1rem; margin-bottom: 0.5rem;">
+                        Ver recursos
+                    </a>
+                    <a href="/" class="btn btn-outline" style="margin-bottom: 0.5rem;">
+                        Ir al inicio
+                    </a>
+                </div>
+
+                <div class="help-note" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
+                    <p style="color: #888; font-size: 0.85rem; margin: 0;">
+                        ¿Sigues teniendo problemas? Los enlaces tienen una validez de 60 días y se renuevan automáticamente cuando accedes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<script>
+// Analytics tracking
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({ 
+    event: 'directorio_access_denied',
+    error_type: '<%= error || "unknown" %>',
+    page: '/renovar-acceso'
+});
+</script>
+</body>
+</html>

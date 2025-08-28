@@ -1,0 +1,81 @@
+<%- include('partials/head-meta', { 
+  title: 'Directorio de Proveedores | Oficios Circulares',
+  description: 'Directorio exclusivo de proveedores sostenibles para miembros de Oficios Circulares.',
+  canonical: '/dir',
+  noindex: true
+}) %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <section class="directorio-section">
+        <div class="container">
+            <div class="directorio-header">
+                <h1 class="directorio-title">Directorio de Proveedores</h1>
+                <p class="directorio-description">Bienvenido/a al directorio exclusivo de proveedores sostenibles.</p>
+                
+                <div class="access-info" style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1.5rem 0;">
+                    <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                        📧 <strong>Acceso activo para:</strong> <%= email %><br>
+                        ⏰ <strong>Válido hasta:</strong> <%= new Date(expiresAt).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %>
+                        <br><small style="color: #888;">Tu acceso se renueva automáticamente cada vez que visitas el directorio.</small>
+                    </p>
+                </div>
+            </div>
+
+            <div class="directorio-content">
+                <!-- Contenido del directorio aquí -->
+                <div class="directorio-placeholder" style="text-align: center; padding: 3rem 1rem; background: #f8f9fa; border-radius: 12px;">
+                    <h2 style="color: #333; margin-bottom: 1rem;">🚧 Directorio en construcción</h2>
+                    <p style="color: #666; max-width: 600px; margin: 0 auto 2rem;">
+                        Estamos preparando una experiencia increíble con información detallada de proveedores sostenibles: 
+                        materiales, mínimos de pedido, plazos de entrega y más.
+                    </p>
+                    
+                    <div class="coming-soon" style="margin: 2rem 0;">
+                        <h3 style="color: #444; margin-bottom: 1rem;">¿Qué encontrarás próximamente?</h3>
+                        <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                            <div class="feature-card" style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #22c55e;">
+                                <h4 style="margin: 0 0 0.5rem; color: #333;">📋 Información detallada</h4>
+                                <p style="margin: 0; color: #666; font-size: 0.9rem;">Materiales, procesos, certificaciones y especialidades de cada proveedor.</p>
+                            </div>
+                            <div class="feature-card" style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                                <h4 style="margin: 0 0 0.5rem; color: #333;">📦 Condiciones comerciales</h4>
+                                <p style="margin: 0; color: #666; font-size: 0.9rem;">Mínimos de pedido, plazos de entrega y condiciones de pago.</p>
+                            </div>
+                            <div class="feature-card" style="background: white; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                                <h4 style="margin: 0 0 0.5rem; color: #333;">🔍 Búsqueda avanzada</h4>
+                                <p style="margin: 0; color: #666; font-size: 0.9rem;">Filtra por ubicación, materiales, certificaciones y más criterios.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-section" style="margin-top: 3rem;">
+                        <p style="color: #666; margin-bottom: 1.5rem;">Mientras tanto, explora nuestros recursos disponibles:</p>
+                        <a href="/recursos" class="btn btn-primary" style="margin-right: 1rem;">Ver recursos</a>
+                        <a href="/" class="btn btn-secondary">Ir al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<script>
+// Analytics tracking
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({ 
+    event: 'directorio_access',
+    user_email: '<%= email %>',
+    access_type: 'valid_token'
+});
+
+// Auto-refresh token cada 55 días (antes de que expire)
+setTimeout(() => {
+    console.log('Refreshing page to renew token...');
+    window.location.reload();
+}, 55 * 24 * 60 * 60 * 1000); // 55 días en milisegundos
+</script>
+</body>
+</html>
