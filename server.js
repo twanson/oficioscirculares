@@ -35,6 +35,80 @@ const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
 const MAILCHIMP_AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID || '947779';
 const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_SERVER_PREFIX || 'us2';
 
+// Configuración de Renovación de Tokens (usando variables de entorno)
+const REISSUE_WEBHOOK_URL = process.env.REISSUE_WEBHOOK_URL;
+const REISSUE_API_KEY = process.env.REISSUE_API_KEY;
+
+// Rate limiting simple en memoria
+const rateLimitStore = new Map();
+const emailCooldownStore = new Map();
+
+// Función para limpiar stores periódicamente (evitar memory leaks)
+setInterval(() => {
+    const now = Date.now();
+    // Limpiar rate limit store (15 min = 900000ms)
+    for (const [key, data] of rateLimitStore.entries()) {
+        if (now - data.firstRequest > 900000) {
+            rateLimitStore.delete(key);
+        }
+    }
+    // Limpiar email cooldown store (10 min = 600000ms)
+    for (const [email, timestamp] of emailCooldownStore.entries()) {
+        if (now - timestamp > 600000) {
+            emailCooldownStore.delete(email);
+        }
+    }
+}, 60000); // Limpiar cada minuto
+
+// Rate limiting middleware
+function rateLimitMiddleware(req, res, next) {
+    const ip = req.ip || req.connection.remoteAddress;
+    const now = Date.now();
+    const windowMs = 15 * 60 * 1000; // 15 minutos
+    const maxRequests = 60;
+
+    if (!rateLimitStore.has(ip)) {
+        rateLimitStore.set(ip, { count: 1, firstRequest: now });
+        return next();
+    }
+
+    const data = rateLimitStore.get(ip);
+    
+    // Reset window si ha pasado el tiempo
+    if (now - data.firstRequest > windowMs) {
+        rateLimitStore.set(ip, { count: 1, firstRequest: now });
+        return next();
+    }
+
+    // Incrementar contador
+    data.count++;
+    
+    if (data.count > maxRequests) {
+        return res.status(429).json({
+            ok: false,
+            message: 'Demasiadas solicitudes. Inténtalo más tarde.'
+        });
+    }
+
+    next();
+}
+
+// Email cooldown check
+function checkEmailCooldown(email) {
+    const now = Date.now();
+    const cooldownMs = 10 * 60 * 1000; // 10 minutos
+    
+    if (emailCooldownStore.has(email)) {
+        const lastRequest = emailCooldownStore.get(email);
+        if (now - lastRequest < cooldownMs) {
+            return false; // Aún en cooldown
+        }
+    }
+    
+    emailCooldownStore.set(email, now);
+    return true; // OK para proceder
+}
+
 // Validar que las variables de entorno estén configuradas
 console.log('🔍 Estado de variables de entorno:');
 console.log('   - MAILCHIMP_API_KEY:', MAILCHIMP_API_KEY ? '✅ Configurada' : '❌ No configurada');
@@ -227,6 +301,83 @@ app.get('/api/validate-token', async (req, res) => {
     console.error('API validation error:', error);
     res.status(500).json({ valid: false, error: 'Internal server error' });
   }
+});
+
+// Endpoint POST /api/renew-access - Renovación simple de acceso al directorio
+app.post('/api/renew-access', rateLimitMiddleware, async (req, res) => {
+    try {
+        // 1. Validar y normalizar email
+        const { email } = req.body;
+        
+        if (!email || typeof email !== 'string') {
+            return res.json({
+                ok: true,
+                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+            });
+        }
+
+        const normalizedEmail = email.trim().toLowerCase();
+        
+        // 2. Validar formato básico de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(normalizedEmail)) {
+            return res.json({
+                ok: true,
+                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+            });
+        }
+
+        // 3. Verificar cooldown de email (10 minutos)
+        if (!checkEmailCooldown(normalizedEmail)) {
+            console.log(`⚠️  Email ${normalizedEmail} en cooldown (10 min)`);
+            return res.json({
+                ok: true,
+                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+            });
+        }
+
+        // 4. Verificar que tenemos las variables de entorno necesarias
+        if (!REISSUE_WEBHOOK_URL || !REISSUE_API_KEY) {
+            console.error('❌ Missing REISSUE_WEBHOOK_URL or REISSUE_API_KEY');
+            return res.json({
+                ok: true,
+                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+            });
+        }
+
+        // 5. Llamar a webhook de Make (server-to-server)
+        const makeResponse = await fetch(REISSUE_WEBHOOK_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'x-make-apikey': REISSUE_API_KEY
+            },
+            body: `email=${encodeURIComponent(normalizedEmail)}`,
+            timeout: 10000 // 10 segundos timeout
+        });
+
+        if (makeResponse.ok) {
+            try {
+                const result = await makeResponse.json();
+                console.log(`✅ Renovación procesada para ${normalizedEmail}: ${result.code || 'SENT'}`);
+            } catch (jsonError) {
+                // Make puede devolver "Accepted" como texto plano durante testing
+                const textResult = await makeResponse.text();
+                console.log(`✅ Renovación procesada para ${normalizedEmail}: ${textResult}`);
+            }
+        } else {
+            console.error(`❌ Error en Make webhook (${makeResponse.status}): ${makeResponse.statusText}`);
+        }
+
+    } catch (error) {
+        console.error('❌ Error en /api/renew-access:', error.message);
+    }
+
+    // 6. SIEMPRE responder éxito (anti-enumeración)
+    res.json({
+        ok: true,
+        message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+    });
 });
 
 app.use(express.static('public'));
