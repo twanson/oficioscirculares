@@ -3,6 +3,7 @@ const path = require('path');
 const fetch = require('node-fetch');
 const recursos = require('./lib/recursos');
 const tokenValidator = require('./lib/tokenValidator');
+const directorio = require('./lib/directorio');
 require('dotenv').config();
 
 const app = express();
@@ -237,11 +238,11 @@ app.get('/guia-corta', (req, res) => {
   res.redirect(301, q ? `/recursos/guia-materiales-corta?${q}` : '/recursos/guia-materiales-corta');
 });
 
-// --- /dir (gate) y /dir/confirmacion
+// --- DIRECTORIO DE PROVEEDORES ---
 app.get('/dir', async (req, res) => {
   const token = req.query.token;
   
-  // Si hay token, intentar validación
+  // Si hay token, intentar validación y mostrar directorio
   if (token) {
     try {
       console.log(`🔍 Validating token: ${token}`);
@@ -249,10 +250,27 @@ app.get('/dir', async (req, res) => {
       
       if (validation.valid) {
         console.log(`✅ Token valid, rendering directorio for ${validation.email}`);
+        
+        // Obtener datos del directorio
+        const proveedores = await directorio.getProveedores();
+        const categorias = await directorio.getCategorias();
+        const ubicaciones = await directorio.getUbicaciones();
+        
         return res.render('directorio', { 
           email: validation.email,
           expiresAt: validation.expiresAt,
-          q: req.query 
+          proveedores: proveedores.map(p => directorio.formatearProveedor(p)),
+          categorias,
+          ubicaciones,
+          filtros: {
+            categoria: req.query.categoria || '',
+            ubicacion: req.query.ubicacion || '',
+            busqueda: req.query.q || ''
+          },
+          q: req.query,
+          title: 'Directorio de Proveedores Sostenibles',
+          description: 'Directorio curado de proveedores verificados con criterios de sostenibilidad y circularidad.',
+          canonical: '/dir'
         });
       } else {
         console.log(`❌ Token invalid: ${validation.error}`);
@@ -266,6 +284,81 @@ app.get('/dir', async (req, res) => {
   
   // Si no hay token, mostrar gate normal
   res.render('dir-gate', { q: req.query, noindex: false });
+});
+
+// Detalle de proveedor individual
+app.get('/dir/proveedor/:id', async (req, res) => {
+  const token = req.query.token;
+  
+  if (!token) {
+    return res.redirect('/dir');
+  }
+  
+  try {
+    const validation = await tokenValidator.validateAndRenewToken(token);
+    
+    if (!validation.valid) {
+      return res.redirect('/renovar-acceso?error=' + encodeURIComponent(validation.error));
+    }
+    
+    const proveedor = await directorio.getProveedorById(req.params.id);
+    
+    if (!proveedor) {
+      return res.status(404).render('error', { 
+        title: 'Proveedor no encontrado',
+        message: 'El proveedor solicitado no existe o no está disponible.'
+      });
+    }
+    
+    res.render('proveedor-detalle', {
+      email: validation.email,
+      proveedor: directorio.formatearProveedor(proveedor),
+      title: `${proveedor.nombre} - Directorio Oficios Circulares`,
+      description: proveedor.descripcion,
+      canonical: `/dir/proveedor/${proveedor.id}`,
+      noindex: true,
+      q: req.query
+    });
+    
+  } catch (error) {
+    console.error('💥 Error accessing proveedor detail:', error);
+    res.redirect('/renovar-acceso?error=validation_failed');
+  }
+});
+
+// API endpoint para búsqueda AJAX
+app.get('/api/dir/search', async (req, res) => {
+  try {
+    const { q, categoria, ubicacion } = req.query;
+    let proveedores = await directorio.getProveedores();
+    
+    // Aplicar filtros
+    if (q) {
+      proveedores = await directorio.searchProveedores(q);
+    }
+    
+    if (categoria) {
+      proveedores = proveedores.filter(p => 
+        p.categoria.toLowerCase().includes(categoria.toLowerCase())
+      );
+    }
+    
+    if (ubicacion) {
+      proveedores = proveedores.filter(p => 
+        p.ubicacion.toLowerCase().includes(ubicacion.toLowerCase())
+      );
+    }
+    
+    res.json({
+      success: true,
+      total: proveedores.length,
+      proveedores: proveedores.map(p => directorio.formatearProveedor(p))
+    });
+    
+  } catch (error) {
+    console.error('❌ Error en búsqueda:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
 });
 
 app.get('/dir/confirmacion', (req, res) => {
