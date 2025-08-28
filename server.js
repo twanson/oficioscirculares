@@ -328,6 +328,56 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
+// Endpoint de verificación de configuración Google Sheets
+app.get('/test-google-sheets', async (req, res) => {
+    const config = {
+        hasServiceAccountJSON: !!process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
+        hasSpreadsheetId: !!process.env.SPREADSHEET_ID,
+        hasSheetName: !!process.env.SHEET_NAME,
+        spreadsheetId: process.env.SPREADSHEET_ID || 'Not configured',
+        sheetName: process.env.SHEET_NAME || 'Not configured',
+        nodeEnv: process.env.NODE_ENV || 'undefined'
+    };
+    
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.SPREADSHEET_ID || !process.env.SHEET_NAME) {
+        return res.json({
+            status: 'error',
+            message: 'Configuración incompleta de Google Sheets',
+            config,
+            instructions: 'Configura las variables de entorno: GOOGLE_SERVICE_ACCOUNT_JSON, SPREADSHEET_ID, SHEET_NAME'
+        });
+    }
+    
+    try {
+        // Probar conexión con Google Sheets
+        const tokenValidator = require('./lib/tokenValidator');
+        
+        // Intentar hacer una consulta simple
+        const response = await tokenValidator.sheets.spreadsheets.values.get({
+            spreadsheetId: process.env.SPREADSHEET_ID,
+            range: `${process.env.SHEET_NAME}!A1:Z1`, // Solo la primera fila
+        });
+        
+        res.json({
+            status: 'success',
+            message: 'Configuración correcta de Google Sheets ✅',
+            config,
+            sheetData: {
+                hasData: !!response.data.values,
+                rowCount: response.data.values ? response.data.values.length : 0,
+                headers: response.data.values ? response.data.values[0] : []
+            }
+        });
+    } catch (error) {
+        res.json({
+            status: 'error',
+            message: 'Error de conexión con Google Sheets',
+            config,
+            error: error.message
+        });
+    }
+});
+
 // Endpoint de verificación de configuración
 app.get('/test-mailchimp', async (req, res) => {
     const config = {
