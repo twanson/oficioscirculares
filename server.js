@@ -242,6 +242,31 @@ app.get('/guia-corta', (req, res) => {
 app.get('/dir', async (req, res) => {
   const token = req.query.token;
   
+  // BYPASS TEMPORAL PARA DESARROLLO
+  if (process.env.NODE_ENV !== 'production' && req.query.dev === 'true') {
+    console.log('🚧 Bypass de desarrollo activado');
+    const proveedores = await directorio.getProveedores();
+    const categorias = await directorio.getCategorias();
+    const ubicaciones = await directorio.getUbicaciones();
+    
+    return res.render('directorio', { 
+      email: 'dev@test.com',
+      expiresAt: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000), // 60 días
+      proveedores: proveedores.map(p => directorio.formatearProveedor(p)),
+      categorias,
+      ubicaciones,
+      filtros: {
+        categoria: req.query.categoria || '',
+        ubicacion: req.query.ubicacion || '',
+        busqueda: req.query.q || ''
+      },
+      q: req.query,
+      title: 'Directorio de Proveedores Sostenibles',
+      description: 'Directorio curado de proveedores verificados con criterios de sostenibilidad y circularidad.',
+      canonical: '/dir'
+    });
+  }
+  
   // Si hay token, intentar validación y mostrar directorio
   if (token) {
     try {
