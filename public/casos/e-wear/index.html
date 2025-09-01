@@ -1690,51 +1690,75 @@
       function handleTallySubmission(e) {
         console.log('📨 Evento recibido:', e.data);
         
-        if (e.data.event === 'Tally.FormSubmitted') {
+        if (e.data && e.data.event === 'Tally.FormSubmitted') {
           console.log('✅ Formulario Tally enviado - Iniciando descarga');
-          formSubmitted = true;
           
-          // Mostrar mensaje de éxito
-          if (leadMsgModal) {
-            leadMsgModal.style.display = 'block';
-            leadMsgModal.textContent = '¡Perfecto! Descargando documentos...';
-            leadMsgModal.style.color = '#1F4B3F';
-          }
-          
-          // Tracking GTM
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'file_download',
-            file_name: 'e-wear-docs-bundle',
-            resource_title: 'Ficha de trazabilidad E-wear',
-            download_type: 'case_study_bundle',
-            page_location: window.location.href
-          });
-          
-          // Iniciar descargas después de un momento
-          setTimeout(() => {
-            if (typeof closeLeadModal === 'function') {
-              closeLeadModal();
+          try {
+            formSubmitted = true;
+            
+            // Mostrar mensaje de éxito
+            if (leadMsgModal) {
+              leadMsgModal.style.display = 'block';
+              leadMsgModal.textContent = '¡Perfecto! Descargando documentos...';
+              leadMsgModal.style.color = '#1F4B3F';
             }
             
-            // Descargar ficha de lote
-            const fichaLink = document.createElement('a');
-            fichaLink.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
-            fichaLink.download = 'ficha_lote_oficios_circulares_web.pdf';
-            document.body.appendChild(fichaLink);
-            fichaLink.click();
-            document.body.removeChild(fichaLink);
+            // Tracking GTM
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'file_download',
+              file_name: 'e-wear-docs-bundle',
+              resource_title: 'Ficha de trazabilidad E-wear',
+              download_type: 'case_study_bundle',
+              page_location: window.location.href
+            });
             
-            // Descargar checklist con delay
-            setTimeout(() => {
-              const checklistLink = document.createElement('a');
-              checklistLink.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
-              checklistLink.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
-              document.body.appendChild(checklistLink);
-              checklistLink.click();
-              document.body.removeChild(checklistLink);
-            }, 1000);
-          }, 1500);
+            // Función para iniciar descargas
+            function startDownloads() {
+              console.log('🔥 Iniciando descargas automáticas');
+              
+              // Cerrar modal
+              if (typeof closeLeadModal === 'function') {
+                closeLeadModal();
+              }
+              
+              // Descargar ficha de lote
+              try {
+                const fichaLink = document.createElement('a');
+                fichaLink.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+                fichaLink.download = 'ficha_lote_oficios_circulares_web.pdf';
+                fichaLink.style.display = 'none';
+                document.body.appendChild(fichaLink);
+                fichaLink.click();
+                document.body.removeChild(fichaLink);
+                console.log('📥 Descarga 1: Ficha de lote iniciada');
+              } catch (error) {
+                console.error('Error descarga ficha:', error);
+              }
+              
+              // Descargar checklist con delay
+              setTimeout(() => {
+                try {
+                  const checklistLink = document.createElement('a');
+                  checklistLink.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+                  checklistLink.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
+                  checklistLink.style.display = 'none';
+                  document.body.appendChild(checklistLink);
+                  checklistLink.click();
+                  document.body.removeChild(checklistLink);
+                  console.log('📋 Descarga 2: Checklist iniciada');
+                } catch (error) {
+                  console.error('Error descarga checklist:', error);
+                }
+              }, 1000);
+            }
+            
+            // Iniciar descargas después de un momento
+            setTimeout(startDownloads, 1500);
+            
+          } catch (error) {
+            console.error('Error en handleTallySubmission:', error);
+          }
         }
       }
       
