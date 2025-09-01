@@ -1504,11 +1504,11 @@
             ¡Perfecto! Descargando documentos automáticamente...
           </div>
           
-          <!-- Botón manual como backup -->
-          <div id="manualDownloadSection" style="display:none;margin-top:20px;padding:15px;border:2px solid #1F4B3F;border-radius:8px;background:#f8f9fa;text-align:center;">
-            <p style="margin:0 0 10px 0;color:#1F4B3F;font-weight:600;">¿No se iniciaron las descargas automáticamente?</p>
+          <!-- Botón manual que aparece SOLO después de completar Tally -->
+          <div id="manualDownloadSection" style="display:block;margin-top:20px;padding:15px;border:2px solid #1F4B3F;border-radius:8px;background:#f8f9fa;text-align:center;">
+            <p style="margin:0 0 10px 0;color:#1F4B3F;font-weight:600;">Después de completar el formulario, usa este botón para descargar:</p>
             <button id="manualDownloadBtn" onclick="manualDownload()" style="background:#1F4B3F;color:#fff;border:none;padding:12px 20px;border-radius:8px;font-weight:600;cursor:pointer;">
-              📥 Descargar documentos manualmente
+              📥 Descargar documentos E-WEAR
             </button>
           </div>
           
@@ -1582,144 +1582,7 @@
   <script>
     // Enhanced interactions and animations
     document.addEventListener('DOMContentLoaded', function() {
-      // Control de descarga con formulario inline
-      let formSubmitted = false;
-      
-      // Detectar éxito del formulario Tally inline y activar descargas
-      function detectTallySuccess() {
-        const inlineForm = document.getElementById('tally-inline-form');
-        const inlineIframe = document.getElementById('tally-inline-iframe');
-        const successMsg = document.getElementById('inlineSuccessMsg');
-        
-        if (inlineForm && !formSubmitted) {
-          // Buscar en todo el contenedor del formulario Y en el iframe
-          let formText = '';
-          
-          if (inlineForm) {
-            formText += inlineForm.textContent || inlineForm.innerText || '';
-          }
-          
-          if (inlineIframe) {
-            try {
-              // Intentar acceder al contenido del iframe si es posible
-              const iframeDoc = inlineIframe.contentDocument || inlineIframe.contentWindow.document;
-              if (iframeDoc) {
-                formText += iframeDoc.body.textContent || iframeDoc.body.innerText || '';
-              }
-            } catch (e) {
-              // Si no podemos acceder al iframe, buscar en el DOM principal
-              console.log('No se puede acceder al iframe, buscando en DOM principal');
-            }
-          }
-          
-          // También buscar en todo el documento por si acaso
-          formText += document.body.textContent || document.body.innerText || '';
-          
-          // Buscar mensajes de éxito de Tally
-          const successMessages = [
-            '¡Gracias por completar este formulario!',
-            'Gracias por completar',
-            'Thank you for submitting',
-            'Form submitted successfully',
-            'Creado con Tally'
-          ];
-          
-          const hasSuccess = successMessages.some(msg => formText.includes(msg));
-          
-          if (hasSuccess && formText.includes('Creado con Tally')) {
-            console.log('🎉 TALLY INLINE COMPLETADO - ACTIVANDO DESCARGAS');
-            console.log('Texto encontrado:', formText.substring(0, 200));
-            formSubmitted = true;
-            
-            // Mostrar mensaje de éxito
-            if (successMsg) {
-              successMsg.style.display = 'block';
-            }
-            
-            // Tracking GTM
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-              event: 'file_download',
-              file_name: 'e-wear-docs-bundle',
-              resource_title: 'Ficha de trazabilidad E-wear',
-              download_type: 'case_study_bundle',
-              page_location: window.location.href
-            });
-            
-            // Activar descargas automáticas
-            setTimeout(() => {
-              try {
-                // Descarga 1: Ficha de lote
-                const link1 = document.createElement('a');
-                link1.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
-                link1.download = 'ficha_lote_oficios_circulares_web.pdf';
-                link1.style.display = 'none';
-                document.body.appendChild(link1);
-                link1.click();
-                document.body.removeChild(link1);
-                console.log('📥 Descarga 1: Ficha de lote - EJECUTADA');
-                
-                // Descarga 2: Checklist con delay
-                setTimeout(() => {
-                  try {
-                    const link2 = document.createElement('a');
-                    link2.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
-                    link2.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
-                    link2.style.display = 'none';
-                    document.body.appendChild(link2);
-                    link2.click();
-                    document.body.removeChild(link2);
-                    console.log('📋 Descarga 2: Checklist - EJECUTADA');
-                  } catch (error) {
-                    console.error('Error descarga 2:', error);
-                  }
-                }, 1000);
-                
-              } catch (error) {
-                console.error('Error descarga 1:', error);
-              }
-            }, 1500);
-          }
-        }
-      }
-      
-      // Monitorear formulario inline cada 500ms
-      setInterval(detectTallySuccess, 500);
-      
-      // Variable para detectar si Tally se completó (sin activar descargas)
-      let tallyCompleted = false;
-      
-      // Función para detectar si Tally se completó (independiente de las descargas)
-      function checkTallyCompletion() {
-        const inlineForm = document.getElementById('tally-inline-form');
-        
-        if (inlineForm && !tallyCompleted) {
-          const formText = inlineForm.textContent || inlineForm.innerText || '';
-          
-          // Buscar solo el mensaje de éxito de Tally
-          if (formText.includes('¡Gracias por completar este formulario!') || 
-              formText.includes('Gracias por completar') ||
-              formText.includes('Thank you for submitting')) {
-            
-            console.log('📋 Tally completado detectado');
-            tallyCompleted = true;
-            
-            // Mostrar botón manual después de 5 segundos si no se activaron descargas automáticas
-            setTimeout(() => {
-              if (!formSubmitted) {
-                console.log('⚠️ Descargas automáticas no funcionaron, mostrando botón manual');
-                const manualSection = document.getElementById('manualDownloadSection');
-                if (manualSection) {
-                  manualSection.style.display = 'block';
-                }
-              }
-            }, 5000);
-          }
-        }
-      }
-      
-      // Monitorear Tally completion cada 500ms
-      setInterval(checkTallyCompletion, 500);
+      // SOLO botón manual - sin detección automática problemática
       
       // Función para descarga manual
       window.manualDownload = function() {
