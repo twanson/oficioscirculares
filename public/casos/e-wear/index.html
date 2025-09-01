@@ -1686,52 +1686,20 @@
       // Gestión del formulario Tally en el modal
       const leadMsgModal = document.getElementById('leadMsgModal');
       
-      // Inicializar Tally
-      (function(){
-        var s = document.createElement('script');
-        s.src = 'https://tally.so/widgets/embed.js';
-        s.onload = function(){ 
-          if(window.Tally) {
-            Tally.loadEmbeds();
-            
-            // Añadir campos ocultos automáticamente
-            const iframe = document.getElementById('tally-iframe');
-            if (iframe) {
-              const urlParams = new URLSearchParams(window.location.search);
-              const currentUrl = new URL(window.location.href);
-              
-              // Construir URL con parámetros automáticos
-              const baseUrl = iframe.getAttribute('data-tally-src');
-              const params = new URLSearchParams();
-              
-              // Campos automáticos
-              params.set('resource_id', 'e-wear-docs');
-              params.set('source', 'web');
-              params.set('page_url', currentUrl.href);
-              
-              // UTMs si existen
-              ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(param => {
-                const value = urlParams.get(param);
-                if (value) params.set(param, value);
-              });
-              
-              // Actualizar src del iframe
-              iframe.src = baseUrl + '&' + params.toString();
-            }
-          }
-        };
-        document.body.appendChild(s);
-      })();
-      
-      // Escuchar eventos de Tally
-      window.addEventListener('message', function(e) {
+      // Función para manejar envío de Tally
+      function handleTallySubmission(e) {
+        console.log('📨 Evento recibido:', e.data);
+        
         if (e.data.type === 'tally-form-submitted') {
+          console.log('✅ Formulario Tally enviado - Iniciando descarga');
           formSubmitted = true;
           
           // Mostrar mensaje de éxito
-          leadMsgModal.style.display = 'block';
-          leadMsgModal.textContent = '¡Perfecto! Descargando documentos...';
-          leadMsgModal.style.color = '#1F4B3F';
+          if (leadMsgModal) {
+            leadMsgModal.style.display = 'block';
+            leadMsgModal.textContent = '¡Perfecto! Descargando documentos...';
+            leadMsgModal.style.color = '#1F4B3F';
+          }
           
           // Tracking GTM
           window.dataLayer = window.dataLayer || [];
@@ -1745,7 +1713,9 @@
           
           // Iniciar descargas después de un momento
           setTimeout(() => {
-            closeLeadModal();
+            if (typeof closeLeadModal === 'function') {
+              closeLeadModal();
+            }
             
             // Descargar ficha de lote
             const fichaLink = document.createElement('a');
@@ -1765,10 +1735,57 @@
               document.body.removeChild(checklistLink);
             }, 1000);
           }, 1500);
-          
-          console.log('✅ Formulario Tally enviado - Descarga iniciada');
         }
-      });
+      }
+      
+      // Registrar event listener ANTES de cargar Tally
+      window.addEventListener('message', handleTallySubmission);
+      
+      // Inicializar Tally
+      (function(){
+        var s = document.createElement('script');
+        s.src = 'https://tally.so/widgets/embed.js';
+        s.onload = function(){ 
+          if(window.Tally) {
+            Tally.loadEmbeds();
+            
+            // Añadir campos ocultos automáticamente
+            const iframe = document.getElementById('tally-iframe');
+            if (iframe) {
+              const urlParams = new URLSearchParams(window.location.search);
+              const currentUrl = new URL(window.location.href);
+              
+              // Construir URL con campos ocultos para Tally
+              let baseUrl = iframe.getAttribute('data-tally-src');
+              
+              // Añadir campos ocultos directamente a la URL base
+              const hiddenFields = {
+                'resource_id': 'e-wear-docs',
+                'source': 'web',
+                'page_url': currentUrl.href,
+                'utm_source': urlParams.get('utm_source') || '',
+                'utm_medium': urlParams.get('utm_medium') || '',
+                'utm_campaign': urlParams.get('utm_campaign') || '',
+                'utm_content': urlParams.get('utm_content') || ''
+              };
+              
+              // Construir query string manualmente para campos ocultos
+              const fieldParams = Object.entries(hiddenFields)
+                .filter(([key, value]) => value !== '')
+                .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+                .join('&');
+              
+              // Actualizar src del iframe
+              iframe.src = baseUrl + (fieldParams ? '&' + fieldParams : '');
+              console.log('🎯 Tally inicializado con URL:', iframe.src);
+              console.log('📋 Campos ocultos enviados:', hiddenFields);
+            }
+            
+            console.log('📋 Event listener de Tally registrado correctamente');
+          }
+        };
+        document.body.appendChild(s);
+      })();
 
       // CÓDIGO ELIMINADO: Manejo del formulario HTML anterior
       if (false) {
