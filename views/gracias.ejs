@@ -85,7 +85,17 @@
   <% if (typeof recurso !== 'undefined' && recurso) { %>
   <script>
       document.getElementById('btn-download')?.addEventListener('click', function(){
-          // Aquí puedes disparar un evento de analítica si usas GTM/GA4
+          // Tracking GTM/GA4 para descargas
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+              event: 'file_download',
+              file_name: '<%= recurso.pdf %>',
+              resource_title: '<%= recurso.title %>',
+              resource_slug: '<%= recurso.slug %>',
+              download_type: 'direct_link',
+              page_location: window.location.href
+          });
+          
           console.log('Descarga iniciada:', '<%= recurso.title %>');
       });
   </script>
