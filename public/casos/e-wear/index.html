@@ -1690,7 +1690,7 @@
       function handleTallySubmission(e) {
         console.log('📨 Evento recibido:', e.data);
         
-        if (e.data.type === 'tally-form-submitted') {
+        if (e.data.event === 'Tally.FormSubmitted') {
           console.log('✅ Formulario Tally enviado - Iniciando descarga');
           formSubmitted = true;
           
