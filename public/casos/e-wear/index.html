@@ -1686,13 +1686,40 @@
       // Monitorear formulario inline cada 500ms
       setInterval(detectTallySuccess, 500);
       
-      // Mostrar botón manual después de 10 segundos (como backup)
-      setTimeout(() => {
-        const manualSection = document.getElementById('manualDownloadSection');
-        if (manualSection && !formSubmitted) {
-          manualSection.style.display = 'block';
+      // Variable para detectar si Tally se completó (sin activar descargas)
+      let tallyCompleted = false;
+      
+      // Función para detectar si Tally se completó (independiente de las descargas)
+      function checkTallyCompletion() {
+        const inlineForm = document.getElementById('tally-inline-form');
+        
+        if (inlineForm && !tallyCompleted) {
+          const formText = inlineForm.textContent || inlineForm.innerText || '';
+          
+          // Buscar solo el mensaje de éxito de Tally
+          if (formText.includes('¡Gracias por completar este formulario!') || 
+              formText.includes('Gracias por completar') ||
+              formText.includes('Thank you for submitting')) {
+            
+            console.log('📋 Tally completado detectado');
+            tallyCompleted = true;
+            
+            // Mostrar botón manual después de 5 segundos si no se activaron descargas automáticas
+            setTimeout(() => {
+              if (!formSubmitted) {
+                console.log('⚠️ Descargas automáticas no funcionaron, mostrando botón manual');
+                const manualSection = document.getElementById('manualDownloadSection');
+                if (manualSection) {
+                  manualSection.style.display = 'block';
+                }
+              }
+            }, 5000);
+          }
         }
-      }, 10000);
+      }
+      
+      // Monitorear Tally completion cada 500ms
+      setInterval(checkTallyCompletion, 500);
       
       // Función para descarga manual
       window.manualDownload = function() {
