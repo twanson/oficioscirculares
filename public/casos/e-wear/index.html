@@ -1762,49 +1762,90 @@
         }
       }
       
-      // Registrar event listener ANTES de cargar Tally
-      window.addEventListener('message', handleTallySubmission);
+      // MÉTODO SIMPLE: Detectar mensaje de éxito de Tally
+      let downloadTriggered = false;
       
-      // BACKUP: Event listener alternativo para capturar TODOS los eventos
-      window.addEventListener('message', function(e) {
-        if (e.data && e.data.event && e.data.event.includes('Tally')) {
-          console.log('🔍 Evento Tally detectado:', e.data.event, e.data);
+      function checkForTallySuccess() {
+        // Buscar el mensaje de éxito de Tally
+        const successMessages = [
+          '¡Gracias por completar este formulario!',
+          'Gracias por completar',
+          'Thank you for submitting'
+        ];
+        
+        const modalContent = document.querySelector('#leadModal');
+        if (modalContent) {
+          const modalText = modalContent.textContent || modalContent.innerText || '';
           
-          if (e.data.event === 'Tally.FormSubmitted') {
-            console.log('🚀 ACTIVANDO DESCARGAS DIRECTAMENTE');
+          const hasSuccessMessage = successMessages.some(msg => modalText.includes(msg));
+          
+          if (hasSuccessMessage && !downloadTriggered) {
+            console.log('🎉 DETECTADO ÉXITO DE TALLY - INICIANDO DESCARGAS');
+            downloadTriggered = true;
             
-            // Cerrar modal inmediatamente
-            const modal = document.getElementById('leadModal');
-            if (modal) {
-              modal.style.display = 'none';
-              document.body.style.overflow = 'auto';
-            }
+            // Tracking GTM
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'file_download',
+              file_name: 'e-wear-docs-bundle',
+              resource_title: 'Ficha de trazabilidad E-wear',
+              download_type: 'case_study_bundle',
+              page_location: window.location.href
+            });
             
-            // Iniciar descargas inmediatas
+            // Cerrar modal después de 2 segundos
             setTimeout(() => {
-              // Descarga 1
-              const link1 = document.createElement('a');
-              link1.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
-              link1.download = 'ficha_lote_oficios_circulares_web.pdf';
-              document.body.appendChild(link1);
-              link1.click();
-              document.body.removeChild(link1);
-              console.log('✅ Descarga 1 ejecutada');
-              
-              // Descarga 2
-              setTimeout(() => {
-                const link2 = document.createElement('a');
-                link2.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
-                link2.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
-                document.body.appendChild(link2);
-                link2.click();
-                document.body.removeChild(link2);
-                console.log('✅ Descarga 2 ejecutada');
-              }, 500);
-            }, 1000);
+              const modal = document.getElementById('leadModal');
+              if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+              }
+            }, 2000);
+            
+            // Iniciar descargas
+            setTimeout(() => {
+              try {
+                // Descarga 1: Ficha de lote
+                const link1 = document.createElement('a');
+                link1.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+                link1.download = 'ficha_lote_oficios_circulares_web.pdf';
+                link1.style.display = 'none';
+                document.body.appendChild(link1);
+                link1.click();
+                document.body.removeChild(link1);
+                console.log('📥 Descarga 1: Ficha de lote - EJECUTADA');
+                
+                // Descarga 2: Checklist con delay
+                setTimeout(() => {
+                  try {
+                    const link2 = document.createElement('a');
+                    link2.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+                    link2.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
+                    link2.style.display = 'none';
+                    document.body.appendChild(link2);
+                    link2.click();
+                    document.body.removeChild(link2);
+                    console.log('📋 Descarga 2: Checklist - EJECUTADA');
+                  } catch (error) {
+                    console.error('Error descarga 2:', error);
+                  }
+                }, 1000);
+                
+              } catch (error) {
+                console.error('Error descarga 1:', error);
+              }
+            }, 1500);
           }
         }
-      });
+      }
+      
+      // Iniciar monitoreo cada 500ms cuando el modal esté abierto
+      setInterval(() => {
+        const modal = document.getElementById('leadModal');
+        if (modal && modal.style.display !== 'none' && !downloadTriggered) {
+          checkForTallySuccess();
+        }
+      }, 500);
       
       // Inicializar Tally
       (function(){
