@@ -1,4 +1,4 @@
-<!DOCTYPE html>
++<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -1569,17 +1569,23 @@
         Completa el formulario para descargar la ficha de lote y el checklist de trazabilidad. Recibirás los documentos inmediatamente.
       </p>
       
-      <form id="leadFormModal" style="display:grid;gap:15px;" novalidate>
-        <input type="text" name="name" placeholder="Nombre*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;font-size:16px;" />
-        <input type="email" name="email" placeholder="Email*" required aria-required="true" style="padding:12px;border:1px solid #e5e5e5;border-radius:10px;font-size:16px;" />
-        <input type="text" name="honeypot" style="display:none;" tabindex="-1" autocomplete="off" />
-        
-        <button type="submit" id="leadBtnModal" style="background:#1F4B3F;color:white;padding:14px;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.3s ease;">
-          📥 Enviar y recibir documentos
-        </button>
-        
-        <div id="leadMsgModal" style="display:none;margin-top:10px;font-size:14px;padding:12px;border-radius:8px;background:#f0f9f0;color:#1F4B3F;text-align:center;"></div>
-      </form>
+      <!-- Formulario Tally embebido -->
+      <div id="tally-form-container" style="min-height: 300px;">
+        <iframe id="tally-iframe" 
+                data-tally-src="https://tally.so/embed/3lx4pk?alignLeft=1&hideTitle=1&transparentBackground=1" 
+                loading="lazy" 
+                width="100%" 
+                height="400" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0" 
+                title="Ficha de trazabilidad E-wear">
+        </iframe>
+      </div>
+      
+      <div id="leadMsgModal" style="display:none;margin-top:10px;font-size:14px;padding:12px;border-radius:8px;background:#f0f9f0;color:#1F4B3F;text-align:center;">
+        ¡Perfecto! Descargando documentos...
+      </div>
       
       <p style="margin-top: 20px; font-size: 0.85rem; color: #888; text-align: center;">
         Al enviar, aceptas nuestra <a href="../../privacidad/" target="_blank" style="color: #1F4B3F;">política de privacidad</a>.
@@ -1677,12 +1683,95 @@
         });
       });
       
-      // Formulario del modal
-      const leadFormModal = document.getElementById('leadFormModal');
-      const leadBtnModal = document.getElementById('leadBtnModal');
+      // Gestión del formulario Tally en el modal
       const leadMsgModal = document.getElementById('leadMsgModal');
+      
+      // Inicializar Tally
+      (function(){
+        var s = document.createElement('script');
+        s.src = 'https://tally.so/widgets/embed.js';
+        s.onload = function(){ 
+          if(window.Tally) {
+            Tally.loadEmbeds();
+            
+            // Añadir campos ocultos automáticamente
+            const iframe = document.getElementById('tally-iframe');
+            if (iframe) {
+              const urlParams = new URLSearchParams(window.location.search);
+              const currentUrl = new URL(window.location.href);
+              
+              // Construir URL con parámetros automáticos
+              const baseUrl = iframe.getAttribute('data-tally-src');
+              const params = new URLSearchParams();
+              
+              // Campos automáticos
+              params.set('resource_id', 'e-wear-docs');
+              params.set('source', 'web');
+              params.set('page_url', currentUrl.href);
+              
+              // UTMs si existen
+              ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(param => {
+                const value = urlParams.get(param);
+                if (value) params.set(param, value);
+              });
+              
+              // Actualizar src del iframe
+              iframe.src = baseUrl + '&' + params.toString();
+            }
+          }
+        };
+        document.body.appendChild(s);
+      })();
+      
+      // Escuchar eventos de Tally
+      window.addEventListener('message', function(e) {
+        if (e.data.type === 'tally-form-submitted') {
+          formSubmitted = true;
+          
+          // Mostrar mensaje de éxito
+          leadMsgModal.style.display = 'block';
+          leadMsgModal.textContent = '¡Perfecto! Descargando documentos...';
+          leadMsgModal.style.color = '#1F4B3F';
+          
+          // Tracking GTM
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'file_download',
+            file_name: 'e-wear-docs-bundle',
+            resource_title: 'Ficha de trazabilidad E-wear',
+            download_type: 'case_study_bundle',
+            page_location: window.location.href
+          });
+          
+          // Iniciar descargas después de un momento
+          setTimeout(() => {
+            closeLeadModal();
+            
+            // Descargar ficha de lote
+            const fichaLink = document.createElement('a');
+            fichaLink.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+            fichaLink.download = 'ficha_lote_oficios_circulares_web.pdf';
+            document.body.appendChild(fichaLink);
+            fichaLink.click();
+            document.body.removeChild(fichaLink);
+            
+            // Descargar checklist con delay
+            setTimeout(() => {
+              const checklistLink = document.createElement('a');
+              checklistLink.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+              checklistLink.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
+              document.body.appendChild(checklistLink);
+              checklistLink.click();
+              document.body.removeChild(checklistLink);
+            }, 1000);
+          }, 1500);
+          
+          console.log('✅ Formulario Tally enviado - Descarga iniciada');
+        }
+      });
 
-      if (leadFormModal) {
+      // CÓDIGO ELIMINADO: Manejo del formulario HTML anterior
+      if (false) {
         leadFormModal.addEventListener('submit', async (e) => {
           e.preventDefault();
           
@@ -1766,11 +1855,10 @@
             
             leadMsgModal.style.color = '#dc2626';
           } finally {
-            leadBtnModal.disabled = false;
-            leadBtnModal.textContent = '📥 Enviar y recibir documentos';
+            // Código eliminado - ya no se usa
           }
         });
-      }
+      } // FIN del bloque eliminado
 
       // Micro-form mejorado (Formspree + Mailchimp + validaciones)
       const leadForm = document.getElementById('leadForm');
