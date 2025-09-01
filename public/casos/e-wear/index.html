@@ -1188,13 +1188,8 @@
   }
   </script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W7CH52J6');</script>
-    <!-- End Google Tag Manager -->
+    <!-- Traffic Source Detector -->
+    <script src="../../assets/js/traffic-source-detector.js" async></script>
 </head>
 <body class="page-case">
   <nav class="navbar enhanced-navbar">
@@ -1445,7 +1440,7 @@
         </div>
 
         <p class="storybeat" role="note" aria-label="StoryBeat">Conocí cajones y cables, hornos y manos. Hoy soy borde y luz en tu dedo. Si un día cierras mi ciclo, vuelvo al origen.</p>
-        <p id="relato-link" style="margin-top:8px;"><a href="../../assets/docs/relato-e-wear.pdf" target="_blank" rel="noopener">Leer el relato completo (PDF)</a></p>
+        <p id="relato-link" style="margin-top:8px;"><a href="../../assets/docs/relato-e-wear.pdf" target="_blank" rel="noopener" onclick="trackEwearDownload('relato_completo', this.href)">Leer el relato completo (PDF)</a></p>
 
         <h2 id="pruebas-metricas" class="oc-section">📊 Pruebas y métricas</h2>
         <section class="metrics">
@@ -1464,8 +1459,8 @@
               </h4>
               <p style="margin: 0 0 16px 0; font-size: 0.95em; line-height: 1.5;">Ya no compite solo por precio. Sus clientes pagan premium por la historia verificable. Posicionamiento único en el mercado de joyería sostenible.</p>
               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                <a id="link-ficha" class="btn-outline" href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" target="_blank" rel="noopener">Ficha de lote</a>
-                <a id="link-ensayo" class="btn-outline" href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" target="_blank" rel="noopener">Checklist trazabilidad</a>
+                <a id="link-ficha" class="btn-outline" href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" target="_blank" rel="noopener" onclick="trackEwearDownload('ficha_lote', this.href)">Ficha de lote</a>
+                <a id="link-ensayo" class="btn-outline" href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" target="_blank" rel="noopener" onclick="trackEwearDownload('checklist_trazabilidad', this.href)">Checklist trazabilidad</a>
               </div>
             </div>
             
@@ -2037,11 +2032,28 @@
         <iframe src="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" width="100%" height="100%" style="border: none;"></iframe>
       </div>
       <div style="padding: 15px 20px; background: #f8f9fa; text-align: center;">
-        <a id="modal-download-ficha" href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" download="ficha_lote_oficios_circulares_web.pdf" class="btn-outline" style="margin-right: 10px;">📥 Descargar PDF</a>
-        <a id="modal-download-checklist" href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" download="checklist_trazabilidad_oficios_circulares_web.pdf" class="btn-outline">📋 Descargar Checklist</a>
+        <a id="modal-download-ficha" href="../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf" download="ficha_lote_oficios_circulares_web.pdf" class="btn-outline" style="margin-right: 10px;" onclick="trackEwearDownload('ficha_lote_modal', this.href)">📥 Descargar PDF</a>
+        <a id="modal-download-checklist" href="../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf" download="checklist_trazabilidad_oficios_circulares_web.pdf" class="btn-outline" onclick="trackEwearDownload('checklist_trazabilidad_modal', this.href)">📋 Descargar Checklist</a>
       </div>
     </div>
   </div>
+
+  <!-- Analytics tracking para descargas e-wear -->
+  <script>
+    function trackEwearDownload(documentType, fileUrl) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'file_download',
+        file_name: fileUrl,
+        document_type: documentType,
+        case_study: 'e-wear',
+        download_type: 'case_study_document',
+        page_location: window.location.href
+      });
+      
+      console.log('E-wear document download tracked:', documentType);
+    }
+  </script>
 
 </body>
 </html>
