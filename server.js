@@ -171,6 +171,12 @@ app.get('/circular-express', (req, res) => {
   redirectWithQuery('/recursos/circular-express', req, res);
 });
 
+// Ruta específica para página de gracias de recursos (debe ir ANTES de /recursos/:slug)
+app.get('/recursos/gracias', (req, res) => {
+  res.set('X-Robots-Tag', 'noindex, nofollow');
+  res.sendFile(path.join(__dirname, 'public', 'recursos', 'gracias', 'index.html'));
+});
+
 // Rutas de recursos
 app.get('/recursos', (req, res) => {
   const visibles = recursos.getAllRecursos().filter(r => r.listed !== false);
