@@ -199,9 +199,21 @@ app.get('/recursos/:slug', (req, res) => {
   });
 });
 
+// Ruta específica para E-WEAR gracias
+app.get('/gracias/e-wear', (req, res) => {
+  res.set('X-Robots-Tag', 'noindex, nofollow');
+  res.render('gracias-ewear');
+});
+
 app.get('/gracias', (req, res) => {
   const isDir = req.query.resource === 'dir';
+  const isEwear = req.query.resource === 'e-wear-docs';
   const rawEmail = (req.query.email || '').trim();
+  
+  // Si es E-WEAR, redirigir a la página específica
+  if (isEwear) {
+    return res.redirect('/gracias/e-wear');
+  }
   
   // Función mejorada para enmascarar email
   function maskEmail(email) {
