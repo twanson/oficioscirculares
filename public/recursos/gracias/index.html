@@ -261,6 +261,62 @@
             color: white;
         }
         
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, rgba(31, 75, 63, 0.08) 0%, rgba(45, 95, 79, 0.12) 100%);
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(31, 75, 63, 0.1);
+        }
+        
+        .download-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f4b3f;
+            margin-bottom: 16px;
+        }
+        
+        .download-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, #1f4b3f 0%, #2d5f4f 100%);
+            color: white;
+            padding: 18px 36px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(31, 75, 63, 0.2);
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(31, 75, 63, 0.3);
+            background: linear-gradient(135deg, #2d5f4f 0%, #1f4b3f 100%);
+        }
+        
+        .btn-download:active {
+            transform: translateY(0);
+        }
+        
+        .btn-download:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
         /* CTA Final */
         .cta-final {
             background: linear-gradient(135deg, #E0B894 0%, #D17B49 50%, #B8613A 100%);
@@ -552,6 +608,20 @@
         </div>
     </section>
 
+    <!-- Botón de Descarga Principal -->
+    <section class="download-section">
+        <div class="container">
+            <h2 class="download-title">📥 Tus documentos E-WEAR están listos</h2>
+            <p class="download-description">
+                Haz clic en el botón para descargar la ficha de trazabilidad y el checklist de proveedores.
+            </p>
+            <button onclick="triggerDownloads()" class="btn-download" id="downloadBtn">
+                📄 Descargar documentos E-WEAR
+            </button>
+            <div id="downloadStatus" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: rgba(255, 255, 255, 0.9);"></div>
+        </div>
+    </section>
+
     <!-- CTA Final -->
     <section class="cta-final">
         <div class="container">
@@ -620,9 +690,21 @@
         let downloadsCompleted = 0;
         const totalDownloads = 2;
         
-        // Función para descargar documentos E-WEAR
+        // Función para descargar documentos E-WEAR (manual)
         function triggerDownloads() {
-            console.log('🔥 Iniciando descargas automáticas E-WEAR desde página de recursos');
+            console.log('🔥 Iniciando descargas manuales E-WEAR desde página de recursos');
+            
+            // Deshabilitar botón y mostrar estado
+            const downloadBtn = document.getElementById('downloadBtn');
+            const statusDiv = document.getElementById('downloadStatus');
+            
+            downloadBtn.disabled = true;
+            downloadBtn.textContent = '⏳ Descargando...';
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = `
+                <h3>⏳ Preparando descargas...</h3>
+                <p>Los documentos E-WEAR se están descargando. Revisa tu carpeta de descargas.</p>
+            `;
             
             // Tracking GTM
             window.dataLayer = window.dataLayer || [];
@@ -661,8 +743,17 @@
                         console.log('📋 Descarga 2: Checklist - EJECUTADA');
                         downloadsCompleted++;
                         updateDownloadStatus();
+                        
+                        // Reactivar botón después de las descargas
+                        setTimeout(() => {
+                            downloadBtn.disabled = false;
+                            downloadBtn.textContent = '✅ Descargar de nuevo';
+                        }, 1000);
+                        
                     } catch (error) {
                         console.error('Error en descarga del checklist:', error);
+                        downloadBtn.disabled = false;
+                        downloadBtn.textContent = '❌ Error - Reintentar';
                     }
                 }, 800);
             }, 500);
@@ -722,14 +813,9 @@
             observer.observe(card);
         });
 
-        // Iniciar descargas automáticamente al cargar la página
+        // Inicializar página sin descargas automáticas
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📥 Página de gracias para recursos cargada - Iniciando descargas E-WEAR');
-            
-            // Pequeño delay para que la página cargue completamente
-            setTimeout(() => {
-                triggerDownloads();
-            }, 1000);
+            console.log('📥 Página de gracias para recursos cargada - Esperando acción manual del usuario');
             
             // Scroll suave al inicio
             window.scrollTo({
