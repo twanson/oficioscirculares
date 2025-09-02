@@ -567,9 +567,23 @@
             observer.observe(card);
         });
 
-        // Auto-scroll suave desde Tally si viene con parámetro
+        // Sistema de personalización y descargas por recurso
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
+            const resource = urlParams.get('resource');
+            const email = urlParams.get('email');
+            
+            // Personalización con email si viene
+            if (email && email !== '{email}') {
+                personalizeWithEmail(email);
+            }
+            
+            // Manejo específico por tipo de recurso
+            if (resource === 'e-wear-docs') {
+                handleEwearResource();
+            }
+            
+            // Auto-scroll suave desde Tally si viene con parámetro
             if (urlParams.get('from') === 'tally') {
                 // Pequeño delay para que la página cargue completamente
                 setTimeout(() => {
@@ -580,6 +594,193 @@
                 }, 300);
             }
         });
+        
+        // Función para personalizar con email
+        function personalizeWithEmail(email) {
+            // Actualizar título si existe un elemento específico
+            const heroTitle = document.querySelector('.hero-title');
+            if (heroTitle && email.includes('@')) {
+                const name = email.split('@')[0];
+                heroTitle.textContent = `¡Hola ${name}!`;
+            }
+            
+            // Actualizar links de email
+            const emailLinks = document.querySelectorAll('a[href="mailto:"]');
+            emailLinks.forEach(link => {
+                link.href = `mailto:${email}`;
+                link.textContent = 'Revisar email';
+            });
+        }
+        
+        // Función específica para E-WEAR
+        function handleEwearResource() {
+            console.log('🎯 Detectado recurso E-WEAR - Configurando página específica');
+            
+            // Cambiar contenido del hero
+            const heroIcon = document.querySelector('.success-icon');
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const heroDescription = document.querySelector('.hero-description');
+            
+            if (heroIcon) heroIcon.textContent = '📥';
+            if (heroTitle && !heroTitle.textContent.includes('Hola')) {
+                heroTitle.textContent = '¡Documentos E-WEAR descargados!';
+            }
+            if (heroSubtitle) heroSubtitle.textContent = 'Caso de Joyería Circular y Trazable';
+            if (heroDescription) {
+                heroDescription.textContent = 'Gracias por descargar la documentación del caso E-WEAR. Los documentos se están descargando automáticamente en tu dispositivo.';
+            }
+            
+            // Cambiar título de la página
+            document.title = '¡Documentos E-WEAR descargados! — Oficios Circulares';
+            
+            // Agregar mensaje de descarga
+            addDownloadStatus();
+            
+            // Activar descargas automáticas
+            setTimeout(() => {
+                triggerEwearDownloads();
+            }, 1000);
+            
+            // Personalizar steps para E-WEAR
+            personalizeStepsForEwear();
+        }
+        
+        // Función para agregar estado de descarga
+        function addDownloadStatus() {
+            const heroContent = document.querySelector('.hero-gracias-content');
+            if (heroContent) {
+                const downloadStatus = document.createElement('div');
+                downloadStatus.id = 'ewear-download-status';
+                downloadStatus.style.cssText = `
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    border-radius: 12px;
+                    padding: 20px;
+                    margin: 30px 0;
+                    backdrop-filter: blur(10px);
+                    text-align: center;
+                `;
+                downloadStatus.innerHTML = `
+                    <h3 style="margin: 0 0 10px; font-size: 1.3rem; color: #E0B894;">🔄 Descarga en progreso...</h3>
+                    <p style="margin: 0; opacity: 0.9;">Los documentos E-WEAR se están descargando automáticamente.</p>
+                `;
+                heroContent.appendChild(downloadStatus);
+            }
+        }
+        
+        // Variables para tracking de descargas E-WEAR
+        let ewearDownloadsCompleted = 0;
+        const totalEwearDownloads = 2;
+        
+        // Función para descargar documentos E-WEAR
+        function triggerEwearDownloads() {
+            console.log('🔥 Iniciando descargas automáticas E-WEAR desde página de gracias');
+            
+            // Tracking GTM
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'file_download',
+                file_name: 'e-wear-docs-bundle',
+                resource_id: 'e-wear-docs',
+                resource_title: 'Ficha de trazabilidad E-wear',
+                download_type: 'case_study_bundle_thank_you',
+                page_location: window.location.href
+            });
+            
+            setTimeout(() => {
+                // Descarga 1: Ficha de lote
+                const link1 = document.createElement('a');
+                link1.href = '../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+                link1.download = 'ficha_lote_oficios_circulares_web.pdf';
+                link1.style.display = 'none';
+                document.body.appendChild(link1);
+                link1.click();
+                document.body.removeChild(link1);
+                console.log('📄 Descarga 1: Ficha de lote - EJECUTADA');
+                ewearDownloadsCompleted++;
+                updateEwearDownloadStatus();
+                
+                // Descarga 2: Checklist con delay
+                setTimeout(() => {
+                    try {
+                        const link2 = document.createElement('a');
+                        link2.href = '../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+                        link2.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
+                        link2.style.display = 'none';
+                        document.body.appendChild(link2);
+                        link2.click();
+                        document.body.removeChild(link2);
+                        console.log('📋 Descarga 2: Checklist - EJECUTADA');
+                        ewearDownloadsCompleted++;
+                        updateEwearDownloadStatus();
+                    } catch (error) {
+                        console.error('Error en descarga del checklist:', error);
+                    }
+                }, 800);
+            }, 500);
+        }
+        
+        // Función para actualizar estado de descarga E-WEAR
+        function updateEwearDownloadStatus() {
+            const statusDiv = document.getElementById('ewear-download-status');
+            if (!statusDiv) return;
+            
+            if (ewearDownloadsCompleted >= totalEwearDownloads) {
+                statusDiv.innerHTML = `
+                    <h3 style="margin: 0 0 10px; font-size: 1.3rem; color: #4CAF50;">✅ ¡Descarga completada!</h3>
+                    <p style="margin: 0; opacity: 0.9;">Los documentos E-WEAR ya están en tu dispositivo. Revisa tu carpeta de descargas.</p>
+                `;
+                statusDiv.style.background = 'rgba(76, 175, 80, 0.1)';
+                statusDiv.style.borderColor = 'rgba(76, 175, 80, 0.3)';
+            } else {
+                statusDiv.innerHTML = `
+                    <h3 style="margin: 0 0 10px; font-size: 1.3rem; color: #E0B894;">⏳ Descargando... (${ewearDownloadsCompleted}/${totalEwearDownloads})</h3>
+                    <p style="margin: 0; opacity: 0.9;">Descarga en progreso...</p>
+                `;
+            }
+        }
+        
+        // Función para personalizar steps para E-WEAR
+        function personalizeStepsForEwear() {
+            const stepsGrid = document.querySelector('.steps-grid');
+            if (!stepsGrid) return;
+            
+            // Actualizar el contenido de los steps para E-WEAR
+            const steps = stepsGrid.querySelectorAll('.step-card');
+            
+            if (steps[0]) {
+                steps[0].querySelector('.step-number').textContent = '🌟';
+                steps[0].querySelector('.step-title').textContent = 'Únete a nuestra comunidad';
+                steps[0].querySelector('.step-description').textContent = 'Conecta con otros artesanos y diseñadores comprometidos con la circularidad. Comparte experiencias sobre trazabilidad.';
+                const action1 = steps[0].querySelector('.step-action');
+                action1.href = 'https://tally.so/r/mOyV98';
+                action1.target = '_blank';
+                action1.textContent = '📧 Únete ahora';
+                // Hacer destacar este step
+                steps[0].style.background = 'linear-gradient(135deg, #1F4B3F 0%, #3E7C59 100%)';
+                steps[0].style.color = 'white';
+            }
+            
+            if (steps[1]) {
+                steps[1].querySelector('.step-number').textContent = '📚';
+                steps[1].querySelector('.step-title').textContent = 'Directorio de proveedores';
+                steps[1].querySelector('.step-description').textContent = 'Descubre laboratorios especializados y proveedores sostenibles que te ayudarán a implementar trazabilidad.';
+                const action2 = steps[1].querySelector('.step-action');
+                action2.href = '../#recursos';
+                action2.textContent = '🔍 Explorar directorio';
+            }
+            
+            if (steps[2]) {
+                steps[2].querySelector('.step-number').textContent = '⚡';
+                steps[2].querySelector('.step-title').textContent = 'Implementa en tu proyecto';
+                steps[2].querySelector('.step-description').textContent = 'Si quieres implementar un sistema como E-WEAR, agenda una consulta estratégica gratuita.';
+                const action3 = steps[2].querySelector('.step-action');
+                action3.href = 'https://calendar.app.google/e9PuWyYnspzeXWBU7';
+                action3.target = '_blank';
+                action3.textContent = '📅 Agenda consulta';
+            }
+        }
     </script>
 </body>
 </html>
