@@ -123,25 +123,62 @@
             opacity: 0.9;
         }
         
-        .back-to-case {
-            background: rgba(224, 184, 148, 0.2);
-            border: 2px solid #E0B894;
-            color: #E0B894;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            display: inline-block;
-            margin: 20px 10px;
-            transition: all 0.3s ease;
+        .hero-download-section {
+            margin: 30px 0;
         }
         
-        .back-to-case:hover {
-            background: #E0B894;
-            color: #1F4B3F;
+        .btn-download-hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #1f4b3f;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+        }
+        
+        .btn-download-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .btn-download-hero:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-download-hero:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-cta-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #D17B49 0%, #B8613A 100%);
+            color: white;
+            padding: 18px 36px;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(209, 123, 73, 0.3);
+        }
+        
+        .hero-cta-primary:hover {
+            background: linear-gradient(135deg, #B8613A 0%, #D17B49 100%);
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(209, 123, 73, 0.4);
         }
         
         /* Próximos pasos */
@@ -556,19 +593,21 @@
     <section class="hero-gracias">
         <div class="hero-gracias-content">
             <div class="success-icon">📥</div>
-            <h1 class="hero-title">¡Documentos E-WEAR descargados!</h1>
+            <h1 class="hero-title">¡Tus documentos E-WEAR están listos!</h1>
             <p class="hero-subtitle">Caso de Joyería Circular y Trazable</p>
             <p class="hero-description">
-                Gracias por descargar la documentación del caso E-WEAR. Los documentos se están descargando automáticamente. Ahora tienes acceso a la ficha de lote y el checklist de trazabilidad.
+                Gracias por completar el formulario. Haz clic en el botón para descargar la ficha de trazabilidad y el checklist de proveedores del caso E-WEAR.
             </p>
             
-            <div class="download-status" id="downloadStatus">
-                <h3>🔄 Descarga en progreso...</h3>
-                <p>Los documentos se están descargando automáticamente. Si no se inicia, revisa tu carpeta de descargas.</p>
+            <div class="hero-download-section">
+                <button onclick="triggerDownloads()" class="btn-download-hero" id="downloadBtn">
+                    📄 Descargar documentos E-WEAR
+                </button>
+                <div id="downloadStatus" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white;"></div>
             </div>
             
-            <a href="../../casos/e-wear/" class="back-to-case">
-                🔙 Continuar leyendo el caso E-WEAR
+            <a href="../../casos/e-wear/" class="hero-cta-primary">
+                ← Continuar leyendo el caso E-WEAR
             </a>
         </div>
     </section>
@@ -593,7 +632,7 @@
                     <p class="step-description">
                         Como miembro de la comunidad, tendrás acceso exclusivo a nuestro directorio de proveedores sostenibles, laboratorios especializados y profesionales de la circularidad.
                     </p>
-                    <a href="../../#recursos" class="step-action">🔍 Explorar directorio</a>
+                    <a href="https://tally.so/r/mOyV98" target="_blank" class="step-action">🔍 Acceder al directorio</a>
                 </div>
 
                 <div class="step-card">
@@ -608,31 +647,7 @@
         </div>
     </section>
 
-    <!-- Botón de Descarga Principal -->
-    <section class="download-section">
-        <div class="container">
-            <h2 class="download-title">📥 Tus documentos E-WEAR están listos</h2>
-            <p class="download-description">
-                Haz clic en el botón para descargar la ficha de trazabilidad y el checklist de proveedores.
-            </p>
-            <button onclick="triggerDownloads()" class="btn-download" id="downloadBtn">
-                📄 Descargar documentos E-WEAR
-            </button>
-            <div id="downloadStatus" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: rgba(255, 255, 255, 0.9);"></div>
-        </div>
-    </section>
 
-    <!-- CTA Final -->
-    <section class="cta-final">
-        <div class="container">
-            <h2 class="cta-title">¿Listo para hacer tu proyecto más circular?</h2>
-            <p class="cta-description">
-                Únete a nuestra comunidad de creadores conscientes y accede a recursos exclusivos, casos de estudio y un directorio completo de proveedores circulares.
-            </p>
-            <a href="https://tally.so/r/mOyV98" target="_blank" class="btn-cta">🌟 Únete a la comunidad</a>
-            <a href="../../casos/e-wear/" class="btn-cta">🔙 Volver al caso E-WEAR</a>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="footer">
