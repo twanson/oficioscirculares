@@ -1580,9 +1580,92 @@
   <!-- Modal eliminado - usando formulario inline -->
 
   <script>
-    // Enhanced interactions and animations
+    // SISTEMA LIMPIO DE DESCARGAS E-WEAR - SIN DESCARGAS AUTOMÁTICAS EN CARGA
     document.addEventListener('DOMContentLoaded', function() {
-      // SOLO botón manual - sin detección automática problemática
+      
+      // Variables de control
+      let tallyCompleted = false;
+      
+      // Función principal para descargar documentos
+      function triggerDownloads() {
+        console.log('🔥 Iniciando descargas de documentos E-WEAR');
+        
+        // Tracking GTM
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'file_download',
+          file_name: 'e-wear-docs-bundle',
+          resource_id: 'e-wear-docs',
+          resource_title: 'Ficha de trazabilidad E-wear',
+          download_type: 'case_study_bundle',
+          page_location: window.location.href
+        });
+        
+        // Mostrar mensaje de éxito
+        const successDiv = document.getElementById('successMessage');
+        if (successDiv) {
+          successDiv.style.display = 'block';
+          successDiv.textContent = '¡Perfecto! Descargando documentos automáticamente...';
+        }
+        
+        setTimeout(() => {
+          // Descarga 1: Ficha de lote
+          const link1 = document.createElement('a');
+          link1.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
+          link1.download = 'ficha_lote_oficios_circulares_web.pdf';
+          link1.style.display = 'none';
+          document.body.appendChild(link1);
+          link1.click();
+          document.body.removeChild(link1);
+          console.log('📄 Descarga 1: Ficha de lote - EJECUTADA');
+          
+          // Descarga 2: Checklist con delay
+          setTimeout(() => {
+            try {
+              const link2 = document.createElement('a');
+              link2.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
+              link2.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
+              link2.style.display = 'none';
+              document.body.appendChild(link2);
+              link2.click();
+              document.body.removeChild(link2);
+              console.log('📋 Descarga 2: Checklist - EJECUTADA');
+            } catch (error) {
+              console.error('Error en descarga del checklist:', error);
+            }
+          }, 800);
+        }, 500);
+      }
+      
+      // Función de backup para descarga manual
+      window.manualDownload = function() {
+        console.log('🔥 DESCARGA MANUAL ACTIVADA');
+        triggerDownloads();
+        
+        // Ocultar botón manual después de usar
+        const manualSection = document.getElementById('manualDownloadSection');
+        if (manualSection) {
+          manualSection.style.display = 'none';
+        }
+      };
+      
+      // Detectar finalización de Tally mediante eventos de postMessage
+      function handleTallyMessage(event) {
+        console.log('📨 Mensaje recibido:', event.data);
+        
+        if (event.data && event.data.event === 'Tally.FormSubmitted' && !tallyCompleted) {
+          console.log('✅ Formulario Tally completado exitosamente');
+          tallyCompleted = true;
+          
+          // Activar descargas después de un momento
+          setTimeout(() => {
+            triggerDownloads();
+          }, 1500);
+        }
+      }
+      
+      // Escuchar eventos de Tally
+      window.addEventListener('message', handleTallyMessage, false);
       
       // Función para descarga manual
       window.manualDownload = function() {
@@ -1847,198 +1930,7 @@
         document.body.appendChild(s);
       })();
 
-      // CÓDIGO ELIMINADO: Manejo del formulario HTML anterior
-      if (false) {
-        leadFormModal.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          
-          const name = leadFormModal.querySelector('input[name="name"]').value.trim();
-          const email = leadFormModal.querySelector('input[name="email"]').value.trim();
-          const honeypot = leadFormModal.querySelector('input[name="honeypot"]').value;
-
-          // Validación anti-spam
-          if (honeypot) {
-            console.log('🚫 Spam detectado');
-            return;
-          }
-
-          // Validaciones básicas
-          if (!name || !email) {
-            leadMsgModal.style.display = 'block';
-            leadMsgModal.textContent = 'Por favor, completa todos los campos obligatorios.';
-            leadMsgModal.style.color = '#dc2626';
-            return;
-          }
-
-          leadBtnModal.disabled = true;
-          leadBtnModal.textContent = 'Enviando...';
-
-          try {
-            const response = await fetch('/subscribe', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                firstName: name,
-                email: email,
-                tags: ['E-WEAR Case Study', 'Ficha Trazabilidad', 'Joyería Circular']
-              })
-            });
-
-            const responseData = await response.json();
-            console.log('Respuesta servidor:', response.status, responseData);
-
-            if (response.ok) {
-              formSubmitted = true;
-              leadMsgModal.style.display = 'block';
-              leadMsgModal.textContent = '¡Perfecto! Cerrando modal y descargando documentos...';
-              leadMsgModal.style.color = '#1F4B3F';
-              
-              // Cerrar modal después de 1 segundo y iniciar descargas
-              setTimeout(() => {
-                closeLeadModal();
-                
-                // Iniciar descargas automáticas
-                const fichaLink = document.createElement('a');
-                fichaLink.href = '../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
-                fichaLink.download = 'ficha_lote_oficios_circulares_web.pdf';
-                fichaLink.click();
-                
-                setTimeout(() => {
-                  const checklistLink = document.createElement('a');
-                  checklistLink.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
-                  checklistLink.download = 'checklist_trazabilidad_oficios_circulares_web.pdf';
-                  checklistLink.click();
-                }, 500);
-              }, 1500);
-              
-              console.log('✅ Usuario suscrito a Mailchimp desde modal');
-            } else {
-              console.error('Error servidor:', response.status, responseData);
-              throw new Error(`Error: ${responseData.error || responseData.message || 'Error desconocido'}`);
-            }
-          } catch (error) {
-            console.error('Error completo:', error);
-            leadMsgModal.style.display = 'block';
-            
-            if (error.name === 'TypeError' && error.message.includes('fetch')) {
-              leadMsgModal.textContent = 'Error de conexión. Verifica tu internet y vuelve a intentar.';
-            } else if (error.message.includes('400')) {
-              leadMsgModal.textContent = 'Datos inválidos. Verifica tu email y vuelve a intentar.';
-            } else if (error.message.includes('500')) {
-              leadMsgModal.textContent = 'Servicio temporalmente no disponible. Inténtalo en unos minutos.';
-            } else {
-              leadMsgModal.textContent = 'Error inesperado. Contacta con soporte si persiste.';
-            }
-            
-            leadMsgModal.style.color = '#dc2626';
-          } finally {
-            // Código eliminado - ya no se usa
-          }
-        });
-      } // FIN del bloque eliminado
-
-      // Micro-form mejorado (Formspree + Mailchimp + validaciones)
-      const leadForm = document.getElementById('leadForm');
-      const leadBtn = document.getElementById('leadSubmit');
-      const leadMsg = document.getElementById('leadMsg');
-      
-      if (leadForm) {
-        leadForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          
-          // Verificar honeypot
-          if (leadForm.company && leadForm.company.value) { 
-            return; 
-          }
-          
-          const formData = new FormData(leadForm);
-          const name = formData.get('name');
-          const email = formData.get('email');
-          
-          // Validación básica
-          if (!name || !email) {
-            alert('Por favor, completa todos los campos obligatorios.');
-            return;
-          }
-          
-          leadBtn.disabled = true;
-          leadBtn.textContent = 'Enviando...';
-          
-          try {
-            // Enviar directamente a nuestro endpoint de Mailchimp
-            const response = await fetch('/subscribe', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                firstName: name,
-                email: email,
-                tags: ['E-WEAR Case Study', 'Ficha Trazabilidad', 'Joyería Circular']
-              })
-            });
-            
-            const responseData = await response.json();
-            console.log('Respuesta servidor:', response.status, responseData);
-            
-            if (response.ok) {
-              // Marcar formulario como enviado
-              formSubmitted = true;
-              
-              // Mostrar mensaje de éxito
-              leadMsg.style.display = 'block';
-              leadMsg.textContent = '¡Perfecto! Descargando documentos...';
-              leadMsg.style.color = '#1F4B3F';
-              
-              // Abrir modal
-              openModal(leadBtn);
-              
-              // Descargar documentos después de un momento
-              setTimeout(() => {
-                const ficha = document.createElement('a');
-                ficha.href='../../assets/docs/cases/e-wear/ficha_lote_oficios_circulares_web.pdf';
-                ficha.download='ficha_lote_oficios_circulares_web.pdf';
-                document.body.appendChild(ficha); 
-                ficha.click(); 
-                document.body.removeChild(ficha);
-              }, 1000);
-              
-              setTimeout(() => {
-                const checklist = document.createElement('a');
-                checklist.href='../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
-                checklist.download='checklist_trazabilidad_oficios_circulares_web.pdf';
-                document.body.appendChild(checklist); 
-                checklist.click(); 
-                document.body.removeChild(checklist);
-              }, 1500);
-              
-              console.log('✅ Usuario suscrito a Mailchimp y documentos descargados');
-              
-            } else {
-              console.error('Error servidor:', response.status, responseData);
-              throw new Error(`Error: ${responseData.error || responseData.message || 'Error desconocido'}`);
-            }
-            
-          } catch (error) {
-            console.error('Error completo:', error);
-            leadMsg.style.display = 'block';
-            
-            // Mensaje más específico según el tipo de error
-            if (error.message.includes('NetworkError') || error.message.includes('fetch')) {
-              leadMsg.textContent = 'Error de conexión. Verifica tu internet e inténtalo de nuevo.';
-            } else if (error.message.includes('Configuración de Mailchimp incompleta')) {
-              leadMsg.textContent = 'Servicio temporalmente no disponible. Inténtalo más tarde.';
-            } else {
-              leadMsg.textContent = 'Error al procesar. Inténtalo de nuevo o contáctanos directamente.';
-            }
-            
-            leadMsg.style.color = '#dc2626';
-          } finally {
-            leadBtn.disabled = false;
-            leadBtn.textContent = '📥 Enviar y recibir documentos';
-          }
-        });
-      }
+      // CÓDIGO ELIMINADO: Formularios obsoletos que causaban descargas automáticas
       // Reading progress bar
       const progressBar = document.querySelector('.reading-progress');
       
