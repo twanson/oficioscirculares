@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E-WEAR: De basura electrónica a joya premium con historia verificable</title>
-  <meta name="description" content="Los consumidores pagan hasta un 30% más por productos genuinamente sostenibles. Pero solo si tienen evidencia de que lo son. Te mostramos cómo lo conseguimos con E-WEAR." />
+  <title>E-WEAR: De residuo electrónico a joya con historia</title>
+  <meta name="description" content="Cómo Laura transformó su taller de joyería tradicional en Córdoba en un modelo circular que recupera plata de residuos electrónicos. Un caso real de economía circular artesanal." />
   <link rel="canonical" href="https://www.oficioscirculares.com/casos/e-wear/" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Oficios Circulares" />
@@ -92,9 +92,9 @@
     .page { 
       padding: 0;
       max-width: none;
-      line-height: 1.65;
+      line-height: 1.7;
       color: var(--text-primary);
-      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     
     .container {
@@ -716,9 +716,9 @@
     :root{ --space-8:8px; --space-12:12px; --space-16:16px; --space-24:24px; --space-32:32px; --space-40:40px; --space-48:48px; --space-56:56px; --max-ch:68ch; --accent:#1ea672; }
     .page-case .article-content{ max-width: var(--max-ch); margin-inline:auto; }
     .page-case .article-content h1{ font-weight:800; font-size:clamp(32px,4.5vw,44px); line-height:1.15; letter-spacing:-0.01em; margin:0 0 var(--space-16); }
-    .page-case .article-content h2{ font-weight:700; font-size:clamp(24px,3vw,32px); line-height:1.2; margin:var(--space-56) 0 var(--space-16); }
-    .page-case .article-content h3{ font-weight:600; font-size:clamp(20px,2.2vw,24px); line-height:1.25; margin:var(--space-24) 0 var(--space-12); }
-    .page-case .article-content p, .page-case .article-content li{ font-weight:400; font-size:18px; line-height:1.7; max-width:var(--max-ch); margin:0 0 var(--space-12); }
+    .page-case .article-content h2{ font-weight:600; font-size:clamp(1.5rem,2.8vw,1.875rem); line-height:1.3; margin:var(--space-40) 0 var(--space-16); }
+    .page-case .article-content h3{ font-weight:600; font-size:clamp(1.125rem,2.2vw,1.375rem); line-height:1.3; margin:var(--space-24) 0 var(--space-12); }
+    .page-case .article-content p, .page-case .article-content li{ font-weight:400; font-size:clamp(1rem,2vw,1.125rem); line-height:1.7; max-width:var(--max-ch); margin:0 0 var(--space-16); }
     .page-case .article-content ul{ margin:0 0 var(--space-16); padding-left:1.1rem; }
     .page-case .article-content li{ margin-bottom:var(--space-8); }
     .summary-3lines{ display:grid; row-gap:var(--space-8); margin:0 0 var(--space-32); }
@@ -774,21 +774,23 @@
       .page-case .content-images-grid { margin: 2.5rem auto !important; }
       .page-case .storybeat { margin: 2rem 0 !important; }
       
-      /* 3. TOC más prominente */
+      /* 3. TOC más compacto */
       .toc { 
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
-        border: 1px solid #d1d5db; border-radius: 20px; 
-        padding: 0; margin: 4rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        background: #f8f9fa; 
+        border: 1px solid #d1d5db; border-radius: 12px; 
+        padding: 0; margin: 2rem 0; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
       }
       .toc summary { 
-        padding: 28px 36px; cursor: pointer; font-weight: 700; font-size: 1.5rem;
-        background: #fff; border-radius: 20px; border: none;
-        display: flex; align-items: center; gap: 12px; transition: all 0.3s ease;
+        padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 1rem;
+        background: #fff; border-radius: 12px; border: none;
+        display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;
       }
-      .toc summary:hover { background: #f1f5f9; transform: translateY(-1px); }
-      .toc[open] summary { border-bottom: 1px solid #d1d5db; border-radius: 20px 20px 0 0; }
-      .toc-content { padding: 28px 36px; font-size: 1.125rem; }
-      .toc-content a { font-size: 1.125rem !important; line-height: 1.6 !important; }
+      .toc summary:hover { background: #f1f5f9; }
+      .toc[open] summary { border-bottom: 1px solid #d1d5db; border-radius: 12px 12px 0 0; }
+      .toc-content { padding: 16px 20px; }
+      .toc-content ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+      .toc-content a { font-size: 0.95rem !important; line-height: 1.4 !important; color: #1F4B3F; text-decoration: none; padding: 4px 0; display: block; }
+      .toc-content a:hover { color: #2D5F4F; }
       
       /* 4. Timeline con progresión descendente - OVERRIDE CSS GLOBAL */
       .page-case .oc-steps { 
@@ -1045,9 +1047,9 @@
     @media (min-width: 1440px) {
       .container { max-width: 92vw; }
       .oc-steps { grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); }
-      .page-case .article-content h2 { font-size: 2.75rem !important; }
-      .page-case .article-content h3 { font-size: 1.875rem !important; }
-      .page-case .article-content h4 { font-size: 1.5rem !important; }
+      .page-case .article-content h2 { font-size: 2.25rem !important; }
+      .page-case .article-content h3 { font-size: 1.5rem !important; }
+      .page-case .article-content h4 { font-size: 1.25rem !important; }
       .page-case .article-content { font-size: 1.375rem !important; }
       .page-case .article-content p { font-size: 1.375rem !important; }
       .page-case .article-content li { font-size: 1.375rem !important; }
@@ -1061,15 +1063,15 @@
       .page-case .metrics-container .card h3 { font-size: 1.625rem !important; }
       .page-case .metrics-grid .card p,
       .page-case .metrics-container .card p { font-size: 1.375rem !important; }
-      .toc summary { font-size: 1.625rem !important; }
-      .toc-content a { font-size: 1.25rem !important; }
+      .toc summary { font-size: 1.125rem !important; }
+      .toc-content a { font-size: 1rem !important; }
     }
     
     @media (min-width: 1920px) {
       .container { max-width: 90vw; }
-      .page-case .article-content h2 { font-size: 3rem !important; }
-      .page-case .article-content h3 { font-size: 2rem !important; }
-      .page-case .article-content h4 { font-size: 1.625rem !important; }
+      .page-case .article-content h2 { font-size: 2.5rem !important; }
+      .page-case .article-content h3 { font-size: 1.75rem !important; }
+      .page-case .article-content h4 { font-size: 1.5rem !important; }
       .page-case .article-content { font-size: 1.5rem !important; }
       .page-case .article-content p { font-size: 1.5rem !important; }
       .page-case .article-content li { font-size: 1.5rem !important; }
@@ -1083,8 +1085,8 @@
       .page-case .metrics-container .card h3 { font-size: 1.75rem !important; }
       .page-case .metrics-grid .card p,
       .page-case .metrics-container .card p { font-size: 1.5rem !important; }
-      .toc summary { font-size: 1.75rem !important; }
-      .toc-content a { font-size: 1.375rem !important; }
+      .toc summary { font-size: 1.25rem !important; }
+      .toc-content a { font-size: 1.125rem !important; }
     }
     
     /* Estilos para móvil/tablet - espaciado optimizado */
@@ -1169,7 +1171,7 @@
     "@type":"FAQPage",
     "mainEntity":[
       {"@type":"Question","name":"¿Trabajáis solo con joyería?","acceptedAnswer":{"@type":"Answer","text":"No. Acompañamos a cualquier artesano o marca con propósito que quiera hacer su proyecto más circular y comunicarlo con credibilidad."}},
-      {"@type":"Question","name":"¿Cuánto dura el proceso?","acceptedAnswer":{"@type":"Answer","text":"Depende del proyecto, pero normalmente entre 3-6 meses para una transformación completa como la de E-WEAR."}},
+      {"@type":"Question","name":"¿Cuánto dura el proceso?","acceptedAnswer":{"@type":"Answer","text":"Depende de cada caso: del punto de partida, los objetivos y el tipo de acompañamiento que busques. Máximo unos 6 meses para una transformación completa como la de E-WEAR."}},
       {"@type":"Question","name":"¿Trabajáis con marcas que están empezando?","acceptedAnswer":{"@type":"Answer","text":"Sí, pero necesitas tener ya un producto o servicio funcionando. No hacemos business plans desde cero."}},
       {"@type":"Question","name":"¿Y si mi proyecto no es viable?","acceptedAnswer":{"@type":"Answer","text":"Te lo diremos en la primera llamada. Preferimos ser honestos desde el principio que prometerte algo que no podemos cumplir."}}
     ]
@@ -1249,8 +1251,8 @@
           <span aria-current="page" style="color: white; font-weight: 600;">E‑WEAR</span>
         </nav>
         
-        <h1 class="case-title">E-WEAR: De basura electrónica a joya premium con historia verificable</h1>
-        <p class="case-subtitle">Los consumidores pagan hasta un 30% más por productos genuinamente sostenibles. Pero solo si tienen evidencia de que lo son. Te mostramos cómo lo conseguimos con E-WEAR.</p>
+        <h1 class="case-title">E-WEAR: De residuo electrónico a joya con historia</h1>
+        <p class="case-subtitle">Cómo Laura transformó su taller de joyería tradicional en Córdoba en un modelo circular que recupera plata de residuos electrónicos. Un caso real de economía circular artesanal.</p>
         <p style="margin: 12px 0 0;">
           <a href="#lead-title" class="cta-secondary-btn">📥 Descarga ficha de trazabilidad (formulario requerido)</a>
         </p>
@@ -1280,9 +1282,17 @@
       </figure>
 
       <!-- TOC como acordeón debajo del hero -->
-      <details id="toc" class="toc" aria-label="Índice" open>
+      <details id="toc" class="toc" aria-label="Índice">
         <summary class="toc-title">📖 Contenido</summary>
-        <div class="toc-content"></div>
+        <div class="toc-content">
+          <ul>
+            <li><a href="#el-origen-de-una-idea">El origen de una idea</a></li>
+            <li><a href="#construyendo-el-modelo-e-wear">Construyendo el modelo E-WEAR</a></li>
+            <li><a href="#los-resultados-tras-un-ano">Los resultados tras un año</a></li>
+            <li><a href="#lo-que-realmente-hace-oficios-circulares">Lo que hace Oficios Circulares</a></li>
+            <li><a href="#es-tu-momento">¿Es tu momento?</a></li>
+          </ul>
+        </div>
       </details>
 
       <article id="post-content" class="article-content">
@@ -1296,190 +1306,244 @@
         <div class="sticky-cta-desktop" id="stickyCtaDesktop">
           <a href="#lead-title" style="background:#1F4B3F; color:#fff; border:0; border-radius:999px; padding:14px 22px; box-shadow:0 8px 24px rgba(0,0,0,.2); text-decoration: none;">📥 Descarga ficha de trazabilidad</a>
         </div>
-        <h2 id="resumen-ejecutivo" class="oc-section">Resumen ejecutivo</h2>
-        <p>El desafío de Laura era real: tenía plata 100% reciclada de dispositivos electrónicos, pero sus clientes no se lo creían. Le faltaba credibilidad para justificar precios premium y no sabía cómo comunicar sostenibilidad sin sonar a marketing vacío.</p>
-        <p>El resultado: Cada anillo de E-WEAR ahora incluye su ficha de lote, ensayo de pureza y un packaging que cuenta la historia completa. Sus clientes ya no solo compran una joya, compran una narrativa verificable de transformación.</p>
+        <h2 id="el-origen-de-una-idea" class="oc-section">El origen de una idea</h2>
+        
+        <p>Laura es joyera en Córdoba. Tercera generación de plateros en una familia que conoce cada secreto del metal desde los tiempos en que su abuelo trabajaba para los talleres de la Judería. Quince años manteniendo la tradición familiar le habían enseñado todo sobre la plata: cómo se comporta en el crisol, cómo responde al martillo, cómo adquiere ese brillo característico.</p>
+
+        <p>Lo que nunca había cuestionado era de dónde venía ese metal que trabajaba cada día. Fue limpiando el taller familiar cuando encontró una caja con móviles viejos destinados al punto limpio. Mientras los observaba, recordó un documental sobre minería urbana. El dato la impactó: una tonelada de móviles viejos contiene 300 gramos de oro y 3 kilos de plata. Una tonelada de mineral de oro apenas contiene 5-10 gramos del metal precioso.</p>
+
+        <p>La investigación que siguió cambió su perspectiva. España genera 900.000 toneladas de residuos electrónicos al año. Solo se recicla correctamente el 20%. El resto termina en vertederos, incineradoras o exportado ilegalmente. Laura tomó una decisión que su abuelo habría considerado una locura: su próxima colección sería 100% plata recuperada de residuos electrónicos.</p>
         
 
-        <h2 id="el-problema" class="oc-section">El problema que resolvimos</h2>
-        <p>Laura, fundadora de E-WEAR, vino a nosotros con una frustración que conocemos bien: "Soy sostenible de verdad, pero nadie me cree".</p>
+        <h2 id="el-muro-de-la-realidad" class="oc-section">El muro de la realidad</h2>
+
+        <p>Los obstáculos aparecieron rápidamente. Los puntos limpios no pueden vender residuos a particulares. Los recicladores tradicionales de metal no separan por origen. Las plantas industriales de reciclaje trabajan con mínimos de toneladas, no con los gramos que necesita un artesano.</p>
+
+        <p>Laura pasó tres meses intentando crear una cadena de suministro. Llamadas, reuniones, callejones sin salida. Las tiendas de reparación guardaban placas "por si acaso" pero no sabían qué hacer con ellas. Los gestores de residuos hablaban de normativas y autorizaciones. Nadie trabajaba a escala artesanal.</p>
+
+        <p><em>"Quizás es imposible a pequeña escala"</em>, pensó después de otra llamada infructuosa. El sistema estaba diseñado para grandes industrias, no para talleres.</p>
+
+        <h2 id="el-encuentro-que-cambio-todo" class="oc-section">El encuentro que cambió todo</h2>
+
+        <p>Fue en unas jornadas sobre economía circular donde nuestros caminos se cruzaron. Laura tenía cinco minutos para presentar su idea. Habló con pasión sobre joyas que contarían historias de transformación, sobre dignificar el material reciclado, sobre cerrar círculos a escala humana.</p>
+
+        <p><em>"El problema"</em>, concluyó, <em>"es que el sistema no está preparado para pequeños productores. Está diseñado para industrias."</em></p>
+
+        <p>Cuando bajó del escenario, nos acercamos. <em>"El sistema no está preparado, pero se puede construir uno nuevo. ¿Tienes tiempo para un café?"</em> Ese café duró tres horas. Laura dibujaba en servilletas. Nosotros tomábamos notas. Al final, teníamos claro el camino.</p>
         
-        <p><strong>Sus desafíos específicos:</strong></p>
-        <ul>
-          <li><strong>Incredulidad del cliente:</strong> "¿Esto realmente viene de móviles antiguos?"</li>
-          <li><strong>Falta de diferenciación:</strong> Competía solo por precio, no por propósito</li>
-          <li><strong>Comunicación débil:</strong> Sus valores no se traducían en valor percibido</li>
-          <li><strong>Sin pruebas tangibles:</strong> Todo dependía de "confía en mi palabra"</li>
-        </ul>
-        
-        <p>El punto de inflexión: Laura se dio cuenta de que no bastaba con SER sostenible, necesitaba DEMOSTRARLO de forma que conectara emocionalmente con sus clientes.</p>
-        
-        <figure class="content-image" style="max-width: 600px; margin: 2rem auto;">
-          <img src="../../assets/images/cases/e-wear/moodboard-paleta-e-wear.webp" loading="lazy" decoding="async" alt="Desarrollamos una identidad visual que conecta con la memoria tecnológica y genera confianza." style="width: 600px; height: 419px; max-width: 100%; object-fit: cover;" />
-          <figcaption><strong>Desarrollamos una identidad visual que conecta con la memoria tecnológica y genera confianza.</strong></figcaption>
+        <figure class="content-image" style="margin: 2rem 0;">
+          <img src="../../assets/images/cases/e-wear/lote-origen-placas-etiquetadas.webp" loading="lazy" decoding="async" alt="Placas de circuitos verdes y componentes electrónicos listos para recuperación" />
+          <figcaption>Placas base y componentes electrónicos: la materia prima de E-WEAR</figcaption>
         </figure>
 
-        <h2 id="nuestra-estrategia" class="oc-section">Nuestra estrategia: 4 pilares para la credibilidad sostenible</h2>
+        <h2 id="construyendo-el-modelo-e-wear" class="oc-section">Construyendo el modelo E-WEAR</h2>
         
-        <div class="card">
-          <h3>1. Marca y narrativa verificable</h3>
-          <p><strong>Antes:</strong> "Hacemos joyas recicladas" (genérico, poco creíble)</p>
-          <p><strong>Después:</strong> "Fui memoria en un móvil. Caí en un cajón. Alguien me rescató. Hoy vuelvo a contar historias como anillo."</p>
-          <p>Desarrollamos mensajes que conectan emocionalmente pero se apoyan en hechos verificables.</p>
-        </div>
-        
-        <div class="card">
-          <h3>2. Trazabilidad documento por documento</h3>
-          <p><strong>El sistema que diseñamos:</strong></p>
-          <ul>
-            <li>Etiquetado de lotes con fecha y procedencia</li>
-            <li>Colaboración con reciclador certificado</li>
-            <li>Refinado en lotes pequeños para mantener trazabilidad</li>
-            <li>Ficha técnica y ensayo de pureza por cada pieza</li>
+        <h3 id="fase-1-entender-el-contexto-real">Fase 1: Entender el contexto real (Semanas 1-2)</h3>
+
+        <p>Pasamos dos semanas en el taller de Laura. No llegamos con soluciones predefinidas sino con preguntas. Documentamos cada proceso, cada decisión, cada oportunidad. El taller es peculiar: herramientas centenarias conviven con tecnología moderna, clientes de toda la vida se mezclan con turistas conscientes.</p>
+
+        <p>Mapeamos el ecosistema local: 47 tiendas de reparación de móviles en Córdoba, cientos más en el radio de 200km. Cada una genera kilos de placas base semanalmente que terminan en la basura. Una red dormida esperando activación.</p>
+
+        <p><em>"Si conseguimos conectar esta red"</em>, dijimos, <em>"tienes material para años. Y el modelo puede replicarse en cualquier ciudad."</em></p>
+
+        <h3 id="fase-2-la-estrategia-de-red-distribuida">Fase 2: La estrategia de red distribuida (Semanas 3-5)</h3>
+
+        <p>En lugar de buscar un gran proveedor, diseñamos una red de pequeños puntos de recogida:</p>
+
+        <ul>
+          <li><strong>Identificación:</strong> Mapeamos tiendas de reparación, empresas de informática, puntos de recogida ciudadana</li>
+          <li><strong>Propuesta de valor:</strong> Pequeño pago por kilo + certificado de economía circular + visibilidad de su contribución</li>
+          <li><strong>Protocolo simple:</strong> Cajas etiquetadas, procedimiento básico (foto, peso, fecha), sin burocracia excesiva</li>
+          <li><strong>Formación mínima:</strong> Una hora de explicación, un manual visual, un WhatsApp para dudas</li>
           </ul>
-          <p><strong>Resultado:</strong> Cada cliente recibe documentación descargable que demuestra el origen de su joya.</p>
-        </div>
-        
-        <div class="card">
-          <h3>3. Producto testado hasta la perfección</h3>
-          <p>No lanzamos nada hasta que cumple nuestro estándar: bocetos iniciales, prototipos físicos, pruebas de comodidad con usuarias reales, iteración hasta conseguir la pieza perfecta.</p>
+
+        <p>Encontramos a Manuel, un ingeniero químico jubilado en Sevilla que había montado una pequeña planta de recuperación de metales. <em>"Llevo años esperando un proyecto así"</em>, nos dijo. Podía procesar lotes pequeños, extraer plata con 99.9% de pureza y, crucial, enseñar el proceso para entenderlo completamente.</p>
+
+                <p>La red se activó más rápido de lo esperado. Los técnicos de reparación, acostumbrados a ver su trabajo como "arreglar cacharros", de repente eran parte de una cadena de valor circular. <em>"Ahora cuando desmonto un móvil, sé que tendrá otra vida"</em>, nos dijo Antonio, de una tienda del centro.</p>
+
+        <div class="content-images-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+            <figure>
+            <img src="../../assets/images/cases/e-wear/puesto-desmontaje-seguro.webp" loading="lazy" decoding="async" alt="Puesto de desmontaje seguro de dispositivos electrónicos" />
+            <figcaption>Puesto de desmontaje seguro: protocolos especializados para la recuperación de metales</figcaption>
+            </figure>
+            <figure>
+            <img src="../../assets/images/cases/e-wear/macro-textura-plata.webp" loading="lazy" decoding="async" alt="Manos trabajando en el taller de joyería con herramientas tradicionales" />
+            <figcaption>El proceso artesanal: donde la tradición se encuentra con la innovación circular</figcaption>
+            </figure>
+          </div>
           
-          <figure class="content-image">
-            <img src="../../assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" loading="lazy" decoding="async" alt="Iteramos hasta conseguir piezas que cumplen tanto con comodidad como con propósito." />
-            <figcaption><strong>Iteramos hasta conseguir piezas que cumplen tanto con comodidad como con propósito.</strong></figcaption>
+        <h3 id="fase-3-el-desarrollo-conjunto-del-producto">Fase 3: El desarrollo conjunto del producto (Semanas 6-9)</h3>
+
+        <p>No diseñamos por Laura; diseñamos con Laura y su comunidad. Organizamos tres sesiones de co-creación:</p>
+
+        <p><strong>Sesión con artesanos:</strong> Invitamos a otros joyeros. Algunos escépticos (<em>"el reciclado es de segunda"</em>), otros curiosos. Les mostramos el material, el proceso, las posibilidades. Sus dudas nos ayudaron a refinar: la plata reciclada es idéntica en pureza, la historia añade valor, no lo resta.</p>
+
+        <p><strong>Sesión con clientes:</strong> 12 clientes habituales de Laura. Su feedback fue claro: <em>"La historia es preciosa, pero la joya tiene que ser bella por sí misma, no por lástima ecológica."</em> Ese insight cambió todo el enfoque de diseño.</p>
+
+        <p><strong>Sesión con nuevas generaciones:</strong> Estudiantes de diseño y sostenibilidad. Aportaron perspectiva sobre comunicación, sobre cómo su generación valora la transparencia radical, sobre la importancia de poder verificar cada claim.</p>
+
+        <p>El diseño final encontró su lenguaje: líneas inspiradas en la geometría de los circuitos pero interpretadas con elegancia clásica. No parecen placas base; sugieren tecnología sin ser literales. Joyas que podrías heredar de tu abuela o comprar en una concept store de Tokio.</p>
+
+        <figure class="content-image" style="margin: 2rem 0;">
+          <img src="../../assets/images/cases/e-wear/moodboard-paleta-e-wear.webp" loading="lazy" decoding="async" alt="Moodboard y paleta de colores del proyecto E-WEAR" />
+          <figcaption>Moodboard E-WEAR: conectando la estética tecnológica con la elegancia artesanal</figcaption>
+            </figure>
+
+        <h3 id="fase-4-el-sistema-de-transparencia-radical">Fase 4: El sistema de transparencia radical (Semanas 10-11)</h3>
+
+        <p>Creamos un sistema de trazabilidad en tres capas que ahora es nuestro estándar para todos los proyectos:</p>
+
+        <p><strong>Física:</strong> Cada pieza lleva grabado un código único, sutil, integrado en el diseño</p>
+        <p><strong>Documental:</strong> Ficha que acompaña cada joya con origen del lote (foto incluida), fecha y lugar de recogida, proceso de recuperación, certificado de pureza, artesano y fecha de creación</p>
+        <p><strong>Digital:</strong> QR que conecta con información ampliada, incluyendo impacto ambiental evitado y la historia completa del material</p>
+
+                        <p>Importante: también documentamos lo que aún no conseguimos. <em>"Los cierres son de plata nueva. Estamos trabajando para que sean 100% reciclados en 2025."</em> La honestidad genera más confianza que cualquier certificado. Este principio de transparencia radical es ahora central en todos nuestros proyectos, sean artesanales o industriales.</p>
+
+        <figure class="content-image" style="margin: 2rem 0;">
+          <img src="../../assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.webp" loading="lazy" decoding="async" alt="Ensayo de pureza de lote E-WEAR mostrando 99.9% de plata" />
+          <figcaption>Ensayo de pureza: cada lote de plata recuperada se certifica con 99.9% de pureza</figcaption>
+            </figure>
+
+        <h3 id="fase-5-la-narrativa-autentica">Fase 5: La narrativa auténtica (Semanas 12-13)</h3>
+
+        <p>La comunicación debía resonar tanto local como globalmente:</p>
+
+        <p><strong>Mensaje principal:</strong> "Tradición que transforma el futuro"</p>
+        <p><strong>Historia en tres tiempos:</strong> Pasado (esta plata conectaba personas) → Presente (rescatada y transformada con maestría) → Futuro (una joya que demuestra que otro modelo es posible)</p>
+        <p><strong>Toque distintivo:</strong> En este caso, Laura quiso inspirar su colección en elementos arquitectónicos cordobeses reinterpretados con estética tecnológica</p>
+        <p><strong>Universalidad:</strong> La historia funciona en Córdoba, Barcelona, Berlín o Buenos Aires. Es local y global simultáneamente.</p>
+
+        <p>Desarrollamos templates y guías para que Laura pudiera contar la historia consistentemente sin convertirse en community manager. Automatizamos lo automatizable, personalizamos lo importante.</p>
+
+        <figure class="content-image" style="margin: 2rem 0;">
+          <img src="../../assets/images/cases/e-wear/packaging-tv-retro.webp" loading="lazy" decoding="async" alt="Packaging creativo con forma de TV retro para las joyas E-WEAR" />
+          <figcaption>Packaging "TV retro": la experiencia de unboxing cuenta la historia del origen tecnológico</figcaption>
+            </figure>
+
+        <h3 id="fase-6-el-ecosistema-de-apoyo">Fase 6: El ecosistema de apoyo (Semanas 14-16)</h3>
+
+        <p>No dejamos a Laura sola con un manual. Construimos un sistema de soporte que ahora aplicamos en todos nuestros proyectos:</p>
+
+        <ul>
+          <li><strong>Formación continua:</strong> Sesiones mensuales online para resolver dudas y compartir mejoras</li>
+          <li><strong>Red de pares:</strong> Conectamos a Laura con otros dos joyeros interesados. Comparten aprendizajes, hacen pedidos conjuntos, se apoyan mutuamente</li>
+          <li><strong>Documentación viva:</strong> Sistema simple en la nube para registrar cada lote, pieza, venta. No es burocracia; es la memoria del proyecto</li>
+          <li><strong>Comunicación asistida:</strong> Templates, calendario de contenidos, respuestas a preguntas frecuentes</li>
+          <li><strong>Evolución constante:</strong> Cada mes revisamos, aprendemos, ajustamos. El modelo mejora continuamente.</li>
+        </ul>
+
+        <h2 id="los-resultados-tras-un-ano" class="oc-section">Los resultados tras un año</h2>
+
+        <figure class="content-image" style="margin: 2rem 0;">
+          <img src="../../assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" loading="lazy" decoding="async" alt="Comparación entre prototipo y pieza final de anillo E-WEAR" />
+          <figcaption>De prototipo a pieza final: cada joya E-WEAR pasa por múltiples iteraciones</figcaption>
+            </figure>
+
+        <p><strong>Los números que importan:</strong></p>
+        <ul>
+          <li>18 kg de plata recuperada (equivalente a unos 5.000 dispositivos)</li>
+          <li>420 piezas creadas</li>
+          <li>12 puntos de recogida activos</li>
+          <li>3 empleos directos creados</li>
+          <li>62 kg de e-waste procesados correctamente</li>
+          <li>Lista de espera de 3 meses</li>
+          <li>Modelo replicado por 2 talleres más</li>
+          <li>ROI positivo desde el mes 8</li>
+        </ul>
+
+        <p><strong>Los impactos no medibles en números:</strong></p>
+
+        <p><strong><em>Dignificación del reciclaje:</em></strong> Los técnicos de reparación ahora se sienten parte de algo mayor. Guardan las placas con cuidado, las clasifican mejor, preguntan por las joyas resultantes.</p>
+
+        <p><strong><em>Educación expandida:</em></strong> Laura da charlas en institutos y universidades. Los jóvenes conectan inmediatamente: sus dispositivos tienen valor más allá de su función.</p>
+
+        <p><strong><em>Cambio de paradigma:</em></strong> Otros artesanos empiezan a preguntarse: ¿qué materiales estoy desperdiciando? ¿qué círculos puedo cerrar?</p>
+
+        <p><strong><em>Potencial de replicación:</em></strong> El modelo E-WEAR podría ser exportable a otros contextos, adaptándose a las particularidades locales de cada territorio.</p>
+
+        <div class="content-images-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+            <figure>
+            <img src="../../assets/images/cases/e-wear/packaging-movil-concha.webp" loading="lazy" decoding="async" alt="Packaging con forma de móvil concha conteniendo anillo E-WEAR" />
+            <figcaption>Packaging "móvil concha": cada caja cuenta la historia del viaje de e-waste a joya</figcaption>
           </figure>
-        </div>
-        
-        <div class="card">
-          <h3>4. Packaging que cuenta la historia</h3>
-          <p>Diseñamos cajas con forma de TV retro y móvil concha en cartón reciclado. No es solo embalaje, es parte de la experiencia que refuerza el mensaje de origen tecnológico.</p>
-          
-          <div class="content-images-grid">
-            <figure>
-              <img src="../../assets/images/cases/e-wear/packaging-tv-retro.webp" loading="lazy" decoding="async" alt="El packaging evoca memoria compartida y refuerza la narrativa de origen tecnológico." />
-              <figcaption><strong>El packaging evoca memoria compartida y refuerza la narrativa de origen tecnológico.</strong></figcaption>
+          <figure>
+            <img src="../../assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.webp" loading="lazy" decoding="async" alt="Tarjeta plantable con mensaje macro del proyecto E-WEAR" />
+            <figcaption>Tarjeta plantable: cerrando el círculo del proceso circular</figcaption>
             </figure>
-            <figure>
-              <img src="../../assets/images/cases/e-wear/packaging-movil-concha.webp" loading="lazy" decoding="async" alt="Cada caja cuenta la historia del viaje de RAEE a joya." />
-              <figcaption><strong>Cada caja cuenta la historia del viaje de RAEE a joya.</strong></figcaption>
-            </figure>
-          </div>
-          
-          <figure class="content-image">
-            <img src="../../assets/images/cases/e-wear/tarjeta-plantable-mensaje-macro.webp" loading="lazy" decoding="async" alt="La tarjeta plantable cierra el círculo del proceso circular." />
-            <figcaption><strong>La tarjeta plantable cierra el círculo del proceso circular.</strong></figcaption>
-          </figure>
         </div>
 
-        <h2 id="proceso" class="oc-section">El proceso: De residuo a joya en 5 actos</h2>
-        
-        <p><strong>ACTO 1: Origen</strong></p>
-        <p>Visitamos talleres de reparación y diseñamos el sistema de recogida de RAEE (Residuos de Aparatos Eléctricos y Electrónicos). Cada lote se etiqueta con procedencia y fecha desde el primer momento.</p>
-        
-        <p><strong>ACTO 2: Rescate</strong></p>
-        <p>Establecimos protocolos de desmontaje seguro: guantes ESD, separación de metales, reciclaje adecuado del resto. Nada se desperdicia.</p>
-        
-        <p><strong>ACTO 3: Transformación</strong></p>
-        <p>Coordinamos la refinación en lotes pequeños con reciclador certificado. Cada lote mantiene su identidad y documentación.</p>
-        
-        <p><strong>ACTO 4: Renacer</strong></p>
-        <p>Laura convierte la plata en joya mientras nosotros verificamos que la historia y trazabilidad acompañen cada pieza.</p>
-        
-        <p><strong>ACTO 5: Entrega</strong></p>
-        <p>La experiencia de unboxing completa la narrativa: packaging que evoca el origen tecnológico + documentación que lo demuestra.</p>
-        <div class="oc-steps numbered">
-          <div class="oc-step process-step" id="origen">
-            <h4><span class="num"></span> Origen</h4>
-            <figure>
-              <picture>
-                <source srcset="../../assets/images/cases/e-wear/lote-origen-placas-etiquetadas.webp" type="image/webp" />
-                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Etiquetamos el lote de RAEE con fecha y procedencia." />
-              </picture>
-            </figure>
-          </div>
+        <h2 id="lo-que-realmente-hace-oficios-circulares" class="oc-section">Lo que realmente hace Oficios Circulares</h2>
 
-          <div class="oc-step process-step" id="rescate">
-            <h4><span class="num"></span> Rescate</h4>
-            <figure>
-              <picture>
-                <source srcset="../../assets/images/cases/e-wear/puesto-desmontaje-seguro.webp" type="image/webp" />
-                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Realizamos desmontaje seguro y separación de metales." />
-              </picture>
-            </figure>
-          </div>
+        <h3>Nuestro acompañamiento estratégico incluye:</h3>
 
-          <div class="oc-step process-step" id="transformacion">
-            <h4><span class="num"></span> Transformación</h4>
-            <figure>
-              <picture>
-                <source srcset="../../assets/images/cases/e-wear/ensayo-pureza-lote-ewXX-redactado.webp" type="image/webp" />
-                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Mostramos el ensayo de pureza del lote." />
-              </picture>
-            </figure>
-          </div>
+        <p><strong>Análisis sistémico:</strong> No miramos solo tu negocio, sino todo el ecosistema. Identificamos flujos de materiales, actores clave, oportunidades ocultas. Trabajamos con artesanos, pero también con pequeñas industrias, cooperativas, startups con propósito.</p>
 
-          <div class="oc-step process-step" id="renacer">
-            <h4><span class="num"></span> Renacer</h4>
-            <figure>
-              <picture>
-                <source srcset="../../assets/images/cases/e-wear/prototipo-vs-final-anillo.webp" type="image/webp" />
-                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Comparamos el prototipo con la pieza final para validar comodidad." />
-              </picture>
-            </figure>
-          </div>
+        <p><strong>Diseño de modelo circular:</strong> Creamos la hoja de ruta específica para tu realidad. No aplicamos fórmulas; construimos soluciones a medida. Cada sector, cada escala, cada contexto requiere su aproximación.</p>
 
-          <div class="oc-step process-step" id="entrega">
-            <h4><span class="num"></span> Entrega</h4>
-            <figure>
-              <picture>
-                <source srcset="../../assets/images/cases/e-wear/packaging-movil-concha.webp" type="image/webp" />
-                <img src="../../assets/images/cases/e-wear/placeholder-4x3.jpg" loading="lazy" decoding="async" alt="Abrimos el móvil concha y se ve el anillo." />
-              </picture>
-            </figure>
-          </div>
-        </div>
+        <p><strong>Activación de redes:</strong> Te enseñamos a identificar, contactar y activar los actores necesarios. No hacemos el trabajo por ti; te capacitamos para que lo hagas y lo mantengas.</p>
 
-        <p class="storybeat" role="note" aria-label="StoryBeat">Conocí cajones y cables, hornos y manos. Hoy soy borde y luz en tu dedo. Si un día cierras mi ciclo, vuelvo al origen.</p>
-        <p id="relato-link" style="margin-top:8px;"><a href="../../assets/docs/relato-e-wear.pdf" target="_blank" rel="noopener" onclick="trackEwearDownload('relato_completo', this.href)">Leer el relato completo (PDF)</a></p>
+        <p><strong>Desarrollo de capacidades:</strong> Formación práctica para que seas autónomo. El objetivo es que nos necesites para evolucionar, no para sobrevivir.</p>
 
-        <h2 id="pruebas-metricas" class="oc-section">📊 Pruebas y métricas</h2>
-        <section class="metrics">
-        <div class="metrics-container">
-          <div class="metrics-grid">
-            <div class="card" style="margin: 0; padding: 20px; border: 2px solid var(--verde-hoja); border-radius: 16px;">
-              <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
-                ✅ <span>Credibilidad total</span>
-              </h4>
-              <p style="margin: 0; font-size: 0.95em; line-height: 1.5;">Plata 100% reciclada verificada. Documentación completa descargable por el cliente. Sistema de trazabilidad por lotes.</p>
-            </div>
-            
-            <div class="card" style="margin: 0; padding: 20px; border: 2px solid var(--terracota); border-radius: 16px;">
-              <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
-                📈 <span>Diferenciación competitiva</span>
-              </h4>
-              <p style="margin: 0 0 16px 0; font-size: 0.95em; line-height: 1.5;">Ya no compite solo por precio. Sus clientes pagan premium por la historia verificable. Posicionamiento único en el mercado de joyería sostenible.</p>
-              <p style="font-style: italic; color: #666; margin-top: 1rem;">
-                📋 Para descargar estos documentos, completa el formulario al final del artículo.
-              </p>
-            </div>
-            
-            <div class="card" style="margin: 0; padding: 20px; border: 2px solid #ffc107; border-radius: 16px;">
-              <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
-                ⚠️ <span>Transparencia total (incluso en limitaciones)</span>
-              </h4>
-              <p style="margin: 0 0 8px 0; font-size: 0.95em; line-height: 1.5;"><strong>Hoy:</strong> Los cierres y cadenas aún no son reciclados (estamos en pruebas)</p>
-              <p style="margin: 0; font-size: 0.9em; color: #666; font-weight: 600;"><strong>Objetivo:</strong> 100% componentes reciclados en 12 meses</p>
-            </div>
-          </div>
-          
-          <!-- Banner transparencia con formato consistente -->
-          <div class="card" role="status" style="margin: 2rem 0; padding: 20px; border: 2px solid #fed7aa; border-radius: 16px; background: #fff7ed;">
-            <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); display: flex; align-items: center; gap: 8px;">
-              💡 <span>Creemos que la transparencia sobre lo que falta por hacer genera más confianza que ocultar las limitaciones actuales.</span>
-            </h4>
-          </div>
-        </div>
-        </section>
+        <p><strong>Sistemas y herramientas:</strong> Protocolos, plantillas, sistemas de gestión. Todo simple, escalable, adaptable. Sin software caro, sin consultores permanentes.</p>
+
+        <p><strong>Narrativa honesta:</strong> Tu historia, bien contada, sin greenwashing. Con pruebas, con datos, con transparencia radical. Marketing que no miente.</p>
+
+        <p><strong>Acompañamiento real:</strong> Los primeros meses son críticos. Estamos ahí, ajustando, resolviendo, aprendiendo contigo. Luego, apoyo puntual cuando lo necesites.</p>
+
+        <h3>Lo que NO hacemos:</h3>
+        <ul>
+          <li>No imponemos modelos predefinidos de Silicon Valley</li>
+          <li>No prometemos revoluciones en 3 meses</li>
+          <li>No creamos dependencia de consultoría infinita</li>
+          <li>No hacemos greenwashing ni "circular washing"</li>
+          <li>No trabajamos con quien busca solo una etiqueta verde</li>
+        </ul>
+
+        <h2 id="el-potencial-por-delante" class="oc-section">El potencial por delante</h2>
+
+        <p>E-WEAR es una gota en el océano, pero demuestra que el océano puede cambiar gota a gota. En España hay miles de talleres artesanales, pequeñas empresas manufactureras, cooperativas de producción. Cada una puede cerrar sus círculos.</p>
+
+        <p>Laura ya no trabaja sola. La red crece orgánicamente: Carmen en Sevilla con cobre de cables, José en Granada con aluminio, María en Málaga combinando materiales. Pero también PyMEs industriales consultándonos: una fábrica de muebles que quiere trabajar con madera recuperada, una textil que busca cerrar el círculo de sus retales, una conservera que quiere repensar sus envases.</p>
+
+        <p>El modelo se adapta a cada realidad. No es copy-paste. Es entender, diseñar, construir, acompañar. Cada proyecto enseña algo nuevo que beneficia al siguiente. La red se fortalece, el conocimiento se comparte, el impacto se multiplica.</p>
+
+        <p>Oficios Circulares no es una consultora tradicional. Somos activadores de circularidad real. Trabajamos con las manos en la masa, entendiendo cada proceso, cada restricción, cada oportunidad. Desde el taller artesano hasta la pequeña fábrica, desde la cooperativa agrícola hasta la startup con propósito.</p>
+
+        <h2 id="es-tu-momento" class="oc-section">¿Es tu momento?</h2>
+
+        <p><strong>Requisitos básicos:</strong></p>
+        <ul>
+          <li>Un negocio real que transforme materiales (artesanal, industrial, agrícola, lo que sea)</li>
+          <li>Disposición para la transparencia radical</li>
+          <li>Capacidad de invertir tiempo en el cambio (más importante que el dinero)</li>
+          <li>Visión a medio plazo (esto no es un sprint)</li>
+          <li>Compromiso genuino (no buscamos maquillaje verde)</li>
+        </ul>
+
+        <p><strong>El proceso de exploración:</strong></p>
+        <ol>
+          <li>Conversación inicial (gratuita) para entender tu situación</li>
+          <li>Diagnóstico preliminar (1 semana) para evaluar potencial</li>
+          <li>Propuesta de acompañamiento adaptada a tu realidad</li>
+          <li>Decisión conjunta de si hay fit mutuo</li>
+        </ol>
+
+        <p>No trabajamos con todo el mundo. Buscamos productores, transformadores y creadores que realmente quieran liderar el cambio en sus sectores. Da igual si eres un ceramista en Talavera, una cooperativa textil en Béjar, una startup de biomateriales en Barcelona o una quesería en Asturias. Si trabajas con materiales, tienes un proyecto con propósito o crees en la circularidad real, podemos explorar juntos.</p>
+
+        <h2 id="el-futuro-se-construye-con-las-manos" class="oc-section">El futuro se construye con las manos</h2>
+
+        <p>Laura sigue en su taller de la Judería cordobesa. Cada mañana, al encender el soplete, ya no ve solo una herramienta de trabajo. Ve un instrumento de transformación. <em>"Mi abuelo estaría orgulloso"</em>, dice mientras pule una pieza. <em>"No por romper la tradición, sino por honrarla dándole futuro."</em></p>
+
+        <p>En Oficios Circulares creemos que la economía circular no es un concepto de PowerPoint. Es Laura recuperando plata. Es Manuel procesando con cuidado. Es Antonio guardando placas. Es cada cliente eligiendo conscientemente. Es cada productor repensando sus flujos.</p>
+
+        <p>No creemos en la economía circular perfecta que llegará algún día. Creemos en la economía circular imperfecta que construimos hoy, proyecto a proyecto, mejorando continuamente.</p>
+
+        <p><strong>¿Tienes un negocio que transforma materiales? ¿Crees que puede ser más circular? ¿Quieres construir el cambio, no solo hablarlo?</strong></p>
+
+        <p><a href="https://tally.so/r/nPxWM0?ref=ewear" target="_blank">Contacta con nosotros</a> y exploremos juntos cómo tu actividad puede cerrar el círculo.</p>
+
+        <p>Porque cada negocio esconde oportunidades circulares. Solo hay que verlas, diseñarlas y construirlas.<br>
+        Paso a paso. Taller a taller. Historia a historia.</p>
         <!-- Formulario Tally para descarga de documentos E-WEAR -->
         <section aria-labelledby="lead-title" style="margin: 28px 0 12px;">
           <h3 id="lead-title">📥 Descarga un ejemplo de ficha de trazabilidad</h3>
@@ -1520,7 +1584,7 @@
           </div>
           <div class="card" style="border-left: 4px solid var(--terracota);">
             <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); font-size: 1.1em;">¿Cuánto dura el proceso?</h4>
-            <p style="margin: 0; line-height: 1.6;">Depende del proyecto, pero normalmente entre 3-6 meses para una transformación completa como la de E-WEAR.</p>
+            <p style="margin: 0; line-height: 1.6;">Depende de cada caso: del punto de partida, los objetivos y el tipo de acompañamiento que busques. Máximo unos 6 meses para una transformación completa como la de E-WEAR.</p>
           </div>
           <div class="card" style="border-left: 4px solid var(--arena);">
             <h4 style="margin: 0 0 12px 0; color: var(--verde-profundo); font-size: 1.1em;">¿Trabajáis con marcas que están empezando?</h4>
@@ -1682,7 +1746,7 @@
       
       // Gestión del formulario Tally en el modal
       const leadMsgModal = document.getElementById('leadMsgModal');
-      
+
       // Función para manejar envío de Tally
       function handleTallySubmission(e) {
         console.log('📨 Evento recibido:', e.data);
@@ -1695,7 +1759,7 @@
             
             // Mostrar mensaje de éxito
             if (leadMsgModal) {
-              leadMsgModal.style.display = 'block';
+            leadMsgModal.style.display = 'block';
               leadMsgModal.textContent = '¡Perfecto! Descargando documentos...';
               leadMsgModal.style.color = '#1F4B3F';
             }
@@ -1718,7 +1782,7 @@
               if (typeof closeLeadModal === 'function') {
                 closeLeadModal();
               }
-              
+                
               // Descargar ficha de lote
               try {
                 const fichaLink = document.createElement('a');
@@ -1732,9 +1796,9 @@
               } catch (error) {
                 console.error('Error descarga ficha:', error);
               }
-              
+                
               // Descargar checklist con delay
-              setTimeout(() => {
+                setTimeout(() => {
                 try {
                   const checklistLink = document.createElement('a');
                   checklistLink.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
@@ -1744,7 +1808,7 @@
                   checklistLink.click();
                   document.body.removeChild(checklistLink);
                   console.log('📋 Descarga 2: Checklist iniciada');
-                } catch (error) {
+          } catch (error) {
                   console.error('Error descarga checklist:', error);
                 }
               }, 1000);
@@ -1813,7 +1877,7 @@
                 console.log('📥 Descarga 1: Ficha de lote - EJECUTADA');
                 
                 // Descarga 2: Checklist con delay
-                setTimeout(() => {
+              setTimeout(() => {
                   try {
                     const link2 = document.createElement('a');
                     link2.href = '../../assets/docs/cases/e-wear/checklist_trazabilidad_oficios_circulares_web.pdf';
@@ -1826,12 +1890,12 @@
                   } catch (error) {
                     console.error('Error descarga 2:', error);
                   }
-                }, 1000);
-                
+              }, 1000);
+              
               } catch (error) {
                 console.error('Error descarga 1:', error);
               }
-            }, 1500);
+              }, 1500);
           }
         }
       }
