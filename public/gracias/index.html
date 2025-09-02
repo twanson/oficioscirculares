@@ -569,18 +569,31 @@
 
         // Sistema de personalización y descargas por recurso
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔄 Página de gracias cargada - Iniciando detección de recursos');
+            
             const urlParams = new URLSearchParams(window.location.search);
             const resource = urlParams.get('resource');
             const email = urlParams.get('email');
             
+            console.log('📋 Parámetros URL detectados:', {
+                resource: resource,
+                email: email,
+                fullURL: window.location.href,
+                search: window.location.search
+            });
+            
             // Personalización con email si viene
             if (email && email !== '{email}') {
+                console.log('📧 Personalizando con email:', email);
                 personalizeWithEmail(email);
             }
             
             // Manejo específico por tipo de recurso
             if (resource === 'e-wear-docs') {
+                console.log('🎯 DETECTADO E-WEAR - Activando contenido específico');
                 handleEwearResource();
+            } else {
+                console.log('⚠️ No se detectó resource=e-wear-docs. Resource actual:', resource);
             }
             
             // Auto-scroll suave desde Tally si viene con parámetro
@@ -644,6 +657,9 @@
             
             // Personalizar steps para E-WEAR
             personalizeStepsForEwear();
+            
+            // Agregar botón prominente para volver al caso E-WEAR
+            addBackToEwearButton();
         }
         
         // Función para agregar estado de descarga
@@ -781,6 +797,77 @@
                 action3.textContent = '📅 Agenda consulta';
             }
         }
+        
+        // Función para agregar botón de regreso al caso E-WEAR
+        function addBackToEwearButton() {
+            const ctaSection = document.querySelector('.cta-final .container');
+            if (ctaSection) {
+                // Modificar el contenido del CTA final para E-WEAR
+                const ctaTitle = ctaSection.querySelector('.cta-title');
+                const ctaDescription = ctaSection.querySelector('.cta-description');
+                const existingBtn = ctaSection.querySelector('.btn-cta');
+                
+                if (ctaTitle) {
+                    ctaTitle.textContent = '¿Quieres seguir explorando el caso E-WEAR?';
+                }
+                
+                if (ctaDescription) {
+                    ctaDescription.textContent = 'Vuelve al artículo completo para ver más detalles sobre la implementación de trazabilidad en joyería circular.';
+                }
+                
+                if (existingBtn) {
+                    existingBtn.textContent = '🔙 Continuar leyendo el caso E-WEAR';
+                    existingBtn.href = '../casos/e-wear/';
+                    existingBtn.target = '_self';
+                    existingBtn.style.fontSize = '1.2rem';
+                    existingBtn.style.padding = '18px 36px';
+                    existingBtn.style.marginBottom = '15px';
+                    existingBtn.style.display = 'block';
+                    existingBtn.style.maxWidth = '400px';
+                    existingBtn.style.margin = '0 auto 15px';
+                }
+                
+                // Agregar botón secundario para consulta
+                const secondaryBtn = document.createElement('a');
+                secondaryBtn.className = 'btn-cta';
+                secondaryBtn.href = 'https://calendar.app.google/e9PuWyYnspzeXWBU7';
+                secondaryBtn.target = '_blank';
+                secondaryBtn.textContent = '📅 Agenda consulta para tu proyecto';
+                secondaryBtn.style.background = 'transparent';
+                secondaryBtn.style.color = 'white';
+                secondaryBtn.style.border = '2px solid white';
+                secondaryBtn.style.fontSize = '1rem';
+                secondaryBtn.style.padding = '12px 24px';
+                
+                if (existingBtn) {
+                    existingBtn.parentNode.insertBefore(secondaryBtn, existingBtn.nextSibling);
+                }
+            }
+        }
+        
+        // MÉTODO ALTERNATIVO: Verificación inmediata en caso de que DOMContentLoaded falle
+        (function() {
+            console.log('🔄 Verificación alternativa iniciada');
+            
+            const checkForEwear = () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const resource = urlParams.get('resource');
+                
+                console.log('🔍 Verificación alternativa - resource:', resource);
+                
+                if (resource === 'e-wear-docs' && !document.getElementById('ewear-download-status')) {
+                    console.log('⚡ Activando E-WEAR por método alternativo');
+                    handleEwearResource();
+                }
+            };
+            
+            // Ejecutar inmediatamente
+            checkForEwear();
+            
+            // Y también después de un breve delay
+            setTimeout(checkForEwear, 500);
+            setTimeout(checkForEwear, 1500);
+        })();
     </script>
 </body>
 </html>
