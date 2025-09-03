@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const posts = [
     {
       slug: '../casos/e-wear/',
-      title: 'E-WEAR: De basura electrónica a joya premium con historia verificable',
-      excerpt: 'Los consumidores pagan hasta un 30% más por productos genuinamente sostenibles. Pero solo si tienen evidencia de que lo son.',
+      title: 'E-WEAR: De residuo electrónico a joya con historia',
+      excerpt: 'Cómo Laura transformó su taller de joyería tradicional en un modelo circular que recupera plata de residuos electrónicos. Un caso real de economía circular artesanal.',
       date: '2025-08-08',
       readingMinutes: 8,
       cover: ASSETS_BASE + '/images/cases/e-wear/hero-packaging-movil-concha.webp',
