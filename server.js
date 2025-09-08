@@ -177,6 +177,15 @@ app.get('/recursos/gracias', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'recursos', 'gracias', 'index.html'));
 });
 
+// Ruta específica para modelos-sostenibles (coming soon)
+app.get('/recursos/modelos-sostenibles', (req, res) => {
+  res.render('coming-soon', {
+    title: 'Guía de Modelos de Negocios Sostenibles - Próximamente',
+    description: 'Próximamente disponible: Guía completa de modelos de negocios sostenibles para artesanos y pequeñas marcas.',
+    canonical: '/recursos/modelos-sostenibles'
+  });
+});
+
 // Rutas de recursos
 app.get('/recursos', (req, res) => {
   const visibles = recursos.getAllRecursos().filter(r => r.listed !== false);
