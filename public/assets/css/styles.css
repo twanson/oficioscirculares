@@ -2492,9 +2492,16 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 
 .explore-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .explore-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
 }
 
 .explore-card {
@@ -2550,11 +2557,6 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     
     .coming-soon-description {
         font-size: 1.1rem;
-    }
-    
-    .explore-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
     
     .explore-card {
