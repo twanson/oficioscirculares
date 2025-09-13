@@ -429,5 +429,150 @@ document.addEventListener('DOMContentLoaded', function() {
     //         slideInterval = setInterval(nextSlide, 5000);
     //     });
     // }
+    
+    // Setup servicios dropdown if it exists
+    setupServiciosDropdown();
 });
+
+// ===== SERVICIOS DROPDOWN FUNCTIONALITY =====
+function setupServiciosDropdown() {
+    const dropdownBtn = document.getElementById('servicios-dropdown-btn');
+    const dropdownMenu = document.getElementById('servicios-dropdown-menu');
+    
+    if (!dropdownBtn || !dropdownMenu) return; // Exit if dropdown doesn't exist on this page
+    
+    const dropdownItems = dropdownMenu.querySelectorAll('.dropdown-item');
+    let currentFocusedIndex = -1;
+    
+    // Setup UTM links for dropdown items
+    dropdownItems.forEach(function(item) {
+        const service = item.getAttribute('data-service');
+        const originalHref = item.getAttribute('href');
+        
+        // Add UTM parameters with header-dropdown content
+        const utm = {
+            utm_source: 'site',
+            utm_medium: 'internal',
+            utm_campaign: `oc-${service}`,
+            utm_content: 'header-dropdown'
+        };
+        
+        const url = new URL(originalHref, window.location.origin);
+        Object.entries(utm).forEach(([key, value]) => {
+            url.searchParams.set(key, value);
+        });
+        item.href = url.toString();
+        
+        // Add GA4 tracking
+        item.addEventListener('click', function(e) {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'click_cta',
+                cta_offer: service,
+                cta_location: 'header-dropdown'
+            });
+        });
+    });
+    
+    // Toggle dropdown
+    function toggleDropdown(open) {
+        const isOpen = open !== undefined ? open : dropdownBtn.getAttribute('aria-expanded') === 'false';
+        dropdownBtn.setAttribute('aria-expanded', isOpen);
+        dropdownMenu.classList.toggle('show', isOpen);
+        currentFocusedIndex = -1;
+        
+        if (isOpen) {
+            // Focus first item when opening with keyboard
+            setTimeout(() => {
+                if (document.activeElement === dropdownBtn) {
+                    focusItem(0);
+                }
+            }, 10);
+        }
+    }
+    
+    // Focus management
+    function focusItem(index) {
+        if (index >= 0 && index < dropdownItems.length) {
+            currentFocusedIndex = index;
+            dropdownItems[index].focus();
+        }
+    }
+    
+    // Button click handler
+    dropdownBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleDropdown();
+    });
+    
+    // Button keyboard handler
+    dropdownBtn.addEventListener('keydown', function(e) {
+        switch(e.key) {
+            case 'Enter':
+            case ' ':
+                e.preventDefault();
+                toggleDropdown();
+                break;
+            case 'ArrowDown':
+                e.preventDefault();
+                toggleDropdown(true);
+                break;
+            case 'Escape':
+                toggleDropdown(false);
+                break;
+        }
+    });
+    
+    // Menu items keyboard navigation
+    dropdownItems.forEach(function(item, index) {
+        item.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    focusItem((index + 1) % dropdownItems.length);
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    focusItem(index === 0 ? dropdownItems.length - 1 : index - 1);
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    focusItem(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    focusItem(dropdownItems.length - 1);
+                    break;
+                case 'Escape':
+                    e.preventDefault();
+                    toggleDropdown(false);
+                    dropdownBtn.focus();
+                    break;
+                case 'Tab':
+                    // Allow default tab behavior
+                    toggleDropdown(false);
+                    break;
+            }
+        });
+        
+        // Close on item click
+        item.addEventListener('click', function() {
+            toggleDropdown(false);
+        });
+    });
+    
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            toggleDropdown(false);
+        }
+    });
+    
+    // Close on focus outside
+    document.addEventListener('focusin', function(e) {
+        if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            toggleDropdown(false);
+        }
+    });
+}
 

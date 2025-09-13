@@ -186,6 +186,19 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
   });
 });
 
+// Rutas de servicios
+app.get('/servicios/diagnostico-3d', (req, res) => {
+  res.render('diagnostico-3d');
+});
+
+app.get('/servicios/roadmap-3d', (req, res) => {
+  res.render('roadmap-3d');
+});
+
+app.get('/servicios/sprint-3d', (req, res) => {
+  res.render('sprint-3d');
+});
+
 // Rutas de recursos
 app.get('/recursos', (req, res) => {
   const visibles = recursos.getAllRecursos().filter(r => r.listed !== false);
@@ -502,9 +515,9 @@ app.post('/api/renew-access', rateLimitMiddleware, async (req, res) => {
 
 app.use(express.static('public'));
 
-// Servir archivos estáticos
+// Servir página principal como EJS template
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.render('index');
 });
 
 // Endpoint para suscripción a MailChimp
