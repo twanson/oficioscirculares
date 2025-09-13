@@ -2810,6 +2810,17 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
   box-shadow: 0 0 0 3px rgba(16,185,129,0.3);
 }
 
+/* Tipografía específica y sticky CTA para Diagnóstico 3D */
+.page-service.diag3d h1.hero-title { font-size: clamp(2.5rem, 4.8vw, 3rem); line-height: 1.15; font-weight: 600; }
+.page-service.diag3d h2.section-title.enhanced { font-size: clamp(1.75rem, 3.2vw, 2rem); line-height: 1.2; font-weight: 600; }
+.page-service.diag3d .ui-card h3 { font-size: 1.25rem; line-height: 1.25; font-weight: 500; }
+.page-service.diag3d p, .page-service.diag3d li { font-size: 1rem; line-height: 1.6; }
+.page-service.diag3d .hero-ctas .btn, .sticky-cta-mobile .btn { border-radius: 16px; padding: 12px 20px; font-weight: 600; }
+
+.sticky-cta-mobile { position: fixed; left: 0; right:0; bottom: 0; display: none; gap: 10px; padding: 10px 16px; background: rgba(255,255,255,0.92); border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 30px rgba(31,75,63,0.08); z-index: 60; }
+.sticky-cta-mobile .btn { flex: 1; text-align: center; }
+@media (max-width: 768px) { .sticky-cta-mobile { display: flex; } }
+
 
 .option-title {
     font-family: var(--font-heading);
