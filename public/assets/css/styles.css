@@ -2760,6 +2760,24 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 /* Toggle para móvil: oculto en desktop */
 .micro-toggle { display: none; }
 
+/* Arreglar hover en iPad/tablets */
+@media (hover: none) and (pointer: coarse) {
+  .micro-cards {
+    /* En dispositivos touch, mostrar siempre sin hover */
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    width: 100% !important;
+    margin: 20px 0;
+    box-shadow: 0 8px 24px rgba(31, 75, 63, 0.12);
+  }
+  
+  .micro-card a:hover {
+    background: #1F4B3F; /* Mantener color original */
+  }
+}
+
 /* Modo acordeón móvil para micro‑cards */
 @media (max-width: 768px) {
   .micro-cards.mobile-accordion {
