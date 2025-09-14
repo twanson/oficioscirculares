@@ -2804,16 +2804,128 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 }
 
 /* ===== SERVICIOS: LANDING PAGES ===== */
-.service-hero { padding: 64px 0 32px; background: var(--blanco-calido); }
-.service-hero .hero-split-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: center; }
-.service-hero .hero-title { font-size: clamp(2.2rem, 4.5vw, 3.2rem); line-height: 1.15; margin: 8px 0 16px; font-weight: 800; color: var(--verde-profundo); }
-.service-hero .hero-sub { color: var(--negro-verdoso); margin-bottom: 16px; }
-.service-hero .eyebrow { color: var(--ocre); font-weight: 800; letter-spacing: .02em; text-transform: none; font-size: 0.95rem; }
-.service-hero .hero-bullets { margin: 12px 0 20px; padding-left: 20px; display: grid; gap: 8px; }
-.service-hero .hero-bullets li { color: var(--negro-verdoso); }
-.service-hero .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
-.service-hero .hero-media .media-frame { position: relative; border-radius: 20px; overflow: hidden; background: #fff; box-shadow: 0 16px 40px rgba(31,75,63,0.15); border:1px solid #e5e7eb; }
-.service-hero .hero-media img { display: block; width: 100%; height: auto; }
+.service-hero {
+    padding: 80px 0 48px;
+    background: linear-gradient(135deg, var(--blanco-calido) 0%, #ffffff 100%);
+    position: relative;
+}
+
+.service-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(209, 123, 73, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.service-hero .hero-split-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.service-hero .hero-copy {
+    padding-right: 24px;
+}
+
+.service-hero .hero-title {
+    font-size: clamp(2.4rem, 4.8vw, 3.4rem);
+    line-height: 1.1;
+    margin: 0 0 20px;
+    font-weight: 800;
+    color: var(--verde-profundo);
+    text-shadow: 0 1px 2px rgba(31, 75, 63, 0.05);
+}
+
+.service-hero .hero-sub {
+    color: var(--negro-verdoso);
+    margin-bottom: 24px;
+    font-size: clamp(1.1rem, 2.2vw, 1.25rem);
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.service-hero .eyebrow {
+    color: var(--terracota);
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-transform: none;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.service-hero .hero-bullets {
+    margin: 20px 0 32px;
+    padding-left: 0;
+    display: grid;
+    gap: 12px;
+    list-style: none;
+}
+
+.service-hero .hero-bullets li {
+    color: var(--negro-verdoso);
+    position: relative;
+    padding-left: 32px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.service-hero .hero-bullets li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--verde-hoja);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.service-hero .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.service-hero .hero-media .media-frame {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow:
+        0 20px 50px rgba(31, 75, 63, 0.12),
+        0 8px 16px rgba(31, 75, 63, 0.08);
+    border: 1px solid rgba(31, 75, 63, 0.08);
+    transform: rotate(1deg);
+    transition: var(--transition-smooth);
+}
+
+.service-hero .hero-media .media-frame:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow:
+        0 25px 60px rgba(31, 75, 63, 0.15),
+        0 10px 20px rgba(31, 75, 63, 0.1);
+}
+
+.service-hero .hero-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(1.1) contrast(1.05);
+    transition: var(--transition-smooth);
+}
+
+.service-hero .hero-media .media-frame:hover img {
+    filter: saturate(1.2) contrast(1.1);
+}
 
 .service-section { padding: 60px 0; background: var(--blanco-calido); }
 .service-section:nth-of-type(even) { background: #fff; }
@@ -2830,7 +2942,52 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 .badges { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
 .badge { display:inline-block; padding:6px 10px; border-radius: 999px; border:1px solid #e5e7eb; background:#fff; color: var(--verde-profundo); font-weight:600; font-size:.9rem; }
 
-.faq-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+/* FAQ mejorada con mejor espaciado */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.faq-grid .ui-card {
+    transition: var(--transition-smooth);
+    border-left: 3px solid transparent;
+}
+
+.faq-grid .ui-card:hover {
+    border-left-color: var(--terracota);
+    transform: translateY(-2px);
+}
+
+.faq-grid .ui-card h3 {
+    color: var(--verde-profundo);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.faq-grid .ui-card h3::before {
+    content: '?';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--terracota);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.faq-grid .ui-card p {
+    color: var(--negro-verdoso);
+    line-height: 1.6;
+}
 .example-card .microcopy { color:#6b7280; margin-top: 8px; }
 .kpis-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 
@@ -2853,14 +3010,655 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 
 /* Tipografía específica y sticky CTA para Diagnóstico 3D */
 .page-service.diag3d h1.hero-title { font-size: clamp(2.5rem, 4.8vw, 3rem); line-height: 1.15; font-weight: 600; }
-.page-service.diag3d h2.section-title.enhanced { font-size: clamp(1.75rem, 3.2vw, 2rem); line-height: 1.2; font-weight: 600; }
-.page-service.diag3d .ui-card h3 { font-size: 1.25rem; line-height: 1.25; font-weight: 500; }
-.page-service.diag3d p, .page-service.diag3d li { font-size: 1rem; line-height: 1.6; }
-.page-service.diag3d .hero-ctas .btn, .sticky-cta-mobile .btn { border-radius: 16px; padding: 12px 20px; font-weight: 600; }
+.page-service.diag3d h2.section-title.enhanced { font-size: clamp(1.8rem, 3.2vw, 2.1rem); line-height: 1.2; font-weight: 700; margin-bottom: 28px; }
+.page-service.diag3d .ui-card { background:#fff; border:1px solid #e5e7eb; border-radius: 16px; padding: 24px; box-shadow: 0 10px 24px rgba(31,75,63,0.08); }
+.page-service.diag3d .ui-card h3 { font-size: 1.2rem; line-height: 1.25; font-weight: 700; color: var(--verde-profundo); margin-bottom: 8px; }
+.page-service.diag3d p, .page-service.diag3d li { font-size: 1rem; line-height: 1.65; color: var(--negro-verdoso); }
+.page-service.diag3d .simple-list li { margin: 4px 0; }
+.page-service.diag3d .hero-ctas .btn, .sticky-cta-mobile .btn { border-radius: 16px; padding: 12px 20px; font-weight: 700; }
+/* Testimonial y ejemplo mejorados */
+.page-service.diag3d .example-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.page-service.diag3d .example-card::before {
+    content: '\201C';
+    position: absolute;
+    top: -8px;
+    left: 16px;
+    font-size: 4rem;
+    color: var(--terracota);
+    opacity: 0.2;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.page-service.diag3d .example-card blockquote {
+    border-left: 4px solid var(--terracota);
+    padding-left: 20px;
+    color: var(--negro-verdoso);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+}
+
+.page-service.diag3d .example-card p:last-child {
+    margin-top: 12px;
+    font-weight: 600;
+    color: var(--verde-profundo);
+}
+
+/* Sección de precio mejorada */
+.page-service.diag3d #precio .ui-card {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border: 2px solid rgba(31, 75, 63, 0.08);
+    text-align: center;
+    position: relative;
+}
+
+.page-service.diag3d #precio .ui-card::before {
+    content: '\20AC';
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    font-size: 3rem;
+    color: var(--verde-hoja);
+    opacity: 0.1;
+    font-weight: 800;
+}
+
+.page-service.diag3d #precio .ui-card p:first-child {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--verde-profundo);
+    margin-bottom: 8px;
+}
+
+.page-service.diag3d #precio .ui-card p:first-child strong {
+    font-size: 2rem;
+    color: var(--verde-hoja);
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.page-service.diag3d #precio .badges {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-service.diag3d .badge {
+    background: linear-gradient(135deg, var(--verde-profundo), var(--verde-hoja));
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(31, 75, 63, 0.2);
+}
+/* Deliverables Cards mejoradas con mejor jerarquía visual */
+.page-service.diag3d .deliverables-grid .card-operacion {
+    background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 100%);
+    border-color: rgba(31, 75, 63, 0.12);
+    position: relative;
+}
+
+.page-service.diag3d .deliverables-grid .card-operacion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--verde-profundo), var(--verde-hoja));
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.diag3d .deliverables-grid .card-comercial {
+    background: linear-gradient(135deg, #fffbf5 0%, #ffffff 100%);
+    border-color: rgba(209, 123, 73, 0.12);
+    position: relative;
+}
+
+.page-service.diag3d .deliverables-grid .card-comercial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--terracota), #f59e0b);
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.diag3d .deliverables-grid .card-informe {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-color: rgba(107, 114, 128, 0.12);
+    position: relative;
+}
+
+.page-service.diag3d .deliverables-grid .card-informe::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6b7280, #9ca3af);
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.diag3d .deliverables-grid .ui-card h3 {
+    color: var(--verde-profundo);
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+.page-service.diag3d .deliverables-grid .card-comercial h3 {
+    color: #b45309;
+}
+
+.page-service.diag3d .deliverables-grid .card-informe h3 {
+    color: #4b5563;
+}
+
+/* Bandas laterales para reforzar color de cada tarjeta */
+.page-service.diag3d .deliverables-grid .card-operacion { border-left: 6px solid #1F4B3F; }
+.page-service.diag3d .deliverables-grid .card-comercial { border-left: 6px solid #d97706; }
+.page-service.diag3d .deliverables-grid .card-informe { border-left: 6px solid #9ca3af; }
+
+/* Timeline refinada con elementos más visuales */
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0;
+    position: relative;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    counter-reset: timeline-counter;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--verde-profundo), var(--verde-hoja), var(--terracota));
+    border-radius: 2px;
+}
+
+.timeline li {
+    position: relative;
+    padding: 20px 0 20px 80px;
+    margin-bottom: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(31, 75, 63, 0.06);
+    border: 1px solid rgba(31, 75, 63, 0.08);
+    transition: var(--transition-smooth);
+}
+
+.timeline li:hover {
+    transform: translateX(8px);
+    box-shadow: 0 8px 24px rgba(31, 75, 63, 0.1);
+}
+
+.timeline li::before {
+    content: counter(timeline-counter);
+    counter-increment: timeline-counter;
+    position: absolute;
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--verde-profundo), var(--verde-hoja));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(31, 75, 63, 0.3);
+    z-index: 2;
+}
+
+.timeline li strong {
+    color: var(--verde-profundo);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.note {
+    color: #6b7280;
+    margin-top: 24px;
+    font-style: italic;
+    text-align: center;
+    padding: 12px 20px;
+    background: rgba(31, 75, 63, 0.03);
+    border-radius: 8px;
+    border-left: 3px solid var(--terracota);
+}
+
+.inline-cta {
+    margin-top: 32px;
+    text-align: center;
+}
+
+/* CTAs mejorados con mejor espaciado y micro-interacciones */
+.page-service.diag3d .hero-ctas {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.page-service.diag3d .hero-ctas .btn {
+    position: relative;
+    overflow: hidden;
+    transform: perspective(1px) translateZ(0);
+}
+
+.page-service.diag3d .hero-ctas .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.page-service.diag3d .hero-ctas .btn:hover::before {
+    left: 100%;
+}
+
+.page-service.diag3d .hero-ctas .btn-secondary {
+    background: transparent;
+    color: var(--verde-profundo);
+    border: 2px solid var(--verde-profundo);
+}
+
+.page-service.diag3d .hero-ctas .btn-secondary:hover {
+    background: var(--verde-profundo);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(31, 75, 63, 0.2);
+}
+
+/* Centrado del CTA final */
+.cta-final .container { text-align: center; }
+.cta-final .hero-ctas { display: inline-flex; justify-content: center; align-items: center; gap: 20px; margin: 0 auto; width: auto; }
 
 .sticky-cta-mobile { position: fixed; left: 0; right:0; bottom: 0; display: none; gap: 10px; padding: 10px 16px; background: rgba(255,255,255,0.92); border-top: 1px solid #e5e7eb; box-shadow: 0 -10px 30px rgba(31,75,63,0.08); z-index: 60; }
 .sticky-cta-mobile .btn { flex: 1; text-align: center; }
 @media (max-width: 768px) { .sticky-cta-mobile { display: flex; } }
+
+/* ===== ROADMAP 3D SPECIFIC STYLES ===== */
+.page-service.roadmap3d h1.hero-title { font-size: clamp(2.5rem, 4.8vw, 3rem); line-height: 1.15; font-weight: 600; }
+.page-service.roadmap3d h2.section-title.enhanced { font-size: clamp(1.8rem, 3.2vw, 2.1rem); line-height: 1.2; font-weight: 700; margin-bottom: 28px; }
+.page-service.roadmap3d .ui-card { background:#fff; border:1px solid rgba(31, 75, 63, 0.06); border-radius: 20px; padding: 28px; box-shadow: 0 12px 32px rgba(31, 75, 63, 0.06), 0 4px 8px rgba(31, 75, 63, 0.04); transition: var(--transition-smooth); position: relative; margin-bottom: 16px; }
+.page-service.roadmap3d .ui-card:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(31, 75, 63, 0.1), 0 6px 12px rgba(31, 75, 63, 0.06); }
+.page-service.roadmap3d .ui-card h3 { font-size: 1.25rem; line-height: 1.25; font-weight: 700; color: var(--verde-profundo); margin-bottom: 12px; }
+.page-service.roadmap3d p, .page-service.roadmap3d li { font-size: 1rem; line-height: 1.65; color: var(--negro-verdoso); }
+.page-service.roadmap3d .simple-list li { margin: 4px 0; }
+.page-service.roadmap3d .hero-ctas .btn, .sticky-cta-mobile .btn { border-radius: 16px; padding: 12px 20px; font-weight: 700; }
+.page-service.roadmap3d .example-card blockquote { border-left: 4px solid var(--terracota); padding-left: 20px; color: var(--negro-verdoso); font-style: italic; font-size: 1.1rem; line-height: 1.6; position: relative; z-index: 2; }
+.page-service.roadmap3d .example-card p:last-child { margin-top: 12px; font-weight: 600; color: var(--verde-profundo); }
+.page-service.roadmap3d .example-card::before { content: '"'; position: absolute; top: -8px; left: 16px; font-size: 4rem; color: var(--terracota); opacity: 0.2; font-family: Georgia, serif; line-height: 1; }
+
+/* Deliverables Cards para Roadmap 3D */
+.page-service.roadmap3d .deliverables-grid .card-operacion {
+    background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 100%);
+    border-color: rgba(31, 75, 63, 0.12);
+    position: relative;
+}
+
+.page-service.roadmap3d .deliverables-grid .card-operacion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--verde-profundo), var(--verde-hoja));
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.roadmap3d .deliverables-grid .card-comercial {
+    background: linear-gradient(135deg, #fffbf5 0%, #ffffff 100%);
+    border-color: rgba(209, 123, 73, 0.12);
+    position: relative;
+}
+
+.page-service.roadmap3d .deliverables-grid .card-comercial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--terracota), #f59e0b);
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.roadmap3d .deliverables-grid .card-informe {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-color: rgba(107, 114, 128, 0.12);
+    position: relative;
+}
+
+.page-service.roadmap3d .deliverables-grid .card-informe::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6b7280, #9ca3af);
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.roadmap3d .deliverables-grid .ui-card h3 {
+    color: var(--verde-profundo);
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+.page-service.roadmap3d .deliverables-grid .card-comercial h3 {
+    color: #b45309;
+}
+
+.page-service.roadmap3d .deliverables-grid .card-informe h3 {
+    color: #4b5563;
+}
+
+/* Testimonial y ejemplo mejorados para Roadmap 3D */
+.page-service.roadmap3d .example-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sección de precio mejorada para Roadmap 3D */
+.page-service.roadmap3d #precio .ui-card {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border: 2px solid rgba(31, 75, 63, 0.08);
+    text-align: center;
+    position: relative;
+}
+
+.page-service.roadmap3d #precio .ui-card::before {
+    content: '€';
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    font-size: 3rem;
+    color: var(--verde-hoja);
+    opacity: 0.1;
+    font-weight: 800;
+}
+
+.page-service.roadmap3d #precio .ui-card p:first-child {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--verde-profundo);
+    margin-bottom: 8px;
+}
+
+.page-service.roadmap3d #precio .ui-card p:first-child strong {
+    font-size: 2rem;
+    color: var(--verde-hoja);
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.page-service.roadmap3d #precio .badges {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-service.roadmap3d .badge {
+    background: linear-gradient(135deg, var(--verde-profundo), var(--verde-hoja));
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(31, 75, 63, 0.2);
+}
+
+/* CTAs mejorados con mejor espaciado y micro-interacciones para Roadmap 3D */
+.page-service.roadmap3d .hero-ctas {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.page-service.roadmap3d .hero-ctas .btn {
+    position: relative;
+    overflow: hidden;
+    transform: perspective(1px) translateZ(0);
+}
+
+.page-service.roadmap3d .hero-ctas .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.page-service.roadmap3d .hero-ctas .btn:hover::before {
+    left: 100%;
+}
+
+.page-service.roadmap3d .hero-ctas .btn-secondary {
+    background: transparent;
+    color: var(--verde-profundo);
+    border: 2px solid var(--verde-profundo);
+}
+
+.page-service.roadmap3d .hero-ctas .btn-secondary:hover {
+    background: var(--verde-profundo);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(31, 75, 63, 0.2);
+}
+
+/* ===== SPRINT 3D SPECIFIC STYLES ===== */
+.page-service.sprint3d h1.hero-title { font-size: clamp(2.5rem, 4.8vw, 3rem); line-height: 1.15; font-weight: 600; }
+.page-service.sprint3d h2.section-title.enhanced { font-size: clamp(1.8rem, 3.2vw, 2.1rem); line-height: 1.2; font-weight: 700; margin-bottom: 28px; }
+.page-service.sprint3d .ui-card { background:#fff; border:1px solid rgba(31, 75, 63, 0.06); border-radius: 20px; padding: 28px; box-shadow: 0 12px 32px rgba(31, 75, 63, 0.06), 0 4px 8px rgba(31, 75, 63, 0.04); transition: var(--transition-smooth); position: relative; margin-bottom: 16px; }
+.page-service.sprint3d .ui-card:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(31, 75, 63, 0.1), 0 6px 12px rgba(31, 75, 63, 0.06); }
+.page-service.sprint3d .ui-card h3 { font-size: 1.25rem; line-height: 1.25; font-weight: 700; color: var(--verde-profundo); margin-bottom: 12px; }
+.page-service.sprint3d p, .page-service.sprint3d li { font-size: 1rem; line-height: 1.65; color: var(--negro-verdoso); }
+.page-service.sprint3d .simple-list li { margin: 4px 0; }
+.page-service.sprint3d .hero-ctas .btn, .sticky-cta-mobile .btn { border-radius: 16px; padding: 12px 20px; font-weight: 700; }
+.page-service.sprint3d .example-card blockquote { border-left: 4px solid var(--terracota); padding-left: 20px; color: var(--negro-verdoso); font-style: italic; font-size: 1.1rem; line-height: 1.6; position: relative; z-index: 2; }
+.page-service.sprint3d .example-card p:last-child { margin-top: 12px; font-weight: 600; color: var(--verde-profundo); }
+.page-service.sprint3d .example-card::before { content: '"'; position: absolute; top: -8px; left: 16px; font-size: 4rem; color: var(--terracota); opacity: 0.2; font-family: Georgia, serif; line-height: 1; }
+
+/* Deliverables Cards para Sprint 3D */
+.page-service.sprint3d .deliverables-grid .card-operacion {
+    background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 100%);
+    border-color: rgba(31, 75, 63, 0.12);
+    position: relative;
+}
+
+.page-service.sprint3d .deliverables-grid .card-operacion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--verde-profundo), var(--verde-hoja));
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.sprint3d .deliverables-grid .card-comercial {
+    background: linear-gradient(135deg, #fffbf5 0%, #ffffff 100%);
+    border-color: rgba(209, 123, 73, 0.12);
+    position: relative;
+}
+
+.page-service.sprint3d .deliverables-grid .card-comercial::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--terracota), #f59e0b);
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.sprint3d .deliverables-grid .card-informe {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-color: rgba(107, 114, 128, 0.12);
+    position: relative;
+}
+
+.page-service.sprint3d .deliverables-grid .card-informe::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6b7280, #9ca3af);
+    border-radius: 20px 20px 0 0;
+}
+
+.page-service.sprint3d .deliverables-grid .ui-card h3 {
+    color: var(--verde-profundo);
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+.page-service.sprint3d .deliverables-grid .card-comercial h3 {
+    color: #b45309;
+}
+
+.page-service.sprint3d .deliverables-grid .card-informe h3 {
+    color: #4b5563;
+}
+
+/* Timeline específica para Sprint 3D (4 semanas) */
+.page-service.sprint3d .timeline-4::before {
+    background: linear-gradient(180deg, var(--verde-profundo), var(--verde-hoja), var(--terracota), #f59e0b);
+}
+
+/* Testimonial y ejemplo mejorados para Sprint 3D */
+.page-service.sprint3d .example-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sección de precio mejorada para Sprint 3D */
+.page-service.sprint3d #precio .ui-card {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border: 2px solid rgba(31, 75, 63, 0.08);
+    text-align: center;
+    position: relative;
+}
+
+.page-service.sprint3d #precio .ui-card::before {
+    content: '€';
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    font-size: 3rem;
+    color: var(--verde-hoja);
+    opacity: 0.1;
+    font-weight: 800;
+}
+
+.page-service.sprint3d #precio .ui-card p:first-child {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--verde-profundo);
+    margin-bottom: 8px;
+}
+
+.page-service.sprint3d #precio .ui-card p:first-child strong {
+    font-size: 2rem;
+    color: var(--verde-hoja);
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.page-service.sprint3d #precio .badges {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-service.sprint3d .badge {
+    background: linear-gradient(135deg, var(--verde-profundo), var(--verde-hoja));
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(31, 75, 63, 0.2);
+}
+
+/* CTAs mejorados con mejor espaciado y micro-interacciones para Sprint 3D */
+.page-service.sprint3d .hero-ctas {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.page-service.sprint3d .hero-ctas .btn {
+    position: relative;
+    overflow: hidden;
+    transform: perspective(1px) translateZ(0);
+}
+
+.page-service.sprint3d .hero-ctas .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.page-service.sprint3d .hero-ctas .btn:hover::before {
+    left: 100%;
+}
+
+.page-service.sprint3d .hero-ctas .btn-secondary {
+    background: transparent;
+    color: var(--verde-profundo);
+    border: 2px solid var(--verde-profundo);
+}
+
+.page-service.sprint3d .hero-ctas .btn-secondary:hover {
+    background: var(--verde-profundo);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(31, 75, 63, 0.2);
+}
 
 
 .option-title {
