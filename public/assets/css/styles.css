@@ -3002,6 +3002,7 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     text-align: center;
   }
   
+  /* En tablet la imagen sigue primero */
   .service-hero .hero-media {
     order: -1;
   }
@@ -3014,6 +3015,15 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
   
   .service-hero .hero-split-grid {
     gap: 24px;
+  }
+  
+  /* En móvil, el título va primero (orden normal) */
+  .service-hero .hero-media {
+    order: 1;
+  }
+  
+  .service-hero .hero-copy {
+    order: 0;
   }
   
   .service-hero .hero-title {
@@ -3042,10 +3052,16 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     justify-content: center;
   }
   
+  /* Quitar efecto inclinado en móvil */
   .service-hero .hero-media .media-frame {
     border-radius: 16px;
     max-width: 100%;
     margin: 0 auto;
+    transform: none !important;
+  }
+  
+  .service-hero .hero-media .media-frame:hover {
+    transform: translateY(-2px) !important;
   }
 }
 
@@ -3308,6 +3324,53 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     font-size: 1.25rem;
     box-shadow: 0 4px 12px rgba(31, 75, 63, 0.3);
     z-index: 2;
+}
+
+/* Arreglar círculos cortados en móvil */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 20px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .timeline::before {
+    left: 20px;
+  }
+  
+  .timeline li {
+    padding: 16px 0 16px 60px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .timeline li::before {
+    left: -10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline {
+    padding-left: 15px;
+  }
+  
+  .timeline::before {
+    left: 15px;
+  }
+  
+  .timeline li {
+    padding: 12px 0 12px 50px;
+  }
+  
+  .timeline li::before {
+    left: -7px;
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
 }
 
 .timeline li strong {
