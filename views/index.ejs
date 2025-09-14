@@ -666,6 +666,13 @@
                 // Toggle móvil
                 const toggleMobile = function(e){
                     if (!microCards.classList.contains('mobile-accordion')) return;
+                    // Si el clic viene desde dentro de micro-cards y es un enlace, NO interferir
+                    if (microCards.contains(e.target)) {
+                        const link = e.target.closest ? e.target.closest('a') : null;
+                        if (link) return; // permitir navegación
+                        // Si el clic cae en el propio toggle, lo manejamos más abajo
+                        if (!e.target.closest || !e.target.closest('#micro-toggle')) return;
+                    }
                     e.preventDefault();
                     const open = microCards.classList.toggle('is-open');
                     if (microToggle) microToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
