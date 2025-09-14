@@ -271,7 +271,7 @@
                     </div>
                 </a>
                 
-                <a href="#contacto" class="service-card-link" id="consultoria-trigger">
+                <div class="service-card-link" id="consultoria-trigger">
                     <div class="service-card featured" id="consultoria">
                         <div class="service-icon">⚙️</div>
                         <h3 class="service-title">Consultoría Estratégica</h3>
@@ -303,7 +303,7 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
                 
                 <a href="#contacto" class="service-card-link">
                     <div class="service-card">
@@ -340,8 +340,12 @@
                 </a>
             </div>
             
-            <!-- Micro-tarjetas (overlay) -->
+            <!-- Micro-tarjetas (overlay en desktop; acordeón en móvil) -->
             <div class="micro-cards" id="micro-cards">
+                <button class="micro-toggle" id="micro-toggle" aria-expanded="false" aria-controls="micro-cards" type="button">
+                    <span>Elige cómo empezar</span>
+                    <span class="chevron" aria-hidden="true"></span>
+                </button>
                 <h4 class="micro-title">Elige cómo empezar</h4>
                 <div class="micro-grid">
                     <div class="micro-card">
@@ -576,6 +580,8 @@
             const microCards = document.getElementById('micro-cards');
             const featuredCard = document.getElementById('consultoria');
             const servicesContainer = document.querySelector('.services .container');
+            const servicesGrid = document.querySelector('.services-grid');
+            const microToggle = document.getElementById('micro-toggle');
             let hideTimer = null;
 
             if (consultoriaTrigger && microCards) {
@@ -613,11 +619,82 @@
                     }, 80);
                 };
 
-                consultoriaTrigger.addEventListener('mouseenter', show);
-                consultoriaTrigger.addEventListener('mouseleave', scheduleHide);
+                const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                const mqMobile = window.matchMedia('(max-width: 768px)');
 
-                microCards.addEventListener('mouseenter', show);
-                microCards.addEventListener('mouseleave', scheduleHide);
+                // Modo acordeón en móvil: insertar micro‑cards tras la tarjeta verde
+                const enableMobileAccordion = () => {
+                    const consultoriaCard = document.getElementById('consultoria');
+                    if (!consultoriaCard) return;
+                    if (microCards.parentElement !== consultoriaCard) {
+                        consultoriaCard.appendChild(microCards);
+                    }
+                    microCards.style.display = 'block';
+                    microCards.classList.add('mobile-accordion');
+                    microCards.classList.remove('is-open');
+                    if (microToggle) microToggle.setAttribute('aria-expanded','false');
+                };
+                const disableMobileAccordion = () => {
+                    microCards.classList.remove('mobile-accordion');
+                    microCards.classList.remove('is-open');
+                    microCards.style.display = '';
+                };
+                const applyMode = () => {
+                    if (mqMobile.matches || isTouch) enableMobileAccordion(); else disableMobileAccordion();
+                };
+                applyMode();
+                mqMobile.addEventListener('change', applyMode);
+
+                // Interacción desktop (hover)
+                consultoriaTrigger.addEventListener('mouseenter', function(){
+                    if (microCards.classList.contains('mobile-accordion')) return;
+                    show();
+                });
+                consultoriaTrigger.addEventListener('mouseleave', function(){
+                    if (microCards.classList.contains('mobile-accordion')) return;
+                    scheduleHide();
+                });
+                microCards.addEventListener('mouseenter', function(){
+                    if (microCards.classList.contains('mobile-accordion')) return;
+                    show();
+                });
+                microCards.addEventListener('mouseleave', function(){
+                    if (microCards.classList.contains('mobile-accordion')) return;
+                    scheduleHide();
+                });
+
+                // Toggle móvil
+                const toggleMobile = function(e){
+                    if (!microCards.classList.contains('mobile-accordion')) return;
+                    e.preventDefault();
+                    const open = microCards.classList.toggle('is-open');
+                    if (microToggle) microToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    // Auto-scroll suave al abrir, solo móvil y si hace falta
+                    if (open) {
+                        const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        if (!prefersReduce) {
+                            setTimeout(() => {
+                                const rect = microCards.getBoundingClientRect();
+                                const vh = window.innerHeight || document.documentElement.clientHeight;
+                                // Si el inicio del bloque queda muy abajo o fuera de vista, hacer scroll
+                                if (rect.top > vh * 0.65 || rect.top < 0) {
+                                    const target = document.getElementById('consultoria') || microCards;
+                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }, 220);
+                        }
+                    }
+                };
+                consultoriaTrigger.addEventListener('click', toggleMobile);
+                if (microToggle) microToggle.addEventListener('click', toggleMobile);
+                // Delegación extra por si el click cae en hijos del toggle
+                microCards.addEventListener('click', function(e){
+                    if (!microCards.classList.contains('mobile-accordion')) return;
+                    const t = e.target;
+                    if (t && (t.id === 'micro-toggle' || t.closest && t.closest('#micro-toggle'))) {
+                        toggleMobile(e);
+                    }
+                });
 
                 // Reposicionar en scroll/resize para mantener altura correcta
                 window.addEventListener('scroll', () => {

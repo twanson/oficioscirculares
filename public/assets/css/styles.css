@@ -2757,6 +2757,47 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     transition: opacity .16s ease, transform .16s ease, visibility .16s step-start;
 }
 
+/* Toggle para móvil: oculto en desktop */
+.micro-toggle { display: none; }
+
+/* Modo acordeón móvil para micro‑cards */
+@media (max-width: 768px) {
+  .micro-cards.mobile-accordion {
+      position: static !important;
+      transform: none !important;
+      top: auto !important;
+      width: 100% !important;
+      margin: 16px 0 0 0;
+      opacity: 1; /* controlado por max-height */
+      pointer-events: auto;
+      box-shadow: none;
+      border: 1px solid #e5e7eb;
+  }
+  /* Evitar que el header tape el inicio al hacer scrollIntoView */
+  #consultoria, .micro-cards.mobile-accordion { scroll-margin-top: 72px; }
+  .micro-cards.mobile-accordion .micro-title { display: none; }
+  .micro-cards.mobile-accordion .micro-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-weight: 700;
+      color: #1F4B3F;
+      cursor: pointer;
+  }
+  .micro-cards.mobile-accordion .micro-toggle .chevron {
+      width: 10px; height: 10px; border-right: 2px solid #1F4B3F; border-bottom:2px solid #1F4B3F; transform: rotate(45deg); transition: transform .2s ease; pointer-events: none;
+  }
+  .micro-cards.mobile-accordion.is-open .micro-toggle .chevron { transform: rotate(-135deg); }
+  .micro-cards.mobile-accordion .micro-grid { overflow: hidden; transition: max-height .25s ease, opacity .2s ease; max-height: 0; opacity: 0; }
+  .micro-cards.mobile-accordion.is-open .micro-grid { max-height: 1200px; opacity: 1; }
+  .micro-cards.mobile-accordion .micro-grid { grid-template-columns: 1fr; }
+}
+
 /* Aseguramos contexto de posicionamiento para el overlay */
 .services .container {
     position: relative;
