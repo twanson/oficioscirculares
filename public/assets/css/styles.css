@@ -3425,6 +3425,31 @@ iframe[src*="tally.so"] {
 .page-service.diag3d .deliverables-grid .card-comercial { border-left: 6px solid #d97706; }
 .page-service.diag3d .deliverables-grid .card-informe { border-left: 6px solid #9ca3af; }
 
+/* Destacado del Plan de Acción Circular */
+.plan-accion-highlight {
+    text-align: center;
+    margin-top: 32px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(31, 75, 63, 0.12);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.plan-accion-highlight p {
+    font-size: 1.1rem;
+    color: var(--verde-profundo);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.plan-accion-highlight strong {
+    color: var(--verde-profundo);
+    font-weight: 700;
+}
+
 /* Timeline refinada con elementos más visuales */
 .timeline {
     list-style: none;
@@ -3685,6 +3710,14 @@ iframe[src*="tally.so"] {
     color: #4b5563;
 }
 
+/* Centrar las 2 tarjetas en roadmap-3d */
+.page-service.roadmap3d .deliverables-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 32px;
+}
+
 /* Testimonial y ejemplo mejorados para Roadmap 3D */
 .page-service.roadmap3d .example-card {
     position: relative;
@@ -3859,6 +3892,14 @@ iframe[src*="tally.so"] {
 
 .page-service.sprint3d .deliverables-grid .card-informe h3 {
     color: #4b5563;
+}
+
+/* Centrar las 2 tarjetas en sprint-3d */
+.page-service.sprint3d .deliverables-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 32px;
 }
 
 /* Timeline específica para Sprint 3D (4 semanas) */
