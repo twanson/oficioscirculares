@@ -674,6 +674,39 @@
                     microCards.classList.remove('is-open');
                     microCards.style.display = '';
                 };
+                // Función robusta para forzar CTA estática en iPad
+                const forceTabletCTA = () => {
+                    // Verificar directamente por viewport size (más confiable que media queries)
+                    const screenWidth = window.screen.width;
+                    const screenHeight = window.screen.height;
+                    const currentWidth = window.innerWidth;
+
+                    // iPad detectado por tamaños de pantalla típicos
+                    const isTabletSize = (currentWidth >= 769 && currentWidth <= 1366) ||
+                                        (screenWidth >= 768 && screenWidth <= 1366) ||
+                                        (screenHeight >= 768 && screenHeight <= 1366);
+
+                    if (isTabletSize) {
+                        const consultoriaCta = document.getElementById('consultoria-cta-static');
+                        const microCards = document.getElementById('micro-cards');
+
+                        if (consultoriaCta && microCards) {
+                            // FORZAR mostrar CTA estática
+                            consultoriaCta.style.display = 'block';
+                            consultoriaCta.style.visibility = 'visible';
+                            consultoriaCta.style.opacity = '1';
+
+                            // FORZAR ocultar micro-cards
+                            microCards.style.display = 'none';
+                            microCards.style.visibility = 'hidden';
+                            microCards.style.opacity = '0';
+                            microCards.style.pointerEvents = 'none';
+                            microCards.style.position = 'absolute';
+                            microCards.style.left = '-9999px';
+                        }
+                    }
+                };
+
                 const applyMode = () => {
                     // Solo activar accordion en móvil (no en tablet/iPad)
                     if (mqMobile.matches) {
@@ -700,16 +733,23 @@
                     }
                 };
                 applyMode();
+                forceTabletCTA(); // Aplicar inmediatamente al cargar
                 mqMobile.addEventListener('change', applyMode);
                 mqTablet.addEventListener('change', applyMode);
 
                 // Escuchar cambios de orientación específicamente para iPad
                 window.addEventListener('orientationchange', function() {
-                    setTimeout(applyMode, 100); // Pequeño delay para que se complete la rotación
+                    // Múltiples timeouts para asegurar que se aplique correctamente
+                    setTimeout(forceTabletCTA, 50);
+                    setTimeout(forceTabletCTA, 100);
+                    setTimeout(forceTabletCTA, 200);
+                    setTimeout(forceTabletCTA, 500); // Backup final
+                    setTimeout(applyMode, 100);
                 });
 
                 // Listener de resize como backup
                 window.addEventListener('resize', function() {
+                    forceTabletCTA();
                     if (mqTablet.matches) {
                         const consultoriaCta = document.getElementById('consultoria-cta-static');
                         if (consultoriaCta) {
