@@ -2882,13 +2882,22 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         text-decoration: none !important;
     }
 
-    /* Ocultar contenido detallado para diseño limpio */
-    .consultoria-option-content {
-        display: none !important;
+    /* MOSTRAR solo el texto simple para iPad */
+    .consultoria-option .consultoria-option-text {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
-    .consultoria-btn {
+    /* Ocultar contenido detallado para diseño limpio */
+    .consultoria-option .consultoria-option-content {
         display: none !important;
+        visibility: hidden !important;
+    }
+
+    .consultoria-option .consultoria-btn {
+        display: none !important;
+        visibility: hidden !important;
     }
 
     /* Ocultar las micro-cards originales en tablet - MÁS ESPECÍFICO */
@@ -2919,6 +2928,26 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         display: inline-block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        background: white !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 20px !important;
+        padding: 8px 14px !important;
+        color: #1F4B3F !important;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none !important;
+    }
+
+    .consultoria-option .consultoria-option-text {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .consultoria-option .consultoria-option-content,
+    .consultoria-option .consultoria-btn {
+        display: none !important;
+        visibility: hidden !important;
     }
 }
 
