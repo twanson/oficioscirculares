@@ -196,7 +196,12 @@ app.get('/servicios/roadmap-3d', (req, res) => {
 });
 
 app.get('/servicios/sprint-3d', (req, res) => {
-  res.render('sprint-3d');
+    res.render('sprint-3d');
+});
+
+// Página de contacto con formulario Tally
+app.get('/contacto', (req, res) => {
+    res.render('contacto');
 });
 
 // Rutas de recursos

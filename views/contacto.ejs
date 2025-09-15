@@ -1,0 +1,189 @@
+<%- include('partials/head-meta', {
+    title: 'Contacto — Servicios 3D | Oficios Circulares',
+    description: 'Cuéntanos en 1–2 minutos qué necesitas. Te proponemos 2–3 huecos y un primer paso claro.',
+    canonical: '/contacto',
+    ogImage: 'https://www.oficioscirculares.com/img/general/og-contacto.webp',
+    ogImageAlt: 'Contacto Oficios Circulares - Servicios 3D'
+}) %>
+<%- include('partials/header') %>
+
+<main class="main-content page-contacto" id="maincontent">
+    <section class="contacto-section" aria-labelledby="contacto-title">
+        <div class="container">
+            <h1 id="contacto-title" class="sr-only">Contacto — Servicios 3D</h1>
+            
+            <!-- Selector de servicio si no hay service en query params -->
+            <div id="service-selector" class="service-selector" style="display: none;">
+                <div class="selector-content">
+                    <h2 class="selector-title">Elige un servicio para continuar:</h2>
+                    <div class="selector-buttons">
+                        <a href="/contacto?service=diagnostico-3d" 
+                           class="btn btn-outline"
+                           data-event="click_cta" 
+                           data-label="contacto-selector-diag3d">
+                            Diagnóstico 3D
+                        </a>
+                        <a href="/contacto?service=roadmap-3d" 
+                           class="btn btn-outline"
+                           data-event="click_cta" 
+                           data-label="contacto-selector-roadmap3d">
+                            Roadmap 3D
+                        </a>
+                        <a href="/contacto?service=sprint-3d" 
+                           class="btn btn-outline"
+                           data-event="click_cta" 
+                           data-label="contacto-selector-sprint3d">
+                            Sprint 3D
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenedor del iframe de Tally -->
+            <div class="tally-container">
+                <iframe
+                    id="tally-iframe"
+                    src=""
+                    data-tally-src=""
+                    width="100%"
+                    height="900"
+                    frameborder="0"
+                    title="Contacto — Servicios 3D"
+                    style="background: transparent; min-height: 600px;"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+/* Estilos específicos para la página de contacto */
+.page-contacto {
+    background: var(--blanco-calido);
+    min-height: 100vh;
+}
+
+.contacto-section {
+    padding: 80px 0 60px;
+}
+
+.service-selector {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(31, 75, 63, 0.08);
+}
+
+.selector-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--verde-profundo);
+    margin-bottom: 24px;
+}
+
+.selector-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.selector-buttons .btn {
+    min-width: 160px;
+}
+
+.tally-container {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31, 75, 63, 0.12);
+    min-height: 600px;
+}
+
+.tally-container iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contacto-section {
+        padding: 60px 0 40px;
+    }
+    
+    .service-selector {
+        padding: 24px 16px;
+        margin-bottom: 24px;
+    }
+    
+    .selector-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .selector-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .tally-container iframe {
+        height: 800px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const service = urlParams.get('service');
+    
+    // Elementos del DOM
+    const serviceSelector = document.getElementById('service-selector');
+    const tallyIframe = document.getElementById('tally-iframe');
+    
+    // Si no hay servicio, mostrar selector
+    if (!service) {
+        serviceSelector.style.display = 'block';
+        tallyIframe.style.display = 'none';
+        return;
+    }
+    
+    // Construir URL del iframe de Tally
+    const tallyBaseUrl = 'https://tally.so/r/w4Zy5d';
+    const tallyParams = new URLSearchParams({
+        transparentBackground: '1',
+        dynamicHeight: '1',
+        hideTitle: '1',
+        service: urlParams.get('service') || '',
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || '',
+        utm_content: urlParams.get('utm_content') || '',
+        page_path: urlParams.get('page_path') || '',
+    });
+    
+    const tallySrc = `${tallyBaseUrl}?${tallyParams.toString()}`;
+    
+    // Configurar iframe
+    tallyIframe.src = tallySrc;
+    tallyIframe.setAttribute('data-tally-src', tallySrc);
+    
+    // Ocultar selector si hay servicio
+    serviceSelector.style.display = 'none';
+    tallyIframe.style.display = 'block';
+    
+    console.log('📝 Tally form loaded with params:', Object.fromEntries(tallyParams));
+});
+</script>
+
+<!-- Cargar script de Tally para funcionalidades avanzadas -->
+<script async src="https://tally.so/widgets/embed.js"></script>
+
+<%- include('partials/footer') %>
