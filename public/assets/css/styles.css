@@ -2821,15 +2821,19 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     display: none; /* Oculto por defecto */
 }
 
-/* iPad y tablets: solución simple y elegante - TODAS las orientaciones */
-@media (min-width: 769px) and (max-width: 1366px) {
+/* iPad y tablets: FORZAR VISUALIZACIÓN EN TODAS LAS ORIENTACIONES */
+@media screen and (min-width: 769px) and (max-width: 1366px) {
     .consultoria-cta-section {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         margin-top: 18px;
         padding: 16px;
         background: #f8f9fa;
         border-radius: 10px;
         border: 1px solid #e5e7eb;
+        position: relative !important;
+        z-index: 999 !important;
     }
 
     .consultoria-cta-title {
@@ -2838,10 +2842,11 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         color: #1F4B3F;
         text-align: center;
         margin: 0 0 14px 0;
+        display: block !important;
     }
 
     .consultoria-options-grid {
-        display: flex;
+        display: flex !important;
         flex-wrap: wrap;
         gap: 8px;
         justify-content: center;
@@ -2850,29 +2855,31 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 
     /* Diseño simple: solo nombres como pills/badges */
     .consultoria-option {
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 20px;
-        padding: 8px 14px;
-        display: inline-block;
+        background: white !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 20px !important;
+        padding: 8px 14px !important;
+        display: inline-block !important;
         transition: all 0.2s ease;
-        text-decoration: none;
-        color: #1F4B3F;
+        text-decoration: none !important;
+        color: #1F4B3F !important;
         font-weight: 600;
         font-size: 0.9rem;
         white-space: nowrap;
         position: relative;
-        z-index: 10;
+        z-index: 1000 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .consultoria-option:hover,
     .consultoria-option:focus,
     .consultoria-option:active {
-        background: #1F4B3F;
-        color: white;
+        background: #1F4B3F !important;
+        color: white !important;
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(31, 75, 63, 0.15);
-        text-decoration: none;
+        text-decoration: none !important;
     }
 
     /* Ocultar contenido detallado para diseño limpio */
@@ -2891,6 +2898,27 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         visibility: hidden !important;
         opacity: 0 !important;
         pointer-events: none !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+}
+
+/* FUERZA ESPECÍFICA PARA ORIENTACIÓN HORIZONTAL iPad */
+@media screen and (min-device-width: 768px) and (max-device-width: 1366px) and (orientation: landscape) {
+    .consultoria-cta-section {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .consultoria-options-grid {
+        display: flex !important;
+    }
+
+    .consultoria-option {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
 

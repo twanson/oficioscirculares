@@ -680,18 +680,45 @@
                         enableMobileAccordion();
                     } else {
                         disableMobileAccordion();
-                        // En iPad/tablet, ocultar micro-cards completamente
+                        // En iPad/tablet, ocultar micro-cards completamente y forzar mostrar CTA estática
                         if (mqTablet.matches) {
                             microCards.style.display = 'none';
                             microCards.style.visibility = 'hidden';
                             microCards.style.opacity = '0';
                             microCards.style.pointerEvents = 'none';
+                            microCards.style.position = 'absolute';
+                            microCards.style.left = '-9999px';
+
+                            // FORZAR mostrar la sección estática en iPad
+                            const consultoriaCta = document.getElementById('consultoria-cta-static');
+                            if (consultoriaCta) {
+                                consultoriaCta.style.display = 'block';
+                                consultoriaCta.style.visibility = 'visible';
+                                consultoriaCta.style.opacity = '1';
+                            }
                         }
                     }
                 };
                 applyMode();
                 mqMobile.addEventListener('change', applyMode);
                 mqTablet.addEventListener('change', applyMode);
+
+                // Escuchar cambios de orientación específicamente para iPad
+                window.addEventListener('orientationchange', function() {
+                    setTimeout(applyMode, 100); // Pequeño delay para que se complete la rotación
+                });
+
+                // Listener de resize como backup
+                window.addEventListener('resize', function() {
+                    if (mqTablet.matches) {
+                        const consultoriaCta = document.getElementById('consultoria-cta-static');
+                        if (consultoriaCta) {
+                            consultoriaCta.style.display = 'block';
+                            consultoriaCta.style.visibility = 'visible';
+                            consultoriaCta.style.opacity = '1';
+                        }
+                    }
+                });
 
                 // Interacción desktop (hover)
                 consultoriaTrigger.addEventListener('mouseenter', function(){
