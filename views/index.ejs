@@ -302,6 +302,40 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Sección estática para iPad/tablets -->
+                        <div class="consultoria-cta-section" id="consultoria-cta-static">
+                            <h4 class="consultoria-cta-title">Conoce nuestros servicios</h4>
+                            <div class="consultoria-options-grid">
+                                <a href="/servicios/diagnostico-3d" class="consultoria-option">
+                                    <div class="consultoria-option-content">
+                                        <h5>Diagnóstico 3D</h5>
+                                        <p>30–45' · 3 palancas + 3 activos · PDF 1 pág.</p>
+                                    </div>
+                                    <span class="consultoria-btn">Solicitar Diagnóstico</span>
+                                    <!-- Texto simple para iPad -->
+                                    Diagnóstico 3D
+                                </a>
+                                <a href="/servicios/roadmap-3d" class="consultoria-option">
+                                    <div class="consultoria-option-content">
+                                        <h5>Roadmap 3D</h5>
+                                        <p>2 semanas · plan 90 días · KPIs y calendario</p>
+                                    </div>
+                                    <span class="consultoria-btn">Solicitar Roadmap</span>
+                                    <!-- Texto simple para iPad -->
+                                    Roadmap 3D
+                                </a>
+                                <a href="/servicios/sprint-3d" class="consultoria-option">
+                                    <div class="consultoria-option-content">
+                                        <h5>Sprint 3D</h5>
+                                        <p>3–4 semanas · piloto + kit comercial listo</p>
+                                    </div>
+                                    <span class="consultoria-btn">Solicitar Sprint</span>
+                                    <!-- Texto simple para iPad -->
+                                    Sprint 3D
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -621,7 +655,7 @@
 
                 const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
                 const mqMobile = window.matchMedia('(max-width: 768px)');
-                const mqTablet = window.matchMedia('(min-width: 769px) and (max-width: 1024px)');
+                const mqTablet = window.matchMedia('(min-width: 769px) and (max-width: 1366px)');
 
                 // Modo acordeón en móvil e iPad: insertar micro‑cards tras la tarjeta verde
                 const enableMobileAccordion = () => {
@@ -641,11 +675,18 @@
                     microCards.style.display = '';
                 };
                 const applyMode = () => {
-                    // Activar accordion en móvil, tablet/iPad, o dispositivos touch
-                    if (mqMobile.matches || mqTablet.matches || isTouch) {
+                    // Solo activar accordion en móvil (no en tablet/iPad)
+                    if (mqMobile.matches) {
                         enableMobileAccordion();
                     } else {
                         disableMobileAccordion();
+                        // En iPad/tablet, ocultar micro-cards completamente
+                        if (mqTablet.matches) {
+                            microCards.style.display = 'none';
+                            microCards.style.visibility = 'hidden';
+                            microCards.style.opacity = '0';
+                            microCards.style.pointerEvents = 'none';
+                        }
                     }
                 };
                 applyMode();

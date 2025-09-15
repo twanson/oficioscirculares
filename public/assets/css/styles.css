@@ -2816,49 +2816,153 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
   .micro-cards.mobile-accordion .micro-grid { grid-template-columns: 1fr; }
 }
 
-/* Modo acordeón horizontal para iPad */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .micro-cards.mobile-accordion {
-      position: static !important;
-      transform: none !important;
-      top: auto !important;
-      width: 100% !important;
-      margin: 16px 0 0 0;
-      opacity: 1; /* controlado por max-height */
-      pointer-events: auto;
-      box-shadow: 0 8px 24px rgba(31, 75, 63, 0.12);
-      border: 1px solid #e5e7eb;
-  }
-  /* Evitar que el header tape el inicio al hacer scrollIntoView */
-  #consultoria, .micro-cards.mobile-accordion { scroll-margin-top: 72px; }
-  .micro-cards.mobile-accordion .micro-title { display: none; }
-  .micro-cards.mobile-accordion .micro-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px 14px;
-      font-weight: 700;
-      color: #1F4B3F;
-      cursor: pointer;
-  }
-  .micro-cards.mobile-accordion .micro-toggle .chevron {
-      width: 10px; height: 10px; border-right: 2px solid #1F4B3F; border-bottom:2px solid #1F4B3F; transform: rotate(45deg); transition: transform .2s ease; pointer-events: none;
-  }
-  .micro-cards.mobile-accordion.is-open .micro-toggle .chevron { transform: rotate(-135deg); }
-  .micro-cards.mobile-accordion .micro-grid {
-      overflow: hidden;
-      transition: max-height .25s ease, opacity .2s ease;
-      max-height: 0;
-      opacity: 0;
-      /* Mantener grid horizontal en iPad */
-      grid-template-columns: repeat(3, 1fr) !important;
-      gap: 20px;
-  }
-  .micro-cards.mobile-accordion.is-open .micro-grid { max-height: 400px; opacity: 1; }
+/* ===== SECCIÓN CTA ESTÁTICA PARA CONSULTORÍA (iPad/Tablets) ===== */
+.consultoria-cta-section {
+    display: none; /* Oculto por defecto */
+}
+
+/* iPad y tablets: solución simple y elegante - TODAS las orientaciones */
+@media (min-width: 769px) and (max-width: 1366px) {
+    .consultoria-cta-section {
+        display: block !important;
+        margin-top: 18px;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+    }
+
+    .consultoria-cta-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1F4B3F;
+        text-align: center;
+        margin: 0 0 14px 0;
+    }
+
+    .consultoria-options-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Diseño simple: solo nombres como pills/badges */
+    .consultoria-option {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 20px;
+        padding: 8px 14px;
+        display: inline-block;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        color: #1F4B3F;
+        font-weight: 600;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        position: relative;
+        z-index: 10;
+    }
+
+    .consultoria-option:hover,
+    .consultoria-option:focus,
+    .consultoria-option:active {
+        background: #1F4B3F;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(31, 75, 63, 0.15);
+        text-decoration: none;
+    }
+
+    /* Ocultar contenido detallado para diseño limpio */
+    .consultoria-option-content {
+        display: none !important;
+    }
+
+    .consultoria-btn {
+        display: none !important;
+    }
+
+    /* Ocultar las micro-cards originales en tablet - MÁS ESPECÍFICO */
+    .micro-cards,
+    #micro-cards {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+}
+
+/* Mostrar la sección estática también en móvil vertical como alternativa */
+@media (max-width: 768px) {
+    .consultoria-cta-section {
+        display: block;
+        margin-top: 16px;
+        padding: 16px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+    }
+
+    .consultoria-cta-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1F4B3F;
+        text-align: center;
+        margin: 0 0 16px 0;
+    }
+
+    .consultoria-options-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .consultoria-option {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .consultoria-option h5 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1F4B3F;
+        margin: 0 0 8px 0;
+    }
+
+    .consultoria-option p {
+        font-size: 0.85rem;
+        color: #666;
+        margin: 0 0 12px 0;
+        line-height: 1.4;
+    }
+
+    .consultoria-btn {
+        display: inline-block;
+        background: #1F4B3F;
+        color: white;
+        text-decoration: none;
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .consultoria-btn:hover {
+        background: #2d6b55;
+    }
+
+    /* Ocultar las micro-cards originales en móvil también */
+    .micro-cards {
+        display: none !important;
+    }
 }
 
 /* Aseguramos contexto de posicionamiento para el overlay */
