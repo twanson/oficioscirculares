@@ -621,8 +621,9 @@
 
                 const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
                 const mqMobile = window.matchMedia('(max-width: 768px)');
+                const mqTablet = window.matchMedia('(min-width: 769px) and (max-width: 1024px)');
 
-                // Modo acordeón en móvil: insertar micro‑cards tras la tarjeta verde
+                // Modo acordeón en móvil e iPad: insertar micro‑cards tras la tarjeta verde
                 const enableMobileAccordion = () => {
                     const consultoriaCard = document.getElementById('consultoria');
                     if (!consultoriaCard) return;
@@ -640,10 +641,16 @@
                     microCards.style.display = '';
                 };
                 const applyMode = () => {
-                    if (mqMobile.matches || isTouch) enableMobileAccordion(); else disableMobileAccordion();
+                    // Activar accordion en móvil, tablet/iPad, o dispositivos touch
+                    if (mqMobile.matches || mqTablet.matches || isTouch) {
+                        enableMobileAccordion();
+                    } else {
+                        disableMobileAccordion();
+                    }
                 };
                 applyMode();
                 mqMobile.addEventListener('change', applyMode);
+                mqTablet.addEventListener('change', applyMode);
 
                 // Interacción desktop (hover)
                 consultoriaTrigger.addEventListener('mouseenter', function(){
