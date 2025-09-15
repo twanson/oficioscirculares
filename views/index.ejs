@@ -674,35 +674,52 @@
                     microCards.classList.remove('is-open');
                     microCards.style.display = '';
                 };
-                // Función robusta para forzar CTA estática en iPad
-                const forceTabletCTA = () => {
-                    // Verificar directamente por viewport size (más confiable que media queries)
-                    const screenWidth = window.screen.width;
-                    const screenHeight = window.screen.height;
+                // Función para manejar iPad horizontal: mostrar micro-cards debajo
+                const handleTabletLayout = () => {
                     const currentWidth = window.innerWidth;
+                    const currentHeight = window.innerHeight;
 
-                    // iPad detectado por tamaños de pantalla típicos
-                    const isTabletSize = (currentWidth >= 769 && currentWidth <= 1366) ||
-                                        (screenWidth >= 768 && screenWidth <= 1366) ||
-                                        (screenHeight >= 768 && screenHeight <= 1366);
+                    // Detectar iPad en horizontal (más ancho que alto)
+                    const isTabletHorizontal = (currentWidth >= 769 && currentWidth <= 1366) && (currentWidth > currentHeight);
 
-                    if (isTabletSize) {
-                        const consultoriaCta = document.getElementById('consultoria-cta-static');
-                        const microCards = document.getElementById('micro-cards');
+                    const consultoriaCta = document.getElementById('consultoria-cta-static');
+                    const microCards = document.getElementById('micro-cards');
+                    const servicesContainer = document.querySelector('.services .container');
 
-                        if (consultoriaCta && microCards) {
-                            // FORZAR mostrar CTA estática
+                    if (isTabletHorizontal) {
+                        // iPad HORIZONTAL: Ocultar CTA estática y mostrar micro-cards debajo
+                        if (consultoriaCta) {
+                            consultoriaCta.style.display = 'none';
+                        }
+
+                        if (microCards && servicesContainer) {
+                            // Mostrar micro-cards como sección normal debajo del grid
+                            microCards.style.position = 'static';
+                            microCards.style.transform = 'none';
+                            microCards.style.left = 'auto';
+                            microCards.style.top = 'auto';
+                            microCards.style.width = '100%';
+                            microCards.style.display = 'block';
+                            microCards.style.visibility = 'visible';
+                            microCards.style.opacity = '1';
+                            microCards.style.pointerEvents = 'auto';
+                            microCards.style.margin = '32px 0 0 0';
+                            microCards.style.boxShadow = '0 8px 24px rgba(31, 75, 63, 0.12)';
+
+                            // Asegurar que esté al final del container
+                            servicesContainer.appendChild(microCards);
+                        }
+                    } else if (currentWidth >= 769 && currentWidth <= 1366) {
+                        // iPad VERTICAL: Mostrar CTA estática y ocultar micro-cards
+                        if (consultoriaCta) {
                             consultoriaCta.style.display = 'block';
                             consultoriaCta.style.visibility = 'visible';
                             consultoriaCta.style.opacity = '1';
+                        }
 
-                            // FORZAR ocultar micro-cards
+                        if (microCards) {
                             microCards.style.display = 'none';
                             microCards.style.visibility = 'hidden';
-                            microCards.style.opacity = '0';
-                            microCards.style.pointerEvents = 'none';
-                            microCards.style.position = 'absolute';
-                            microCards.style.left = '-9999px';
                         }
                     }
                 };
@@ -733,31 +750,23 @@
                     }
                 };
                 applyMode();
-                forceTabletCTA(); // Aplicar inmediatamente al cargar
+                handleTabletLayout(); // Aplicar inmediatamente al cargar
                 mqMobile.addEventListener('change', applyMode);
                 mqTablet.addEventListener('change', applyMode);
 
                 // Escuchar cambios de orientación específicamente para iPad
                 window.addEventListener('orientationchange', function() {
                     // Múltiples timeouts para asegurar que se aplique correctamente
-                    setTimeout(forceTabletCTA, 50);
-                    setTimeout(forceTabletCTA, 100);
-                    setTimeout(forceTabletCTA, 200);
-                    setTimeout(forceTabletCTA, 500); // Backup final
+                    setTimeout(handleTabletLayout, 50);
+                    setTimeout(handleTabletLayout, 100);
+                    setTimeout(handleTabletLayout, 200);
+                    setTimeout(handleTabletLayout, 500); // Backup final
                     setTimeout(applyMode, 100);
                 });
 
                 // Listener de resize como backup
                 window.addEventListener('resize', function() {
-                    forceTabletCTA();
-                    if (mqTablet.matches) {
-                        const consultoriaCta = document.getElementById('consultoria-cta-static');
-                        if (consultoriaCta) {
-                            consultoriaCta.style.display = 'block';
-                            consultoriaCta.style.visibility = 'visible';
-                            consultoriaCta.style.opacity = '1';
-                        }
-                    }
+                    handleTabletLayout();
                 });
 
                 // Interacción desktop (hover)
