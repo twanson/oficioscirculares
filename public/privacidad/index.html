@@ -163,18 +163,84 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-  <nav class="navbar enhanced-navbar">
-    <div class="nav-container">
-      <a href="../" class="nav-logo">
-        <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo" />
-        <span class="logo-text">Oficios Circulares</span>
-      </a>
-      <div class="nav-actions">
-        <a href="../blog/" class="nav-link">Blog</a>
-        <a href="../#contacto" class="nav-cta">Únete</a>
-      </div>
-    </div>
-  </nav>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../" class="nav-logo">
+                <img src="../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo">
+                <span class="logo-text">Oficios Circulares</span>
+            </a>
+            <div class="nav-menu" id="nav-menu">
+                <a href="../#que-es" class="nav-link">¿Qué es?</a>
+                <a href="../#para-quien" class="nav-link">¿Para quién?</a>
+                <div class="servicios-dropdown">
+                    <button 
+                        class="nav-link dropdown-toggle" 
+                        id="servicios-dropdown-btn"
+                        aria-haspopup="menu" 
+                        aria-expanded="false"
+                        aria-controls="servicios-dropdown-menu">
+                        Qué ofrecemos
+                        <svg class="dropdown-icon" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="servicios-dropdown-menu" role="menu" aria-labelledby="servicios-dropdown-btn">
+                        <a href="../#consultoria" 
+                           class="dropdown-item" 
+                           role="menuitem" 
+                           data-service="consultoria"
+                           aria-label="Ir a Consultoría - Método 3D">
+                            <span class="item-title">Consultoría</span>
+                            <span class="item-subtitle">Método 3D</span>
+                        </a>
+                        <a href="../servicios/diagnostico-3d" 
+                           class="dropdown-item" 
+                           role="menuitem"
+                           data-service="diagnostico-3d"
+                           aria-label="Ir a Diagnóstico 3D">
+                            <span class="item-title">Diagnóstico 3D</span>
+                            <span class="item-subtitle">30-45 min · PDF personalizado</span>
+                        </a>
+                        <a href="../servicios/roadmap-3d" 
+                           class="dropdown-item" 
+                           role="menuitem"
+                           data-service="roadmap-3d"
+                           aria-label="Ir a Roadmap 3D">
+                            <span class="item-title">Roadmap 3D</span>
+                            <span class="item-subtitle">Plan 90 días · KPIs</span>
+                        </a>
+                        <a href="../servicios/sprint-3d" 
+                           class="dropdown-item" 
+                           role="menuitem"
+                           data-service="sprint-3d"
+                           aria-label="Ir a Sprint 3D">
+                            <span class="item-title">Sprint 3D</span>
+                            <span class="item-subtitle">3-4 semanas · Kit comercial</span>
+                        </a>
+                        <a href="../recursos" 
+                           class="dropdown-item" 
+                           role="menuitem"
+                           data-service="recursos"
+                           aria-label="Ir a Recursos formativos">
+                            <span class="item-title">Recursos formativos</span>
+                            <span class="item-subtitle">Guías y herramientas</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="../#comunidad" class="nav-link">Comunidad</a>
+                <a href="../blog/" class="nav-link">Blog</a>
+                <a href="../recursos" class="nav-link">Recursos</a>
+                <a href="../faqs/" class="nav-link">FAQs</a>
+                <a href="../sobre-nosotros/" class="nav-link">Sobre Nosotros</a>
+                <a href="../#contacto" class="nav-link cta-nav">Únete</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
   <section class="privacy-hero">
     <div class="privacy-hero-content">
@@ -291,19 +357,7 @@
     <p><em>Esta política cumple con el Reglamento General de Protección de Datos (GDPR) y la Ley Orgánica de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</em></p>
   </main>
 
-  <script>
-    // Enhanced navbar behavior
-    document.addEventListener('DOMContentLoaded', () => {
-      const navbar = document.querySelector('.enhanced-navbar');
-      
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-      });
-    });
-  </script>
+  <!-- Script principal para funcionalidad del header -->
+  <script src="../assets/js/script.js"></script>
 </body>
 </html>

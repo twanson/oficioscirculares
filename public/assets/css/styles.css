@@ -1446,6 +1446,23 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 .footer-bottom p {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.footer-legal {
+    margin-top: 10px;
+}
+
+.legal-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.legal-link:hover {
+    color: var(--arena);
+    text-decoration: underline;
 }
 
 /* ===== ANIMATIONS ===== */
