@@ -2155,6 +2155,21 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     color: white; /* Todo el texto dentro del formulario en blanco */
 }
 
+/* Mejorar contraste de labels y texto en formularios Tally */
+.tally-form-container iframe,
+.tally-form-container [data-tally-src] {
+    /* Sobrescribir estilos del iframe para mejorar legibilidad */
+    filter: none !important;
+}
+
+/* Estilos específicos para mejorar la legibilidad en formularios Tally dentro de fondos oscuros */
+iframe[src*="tally.so"] {
+    /* Permitir que Tally maneje su propio contraste */
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 .fallback-download {
     margin-top: 2rem;
     padding-top: 2rem;

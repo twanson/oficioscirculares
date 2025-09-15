@@ -10,7 +10,10 @@
 <main class="main-content page-contacto" id="maincontent">
     <section class="contacto-section" aria-labelledby="contacto-title">
         <div class="container">
-            <h1 id="contacto-title" class="sr-only">Contacto — Servicios 3D</h1>
+            <div class="contacto-header">
+                <h1 id="contacto-title" class="contacto-title">Contacto — Servicios 3D</h1>
+                <p class="contacto-subtitle">Cuéntanos en 1–2 minutos qué necesitas. Te propongo 2–3 huecos y te envío un primer paso claro.</p>
+            </div>
             
             <!-- Selector de servicio si no hay service en query params -->
             <div id="service-selector" class="service-selector" style="display: none;">
@@ -65,7 +68,30 @@
 }
 
 .contacto-section {
-    padding: 80px 0 60px;
+    padding: 60px 0 40px;
+}
+
+.contacto-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contacto-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--verde-profundo);
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.contacto-subtitle {
+    font-size: 1.1rem;
+    color: var(--negro-verdoso);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+    opacity: 0.9;
 }
 
 .service-selector {
@@ -98,17 +124,24 @@
 }
 
 .tally-container {
-    background: white;
+    background: var(--verde-profundo);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(31, 75, 63, 0.12);
     min-height: 600px;
+    padding: 0;
 }
 
 .tally-container iframe {
     display: block;
     width: 100%;
     border: none;
+    background: transparent;
+}
+
+/* Estilos para mejorar la apariencia del formulario Tally */
+.tally-container iframe[data-tally-src] {
+    border-radius: 16px;
 }
 
 /* Responsive */
@@ -185,5 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Cargar script de Tally para funcionalidades avanzadas -->
 <script async src="https://tally.so/widgets/embed.js"></script>
+
+<!-- Script principal para funcionalidad del header -->
+<script src="/assets/js/script.js"></script>
 
 <%- include('partials/footer') %>
