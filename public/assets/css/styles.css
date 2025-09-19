@@ -3364,11 +3364,21 @@ iframe[src*="tally.so"] {
 /* Mejorar layout de deliverables en móvil */
 @media (max-width: 768px) {
   .deliverables-grid { 
-    grid-template-columns: 1fr; 
-    gap: 28px;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 0 8px;
+    grid-template-columns: 1fr !important; 
+    gap: 28px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 8px !important;
+  }
+  
+  /* Sobrescribir reglas específicas de roadmap3d y sprint3d en móvil */
+  .page-service.roadmap3d .deliverables-grid,
+  .page-service.sprint3d .deliverables-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 8px !important;
   }
   
   /* Mejorar tarjetas de deliverables en móvil */
@@ -3412,9 +3422,12 @@ iframe[src*="tally.so"] {
   }
   
   /* Ajustar deliverables para móviles pequeños */
-  .deliverables-grid {
-    gap: 24px;
-    padding: 0 4px;
+  .deliverables-grid,
+  .page-service.roadmap3d .deliverables-grid,
+  .page-service.sprint3d .deliverables-grid {
+    gap: 24px !important;
+    padding: 0 4px !important;
+    grid-template-columns: 1fr !important;
   }
   
   .deliverables-grid .ui-card {
