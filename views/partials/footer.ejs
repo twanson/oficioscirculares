@@ -54,3 +54,22 @@
             </div>
         </div>
     </footer>
+
+    <%- include('cookie-banner') %>
+
+    <!-- Asistente de Oficios Circulares: burbuja + popup (widget) -->
+    <link rel="stylesheet" href="/oc/oc-widget.css"/>
+    <script src="/oc/oc-widget.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function(){
+        if(window.OCWidget && typeof OCWidget.init==='function'){
+          OCWidget.init({
+            url: "https://oc-assistant-68142597623.us-central1.run.app/?embed=1",
+            brandColor: "#1f6feb",
+            bubbleText: "¿Puedo ayudarte?",
+            greet: { text: "¿Puedo ayudarte en algo?", delay: 2500, oncePer: 'session' },
+            utm: { source: 'web', medium: 'bubble' }
+          });
+        }
+      });
+    </script>
