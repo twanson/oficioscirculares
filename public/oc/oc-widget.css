@@ -1,19 +1,161 @@
+/* Widget de Oficios Circulares - Diseño alineado con la web */
 :root{
-  --oc-brand:#1f6feb; /* botón */
-  --oc-panel-bg:#0d1117; /* panel */
-  --oc-panel-fg:#e6edf3; /* texto */
-  --oc-shadow:0 10px 30px rgba(0,0,0,.25);
-}
-.oc-bubble{position:fixed;right:20px;bottom:20px;z-index:9999;background:var(--oc-brand);color:#fff;border-radius:24px;padding:12px 16px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.18);font:600 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial}
-.oc-bubble:focus{outline:2px solid #fff4}
-.oc-panel{position:fixed;right:20px;bottom:70px;width:380px;height:560px;display:none;border-radius:12px;overflow:hidden;box-shadow:var(--oc-shadow);z-index:9998;background:var(--oc-panel-bg);color:var(--oc-panel-fg)}
-.oc-head{height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--oc-panel-bg);border-bottom:1px solid #30363d}
-.oc-title{font:600 13px/1 system-ui;flex:1}
-.oc-close{background:transparent;border:0;color:var(--oc-panel-fg);cursor:pointer;font-size:16px}
-.oc-iframe{width:100%;height:calc(100% - 42px);border:0;background:#000}
-.oc-greet{position:fixed;right:88px;bottom:36px;max-width:240px;background:#fff;color:#111;border-radius:10px;padding:10px 12px;font:500 13px/1.3 system-ui;box-shadow:0 6px 18px rgba(0,0,0,.18);z-index:9999;display:none}
-.oc-greet:after{content:"";position:absolute;right:-6px;bottom:10px;border-left:6px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent}
-@media(max-width:480px){
-  .oc-panel{right:2.5vw;width:95vw;height:70vh}
+  /* Colores de la marca Oficios Circulares */
+  --oc-verde-profundo: #1F4B3F;
+  --oc-verde-hoja: #3E7C59;
+  --oc-terracota: #D17B49;
+  --oc-arena: #E8D5B7;
+  --oc-blanco-calido: #FAF9F7;
+  --oc-negro-verdoso: #1C1E1B;
+
+  /* Tipografía */
+  --oc-font-heading: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  --oc-font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Efectos */
+  --oc-shadow-soft: 0 8px 32px rgba(31, 75, 63, 0.12);
+  --oc-shadow-strong: 0 16px 48px rgba(31, 75, 63, 0.24);
+  --oc-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --oc-border-radius: 16px;
 }
 
+/* Burbuja de chat */
+.oc-bubble{
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  background: var(--oc-verde-profundo);
+  color: var(--oc-blanco-calido);
+  border-radius: 24px;
+  padding: 14px 20px;
+  cursor: pointer;
+  box-shadow: var(--oc-shadow-soft);
+  font: 600 15px/1.2 var(--oc-font-body);
+  transition: var(--oc-transition);
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.oc-bubble:hover{
+  background: var(--oc-verde-hoja);
+  transform: translateY(-2px);
+  box-shadow: var(--oc-shadow-strong);
+}
+
+.oc-bubble:focus{
+  outline: 2px solid var(--oc-terracota);
+  outline-offset: 2px;
+}
+
+/* Panel de chat */
+.oc-panel{
+  position: fixed;
+  right: 24px;
+  bottom: 84px;
+  width: 400px;
+  height: 580px;
+  display: none;
+  border-radius: var(--oc-border-radius);
+  overflow: hidden;
+  box-shadow: var(--oc-shadow-strong);
+  z-index: 9998;
+  background: var(--oc-blanco-calido);
+  color: var(--oc-negro-verdoso);
+  border: 1px solid rgba(31, 75, 63, 0.08);
+}
+
+/* Header del panel */
+.oc-head{
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  background: var(--oc-verde-profundo);
+  color: var(--oc-blanco-calido);
+  border-bottom: none;
+}
+
+.oc-title{
+  font: 600 16px/1.2 var(--oc-font-heading);
+  flex: 1;
+  color: var(--oc-blanco-calido);
+}
+
+.oc-close{
+  background: rgba(255,255,255,0.1);
+  border: 0;
+  color: var(--oc-blanco-calido);
+  cursor: pointer;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--oc-transition);
+}
+
+.oc-close:hover{
+  background: rgba(255,255,255,0.2);
+}
+
+/* Iframe */
+.oc-iframe{
+  width: 100%;
+  height: calc(100% - 56px);
+  border: 0;
+  background: var(--oc-blanco-calido);
+}
+
+/* Mensaje de saludo */
+.oc-greet{
+  position: fixed;
+  right: 104px;
+  bottom: 40px;
+  max-width: 280px;
+  background: var(--oc-blanco-calido);
+  color: var(--oc-negro-verdoso);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font: 500 14px/1.4 var(--oc-font-body);
+  box-shadow: var(--oc-shadow-soft);
+  z-index: 9999;
+  display: none;
+  border: 1px solid var(--oc-arena);
+}
+
+.oc-greet:after{
+  content: "";
+  position: absolute;
+  right: -8px;
+  bottom: 16px;
+  border-left: 8px solid var(--oc-blanco-calido);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+/* Responsive design */
+@media(max-width: 480px){
+  .oc-bubble{
+    right: 16px;
+    bottom: 16px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .oc-panel{
+    right: 16px;
+    bottom: 72px;
+    width: calc(100vw - 32px);
+    height: calc(100vh - 120px);
+    max-height: 80vh;
+  }
+
+  .oc-greet{
+    right: 80px;
+    bottom: 32px;
+    max-width: calc(100vw - 120px);
+  }
+}

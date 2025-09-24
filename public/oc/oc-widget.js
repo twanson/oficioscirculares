@@ -16,7 +16,7 @@
     // inject CSS
     if(!d.getElementById('oc-widget-css')){
       const link=d.createElement('link');
-      link.id='oc-widget-css'; link.rel='stylesheet'; link.href=(cfg.cssHref||'')||'https://'+location.host+'/web-widget/oc-widget.css';
+      link.id='oc-widget-css'; link.rel='stylesheet'; link.href=(cfg.cssHref||'')||'https://'+location.host+'/oc/oc-widget.css';
       // fallback inline if load fails
       link.onerror=()=>{console.warn('OC widget CSS not found; using inline styles')}
       d.head.appendChild(link);

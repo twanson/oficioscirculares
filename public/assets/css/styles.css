@@ -2748,37 +2748,68 @@ iframe[src*="tally.so"] {
 
 .micro-card {
     background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 20px;
+    border: 2px solid #E8D5B7;
+    border-radius: 16px;
+    padding: 24px 20px;
     text-align: center;
+    box-shadow: 0 4px 16px rgba(31, 75, 63, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+}
+
+.micro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(31, 75, 63, 0.15);
+    border-color: #D17B49;
+}
+
+.micro-card .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    display: block;
 }
 
 .micro-card h5 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #1F4B3F;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-family: var(--font-heading, 'Nunito', sans-serif);
 }
 
 .micro-card p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #1C1E1B;
+    margin-bottom: 8px;
+    flex-grow: 1;
+    line-height: 1.5;
+}
+
+.micro-card p strong {
+    color: #D17B49;
+    font-weight: 600;
 }
 
 .micro-card a {
     background: #1F4B3F;
     color: white;
     text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 12px 24px;
+    border-radius: 12px;
     font-weight: 600;
     font-size: 0.9rem;
+    margin-top: auto;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
 .micro-card a:hover {
-    background: #2d6b55;
+    background: #3E7C59;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(31, 75, 63, 0.2);
 }
 
 /* Visibilidad controlada por JS */
