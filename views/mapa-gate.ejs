@@ -1,0 +1,137 @@
+<%-
+  include('partials/head-meta', {
+    title: 'Mapa Circular Artesano — Solo miembros | Oficios Circulares',
+    description: 'Accede al mapa interactivo con +200 recursos circulares verificados: proveedores, servicios de reparación, talleres y más.',
+    canonical: '/mapa',
+    noindex: typeof noindex !== 'undefined' ? noindex : false
+  })
+%>
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <section class="recurso-detail-section">
+        <div class="container">
+            <div class="recurso-detail">
+                <!-- Gate: se muestra si NO hay cookie o token válido -->
+                <div id="gate" style="display:none;">
+                    <header class="recurso-header">
+                        <h1 class="recurso-title">Mapa Circular Artesano</h1>
+                        <p class="recurso-description">Un mapa interactivo en Google Maps con +200 recursos circulares verificados para artesanos y pequeños productores.</p>
+                    </header>
+
+                    <section class="recurso-cta">
+                        <div class="cta-container">
+                            <h3>Únete gratis para acceder al mapa</h3>
+                            <p>Acceso directo desde cualquier dispositivo, sin contraseñas.</p>
+                            
+                            <div class="benefits-list" style="margin: 1.5rem 0;">
+                                <p style="margin-bottom: 0.5rem;"><strong>¿Qué vas a encontrar dentro?</strong></p>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #22c55e;">✅</span>
+                                        <strong>Proveedores de materiales recuperados:</strong> Organizados por región y material.
+                                    </li>
+                                    <li style="margin: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #22c55e;">✅</span>
+                                        <strong>Servicios de reparación especializados:</strong> Talleres y profesionales por especialidad.
+                                    </li>
+                                    <li style="margin: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #22c55e;">✅</span>
+                                        <strong>Talleres de formación:</strong> Cursos presenciales y online en diseño circular.
+                                    </li>
+                                    <li style="margin: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                                        <span style="position: absolute; left: 0; color: #22c55e;">✅</span>
+                                        <strong>Redes de logística:</strong> Conexiones regionales activas.
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Embed de Tally -->
+                            <div class="tally-form-container">
+                                <iframe
+                                  src="https://tally.so/embed/1AA6XQ?alignLeft=1&hideTitle=1&transparentBackground=1&resource_id=mapa_circular&source=web&utm_medium=gate<% if (q && q.utm_source) { %>&utm_source=<%= encodeURIComponent(q.utm_source) %><% } %><% if (q && q.utm_campaign) { %>&utm_campaign=<%= encodeURIComponent(q.utm_campaign) %><% } %><% if (q && q.utm_content) { %>&utm_content=<%= encodeURIComponent(q.utm_content) %><% } %><% if (q && q.page_url) { %>&page_url=<%= encodeURIComponent(q.page_url) %><% } %>"
+                                  width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Accede al Mapa Circular Artesano">
+                                </iframe>
+                            </div>
+
+                            <!-- Información adicional -->
+                            <div class="form-info">
+                                <p><small>🔒 Tus datos están seguros. Solo los usamos para enviarte el enlace de acceso y contenido relacionado ocasionalmente.</small></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Contenido protegido: lo controla el script (token/cookie) -->
+                <div id="mapa-content" style="display:none;">
+                    <header class="recurso-header">
+                        <h1 class="recurso-title">Mapa Circular Artesano</h1>
+                        <p class="recurso-description">Bienvenido/a al mapa de recursos circulares. Tu acceso está activo.</p>
+                    </header>
+                    
+                    <div class="recurso-cta">
+                        <div class="cta-container">
+                            <h3>Redirigiendo al mapa...</h3>
+                            <p>Si no eres redirigido automáticamente, <a href="/mapa?token=<%= q && q.token ? q.token : '' %>">haz clic aquí</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+  <script>
+  (function () {
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('mapa-content');
+    const VALIDATE_URL = "https://hook.eu2.make.com/1li6x48yx19frcc13566ai2wd3ia402c"; // Make Custom Webhook
+
+    function show(el){ el && (el.style.display='block'); }
+    function hide(el){ el && (el.style.display='none'); }
+    function setMemberCookie(){
+      // Cookie de sesión de miembro: 60 días
+      document.cookie = "oc_member=1; Max-Age=5184000; Path=/; SameSite=Lax";
+    }
+    function hasMemberCookie(){
+      return document.cookie.split(';').some(c => c.trim().startsWith('oc_member=1'));
+    }
+
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+
+    if (hasMemberCookie()) { 
+        // Si tiene cookie, redirigir al mapa real si estamos en la gate
+        // Pero como esto es la gate, significa que el servidor no detectó token valido o cookie (si fuera server-side check)
+        // Dejamos que el usuario vea el contenido "protegido" que en este caso podría ser un link al mapa o el mapa mismo si lo cargamos aquí.
+        // En el caso de /dir, el server maneja la renderización de 'directorio' vs 'dir-gate'.
+        // Aquí haremos lo mismo. Si JS detecta cookie, recargamos con token o redirigimos?
+        // Por simplicidad, mostramos el gate si el server renderizó el gate.
+        // Pero si el usuario tiene cookie, tal vez deberíamos redirigir a /mapa?token=COOKIE_VALUE (no tenemos el token en cookie)
+        // Mejor dejar que el usuario pida un nuevo link o use el token que tiene.
+        // Sin embargo, el script original de dir-gate intentaba mostrar contenido.
+        // Vamos a mantener la lógica visual:
+        show(gate); hide(content); 
+    }
+
+    if (token) {
+      fetch(VALIDATE_URL + "?token=" + encodeURIComponent(token), { method:"GET", credentials:"omit" })
+        .then(r => r.json())
+        .then(j => {
+          if (j && j.ok) { 
+              setMemberCookie(); 
+              // Redirigir a la ruta protegida completa
+              window.location.href = "/mapa?token=" + encodeURIComponent(token);
+          }
+          else { show(gate); hide(content); }
+        })
+        .catch(() => { show(gate); hide(content); });
+    } else {
+      show(gate); hide(content);
+    }
+  })();
+  </script>
+</body>
+</html>

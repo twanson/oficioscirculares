@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include('partials/head-meta', { title: 'Mapa Circular Artesano — Oficios Circulares' ,
+        description: 'Mapa interactivo con recursos circulares verificados.' , canonical: '/mapa' , noindex: true }) %>
+
+        <style>
+            .mapa-header {
+                background: linear-gradient(135deg, var(--verde-profundo) 0%, var(--verde-hoja) 100%);
+                color: white;
+                padding: 40px 0;
+                text-align: center;
+            }
+
+            .mapa-title {
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            .mapa-container {
+                height: 80vh;
+                width: 100%;
+                position: relative;
+            }
+
+            .mapa-iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            .user-info-bar {
+                background: #f8f9fa;
+                padding: 10px 0;
+                border-bottom: 1px solid #e9ecef;
+                font-size: 0.9rem;
+                color: #666;
+                text-align: center;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <div class="user-info-bar">
+            <div class="container">
+                👋 Bienvenido/a, <strong>
+                    <%= email %>
+                </strong> | Acceso válido hasta <%= new Date(expiresAt).toLocaleDateString('es-ES') %>
+            </div>
+        </div>
+
+        <div class="mapa-container">
+            <iframe class="mapa-iframe"
+                src="https://www.google.com/maps/d/embed?mid=1cW6AmrEQYaeCRVozRj4rA-tEAHB2G3I&ehbc=2E312F&noprof=1"
+                width="640" height="480">
+            </iframe>
+        </div>
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>

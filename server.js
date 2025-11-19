@@ -331,6 +331,41 @@ app.get('/dir', async (req, res) => {
   res.render('dir-gate', { q: req.query, noindex: false });
 });
 
+// --- MAPA CIRCULAR ARTESANO ---
+app.get('/mapa', async (req, res) => {
+  const token = req.query.token;
+  
+  // Si hay token, intentar validación y mostrar mapa
+  if (token) {
+    try {
+      console.log(`🔍 Validating token for mapa: ${token}`);
+      const validation = await tokenValidator.validateAndRenewToken(token);
+      
+      if (validation.valid) {
+        console.log(`✅ Token valid, rendering mapa for ${validation.email}`);
+        
+        return res.render('mapa', { 
+          email: validation.email,
+          expiresAt: validation.expiresAt,
+          q: req.query,
+          title: 'Mapa Circular Artesano',
+          description: 'Mapa interactivo con recursos circulares verificados.',
+          canonical: '/mapa'
+        });
+      } else {
+        console.log(`❌ Token invalid: ${validation.error}`);
+        return res.redirect('/renovar-acceso?error=' + encodeURIComponent(validation.error));
+      }
+    } catch (error) {
+      console.error('💥 Error during token validation for mapa:', error);
+      return res.redirect('/renovar-acceso?error=validation_failed');
+    }
+  }
+  
+  // Si no hay token, mostrar gate normal
+  res.render('mapa-gate', { q: req.query, noindex: false });
+});
+
 // Detalle de proveedor individual
 app.get('/dir/proveedor/:id', async (req, res) => {
   const token = req.query.token;
