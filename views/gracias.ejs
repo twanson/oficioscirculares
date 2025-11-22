@@ -1,107 +1,116 @@
-<%- include('partials/head-meta', { title, description, canonical, noindex: typeof noindex !== 'undefined' ? noindex : true }) %>
-<%- include('partials/header') %>
+<%- include('partials/head-meta', { title, description, canonical, noindex: typeof noindex !=='undefined' ? noindex :
+  true }) %>
+  <%- include('partials/header') %>
 
-<% if (typeof isDir !== 'undefined' && isDir) { %>
-  <main class="main-content">
-    <section class="gracias-section">
-      <div class="container">
-        <div class="gracias-content">
-          <div class="gracias-icon">🎉</div>
-          <h1 class="gracias-title"><%= title %></h1>
-          
-          <p class="text-lg" style="font-size: 1.1rem; line-height: 1.6; margin: 1.5rem 0;">
-            <strong>Listo: ya formas parte de la comunidad.</strong>
-            Te hemos enviado un email con tu <strong>enlace de acceso al Directorio</strong>. Además,
-            <strong>en las próximas 24–48 h</strong> recibirás un correo de bienvenida con recursos y siguientes pasos.
-          </p>
-          
-          <% if (maskedEmail) { %>
-            <p class="muted" style="color: #666; margin: 1rem 0;">Hemos enviado el enlace a <strong><%= maskedEmail %></strong>.</p>
-          <% } %>
-          
-          <div class="actions" style="margin: 2rem 0;">
-            <a href="/" class="btn btn-primary">Ir al inicio</a>
-          </div>
-          
-          <p class="note" style="font-size: 0.9rem; color: #666; margin-top: 2rem;">
-            Tu enlace es válido durante <strong>60 días</strong> y se renueva automáticamente cada vez que accedes.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Analytics -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'dir_signup_complete' });
-    </script>
-  </main>
-<% } else { %>
-  <main class="main-content">
-      <section class="gracias-section">
+    <% if ((typeof isDir !=='undefined' && isDir) || (typeof isMapa !=='undefined' && isMapa)) { %>
+      <main class="main-content">
+        <section class="gracias-section">
           <div class="container">
-              <div class="gracias-content">
-                  <div class="gracias-icon">🎉</div>
-                  <h1 class="gracias-title">¡Gracias!</h1>
-                  <% if (typeof recurso !== 'undefined' && recurso) { %>
-                    <p class="gracias-subtitle">Tu descarga está lista. Esperamos que te sea de gran valor.</p>
-                    
-                    <div class="download-action">
-                        <a href="<%= recurso.pdf %>" id="btn-download" class="btn btn-primary btn-large">
-                            <span class="btn-icon">📥</span>
-                            Descargar PDF
-                        </a>
-                    </div>
+            <div class="gracias-content">
+              <div class="gracias-icon">🎉</div>
+              <h1 class="gracias-title">
+                <%= title %>
+              </h1>
 
-                    <section class="next-steps">
-                        <h2>Siguientes pasos recomendados</h2>
-                        <div class="steps-grid">
-                            <div class="step-card">
-                                <h3>📂 Explora más recursos</h3>
-                                <p>Descubre otras guías y herramientas</p>
-                                <a href="/recursos" class="btn btn-secondary">Ver todos los recursos</a>
-                            </div>
-                            <div class="step-card">
-                                <h3>🏢 Directorio vivo</h3>
-                                <p>Encuentra proveedores sostenibles</p>
-                                <a href="/dir" class="btn btn-secondary">Solicitar acceso al directorio</a>
-                            </div>
-                            <div class="step-card">
-                                <h3>📋 Plantillas útiles</h3>
-                                <p>Herramientas prácticas para tu proyecto</p>
-                                <a href="/plantillas" class="btn btn-secondary">Ver plantillas</a>
-                            </div>
-                        </div>
-                    </section>
+              <p class="text-lg" style="font-size: 1.1rem; line-height: 1.6; margin: 1.5rem 0;">
+                <strong>Listo: ya formas parte de la comunidad.</strong>
+                Te hemos enviado un email con tu <strong>enlace de acceso al <%= isMapa ? 'Mapa Circular' : 'Directorio'
+                    %></strong>. Además,
+                <strong>en las próximas 24–48 h</strong> recibirás un correo de bienvenida con recursos y siguientes
+                pasos.
+              </p>
+
+              <% if (maskedEmail) { %>
+                <p class="muted" style="color: #666; margin: 1rem 0;">Hemos enviado el enlace a <strong>
+                    <%= maskedEmail %>
+                  </strong>.</p>
+                <% } %>
+
+                  <div class="actions" style="margin: 2rem 0;">
+                    <a href="/" class="btn btn-primary">Ir al inicio</a>
+                  </div>
+
+                  <p class="note" style="font-size: 0.9rem; color: #666; margin-top: 2rem;">
+                    Tu enlace es válido durante <strong>60 días</strong> y se renueva automáticamente cada vez que
+                    accedes.
+                  </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Analytics -->
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: '<%= isMapa ? "mapa_signup_complete" : "dir_signup_complete" %>' });
+        </script>
+      </main>
+      <% } else { %>
+        <main class="main-content">
+          <section class="gracias-section">
+            <div class="container">
+              <div class="gracias-content">
+                <div class="gracias-icon">🎉</div>
+                <h1 class="gracias-title">¡Gracias!</h1>
+                <% if (typeof recurso !=='undefined' && recurso) { %>
+                  <p class="gracias-subtitle">Tu descarga está lista. Esperamos que te sea de gran valor.</p>
+
+                  <div class="download-action">
+                    <a href="<%= recurso.pdf %>" id="btn-download" class="btn btn-primary btn-large">
+                      <span class="btn-icon">📥</span>
+                      Descargar PDF
+                    </a>
+                  </div>
+
+                  <section class="next-steps">
+                    <h2>Siguientes pasos recomendados</h2>
+                    <div class="steps-grid">
+                      <div class="step-card">
+                        <h3>📂 Explora más recursos</h3>
+                        <p>Descubre otras guías y herramientas</p>
+                        <a href="/recursos" class="btn btn-secondary">Ver todos los recursos</a>
+                      </div>
+                      <div class="step-card">
+                        <h3>🏢 Directorio vivo</h3>
+                        <p>Encuentra proveedores sostenibles</p>
+                        <a href="/dir" class="btn btn-secondary">Solicitar acceso al directorio</a>
+                      </div>
+                      <div class="step-card">
+                        <h3>📋 Plantillas útiles</h3>
+                        <p>Herramientas prácticas para tu proyecto</p>
+                        <a href="/plantillas" class="btn btn-secondary">Ver plantillas</a>
+                      </div>
+                    </div>
+                  </section>
                   <% } else { %>
                     <p>Tu solicitud se ha enviado correctamente.</p>
-                  <% } %>
+                    <% } %>
               </div>
-          </div>
-      </section>
-  </main>
+            </div>
+          </section>
+        </main>
 
-  <script src="/assets/js/script.js"></script>
-  <% if (typeof recurso !== 'undefined' && recurso) { %>
-  <script>
-      document.getElementById('btn-download')?.addEventListener('click', function(){
-          // Tracking GTM/GA4 para descargas
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-              event: 'file_download',
-              file_name: '<%= recurso.pdf %>',
-              resource_title: '<%= recurso.title %>',
-              resource_slug: '<%= recurso.slug %>',
-              download_type: 'direct_link',
-              page_location: window.location.href
-          });
-          
-          console.log('Descarga iniciada:', '<%= recurso.title %>');
-      });
-  </script>
-  <% } %>
-<% } %>
+        <script src="/assets/js/script.js"></script>
+        <% if (typeof recurso !=='undefined' && recurso) { %>
+          <script>
+            document.getElementById('btn-download')?.addEventListener('click', function () {
+              // Tracking GTM/GA4 para descargas
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: 'file_download',
+                file_name: '<%= recurso.pdf %>',
+                resource_title: '<%= recurso.title %>',
+                resource_slug: '<%= recurso.slug %>',
+                download_type: 'direct_link',
+                page_location: window.location.href
+              });
 
-<%- include('partials/footer') %>
-</body>
-</html>
+              console.log('Descarga iniciada:', '<%= recurso.title %>');
+            });
+          </script>
+          <% } %>
+            <% } %>
+
+              <%- include('partials/footer') %>
+                </body>
+
+                </html>

@@ -11,24 +11,24 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware para redirigir dominio naked a www
 app.use((req, res, next) => {
-    const host = req.get('host');
-    
-    // Si es localhost, permitir sin redirecciones
-    if (host && host.startsWith('localhost')) {
-        return next();
-    }
-    
-    // Si es el dominio naked (sin www), redirigir a www
-    if (host === 'oficioscirculares.com') {
-        return res.redirect(301, `https://www.oficioscirculares.com${req.originalUrl}`);
-    }
-    
-    // Si no es HTTPS en producción, forzar HTTPS
-    if (req.header('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === 'production') {
-        return res.redirect(301, `https://${req.get('host')}${req.originalUrl}`);
-    }
-    
-    next();
+  const host = req.get('host');
+
+  // Si es localhost, permitir sin redirecciones
+  if (host && host.startsWith('localhost')) {
+    return next();
+  }
+
+  // Si es el dominio naked (sin www), redirigir a www
+  if (host === 'oficioscirculares.com') {
+    return res.redirect(301, `https://www.oficioscirculares.com${req.originalUrl}`);
+  }
+
+  // Si no es HTTPS en producción, forzar HTTPS
+  if (req.header('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === 'production') {
+    return res.redirect(301, `https://${req.get('host')}${req.originalUrl}`);
+  }
+
+  next();
 });
 
 // Configuración de MailChimp (usando variables de entorno)
@@ -46,68 +46,68 @@ const emailCooldownStore = new Map();
 
 // Función para limpiar stores periódicamente (evitar memory leaks)
 setInterval(() => {
-    const now = Date.now();
-    // Limpiar rate limit store (15 min = 900000ms)
-    for (const [key, data] of rateLimitStore.entries()) {
-        if (now - data.firstRequest > 900000) {
-            rateLimitStore.delete(key);
-        }
+  const now = Date.now();
+  // Limpiar rate limit store (15 min = 900000ms)
+  for (const [key, data] of rateLimitStore.entries()) {
+    if (now - data.firstRequest > 900000) {
+      rateLimitStore.delete(key);
     }
-    // Limpiar email cooldown store (10 min = 600000ms)
-    for (const [email, timestamp] of emailCooldownStore.entries()) {
-        if (now - timestamp > 600000) {
-            emailCooldownStore.delete(email);
-        }
+  }
+  // Limpiar email cooldown store (10 min = 600000ms)
+  for (const [email, timestamp] of emailCooldownStore.entries()) {
+    if (now - timestamp > 600000) {
+      emailCooldownStore.delete(email);
     }
+  }
 }, 60000); // Limpiar cada minuto
 
 // Rate limiting middleware
 function rateLimitMiddleware(req, res, next) {
-    const ip = req.ip || req.connection.remoteAddress;
-    const now = Date.now();
-    const windowMs = 15 * 60 * 1000; // 15 minutos
-    const maxRequests = 60;
+  const ip = req.ip || req.connection.remoteAddress;
+  const now = Date.now();
+  const windowMs = 15 * 60 * 1000; // 15 minutos
+  const maxRequests = 60;
 
-    if (!rateLimitStore.has(ip)) {
-        rateLimitStore.set(ip, { count: 1, firstRequest: now });
-        return next();
-    }
+  if (!rateLimitStore.has(ip)) {
+    rateLimitStore.set(ip, { count: 1, firstRequest: now });
+    return next();
+  }
 
-    const data = rateLimitStore.get(ip);
-    
-    // Reset window si ha pasado el tiempo
-    if (now - data.firstRequest > windowMs) {
-        rateLimitStore.set(ip, { count: 1, firstRequest: now });
-        return next();
-    }
+  const data = rateLimitStore.get(ip);
 
-    // Incrementar contador
-    data.count++;
-    
-    if (data.count > maxRequests) {
-        return res.status(429).json({
-            ok: false,
-            message: 'Demasiadas solicitudes. Inténtalo más tarde.'
-        });
-    }
+  // Reset window si ha pasado el tiempo
+  if (now - data.firstRequest > windowMs) {
+    rateLimitStore.set(ip, { count: 1, firstRequest: now });
+    return next();
+  }
 
-    next();
+  // Incrementar contador
+  data.count++;
+
+  if (data.count > maxRequests) {
+    return res.status(429).json({
+      ok: false,
+      message: 'Demasiadas solicitudes. Inténtalo más tarde.'
+    });
+  }
+
+  next();
 }
 
 // Email cooldown check
 function checkEmailCooldown(email) {
-    const now = Date.now();
-    const cooldownMs = 10 * 60 * 1000; // 10 minutos
-    
-    if (emailCooldownStore.has(email)) {
-        const lastRequest = emailCooldownStore.get(email);
-        if (now - lastRequest < cooldownMs) {
-            return false; // Aún en cooldown
-        }
+  const now = Date.now();
+  const cooldownMs = 10 * 60 * 1000; // 10 minutos
+
+  if (emailCooldownStore.has(email)) {
+    const lastRequest = emailCooldownStore.get(email);
+    if (now - lastRequest < cooldownMs) {
+      return false; // Aún en cooldown
     }
-    
-    emailCooldownStore.set(email, now);
-    return true; // OK para proceder
+  }
+
+  emailCooldownStore.set(email, now);
+  return true; // OK para proceder
 }
 
 // Validar que las variables de entorno estén configuradas
@@ -117,16 +117,16 @@ console.log('   - MAILCHIMP_AUDIENCE_ID:', MAILCHIMP_AUDIENCE_ID);
 console.log('   - MAILCHIMP_SERVER_PREFIX:', MAILCHIMP_SERVER_PREFIX);
 
 if (!MAILCHIMP_API_KEY) {
-    console.error('\n❌ PROBLEMA: MAILCHIMP_API_KEY no está configurada');
-    console.log('\n📝 Para solucionarlo:');
-    console.log('1. Ve a https://admin.mailchimp.com/account/api/');
-    console.log('2. Crea una nueva API Key');
-    console.log('3. En Railway, ve a tu proyecto > Variables');
-    console.log('4. Añade estas variables:');
-    console.log('   - MAILCHIMP_API_KEY: [tu_api_key]');
-    console.log('   - MAILCHIMP_AUDIENCE_ID: [tu_audience_id]');
-    console.log('   - MAILCHIMP_SERVER_PREFIX: [us1, us2, etc.]');
-    console.log('\n⚠️  Mientras tanto, los emails no se guardarán en Mailchimp\n');
+  console.error('\n❌ PROBLEMA: MAILCHIMP_API_KEY no está configurada');
+  console.log('\n📝 Para solucionarlo:');
+  console.log('1. Ve a https://admin.mailchimp.com/account/api/');
+  console.log('2. Crea una nueva API Key');
+  console.log('3. En Railway, ve a tu proyecto > Variables');
+  console.log('4. Añade estas variables:');
+  console.log('   - MAILCHIMP_API_KEY: [tu_api_key]');
+  console.log('   - MAILCHIMP_AUDIENCE_ID: [tu_audience_id]');
+  console.log('   - MAILCHIMP_SERVER_PREFIX: [us1, us2, etc.]');
+  console.log('\n⚠️  Mientras tanto, los emails no se guardarán en Mailchimp\n');
 }
 
 // Configurar EJS
@@ -139,7 +139,7 @@ app.use(express.json());
 // Middleware para redirecciones PDF (maneja varias codificaciones)
 app.use('/', (req, res, next) => {
   const url = req.path;
-  
+
   // Lista de variantes del nombre del PDF original
   const pdfVariants = [
     '/Diagnostico_Circular_Express_Oficios_Circulares.pdf',
@@ -147,12 +147,12 @@ app.use('/', (req, res, next) => {
     '/Diagn%C3%B3stico_Circular_Express_Oficios_Circulares.pdf',
     '/Diagn%C2%B3stico_Circular_Express_Oficios_Circulares.pdf'
   ];
-  
+
   // Si la URL coincide con alguna variante, redirigir
   if (pdfVariants.includes(url) || url.includes('Diagn') && url.includes('stico_Circular_Express') && url.endsWith('.pdf')) {
     return res.redirect(301, '/downloads/Circular_Express_Oficios_Circulares_2025.pdf');
   }
-  
+
   next();
 });
 
@@ -196,12 +196,12 @@ app.get('/servicios/roadmap-3d', (req, res) => {
 });
 
 app.get('/servicios/sprint-3d', (req, res) => {
-    res.render('sprint-3d');
+  res.render('sprint-3d');
 });
 
 // Página de contacto con formulario Tally
 app.get('/contacto', (req, res) => {
-    res.render('contacto');
+  res.render('contacto');
 });
 
 // Rutas de recursos
@@ -234,14 +234,15 @@ app.get('/gracias/e-wear', (req, res) => {
 
 app.get('/gracias', (req, res) => {
   const isDir = req.query.resource === 'dir';
+  const isMapa = req.query.resource === 'mapa';
   const isEwear = req.query.resource === 'e-wear-docs';
   const rawEmail = (req.query.email || '').trim();
-  
+
   // Si es E-WEAR, redirigir a la página específica
   if (isEwear) {
     return res.redirect('/gracias/e-wear');
   }
-  
+
   // Función mejorada para enmascarar email
   function maskEmail(email) {
     if (!email) return '';
@@ -252,14 +253,26 @@ app.get('/gracias', (req, res) => {
     const tail = dom.slice(1).join('.');
     return `${u}@${base}${tail ? '.' + tail : ''}`;
   }
-  
+
+  let title = '¡Gracias!';
+  let description = 'Tu solicitud se ha enviado correctamente.';
+
+  if (isDir) {
+    title = 'Ya formas parte de la comunidad';
+    description = 'Te hemos enviado tu enlace de acceso al Directorio y recibirás un email de bienvenida en 24-48h.';
+  } else if (isMapa) {
+    title = 'Ya formas parte de la comunidad';
+    description = 'Te hemos enviado tu enlace de acceso al Mapa Circular y recibirás un email de bienvenida en 24-48h.';
+  }
+
   const viewModel = {
     isDir,
-    maskedEmail: isDir ? maskEmail(rawEmail) : null,
+    isMapa,
+    maskedEmail: (isDir || isMapa) ? maskEmail(rawEmail) : null,
     q: req.query,
-    noindex: isDir,
-    title: isDir ? 'Ya formas parte de la comunidad' : '¡Gracias!',
-    description: isDir ? 'Te hemos enviado tu enlace de acceso al Directorio y recibirás un email de bienvenida en 24-48h.' : 'Tu solicitud se ha enviado correctamente.',
+    noindex: (isDir || isMapa),
+    title,
+    description,
     canonical: req.originalUrl
   };
   res.render('gracias', viewModel);
@@ -286,22 +299,22 @@ app.get('/guia-corta', (req, res) => {
 // --- DIRECTORIO DE PROVEEDORES ---
 app.get('/dir', async (req, res) => {
   const token = req.query.token;
-  
+
   // Si hay token, intentar validación y mostrar directorio
   if (token) {
     try {
       console.log(`🔍 Validating token: ${token}`);
       const validation = await tokenValidator.validateAndRenewToken(token);
-      
+
       if (validation.valid) {
         console.log(`✅ Token valid, rendering directorio for ${validation.email}`);
-        
+
         // Obtener datos del directorio
         const proveedores = await directorio.getProveedores();
         const categorias = await directorio.getCategorias();
         const ubicaciones = await directorio.getUbicaciones();
-        
-        return res.render('directorio', { 
+
+        return res.render('directorio', {
           email: validation.email,
           expiresAt: validation.expiresAt,
           proveedores: proveedores.map(p => directorio.formatearProveedor(p)),
@@ -326,7 +339,7 @@ app.get('/dir', async (req, res) => {
       return res.redirect('/renovar-acceso?error=validation_failed');
     }
   }
-  
+
   // Si no hay token, mostrar gate normal
   res.render('dir-gate', { q: req.query, noindex: false });
 });
@@ -334,17 +347,17 @@ app.get('/dir', async (req, res) => {
 // --- MAPA CIRCULAR ARTESANO ---
 app.get('/mapa', async (req, res) => {
   const token = req.query.token;
-  
+
   // Si hay token, intentar validación y mostrar mapa
   if (token) {
     try {
       console.log(`🔍 Validating token for mapa: ${token}`);
       const validation = await tokenValidator.validateAndRenewToken(token);
-      
+
       if (validation.valid) {
         console.log(`✅ Token valid, rendering mapa for ${validation.email}`);
-        
-        return res.render('mapa', { 
+
+        return res.render('mapa', {
           email: validation.email,
           expiresAt: validation.expiresAt,
           q: req.query,
@@ -361,7 +374,7 @@ app.get('/mapa', async (req, res) => {
       return res.redirect('/renovar-acceso?error=validation_failed');
     }
   }
-  
+
   // Si no hay token, mostrar gate normal
   res.render('mapa-gate', { q: req.query, noindex: false });
 });
@@ -369,27 +382,27 @@ app.get('/mapa', async (req, res) => {
 // Detalle de proveedor individual
 app.get('/dir/proveedor/:id', async (req, res) => {
   const token = req.query.token;
-  
+
   if (!token) {
     return res.redirect('/dir');
   }
-  
+
   try {
     const validation = await tokenValidator.validateAndRenewToken(token);
-    
+
     if (!validation.valid) {
       return res.redirect('/renovar-acceso?error=' + encodeURIComponent(validation.error));
     }
-    
+
     const proveedor = await directorio.getProveedorById(req.params.id);
-    
+
     if (!proveedor) {
-      return res.status(404).render('error', { 
+      return res.status(404).render('error', {
         title: 'Proveedor no encontrado',
         message: 'El proveedor solicitado no existe o no está disponible.'
       });
     }
-    
+
     res.render('proveedor-detalle', {
       email: validation.email,
       proveedor: directorio.formatearProveedor(proveedor),
@@ -399,7 +412,7 @@ app.get('/dir/proveedor/:id', async (req, res) => {
       noindex: true,
       q: req.query
     });
-    
+
   } catch (error) {
     console.error('💥 Error accessing proveedor detail:', error);
     res.redirect('/renovar-acceso?error=validation_failed');
@@ -411,30 +424,30 @@ app.get('/api/dir/search', async (req, res) => {
   try {
     const { q, categoria, ubicacion } = req.query;
     let proveedores = await directorio.getProveedores();
-    
+
     // Aplicar filtros
     if (q) {
       proveedores = await directorio.searchProveedores(q);
     }
-    
+
     if (categoria) {
-      proveedores = proveedores.filter(p => 
+      proveedores = proveedores.filter(p =>
         p.categoria.toLowerCase().includes(categoria.toLowerCase())
       );
     }
-    
+
     if (ubicacion) {
-      proveedores = proveedores.filter(p => 
+      proveedores = proveedores.filter(p =>
         p.ubicacion.toLowerCase().includes(ubicacion.toLowerCase())
       );
     }
-    
+
     res.json({
       success: true,
       total: proveedores.length,
       proveedores: proveedores.map(p => directorio.formatearProveedor(p))
     });
-    
+
   } catch (error) {
     console.error('❌ Error en búsqueda:', error);
     res.status(500).json({ success: false, error: 'Error interno del servidor' });
@@ -449,7 +462,7 @@ app.get('/dir/confirmacion', (req, res) => {
 // --- Validación de tokens y renovación de acceso
 app.get('/renovar-acceso', (req, res) => {
   const error = req.query.error;
-  res.render('renovar-acceso', { 
+  res.render('renovar-acceso', {
     error,
     q: req.query,
     noindex: true,
@@ -462,7 +475,7 @@ app.get('/renovar-acceso', (req, res) => {
 // API endpoint para validación AJAX (opcional)
 app.get('/api/validate-token', async (req, res) => {
   const token = req.query.token;
-  
+
   if (!token) {
     return res.status(400).json({ valid: false, error: 'Token required' });
   }
@@ -478,292 +491,292 @@ app.get('/api/validate-token', async (req, res) => {
 
 // Endpoint POST /api/renew-access - Renovación simple de acceso al directorio
 app.post('/api/renew-access', rateLimitMiddleware, async (req, res) => {
-    try {
-        // 1. Validar y normalizar email
-        const { email } = req.body;
-        
-        if (!email || typeof email !== 'string') {
-            return res.json({
-                ok: true,
-                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
-            });
-        }
+  try {
+    // 1. Validar y normalizar email
+    const { email } = req.body;
 
-        const normalizedEmail = email.trim().toLowerCase();
-        
-        // 2. Validar formato básico de email
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(normalizedEmail)) {
-            return res.json({
-                ok: true,
-                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
-            });
-        }
-
-        // 3. Verificar cooldown de email (10 minutos)
-        if (!checkEmailCooldown(normalizedEmail)) {
-            console.log(`⚠️  Email ${normalizedEmail} en cooldown (10 min)`);
-            return res.json({
-                ok: true,
-                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
-            });
-        }
-
-        // 4. Verificar que tenemos las variables de entorno necesarias
-        if (!REISSUE_WEBHOOK_URL || !REISSUE_API_KEY) {
-            console.error('❌ Missing REISSUE_WEBHOOK_URL or REISSUE_API_KEY');
-            return res.json({
-                ok: true,
-                message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
-            });
-        }
-
-        // 5. Llamar a webhook de Make (server-to-server)
-        const makeResponse = await fetch(REISSUE_WEBHOOK_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'x-make-apikey': REISSUE_API_KEY
-            },
-            body: `email=${encodeURIComponent(normalizedEmail)}`,
-            timeout: 10000 // 10 segundos timeout
-        });
-
-        if (makeResponse.ok) {
-            try {
-                const result = await makeResponse.json();
-                console.log(`✅ Renovación procesada para ${normalizedEmail}: ${result.code || 'SENT'}`);
-            } catch (jsonError) {
-                // Make puede devolver "Accepted" como texto plano durante testing
-                const textResult = await makeResponse.text();
-                console.log(`✅ Renovación procesada para ${normalizedEmail}: ${textResult}`);
-            }
-        } else {
-            console.error(`❌ Error en Make webhook (${makeResponse.status}): ${makeResponse.statusText}`);
-        }
-
-    } catch (error) {
-        console.error('❌ Error en /api/renew-access:', error.message);
-    }
-
-    // 6. SIEMPRE responder éxito (anti-enumeración)
-    res.json({
+    if (!email || typeof email !== 'string') {
+      return res.json({
         ok: true,
         message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // 2. Validar formato básico de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(normalizedEmail)) {
+      return res.json({
+        ok: true,
+        message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+      });
+    }
+
+    // 3. Verificar cooldown de email (10 minutos)
+    if (!checkEmailCooldown(normalizedEmail)) {
+      console.log(`⚠️  Email ${normalizedEmail} en cooldown (10 min)`);
+      return res.json({
+        ok: true,
+        message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+      });
+    }
+
+    // 4. Verificar que tenemos las variables de entorno necesarias
+    if (!REISSUE_WEBHOOK_URL || !REISSUE_API_KEY) {
+      console.error('❌ Missing REISSUE_WEBHOOK_URL or REISSUE_API_KEY');
+      return res.json({
+        ok: true,
+        message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+      });
+    }
+
+    // 5. Llamar a webhook de Make (server-to-server)
+    const makeResponse = await fetch(REISSUE_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'x-make-apikey': REISSUE_API_KEY
+      },
+      body: `email=${encodeURIComponent(normalizedEmail)}`,
+      timeout: 10000 // 10 segundos timeout
     });
+
+    if (makeResponse.ok) {
+      try {
+        const result = await makeResponse.json();
+        console.log(`✅ Renovación procesada para ${normalizedEmail}: ${result.code || 'SENT'}`);
+      } catch (jsonError) {
+        // Make puede devolver "Accepted" como texto plano durante testing
+        const textResult = await makeResponse.text();
+        console.log(`✅ Renovación procesada para ${normalizedEmail}: ${textResult}`);
+      }
+    } else {
+      console.error(`❌ Error en Make webhook (${makeResponse.status}): ${makeResponse.statusText}`);
+    }
+
+  } catch (error) {
+    console.error('❌ Error en /api/renew-access:', error.message);
+  }
+
+  // 6. SIEMPRE responder éxito (anti-enumeración)
+  res.json({
+    ok: true,
+    message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
+  });
 });
 
 app.use(express.static('public'));
 
 // Servir página principal como EJS template
 app.get('/', (req, res) => {
-    res.render('index');
+  res.render('index');
 });
 
 // Endpoint para suscripción a MailChimp
 app.post('/subscribe', async (req, res) => {
-    const { firstName, email, tags } = req.body;
-    
-    console.log(`📧 Intento de suscripción: ${firstName} - ${email}`);
-    console.log(`🏷️ Etiquetas recibidas: ${tags ? JSON.stringify(tags) : 'ninguna'}`);
-    console.log(`🔍 Tipo de tags:`, typeof tags);
-    console.log(`🔍 Es array?:`, Array.isArray(tags));
-    console.log(`🔍 Length:`, tags ? tags.length : 'N/A');
-    
-    if (!firstName || !email) {
-        return res.status(400).json({ error: 'Nombre y email son requeridos' });
+  const { firstName, email, tags } = req.body;
+
+  console.log(`📧 Intento de suscripción: ${firstName} - ${email}`);
+  console.log(`🏷️ Etiquetas recibidas: ${tags ? JSON.stringify(tags) : 'ninguna'}`);
+  console.log(`🔍 Tipo de tags:`, typeof tags);
+  console.log(`🔍 Es array?:`, Array.isArray(tags));
+  console.log(`🔍 Length:`, tags ? tags.length : 'N/A');
+
+  if (!firstName || !email) {
+    return res.status(400).json({ error: 'Nombre y email son requeridos' });
+  }
+
+  // Verificar si las variables de entorno están configuradas
+  if (!MAILCHIMP_API_KEY) {
+    console.error('❌ Error: No se puede suscribir - MAILCHIMP_API_KEY no configurada');
+    return res.status(500).json({
+      error: 'Configuración de Mailchimp incompleta',
+      details: 'Las variables de entorno no están configuradas correctamente'
+    });
+  }
+
+  try {
+    const url = `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}/members`;
+
+    console.log(`🔗 URL de Mailchimp: ${url}`);
+
+    // SOLO usar etiquetas que vienen desde Make/frontend - SIN etiquetas automáticas
+    let finalTags = [];
+
+    if (tags && Array.isArray(tags) && tags.length > 0) {
+      // Usar ÚNICAMENTE las etiquetas que vienen desde Make/frontend
+      finalTags = tags;
+      console.log(`🏷️ Usando etiquetas desde Make/frontend: ${JSON.stringify(tags)}`);
+    } else if (tags && typeof tags === 'string' && tags.trim() !== '') {
+      // Si viene como string, convertir a array
+      finalTags = [tags.trim()];
+      console.log(`🏷️ Usando etiqueta string desde Make/frontend: ${tags}`);
+    } else {
+      // NO añadir ninguna etiqueta automática - dejar vacío
+      finalTags = [];
+      console.log(`🏷️ Sin etiquetas - NO se añaden etiquetas automáticas`);
     }
-    
-    // Verificar si las variables de entorno están configuradas
-    if (!MAILCHIMP_API_KEY) {
-        console.error('❌ Error: No se puede suscribir - MAILCHIMP_API_KEY no configurada');
-        return res.status(500).json({ 
-            error: 'Configuración de Mailchimp incompleta',
-            details: 'Las variables de entorno no están configuradas correctamente'
+
+    const data = {
+      email_address: email,
+      status: 'subscribed',
+      merge_fields: {
+        FNAME: firstName,
+      },
+      tags: finalTags
+    };
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${Buffer.from(`anystring:${MAILCHIMP_API_KEY}`).toString('base64')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    console.log(`📊 Respuesta de Mailchimp [${response.status}]:`, result);
+    console.log(`🏷️ Etiquetas finales enviadas a Mailchimp: ${JSON.stringify(finalTags)}`);
+
+    if (response.ok) {
+      console.log('✅ Suscripción exitosa a Mailchimp');
+      res.json({ success: true, message: 'Suscripción exitosa' });
+    } else {
+      console.error('❌ Error de MailChimp:', result);
+
+      // Si el email ya existe, considerarlo como éxito
+      if (result.title === 'Member Exists') {
+        console.log('ℹ️ Email ya existía en la lista');
+        res.json({ success: true, message: 'Ya estás suscrito' });
+      } else {
+        res.status(400).json({
+          error: 'Error al suscribir',
+          details: result.detail || result.title
         });
+      }
     }
-    
-    try {
-        const url = `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}/members`;
-        
-        console.log(`🔗 URL de Mailchimp: ${url}`);
-        
-        // SOLO usar etiquetas que vienen desde Make/frontend - SIN etiquetas automáticas
-        let finalTags = [];
-        
-        if (tags && Array.isArray(tags) && tags.length > 0) {
-            // Usar ÚNICAMENTE las etiquetas que vienen desde Make/frontend
-            finalTags = tags;
-            console.log(`🏷️ Usando etiquetas desde Make/frontend: ${JSON.stringify(tags)}`);
-        } else if (tags && typeof tags === 'string' && tags.trim() !== '') {
-            // Si viene como string, convertir a array
-            finalTags = [tags.trim()];
-            console.log(`🏷️ Usando etiqueta string desde Make/frontend: ${tags}`);
-        } else {
-            // NO añadir ninguna etiqueta automática - dejar vacío
-            finalTags = [];
-            console.log(`🏷️ Sin etiquetas - NO se añaden etiquetas automáticas`);
-        }
-        
-        const data = {
-            email_address: email,
-            status: 'subscribed',
-            merge_fields: {
-                FNAME: firstName,
-            },
-            tags: finalTags
-        };
-        
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Basic ${Buffer.from(`anystring:${MAILCHIMP_API_KEY}`).toString('base64')}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-        
-        const result = await response.json();
-        
-        console.log(`📊 Respuesta de Mailchimp [${response.status}]:`, result);
-        console.log(`🏷️ Etiquetas finales enviadas a Mailchimp: ${JSON.stringify(finalTags)}`);
-        
-        if (response.ok) {
-            console.log('✅ Suscripción exitosa a Mailchimp');
-            res.json({ success: true, message: 'Suscripción exitosa' });
-        } else {
-            console.error('❌ Error de MailChimp:', result);
-            
-            // Si el email ya existe, considerarlo como éxito
-            if (result.title === 'Member Exists') {
-                console.log('ℹ️ Email ya existía en la lista');
-                res.json({ success: true, message: 'Ya estás suscrito' });
-            } else {
-                res.status(400).json({ 
-                    error: 'Error al suscribir', 
-                    details: result.detail || result.title 
-                });
-            }
-        }
-        
-    } catch (error) {
-        console.error('💥 Error del servidor:', error);
-        res.status(500).json({ error: 'Error interno del servidor', details: error.message });
-    }
+
+  } catch (error) {
+    console.error('💥 Error del servidor:', error);
+    res.status(500).json({ error: 'Error interno del servidor', details: error.message });
+  }
 });
 
 // Endpoint de verificación de configuración Google Sheets
 app.get('/test-google-sheets', async (req, res) => {
-    const config = {
-        hasServiceAccountJSON: !!process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
-        hasSpreadsheetId: !!process.env.SPREADSHEET_ID,
-        hasSheetName: !!process.env.SHEET_NAME,
-        spreadsheetId: process.env.SPREADSHEET_ID || 'Not configured',
-        sheetName: process.env.SHEET_NAME || 'Not configured',
-        nodeEnv: process.env.NODE_ENV || 'undefined'
-    };
-    
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.SPREADSHEET_ID || !process.env.SHEET_NAME) {
-        return res.json({
-            status: 'error',
-            message: 'Configuración incompleta de Google Sheets',
-            config,
-            instructions: 'Configura las variables de entorno: GOOGLE_SERVICE_ACCOUNT_JSON, SPREADSHEET_ID, SHEET_NAME'
-        });
-    }
-    
-    try {
-        // Probar conexión con Google Sheets
-        const tokenValidator = require('./lib/tokenValidator');
-        
-        // Intentar hacer una consulta simple
-        const response = await tokenValidator.sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.SPREADSHEET_ID,
-            range: `${process.env.SHEET_NAME}!A1:Z1`, // Solo la primera fila
-        });
-        
-        res.json({
-            status: 'success',
-            message: 'Configuración correcta de Google Sheets ✅',
-            config,
-            sheetData: {
-                hasData: !!response.data.values,
-                rowCount: response.data.values ? response.data.values.length : 0,
-                headers: response.data.values ? response.data.values[0] : []
-            }
-        });
-    } catch (error) {
-        res.json({
-            status: 'error',
-            message: 'Error de conexión con Google Sheets',
-            config,
-            error: error.message
-        });
-    }
+  const config = {
+    hasServiceAccountJSON: !!process.env.GOOGLE_SERVICE_ACCOUNT_JSON,
+    hasSpreadsheetId: !!process.env.SPREADSHEET_ID,
+    hasSheetName: !!process.env.SHEET_NAME,
+    spreadsheetId: process.env.SPREADSHEET_ID || 'Not configured',
+    sheetName: process.env.SHEET_NAME || 'Not configured',
+    nodeEnv: process.env.NODE_ENV || 'undefined'
+  };
+
+  if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON || !process.env.SPREADSHEET_ID || !process.env.SHEET_NAME) {
+    return res.json({
+      status: 'error',
+      message: 'Configuración incompleta de Google Sheets',
+      config,
+      instructions: 'Configura las variables de entorno: GOOGLE_SERVICE_ACCOUNT_JSON, SPREADSHEET_ID, SHEET_NAME'
+    });
+  }
+
+  try {
+    // Probar conexión con Google Sheets
+    const tokenValidator = require('./lib/tokenValidator');
+
+    // Intentar hacer una consulta simple
+    const response = await tokenValidator.sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.SPREADSHEET_ID,
+      range: `${process.env.SHEET_NAME}!A1:Z1`, // Solo la primera fila
+    });
+
+    res.json({
+      status: 'success',
+      message: 'Configuración correcta de Google Sheets ✅',
+      config,
+      sheetData: {
+        hasData: !!response.data.values,
+        rowCount: response.data.values ? response.data.values.length : 0,
+        headers: response.data.values ? response.data.values[0] : []
+      }
+    });
+  } catch (error) {
+    res.json({
+      status: 'error',
+      message: 'Error de conexión con Google Sheets',
+      config,
+      error: error.message
+    });
+  }
 });
 
 // Endpoint de verificación de configuración
 app.get('/test-mailchimp', async (req, res) => {
-    const config = {
-        hasApiKey: !!MAILCHIMP_API_KEY,
-        audienceId: MAILCHIMP_AUDIENCE_ID,
-        serverPrefix: MAILCHIMP_SERVER_PREFIX,
-        apiKeyLength: MAILCHIMP_API_KEY ? MAILCHIMP_API_KEY.length : 0,
-        nodeEnv: process.env.NODE_ENV || 'undefined',
-        nodeEnvLength: (process.env.NODE_ENV || '').length,
-        nodeEnvType: typeof process.env.NODE_ENV,
-        isProduction: (process.env.NODE_ENV || '').trim() === 'production',
-        tagLogic: 'Etiquetas gestionadas completamente desde Make - sin etiquetas automáticas'
-    };
-    
-    if (!MAILCHIMP_API_KEY) {
-        return res.json({
-            status: 'error',
-            message: 'Configuración incompleta',
-            config,
-            instructions: 'Revisa CONFIGURACION_MAILCHIMP.md para configurar las variables'
-        });
+  const config = {
+    hasApiKey: !!MAILCHIMP_API_KEY,
+    audienceId: MAILCHIMP_AUDIENCE_ID,
+    serverPrefix: MAILCHIMP_SERVER_PREFIX,
+    apiKeyLength: MAILCHIMP_API_KEY ? MAILCHIMP_API_KEY.length : 0,
+    nodeEnv: process.env.NODE_ENV || 'undefined',
+    nodeEnvLength: (process.env.NODE_ENV || '').length,
+    nodeEnvType: typeof process.env.NODE_ENV,
+    isProduction: (process.env.NODE_ENV || '').trim() === 'production',
+    tagLogic: 'Etiquetas gestionadas completamente desde Make - sin etiquetas automáticas'
+  };
+
+  if (!MAILCHIMP_API_KEY) {
+    return res.json({
+      status: 'error',
+      message: 'Configuración incompleta',
+      config,
+      instructions: 'Revisa CONFIGURACION_MAILCHIMP.md para configurar las variables'
+    });
+  }
+
+  try {
+    // Probar conexión con Mailchimp
+    const url = `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}`;
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Basic ${Buffer.from(`anystring:${MAILCHIMP_API_KEY}`).toString('base64')}`,
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      res.json({
+        status: 'success',
+        message: 'Configuración correcta ✅',
+        config,
+        audienceName: data.name,
+        memberCount: data.stats.member_count
+      });
+    } else {
+      const error = await response.json();
+      res.json({
+        status: 'error',
+        message: 'Error de conexión con Mailchimp',
+        config,
+        error: error.detail
+      });
     }
-    
-    try {
-        // Probar conexión con Mailchimp
-        const url = `https://${MAILCHIMP_SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}`;
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Basic ${Buffer.from(`anystring:${MAILCHIMP_API_KEY}`).toString('base64')}`,
-                'Content-Type': 'application/json',
-            }
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            res.json({
-                status: 'success',
-                message: 'Configuración correcta ✅',
-                config,
-                audienceName: data.name,
-                memberCount: data.stats.member_count
-            });
-        } else {
-            const error = await response.json();
-            res.json({
-                status: 'error',
-                message: 'Error de conexión con Mailchimp',
-                config,
-                error: error.detail
-            });
-        }
-    } catch (error) {
-        res.json({
-            status: 'error',
-            message: 'Error al conectar',
-            config,
-            error: error.message
-        });
-    }
+  } catch (error) {
+    res.json({
+      status: 'error',
+      message: 'Error al conectar',
+      config,
+      error: error.message
+    });
+  }
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
-    console.log(`🔧 Test de configuración: http://localhost:${PORT}/test-mailchimp`);
+  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+  console.log(`🔧 Test de configuración: http://localhost:${PORT}/test-mailchimp`);
 }); 
