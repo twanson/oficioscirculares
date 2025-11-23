@@ -226,7 +226,7 @@
                                                                             // UTMs se heredan de window.location.search tal cual
 
                                                                             // Redirigir a la página de gracias
-                                                                            window.location.href = `/gracias/${recurso.slug}?${params.toString()}`;
+                                                                            window.location.href = `/gracias/<%= recurso.slug %>?${params.toString()}`;
                                                                         }
                                                                     });
                                                                 }
