@@ -57,7 +57,7 @@
                   <div class="download-action">
                     <a href="<%= recurso.pdf %>" id="btn-download" class="btn btn-primary btn-large">
                       <span class="btn-icon">📥</span>
-                      Descargar PDF
+                      <%= recurso.pdf.endsWith('.zip') ? 'Descargar ZIP' : 'Descargar PDF' %>
                     </a>
                   </div>
 
