@@ -1,168 +1,256 @@
 <%- include('partials/head-meta', { title, description, canonical }) %>
-<%- include('partials/header') %>
+    <%- include('partials/header') %>
 
-<main class="main-content">
-    <section class="recurso-detail-section">
-        <div class="container">
-            <div class="recurso-detail">
-                <header class="recurso-header">
-                    <h1 class="recurso-title"><%= recurso.title %></h1>
-                    <p class="recurso-description"><%= recurso.summary %></p>
-                </header>
-                
-                <div class="recurso-visual">
-                    <img loading="lazy" src="<%= recurso.cover %>" alt="<%= recurso.title %>" class="recurso-cover">
-                </div>
+        <main class="main-content">
+            <section class="recurso-detail-section">
+                <div class="container">
+                    <div class="recurso-detail">
+                        <header class="recurso-header">
+                            <h1 class="recurso-title">
+                                <%= recurso.title %>
+                            </h1>
+                            <p class="recurso-description">
+                                <%= recurso.summary %>
+                            </p>
+                        </header>
 
-                <% if (recurso.slug === 'guia-materiales') { %>
-                <!-- Contenido específico para Guía de Materiales Completa -->
-                <div class="recurso-content-detail">
-                    <div class="content-section">
-                        <h2>¿Qué es?</h2>
-                        <p>Una guía práctica para elegir materiales con criterio sin tecnicismos. Reúne en un solo lugar qué preferir y qué evitar por oficio, por qué hacerlo y cómo aplicarlo en tu día a día.</p>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>¿Para quién?</h2>
-                        <ul>
-                            <li><strong>Artesanos y pequeños talleres.</strong></li>
-                            <li><strong>Marcas emergentes de producto físico</strong> (textil, cerámica, joyería, madera, papel/cartón, velas/cosmética, packaging, etc.).</li>
-                            <li><strong>Diseñadores y makers</strong> que buscan criterios claros y proveedores fiables.</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>Qué incluye</h2>
-                        <ul>
-                            <li><strong>Criterios por oficio:</strong> qué preferir/evitar y la razón (impacto, durabilidad, fin de vida, viabilidad).</li>
-                            <li><strong>Fichas de materiales</strong> con pros/contras y usos recomendados.</li>
-                            <li><strong>Checklist de compra responsable</strong> para revisar en 2–3 minutos antes de pedir.</li>
-                            <li><strong>Marco legal exprés</strong> para comunicar sin greenwashing.</li>
-                            <li><strong>Errores habituales</strong> y cómo evitarlos.</li>
-                            <li><strong>Plantillas simples:</strong> matriz de decisión y trazabilidad mínima.</li>
-                            <li><strong>Acceso al Directorio vivo</strong> de proveedores verificados y recursos que actualizamos de forma continua.</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>Qué te resuelve</h2>
-                        <ul>
-                            <li>Ahorras horas de búsqueda y pruebas fallidas.</li>
-                            <li>Reduces residuos y retrabajos desde el diseño.</li>
-                            <li>Tomas decisiones con criterio y puedes explicarlas a clientes y equipo.</li>
-                            <li>Evitas riesgos por claims ambientales confusos.</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>Formato y actualizaciones</h2>
-                        <p>Descarga en PDF + acceso al Directorio vivo para que tus contactos y recursos no queden desactualizados.</p>
-                    </div>
-                </div>
-                <% } else if (recurso.slug === 'circular-express') { %>
-                <!-- Contenido específico para Circular Express -->
-                <div class="recurso-content-detail">
-                    <div class="content-section">
-                        <h2>¿Qué es?</h2>
-                        <p>Un auto-diagnóstico breve para medir el nivel de circularidad de tu taller o marca y decidir dónde actuar primero.</p>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>¿Para quién?</h2>
-                        <ul>
-                            <li><strong>Artesanos y pequeños talleres.</strong></li>
-                            <li><strong>Marcas emergentes de producto físico.</strong></li>
-                            <li><strong>Cualquier proyecto</strong> que quiera una foto rápida de su situación y un plan simple para mejorar.</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>Qué incluye</h2>
-                        <ul>
-                            <li><strong>Checklist de prácticas clave.</strong></li>
-                            <li><strong>Puntuación rápida por áreas</strong> (materiales, residuos, diseño, operaciones, comunicación).</li>
-                            <li><strong>Mini-plan de mejora inmediata</strong> con 3–5 acciones priorizadas.</li>
-                            <li><strong>Consejos prácticos y atajos</strong> para empezar hoy.</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>Cómo funciona (3 pasos)</h2>
-                        <ol>
-                            <li><strong>Descarga la guía.</strong></li>
-                            <li><strong>Completa el checklist</strong> (10–15 min).</li>
-                            <li><strong>Revisa tu puntuación</strong> y aplica el mini-plan.</li>
-                        </ol>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>Qué te llevas</h2>
-                        <ul>
-                            <li>Claridad sobre lo que ya haces bien.</li>
-                            <li>Un orden de prioridades realista para las próximas semanas.</li>
-                            <li>Un lenguaje común para hablar con equipo y clientes.</li>
-                        </ul>
-                    </div>
-
-                    <div class="content-section">
-                        <h2>Formato y tiempo</h2>
-                        <p>PDF breve y accionable. Se completa en 10–15 minutos.</p>
-                    </div>
-                </div>
-                <% } %>
-
-                <!-- FORMULARIO TALLY con parámetros optimizados -->
-                <section class="recurso-cta">
-                    <div class="cta-container">
-                        <h3>Completa el formulario para recibir el recurso</h3>
-                        <p>Descarga inmediata después de completar los datos</p>
-
-                        <!-- Constante base con parámetros del servidor -->
-                        <% const base = `https://tally.so/embed/${recurso.form_tally_id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&resource_id=${recurso.slug}&source=web`; %>
-
-                        <!-- Embed de Tally -->
-                        <div id="tally-embed" class="tally-form-container" aria-live="polite">
-                            <iframe data-tally-src="<%= base %>" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="<%= recurso.title %>"></iframe>
+                        <div class="recurso-visual">
+                            <img loading="lazy" src="<%= recurso.cover %>" alt="<%= recurso.title %>"
+                                class="recurso-cover">
                         </div>
-                        <script defer>
-                            (function(){
-                                var s=document.createElement('script');
-                                s.src='https://tally.so/widgets/embed.js';
-                                s.onload=function(){ 
-                                    if(window.Tally) {
-                                        Tally.loadEmbeds();
-                                        
-                                        // Script optimizado: solo page_url, UTMs se heredan automáticamente
-                                        window.addEventListener('message', function(e) {
-                                            if (e.data.type === 'tally-form-submitted') {
-                                                const url = new URL(window.location.href);
-                                                const params = new URLSearchParams();
-                                                params.set('page_url', url.href);
-                                                // UTMs se heredan de window.location.search tal cual
-                                                
-                                                // Redirigir a la página de gracias
-                                                window.location.href = `/gracias/${recurso.slug}?${params.toString()}`;
-                                            }
-                                        });
-                                    }
-                                };
-                                document.body.appendChild(s);
-                            })();
-                        </script>
 
-                        <!-- Información adicional -->
-                        <div class="form-info">
-                            <p><small>🔒 Tus datos están seguros. Solo los usamos para enviarte el recurso y contenido relacionado ocasionalmente.</small></p>
-                        </div>
+                        <% if (recurso.slug==='guia-materiales' ) { %>
+                            <!-- Contenido específico para Guía de Materiales Completa -->
+                            <div class="recurso-content-detail">
+                                <div class="content-section">
+                                    <h2>¿Qué es?</h2>
+                                    <p>Una guía práctica para elegir materiales con criterio sin tecnicismos. Reúne en
+                                        un solo lugar qué preferir y qué evitar por oficio, por qué hacerlo y cómo
+                                        aplicarlo en tu día a día.</p>
+                                </div>
+
+                                <div class="content-section">
+                                    <h2>¿Para quién?</h2>
+                                    <ul>
+                                        <li><strong>Artesanos y pequeños talleres.</strong></li>
+                                        <li><strong>Marcas emergentes de producto físico</strong> (textil, cerámica,
+                                            joyería, madera, papel/cartón, velas/cosmética, packaging, etc.).</li>
+                                        <li><strong>Diseñadores y makers</strong> que buscan criterios claros y
+                                            proveedores fiables.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content-section">
+                                    <h2>Qué incluye</h2>
+                                    <ul>
+                                        <li><strong>Criterios por oficio:</strong> qué preferir/evitar y la razón
+                                            (impacto, durabilidad, fin de vida, viabilidad).</li>
+                                        <li><strong>Fichas de materiales</strong> con pros/contras y usos recomendados.
+                                        </li>
+                                        <li><strong>Checklist de compra responsable</strong> para revisar en 2–3 minutos
+                                            antes de pedir.</li>
+                                        <li><strong>Marco legal exprés</strong> para comunicar sin greenwashing.</li>
+                                        <li><strong>Errores habituales</strong> y cómo evitarlos.</li>
+                                        <li><strong>Plantillas simples:</strong> matriz de decisión y trazabilidad
+                                            mínima.</li>
+                                        <li><strong>Acceso al Directorio vivo</strong> de proveedores verificados y
+                                            recursos que actualizamos de forma continua.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content-section">
+                                    <h2>Qué te resuelve</h2>
+                                    <ul>
+                                        <li>Ahorras horas de búsqueda y pruebas fallidas.</li>
+                                        <li>Reduces residuos y retrabajos desde el diseño.</li>
+                                        <li>Tomas decisiones con criterio y puedes explicarlas a clientes y equipo.</li>
+                                        <li>Evitas riesgos por claims ambientales confusos.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="content-section">
+                                    <h2>Formato y actualizaciones</h2>
+                                    <p>Descarga en PDF + acceso al Directorio vivo para que tus contactos y recursos no
+                                        queden desactualizados.</p>
+                                </div>
+                            </div>
+                            <% } else if (recurso.slug==='circular-express' ) { %>
+                                <!-- Contenido específico para Circular Express -->
+                                <div class="recurso-content-detail">
+                                    <div class="content-section">
+                                        <h2>¿Qué es?</h2>
+                                        <p>Un auto-diagnóstico breve para medir el nivel de circularidad de tu taller o
+                                            marca y decidir dónde actuar primero.</p>
+                                    </div>
+
+                                    <div class="content-section">
+                                        <h2>¿Para quién?</h2>
+                                        <ul>
+                                            <li><strong>Artesanos y pequeños talleres.</strong></li>
+                                            <li><strong>Marcas emergentes de producto físico.</strong></li>
+                                            <li><strong>Cualquier proyecto</strong> que quiera una foto rápida de su
+                                                situación y un plan simple para mejorar.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="content-section">
+                                        <h2>Qué incluye</h2>
+                                        <ul>
+                                            <li><strong>Checklist de prácticas clave.</strong></li>
+                                            <li><strong>Puntuación rápida por áreas</strong> (materiales, residuos,
+                                                diseño, operaciones, comunicación).</li>
+                                            <li><strong>Mini-plan de mejora inmediata</strong> con 3–5 acciones
+                                                priorizadas.</li>
+                                            <li><strong>Consejos prácticos y atajos</strong> para empezar hoy.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="content-section">
+                                        <h2>Cómo funciona (3 pasos)</h2>
+                                        <ol>
+                                            <li><strong>Descarga la guía.</strong></li>
+                                            <li><strong>Completa el checklist</strong> (10–15 min).</li>
+                                            <li><strong>Revisa tu puntuación</strong> y aplica el mini-plan.</li>
+                                        </ol>
+                                    </div>
+
+                                    <div class="content-section">
+                                        <h2>Qué te llevas</h2>
+                                        <ul>
+                                            <li>Claridad sobre lo que ya haces bien.</li>
+                                            <li>Un orden de prioridades realista para las próximas semanas.</li>
+                                            <li>Un lenguaje común para hablar con equipo y clientes.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="content-section">
+                                        <h2>Formato y tiempo</h2>
+                                        <p>PDF breve y accionable. Se completa en 10–15 minutos.</p>
+                                    </div>
+                                </div>
+                                <% } else if (recurso.slug==='guia-upcycling' ) { %>
+                                    <!-- Contenido específico para Guía Upcycling -->
+                                    <div class="recurso-content-detail">
+                                        <div class="content-section">
+                                            <h2>¿Qué es esta guía?</h2>
+                                            <p><strong>Guía Artistas Upcycling + Toolkit Práctico.</strong> 50 páginas
+                                                de casos reales, técnicas aplicables y plantillas visuales.</p>
+                                            <p>Perfecto para: Marcas artesanales españolas y latinoamericanas que buscan
+                                                diferenciarse con circularidad auténtica.</p>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h2>¿Qué vas a encontrar dentro?</h2>
+                                            <ul>
+                                                <li><strong>12 Casos de Artistas Reconocidos:</strong> Vik Muniz,
+                                                    Bordalo II, Bernard Pras, Miquel Aparici y más. Con análisis de
+                                                    técnicas, materiales y modelo de negocio.</li>
+                                                <li><strong>7 Técnicas Aplicables a Pequeña Escala:</strong> Desde
+                                                    collage con residuos hasta escultura con chatarra. Paso a paso
+                                                    adaptado a talleres artesanales.</li>
+                                                <li><strong>30+ Materiales Ideales por Sector:</strong> Textil, madera,
+                                                    metal, papel, plástico. Dónde conseguirlos y cómo prepararlos para
+                                                    transformación.</li>
+                                                <li><strong>Framework de Storytelling Circular:</strong> Cómo comunicar
+                                                    tu proceso sin greenwashing. Narrativas auténticas que conectan
+                                                    emocionalmente.</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h2>Y eso no es todo... (Bonus Incluido)</h2>
+                                            <ul>
+                                                <li><strong>Guía de Proveedores Circulares España:</strong> Directorio
+                                                    de 20+ proveedores de materiales recuperados en península ibérica
+                                                    con contactos directos.</li>
+                                                <li><strong>Calculadora de Impacto Ambiental:</strong> Plantilla Excel
+                                                    para medir kg CO2 evitados y kg residuos transformados. Comunica tu
+                                                    impacto con datos reales.</li>
+                                                <li><strong>Checklist Fotografía de Proceso:</strong> 15 momentos clave
+                                                    para documentar tu transformación. Storytelling visual que vende.
+                                                </li>
+                                                <li><strong>15 Plantillas Visuales Editables:</strong> Esquemas
+                                                    antes/después, infografías materiales, templates redes sociales para
+                                                    mostrar tu proceso circular.</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="content-section">
+                                            <h2>Con este recurso podrás:</h2>
+                                            <ul>
+                                                <li>Reducir hasta 60% los costes de tus materiales identificando
+                                                    residuos de alto potencial.</li>
+                                                <li>Multiplicar x3 el valor percibido de tus productos con narrativas de
+                                                    transformación auténticas.</li>
+                                                <li>Diferenciarte en mercados saturados con piezas únicas cargadas de
+                                                    historia y propósito.</li>
+                                                <li>Atraer clientes conscientes dispuestos a pagar más por
+                                                    sostenibilidad real y tangible.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <% } %>
+
+                                        <!-- FORMULARIO TALLY con parámetros optimizados -->
+                                        <section class="recurso-cta">
+                                            <div class="cta-container">
+                                                <h3>Completa el formulario para recibir el recurso</h3>
+                                                <p>Descarga inmediata después de completar los datos</p>
+
+                                                <!-- Constante base con parámetros del servidor -->
+                                                <% const
+                                                    base=`https://tally.so/embed/${recurso.form_tally_id}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&resource_id=${recurso.slug}&source=web`;
+                                                    %>
+
+                                                    <!-- Embed de Tally -->
+                                                    <div id="tally-embed" class="tally-form-container"
+                                                        aria-live="polite">
+                                                        <iframe data-tally-src="<%= base %>" loading="lazy" width="100%"
+                                                            height="500" frameborder="0" marginheight="0"
+                                                            marginwidth="0" title="<%= recurso.title %>"></iframe>
+                                                    </div>
+                                                    <script defer>
+                                                        (function () {
+                                                            var s = document.createElement('script');
+                                                            s.src = 'https://tally.so/widgets/embed.js';
+                                                            s.onload = function () {
+                                                                if (window.Tally) {
+                                                                    Tally.loadEmbeds();
+
+                                                                    // Script optimizado: solo page_url, UTMs se heredan automáticamente
+                                                                    window.addEventListener('message', function (e) {
+                                                                        if (e.data.type === 'tally-form-submitted') {
+                                                                            const url = new URL(window.location.href);
+                                                                            const params = new URLSearchParams();
+                                                                            params.set('page_url', url.href);
+                                                                            // UTMs se heredan de window.location.search tal cual
+
+                                                                            // Redirigir a la página de gracias
+                                                                            window.location.href = `/gracias/${recurso.slug}?${params.toString()}`;
+                                                                        }
+                                                                    });
+                                                                }
+                                                            };
+                                                            document.body.appendChild(s);
+                                                        })();
+                                                    </script>
+
+                                                    <!-- Información adicional -->
+                                                    <div class="form-info">
+                                                        <p><small>🔒 Tus datos están seguros. Solo los usamos para
+                                                                enviarte el recurso y contenido relacionado
+                                                                ocasionalmente.</small></p>
+                                                    </div>
+                                            </div>
+                                        </section>
                     </div>
-                </section>
-            </div>
-        </div>
-    </section>
-</main>
+                </div>
+            </section>
+        </main>
 
-<%- include('partials/footer') %>
+        <%- include('partials/footer') %>
 
-<script src="/assets/js/script.js"></script>
-</body>
-</html>
+            <script src="/assets/js/script.js"></script>
+            </body>
+
+            </html>
