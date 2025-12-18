@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Documentos E-WEAR descargados! — Oficios Circulares</title>
-    <meta name="description" content="Gracias por descargar la documentación del caso E-WEAR. Únete a nuestra comunidad y accede a nuestro directorio de proveedores circulares.">
+    <meta name="description"
+        content="Gracias por descargar la documentación del caso E-WEAR. Únete a nuestra comunidad y accede a nuestro directorio de proveedores circulares.">
     <meta name="robots" content="noindex, nofollow">
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="¡Documentos E-WEAR descargados! — Oficios Circulares">
-    <meta property="og:description" content="Gracias por descargar la documentación del caso E-WEAR. Únete a nuestra comunidad de artesanos circulares.">
-    <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/cover-ewear-trazabilidad.jpg">
+    <meta property="og:description"
+        content="Gracias por descargar la documentación del caso E-WEAR. Únete a nuestra comunidad de artesanos circulares.">
+    <meta property="og:image"
+        content="https://www.oficioscirculares.com/assets/images/cases/e-wear/cover-ewear-trazabilidad.jpg">
     <meta property="og:url" content="https://www.oficioscirculares.com/recursos/gracias/">
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:title" content="¡Documentos E-WEAR descargados! — Oficios Circulares">
-    <meta property="twitter:description" content="Gracias por descargar la documentación del caso E-WEAR. Únete a nuestra comunidad.">
-    <meta property="twitter:image" content="https://www.oficioscirculares.com/assets/images/cases/e-wear/cover-ewear-trazabilidad.jpg">
+    <meta property="twitter:description"
+        content="Gracias por descargar la documentación del caso E-WEAR. Únete a nuestra comunidad.">
+    <meta property="twitter:image"
+        content="https://www.oficioscirculares.com/assets/images/cases/e-wear/cover-ewear-trazabilidad.jpg">
 
     <link rel="canonical" href="https://www.oficioscirculares.com/recursos/gracias/">
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <link rel="stylesheet" href="../../assets/css/animations.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <style>
-        html, body {
+        html,
+        body {
             height: 100%;
             margin: 0 !important;
             padding: 0 !important;
         }
-        
+
         body {
             overflow-x: hidden;
         }
-        
+
         /* Hero Section */
         .hero-gracias {
             background: linear-gradient(135deg, rgba(31, 75, 63, 0.9) 0%, rgba(45, 95, 79, 0.95) 100%);
@@ -48,7 +55,7 @@
             display: flex;
             align-items: center;
         }
-        
+
         .hero-gracias::before {
             content: '';
             position: absolute;
@@ -60,7 +67,7 @@
             opacity: 0.25;
             z-index: 1;
         }
-        
+
         .hero-gracias-content {
             position: relative;
             z-index: 2;
@@ -69,30 +76,30 @@
             padding: 0 20px;
             text-align: center;
         }
-        
+
         .success-icon {
             font-size: 5rem;
             margin-bottom: 2rem;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         }
-        
+
         .hero-title {
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
             margin: 0 0 20px;
             line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .hero-subtitle {
             font-size: clamp(1.2rem, 3vw, 1.5rem);
             margin: 0 0 40px;
             color: #E0B894;
             font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
-        
+
         .hero-description {
             font-size: 1.125rem;
             margin: 0 0 50px;
@@ -103,7 +110,7 @@
             margin-right: auto;
             color: white;
         }
-        
+
         .download-status {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -112,22 +119,22 @@
             margin: 30px 0;
             backdrop-filter: blur(10px);
         }
-        
+
         .download-status h3 {
             margin: 0 0 10px;
             font-size: 1.3rem;
             color: #E0B894;
         }
-        
+
         .download-status p {
             margin: 0;
             opacity: 0.9;
         }
-        
+
         .hero-download-section {
             margin: 30px 0;
         }
-        
+
         .btn-download-hero {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             color: #1f4b3f;
@@ -143,24 +150,24 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             margin-bottom: 20px;
         }
-        
+
         .btn-download-hero:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
         }
-        
+
         .btn-download-hero:active {
             transform: translateY(-1px);
         }
-        
+
         .btn-download-hero:disabled {
             background: #ccc;
             cursor: not-allowed;
             transform: none;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .hero-cta-primary {
             display: inline-block;
             background: linear-gradient(135deg, #D17B49 0%, #B8613A 100%);
@@ -175,25 +182,25 @@
             transition: all 0.3s ease;
             box-shadow: 0 6px 20px rgba(209, 123, 73, 0.3);
         }
-        
+
         .hero-cta-primary:hover {
             background: linear-gradient(135deg, #B8613A 0%, #D17B49 100%);
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(209, 123, 73, 0.4);
         }
-        
+
         /* Próximos pasos */
         .next-steps {
             background: white;
             padding: 80px 0;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         .section-title {
             text-align: center;
             font-size: clamp(2rem, 4vw, 3rem);
@@ -201,7 +208,7 @@
             margin-bottom: 3rem;
             font-weight: 800;
         }
-        
+
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -209,7 +216,7 @@
             margin-bottom: 3rem;
             align-items: stretch;
         }
-        
+
         .step-card {
             background: #FAF9F7;
             border-radius: 20px;
@@ -221,26 +228,26 @@
             flex-direction: column;
             height: 100%;
         }
-        
+
         .step-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(31, 75, 63, 0.1);
         }
-        
+
         .step-card.featured {
             background: linear-gradient(135deg, #1F4B3F 0%, #3E7C59 100%);
             color: white;
             border: 1px solid #1F4B3F;
         }
-        
+
         .step-card.featured .step-title {
             color: #E0B894;
         }
-        
+
         .step-card.featured .step-description {
             color: rgba(255, 255, 255, 0.9);
         }
-        
+
         .step-number {
             display: inline-block;
             width: 60px;
@@ -255,26 +262,26 @@
             font-weight: 800;
             margin: 0 auto 1.5rem;
         }
-        
+
         .step-card.featured .step-number {
             background: linear-gradient(135deg, #E0B894 0%, #D17B49 100%);
             color: #1F4B3F;
         }
-        
+
         .step-title {
             font-size: 1.5rem;
             color: #1F4B3F;
             margin-bottom: 1rem;
             font-weight: 700;
         }
-        
+
         .step-description {
             color: #666;
             line-height: 1.6;
             margin-bottom: 1.5rem;
             flex-grow: 1;
         }
-        
+
         .step-action {
             color: #D17B49;
             font-weight: 600;
@@ -286,25 +293,25 @@
             transition: all 0.3s ease;
             margin-top: auto;
         }
-        
+
         .step-action:hover {
             background: #D17B49;
             color: white;
             text-decoration: none;
         }
-        
+
         .step-card.featured .step-action {
             background: #E0B894;
             color: #1F4B3F;
             border: 2px solid #E0B894;
         }
-        
+
         .step-card.featured .step-action:hover {
             background: #D17B49;
             border-color: #D17B49;
             color: white;
         }
-        
+
         /* Download Section */
         .download-section {
             background: linear-gradient(135deg, rgba(31, 75, 63, 0.08) 0%, rgba(45, 95, 79, 0.12) 100%);
@@ -312,14 +319,14 @@
             text-align: center;
             border-top: 1px solid rgba(31, 75, 63, 0.1);
         }
-        
+
         .download-title {
             font-size: 2rem;
             font-weight: 700;
             color: #1f4b3f;
             margin-bottom: 16px;
         }
-        
+
         .download-description {
             font-size: 1.1rem;
             color: #666;
@@ -328,7 +335,7 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .btn-download {
             background: linear-gradient(135deg, #1f4b3f 0%, #2d5f4f 100%);
             color: white;
@@ -343,24 +350,24 @@
             display: inline-block;
             box-shadow: 0 4px 15px rgba(31, 75, 63, 0.2);
         }
-        
+
         .btn-download:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(31, 75, 63, 0.3);
             background: linear-gradient(135deg, #2d5f4f 0%, #1f4b3f 100%);
         }
-        
+
         .btn-download:active {
             transform: translateY(0);
         }
-        
+
         .btn-download:disabled {
             background: #ccc;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
-        
+
         /* CTA Final */
         .cta-final {
             background: linear-gradient(135deg, #E0B894 0%, #D17B49 50%, #B8613A 100%);
@@ -369,7 +376,7 @@
             text-align: center;
             position: relative;
         }
-        
+
         .cta-final::before {
             content: '';
             position: absolute;
@@ -380,18 +387,18 @@
             background: linear-gradient(135deg, rgba(224, 184, 148, 0.9) 0%, rgba(209, 123, 73, 0.95) 50%, rgba(184, 97, 58, 0.9) 100%);
             z-index: 1;
         }
-        
+
         .cta-final .container {
             position: relative;
             z-index: 2;
         }
-        
+
         .cta-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 1rem;
             font-weight: 700;
         }
-        
+
         .cta-description {
             font-size: 1.125rem;
             margin-bottom: 2rem;
@@ -400,7 +407,7 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .btn-cta {
             display: inline-block;
             background: white;
@@ -414,15 +421,15 @@
             border: 2px solid white;
             margin: 10px;
         }
-        
+
         .btn-cta:hover {
             background: transparent;
             color: white;
             text-decoration: none;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* Footer */
         .footer {
             background: #1a1a1a;
@@ -512,21 +519,21 @@
                 padding: 80px 0 60px;
                 min-height: 90vh;
             }
-            
+
             .success-icon {
                 font-size: 4rem;
                 margin-bottom: 1.5rem;
             }
-            
+
             .steps-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .step-card {
                 padding: 1.5rem;
             }
-            
+
             .step-number {
                 width: 50px;
                 height: 50px;
@@ -555,20 +562,24 @@
     </style>
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W7CH52J6');</script>
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W7CH52J6');</script>
     <!-- End Google Tag Manager -->
 
     <!-- Traffic Source Detector -->
     <script src="../../assets/js/traffic-source-detector.js" async></script>
 </head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7CH52J6"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7CH52J6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <!-- Navigation -->
@@ -603,16 +614,19 @@
             <h1 class="hero-title">¡Tus documentos E-WEAR están listos!</h1>
             <p class="hero-subtitle">Caso de Joyería Circular y Trazable</p>
             <p class="hero-description">
-                Gracias por completar el formulario. Haz clic en el botón para descargar la ficha de trazabilidad y el checklist de proveedores del caso E-WEAR.
+                Gracias por completar el formulario. Haz clic en el botón para descargar la ficha de trazabilidad y el
+                checklist de proveedores del caso E-WEAR.
             </p>
-            
+
             <div class="hero-download-section">
                 <button onclick="triggerDownloads()" class="btn-download-hero" id="downloadBtn">
                     📄 Descargar documentos E-WEAR
                 </button>
-                <div id="downloadStatus" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white;"></div>
+                <div id="downloadStatus"
+                    style="display: none; margin-top: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white;">
+                </div>
             </div>
-            
+
             <a href="../../casos/e-wear/" class="hero-cta-primary">
                 ← Continuar leyendo el caso E-WEAR
             </a>
@@ -628,7 +642,8 @@
                     <div class="step-number">🌟</div>
                     <h3 class="step-title">Forma parte de la comunidad</h3>
                     <p class="step-description">
-                        Conecta con otros artesanos, diseñadores y emprendedores comprometidos con la circularidad. Comparte experiencias y aprende de casos reales como E-WEAR.
+                        Conecta con otros artesanos, diseñadores y emprendedores comprometidos con la circularidad.
+                        Comparte experiencias y aprende de casos reales como E-WEAR.
                     </p>
                     <a href="https://tally.so/r/mOyV98" target="_blank" class="step-action">📧 Únete ahora</a>
                 </div>
@@ -637,18 +652,22 @@
                     <div class="step-number">📚</div>
                     <h3 class="step-title">Accede al directorio vivo</h3>
                     <p class="step-description">
-                        Como miembro de la comunidad, tendrás acceso exclusivo a nuestro directorio de proveedores sostenibles, laboratorios especializados y profesionales de la circularidad.
+                        Como miembro de la comunidad, tendrás acceso exclusivo a nuestro directorio de proveedores
+                        sostenibles, laboratorios especializados y profesionales de la circularidad.
                     </p>
-                    <a href="../../dir/?utm_source=ewear_gracias&utm_medium=cta&utm_campaign=directorio" class="step-action">🔍 Acceder al directorio</a>
+                    <a href="../../dir/?utm_source=ewear_gracias&utm_medium=cta&utm_campaign=directorio"
+                        class="step-action">🔍 Acceder al directorio</a>
                 </div>
 
                 <div class="step-card">
                     <div class="step-number">⚡</div>
                     <h3 class="step-title">Implementa en tu proyecto</h3>
                     <p class="step-description">
-                        ¿Quieres desarrollar un sistema de trazabilidad como E-WEAR? Agenda una consulta estratégica gratuita para explorar las opciones para tu proyecto.
+                        ¿Quieres desarrollar un sistema de trazabilidad como E-WEAR? Agenda una consulta estratégica
+                        gratuita para explorar las opciones para tu proyecto.
                     </p>
-                    <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="step-action">📅 Agenda consulta</a>
+                    <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="step-action">📅
+                        Agenda consulta</a>
                 </div>
             </div>
         </div>
@@ -662,10 +681,11 @@
             <div class="footer-brand">
                 <img src="../../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="footer-logo">
                 <p class="footer-tagline">
-                    "Creemos en un futuro donde la creación con propósito sea pilar de una nueva economía: más conectada con el territorio, las personas y el planeta."
+                    "Creemos en un futuro donde la creación con propósito sea pilar de una nueva economía: más conectada
+                    con el territorio, las personas y el planeta."
                 </p>
             </div>
-            
+
             <div class="footer-links">
                 <div class="footer-column">
                     <h4>Navegación</h4>
@@ -679,7 +699,7 @@
                         <li><a href="../../sobre-nosotros/">Sobre Nosotros</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h4>Servicios</h4>
                     <ul>
@@ -689,20 +709,22 @@
                         <li><a href="https://tally.so/r/nPxWM0" target="_blank">Contacto</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h4>Conecta</h4>
                     <ul>
                         <li><a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a></li>
-                        <li><a href="https://instagram.com/oficioscirculares" target="_blank">📷 Instagram</a></li>
-                        <li><a href="https://www.linkedin.com/company/oficios-circulares/" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://instagram.com/oficios.circulares" target="_blank">📷 Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/company/oficios-circulares/" target="_blank">LinkedIn</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
-            <p>&copy; 2025 Oficios Circulares. Todos los derechos reservados. | <a href="../../privacidad/" style="color: #999999;">Política de Privacidad</a></p>
+            <p>&copy; 2025 Oficios Circulares. Todos los derechos reservados. | <a href="../../privacidad/"
+                    style="color: #999999;">Política de Privacidad</a></p>
         </div>
     </footer>
 
@@ -711,15 +733,15 @@
         // Variables de control de descarga
         let downloadsCompleted = 0;
         const totalDownloads = 2;
-        
+
         // Función para descargar documentos E-WEAR (manual)
         function triggerDownloads() {
             console.log('🔥 Iniciando descargas manuales E-WEAR desde página de recursos');
-            
+
             // Deshabilitar botón y mostrar estado
             const downloadBtn = document.getElementById('downloadBtn');
             const statusDiv = document.getElementById('downloadStatus');
-            
+
             downloadBtn.disabled = true;
             downloadBtn.textContent = '⏳ Descargando...';
             statusDiv.style.display = 'block';
@@ -727,7 +749,7 @@
                 <h3>⏳ Preparando descargas...</h3>
                 <p>Los documentos E-WEAR se están descargando. Revisa tu carpeta de descargas.</p>
             `;
-            
+
             // Tracking GTM
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
@@ -738,7 +760,7 @@
                 download_type: 'case_study_bundle_resources',
                 page_location: window.location.href
             });
-            
+
             setTimeout(() => {
                 try {
                     // Descarga 1: Ficha de lote
@@ -749,7 +771,7 @@
                     link1.rel = 'noopener noreferrer';
                     link1.style.display = 'none';
                     document.body.appendChild(link1);
-                    
+
                     // Crear evento click personalizado para forzar descarga
                     const clickEvent1 = new MouseEvent('click', {
                         view: window,
@@ -758,11 +780,11 @@
                     });
                     link1.dispatchEvent(clickEvent1);
                     document.body.removeChild(link1);
-                    
+
                     console.log('📄 Descarga 1: Ficha de lote - EJECUTADA');
                     downloadsCompleted++;
                     updateDownloadStatus();
-                    
+
                     // Descarga 2: Checklist con delay
                     setTimeout(() => {
                         try {
@@ -773,7 +795,7 @@
                             link2.rel = 'noopener noreferrer';
                             link2.style.display = 'none';
                             document.body.appendChild(link2);
-                            
+
                             // Crear evento click personalizado para forzar descarga
                             const clickEvent2 = new MouseEvent('click', {
                                 view: window,
@@ -782,17 +804,17 @@
                             });
                             link2.dispatchEvent(clickEvent2);
                             document.body.removeChild(link2);
-                            
+
                             console.log('📋 Descarga 2: Checklist - EJECUTADA');
                             downloadsCompleted++;
                             updateDownloadStatus();
-                            
+
                             // Reactivar botón después de las descargas
                             setTimeout(() => {
                                 downloadBtn.disabled = false;
                                 downloadBtn.textContent = '✅ Descargar de nuevo';
                             }, 1000);
-                            
+
                         } catch (error) {
                             console.error('Error en descarga del checklist:', error);
                             downloadBtn.disabled = false;
@@ -806,12 +828,12 @@
                 }
             }, 500);
         }
-        
+
         // Función para actualizar el estado de la descarga
         function updateDownloadStatus() {
             const statusDiv = document.getElementById('downloadStatus');
             if (!statusDiv) return;
-            
+
             if (downloadsCompleted >= totalDownloads) {
                 statusDiv.innerHTML = `
                     <h3>✅ ¡Descarga completada!</h3>
@@ -826,11 +848,11 @@
                 `;
             }
         }
-        
+
         // Mobile menu functionality
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         if (hamburger && navMenu) {
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
@@ -862,9 +884,9 @@
         });
 
         // Inicializar página sin descargas automáticas
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('📥 Página de gracias para recursos cargada - Esperando acción manual del usuario');
-            
+
             // Scroll suave al inicio
             window.scrollTo({
                 top: 0,
@@ -873,4 +895,5 @@
         });
     </script>
 </body>
+
 </html>
