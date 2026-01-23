@@ -112,9 +112,15 @@
     }
     
     .oc-container {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 var(--spacing-md);
+    }
+
+    /* Unified article content width - matches logistica-inversa */
+    .article-content {
+      max-width: 800px;
+      margin: 0 auto;
     }
     
     /* Enhanced Typography System */
@@ -721,12 +727,12 @@
     }
 
     /* Case E‑WEAR: tipografía y ritmo (scoped al contenido) */
-    :root{ --space-8:8px; --space-12:12px; --space-16:16px; --space-24:24px; --space-32:32px; --space-40:40px; --space-48:48px; --space-56:56px; --max-ch:68ch; --accent:#1ea672; }
-    .page-case .article-content{ max-width: var(--max-ch); margin-inline:auto; }
+    :root{ --space-8:8px; --space-12:12px; --space-16:16px; --space-24:24px; --space-32:32px; --space-40:40px; --space-48:48px; --space-56:56px; --max-ch:800px; --accent:#1ea672; }
+    .page-case .article-content{ max-width: 800px; margin-inline:auto; }
     .page-case .article-content h1{ font-weight:800; font-size:clamp(32px,4.5vw,44px); line-height:1.15; letter-spacing:-0.01em; margin:0 0 var(--space-16); }
     .page-case .article-content h2{ font-weight:600; font-size:clamp(1.5rem,2.8vw,1.875rem); line-height:1.3; margin:var(--space-40) 0 var(--space-16); }
     .page-case .article-content h3{ font-weight:600; font-size:clamp(1.125rem,2.2vw,1.375rem); line-height:1.3; margin:var(--space-24) 0 var(--space-12); }
-    .page-case .article-content p, .page-case .article-content li{ font-weight:400; font-size:clamp(1rem,2vw,1.125rem); line-height:1.7; max-width:var(--max-ch); margin:0 0 var(--space-16); }
+    .page-case .article-content p, .page-case .article-content li{ font-weight:400; font-size:clamp(1rem,2vw,1.05rem); line-height:1.75; max-width:800px; margin:0 0 var(--space-16); }
     .page-case .article-content ul{ margin:0 0 var(--space-16); padding-left:1.1rem; }
     .page-case .article-content li{ margin-bottom:var(--space-8); }
     .summary-3lines{ display:grid; row-gap:var(--space-8); margin:0 0 var(--space-32); }
@@ -754,21 +760,21 @@
     .page-case .article-content .gallery figure{ margin:0; }
     .page-case .article-content .gallery figcaption{ font-size:14px; line-height:1.4; color:rgba(0,0,0,.75); margin-top:6px; }
 
-    /* Desktop layout amplio y legible */
+    /* Desktop layout - unified with logistica-inversa article */
     @media (min-width: 1024px) {
-      /* 1. Aprovechar mucho más ancho disponible */
-      .oc-container { max-width: none; padding: 0; }
-      .container { max-width: 95vw; margin-inline: auto; padding-inline: 2vw; }
-      
-      /* 2. Tipografía equilibrada - Interlineado y jerarquía uniformes */
-      .page-case .article-content { font-size: 1.25rem !important; line-height: 1.6 !important; max-width: none !important; }
-      .page-case .article-content h2 { font-size: 2.5rem !important; font-weight: 700 !important; margin: 3.5rem 0 1.5rem !important; letter-spacing: -0.02em !important; line-height: 1.2 !important; }
-      .page-case .article-content h3 { font-size: 1.75rem !important; font-weight: 600 !important; margin: 2.5rem 0 1rem !important; line-height: 1.3 !important; }
-      .page-case .article-content h4 { font-size: 1.375rem !important; font-weight: 600 !important; margin: 2rem 0 0.75rem !important; line-height: 1.4 !important; }
-      .page-case .article-content p { margin-bottom: 1.25rem !important; max-width: none !important; font-size: 1.25rem !important; line-height: 1.6 !important; }
-      .page-case .article-content li { font-size: 1.25rem !important; line-height: 1.6 !important; max-width: none !important; margin-bottom: 0.75rem !important; }
-      .article-content section { margin: 4rem 0; }
-      
+      /* 1. Centered container with consistent max-width */
+      .oc-container { max-width: 1200px; padding: 0 3rem; margin: 0 auto; }
+      .container { max-width: 1200px; margin-inline: auto; padding-inline: 3rem; }
+
+      /* 2. Article content centered at 800px like logistica-inversa */
+      .page-case .article-content { font-size: 1.05rem !important; line-height: 1.75 !important; max-width: 800px !important; margin: 0 auto !important; }
+      .page-case .article-content h2 { font-size: 2rem !important; font-weight: 700 !important; margin: 3rem 0 1.5rem !important; letter-spacing: -0.02em !important; line-height: 1.2 !important; }
+      .page-case .article-content h3 { font-size: 1.4rem !important; font-weight: 600 !important; margin: 2rem 0 1rem !important; line-height: 1.3 !important; }
+      .page-case .article-content h4 { font-size: 1.2rem !important; font-weight: 600 !important; margin: 1.5rem 0 0.75rem !important; line-height: 1.4 !important; }
+      .page-case .article-content p { margin-bottom: 1.5rem !important; max-width: 800px !important; font-size: 1.05rem !important; line-height: 1.75 !important; }
+      .page-case .article-content li { font-size: 1.05rem !important; line-height: 1.7 !important; max-width: 800px !important; margin-bottom: 0.5rem !important; }
+      .article-content section { margin: 3rem 0; }
+
       /* Organización mejorada de secciones */
       .page-case .article-content > section:first-of-type { margin-top: 2rem; }
       .page-case .article-content > section:last-of-type { margin-bottom: 2rem; }
@@ -1051,50 +1057,36 @@
       }
     }
     
-    /* Responsive breakpoints adicionales - OVERRIDE */
+    /* Responsive breakpoints - unified centered layout */
     @media (min-width: 1440px) {
-      .container { max-width: 92vw; }
+      .container { max-width: 1200px; margin: 0 auto; }
+      .oc-container { max-width: 1200px; margin: 0 auto; }
       .oc-steps { grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); }
-      .page-case .article-content h2 { font-size: 2.25rem !important; }
-      .page-case .article-content h3 { font-size: 1.5rem !important; }
-      .page-case .article-content h4 { font-size: 1.25rem !important; }
-      .page-case .article-content { font-size: 1.375rem !important; }
-      .page-case .article-content p { font-size: 1.375rem !important; }
-      .page-case .article-content li { font-size: 1.375rem !important; }
-      .page-case .storybeat { font-size: 1.25rem !important; }
-      .page-case form { font-size: 1.25rem !important; }
-      .page-case #faq + div .card h4,
-      .page-case h2#faq + div .card h4 { font-size: 1.625rem !important; }
-      .page-case #faq + div .card p,
-      .page-case h2#faq + div .card p { font-size: 1.375rem !important; }
-      .page-case .metrics-grid .card h3,
-      .page-case .metrics-container .card h3 { font-size: 1.625rem !important; }
-      .page-case .metrics-grid .card p,
-      .page-case .metrics-container .card p { font-size: 1.375rem !important; }
-      .toc summary { font-size: 1.125rem !important; }
-      .toc-content a { font-size: 1rem !important; }
+      .page-case .article-content { max-width: 800px !important; margin: 0 auto !important; }
+      .page-case .article-content h2 { font-size: 2rem !important; }
+      .page-case .article-content h3 { font-size: 1.4rem !important; }
+      .page-case .article-content h4 { font-size: 1.2rem !important; }
+      .page-case .article-content p { font-size: 1.05rem !important; max-width: 800px !important; }
+      .page-case .article-content li { font-size: 1.05rem !important; }
+      .page-case .storybeat { font-size: 1.1rem !important; }
+      .page-case form { font-size: 1rem !important; }
+      .toc summary { font-size: 1rem !important; }
+      .toc-content a { font-size: 0.95rem !important; }
     }
-    
+
     @media (min-width: 1920px) {
-      .container { max-width: 90vw; }
-      .page-case .article-content h2 { font-size: 2.5rem !important; }
-      .page-case .article-content h3 { font-size: 1.75rem !important; }
-      .page-case .article-content h4 { font-size: 1.5rem !important; }
-      .page-case .article-content { font-size: 1.5rem !important; }
-      .page-case .article-content p { font-size: 1.5rem !important; }
-      .page-case .article-content li { font-size: 1.5rem !important; }
-      .page-case .storybeat { font-size: 1.375rem !important; }
-      .page-case form { font-size: 1.375rem !important; }
-      .page-case #faq + div .card h4,
-      .page-case h2#faq + div .card h4 { font-size: 1.75rem !important; }
-      .page-case #faq + div .card p,
-      .page-case h2#faq + div .card p { font-size: 1.5rem !important; }
-      .page-case .metrics-grid .card h3,
-      .page-case .metrics-container .card h3 { font-size: 1.75rem !important; }
-      .page-case .metrics-grid .card p,
-      .page-case .metrics-container .card p { font-size: 1.5rem !important; }
-      .toc summary { font-size: 1.25rem !important; }
-      .toc-content a { font-size: 1.125rem !important; }
+      .container { max-width: 1200px; margin: 0 auto; }
+      .oc-container { max-width: 1200px; margin: 0 auto; }
+      .page-case .article-content { max-width: 800px !important; margin: 0 auto !important; }
+      .page-case .article-content h2 { font-size: 2rem !important; }
+      .page-case .article-content h3 { font-size: 1.4rem !important; }
+      .page-case .article-content h4 { font-size: 1.2rem !important; }
+      .page-case .article-content p { font-size: 1.05rem !important; max-width: 800px !important; }
+      .page-case .article-content li { font-size: 1.05rem !important; }
+      .page-case .storybeat { font-size: 1.1rem !important; }
+      .page-case form { font-size: 1rem !important; }
+      .toc summary { font-size: 1rem !important; }
+      .toc-content a { font-size: 0.95rem !important; }
     }
     
     /* Estilos para móvil/tablet - espaciado optimizado */
@@ -1285,7 +1277,7 @@
 
   
   <div class="page oc-container oc-prose">
-    <div class="container" style="max-width:none;padding:0 16px;">
+    <div class="container" style="max-width:1200px;padding:0 24px;margin:0 auto;">
       
       <figure class="hero-figure fade-in">
         <picture>
