@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logistica inversa para marcas artesanales: cuando tiene sentido y cuando no | Oficios Circulares</title>
+  <meta name="description" content="Analisis practico sobre cuando tiene sentido implementar un sistema de logistica inversa para envases reutilizables en marcas artesanales y sostenibles." />
+  <link rel="canonical" href="https://www.oficioscirculares.com/blog/logistica-inversa/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Oficios Circulares" />
+  <meta property="og:title" content="Logistica inversa para marcas artesanales: cuando tiene sentido y cuando no" />
+  <meta property="og:description" content="Guia practica para marcas medianas que se plantean recuperar sus envases. Con ejemplos reales de cosmetica natural, alimentacion artesanal y cerveceria craft." />
+  <meta property="og:url" content="https://www.oficioscirculares.com/blog/logistica-inversa/" />
+  <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/blog/logistica-inversa/imagen-hero-artesanal.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Logistica inversa para marcas artesanales: cuando tiene sentido y cuando no" />
+  <meta name="twitter:description" content="Guia practica para marcas medianas que se plantean recuperar sus envases." />
+  <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/blog/logistica-inversa/imagen-hero-artesanal.jpg" />
+
+  <meta name="keywords" content="logistica inversa, envases reutilizables, circularidad, sostenibilidad, marcas artesanales, economia circular" />
+  <meta name="author" content="Jose Moscardo" />
+  <meta property="article:published_time" content="2026-01-23T00:00:00Z" />
+  <meta property="article:author" content="Jose Moscardo" />
+  <meta property="article:section" content="Blog" />
+  <meta property="article:tag" content="Logistica Inversa" />
+  <meta property="article:tag" content="Circularidad" />
+  <meta property="article:tag" content="Sostenibilidad" />
+
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+  <link rel="stylesheet" href="../../assets/css/animations.css" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W7CH52J6');</script>
+  <!-- End Google Tag Manager -->
+
+  <style>
+    :root {
+      --color-primary: #1F4B3F;
+      --color-primary-light: #2D5F4F;
+      --color-accent: #D17B49;
+      --color-accent-light: #E8956A;
+      --color-sand: #F5F1EB;
+      --color-sand-dark: #E8E0D5;
+      --color-cream: #FAF9F7;
+      --color-text: #1a1a1a;
+      --color-text-light: #555;
+    }
+
+    body {
+      padding-top: 80px;
+    }
+
+    /* Enhanced Navbar */
+    .enhanced-navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      padding: 1rem 3rem;
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      background: white;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .breadcrumbs a {
+      color: var(--color-text-light);
+      text-decoration: none;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--color-accent);
+    }
+
+    .breadcrumbs span {
+      margin: 0 0.5rem;
+    }
+
+    /* Hero */
+    .article-hero {
+      background: linear-gradient(rgba(31, 75, 63, 0.8), rgba(31, 75, 63, 0.9)), url('../../assets/images/blog/logistica-inversa/imagen-hero-artesanal.jpg') center/cover no-repeat;
+      padding: 5rem 3rem;
+      text-align: center;
+      color: white;
+    }
+
+    .article-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      max-width: 900px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.2;
+      color: white;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      opacity: 0.95;
+      line-height: 1.7;
+    }
+
+    .hero-highlight {
+      background: rgba(255,255,255,0.1);
+      border-left: 4px solid var(--color-accent);
+      padding: 1.2rem 1.5rem;
+      max-width: 750px;
+      margin: 2rem auto;
+      font-style: italic;
+      text-align: left;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Article content */
+    .article-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem;
+    }
+
+    .article-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .article-content h2 {
+      font-size: 2rem;
+      color: var(--color-primary);
+      margin: 3rem 0 1.5rem;
+      font-weight: 700;
+    }
+
+    .article-content h3 {
+      font-size: 1.4rem;
+      color: var(--color-text);
+      margin: 2rem 0 1rem;
+      font-weight: 600;
+    }
+
+    .article-content p {
+      margin-bottom: 1.5rem;
+      line-height: 1.75;
+      font-size: 1.05rem;
+    }
+
+    .article-content ul, .article-content ol {
+      margin: 1rem 0 1.5rem 1.5rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+    }
+
+    /* Callouts */
+    .callout {
+      background: var(--color-sand);
+      border-left: 4px solid var(--color-accent);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .callout.tip {
+      background: rgba(209, 123, 73, 0.08);
+    }
+
+    .callout p {
+      margin-bottom: 0;
+    }
+
+    /* Quote */
+    .quote {
+      background: var(--color-primary);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .quote p {
+      color: white;
+      margin-bottom: 0;
+    }
+
+    /* Images */
+    .full-width-image {
+      margin: 2.5rem -3rem;
+      width: calc(100% + 6rem);
+    }
+
+    .full-width-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .inline-image {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .inline-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .image-caption {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* Data grid */
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .data-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid var(--color-sand-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .data-card-number {
+      font-size: 2.5rem;
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .data-card-unit {
+      font-size: 1rem;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .data-card-label {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-top: 0.5rem;
+    }
+
+    /* Case studies */
+    .case-studies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .case-studies-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .case-study {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--color-sand-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .case-study-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .case-study-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--color-sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .case-study-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .case-study-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .case-study-subtitle {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+    }
+
+    .case-study-content p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .case-study-highlight {
+      background: var(--color-sand);
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: var(--color-primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--color-sand-dark);
+    }
+
+    tr:nth-child(even) {
+      background: var(--color-sand);
+    }
+
+    /* Decision framework */
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .decision-card {
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+
+    .decision-card.yes {
+      background: rgba(31, 75, 63, 0.08);
+      border: 2px solid var(--color-primary);
+    }
+
+    .decision-card.no {
+      background: rgba(209, 123, 73, 0.08);
+      border: 2px solid var(--color-accent);
+    }
+
+    .decision-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .decision-card.yes h4 {
+      color: var(--color-primary);
+    }
+
+    .decision-card.no h4 {
+      color: var(--color-accent);
+    }
+
+    .decision-card ul {
+      margin-left: 1.2rem;
+    }
+
+    .decision-card li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Alternatives */
+    .alternatives-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 600px) {
+      .alternatives-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .alternative-card {
+      background: white;
+      border: 1px solid var(--color-sand-dark);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .alternative-card h4 {
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .alternative-card p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+      color: white;
+      padding: 4rem 3rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .cta-section p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+      color: white;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--color-accent);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--color-accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-sand);
+      padding: 2rem 3rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+    }
+
+    /* Back to top */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+      }
+
+      .breadcrumbs {
+        padding: 1rem 1.5rem;
+      }
+
+      .article-hero {
+        padding: 3rem 1.5rem;
+      }
+
+      .article-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .full-width-image {
+        margin: 2rem -1.5rem;
+        width: calc(100% + 3rem);
+      }
+
+      .hero-meta {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7CH52J6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <nav class="navbar enhanced-navbar">
+    <div class="nav-container">
+      <a href="../../" class="nav-logo">
+        <img src="../../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo" />
+        <span class="logo-text">Oficios Circulares</span>
+      </a>
+      <div class="nav-menu">
+        <a href="../../#que-es" class="nav-link">Que es?</a>
+        <a href="../../#para-quien" class="nav-link">Para quien?</a>
+        <a href="../../#ofrecemos" class="nav-link">Que ofrecemos</a>
+        <a href="../../#comunidad" class="nav-link">Comunidad</a>
+        <a href="../" class="nav-link active">Blog</a>
+        <a href="../../recursos" class="nav-link">Recursos</a>
+        <a href="../../faqs/" class="nav-link">FAQs</a>
+        <a href="../../sobre-nosotros/" class="nav-link">Sobre Nosotros</a>
+        <a href="https://tally.so/r/mOyV98" target="_blank" class="btn btn-primary btn-small">Unete</a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Back to top button -->
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 15l-6-6-6 6"></path>
+    </svg>
+  </button>
+
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs">
+    <a href="../../">Inicio</a>
+    <span>></span>
+    <a href="../">Blog</a>
+    <span>></span>
+    Logistica Inversa
+  </nav>
+
+  <!-- Hero -->
+  <section class="article-hero">
+    <h1>Logistica inversa para marcas artesanales: cuando tiene sentido y cuando no</h1>
+    <p class="hero-subtitle">Guia practica para marcas medianas que se plantean recuperar sus envases. Con ejemplos reales de cosmetica natural, alimentacion artesanal y cerveceria craft.</p>
+
+    <div class="hero-highlight">
+      No todas las marcas necesitan recuperar sus envases. Algunas si, otras tienen mejores alternativas. Esta guia te ayuda a descubrir en que grupo esta la tuya - con datos reales, no ilusiones.
+    </div>
+
+    <div class="hero-meta">
+      <span>Jose Moscardo</span>
+      <span>Enero 2026</span>
+      <span>12 min de lectura</span>
+    </div>
+  </section>
+
+  <!-- Article Content -->
+  <article class="article-container">
+    <div class="article-content">
+
+      <p>Si tienes una marca artesanal o sostenible, probablemente te has planteado la pregunta: <strong>deberia recuperar mis envases para reutilizarlos?</strong></p>
+
+      <p>Suena bien. Es circular. Tus clientes lo valorarian. Pero hay una pregunta mas importante: funcionara para TU caso?</p>
+
+      <p>Despues de analizar casos de marcas de cosmetica natural, alimentacion artesanal y cerveceria craft, hay un patron claro: muchas iniciativas fracasan no porque la idea sea mala, sino porque se disenan sin entender las matematicas reales del sistema.</p>
+
+      <div class="callout tip">
+        <p>Este articulo no es sobre por que deberias implementar logistica inversa (eso ya lo intuyes). Es sobre <strong>como saber si funcionara para tu caso especifico</strong> antes de invertir tiempo y dinero - y que alternativas tienes si no funciona.</p>
+      </div>
+
+      <h2>El contexto normativo que lo cambia todo</h2>
+
+      <p>La presion regulatoria sobre envases esta aumentando. No es una tendencia: es una fecha limite. Y aunque hoy afecte mas a grandes empresas, las marcas medianas que se adelanten tendran ventaja competitiva.</p>
+
+    </div>
+
+    <!-- Timeline SVG -->
+    <div class="full-width-image">
+      <img src="../../assets/images/blog/logistica-inversa/imagen-timeline-normativa.svg" alt="Timeline normativa UE/Espana sobre envases 2025-2040">
+    </div>
+
+    <div class="article-content">
+      <p class="image-caption" style="text-align: center; margin-top: -1rem;">El marco normativo europeo establece hitos claros hasta 2040</p>
+
+      <h3>En Espana: Ley 7/2022</h3>
+      <p>La Ley de Residuos y Suelos Contaminados para una Economia Circular ya esta en vigor:</p>
+      <ul>
+        <li>Impuesto de <strong>0,45 euros/kg</strong> sobre plastico no reutilizable</li>
+        <li>Responsabilidad ampliada del productor (RAP) con obligaciones de recogida</li>
+        <li>Reduccion obligatoria del 50% en peso de plasticos de un solo uso para 2026</li>
+      </ul>
+
+      <h3>En Europa: PPWR (desde agosto 2026)</h3>
+      <p>El Reglamento de Envases y Residuos de Envases de la UE establece objetivos de reutilizacion obligatorios: 40% de envases de transporte reutilizables para 2030, llegando al 70% en 2040.</p>
+
+      <h2>Las matematicas que importan</h2>
+
+      <p>Antes de disenar cualquier sistema, necesitas conocer estos numeros. No son opiniones: son datos de estudios y casos reales.</p>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-card-number">5-20</div>
+          <div class="data-card-unit">ciclos</div>
+          <div class="data-card-label">Breakeven ambiental tipico</div>
+        </div>
+        <div class="data-card">
+          <div class="data-card-number">16%</div>
+          <div class="data-card-unit">tasa</div>
+          <div class="data-card-label">Retorno real de Lush (B2C)</div>
+        </div>
+        <div class="data-card">
+          <div class="data-card-number">75%+</div>
+          <div class="data-card-unit">coste</div>
+          <div class="data-card-label">Transporte en sistemas maduros</div>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p>Dato incomodo: Lush, con mas de 900 tiendas y 15 anos de programa de retorno, consigue que vuelva aproximadamente un 16% de sus envases. Si tu tasa esperada es menor, las matematicas se complican.</p>
+      </div>
+
+    </div>
+
+    <!-- Diagrama flujo -->
+    <div class="full-width-image">
+      <img src="../../assets/images/blog/logistica-inversa/imagen-diagrama-flujo.svg" alt="Diagrama de flujo del sistema de logistica inversa">
+    </div>
+
+    <div class="article-content">
+
+      <h2>La trampa del transporte</h2>
+
+      <p>Si hay algo que puede matar la viabilidad de un sistema de logistica inversa, es el transporte. Y para una marca mediana, esto es aun mas critico que para una grande.</p>
+
+      <p>Un analisis de McKinsey encontro que <strong>para envases que alcanzan 20 rotaciones, el transporte representa mas del 75% de los costes y mas del 65% de las emisiones de CO2</strong>.</p>
+
+      <div class="quote">
+        <p>El transporte no es un coste mas. Es EL coste. La cercania con tu cliente - o la densidad de puntos de recogida - puede hacer o deshacer tu sistema.</p>
+      </div>
+
+      <h3>Implicaciones para marcas medianas</h3>
+      <ul>
+        <li><strong>Venta local o en tienda fisica cambia todo.</strong> Si tus clientes vienen a ti, eliminas el transporte de retorno.</li>
+        <li><strong>E-commerce disperso es el peor escenario.</strong> 50 clientes en 40 ciudades diferentes = logistica inversa inviable.</li>
+        <li><strong>Las alternativas hibridas funcionan mejor.</strong> Retorno en siguiente pedido, puntos de recogida concentrados, alianzas con tiendas locales.</li>
+      </ul>
+
+      <h2>Casos reales: que funciona y por que</h2>
+
+      <p>No teorias. Ejemplos de marcas reales operando sistemas de circularidad en Espana y Europa.</p>
+
+      <div class="case-studies-grid">
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-logo"><img src="../../assets/images/blog/logistica-inversa/icono-cosmetica.svg" alt="Cosmetica"></div>
+            <div>
+              <div class="case-study-title">RRR'biocosmetics</div>
+              <div class="case-study-subtitle">Barcelona - Cosmetica natural</div>
+            </div>
+          </div>
+          <div class="case-study-content">
+            <p>Envases de aluminio 100% retornables con sistema de deposito. El cliente paga un deposito con su primera compra que se le devuelve al retornar el envase.</p>
+            <div class="case-study-highlight">
+              <strong>Por que funciona:</strong> Incentivo economico directo, material duradero, operacion concentrada.
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-logo"><img src="../../assets/images/blog/logistica-inversa/icono-lush.svg" alt="Lush"></div>
+            <div>
+              <div class="case-study-title">Lush - "Bring It Back"</div>
+              <div class="case-study-subtitle">Global - Cosmetica</div>
+            </div>
+          </div>
+          <div class="case-study-content">
+            <p>Mascarilla facial gratis por cada 5 envases devueltos en tienda. En 2024, recuperaron 2,7 millones de piezas (16% de lo que ponen en mercado).</p>
+            <div class="case-study-highlight">
+              <strong>Por que funciona:</strong> Red de tiendas propias, incentivo tangible, 15 anos educando al cliente.
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-logo"><img src="../../assets/images/blog/logistica-inversa/icono-growler.svg" alt="Growler"></div>
+            <div>
+              <div class="case-study-title">Sistema Growler</div>
+              <div class="case-study-subtitle">Espana - Cerveza artesanal</div>
+            </div>
+          </div>
+          <div class="case-study-content">
+            <p>Recipientes retornables de vidrio de 1-2L que el cliente compra una vez y rellena en cada visita. Paga por el liquido, no por el envase.</p>
+            <div class="case-study-highlight">
+              <strong>Por que funciona:</strong> El cliente viene a ti (cero logistica), envase coleccionable, experiencia diferenciada.
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-study-header">
+            <div class="case-study-logo"><img src="../../assets/images/blog/logistica-inversa/icono-supermercado.svg" alt="Supermercado"></div>
+            <div>
+              <div class="case-study-title">Re-pot Market</div>
+              <div class="case-study-subtitle">Barcelona - Zero waste</div>
+            </div>
+          </div>
+          <div class="case-study-content">
+            <p>Supermercado online que entrega en envases retornables y los recoge cuando haces tu siguiente pedido. Sin limite de tiempo para devolver.</p>
+            <div class="case-study-highlight">
+              <strong>Por que funciona:</strong> Logistica de entrega ya existe, area geografica concentrada, variedad de productos.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>El punto de equilibrio real</h2>
+
+      <p>El "breakeven" tiene dos dimensiones que a menudo se confunden:</p>
+
+    </div>
+
+    <!-- Grafico breakeven -->
+    <div class="full-width-image">
+      <img src="../../assets/images/blog/logistica-inversa/imagen-grafico-breakeven.svg" alt="Grafico de breakeven ambiental vs economico">
+    </div>
+
+    <div class="article-content">
+      <p class="image-caption" style="text-align: center; margin-top: -1rem;">El breakeven ambiental y economico no siempre coinciden</p>
+
+      <h3>Breakeven ambiental</h3>
+      <p>El numero de ciclos necesarios para que el envase reutilizable tenga menor impacto que el desechable equivalente:</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo de envase</th>
+              <th>Ciclos para breakeven</th>
+              <th>Contexto tipico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tarro vidrio cosmetica</td>
+              <td>5-8 ciclos</td>
+              <td>Cremas, balsamos, mascarillas</td>
+            </tr>
+            <tr>
+              <td>Botella vidrio 500ml</td>
+              <td>4-6 ciclos</td>
+              <td>Aceites, vinagres, bebidas</td>
+            </tr>
+            <tr>
+              <td>Envase aluminio</td>
+              <td>3-5 ciclos</td>
+              <td>Cosmetica solida, balsamos</td>
+            </tr>
+            <tr>
+              <td>Growler vidrio 1-2L</td>
+              <td>2-4 ciclos</td>
+              <td>Cerveza craft, kombucha</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Breakeven economico</h3>
+      <p>El breakeven economico suele requerir mas ciclos que el ambiental - entre 15 y 60 segun el caso. Esto significa que un sistema puede ser "verde" pero no rentable, o al reves.</p>
+
+      <h2>Marco de decision: Te conviene o no?</h2>
+
+      <div class="decision-grid">
+        <div class="decision-card yes">
+          <h4>Probablemente SI tiene sentido si...</h4>
+          <ul>
+            <li>Vendes en tienda fisica o mercados (el cliente viene a ti)</li>
+            <li>Tu cliente compra regularmente (minimo cada 2-3 meses)</li>
+            <li>Tu operacion esta concentrada geograficamente</li>
+            <li>Tu envase tiene valor percibido alto</li>
+            <li>Tienes capacidad de comunicar y educar a tu cliente</li>
+          </ul>
+        </div>
+        <div class="decision-card no">
+          <h4>Probablemente NO tiene sentido si...</h4>
+          <ul>
+            <li>E-commerce con clientes dispersos por toda Espana</li>
+            <li>Tu producto es de compra unica o muy esporadica</li>
+            <li>El envase representa bajo coste vs. producto</li>
+            <li>No tienes canal directo de comunicacion con clientes</li>
+            <li>No puedes asumir perdida parcial de envases</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Alternativas cuando la logistica inversa no funciona</h2>
+
+      <p>Si tu caso no encaja con logistica inversa tradicional, hay otras formas de avanzar en circularidad:</p>
+
+      <div class="alternatives-grid">
+        <div class="alternative-card">
+          <h4>1. Packaging disenado para segunda vida</h4>
+          <p>Envases que el cliente quiera conservar: tarros de ceramica, latas decorativas, cajas de madera. El cliente no devuelve porque no quiere devolverlo.</p>
+        </div>
+        <div class="alternative-card">
+          <h4>2. Sistema de refill sin retorno</h4>
+          <p>El cliente conserva el envase principal y compra recargas en packaging minimo. Reduce residuos sin gestionar devoluciones.</p>
+        </div>
+        <div class="alternative-card">
+          <h4>3. Alianzas con puntos de recogida</h4>
+          <p>Acuerdo con tiendas locales o espacios de coworking como puntos de deposito. Concentras recogida sin gestionar logistica tu mismo.</p>
+        </div>
+        <div class="alternative-card">
+          <h4>4. Sistema de deposito premium</h4>
+          <p>Como RRR'biocosmetics: el cliente paga deposito por el envase. Si lo devuelve, recupera el dinero. Si no, ha pagado por el.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="inline-image">
+      <img src="../../assets/images/blog/logistica-inversa/imagen-packaging-segunda-vida.jpg" alt="Packaging artesanal disenado para segunda vida" style="max-width: 600px; border-radius: 12px;">
+      <p class="image-caption">El mejor sistema de retorno es el que no necesitas: envases que el cliente quiere conservar</p>
+    </div>
+
+    <div class="article-content">
+
+      <h2>Conclusion: Entonces que?</h2>
+
+      <p>La logistica inversa puede ser una herramienta poderosa de circularidad y diferenciacion. Pero no es la unica herramienta - y no es la correcta para todos los casos.</p>
+
+      <p>Funciona cuando las condiciones son las correctas: venta local o concentrada, cliente recurrente, incentivo claro, y vision a largo plazo. Fracasa cuando se disena sobre suposiciones optimistas en lugar de datos reales de TU operativa.</p>
+
+      <div class="callout tip">
+        <p><strong>Lo que si puedes hacer hoy:</strong> Antes de invertir en infraestructura, haz un piloto pequeno. Mide tasa de retorno real con 50 clientes. Pregunta directamente si devolverian el envase. Los datos de un piloto de 3 meses valen mas que un Excel de proyecciones optimistas.</p>
+      </div>
+
+      <p>La regulacion viene. Las fechas estan puestas. La pregunta es si adelantas la tendencia (y aprendes con margen de error) o si esperas a que sea obligatorio (y adaptas con prisas y costes). Pero adelantar no significa implementar el sistema mas complejo posible - significa encontrar el sistema correcto para tu realidad.</p>
+
+    </div>
+  </article>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Quieres saber que sistema de circularidad encaja con tu marca?</h2>
+    <p>Nuestro Diagnostico 3D analiza tu operativa real y te dice que opciones tienen sentido para tu caso especifico - sin humo ni proyecciones optimistas.</p>
+    <a href="../../diagnostico-3d" class="cta-btn">Solicitar Diagnostico 3D</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>2026 Oficios Circulares. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Back to top functionality
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (hamburger && navMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+    }
+  </script>
+</body>
+</html>

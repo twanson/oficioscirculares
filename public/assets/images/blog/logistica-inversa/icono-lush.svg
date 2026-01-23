@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Fondo circular -->
+  <circle cx="24" cy="24" r="22" fill="#F5F1EB"/>
+  
+  <!-- Tarro negro estilo Lush -->
+  <circle cx="24" cy="28" r="12" fill="#1a1a1a"/>
+  
+  <!-- Tapa -->
+  <ellipse cx="24" cy="18" rx="8" ry="2.5" fill="#2D3E2F"/>
+  <rect x="16" y="16" width="16" height="3" fill="#2D3E2F"/>
+  
+  <!-- Símbolo circular de retorno (3 flechas) -->
+  <g transform="translate(24, 28)">
+    <path d="M-4 -5 L-2 -7 L0 -5" stroke="#C17F59" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M0 -5 Q4 -4 4 0" stroke="#C17F59" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    
+    <path d="M4 2 L6 0 L6 3" stroke="#C17F59" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4 2 Q3 6 -2 5" stroke="#C17F59" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    
+    <path d="M-3 3 L-5 5 L-6 2" stroke="#C17F59" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-3 3 Q-6 0 -4 -5" stroke="#C17F59" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

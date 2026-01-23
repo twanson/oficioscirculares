@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './logistica-inversa/',
+      title: 'Logistica inversa para marcas artesanales: cuando tiene sentido y cuando no',
+      excerpt: 'Guia practica para marcas medianas que se plantean recuperar sus envases. Con ejemplos reales de cosmetica natural, alimentacion artesanal y cerveceria craft.',
+      date: '2026-01-23',
+      readingMinutes: 12,
+      cover: ASSETS_BASE + '/images/blog/logistica-inversa/imagen-hero-artesanal.jpg',
+      tags: ['estrategia', 'circularidad', 'logistica']
+    },
+    {
       slug: '../casos/e-wear/',
       title: 'E-WEAR: De residuo electrónico a joya con historia',
       excerpt: 'Cómo Laura transformó su taller de joyería tradicional en un modelo circular que recupera plata de residuos electrónicos. Un caso real de economía circular artesanal.',

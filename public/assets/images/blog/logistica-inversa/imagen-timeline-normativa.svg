@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 520">
+  <style>
+    .title { font-family: Georgia, serif; font-size: 26px; fill: #2D3E2F; font-weight: 500; }
+    .subtitle { font-family: system-ui, sans-serif; font-size: 14px; fill: #666; }
+    .year { font-family: Georgia, serif; font-size: 20px; font-weight: 600; }
+    .card-title { font-family: system-ui, sans-serif; font-size: 13px; fill: #2D3E2F; font-weight: 600; }
+    .card-text { font-family: system-ui, sans-serif; font-size: 11px; fill: #555; }
+    .card-text-white { font-family: system-ui, sans-serif; font-size: 11px; fill: rgba(255,255,255,0.95); }
+    .note-title { font-family: system-ui, sans-serif; font-size: 13px; font-weight: 600; }
+    .note-text { font-family: system-ui, sans-serif; font-size: 11px; fill: #555; }
+  </style>
+  
+  <!-- Background -->
+  <rect width="960" height="520" fill="#F5F1EB"/>
+  
+  <!-- Title -->
+  <text x="480" y="38" class="title" text-anchor="middle">Normativa de Envases: UE y España</text>
+  <text x="480" y="60" class="subtitle" text-anchor="middle">PPWR (Reglamento Europeo) + Ley 7/2022 (España)</text>
+  
+  <!-- Timeline line -->
+  <line x1="80" y1="130" x2="880" y2="130" stroke="#2D3E2F" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- 2025 -->
+  <circle cx="120" cy="130" r="10" fill="#C17F59"/>
+  <text x="120" y="105" class="year" fill="#C17F59" text-anchor="middle">2025</text>
+  <rect x="55" y="150" width="130" height="75" rx="8" fill="white" stroke="#E8E0D5" stroke-width="2"/>
+  <text x="120" y="172" class="card-title" text-anchor="middle">PPWR en vigor</text>
+  <text x="120" y="190" class="card-text" text-anchor="middle">Febrero 2025</text>
+  <text x="120" y="212" class="card-text" text-anchor="middle">España: 0,45€/kg</text>
+
+  <!-- 2026 -->
+  <circle cx="280" cy="130" r="10" fill="#C17F59"/>
+  <text x="280" y="105" class="year" fill="#C17F59" text-anchor="middle">2026</text>
+  <rect x="215" y="150" width="130" height="75" rx="8" fill="white" stroke="#E8E0D5" stroke-width="2"/>
+  <text x="280" y="172" class="card-title" text-anchor="middle">Aplicación general</text>
+  <text x="280" y="190" class="card-text" text-anchor="middle">Agosto 2026</text>
+  <text x="280" y="212" class="card-text" text-anchor="middle">Espacio vacío ≤40%</text>
+
+  <!-- 2030 - caja destacada -->
+  <circle cx="480" cy="130" r="12" fill="#2D3E2F"/>
+  <text x="480" y="105" class="year" fill="#2D3E2F" text-anchor="middle">2030</text>
+  <rect x="400" y="150" width="160" height="95" rx="8" fill="#2D3E2F"/>
+  <text x="480" y="175" class="card-title" fill="white" text-anchor="middle">HITOS CLAVE</text>
+  <text x="480" y="198" class="card-text-white" text-anchor="middle">• 40% transp. reutilizable</text>
+  <text x="480" y="216" class="card-text-white" text-anchor="middle">• 10% bebidas reutiliz.</text>
+  <text x="480" y="234" class="card-text-white" text-anchor="middle">• Ban un solo uso HORECA</text>
+
+  <!-- 2035 -->
+  <circle cx="680" cy="130" r="10" fill="#C17F59"/>
+  <text x="680" y="105" class="year" fill="#C17F59" text-anchor="middle">2035</text>
+  <rect x="615" y="150" width="130" height="75" rx="8" fill="white" stroke="#E8E0D5" stroke-width="2"/>
+  <text x="680" y="172" class="card-title" text-anchor="middle">Reciclado a escala</text>
+  <text x="680" y="190" class="card-text" text-anchor="middle">Todo envase debe</text>
+  <text x="680" y="212" class="card-text" text-anchor="middle">ser reciclable real</text>
+
+  <!-- 2040 -->
+  <circle cx="840" cy="130" r="12" fill="#2D3E2F"/>
+  <text x="840" y="105" class="year" fill="#2D3E2F" text-anchor="middle">2040</text>
+  <rect x="775" y="150" width="130" height="75" rx="8" fill="white" stroke="#2D3E2F" stroke-width="2"/>
+  <text x="840" y="172" class="card-title" text-anchor="middle">Objetivos finales</text>
+  <text x="840" y="190" class="card-text" text-anchor="middle">70% transp. reutil.</text>
+  <text x="840" y="212" class="card-text" text-anchor="middle">40% bebidas reutil.</text>
+  
+  <!-- Spain note -->
+  <rect x="55" y="280" width="400" height="85" rx="10" fill="white" stroke="#C17F59" stroke-width="2"/>
+  <text x="80" y="308" class="note-title" fill="#C17F59">🇪🇸 España - Ley 7/2022</text>
+  <text x="80" y="330" class="note-text">• Impuesto 0,45€/kg plástico no reutilizable</text>
+  <text x="80" y="350" class="note-text">• Sanciones hasta 3,5M€ · RAP obligatoria</text>
+  
+  <!-- EU note -->
+  <rect x="505" y="280" width="400" height="85" rx="10" fill="white" stroke="#2D3E2F" stroke-width="2"/>
+  <text x="530" y="308" class="note-title" fill="#2D3E2F">🇪🇺 PPWR - Reglamento Europeo</text>
+  <text x="530" y="330" class="note-text">• Contenido reciclado mínimo obligatorio</text>
+  <text x="530" y="350" class="note-text">• Etiquetado digital (QR) desde 2027</text>
+  
+  <!-- Logo Oficios Circulares - esquina inferior derecha, fuera de las cajas -->
+  <image x="890" y="450" width="55" height="55" href="logo-oficios-circulares.png"/>
+</svg>

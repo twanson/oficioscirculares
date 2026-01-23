@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Fondo circular -->
+  <circle cx="24" cy="24" r="22" fill="#F5F1EB"/>
+  
+  <!-- Cuerpo del growler -->
+  <path d="M16 18 Q14 20 14 24 L14 36 Q14 40 18 40 L30 40 Q34 40 34 36 L34 24 Q34 20 32 18" fill="#C17F59"/>
+  
+  <!-- Cuello del growler -->
+  <rect x="19" y="10" width="10" height="8" fill="#2D3E2F"/>
+  
+  <!-- Tapa -->
+  <rect x="18" y="8" width="12" height="3" rx="1" fill="#4A5D4B"/>
+  
+  <!-- Asa del growler -->
+  <path d="M34 22 Q40 22 40 29 Q40 36 34 36" stroke="#2D3E2F" stroke-width="4" fill="none" stroke-linecap="round"/>
+  
+  <!-- Reflejo en el vidrio -->
+  <path d="M18 22 L18 34" stroke="white" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+  
+  <!-- Símbolo refill pequeño -->
+  <circle cx="24" cy="30" r="4" fill="none" stroke="#2D3E2F" stroke-width="1.5"/>
+  <path d="M22 30 L24 28 L26 30" stroke="#2D3E2F" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
