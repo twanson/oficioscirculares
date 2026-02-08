@@ -38,18 +38,20 @@
     <!-- Traffic Source Detector -->
     <script src="../../assets/js/traffic-source-detector.js" async></script>
 
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="../../assets/css/animations.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-primary: #2D3E2F;
-            --color-primary-light: #4A5D4B;
-            --color-accent: #C17F59;
-            --color-accent-light: #D4956F;
+            --color-primary: #1F4B3F;
+            --color-primary-light: #2D5F4F;
+            --color-accent: #D17B49;
+            --color-accent-light: #E8956A;
             --color-sand: #F5F1EB;
             --color-sand-dark: #E8E0D5;
-            --color-cream: #FAFAF8;
+            --color-cream: #FAF9F7;
             --color-text: #1A1A1A;
             --color-text-light: #555;
             --color-danger: #C0392B;
@@ -66,37 +68,20 @@
             color: var(--color-text);
             line-height: 1.75;
             font-size: 17px;
+            padding-top: 80px;
         }
 
-        /* Header */
-        .header {
-            background: white;
-            padding: 1rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--color-sand-dark);
-            position: sticky;
+        /* Enhanced Navbar */
+        .enhanced-navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: var(--color-primary);
-            text-decoration: none;
-        }
-        .logo-icon { width: 36px; height: 36px; }
-        .logo-icon img { width: 100%; height: 100%; }
-        .nav-links { display: flex; gap: 1.8rem; align-items: center; }
-        .nav-link { color: var(--color-text-light); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
-        .nav-link:hover { color: var(--color-accent); }
-        .nav-btn { background: var(--color-primary); color: white; padding: 0.6rem 1.2rem; border-radius: 6px; font-size: 0.9rem; text-decoration: none; transition: background 0.2s; }
-        .nav-btn:hover { background: var(--color-primary-light); }
 
         /* Breadcrumbs */
         .breadcrumbs { padding: 1rem 3rem; font-size: 0.85rem; color: var(--color-text-light); background: white; }
@@ -202,7 +187,7 @@
         .full-width-image { margin: 2.5rem -3rem; width: calc(100% + 6rem); }
         .full-width-image img, .full-width-image svg { width: 100%; height: auto; display: block; }
         .inline-image { margin: 2.5rem 0; text-align: center; }
-        .inline-image img { max-width: 100%; height: auto; border-radius: 12px; }
+        .inline-image img { max-width: 100%; width: 100%; height: auto; border-radius: 12px; object-fit: cover; max-height: 450px; }
         .image-caption { font-size: 0.9rem; color: var(--color-text-light); margin-top: 0.75rem; font-style: italic; text-align: center; }
 
         /* Data grid */
@@ -362,8 +347,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header { padding: 1rem 1.5rem; }
-            .nav-links { display: none; }
             .hero { padding: 3rem 1.5rem; }
             .hero h1 { font-size: 2rem; }
             .article-container { padding: 2rem 1.5rem; }
@@ -377,21 +360,40 @@
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="header">
-        <a href="../../" class="logo">
-            <div class="logo-icon"><img src="../../assets/images/logodegraoscuro.png" alt="Oficios Circulares"></div>
-            Oficios Circulares
-        </a>
-        <nav class="nav-links">
-            <a href="../../#que-es" class="nav-link">¿Qué es?</a>
-            <a href="../../#para-quien" class="nav-link">¿Para quién?</a>
-            <a href="../../#ofrecemos" class="nav-link">Qué ofrecemos</a>
-            <a href="../" class="nav-link">Blog</a>
-            <a href="../../recursos/" class="nav-link">Recursos</a>
-            <a href="https://tally.so/r/mOyV98" target="_blank" class="nav-btn">Únete</a>
-        </nav>
-    </header>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7CH52J6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar enhanced-navbar">
+        <div class="nav-container">
+            <a href="../../" class="nav-logo">
+                <img src="../../assets/images/logodegraoscuro.png" alt="Oficios Circulares" class="logo" />
+                <span class="logo-text">Oficios Circulares</span>
+            </a>
+            <div class="nav-menu">
+                <a href="../../#que-es" class="nav-link">Que es?</a>
+                <a href="../../#para-quien" class="nav-link">Para quien?</a>
+                <a href="../../#ofrecemos" class="nav-link">Que ofrecemos</a>
+                <a href="../../#comunidad" class="nav-link">Comunidad</a>
+                <a href="../" class="nav-link active">Blog</a>
+                <a href="../../recursos" class="nav-link">Recursos</a>
+                <a href="../../faqs/" class="nav-link">FAQs</a>
+                <a href="../../sobre-nosotros/" class="nav-link">Sobre Nosotros</a>
+                <a href="https://tally.so/r/mOyV98" target="_blank" class="btn btn-primary btn-small">Unete</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"></path>
+        </svg>
+    </button>
 
     <!-- Breadcrumbs -->
     <nav class="breadcrumbs">
@@ -1066,7 +1068,7 @@
 
         <!-- Imagen: sostenibilidad y economía circular -->
         <div class="inline-image">
-            <img src="imagen-sostenibilidad-circular.jpg" alt="Manos sosteniendo una planta, símbolo de la economía circular y la sostenibilidad artesanal" style="max-width: 700px;">
+            <img src="imagen-sostenibilidad-circular.jpg" alt="Manos sosteniendo una planta, símbolo de la economía circular y la sostenibilidad artesanal">
             <p class="image-caption">La economía circular empieza con pequeños gestos que escalan: cada proyecto aprobado es una semilla de transformación industrial</p>
         </div>
 
@@ -1101,5 +1103,29 @@
         <p>© 2026 Oficios Circulares. Todos los derechos reservados.</p>
     </footer>
 
+    <script>
+        // Back to top functionality
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
 </body>
 </html>
