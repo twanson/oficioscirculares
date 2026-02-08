@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './perte-economia-circular/',
+      title: 'PERTE Economía Circular para PYMEs Artesanales: Guía de los 5 Pasos',
+      excerpt: 'Guía práctica paso a paso para que PYMEs artesanales accedan a los 492M€ del PERTE Economía Circular antes de junio 2026. Con datos reales, ejemplos aprobados y checklist descargable.',
+      date: '2026-02-08',
+      readingMinutes: 14,
+      cover: ASSETS_BASE + '/images/blog/perte-economia-circular/imagen-hero-artesanal.jpg',
+      tags: ['estrategia', 'financiacion', 'circularidad']
+    },
+    {
       slug: './logistica-inversa/',
       title: 'Logistica inversa para marcas artesanales: cuando tiene sentido y cuando no',
       excerpt: 'Guia practica para marcas medianas que se plantean recuperar sus envases. Con ejemplos reales de cosmetica natural, alimentacion artesanal y cerveceria craft.',
