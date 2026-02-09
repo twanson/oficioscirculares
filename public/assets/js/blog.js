@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       slug: './perte-economia-circular/',
       title: 'PERTE Economía Circular para PYMEs Artesanales: Guía de los 5 Pasos',
-      excerpt: 'Guía práctica paso a paso para que PYMEs artesanales accedan a los 492M€ del PERTE Economía Circular antes de junio 2026. Con datos reales, ejemplos aprobados y checklist descargable.',
+      excerpt: 'Guía práctica paso a paso para que PYMEs artesanales accedan a las ayudas del PERTE Economía Circular (492M€). Con datos reales de convocatorias resueltas, ejemplos aprobados y checklist.',
       date: '2026-02-08',
-      readingMinutes: 14,
+      readingMinutes: 15,
       cover: ASSETS_BASE + '/images/blog/perte-economia-circular/imagen-hero-artesanal.jpg',
       tags: ['estrategia', 'financiacion', 'circularidad']
     },
