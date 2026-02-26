@@ -64,5 +64,22 @@
     "form_tally_id": "rjjZzp",
     "cta": "Descargar Guía Gratis",
     "updated_at": "2025-11-23"
+  },
+  {
+    "slug": "5-filtros-residuo-material",
+    "title": "5 Filtros: de residuo local a material",
+    "type": "guia",
+    "summary": "Método práctico para evaluar si un residuo agrícola o industrial cercano puede convertirse en material para tu taller. 5 filtros, tabla de puntuación y decisión GO / PILOTO / NO AHORA.",
+    "tags": [
+      "residuos",
+      "materiales",
+      "circularidad",
+      "diagnostico"
+    ],
+    "cover": "/img/recursos/covers/5-filtros-residuo-cover.webp",
+    "pdf": "/downloads/Guia_5_Filtros_Residuo_Material_2026.pdf",
+    "form_tally_id": "GxrzeO",
+    "cta": "Descargar Guía Gratis",
+    "updated_at": "2026-02-26"
   }
 ]
