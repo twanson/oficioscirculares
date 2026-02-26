@@ -1,85 +1,85 @@
 [
-  {
-    "slug": "guia-materiales",
-    "title": "Guía de Materiales · Completa",
-    "type": "guia",
-    "summary": "Para artesanos y pequeñas marcas. Criterios claros de qué preferir/evitar por oficio, fichas de materiales, checklist de compra, marco legal exprés y acceso al Directorio vivo de proveedores.",
-    "tags": [
-      "materiales",
-      "textil",
-      "ceramica",
-      "madera",
-      "joyeria"
-    ],
-    "cover": "/img/recursos/covers/guia-materiales-cover-larga.webp",
-    "pdf": "/downloads/OC_Guia_Materiales_Completa_2025.pdf",
-    "form_tally_id": "wgloqM",
-    "cta": "Descargar Guía Completa",
-    "updated_at": "2025-08-22"
-  },
-  {
-    "slug": "circular-express",
-    "title": "Circular Express",
-    "type": "test",
-    "summary": "Auto-diagnóstico en 10–15 min para saber qué prácticas circulares ya aplicas y qué mejorar. Incluye checklist, puntuación rápida y mini-plan con próximos pasos.",
-    "tags": [
-      "diagnostico",
-      "evaluacion"
-    ],
-    "cover": "/img/recursos/covers/circular-express-cover.webp",
-    "pdf": "/downloads/Circular_Express_Oficios_Circulares_2025.pdf",
-    "form_tally_id": "mVeedv",
-    "cta": "Descargar",
-    "updated_at": "2025-08-22"
-  },
-  {
-    "slug": "guia-materiales-corta",
-    "title": "Guía de Materiales · Corta (Resumen)",
-    "type": "guia",
-    "summary": "Lo esencial para elegir materiales y comprar mejor. Incluye QR a la guía completa.",
-    "tags": [
-      "materiales",
-      "intro"
-    ],
-    "cover": "/img/recursos/covers/guia-materiales-cover-corta.webp",
-    "pdf": "/downloads/OC_Guia_Materiales_Corta_2025.pdf",
-    "form_tally_id": "npEE2y",
-    "cta": "Descargar Guía Corta",
-    "listed": false,
-    "updated_at": "2025-08-23"
-  },
-  {
-    "slug": "guia-upcycling-artistas",
-    "title": "Guía Artistas Upcycling + Toolkit Práctico",
-    "type": "guia",
-    "summary": "La guía definitiva de artistas upcycling para marcas con propósito. 50 páginas de casos reales, técnicas aplicables y plantillas visuales.",
-    "tags": [
-      "upcycling",
-      "artistas",
-      "guia",
-      "circularidad"
-    ],
-    "cover": "/img/recursos/covers/guia-upcycling-cover.png",
-    "pdf": "/downloads/Guia_Upcycling_Artistas_25.zip",
-    "form_tally_id": "rjjZzp",
-    "cta": "Descargar Guía Gratis",
-    "updated_at": "2025-11-23"
-  },
-  {
-    "slug": "5-filtros-residuo-material",
-    "title": "5 Filtros: de residuo local a material",
-    "type": "guia",
-    "summary": "Método práctico para evaluar si un residuo agrícola o industrial cercano puede convertirse en material para tu taller. 5 filtros, tabla de puntuación y decisión GO / PILOTO / NO AHORA.",
-    "tags": [
-      "residuos",
-      "materiales",
-      "circularidad",
-      "diagnostico"
-    ],
-    "cover": "/img/recursos/covers/5-filtros-residuo-cover.webp",
-    "pdf": "/downloads/Guia_5_Filtros_Residuo_Material_2026.pdf",
-    "form_tally_id": "GxrzeO",
-    "cta": "Descargar Guía Gratis",
-    "updated_at": "2026-02-26"
-  }
+    {
+          "slug": "guia-materiales",
+          "title": "Guía de Materiales · Completa",
+          "type": "guia",
+          "summary": "Para artesanos y pequeñas marcas. Criterios claros de qué preferir/evitar por oficio, fichas de materiales, checklist de compra, marco legal exprés y acceso al Directorio vivo de proveedores.",
+          "tags": [
+                  "materiales",
+                  "textil",
+                  "ceramica",
+                  "madera",
+                  "joyeria"
+          ],
+          "cover": "/img/recursos/covers/guia-materiales-cover-larga.webp",
+          "pdf": "/downloads/OC_Guia_Materiales_Completa_2025.pdf",
+          "form_tally_id": "wgloqM",
+          "cta": "Descargar Guía Completa",
+          "updated_at": "2025-08-22"
+    },
+    {
+          "slug": "circular-express",
+          "title": "Circular Express",
+          "type": "test",
+          "summary": "Auto-diagnóstico en 10–15 min para saber qué prácticas circulares ya aplicas y qué mejorar. Incluye checklist, puntuación rápida y mini-plan con próximos pasos.",
+          "tags": [
+                  "diagnostico",
+                  "evaluacion"
+          ],
+          "cover": "/img/recursos/covers/circular-express-cover.webp",
+          "pdf": "/downloads/Circular_Express_Oficios_Circulares_2025.pdf",
+          "form_tally_id": "mVeedv",
+          "cta": "Descargar",
+          "updated_at": "2025-08-22"
+    },
+    {
+          "slug": "guia-materiales-corta",
+          "title": "Guía de Materiales · Corta (Resumen)",
+          "type": "guia",
+          "summary": "Lo esencial para elegir materiales y comprar mejor. Incluye QR a la guía completa.",
+          "tags": [
+                  "materiales",
+                  "intro"
+          ],
+          "cover": "/img/recursos/covers/guia-materiales-cover-corta.webp",
+          "pdf": "/downloads/OC_Guia_Materiales_Corta_2025.pdf",
+          "form_tally_id": "npEE2y",
+          "cta": "Descargar Guía Corta",
+          "listed": false,
+          "updated_at": "2025-08-23"
+    },
+    {
+          "slug": "guia-upcycling-artistas",
+          "title": "Guía Artistas Upcycling + Toolkit Práctico",
+          "type": "guia",
+          "summary": "La guía definitiva de artistas upcycling para marcas con propósito. 50 páginas de casos reales, técnicas aplicables y plantillas visuales.",
+          "tags": [
+                  "upcycling",
+                  "artistas",
+                  "guia",
+                  "circularidad"
+          ],
+          "cover": "/img/recursos/covers/guia-upcycling-cover.png",
+          "pdf": "/downloads/Guia_Upcycling_Artistas_25.zip",
+          "form_tally_id": "rjjZzp",
+          "cta": "Descargar Guía Gratis",
+          "updated_at": "2025-11-23"
+    },
+    {
+          "slug": "5-filtros-residuo-material",
+          "title": "5 Filtros: de residuo local a material",
+          "type": "guia",
+          "summary": "Método práctico para evaluar si un residuo agrícola o industrial cercano puede convertirse en material para tu taller. 5 filtros, tabla de puntuación y decisión GO / PILOTO / NO AHORA.",
+          "tags": [
+                  "residuos",
+                  "materiales",
+                  "circularidad",
+                  "diagnostico"
+          ],
+          "cover": "/img/recursos/covers/5-filtros-residuo-cover.webp",
+          "pdf": "/downloads/Guia_5_Filtros_Residuo_Material_2026.pdf",
+          "form_tally_id": "GxrzeO",
+          "cta": "Descargar Guía Gratis",
+          "updated_at": "2026-02-26"
+    }
 ]
