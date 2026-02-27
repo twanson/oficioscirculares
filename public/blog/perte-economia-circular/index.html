@@ -243,6 +243,9 @@
         .step-section h3, .step-section h4 { font-size: 1.2rem !important; color: var(--color-primary) !important; }
         .step-title { color: var(--color-primary) !important; font-size: 1.5rem !important; }
 
+        /* Quote override must come AFTER step-content to win specificity */
+        .quote, .quote p, .quote strong, .step-content .quote p { color: white !important; }
+
         /* Case studies */
         .case-studies-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 2rem 0; }
         .case-study { background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid var(--color-sand-dark); }
