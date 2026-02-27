@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
       excerpt: 'Guía práctica con 5 filtros para evaluar si un residuo local puede ser materia prima. Con casos reales en España, semáforos de decisión y hoja de ruta de 30 días.',
       date: '2026-02-01',
       readingMinutes: 12,
-      cover: ASSETS_BASE + '/images/blog/5-filtros-residuo-material/imagen-hero-artesanal.svg',
+      cover: ASSETS_BASE + '/images/blog/5-filtros-residuo-material/imagen-hero-artesanal.jpg',
       tags: ['materiales circulares', 'residuos', 'artesanía', 'economía circular', 'guía práctica']
     },
     {
