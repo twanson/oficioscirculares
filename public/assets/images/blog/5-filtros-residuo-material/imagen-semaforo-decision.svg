@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" role="img" aria-label="Sistema de puntuacion GO / PILOTO / NO AHORA para evaluar residuos como materiales">
+    <style>
+        .svg-title { font-family: Georgia, serif; font-size: 22px; fill: #1F4B3F; font-weight: 500; }
+        .svg-subtitle { font-family: system-ui, sans-serif; font-size: 13px; fill: #666; }
+        .score-label { font-family: Georgia, serif; font-size: 32px; font-weight: 700; }
+        .decision-text { font-family: Georgia, serif; font-size: 20px; font-weight: 700; }
+        .desc-text { font-family: system-ui, sans-serif; font-size: 13px; fill: #555; }
+        .range-text { font-family: system-ui, sans-serif; font-size: 12px; fill: white; font-weight: 600; }
+    </style>
+
+    <rect width="960" height="340" fill="#FAFAF8" rx="0"/>
+
+    <text x="480" y="35" class="svg-title" text-anchor="middle">Sistema de decision: GO / PILOTO / NO AHORA</text>
+    <text x="480" y="55" class="svg-subtitle" text-anchor="middle">Puntua cada filtro de 0 a 2. Suma los 5 filtros para obtener tu puntuacion total (/10).</text>
+
+    <!-- GO -->
+    <rect x="40" y="80" width="280" height="200" rx="14" fill="white" stroke="#27AE60" stroke-width="3"/>
+    <rect x="40" y="80" width="280" height="55" rx="14" fill="#27AE60"/>
+    <rect x="40" y="115" width="280" height="20" fill="#27AE60"/>
+    <text x="95" y="113" class="range-text" font-size="14">8 - 10 puntos</text>
+    <text x="260" y="113" class="decision-text" fill="white" text-anchor="middle">GO</text>
+    <text x="180" y="168" class="desc-text" text-anchor="middle" font-size="14">Material con potencial real.</text>
+    <text x="180" y="190" class="desc-text" text-anchor="middle">Define plan de accion, busca</text>
+    <text x="180" y="208" class="desc-text" text-anchor="middle">partners y empieza a producir.</text>
+    <rect x="80" y="228" width="200" height="32" rx="8" fill="#27AE60" opacity="0.1"/>
+    <text x="180" y="249" font-family="system-ui, sans-serif" font-size="12" fill="#27AE60" font-weight="600" text-anchor="middle">Accion inmediata</text>
+
+    <!-- PILOTO -->
+    <rect x="340" y="80" width="280" height="200" rx="14" fill="white" stroke="#D4A017" stroke-width="3"/>
+    <rect x="340" y="80" width="280" height="55" rx="14" fill="#D4A017"/>
+    <rect x="340" y="115" width="280" height="20" fill="#D4A017"/>
+    <text x="395" y="113" class="range-text" font-size="14">4 - 7 puntos</text>
+    <text x="545" y="113" class="decision-text" fill="white" text-anchor="middle">PILOTO</text>
+    <text x="480" y="168" class="desc-text" text-anchor="middle" font-size="14">Potencial con incertidumbre.</text>
+    <text x="480" y="190" class="desc-text" text-anchor="middle">Haz un piloto acotado: lote</text>
+    <text x="480" y="208" class="desc-text" text-anchor="middle">pequeno, coste controlado, plazo definido.</text>
+    <rect x="380" y="228" width="200" height="32" rx="8" fill="#D4A017" opacity="0.1"/>
+    <text x="480" y="249" font-family="system-ui, sans-serif" font-size="12" fill="#D4A017" font-weight="600" text-anchor="middle">Validar antes de escalar</text>
+
+    <!-- NO AHORA -->
+    <rect x="640" y="80" width="280" height="200" rx="14" fill="white" stroke="#C0392B" stroke-width="3"/>
+    <rect x="640" y="80" width="280" height="55" rx="14" fill="#C0392B"/>
+    <rect x="640" y="115" width="280" height="20" fill="#C0392B"/>
+    <text x="695" y="113" class="range-text" font-size="14">0 - 3 puntos</text>
+    <text x="845" y="113" class="decision-text" fill="white" text-anchor="middle">NO AHORA</text>
+    <text x="780" y="168" class="desc-text" text-anchor="middle" font-size="14">Barreras demasiado grandes hoy.</text>
+    <text x="780" y="190" class="desc-text" text-anchor="middle">Revisa en 6-12 meses o busca</text>
+    <text x="780" y="208" class="desc-text" text-anchor="middle">otro residuo. No es un "no" definitivo.</text>
+    <rect x="680" y="228" width="200" height="32" rx="8" fill="#C0392B" opacity="0.1"/>
+    <text x="780" y="249" font-family="system-ui, sans-serif" font-size="12" fill="#C0392B" font-weight="600" text-anchor="middle">Pivotar o esperar</text>
+
+    <text x="480" y="318" class="svg-subtitle" text-anchor="middle">Importante: una puntuacion alta en 4 filtros no compensa un 0 en uno critico.</text>
+</svg>

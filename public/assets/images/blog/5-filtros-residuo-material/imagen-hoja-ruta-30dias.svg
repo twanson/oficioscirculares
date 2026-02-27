@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" role="img" aria-label="Hoja de ruta de 30 dias: Mapear, Caracterizar, Prototipar, Validar">
+    <style>
+        .svg-title { font-family: Georgia, serif; font-size: 22px; fill: #1F4B3F; font-weight: 500; }
+        .svg-subtitle { font-family: system-ui, sans-serif; font-size: 13px; fill: #666; }
+        .week-label { font-family: system-ui, sans-serif; font-size: 11px; fill: white; font-weight: 600; }
+        .step-title { font-family: Georgia, serif; font-size: 17px; fill: #1F4B3F; font-weight: 600; }
+        .step-desc { font-family: system-ui, sans-serif; font-size: 11px; fill: #555; }
+        .filter-ref { font-family: system-ui, sans-serif; font-size: 11px; fill: #D17B49; font-weight: 600; }
+    </style>
+
+    <rect width="960" height="280" fill="#F5F1EB" rx="0"/>
+
+    <text x="480" y="32" class="svg-title" text-anchor="middle">Hoja de ruta de 30 dias</text>
+    <text x="480" y="52" class="svg-subtitle" text-anchor="middle">De la idea al veredicto en 4 semanas</text>
+
+    <!-- Timeline line -->
+    <line x1="80" y1="100" x2="880" y2="100" stroke="#E8E0D5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="80" y1="100" x2="880" y2="100" stroke="#1F4B3F" stroke-width="3" stroke-dasharray="8,4"/>
+
+    <!-- Week 1 -->
+    <circle cx="160" cy="100" r="20" fill="#1F4B3F"/>
+    <text x="160" y="106" class="week-label" text-anchor="middle">S1</text>
+    <text x="160" y="145" class="step-title" text-anchor="middle">Mapear</text>
+    <text x="160" y="165" class="step-desc" text-anchor="middle">Identifica residuos en</text>
+    <text x="160" y="180" class="step-desc" text-anchor="middle">tu zona (50-100 km)</text>
+    <text x="160" y="205" class="filter-ref" text-anchor="middle">Filtro 1</text>
+
+    <!-- Arrow -->
+    <text x="295" y="105" font-family="system-ui, sans-serif" font-size="20" fill="#D17B49" text-anchor="middle">→</text>
+
+    <!-- Week 2 -->
+    <circle cx="400" cy="100" r="20" fill="#1F4B3F"/>
+    <text x="400" y="106" class="week-label" text-anchor="middle">S2</text>
+    <text x="400" y="145" class="step-title" text-anchor="middle">Caracterizar</text>
+    <text x="400" y="165" class="step-desc" text-anchor="middle">Analiza 2-3 muestras</text>
+    <text x="400" y="180" class="step-desc" text-anchor="middle">de lotes diferentes</text>
+    <text x="400" y="205" class="filter-ref" text-anchor="middle">Filtros 2 y 3</text>
+
+    <!-- Arrow -->
+    <text x="530" y="105" font-family="system-ui, sans-serif" font-size="20" fill="#D17B49" text-anchor="middle">→</text>
+
+    <!-- Week 3 -->
+    <circle cx="640" cy="100" r="20" fill="#D17B49"/>
+    <text x="640" y="106" class="week-label" text-anchor="middle">S3</text>
+    <text x="640" y="145" class="step-title" text-anchor="middle">Prototipar</text>
+    <text x="640" y="165" class="step-desc" text-anchor="middle">Crea prototipos basicos</text>
+    <text x="640" y="180" class="step-desc" text-anchor="middle">Presupuesto: 300-500 €</text>
+    <text x="640" y="205" class="filter-ref" text-anchor="middle">Valida Filtro 3</text>
+
+    <!-- Arrow -->
+    <text x="760" y="105" font-family="system-ui, sans-serif" font-size="20" fill="#D17B49" text-anchor="middle">→</text>
+
+    <!-- Week 4 -->
+    <circle cx="860" cy="100" r="22" fill="#1F4B3F"/>
+    <text x="860" y="105" fill="white" font-family="system-ui, sans-serif" font-size="16" font-weight="700" text-anchor="middle">✓</text>
+    <text x="860" y="145" class="step-title" text-anchor="middle">Validar</text>
+    <text x="860" y="165" class="step-desc" text-anchor="middle">Muestra a 3-5</text>
+    <text x="860" y="180" class="step-desc" text-anchor="middle">compradores reales</text>
+    <text x="860" y="205" class="filter-ref" text-anchor="middle">Filtros 4 y 5</text>
+
+    <!-- Result box -->
+    <rect x="250" y="228" width="460" height="36" rx="10" fill="white" stroke="#D17B49" stroke-width="2"/>
+    <text x="480" y="251" font-family="system-ui, sans-serif" font-size="13" fill="#1F4B3F" font-weight="600" text-anchor="middle">Resultado: GO (avanzar) · PILOTO (investigar mas) · NO AHORA (pivotar)</text>
+</svg>

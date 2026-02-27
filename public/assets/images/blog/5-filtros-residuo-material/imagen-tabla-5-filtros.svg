@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-label="Tabla resumen de los 5 filtros para evaluar si un residuo puede convertirse en material">
+    <style>
+        .svg-title { font-family: Georgia, serif; font-size: 22px; fill: #1F4B3F; font-weight: 500; }
+        .svg-subtitle { font-family: system-ui, sans-serif; font-size: 13px; fill: #666; }
+        .filter-num { font-family: Georgia, serif; font-size: 18px; fill: white; font-weight: 700; }
+        .filter-name { font-family: Georgia, serif; font-size: 15px; fill: #1F4B3F; font-weight: 600; }
+        .filter-question { font-family: system-ui, sans-serif; font-size: 12px; fill: #555; }
+    </style>
+
+    <rect width="960" height="420" fill="#F5F1EB" rx="0"/>
+
+    <text x="480" y="38" class="svg-title" text-anchor="middle">Metodo de 5 Filtros: de residuo a material</text>
+    <text x="480" y="58" class="svg-subtitle" text-anchor="middle">Un residuo no es un material hasta que pasa los 5 filtros</text>
+
+    <!-- Filtro 1 -->
+    <rect x="40" y="85" width="170" height="290" rx="12" fill="white" stroke="#E8E0D5" stroke-width="2"/>
+    <circle cx="125" cy="120" r="22" fill="#1F4B3F"/>
+    <text x="125" y="127" class="filter-num" text-anchor="middle">1</text>
+    <text x="125" y="165" class="filter-name" text-anchor="middle">Disponibilidad</text>
+    <line x1="70" y1="180" x2="180" y2="180" stroke="#E8E0D5" stroke-width="1"/>
+    <text x="125" y="205" class="filter-question" text-anchor="middle">¿Hay suficiente</text>
+    <text x="125" y="222" class="filter-question" text-anchor="middle">cantidad, de forma</text>
+    <text x="125" y="239" class="filter-question" text-anchor="middle">estable, cerca de ti?</text>
+    <rect x="65" y="260" width="120" height="28" rx="6" fill="#27AE60" opacity="0.15"/>
+    <text x="125" y="279" font-family="system-ui, sans-serif" font-size="11" fill="#27AE60" font-weight="600" text-anchor="middle">&gt;10 t/ano, &lt;50km</text>
+    <rect x="65" y="296" width="120" height="28" rx="6" fill="#D4A017" opacity="0.15"/>
+    <text x="125" y="315" font-family="system-ui, sans-serif" font-size="11" fill="#D4A017" font-weight="600" text-anchor="middle">1-10 t, 50-150km</text>
+    <rect x="65" y="332" width="120" height="28" rx="6" fill="#C0392B" opacity="0.15"/>
+    <text x="125" y="351" font-family="system-ui, sans-serif" font-size="11" fill="#C0392B" font-weight="600" text-anchor="middle">&lt;1 t o &gt;150km</text>
+
+    <!-- Filtro 2 -->
+    <rect x="225" y="85" width="170" height="290" rx="12" fill="white" stroke="#E8E0D5" stroke-width="2"/>
+    <circle cx="310" cy="120" r="22" fill="#1F4B3F"/>
+    <text x="310" y="127" class="filter-num" text-anchor="middle">2</text>
+    <text x="310" y="165" class="filter-name" text-anchor="middle">Calidad</text>
+    <line x1="255" y1="180" x2="365" y2="180" stroke="#E8E0D5" stroke-width="1"/>
+    <text x="310" y="205" class="filter-question" text-anchor="middle">¿El material es</text>
+    <text x="310" y="222" class="filter-question" text-anchor="middle">consistente y</text>
+    <text x="310" y="239" class="filter-question" text-anchor="middle">predecible?</text>
+    <rect x="250" y="260" width="120" height="28" rx="6" fill="#27AE60" opacity="0.15"/>
+    <text x="310" y="279" font-family="system-ui, sans-serif" font-size="11" fill="#27AE60" font-weight="600" text-anchor="middle">Estable entre lotes</text>
+    <rect x="250" y="296" width="120" height="28" rx="6" fill="#D4A017" opacity="0.15"/>
+    <text x="310" y="315" font-family="system-ui, sans-serif" font-size="11" fill="#D4A017" font-weight="600" text-anchor="middle">Variaciones ajustables</text>
+    <rect x="250" y="332" width="120" height="28" rx="6" fill="#C0392B" opacity="0.15"/>
+    <text x="310" y="351" font-family="system-ui, sans-serif" font-size="11" fill="#C0392B" font-weight="600" text-anchor="middle">Cada lote diferente</text>
+
+    <!-- Filtro 3 -->
+    <rect x="410" y="85" width="170" height="290" rx="12" fill="white" stroke="#E8E0D5" stroke-width="2"/>
+    <circle cx="495" cy="120" r="22" fill="#D17B49"/>
+    <text x="495" y="127" class="filter-num" text-anchor="middle">3</text>
+    <text x="495" y="165" class="filter-name" text-anchor="middle">Viabilidad tecnica</text>
+    <line x1="440" y1="180" x2="550" y2="180" stroke="#E8E0D5" stroke-width="1"/>
+    <text x="495" y="205" class="filter-question" text-anchor="middle">¿Se puede transformar</text>
+    <text x="495" y="222" class="filter-question" text-anchor="middle">con tus recursos?</text>
+    <text x="495" y="239" class="filter-question" text-anchor="middle"></text>
+    <rect x="435" y="260" width="120" height="28" rx="6" fill="#27AE60" opacity="0.15"/>
+    <text x="495" y="279" font-family="system-ui, sans-serif" font-size="11" fill="#27AE60" font-weight="600" text-anchor="middle">Piloto con baja inv.</text>
+    <rect x="435" y="296" width="120" height="28" rx="6" fill="#D4A017" opacity="0.15"/>
+    <text x="495" y="315" font-family="system-ui, sans-serif" font-size="11" fill="#D4A017" font-weight="600" text-anchor="middle">Inversion moderada</text>
+    <rect x="435" y="332" width="120" height="28" rx="6" fill="#C0392B" opacity="0.15"/>
+    <text x="495" y="351" font-family="system-ui, sans-serif" font-size="11" fill="#C0392B" font-weight="600" text-anchor="middle">Solo a gran escala</text>
+
+    <!-- Filtro 4 -->
+    <rect x="595" y="85" width="170" height="290" rx="12" fill="white" stroke="#E8E0D5" stroke-width="2"/>
+    <circle cx="680" cy="120" r="22" fill="#1F4B3F"/>
+    <text x="680" y="127" class="filter-num" text-anchor="middle">4</text>
+    <text x="680" y="165" class="filter-name" text-anchor="middle">Encaje de mercado</text>
+    <line x1="625" y1="180" x2="735" y2="180" stroke="#E8E0D5" stroke-width="1"/>
+    <text x="680" y="205" class="filter-question" text-anchor="middle">¿Alguien va a</text>
+    <text x="680" y="222" class="filter-question" text-anchor="middle">comprar o valorar</text>
+    <text x="680" y="239" class="filter-question" text-anchor="middle">este material?</text>
+    <rect x="620" y="260" width="120" height="28" rx="6" fill="#27AE60" opacity="0.15"/>
+    <text x="680" y="279" font-family="system-ui, sans-serif" font-size="11" fill="#27AE60" font-weight="600" text-anchor="middle">Demanda creciente</text>
+    <rect x="620" y="296" width="120" height="28" rx="6" fill="#D4A017" opacity="0.15"/>
+    <text x="680" y="315" font-family="system-ui, sans-serif" font-size="11" fill="#D4A017" font-weight="600" text-anchor="middle">Hay que educar</text>
+    <rect x="620" y="332" width="120" height="28" rx="6" fill="#C0392B" opacity="0.15"/>
+    <text x="680" y="351" font-family="system-ui, sans-serif" font-size="11" fill="#C0392B" font-weight="600" text-anchor="middle">Sin demanda clara</text>
+
+    <!-- Filtro 5 -->
+    <rect x="780" y="85" width="140" height="290" rx="12" fill="white" stroke="#D17B49" stroke-width="2"/>
+    <circle cx="850" cy="120" r="22" fill="#D17B49"/>
+    <text x="850" y="127" class="filter-num" text-anchor="middle">5</text>
+    <text x="850" y="160" class="filter-name" text-anchor="middle">Trazabilidad</text>
+    <text x="850" y="177" class="filter-name" text-anchor="middle">+ Narrativa</text>
+    <line x1="800" y1="190" x2="900" y2="190" stroke="#E8E0D5" stroke-width="1"/>
+    <text x="850" y="212" class="filter-question" text-anchor="middle">¿Puedes contar</text>
+    <text x="850" y="229" class="filter-question" text-anchor="middle">su historia de forma</text>
+    <text x="850" y="246" class="filter-question" text-anchor="middle">verificable?</text>
+    <rect x="795" y="265" width="110" height="28" rx="6" fill="#27AE60" opacity="0.15"/>
+    <text x="850" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#27AE60" font-weight="600" text-anchor="middle">100% documentable</text>
+    <rect x="795" y="301" width="110" height="28" rx="6" fill="#D4A017" opacity="0.15"/>
+    <text x="850" y="320" font-family="system-ui, sans-serif" font-size="11" fill="#D4A017" font-weight="600" text-anchor="middle">Parcial</text>
+    <rect x="795" y="337" width="110" height="28" rx="6" fill="#C0392B" opacity="0.15"/>
+    <text x="850" y="356" font-family="system-ui, sans-serif" font-size="11" fill="#C0392B" font-weight="600" text-anchor="middle">Sin documentacion</text>
+
+    <!-- Arrows -->
+    <text x="215" y="230" font-family="system-ui, sans-serif" font-size="18" fill="#1F4B3F" text-anchor="middle">›</text>
+    <text x="400" y="230" font-family="system-ui, sans-serif" font-size="18" fill="#1F4B3F" text-anchor="middle">›</text>
+    <text x="585" y="230" font-family="system-ui, sans-serif" font-size="18" fill="#1F4B3F" text-anchor="middle">›</text>
+    <text x="770" y="230" font-family="system-ui, sans-serif" font-size="18" fill="#1F4B3F" text-anchor="middle">›</text>
+
+    <text x="480" y="405" class="svg-subtitle" text-anchor="middle">Oficios Circulares · oficioscirculares.com</text>
+</svg>
