@@ -21,7 +21,7 @@
 
 /* ===== HERO ===== */
 .impulso-hero {
-    background: linear-gradient(165deg, #0d2920 0%, var(--verde-profundo) 40%, #2a6654 100%);
+    background: linear-gradient(165deg, #1a3d33 0%, #28604f 40%, #3a7d6a 100%);
     color: #fff;
     padding: 100px 0 90px;
     position: relative;
