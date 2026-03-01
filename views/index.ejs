@@ -307,6 +307,15 @@
                         <div class="consultoria-cta-section" id="consultoria-cta-static">
                             <h4 class="consultoria-cta-title">Conoce nuestros servicios</h4>
                             <div class="consultoria-options-grid">
+                                <a href="/impulso-3d" class="consultoria-option consultoria-option-highlight">
+                                    <span class="consultoria-option-text">Impulso 3D</span>
+                                    <div class="consultoria-option-content">
+                                        <div class="service-icon">✨</div>
+                                        <h5>Trabajo solo/a o en un equipo pequeño</h5>
+                                        <p>Circularidad a pequeña escala. El Método 3D adaptado a tu oficio con IA.</p>
+                                    </div>
+                                    <span class="consultoria-btn">Descubrir Impulso 3D</span>
+                                </a>
                                 <a href="/servicios/diagnostico-3d" class="consultoria-option">
                                     <span class="consultoria-option-text">Diagnóstico 3D</span>
                                     <div class="consultoria-option-content">
@@ -384,7 +393,24 @@
                     <span class="chevron" aria-hidden="true"></span>
                 </button>
                 <h4 class="micro-title">Elige cómo empezar</h4>
-                <div class="micro-grid">
+
+                <!-- Segmentación por escala -->
+                <div class="micro-segmentation">
+                    <a href="/impulso-3d" class="micro-segment-card">
+                        <div class="service-icon">✨</div>
+                        <h5>Trabajo solo/a o en un equipo pequeño</h5>
+                        <p>Circularidad a pequeña escala con el Método 3D adaptado a tu oficio.</p>
+                        <span class="micro-segment-btn">Descubrir Impulso 3D &rarr;</span>
+                    </a>
+                    <button class="micro-segment-card" id="micro-show-b2b" type="button">
+                        <div class="service-icon">🏢</div>
+                        <h5>Tengo un equipo o proyecto más amplio</h5>
+                        <p>Servicios de consultoría para proyectos con mayor escala.</p>
+                        <span class="micro-segment-btn">Ver servicios &rarr;</span>
+                    </button>
+                </div>
+
+                <div class="micro-grid" id="micro-grid-b2b" style="display: none;">
                     <div class="micro-card">
                         <div class="service-icon">🔍</div>
                         <h5>Diagnóstico 3D</h5>
@@ -798,6 +824,19 @@
                 void microCards.offsetHeight;
                 // Opcional: recalcular cuando terminen de cargar fuentes e imágenes
                 window.addEventListener('load', positionOverlay);
+            }
+        });
+
+        // B2B toggle en micro-cards segmentation
+        document.addEventListener('DOMContentLoaded', function() {
+            var showB2bBtn = document.getElementById('micro-show-b2b');
+            var b2bGrid = document.getElementById('micro-grid-b2b');
+            var segmentation = document.querySelector('.micro-segmentation');
+            if (showB2bBtn && b2bGrid && segmentation) {
+                showB2bBtn.addEventListener('click', function() {
+                    segmentation.style.display = 'none';
+                    b2bGrid.style.display = '';
+                });
             }
         });
     </script>

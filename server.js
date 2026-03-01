@@ -186,6 +186,11 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
   });
 });
 
+// Ruta Impulso 3D (artesanos y talleres pequeños)
+app.get('/impulso-3d', (req, res) => {
+  res.render('impulso-3d');
+});
+
 // Rutas de servicios
 app.get('/servicios/diagnostico-3d', (req, res) => {
   res.render('diagnostico-3d');
