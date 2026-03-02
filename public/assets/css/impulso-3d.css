@@ -1163,8 +1163,15 @@
     }
 
     .impulso-hero .hero-image {
-        max-width: 500px;
-        margin: 0 auto;
+        order: -1;
+        max-width: 400px;
+        margin: 0 auto 24px;
+    }
+
+    .impulso-hero .hero-image img {
+        max-height: 300px;
+        object-fit: cover;
+        object-position: center;
     }
 }
 
