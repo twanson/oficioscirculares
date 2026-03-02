@@ -609,6 +609,29 @@
     margin: 0;
 }
 
+/* ===== CIRCULARIDAD CALLOUT ===== */
+.circularidad-callout {
+    background: linear-gradient(135deg, var(--verde-profundo) 0%, #143028 100%);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.circularidad-callout h2 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+}
+
+.circularidad-callout p {
+    color: rgba(255,255,255,0.88);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
 /* ===== PRICING ===== */
 .pricing-grid {
     display: grid;
