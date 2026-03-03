@@ -637,7 +637,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .price-card {
@@ -649,6 +649,8 @@
     transition: all var(--transition);
     position: relative;
     border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
 }
 
 .price-card:hover {
@@ -723,6 +725,9 @@
 
 .price-card-body {
     padding: 24px 28px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .price-features {
@@ -789,6 +794,7 @@
     width: 100%;
     text-align: center;
     justify-content: center;
+    margin-top: auto;
 }
 
 .price-ideal {
