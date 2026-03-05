@@ -81,5 +81,22 @@
           "form_tally_id": "GxrzeO",
           "cta": "Descargar Guía Gratis",
           "updated_at": "2026-02-26"
+    },
+    {
+          "slug": "plantilla-dpp",
+          "title": "Plantilla Base DPP + Checklist 30 días",
+          "type": "plantilla",
+          "summary": "Todo lo que necesitas para documentar la trazabilidad de tus productos: plantilla DPP completa, checklist de implementación en 4 semanas, estructura de carpetas y guía anti-greenwashing.",
+          "tags": [
+                  "dpp",
+                  "trazabilidad",
+                  "circularidad",
+                  "normativa"
+          ],
+          "cover": "/images/recursos/plantilla-dpp-cover.webp",
+          "pdf": "/downloads/Plantilla_DPP_Checklist_30dias.pdf",
+          "form_tally_id": "TALLY_FORM_ID_PLANTILLA_DPP",
+          "cta": "Descargar Plantilla Gratis",
+          "updated_at": "2026-03-05"
     }
 ]
