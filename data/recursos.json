@@ -98,5 +98,22 @@
           "form_tally_id": "0QE28B",
           "cta": "Descargar Plantilla Gratis",
           "updated_at": "2026-03-05"
+    },
+    {
+          "slug": "test-relevo-generacional",
+          "title": "Test de Autodiagnóstico: Relevo Generacional",
+          "type": "test",
+          "summary": "8 preguntas clave para saber si tu taller está preparado para el relevo generacional. Sistema de puntuación con resultado tipo semáforo y recomendaciones personalizadas. 2 minutos.",
+          "tags": [
+                  "relevo",
+                  "diagnostico",
+                  "estrategia",
+                  "circularidad"
+          ],
+          "cover": "/img/recursos/covers/test-relevo-cover.png",
+          "pdf": "/downloads/Test-Autodiagnostico-Relevo-Generacional-OC.pdf",
+          "form_tally_id": "9qlRa5",
+          "cta": "Descargar Test Gratis",
+          "updated_at": "2026-03-18"
     }
 ]
