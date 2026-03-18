@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './relevo-generacional-artesania/',
+      title: 'Relevo generacional en artesanía: 5 palancas para que tu oficio no muera contigo',
+      excerpt: 'Guía práctica con 5 palancas para activar el relevo generacional en tu taller. Con datos reales, casos en España y un plan de acción de 30 días.',
+      date: '2026-03-18',
+      readingMinutes: 14,
+      cover: ASSETS_BASE + '/images/blog/relevo-generacional-artesania/imagen-hero-relevo.jpg',
+      tags: ['estrategia', 'circularidad']
+    },
+    {
       slug: './5-filtros-residuo-material/',
       title: '¿Tu residuo local puede convertirse en material? Método práctico en 5 filtros',
       excerpt: 'Guía práctica con 5 filtros para evaluar si un residuo local puede ser materia prima. Con casos reales en España, semáforos de decisión y hoja de ruta de 30 días.',
