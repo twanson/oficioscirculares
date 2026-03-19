@@ -107,6 +107,14 @@
     line-height: 1.2;
 }
 
+.hero-claim {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--primary-dark, #1F4B3F);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
 .impulso-hero .hero-subtitle {
     font-size: 1.18rem;
     color: rgba(255,255,255,0.82);
@@ -854,6 +862,14 @@
     color: var(--terracota);
 }
 
+.journey-step--result .journey-dot {
+    background: var(--accent-warm, #E8DCC8);
+    color: var(--primary-dark, #1F4B3F);
+}
+.journey-step--result .journey-card {
+    border-left-color: var(--accent-warm, #E8DCC8);
+}
+
 .journey-card {
     flex: 1;
     background: #fff;
@@ -1249,6 +1265,10 @@
 
     .impulso-hero h1 {
         font-size: 2rem;
+    }
+
+    .hero-claim {
+        font-size: 1.15rem;
     }
 
     .impulso-hero .hero-subtitle {

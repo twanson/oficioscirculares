@@ -6,7 +6,7 @@
     ogImageAlt: 'Artesano observando madera en su taller - Impulso 3D de Oficios Circulares'
 }) %>
 
-<link rel="stylesheet" href="/assets/css/impulso-3d.css?v=20260319">
+<link rel="stylesheet" href="/assets/css/impulso-3d.css?v=20260320">
 
 <%- include('partials/header') %>
 
@@ -23,6 +23,8 @@
                     </div>
 
                     <h1>&iquest;Haces un trabajo extraordinario pero no encuentras tiempo para contarlo?</h1>
+
+                    <p class="hero-claim">Tu departamento de comunicaci&oacute;n, sin contratar a nadie.</p>
 
                     <p class="hero-subtitle">Hacemos visible todo lo que hay detr&aacute;s de tu trabajo &mdash; tu proceso, tus materiales, tu saber hacer &mdash; y te ayudamos a mejorar tu circularidad. Con un sistema pensado para que lo cuentes en minutos, no en horas.</p>
 
@@ -371,8 +373,8 @@
                         <p>Si sigues adelante, creamos juntos tu hoja de ruta y tu sistema de contenido. T&uacute; siempre al mando.</p>
                     </div>
                 </div>
-                <div class="journey-step fade-in">
-                    <div class="journey-dot">&hearts;</div>
+                <div class="journey-step journey-step--result fade-in">
+                    <div class="journey-dot">&check;</div>
                     <div class="journey-card">
                         <h4>Comunicas con autonom&iacute;a</h4>
                         <p>Tienes las herramientas, el sistema y el acompa&ntilde;amiento para comunicar tu valor de forma constante y aut&eacute;ntica.</p>
@@ -417,24 +419,17 @@
         </div>
     </section>
 
-    <!-- TESTIMONIAL -->
+    <!-- SOCIAL PROOF -->
     <section class="impulso-section impulso-section-cream">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Caso real</span>
-                <h2>De primera mano</h2>
+                <span class="section-label">Lo que buscamos</span>
+                <h2>El resultado que perseguimos</h2>
             </div>
 
             <div class="testimonial-card fade-in">
-                <p class="testimonial-text">Sab&iacute;a que mi trabajo ten&iacute;a valor, pero no sab&iacute;a c&oacute;mo contarlo sin que pareciera artificial. Con el Diagn&oacute;stico descubr&iacute; que ya ten&iacute;a la historia &mdash; solo necesitaba ordenarla. Y con el sistema que me montaron, ahora tardo 15 minutos en preparar lo que antes me llevaba toda una tarde.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">B</div>
-                    <div class="author-info">
-                        <strong>Blanca</strong>
-                        <span>Artesana textil, &Aacute;vila</span>
-                    </div>
-                </div>
-                <p class="testimonial-note">* Caso piloto del programa Impulso 3D. Los resultados pueden variar seg&uacute;n el proyecto.</p>
+                <p class="testimonial-text">Que tardes 15 minutos en preparar lo que antes te llevaba toda una tarde. Que tu contenido suene a ti, no a una m&aacute;quina. Y que puedas dedicar m&aacute;s horas a lo que te apasiona &mdash; tu oficio &mdash; sin dejar de contarlo al mundo.</p>
+                <p class="testimonial-note">Estamos en fase piloto con nuestros primeros artesanos. Los resultados reales los compartiremos aqu&iacute; cuando los tengamos.</p>
             </div>
         </div>
     </section>
@@ -474,7 +469,7 @@
                         <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>
                     <div class="faq-answer">
-                        <p>No. Parte del servicio es una sesi&oacute;n de formaci&oacute;n donde te ense&ntilde;amos a usar tu asistente de contenido paso a paso. Si sabes usar WhatsApp, puedes usarlo. Adem&aacute;s, con el soporte mensual tienes ayuda continua siempre que la necesites.</p>
+                        <p>No. Con el Impulso 3D trabajas con plantillas en Canva y f&oacute;rmulas de texto en un documento &mdash; si sabes copiar y pegar, puedes hacerlo. Con el Impulso 3D Completo, el asistente digital funciona como un chat: le cuentas qu&eacute; quieres comunicar y te prepara el borrador. Si sabes usar WhatsApp, puedes usarlo. En ambos casos, incluimos una sesi&oacute;n de formaci&oacute;n para que arranques con confianza.</p>
                     </div>
                 </div>
 
@@ -552,12 +547,39 @@
   "name": "Impulso 3D",
   "provider": {
     "@type": "Organization",
-    "name": "Oficios Circulares"
+    "name": "Oficios Circulares",
+    "url": "https://www.oficioscirculares.com"
   },
   "areaServed": "ES",
-  "serviceType": "Consulting",
-  "offers": "Desde 90€ (Diagnóstico) hasta 895€ (Impulso 3D Completo)",
-  "url": "https://www.oficioscirculares.com/impulso-3d"
+  "serviceType": "Marketing Consulting",
+  "url": "https://www.oficioscirculares.com/impulso-3d",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios Impulso 3D",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Diagnóstico 3D",
+        "price": "90",
+        "priceCurrency": "EUR",
+        "description": "Sesión de diagnóstico + informe visual de 6-8 páginas"
+      },
+      {
+        "@type": "Offer",
+        "name": "Impulso 3D",
+        "price": "495",
+        "priceCurrency": "EUR",
+        "description": "Kit completo de comunicación con fórmulas, plantillas y Manual de Marca"
+      },
+      {
+        "@type": "Offer",
+        "name": "Impulso 3D Completo",
+        "price": "895",
+        "priceCurrency": "EUR",
+        "description": "Sistema completo con asistente digital personalizado + materiales + formación"
+      }
+    ]
+  }
 }, null, 2) %>
 </script>
 
