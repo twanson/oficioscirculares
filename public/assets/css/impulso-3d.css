@@ -661,6 +661,7 @@
 .price-card.featured {
     border-color: var(--terracota);
     box-shadow: 0 8px 32px rgba(209, 123, 73, 0.15);
+    overflow: visible;
 }
 
 .price-card.featured:hover {
