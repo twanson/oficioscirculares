@@ -669,8 +669,9 @@
 
 .price-badge {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--terracota);
     color: #fff;
     font-size: 0.72rem;
@@ -679,6 +680,7 @@
     border-radius: 100px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .price-card-header {
