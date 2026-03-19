@@ -986,9 +986,20 @@
 }
 
 .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    margin-top: 1.25rem;
+    text-align: right;
+}
+
+.testimonial-name {
+    font-weight: 600;
+    color: var(--primary-dark, #1F4B3F);
+    margin-bottom: 0.15rem;
+    font-size: 1rem;
+}
+
+.testimonial-role {
+    font-size: 0.9rem;
+    color: var(--text-muted, #6B7280);
 }
 
 .author-avatar {
