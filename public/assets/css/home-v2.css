@@ -96,7 +96,7 @@ html, body {
 .hero-v2-content {
     position: relative;
     z-index: 10;
-    max-width: 740px;
+    max-width: 760px;
 }
 
 .hero-v2-content .glass-card {
