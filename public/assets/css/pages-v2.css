@@ -604,6 +604,14 @@ h2 em {
   gap: 28px;
 }
 
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
 .impulso-3d .price-card,
 .price-card {
   display: flex !important;
