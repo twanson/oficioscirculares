@@ -6,12 +6,16 @@
     <title><%= oficio.titulo %></title>
     <meta name="description" content="<%= oficio.subtitulo.replace(/"/g, '&quot;').substring(0, 160) %>">
     <link rel="canonical" href="https://www.oficioscirculares.com/oficios/<%= oficio.slug %>">
+    <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="<%= oficio.titulo %>">
     <meta property="og:description" content="<%= oficio.subtitulo.substring(0, 200) %>">
-    <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png">
+    <meta property="og:image" content="https://www.oficioscirculares.com<%= oficio.hero_image %>">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1280">
+    <meta property="og:image:alt" content="<%= oficio.sector %> — Oficios Circulares">
     <meta property="og:url" content="https://www.oficioscirculares.com/oficios/<%= oficio.slug %>">
     <meta property="og:site_name" content="Oficios Circulares">
 
@@ -19,7 +23,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<%= oficio.titulo %>">
     <meta name="twitter:description" content="<%= oficio.subtitulo.substring(0, 200) %>">
-    <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png">
+    <meta name="twitter:image" content="https://www.oficioscirculares.com<%= oficio.hero_image %>">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
