@@ -1055,6 +1055,14 @@ a:focus-visible {
   justify-content: center !important;
 }
 
+/* Hide "ver ejemplo" / "ver mini-caso" buttons until PDFs are ready */
+.page-service .hero-ctas .btn[style*="display: none"],
+.page-service .hero-ctas .btn[style*="display:none"],
+.page-service .cta-final .hero-ctas .btn[style*="display: none"],
+.page-service .cta-final .hero-ctas .btn[style*="display:none"] {
+  display: none !important;
+}
+
 .page-service .btn-primary,
 .page-service .btn.btn-primary,
 .page-service .btn-primary.btn-large,
