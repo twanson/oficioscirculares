@@ -1,9 +1,9 @@
 <%- include('partials/head-meta', {
-    title: 'Contacto — Servicios 3D | Oficios Circulares',
-    description: 'Cuéntanos en 1–2 minutos qué necesitas. Te proponemos 2–3 huecos y un primer paso claro.',
+    title: 'Hablemos de tu proyecto | Oficios Circulares',
+    description: 'Cuéntanos qué tienes en mente. Te proponemos un primer paso claro para tu proyecto artesanal o circular.',
     canonical: '/contacto',
     ogImage: 'https://www.oficioscirculares.com/img/general/og-contacto.webp',
-    ogImageAlt: 'Contacto Oficios Circulares - Servicios 3D'
+    ogImageAlt: 'Contacto Oficios Circulares — Hablemos de tu proyecto'
 }) %>
 <%- include('partials/header') %>
 
@@ -11,14 +11,15 @@
     <section class="contacto-section" aria-labelledby="contacto-title">
         <div class="container">
             <div class="contacto-header">
-                <h1 id="contacto-title" class="contacto-title">Contacto — Servicios 3D</h1>
-                <p class="contacto-subtitle">Cuéntanos en 1–2 minutos qué necesitas. Te propongo 2–3 huecos y te envío un primer paso claro.</p>
+                <span class="contacto-label">Contacto</span>
+                <h1 id="contacto-title" class="contacto-title">Hablemos de tu proyecto</h1>
+                <p class="contacto-subtitle">Cuéntanos qué tienes en mente y te proponemos un primer paso claro.</p>
             </div>
             
             <!-- Selector de servicio si no hay service en query params -->
             <div id="service-selector" class="service-selector" style="display: none;">
                 <div class="selector-content">
-                    <h2 class="selector-title">Elige un servicio para continuar:</h2>
+                    <h2 class="selector-title">¿Sobre qué te gustaría hablar?</h2>
                     <div class="selector-buttons">
                         <a href="/contacto?service=diagnostico-3d" 
                            class="btn btn-outline"
@@ -61,54 +62,72 @@
 </main>
 
 <style>
-/* Estilos específicos para la página de contacto */
+/* Estilos página de contacto — v2 alineado con Impulso 3D */
 .page-contacto {
-    background: var(--blanco-calido);
+    background: var(--surface, #fbf9f8);
     min-height: 100vh;
 }
 
 .contacto-section {
-    padding: 60px 0 40px;
+    padding: 100px 0 80px;
+}
+
+.contacto-section .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
 }
 
 .contacto-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
+}
+
+.contacto-label {
+    display: inline-block;
+    font-family: var(--font-body, 'Manrope', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--secondary, #934a1c);
+    margin-bottom: 12px;
 }
 
 .contacto-title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-family: var(--font-headline, 'Newsreader', serif);
+    font-size: clamp(2rem, 5vw, 2.8rem);
     font-weight: 700;
-    color: var(--verde-profundo);
+    color: var(--primary, #023429);
     margin-bottom: 16px;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
 .contacto-subtitle {
+    font-family: var(--font-body, 'Manrope', sans-serif);
     font-size: 1.1rem;
-    color: var(--negro-verdoso);
-    max-width: 600px;
+    color: var(--primary, #023429);
+    max-width: 520px;
     margin: 0 auto;
-    line-height: 1.5;
-    opacity: 0.9;
+    line-height: 1.6;
+    opacity: 0.75;
 }
 
 .service-selector {
     background: white;
-    border: 1px solid #e5e7eb;
+    border: none;
     border-radius: 16px;
-    padding: 32px;
+    padding: 36px 32px;
     margin-bottom: 32px;
     text-align: center;
-    box-shadow: 0 4px 16px rgba(31, 75, 63, 0.08);
+    box-shadow: 0 4px 24px rgba(31, 75, 63, 0.08);
 }
 
 .selector-title {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-family: var(--font-headline, 'Newsreader', serif);
+    font-size: 1.3rem;
     font-weight: 600;
-    color: var(--verde-profundo);
+    color: var(--primary, #023429);
     margin-bottom: 24px;
 }
 
@@ -121,13 +140,15 @@
 
 .selector-buttons .btn {
     min-width: 160px;
+    font-family: var(--font-body, 'Manrope', sans-serif);
 }
 
 .tally-container {
-    background: var(--verde-profundo);
+    background: var(--surface, #fbf9f8);
+    border: 1px solid rgba(31, 75, 63, 0.08);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(31, 75, 63, 0.12);
+    box-shadow: 0 4px 24px rgba(31, 75, 63, 0.06);
     min-height: 600px;
     padding: 0;
 }
@@ -139,7 +160,6 @@
     background: transparent;
 }
 
-/* Estilos para mejorar la apariencia del formulario Tally */
 .tally-container iframe[data-tally-src] {
     border-radius: 16px;
 }
@@ -147,24 +167,24 @@
 /* Responsive */
 @media (max-width: 768px) {
     .contacto-section {
-        padding: 60px 0 40px;
+        padding: 80px 0 60px;
     }
-    
+
     .service-selector {
-        padding: 24px 16px;
+        padding: 28px 20px;
         margin-bottom: 24px;
     }
-    
+
     .selector-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .selector-buttons .btn {
         width: 100%;
         max-width: 280px;
     }
-    
+
     .tally-container iframe {
         height: 800px;
     }

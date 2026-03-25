@@ -360,6 +360,14 @@
                                                     </div>
                                                     <script defer>
                                                         (function () {
+                                                            // Append page_url to Tally embed before loading
+                                                            var iframe = document.querySelector('#tally-embed iframe[data-tally-src]');
+                                                            if (iframe) {
+                                                                var src = iframe.getAttribute('data-tally-src');
+                                                                src += '&page_url=' + encodeURIComponent(window.location.href);
+                                                                iframe.setAttribute('data-tally-src', src);
+                                                            }
+
                                                             var s = document.createElement('script');
                                                             s.src = 'https://tally.so/widgets/embed.js';
                                                             s.onload = function () {
