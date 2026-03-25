@@ -1729,7 +1729,10 @@ a:focus-visible {
   pointer-events: none !important;
 }
 
-.page-service .cta-final .section-title.enhanced {
+.page-service .cta-final .section-title.enhanced,
+.page-service.diag3d .cta-final h2.section-title.enhanced,
+.page-service.roadmap3d .cta-final h2.section-title.enhanced,
+.page-service.sprint3d .cta-final h2.section-title.enhanced {
   color: #ffffff !important;
   font-size: clamp(2rem, 4vw, 2.5rem) !important;
   position: relative !important;
@@ -1774,6 +1777,12 @@ a:focus-visible {
   color: #ffffff !important;
   border: 2px solid #ffffff !important;
   box-shadow: none !important;
+}
+
+/* --- STICKY CTA MOBILE — override btn colors for visibility --- */
+.sticky-cta-mobile .btn.btn-primary {
+  background: #fd9f6a !important;
+  color: #ffffff !important;
 }
 
 /* --- PLAN DE ACCIÓN HIGHLIGHT --- */
