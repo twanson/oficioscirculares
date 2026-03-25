@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= oficio.titulo %></title>
+    <meta name="description" content="<%= oficio.subtitulo.replace(/"/g, '&quot;').substring(0, 160) %>">
+    <link rel="canonical" href="https://www.oficioscirculares.com/oficios/<%= oficio.slug %>">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= oficio.titulo %>">
+    <meta property="og:description" content="<%= oficio.subtitulo.substring(0, 200) %>">
+    <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png">
+    <meta property="og:url" content="https://www.oficioscirculares.com/oficios/<%= oficio.slug %>">
+    <meta property="og:site_name" content="Oficios Circulares">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= oficio.titulo %>">
+    <meta name="twitter:description" content="<%= oficio.subtitulo.substring(0, 200) %>">
+    <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Oficios Circulares — <%= oficio.sector %>",
+        "description": "<%= oficio.subtitulo.replace(/"/g, '\\"') %>",
+        "url": "https://www.oficioscirculares.com/oficios/<%= oficio.slug %>",
+        "provider": {
+            "@type": "Organization",
+            "name": "Oficios Circulares",
+            "url": "https://www.oficioscirculares.com"
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "ES"
+        },
+        "serviceType": "Comunicación y Estrategia Circular para <%= oficio.sector %>"
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
+    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260325c">
+    <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260325d">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/logodegraoscuro.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W7CH52J6');</script>
+    <!-- End Google Tag Manager -->
+
+    <script>document.documentElement.classList.remove('no-js');</script>
+    <script src="/assets/js/traffic-source-detector.js" async></script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7CH52J6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <%- include('partials/header') %>
+
+    <!-- ═══════════════════════════════════
+         HERO — Single image + glass card (ADAPTADO A VERTICAL)
+         ═══════════════════════════════════ -->
+    <section class="hero-v2" id="hero">
+        <div class="hero-v2-bg">
+            <img class="hero-slide active" src="<%= oficio.hero_image %>"
+                 alt="<%= oficio.sector %> — Oficios Circulares"
+                 style="object-position: center"
+                 loading="eager">
+            <div class="hero-v2-gradient"></div>
+        </div>
+
+        <div class="hero-v2-content">
+            <div class="glass-card">
+                <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                <span class="hero-v2-badge"><%= oficio.badge %></span>
+                <h1>
+                    <%- oficio.h1 %>
+                </h1>
+                <p>
+                    <%= oficio.subtitulo %>
+                </p>
+                <div class="hero-v2-ctas">
+                    <a href="#contacto" class="btn btn-primary">Nuestro Método &rarr;</a>
+                    <a href="#beneficios" class="btn-ghost">Qué consigues</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         BENEFICIOS — 3 value propositions (ADAPTADO A VERTICAL)
+         ═══════════════════════════════════ -->
+    <section class="cards-v2" id="beneficios">
+        <div class="container">
+            <div class="cards-v2-header">
+                <h2>Qué consigues</h2>
+                <p>Estrategia, sistema y acompañamiento para hacer crecer tu proyecto de <%= oficio.sector_lower %>.</p>
+            </div>
+
+            <div class="cards-v2-grid">
+                <% oficio.cards.forEach(function(card, i) { %>
+                <div class="card-v2 card-v2--<%= card.variante %>">
+                    <% if (card.variante === 'dark') { %><div class="paper-texture" style="position:absolute;inset:0;"></div><% } %>
+                    <div class="card-v2-icon">
+                        <% if (i === 0) { %>
+                        <!-- Megaphone / communication icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+                        <% } else if (i === 1) { %>
+                        <!-- Leaf icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                        <% } else { %>
+                        <!-- Clock icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <% } %>
+                    </div>
+                    <h3><%= card.titulo %></h3>
+                    <p><%= card.texto %></p>
+                    <a href="#servicios" class="card-v2-link">Ver cómo funciona &rarr;</a>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SERVICIOS — Featured + Impulso + Comunidad (IGUAL QUE HOME)
+         ═══════════════════════════════════ -->
+    <section class="servicios-v2" id="servicios">
+        <div class="container">
+            <div class="servicios-v2-header">
+                <h2>Metodología <em>Círculo de Valor 3D</em></h2>
+                <p>Diagnosticar, Diseñar y Difundir. Proyectos que regeneran el entorno y dignifican el trabajo con propósito.</p>
+            </div>
+
+            <div class="servicios-v2-layout">
+                <!-- ROW 1: Consultoría featured (2/3) + Impulso 3D (1/3) -->
+                <div class="servicio-featured">
+                    <div class="servicio-featured-inner">
+                        <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                        <span class="servicio-featured-label">Consultoría Estratégica</span>
+                        <h3>Diseñamos tu hoja de ruta sostenible</h3>
+                        <p>
+                            Analizamos tu proyecto y diseñamos una estrategia circular y rentable, paso a paso.
+                        </p>
+                        <div class="servicio-featured-ctas">
+                            <a href="/servicios/diagnostico-3d" class="btn-servicio-primary">Agendar Diagnóstico &rarr;</a>
+                            <span class="servicio-featured-note serif-italic">Cupos limitados por trimestre</span>
+                        </div>
+                    </div>
+                    <div class="servicio-featured-img">
+                        <img src="/assets/images/yunque 3.jpg"
+                             alt="Artesano trabajando en el yunque"
+                             loading="lazy">
+                        <div class="servicio-featured-quote glass-card">
+                            <p class="quote-text">
+                                "El puente entre el saber ancestral y las necesidades del presente."
+                            </p>
+                            <p class="quote-author">— Jose, Fundador</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="servicio-impulso">
+                    <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                    <div class="servicio-card-icon servicio-impulso-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v16h16"/><path d="m5 19 6-6"/><path d="m2 6 3-3 3 3"/><path d="m18 16 3 3-3 3"/></svg>
+                    </div>
+                    <h4>Impulso 3D</h4>
+                    <p class="servicio-impulso-tagline">Menos tiempo en difusión. Más tiempo en tu oficio.</p>
+                    <p>
+                        Un sistema de comunicación a tu medida. Te acompañamos hasta que funcione solo.
+                    </p>
+                    <a href="/impulso-3d" class="btn-servicio-impulso">Descubrir Impulso 3D &rarr;</a>
+                </div>
+
+                <!-- ROW 2: Comunidad (full width, compact) -->
+                <div class="servicio-comunidad">
+                    <div class="servicio-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div>
+                        <h4>Comunidad y Recursos</h4>
+                        <p>Recursos, formación y conexiones entre proyectos con propósito.</p>
+                    </div>
+                    <a href="/recursos" class="servicio-card-link">Explorar &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         COMUNIDAD — Testimonial cards (IGUAL QUE HOME)
+         ═══════════════════════════════════ -->
+    <section class="comunidad-v2" id="comunidad">
+        <div class="container">
+            <div class="comunidad-v2-header">
+                <h2>Comunidad</h2>
+                <p class="comunidad-v2-sub">Historias de transformación real.</p>
+            </div>
+
+            <div class="comunidad-v2-grid">
+                <div class="testimonio-v2">
+                    <div class="testimonio-v2-img">
+                        <img src="/assets/images/Perfil artesana experimentada.png"
+                             alt="María, ceramista rural"
+                             loading="lazy">
+                    </div>
+                    <h4>María</h4>
+                    <span class="testimonio-role">Ceramista rural</span>
+                    <p class="testimonio-quote">"Me ayudaron a entender que lo que hacía intuitivamente tenía un valor enorme. Ahora sé comunicarlo y mis clientes lo valoran."</p>
+                </div>
+
+                <div class="testimonio-v2">
+                    <div class="testimonio-v2-img">
+                        <img src="/assets/images/artesano innovador.png"
+                             alt="Javier, carpintero innovador"
+                             loading="lazy">
+                    </div>
+                    <h4>Javier</h4>
+                    <span class="testimonio-role">Carpintero innovador</span>
+                    <p class="testimonio-quote">"Encontré la estrategia que me faltaba para unir mi pasión por la innovación con mi compromiso ambiental."</p>
+                </div>
+
+                <div class="testimonio-v2">
+                    <div class="testimonio-v2-img">
+                        <img src="/assets/images/perfil_diseñadora_consciente .png"
+                             alt="Lucía, diseñadora consciente"
+                             loading="lazy">
+                    </div>
+                    <h4>Lucía</h4>
+                    <span class="testimonio-role">Diseñadora consciente</span>
+                    <p class="testimonio-quote">"Ya no me siento sola en este camino. La comunidad me ha dado herramientas, contactos y la confianza para escalar sin perder mis valores."</p>
+                </div>
+            </div>
+
+            <p class="comunidad-v2-disclaimer">
+                <em>Testimonios inspirados en experiencias reales de proyectos en proceso.</em>
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         CTA FINAL (ADAPTADO A VERTICAL)
+         ═══════════════════════════════════ -->
+    <section class="cta-v2" id="contacto">
+        <div class="cta-v2-bg">
+            <img src="/assets/images/workshop_tools.jpg"
+                 alt="Herramientas artesanales"
+                 loading="lazy">
+            <div class="cta-v2-overlay"></div>
+        </div>
+
+        <div class="cta-v2-content">
+            <h2><%= oficio.cta_final_h2.replace(/,/, ',<br>') %></h2>
+            <p>
+                <%= oficio.cta_final_texto %>
+            </p>
+            <div class="cta-v2-buttons">
+                <a href="https://tally.so/r/mOyV98" target="_blank" class="btn-cta-primary">
+                    Únete a Oficios Circulares
+                </a>
+                <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="btn-cta-secondary">
+                    Agenda una llamada estratégica
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         RELATED PAGES — Internal linking SEO
+         ═══════════════════════════════════ -->
+    <% if (oficio.related && oficio.related.length > 0 && allOficios) { %>
+    <section class="cards-v2" id="related" style="background: var(--surface-container-low);">
+        <div class="container">
+            <div class="cards-v2-header">
+                <h2>Otros oficios que acompañamos</h2>
+                <p>Cada oficio tiene su lenguaje. Conoce cómo trabajamos con otros artesanos.</p>
+            </div>
+
+            <div class="cards-v2-grid">
+                <% oficio.related.forEach(function(relSlug) {
+                    var rel = allOficios.find(function(o) { return o.slug === relSlug; });
+                    if (rel) { %>
+                <a href="/oficios/<%= rel.slug %>" class="card-v2 card-v2--light" style="text-decoration:none;">
+                    <h3 style="font-size:1.3rem;"><%= rel.sector %></h3>
+                    <p><%= rel.subtitulo.substring(0, 120) %>...</p>
+                    <span class="card-v2-link">Descubrir &rarr;</span>
+                </a>
+                <% } }); %>
+            </div>
+        </div>
+    </section>
+    <% } %>
+
+    <%- include('partials/footer') %>
+
+    <!-- Scripts -->
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/cookie-banner.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.scrollTo(0, 0);
+
+            // ── Intersection Observer for scroll animations ──
+            const animatedEls = document.querySelectorAll('.card-v2, .testimonio-v2, .servicio-featured, .servicio-impulso, .servicio-comunidad');
+            if ('IntersectionObserver' in window && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                animatedEls.forEach(function(el) {
+                    el.classList.add('anim-hidden');
+                });
+
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('anim-hidden');
+                            entry.target.classList.add('anim-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                animatedEls.forEach(function(el) { observer.observe(el); });
+            }
+        });
+
+        if (window.history.scrollRestoration) {
+            window.history.scrollRestoration = 'manual';
+        }
+
+        // GA4 Event Tracking
+        function trackCTAClick(service) {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'click_cta',
+                cta_offer: service,
+                cta_location: 'vertical-<%= oficio.slug %>'
+            });
+        }
+    </script>
+</body>
+</html>

@@ -609,6 +609,25 @@ app.post('/api/renew-access', rateLimitMiddleware, async (req, res) => {
 
 app.use(express.static('public'));
 
+// ── SEO Programático: Landing pages por verticales de oficios ──
+const oficiosData = require('./data/oficios-verticales.json');
+
+app.get('/oficios/:slug', (req, res) => {
+  const oficio = oficiosData.find(o => o.slug === req.params.slug);
+  if (!oficio) {
+    return res.status(404).send('Página no encontrada');
+  }
+  res.render('oficio-vertical', {
+    oficio: oficio,
+    allOficios: oficiosData
+  });
+});
+
+// Índice de todos los oficios (opcional, para navegación)
+app.get('/oficios', (req, res) => {
+  res.redirect(301, '/#servicios');
+});
+
 // Servir página principal como EJS template
 app.get('/', (req, res) => {
   res.render('index');
