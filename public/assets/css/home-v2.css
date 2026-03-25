@@ -344,7 +344,7 @@ html, body {
    SECTION 3: SERVICIOS V2 (Featured + Sidebar)
    ══════════════════════════════════════════ */
 .servicios-v2 {
-    padding: 96px 48px;
+    padding: 72px 48px;
     background: var(--surface-container-low);
     position: relative;
     overflow: hidden;
@@ -641,7 +641,7 @@ html, body {
    SECTION 4: COMUNIDAD V2 (Testimonials)
    ══════════════════════════════════════════ */
 .comunidad-v2 {
-    padding: 96px 48px;
+    padding: 72px 48px;
     background: var(--surface-container-low);
 }
 
