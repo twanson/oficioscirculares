@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oficios Circulares — Estrategia y red para proyectos con propósito</title>
     <meta name="description" content="Te ayudamos a potenciar tu proyecto, comunicarlo con claridad y avanzar hacia un modelo más circular y sostenible.">
-    
+
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Oficios Circulares — Estrategia y red para proyectos con propósito">
@@ -13,25 +13,25 @@
     <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png">
     <meta property="og:url" content="https://www.oficioscirculares.com">
     <meta property="og:site_name" content="Oficios Circulares">
-    
+
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oficios Circulares — Estrategia y red para proyectos con propósito">
     <meta name="twitter:description" content="Te ayudamos a potenciar tu proyecto, comunicarlo con claridad y avanzar hacia un modelo más circular y sostenible.">
     <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/styles.css?v=HOVER_FINAL_V11">
-    <link rel="stylesheet" href="/assets/css/animations.css">
-    
+    <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
+    <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_MINIMAL_1">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/images/logodegraoscuro.png">
-    
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -39,954 +39,299 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-W7CH52J6');</script>
     <!-- End Google Tag Manager -->
-    
-    <!-- Remove no-js class as soon as JavaScript is available -->
-    <script>document.documentElement.classList.remove('no-js');</script>
 
-    <!-- Traffic Source Detector -->
+    <script>document.documentElement.classList.remove('no-js');</script>
     <script src="/assets/js/traffic-source-detector.js" async></script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7CH52J6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
+
     <!-- Navigation -->
     <%- include('partials/header') %>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-background">
-            <div class="hero-overlay"></div>
-            <div class="hero-slider">
-                <div class="slide active">
-                    <img src="/assets/images/artesana blanco y negro.jpg" alt="Artesana enfocada en su proceso creativo" class="hero-image">
-                </div>
-                <div class="slide">
-                    <img src="/assets/images/wood_texture.jpg" alt="Textura natural de madera sostenible" class="hero-image">
-                </div>
-                <div class="slide">
-                    <img src="/assets/images/Diseñadora_taller_Textil.jpg" alt="Diseñadora trabajando en taller textil" class="hero-image">
-                </div>
-                <div class="slide">
-                    <img src="/assets/images/Herramientas moderno-301703.jpg" alt="Herramientas artesanales modernas" class="hero-image">
-                </div>
-                <div class="slide">
-                    <img src="/assets/images/artesana cermica.jpg" alt="Ceramista trabajando en su taller" class="hero-image">
-                </div>
-                <div class="slide">
-                    <img src="/assets/images/puliendo madera.jpg" alt="Artesano puliendo madera a mano" class="hero-image">
-                </div>
-            </div>
+    <!-- ═══════════════════════════════════
+         HERO — Single image + glass card
+         ═══════════════════════════════════ -->
+    <section class="hero-v2" id="hero">
+        <div class="hero-v2-bg">
+            <img class="hero-slide active" src="/assets/images/artesana blanco y negro.jpg"
+                 alt="Artesana enfocada en su proceso creativo"
+                 loading="eager">
+            <img class="hero-slide" src="/assets/images/wood_texture.jpg"
+                 alt="Textura de madera natural"
+                 loading="eager">
+            <img class="hero-slide" src="/assets/images/Diseñadora_taller_Textil.jpg"
+                 alt="Diseñadora en su taller textil"
+                 loading="eager">
+            <img class="hero-slide" src="/assets/images/Herramientas moderno-301703.jpg"
+                 alt="Herramientas de oficio modernas"
+                 loading="eager">
+            <img class="hero-slide" src="/assets/images/artesana cermica.jpg"
+                 alt="Artesana trabajando la cerámica"
+                 loading="eager">
+            <img class="hero-slide" src="/assets/images/puliendo madera.jpg"
+                 alt="Artesano puliendo madera"
+                 loading="eager">
+            <div class="hero-v2-gradient"></div>
         </div>
-        
-        <div class="hero-content">
-            <div class="container">
-                <h1 class="hero-title">
-                    <span class="title-line">Tu oficio tiene valor.</span>
-                    <span class="title-line">Y también el <span class="highlight">impacto</span></span>
-                    <span class="title-line">que generas.</span>
-                    <div class="circularity-symbol"></div>
+
+        <div class="hero-v2-content">
+            <div class="glass-card">
+                <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                <span class="hero-v2-badge">Economía circular y comunicación para oficios</span>
+                <h1>
+                    Tu oficio tiene<br>
+                    <em>valor</em>
                 </h1>
-                <p class="hero-subtitle">
-                    Te ayudamos a potenciar tu proyecto, comunicarlo con <span class="highlight">claridad</span> y avanzar hacia un modelo más <span class="highlight">circular</span>, consciente y <span class="highlight">sostenible</span>.
+                <p>
+                    Potenciamos tu proyecto, su comunicación y su camino hacia la circularidad.
                 </p>
-                <div class="hero-ctas">
-                    <a href="#contacto" class="btn btn-primary">Únete a la Red</a>
-                    <a href="#que-es" class="btn btn-secondary">Conoce la Metodología</a>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- ¿Qué es Oficios Circulares? -->
-    <section class="about" id="que-es">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title enhanced">Donde los oficios y proyectos con propósito encuentran su futuro</h2>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-intro">
-                    <div class="about-text">
-                        <p class="lead">En Oficios Circulares creemos que los oficios artesanales y proyectos con propósito deben ocupar un <span class="highlight">lugar central</span> en la nueva economía: más conectada con el territorio, las personas y el planeta. Por eso acompañamos a marcas, talleres y proyectos que los impulsan a transformar su práctica desde dentro, fortaleciendo la <span class="highlight">sostenibilidad</span>, la colaboración y una comunicación con <span class="highlight">propósito</span>.</p>
-                    </div>
-                    <div class="about-video">
-                        <div class="video-container">
-                            <iframe 
-                                src="https://www.youtube.com/embed/FJELmTVQiEw?start=47" 
-                                title="Oficios Circulares - Presentación" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Visión estratégica</h3>
-                        <p>No solo enseñamos materiales sostenibles, ayudamos a repensar todo el modelo</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">💬</div>
-                        <h3>Comunicación honesta</h3>
-                        <p>Hablamos de circularidad sin greenwashing, educamos y conectamos</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🔁</div>
-                        <h3>Enfoque sistémico</h3>
-                        <p>Creamos redes de intercambio, inspiración y acción</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🌍</div>
-                        <h3>Impacto real</h3>
-                        <p>Acción local con perspectiva global</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="about-quote-section">
-                <blockquote class="manifesto-quote">
-                    "Somos el puente entre el saber ancestral y las necesidades del presente."
-                </blockquote>
-                <div class="quote-image">
-                    <img src="/assets/images/yunque 3.jpg" alt="Artesano forjando en el yunque" class="about-img-small">
+                <div class="hero-v2-ctas">
+                    <a href="#contacto" class="btn btn-primary">Únete a la Red &rarr;</a>
+                    <a href="#servicios" class="btn-ghost">Nuestro Método</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ¿Para quién? -->
-    <section class="profiles" id="para-quien">
+    <!-- ═══════════════════════════════════
+         BENEFICIOS — 3 value propositions
+         ═══════════════════════════════════ -->
+    <section class="cards-v2" id="beneficios">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">¿Te reconoces en alguna de estas historias?</h2>
+            <div class="cards-v2-header">
+                <h2>Qué consigues</h2>
+                <p>Estrategia, sistema y acompañamiento para crecer sin perderte.</p>
             </div>
-            
-            <div class="profiles-grid">
-                <div class="profile-card">
-                    <div class="profile-image">
-                        <div class="profile-avatar">
-                            <img src="/assets/images/Perfil artesana experimentada.png" alt="Artesana ceramista experimentada" class="profile-photo">
-                        </div>
-                    </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">La Artesana Experimentada</h3>
-                        <p class="profile-example">Marta, 55 años, ceramista</p>
-                        <p class="profile-description">
-                            Dominas tu oficio con maestría, pero sientes que tu proyecto necesita dar un paso más. Te abruma lo digital y te cuesta explicar el valor sostenible de lo que haces, aunque lo vivas cada día.
-                        </p>
-                        <blockquote class="profile-quote">
-                            "Yo ya era circular sin saberlo, pero no sabía cómo explicarlo."
-                        </blockquote>
-                    </div>
+
+            <div class="cards-v2-grid">
+                <div class="card-v2 card-v2--dark">
+                    <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                    <div class="card-v2-icon"><!-- Megaphone / communication icon --><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+                    <h3>Comunicación que fluye</h3>
+                    <p>Un sistema a tu medida para comunicar sin improvisar ni perder horas de taller.</p>
+                    <a href="#servicios" class="card-v2-link">Ver cómo funciona &rarr;</a>
                 </div>
-                
-                <div class="profile-card">
-                    <div class="profile-image">
-                        <div class="profile-avatar">
-                            <img src="/assets/images/artesano innovador.png" alt="Carpintero innovador trabajando" class="profile-photo">
-                        </div>
-                    </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">El Maker Moderno</h3>
-                        <p class="profile-example"><br>Javier, 32 años, carpintero</p>
-                        <p class="profile-description">
-                            Te apasiona unir tecnología y tradición. Sabes que la sostenibilidad importa, pero aún estás buscando cómo aplicarla con coherencia a tu forma de producir, contar y conectar.
-                        </p>
-                        <blockquote class="profile-quote">
-                            "Tengo las herramientas, pero necesito la estrategia."
-                        </blockquote>
-                    </div>
+
+                <div class="card-v2 card-v2--light">
+                    <div class="card-v2-icon"><!-- Lucide leaf icon --><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div>
+                    <h3>Circularidad con sentido</h3>
+                    <p>Circularidad integrada en tu proceso y tu relato. No como etiqueta: como ventaja real.</p>
+                    <a href="#servicios" class="card-v2-link">Descubrir el método &rarr;</a>
                 </div>
-                
-                <div class="profile-card">
-                    <div class="profile-image">
-                        <div class="profile-avatar">
-                            <img src="/assets/images/perfil_diseñadora_consciente .png" alt="Joyera diseñadora consciente" class="profile-photo">
-                        </div>
-                    </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">La Diseñadora Consciente</h3>
-                        <p class="profile-example">Lucía, 28 años, joyera</p>
-                        <p class="profile-description">
-                            Tu marca nació con la sostenibilidad como pilar. Tu reto no es el "porqué", sino el "cómo": cómo ser rentable, cómo llegar a tu cliente ideal y cómo escalar sin perder tus valores.
-                        </p>
-                        <blockquote class="profile-quote">
-                            "Sé por qué lo hago, pero necesito saber cómo hacerlo mejor."
-                        </blockquote>
-                    </div>
-                </div>
-                
-                <div class="profile-card">
-                    <div class="profile-image">
-                        <div class="profile-avatar">
-                            <img src="/assets/images/David_gestor_Estrategico.png" alt="Consultor de marca estratégico" class="profile-photo">
-                        </div>
-                    </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">El Gestor Estratégico</h3>
-                        <p class="profile-example">David, 39 años, consultor</p>
-                        <p class="profile-description">
-                            Tienes un proyecto con impacto, pero sientes que no está comunicando todo su potencial. Buscas una estrategia más alineada con tus valores para ordenar, afinar y avanzar con coherencia.
-                        </p>
-                        <blockquote class="profile-quote">
-                            "Siento que tengo mucho que contar, pero no sé por dónde empezar."
-                        </blockquote>
-                    </div>
+
+                <div class="card-v2 card-v2--accent">
+                    <div class="card-v2-icon"><!-- Clock / time icon --><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                    <h3>Más tiempo para crear</h3>
+                    <p>Menos gestión, más taller. Tu energía de vuelta a tu oficio, tu pasión, tus manos.</p>
+                    <a href="/impulso-3d" class="card-v2-link">Conocer Impulso 3D &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Lo que ofrecemos -->
-    <section class="services" id="ofrecemos">
+    <!-- ═══════════════════════════════════
+         SERVICIOS — Featured + Impulso + Comunidad
+         ═══════════════════════════════════ -->
+    <section class="servicios-v2" id="servicios">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Cuatro pilares para <span class="highlight">transformar</span> tu proyecto con propósito</h2>
+            <div class="servicios-v2-header">
+                <h2>Metodología <em>Círculo de Valor 3D</em></h2>
+                <p>Diagnosticar, Diseñar y Difundir. Proyectos que regeneran el entorno y dignifican el trabajo con propósito.</p>
             </div>
-            
-            <div class="services-grid">
-                <a href="#contacto" class="service-card-link">
-                    <div class="service-card">
-                        <div class="service-icon">🤝</div>
-                        <h3 class="service-title">Comunidad</h3>
-                        <h4 class="service-subtitle">Conecta con tu tribu</h4>
-                        <p class="service-description">
-                            Conecta con personas y proyectos que viven su oficio con propósito. Comparte experiencias, crea alianzas reales y participa en encuentros donde nacen ideas, aprendizajes y colaboraciones circulares.
-                        </p>
-                        <ul class="service-features">
-                            <li>Directorio profesional de la red</li>
-                            <li>Eventos mensuales de networking</li>
-                            <li>Grupos de trabajo por especialidades</li>
-                            <li>Plataforma de intercambio de recursos</li>
-                        </ul>
-                    </div>
-                </a>
-                
-                <div class="service-card-link" id="consultoria-trigger">
-                    <div class="service-card featured" id="consultoria">
-                        <div class="service-icon">⚙️</div>
-                        <h3 class="service-title">Consultoría Estratégica</h3>
-                        <h4 class="service-subtitle">Metodología Círculo de Valor 3D</h4>
-                        <p class="service-description">
-                            Nuestro acompañamiento personalizado te guía a través de tres fases: Diagnosticar tu situación actual, Diseñar tu estrategia circular y Difundir tu nueva propuesta de valor.
-                        </p>
-                        <div class="methodology-steps">
-                            <div class="step">
-                                <span class="step-number">1</span>
-                                <div class="step-content">
-                                    <h5>Diagnosticar</h5>
-                                    <p>Analizamos materiales, procesos y comunicación actual</p>
-                                </div>
-                            </div>
-                            <div class="step">
-                                <span class="step-number">2</span>
-                                <div class="step-content">
-                                    <h5>Diseñar</h5>
-                                    <p>Co-creamos tu estrategia circular personalizada</p>
-                                </div>
-                            </div>
-                            <div class="step">
-                                <span class="step-number">3</span>
-                                <div class="step-content">
-                                    <h5>Difundir</h5>
-                                    <p>Desarrollamos tu narrativa de marca auténtica</p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Sección estática para iPad/tablets -->
-                        <div class="consultoria-cta-section" id="consultoria-cta-static">
-                            <h4 class="consultoria-cta-title">Conoce nuestros servicios</h4>
-                            <div class="consultoria-options-grid">
-                                <a href="/impulso-3d" class="consultoria-option consultoria-option-highlight">
-                                    <span class="consultoria-option-text">Impulso 3D</span>
-                                    <div class="consultoria-option-content">
-                                        <div class="service-icon">✨</div>
-                                        <h5>Trabajo solo/a o en un equipo pequeño</h5>
-                                        <p>Circularidad a pequeña escala. El Método 3D adaptado a tu oficio con IA.</p>
-                                    </div>
-                                    <span class="consultoria-btn">Descubrir Impulso 3D</span>
-                                </a>
-                                <a href="/servicios/diagnostico-3d" class="consultoria-option">
-                                    <span class="consultoria-option-text">Diagnóstico 3D</span>
-                                    <div class="consultoria-option-content">
-                                        <div class="service-icon">🔍</div>
-                                        <h5>Diagnóstico 3D</h5>
-                                        <p>Analizamos tu proyecto actual y identificamos oportunidades de mejora específicas para tu taller artesanal.</p>
-                                        <p><strong>Ideal para:</strong> Proyectos que necesitan claridad sobre sus oportunidades</p>
-                                    </div>
-                                    <span class="consultoria-btn">Solicitar Diagnóstico</span>
-                                </a>
-                                <a href="/servicios/roadmap-3d" class="consultoria-option">
-                                    <span class="consultoria-option-text">Roadmap 3D</span>
-                                    <div class="consultoria-option-content">
-                                        <div class="service-icon">🗺️</div>
-                                        <h5>Roadmap 3D</h5>
-                                        <p>Diseñamos una hoja de ruta estratégica personalizada para hacer crecer tu taller de forma sostenible.</p>
-                                        <p><strong>Ideal para:</strong> Proyectos que quieren un plan estructurado de 90 días</p>
-                                    </div>
-                                    <span class="consultoria-btn">Solicitar Roadmap</span>
-                                </a>
-                                <a href="/servicios/sprint-3d" class="consultoria-option">
-                                    <span class="consultoria-option-text">Sprint 3D</span>
-                                    <div class="consultoria-option-content">
-                                        <div class="service-icon">🚀</div>
-                                        <h5>Sprint 3D</h5>
-                                        <p>Te acompañamos intensivamente en la implementación de cambios concretos en tu taller.</p>
-                                        <p><strong>Ideal para:</strong> Quien necesita implementar algo específico ya</p>
-                                    </div>
-                                    <span class="consultoria-btn">Solicitar Sprint</span>
-                                </a>
-                            </div>
+            <div class="servicios-v2-layout">
+                <!-- ROW 1: Consultoría featured (2/3) + Impulso 3D (1/3) -->
+                <div class="servicio-featured">
+                    <div class="servicio-featured-inner">
+                        <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                        <span class="servicio-featured-label">Consultoría Estratégica</span>
+                        <h3>Diseñamos tu hoja de ruta sostenible</h3>
+                        <p>
+                            Analizamos tu proyecto y diseñamos una estrategia circular y rentable, paso a paso.
+                        </p>
+                        <div class="servicio-featured-ctas">
+                            <a href="/servicios/diagnostico-3d" class="btn-servicio-primary">Agendar Diagnóstico &rarr;</a>
+                            <span class="servicio-featured-note serif-italic">Cupos limitados por trimestre</span>
+                        </div>
+                    </div>
+                    <div class="servicio-featured-img">
+                        <img src="/assets/images/yunque 3.jpg"
+                             alt="Artesano trabajando en el yunque"
+                             loading="lazy">
+                        <div class="servicio-featured-quote glass-card">
+                            <p class="quote-text">
+                                "El puente entre el saber ancestral y las necesidades del presente."
+                            </p>
+                            <p class="quote-author">— Jose, Fundador</p>
                         </div>
                     </div>
                 </div>
-                
-                <a href="#contacto" class="service-card-link">
-                    <div class="service-card">
-                        <div class="service-icon">📢</div>
-                        <h3 class="service-title">Visibilidad</h3>
-                        <h4 class="service-subtitle">Amplifica tu impacto</h4>
-                        <p class="service-description">
-                            Te ayudamos a comunicar tu valor sin caer en greenwashing. Desarrollamos contenidos que educan a tu cliente y conectan emocionalmente.
-                        </p>
-                        <ul class="service-features">
-                            <li>Desarrollo de narrativa de marca</li>
-                            <li>Estrategia de contenidos</li>
-                            <li>Posicionamiento como experto</li>
-                            <li>Visibilidad en nuestros canales</li>
-                        </ul>
-                    </div>
-                </a>
-                
-                <a href="/recursos" class="service-card-link">
-                    <div class="service-card">
-                        <div class="service-icon">📚</div>
-                        <h3 class="service-title">Recursos Formativos</h3>
-                        <h4 class="service-subtitle">Aprende a tu ritmo</h4>
-                        <p class="service-description">
-                            Accede a talleres grupales, guías especializadas y una biblioteca de recursos sobre economía circular, comunicación estratégica y modelos de negocio sostenibles.
-                        </p>
-                        <ul class="service-features">
-                            <li>Talleres online especializados</li>
-                            <li>Guías descargables</li>
-                            <li>Casos de estudio reales</li>
-                            <li>Herramientas de gestión</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-            
-            <!-- Micro-tarjetas (overlay en desktop; acordeón en móvil) -->
-            <div class="micro-cards" id="micro-cards">
-                <button class="micro-toggle" id="micro-toggle" aria-expanded="false" aria-controls="micro-cards" type="button">
-                    <span>Elige cómo empezar</span>
-                    <span class="chevron" aria-hidden="true"></span>
-                </button>
-                <h4 class="micro-title">Elige cómo empezar</h4>
 
-                <!-- Segmentación por escala -->
-                <div class="micro-segmentation">
-                    <a href="/impulso-3d" class="micro-segment-card">
-                        <div class="service-icon">✨</div>
-                        <h5>Trabajo solo/a o en un equipo pequeño</h5>
-                        <p>Circularidad a pequeña escala con el Método 3D adaptado a tu oficio.</p>
-                        <span class="micro-segment-btn">Descubrir Impulso 3D &rarr;</span>
-                    </a>
-                    <button class="micro-segment-card" id="micro-show-b2b" type="button">
-                        <div class="service-icon">🏢</div>
-                        <h5>Tengo un equipo o proyecto más amplio</h5>
-                        <p>Servicios de consultoría para proyectos con mayor escala.</p>
-                        <span class="micro-segment-btn">Ver servicios &rarr;</span>
-                    </button>
+                <div class="servicio-impulso">
+                    <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                    <div class="servicio-card-icon servicio-impulso-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v16h16"/><path d="m5 19 6-6"/><path d="m2 6 3-3 3 3"/><path d="m18 16 3 3-3 3"/></svg>
+                    </div>
+                    <h4>Impulso 3D</h4>
+                    <p class="servicio-impulso-tagline">Menos tiempo en difusión. Más tiempo en tu oficio.</p>
+                    <p>
+                        Un sistema de comunicación a tu medida. Te acompañamos hasta que funcione solo.
+                    </p>
+                    <a href="/impulso-3d" class="btn-servicio-impulso">Descubrir Impulso 3D &rarr;</a>
                 </div>
 
-                <div class="micro-grid" id="micro-grid-b2b" style="display: none;">
-                    <div class="micro-card">
-                        <div class="service-icon">🔍</div>
-                        <h5>Diagnóstico 3D</h5>
-                        <p>Analizamos tu proyecto actual y identificamos oportunidades de mejora específicas.</p>
-                        <p><strong>Ideal para:</strong> Proyectos que necesitan claridad sobre sus oportunidades</p>
-                        <a href="/servicios/diagnostico-3d">Solicitar Diagnóstico</a>
+                <!-- ROW 2: Comunidad (full width, compact) -->
+                <div class="servicio-comunidad">
+                    <div class="servicio-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
-                    <div class="micro-card">
-                        <div class="service-icon">🗺️</div>
-                        <h5>Roadmap 3D</h5>
-                        <p>Diseñamos una hoja de ruta estratégica personalizada para hacer crecer tu proyecto de forma sostenible.</p>
-                        <p><strong>Ideal para:</strong> Proyectos que quieren un plan estructurado de 90 días</p>
-                        <a href="/servicios/roadmap-3d">Solicitar Roadmap</a>
+                    <div>
+                        <h4>Comunidad y Recursos</h4>
+                        <p>Recursos, formación y conexiones entre proyectos con propósito.</p>
                     </div>
-                    <div class="micro-card">
-                        <div class="service-icon">🚀</div>
-                        <h5>Sprint 3D</h5>
-                        <p>Te acompañamos intensivamente en la implementación de cambios concretos.</p>
-                        <p><strong>Ideal para:</strong> Quien necesita implementar algo específico ya</p>
-                        <a href="/servicios/sprint-3d">Solicitar Sprint</a>
-                    </div>
+                    <a href="/recursos" class="servicio-card-link">Explorar &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Por qué unirte -->
-    <section class="testimonials" id="comunidad">
+    <!-- ═══════════════════════════════════
+         COMUNIDAD — Testimonial cards
+         ═══════════════════════════════════ -->
+    <section class="comunidad-v2" id="comunidad">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">El futuro de los oficios y proyectos con propósito se teje entre muchas manos.</h2>
+            <div class="comunidad-v2-header">
+                <h2>Comunidad</h2>
+                <p class="comunidad-v2-sub">Historias de transformación real.</p>
             </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <blockquote>
-                            "Oficios Circulares me ayudó a entender que lo que yo hacía intuitivamente tenía un valor enorme. Ahora sé comunicarlo y mis clientes lo valoran."
-                        </blockquote>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👩‍🎨</div>
-                            <div class="author-info">
-                                <h4>María</h4>
-                                <p>Ceramista rural</p>
-                            </div>
-                        </div>
+
+            <div class="comunidad-v2-grid">
+                <div class="testimonio-v2">
+                    <div class="testimonio-v2-img">
+                        <img src="/assets/images/Perfil artesana experimentada.png"
+                             alt="María, ceramista rural"
+                             loading="lazy">
                     </div>
+                    <h4>María</h4>
+                    <span class="testimonio-role">Ceramista rural</span>
+                    <p class="testimonio-quote">"Me ayudaron a entender que lo que hacía intuitivamente tenía un valor enorme. Ahora sé comunicarlo y mis clientes lo valoran."</p>
                 </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <blockquote>
-                            "Encontré la estrategia que me faltaba para unir mi pasión por la innovación con mi compromiso ambiental. Mi taller ahora es un referente en la zona."
-                        </blockquote>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👨‍🔧</div>
-                            <div class="author-info">
-                                <h4>Javier</h4>
-                                <p>Carpintero innovador</p>
-                            </div>
-                        </div>
+
+                <div class="testimonio-v2">
+                    <div class="testimonio-v2-img">
+                        <img src="/assets/images/artesano innovador.png"
+                             alt="Javier, carpintero innovador"
+                             loading="lazy">
                     </div>
+                    <h4>Javier</h4>
+                    <span class="testimonio-role">Carpintero innovador</span>
+                    <p class="testimonio-quote">"Encontré la estrategia que me faltaba para unir mi pasión por la innovación con mi compromiso ambiental."</p>
                 </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <blockquote>
-                            "Ya no me siento sola en este camino. La comunidad me ha dado herramientas, contactos y la confianza para escalar mi proyecto sin perder mis valores."
-                        </blockquote>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👩‍💼</div>
-                            <div class="author-info">
-                                <h4>Lucía</h4>
-                                <p>Diseñadora consciente</p>
-                            </div>
-                        </div>
+
+                <div class="testimonio-v2">
+                    <div class="testimonio-v2-img">
+                        <img src="/assets/images/perfil_diseñadora_consciente .png"
+                             alt="Lucía, diseñadora consciente"
+                             loading="lazy">
                     </div>
+                    <h4>Lucía</h4>
+                    <span class="testimonio-role">Diseñadora consciente</span>
+                    <p class="testimonio-quote">"Ya no me siento sola en este camino. La comunidad me ha dado herramientas, contactos y la confianza para escalar sin perder mis valores."</p>
                 </div>
             </div>
-            
-            <p style="font-size: 0.85rem; color: #888; text-align: center; margin-top: 0.25rem; margin-bottom: 3rem;">
-                <em>Estos testimonios representan situaciones reales de personas y proyectos que ya están en proceso con nosotros; están inspirados en sus propias experiencias, aunque aún estén en curso.</em>
+
+            <p class="comunidad-v2-disclaimer">
+                <em>Testimonios inspirados en experiencias reales de proyectos en proceso.</em>
             </p>
-            
-            <div class="benefits-section">
-                <h3 class="benefits-title">¿Qué conseguirás al unirte a la red?</h3>
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🎯</div>
-                        <h4>Estrategia clara</h4>
-                        <p>Metodología probada para transformar tu proyecto con propósito</p>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🤝</div>
-                        <h4>Comunidad sólida</h4>
-                        <p>Red de apoyo y colaboración permanente</p>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">📢</div>
-                        <h4>Visibilidad auténtica</h4>
-                        <p>Comunicación que conecta sin sonar a marketing vacío</p>
-                    </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">🌱</div>
-                        <h4>Impacto real</h4>
-                        <p>Herramientas para generar cambio positivo desde tu taller</p>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         CTA FINAL
+         ═══════════════════════════════════ -->
+    <section class="cta-v2" id="contacto">
+        <div class="cta-v2-bg">
+            <img src="/assets/images/workshop_tools.jpg"
+                 alt="Herramientas artesanales"
+                 loading="lazy">
+            <div class="cta-v2-overlay"></div>
+        </div>
+
+        <div class="cta-v2-content">
+            <h2>Transforma tu proyecto,<br><em>transforma el mundo</em></h2>
+            <p>
+                Crear con conciencia. Donde cada proyecto aporta, no extrae,
+                y cada creador se convierte en agente de transformación.
+            </p>
+            <div class="cta-v2-buttons">
+                <a href="https://tally.so/r/mOyV98" target="_blank" class="btn-cta-primary">
+                    Únete a Oficios Circulares
+                </a>
+                <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="btn-cta-secondary">
+                    Agenda una llamada estratégica
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- CTA Final -->
-    <section class="cta-final" id="contacto">
-        <div class="cta-background">
-            <div class="cta-overlay"></div>
-            <img src="/assets/images/workshop_tools.jpg" alt="Herramientas artesanales" class="cta-image">
-        </div>
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Transforma tu proyecto, <span class="highlight">transforma el mundo</span></h2>
-                <p class="cta-description">
-                    La economía circular no es solo una tendencia, es una forma de crear con conciencia. Un futuro donde cada proyecto aporta, no extrae; donde cada marca, taller o comunidad es un nodo de cambio; y donde cada persona creadora se convierte en agente de transformación.
-                </p>
-                <p class="cta-question">¿Te sumás a esta revolución silenciosa pero poderosa?</p>
-                <div class="cta-buttons">
-                    <a href="https://tally.so/r/mOyV98" target="_blank" class="btn btn-primary btn-large">Únete a Oficios Circulares</a>
-                    <a href="https://calendar.app.google/e9PuWyYnspzeXWBU7" target="_blank" class="btn btn-secondary btn-large">Agenda una llamada estratégica</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <%- include('partials/cookie-banner') %>
+    <%- include('partials/footer') %>
 
     <!-- Scripts -->
     <script src="/assets/js/script.js"></script>
     <script src="/assets/js/cookie-banner.js"></script>
     <script>
-        // Auto-scroll al top en navegación normal
+        // Scroll al top en carga
         document.addEventListener('DOMContentLoaded', function() {
-            // Navegación normal - siempre ir al top
             window.scrollTo(0, 0);
+
+            // ── Hero Image Slider (fading) ──
+            const slides = document.querySelectorAll('.hero-slide');
+            if (slides.length > 1) {
+                let current = 0;
+                setInterval(function() {
+                    slides[current].classList.remove('active');
+                    current = (current + 1) % slides.length;
+                    slides[current].classList.add('active');
+                }, 5000);
+            }
+
+            // ── Intersection Observer for scroll animations ──
+            const animatedEls = document.querySelectorAll('.card-v2, .testimonio-v2, .servicio-featured, .servicio-impulso, .servicio-comunidad');
+            if ('IntersectionObserver' in window && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                animatedEls.forEach(function(el) {
+                    el.classList.add('anim-hidden');
+                });
+
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('anim-hidden');
+                            entry.target.classList.add('anim-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                animatedEls.forEach(function(el) { observer.observe(el); });
+            }
         });
-        
-        // También forzar scroll al top antes de que cargue la página
+
         if (window.history.scrollRestoration) {
             window.history.scrollRestoration = 'manual';
         }
-        
-        // UTM Helper Function
-        function buildUTMLink(baseUrl, service) {
-            const utm = {
-                utm_source: 'site',
-                utm_medium: 'internal',
-                utm_campaign: `oc-${service}`,
-                utm_content: 'home-consultoria-cards'
-            };
-            
-            const url = new URL(baseUrl, window.location.origin);
-            Object.entries(utm).forEach(([key, value]) => {
-                url.searchParams.set(key, value);
-            });
-            
-            return url.toString();
-        }
-        
+
         // GA4 Event Tracking
         function trackCTAClick(service) {
-            // Initialize dataLayer if it doesn't exist
             window.dataLayer = window.dataLayer || [];
-            
-            // Push GA4 event
             window.dataLayer.push({
                 event: 'click_cta',
                 cta_offer: service,
-                cta_location: 'home-consultoria-cards'
+                cta_location: 'home-v2'
             });
         }
-        
-        // Hover súper simple (con pequeño retardo para permitir pasar el ratón)
-        document.addEventListener('DOMContentLoaded', function() {
-            const consultoriaTrigger = document.getElementById('consultoria-trigger');
-            const microCards = document.getElementById('micro-cards');
-            const featuredCard = document.getElementById('consultoria');
-            const servicesContainer = document.querySelector('.services .container');
-            const servicesGrid = document.querySelector('.services-grid');
-            const microToggle = document.getElementById('micro-toggle');
-            let hideTimer = null;
-
-            if (consultoriaTrigger && microCards) {
-                const positionOverlay = () => {
-                    if (!featuredCard || !servicesContainer) return;
-                    const cardRect = featuredCard.getBoundingClientRect();
-                    const containerRect = servicesContainer.getBoundingClientRect();
-                    // Medimos la altura aunque esté oculto (visibility hidden mantiene layout)
-                    const overlayHeight = microCards.offsetHeight || 0;
-                    // Centramos aproximadamente respecto a la tarjeta, empujando un poco hacia abajo
-                    let top = (cardRect.top + cardRect.height / 2) - (overlayHeight / 2) - containerRect.top + 20;
-                    // Evitamos que quede por encima del inicio de la tarjeta
-                    const minTop = cardRect.top - containerRect.top + 8;
-                    // También evitamos que quede excesivamente bajo (muy por debajo del borde inferior)
-                    const maxTop = cardRect.bottom - containerRect.top - 40;
-                    top = Math.max(minTop, Math.min(top, maxTop));
-                    servicesContainer.style.setProperty('--micro-top', `${top}px`);
-                };
-
-                const show = () => {
-                    if (hideTimer) {
-                        clearTimeout(hideTimer);
-                        hideTimer = null;
-                    }
-                    // Posicionar cada vez que se muestre por si la página ha hecho scroll
-                    positionOverlay();
-                    microCards.classList.add('is-open');
-                };
-
-                const scheduleHide = () => {
-                    if (hideTimer) clearTimeout(hideTimer);
-                    hideTimer = setTimeout(() => {
-                        microCards.classList.remove('is-open');
-                        hideTimer = null;
-                    }, 80);
-                };
-
-                const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-                const mqMobile = window.matchMedia('(max-width: 768px)');
-                const mqTablet = window.matchMedia('(min-width: 769px) and (max-width: 1366px)');
-
-                // Modo acordeón en móvil e iPad: insertar micro‑cards tras la tarjeta verde
-                const enableMobileAccordion = () => {
-                    const consultoriaCard = document.getElementById('consultoria');
-                    if (!consultoriaCard) return;
-                    if (microCards.parentElement !== consultoriaCard) {
-                        consultoriaCard.appendChild(microCards);
-                    }
-                    microCards.style.display = 'block';
-                    microCards.classList.add('mobile-accordion');
-                    microCards.classList.remove('is-open');
-                    if (microToggle) microToggle.setAttribute('aria-expanded','false');
-                };
-                const disableMobileAccordion = () => {
-                    microCards.classList.remove('mobile-accordion');
-                    microCards.classList.remove('is-open');
-                    microCards.style.display = '';
-                };
-                // Función para manejar iPad horizontal: mostrar micro-cards debajo
-                const handleTabletLayout = () => {
-                    const currentWidth = window.innerWidth;
-                    const currentHeight = window.innerHeight;
-
-                    // Detectar iPad en horizontal (más ancho que alto)
-                    const isTabletHorizontal = (currentWidth >= 769 && currentWidth <= 1366) && (currentWidth > currentHeight);
-
-                    const consultoriaCta = document.getElementById('consultoria-cta-static');
-                    const microCards = document.getElementById('micro-cards');
-                    const servicesContainer = document.querySelector('.services .container');
-
-                    if (isTabletHorizontal) {
-                        // iPad HORIZONTAL: Ocultar CTA estática y mostrar micro-cards debajo
-                        if (consultoriaCta) {
-                            consultoriaCta.style.display = 'none';
-                        }
-
-                        if (microCards && servicesContainer) {
-                            // Mostrar micro-cards como sección normal debajo del grid
-                            microCards.style.position = 'static';
-                            microCards.style.transform = 'none';
-                            microCards.style.left = 'auto';
-                            microCards.style.top = 'auto';
-                            microCards.style.width = '100%';
-                            microCards.style.display = 'block';
-                            microCards.style.visibility = 'visible';
-                            microCards.style.opacity = '1';
-                            microCards.style.pointerEvents = 'auto';
-                            microCards.style.margin = '32px 0 0 0';
-                            microCards.style.boxShadow = '0 8px 24px rgba(31, 75, 63, 0.12)';
-
-                            // Asegurar que esté al final del container
-                            servicesContainer.appendChild(microCards);
-                        }
-                    } else if (currentWidth >= 769 && currentWidth <= 1366) {
-                        // iPad VERTICAL: Mostrar CTA estática y ocultar micro-cards
-                        if (consultoriaCta) {
-                            consultoriaCta.style.display = 'block';
-                            consultoriaCta.style.visibility = 'visible';
-                            consultoriaCta.style.opacity = '1';
-                        }
-
-                        if (microCards) {
-                            microCards.style.display = 'none';
-                            microCards.style.visibility = 'hidden';
-                        }
-                    }
-                };
-
-                const applyMode = () => {
-                    // Solo activar accordion en móvil (no en tablet/iPad)
-                    if (mqMobile.matches) {
-                        enableMobileAccordion();
-                    } else {
-                        disableMobileAccordion();
-                        // En iPad/tablet, ocultar micro-cards completamente y forzar mostrar CTA estática
-                        if (mqTablet.matches) {
-                            microCards.style.display = 'none';
-                            microCards.style.visibility = 'hidden';
-                            microCards.style.opacity = '0';
-                            microCards.style.pointerEvents = 'none';
-                            microCards.style.position = 'absolute';
-                            microCards.style.left = '-9999px';
-
-                            // FORZAR mostrar la sección estática en iPad
-                            const consultoriaCta = document.getElementById('consultoria-cta-static');
-                            if (consultoriaCta) {
-                                consultoriaCta.style.display = 'block';
-                                consultoriaCta.style.visibility = 'visible';
-                                consultoriaCta.style.opacity = '1';
-                            }
-                        }
-                    }
-                };
-                applyMode();
-                handleTabletLayout(); // Aplicar inmediatamente al cargar
-                mqMobile.addEventListener('change', applyMode);
-                mqTablet.addEventListener('change', applyMode);
-
-                // Escuchar cambios de orientación específicamente para iPad
-                window.addEventListener('orientationchange', function() {
-                    // Múltiples timeouts para asegurar que se aplique correctamente
-                    setTimeout(handleTabletLayout, 50);
-                    setTimeout(handleTabletLayout, 100);
-                    setTimeout(handleTabletLayout, 200);
-                    setTimeout(handleTabletLayout, 500); // Backup final
-                    setTimeout(applyMode, 100);
-                });
-
-                // Listener de resize como backup
-                window.addEventListener('resize', function() {
-                    handleTabletLayout();
-                });
-
-                // Interacción desktop (hover)
-                consultoriaTrigger.addEventListener('mouseenter', function(){
-                    if (microCards.classList.contains('mobile-accordion')) return;
-                    show();
-                });
-                consultoriaTrigger.addEventListener('mouseleave', function(){
-                    if (microCards.classList.contains('mobile-accordion')) return;
-                    scheduleHide();
-                });
-                microCards.addEventListener('mouseenter', function(){
-                    if (microCards.classList.contains('mobile-accordion')) return;
-                    show();
-                });
-                microCards.addEventListener('mouseleave', function(){
-                    if (microCards.classList.contains('mobile-accordion')) return;
-                    scheduleHide();
-                });
-
-                // Toggle móvil
-                const toggleMobile = function(e){
-                    if (!microCards.classList.contains('mobile-accordion')) return;
-                    // Si el clic viene desde dentro de micro-cards y es un enlace, NO interferir
-                    if (microCards.contains(e.target)) {
-                        const link = e.target.closest ? e.target.closest('a') : null;
-                        if (link) return; // permitir navegación
-                        // Si el clic cae en el propio toggle, lo manejamos más abajo
-                        if (!e.target.closest || !e.target.closest('#micro-toggle')) return;
-                    }
-                    e.preventDefault();
-                    const open = microCards.classList.toggle('is-open');
-                    if (microToggle) microToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-                    // Auto-scroll suave al abrir, solo móvil y si hace falta
-                    if (open) {
-                        const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                        if (!prefersReduce) {
-                            setTimeout(() => {
-                                const rect = microCards.getBoundingClientRect();
-                                const vh = window.innerHeight || document.documentElement.clientHeight;
-                                // Si el inicio del bloque queda muy abajo o fuera de vista, hacer scroll
-                                if (rect.top > vh * 0.65 || rect.top < 0) {
-                                    const target = document.getElementById('consultoria') || microCards;
-                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }, 220);
-                        }
-                    }
-                };
-                consultoriaTrigger.addEventListener('click', toggleMobile);
-                if (microToggle) microToggle.addEventListener('click', toggleMobile);
-                // Delegación extra por si el click cae en hijos del toggle
-                microCards.addEventListener('click', function(e){
-                    if (!microCards.classList.contains('mobile-accordion')) return;
-                    const t = e.target;
-                    if (t && (t.id === 'micro-toggle' || t.closest && t.closest('#micro-toggle'))) {
-                        toggleMobile(e);
-                    }
-                });
-
-                // Reposicionar en scroll/resize para mantener altura correcta
-                window.addEventListener('scroll', () => {
-                    if (microCards.classList.contains('is-open')) positionOverlay();
-                }, { passive: true });
-                window.addEventListener('resize', () => {
-                    if (microCards.classList.contains('is-open')) positionOverlay();
-                });
-
-                // Precalcular posición y rasterizar contenido para evitar retraso la primera vez
-                positionOverlay();
-                // Fuerza una lectura de layout para precalentar render del contenido
-                void microCards.offsetHeight;
-                // Opcional: recalcular cuando terminen de cargar fuentes e imágenes
-                window.addEventListener('load', positionOverlay);
-            }
-        });
-
-        // B2B toggle en micro-cards segmentation
-        document.addEventListener('DOMContentLoaded', function() {
-            var showB2bBtn = document.getElementById('micro-show-b2b');
-            var b2bGrid = document.getElementById('micro-grid-b2b');
-            var segmentation = document.querySelector('.micro-segmentation');
-            if (showB2bBtn && b2bGrid && segmentation) {
-                showB2bBtn.addEventListener('click', function() {
-                    segmentation.style.display = 'none';
-                    b2bGrid.style.display = '';
-                });
-            }
-        });
-    </script>
-
-    <!-- Popup promocional del blog -->
-    <div id="blogPopup" style="
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 320px;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        z-index: 9999;
-        display: none;
-        overflow: hidden;
-        animation: slideInUp 0.5s ease-out;
-        border: 1px solid #e5e5e5;
-    ">
-        <!-- Imagen del articulo -->
-        <div style="position: relative;">
-            <img src="/assets/images/blog/5-filtros-residuo-material/imagen-hero-artesanal.jpg"
-                 alt="Residuo local convertido en material para artesanos"
-                 style="width: 100%; height: 160px; object-fit: cover;">
-            <button id="closeBlogPopup" style="
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: rgba(0,0,0,0.7);
-                color: white;
-                border: none;
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-            " onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.7)'">×</button>
-        </div>
-
-        <!-- Contenido -->
-        <div style="padding: 20px;">
-            <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                <span style="background: #D17B49; color: white; font-size: 11px; padding: 3px 8px; border-radius: 12px; font-weight: 600; margin-right: 8px;">NUEVO ARTICULO</span>
-                <span style="color: #666; font-size: 12px;">📖 12 min de lectura</span>
-            </div>
-            <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; line-height: 1.3; color: #1F4B3F;">
-                &iquest;Tu residuo local puede convertirse en material?
-            </h4>
-            <p style="margin: 0 0 15px 0; font-size: 14px; color: #666; line-height: 1.4;">
-                M&eacute;todo pr&aacute;ctico en 5 filtros para evaluar si un residuo local puede ser materia prima. Con casos reales en Espa&ntilde;a.
-            </p>
-            <a href="blog/5-filtros-residuo-material/?utm_source=homepage&utm_medium=popup&utm_campaign=5-filtros-residuo&utm_content=blog-popup" style="
-                display: inline-block;
-                background: #1F4B3F;
-                color: white;
-                text-decoration: none;
-                padding: 10px 16px;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: 600;
-                transition: all 0.3s ease;
-                width: 100%;
-                text-align: center;
-                box-sizing: border-box;
-            " onmouseover="this.style.background='#2d6b55'" onmouseout="this.style.background='#1F4B3F'">
-                📖 Leer articulo completo
-            </a>
-        </div>
-    </div>
-
-    <style>
-        @keyframes slideInUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOutDown {
-            from {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            #blogPopup {
-                width: calc(100vw - 40px);
-                bottom: 15px;
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-            }
-        }
-    </style>
-
-    <script>
-        // Control del popup del blog
-        document.addEventListener('DOMContentLoaded', function() {
-            const popup = document.getElementById('blogPopup');
-            const closeBtn = document.getElementById('closeBlogPopup');
-            
-            // Verificar si ya se mostró el popup en esta sesión
-            const popupShown = sessionStorage.getItem('blogPopupShown');
-            
-            if (!popupShown) {
-                // Mostrar popup después de 8 segundos
-                setTimeout(() => {
-                    popup.style.display = 'block';
-                    sessionStorage.setItem('blogPopupShown', 'true');
-                }, 8000);
-            }
-            
-            // Cerrar popup
-            function closePopup() {
-                popup.style.animation = 'slideOutDown 0.4s ease-out';
-                setTimeout(() => {
-                    popup.style.display = 'none';
-                }, 400);
-            }
-            
-            closeBtn.addEventListener('click', closePopup);
-            
-            // Cerrar con Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && popup.style.display === 'block') {
-                    closePopup();
-                }
-            });
-            
-            // Auto-cerrar después de 30 segundos (opcional)
-            setTimeout(() => {
-                if (popup.style.display === 'block') {
-                    closePopup();
-                }
-            }, 38000); // 8s delay + 30s show = 38s total
-        });
     </script>
 </body>
-<%- include('partials/footer') %>
 </html>
