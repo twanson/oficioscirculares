@@ -1,10 +1,13 @@
 <%- include('partials/head-meta', { 
-    title: 'Diagnóstico 3D | Oficios Circulares',
-    description: "En 30–45’ obtén un mapa claro para hacer más circular tu marca y convertirlo en ventas. Palancas operativas, activos de mercado y KPIs sin greenwashing.",
+    title: ‘Diagnóstico 3D | Oficios Circulares’,
+    description: "En 45 minutos descubrimos qué puedes mejorar en tu proceso y cómo comunicarlo para diferenciarte. Informe con oportunidades concretas en 48h.",
     canonical: '/servicios/diagnostico-3d',
     ogImage: 'https://www.oficioscirculares.com/img/servicios/diagnostico-3d-hero.jpg',
     ogImageAlt: 'Diagnóstico 3D de Oficios Circulares: del taller al mercado'
 }) %>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_MINIMAL_2">
+
 <%- include('partials/header') %>
 
 <main class="main-content page-service diag3d" id="maincontent">
@@ -13,15 +16,15 @@
         <div class="container">
             <div class="hero-split-grid">
                 <div class="hero-copy">
-                    <h1 id="hero-title" class="hero-title">Diagnóstico 3D: claridad en 45 minutos, informe accionable en 48h</h1>
-                    <p id="hero-lead" class="hero-sub">Sesión ágil de 45 min para detectar oportunidades + informe ejecutivo en 24–48h con palancas y próximos pasos.</p>
+                    <h1 id="hero-title" class="hero-title">Diagnóstico 3D: descubre qué puedes hacer con lo que ya tienes</h1>
+                    <p id="hero-lead" class="hero-sub">Una sesión de 45 minutos donde analizamos juntos tu proceso, tus materiales y tus residuos. En 48h recibes un informe con oportunidades concretas y los pasos para aprovecharlas.</p>
                     <ul class="hero-bullets" aria-label="Beneficios clave">
-                        <li>Piloto funcional en 30–60 días (si hay encaje)</li>
-                        <li>KPIs auditables (kg recuperados, vida útil, leads B2B…)</li>
-                        <li>Activos listos para publicar (Plan de Acción Circular (1 página), landing, mini‑caso)</li>
+                        <li>Oportunidades reales que puedes implementar en 30–60 días</li>
+                        <li>Datos concretos: kg que recuperas, dinero que ahorras, valor que ganas</li>
+                        <li>Un plan claro con prioridades para empezar sin perder tiempo</li>
                     </ul>
                     <div class="hero-ctas">
-                        <a id="cta-hero" href="/contacto?service=diagnostico-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=hero&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar Diagnóstico 3D" data-event="click_cta" data-label="diag3d-hero">Quiero mi informe de diagnóstico en 48h</a>
+                        <a id="cta-hero" href="/contacto?service=diagnostico-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=hero&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar Diagnóstico 3D" data-event="click_cta" data-label="diag3d-hero">Quiero mi Diagnóstico 3D</a>
                         <a id="cta-hero-email" href="/downloads/ejemplo-informe-diag3d.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=hero" class="btn btn-secondary" aria-label="Ver ejemplo de informe" data-event="file_download" data-label="diag3d-hero-ejemplo" style="display: none;">Ver ejemplo de informe</a>
                     </div>
                 </div>
@@ -37,14 +40,14 @@
     <!-- ¿Reconoces esta situación? -->
     <section class="service-section" id="para-quien" aria-labelledby="para-quien-title">
         <div class="container">
-            <h2 id="para-quien-title" class="section-title enhanced">Este diagnóstico resuelve si...</h2>
+            <h2 id="para-quien-title" class="section-title enhanced" data-label="Encaje">¿Te suena esto?</h2>
             <div class="encaje-wrap">
                 <div class="ui-card">
                     <ul class="simple-list">
-                        <li><strong>“Hago cosas sostenibles pero nadie lo valora”</strong> — Te ayudamos a visibilizarlo</li>
-                        <li><strong>“Mis clientes preguntan por sostenibilidad y no sé qué responder”</strong> — Te damos argumentos con datos</li>
-                        <li><strong>“Genero residuos que intuyo que valen dinero”</strong> — Te mostramos cómo aprovecharlo</li>
-                        <li><strong>“Quiero diferenciarme pero todos hablan de lo mismo”</strong> — Te ayudamos a convertir tu circularidad en una propuesta de valor clara y diferenciadora</li>
+                        <li><strong>”Hago cosas sostenibles pero nadie lo valora”</strong> — Te ayudamos a que se vea</li>
+                        <li><strong>”Mis clientes preguntan por sostenibilidad y no sé qué responder”</strong> — Te damos respuestas con datos reales</li>
+                        <li><strong>”Genero residuos que intuyo que valen dinero”</strong> — Te mostramos cómo aprovecharlo</li>
+                        <li><strong>”Quiero diferenciarme pero todos dicen lo mismo”</strong> — Te ayudamos a contar lo que te hace diferente, con hechos</li>
                     </ul>
                 </div>
             </div>
@@ -54,14 +57,14 @@
     <!-- Qué descubrirás -->
     <section class="service-section" id="que-te-llevas" aria-labelledby="que-llevas-title">
         <div class="container">
-            <h2 id="que-llevas-title" class="section-title enhanced">Al final de los 45 minutos sabrás exactamente:</h2>
+            <h2 id="que-llevas-title" class="section-title enhanced" data-label="Entregables">Qué te llevas del diagnóstico</h2>
             <div class="deliverables-grid">
-                <div class="ui-card card-operacion"><h3>⚙️ LO QUE PUEDES HACER (MEJORAS OPERATIVAS)</h3><ul class="simple-list"><li>Cómo recuperar valor de tus residuos (ej: recortes → nuevo producto)</li><li>Qué servicios adicionales puedes ofrecer (ej: reparación, mantenimiento)</li><li>Cómo optimizar tu uso de materiales para ahorrar dinero</li></ul></div>
-                <div class="ui-card card-comercial"><h3>📢 LO QUE PUEDES CONTAR (HERRAMIENTAS COMERCIALES)</h3><ul class="simple-list"><li>Cómo documentar tu sostenibilidad con datos reales</li><li>Qué contenidos crear para diferenciarte de la competencia</li><li>Cómo comunicar tu valor sin sonar a "lavado verde"</li></ul></div>
-                <div class="ui-card card-informe"><h3>🗂️ INFORME EJECUTIVO (1 PÁGINA)</h3><ul class="simple-list"><li>Resumen priorizado por impacto vs facilidad, listo para compartir</li></ul></div>
+                <div class="ui-card card-operacion"><h3>Qué puedes mejorar en tu proceso</h3><ul class="simple-list"><li>Cómo recuperar valor de tus residuos (ej: recortes → nuevo producto)</li><li>Qué servicios nuevos podrías ofrecer (reparación, mantenimiento, personalización)</li><li>Dónde estás gastando más material del necesario y cómo reducirlo</li></ul></div>
+                <div class="ui-card card-comercial"><h3>Cómo comunicar tu diferencia</h3><ul class="simple-list"><li>Cómo documentar lo que haces con datos que hablen por ti</li><li>Qué contenidos crear para que se vea tu diferencia</li><li>Cómo contar tu historia sin que suene a greenwashing</li></ul></div>
+                <div class="ui-card card-informe"><h3>Tu informe con todo ordenado</h3><ul class="simple-list"><li>Todo lo anterior ordenado por lo que más te conviene hacer primero, listo para compartir con tu equipo</li></ul></div>
             </div>
             <div class="plan-accion-highlight">
-                <p><strong>Plan de Acción Circular (1 página):</strong> Prioriza por impacto vs facilidad para que empieces ya.</p>
+                <p><strong>Tu hoja de ruta:</strong> Las oportunidades ordenadas de mayor a menor impacto, para que sepas por dónde empezar.</p>
             </div>
         </div>
     </section>
@@ -69,14 +72,14 @@
     <!-- Cómo funciona -->
     <section class="service-section" id="como-funciona" aria-labelledby="flujo-title">
         <div class="container">
-            <h2 id="flujo-title" class="section-title enhanced">Metodología 3D en sesión ágil + entregable en 48h</h2>
+            <h2 id="flujo-title" class="section-title enhanced" data-label="Metodología">Cómo funciona la sesión</h2>
             <ol class="timeline">
-                <li><strong>Diagnosticar (15 min)</strong> · Mapeamos tus materiales, procesos y residuos actuales.</li>
-                <li><strong>Diseñar (20 min)</strong> · Identificamos oportunidades de mejora operativa y comercial.</li>
-                <li><strong>Difundir (10 min)</strong> · Definimos cómo comunicar tu sostenibilidad para que venda.</li>
+                <li><strong>Diagnosticar (15 min)</strong> — Repasamos juntos tus materiales, tu proceso y tus residuos.</li>
+                <li><strong>Diseñar (20 min)</strong> — Identificamos oportunidades: qué puedes mejorar y cómo contarlo.</li>
+                <li><strong>Difundir (10 min)</strong> — Definimos cómo comunicar lo que haces para que se valore.</li>
             </ol>
-            <p class="note">Visita in situ opcional.</p>
-            <p style="margin-top: 20px; font-weight: 600; color: var(--verde-profundo);">El resultado: un plan 1-página entregado en 24–48h, con palancas operativas y acciones comerciales claras.</p>
+            <p class="note">Si prefieres que veamos tu taller en persona, también es posible.</p>
+            <p style="margin-top: 20px; font-weight: 600; color: var(--verde-profundo);">En 24–48h recibes tu informe: oportunidades concretas, prioridades claras y los siguientes pasos para actuar.</p>
             <div class="inline-cta">
                 <a id="cta-flow" href="/contacto?service=diagnostico-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=flow&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar desde Cómo funciona" data-event="click_cta" data-label="diag3d-flow">Reservar mi Diagnóstico 3D</a>
             </div>
@@ -86,13 +89,13 @@
     <!-- Ejemplo real + Testimonial -->
     <section class="service-section" id="ejemplo" aria-labelledby="ejemplo-title">
         <div class="container">
-            <h2 id="ejemplo-title" class="section-title enhanced">Ejemplo real</h2>
+            <h2 id="ejemplo-title" class="section-title enhanced" data-label="Caso real">Ejemplo real</h2>
             <div class="ui-card example-card" style="margin-bottom:16px;">
-                <p><strong>Caso empresa de cerámica y barro:</strong> En 45 min identificamos que podían recuperar 72kg de recortes de obra mensual y convertirlos en mosaico terrazzo. Resultado: nuevo producto diferencial + ahorro de 200€/mes en gestión de residuos.</p>
+                <p><strong>Un taller de cerámica en Valencia</strong> generaba recortes de obra que iban directos al contenedor. En 45 minutos identificamos que podían recuperar 72 kg al mes y transformarlos en mosaico terrazzo. Resultado: un producto nuevo con más margen y 200 €/mes menos en gestión de residuos.</p>
             </div>
             <div class="ui-card example-card">
                 <blockquote style="margin:0 0 10px 0">“Llevaba 3 años diciendo que era sostenible pero sin datos que lo demostraran. En 45 minutos me dieron 3 KPIs concretos y una hoja de ruta clara para comunicarlo.”</blockquote>
-                <p style="color:#6b7280; margin:0;">— Elena, Estudio de diseño textil</p>
+                <p style="color:#6b7280; margin:0;">— Taller de diseño textil, Madrid</p>
             </div>
         </div>
     </section>
@@ -100,11 +103,11 @@
     <!-- Precio y garantías -->
     <section class="service-section" id="precio" aria-labelledby="precio-title">
         <div class="container">
-            <h2 id="precio-title" class="section-title enhanced">¿Cuánto cuesta?</h2>
+            <h2 id="precio-title" class="section-title enhanced" data-label="Inversión">Tu inversión</h2>
             <div class="ui-card">
-                <p><strong>290€ - 350€</strong> (según complejidad del proyecto)</p>
-                <p>Incluye sesión de 45 min + informe ejecutivo en 24–48h. <em>(Si después contratas un servicio superior, te bonificamos el importe del diagnóstico.)</em></p>
-                <div class="badges"><span class="badge">Sin greenwashing</span><span class="badge">Datos o no hay caso</span><span class="badge">Plazos cerrados</span></div>
+                <p><strong>90–350€</strong> (según complejidad del proyecto)</p>
+                <p>Incluye la sesión de 45 minutos y el informe con oportunidades en 24–48h. <em>(Si después decides seguir con nosotros, te descontamos el importe del diagnóstico.)</em></p>
+                <div class="badges"><span class="badge">Sin greenwashing</span><span class="badge">Sin datos, no hay caso</span><span class="badge">Plazos claros</span></div>
             </div>
         </div>
     </section>
@@ -112,13 +115,13 @@
     <!-- Preparación previa -->
     <section class="service-section" id="que-necesitas-preparar" aria-labelledby="prep-title">
         <div class="container">
-            <h2 id="prep-title" class="section-title enhanced">Lo único que necesitas preparar</h2>
+            <h2 id="prep-title" class="section-title enhanced" data-label="Preparación">Lo único que necesitas preparar</h2>
             <div class="ui-card">
                 <ul class="simple-list">
                     <li>3–5 fotos de tus productos principales o proyectos recientes</li>
                     <li>Lista rápida de qué residuos generas (aproximadamente)</li>
                     <li>Coste de gestión de residuos (si lo sabes; si no, lo estimamos)</li>
-                    <li>Que participen quien conoce la operación + quien vende</li>
+                    <li>Que estén las personas que conocen el día a día del taller y las que tratan con clientes</li>
                 </ul>
             </div>
         </div>
@@ -127,11 +130,11 @@
     <!-- FAQ -->
     <section class="service-section" id="faq" aria-labelledby="faq-title">
         <div class="container">
-            <h2 id="faq-title" class="section-title enhanced">Preguntas frecuentes</h2>
+            <h2 id="faq-title" class="section-title enhanced" data-label="FAQ">Preguntas frecuentes</h2>
             <div class="faq-grid">
                 <div class="ui-card"><h3>¿Trabajáis con mi sector?</h3><p>Con cualquier marca que fabrique productos físicos: moda, cerámica, muebles, decoración, cosmética artesanal, etc.</p></div>
-                <div class="ui-card"><h3>¿Y si no veo valor en las propuestas?</h3><p>Pagas 190€ por un diagnóstico profesional. Si después contratas cualquier servicio, te bonificamos el importe completo.</p></div>
-                <div class="ui-card"><h3>¿45 minutos es suficiente tiempo?</h3><p>Para un diagnóstico inicial, sí. En menos de una hora identificamos tus palancas clave. Y lo importante: en 24–48h recibes un informe claro y accionable para actuar sin perder tiempo.</p></div>
+                <div class="ui-card"><h3>¿Y si no veo valor en las propuestas?</h3><p>Pagas por un diagnóstico profesional. Si después contratas cualquier servicio, te bonificamos el importe completo.</p></div>
+                <div class="ui-card"><h3>¿45 minutos dan para algo?</h3><p>Más de lo que imaginas. En 45 minutos identificamos las oportunidades más importantes. Y en 24–48h recibes un informe ordenado con los pasos concretos para actuar.</p></div>
                 <div class="ui-card"><h3>¿Idioma y confidencialidad?</h3><p>Trabajamos en español; firmamos NDA si lo necesitas.</p></div>
             </div>
         </div>
@@ -140,10 +143,10 @@
     <!-- CTA final -->
     <section class="service-section cta-final" id="cta-final" aria-labelledby="cta-final-title">
         <div class="container">
-            <h2 id="cta-final-title" class="section-title enhanced">¿Empezamos?</h2>
-            <p>Reserva tu Diagnóstico 3D: sesión de 45 min + informe 1-página en 24–48h con palancas, activos y métricas listas para aplicar.</p>
+            <h2 id="cta-final-title" class="section-title enhanced" data-label="Siguiente paso">¿Empezamos?</h2>
+            <p>En 45 minutos sabrás exactamente qué puedes mejorar y cómo comunicarlo. Y en 48h tendrás el informe en tus manos.</p>
             <div class="hero-ctas">
-                <a id="cta-footer" href="/contacto?service=diagnostico-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=footer&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar Diagnóstico 3D" data-event="click_cta" data-label="diag3d-footer">Quiero mi diagnóstico 3D ahora</a>
+                <a id="cta-footer" href="/contacto?service=diagnostico-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=footer&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar Diagnóstico 3D" data-event="click_cta" data-label="diag3d-footer">Reservar mi Diagnóstico 3D</a>
                 <a id="cta-footer-email" class="btn btn-secondary" href="/downloads/ejemplo-informe-diag3d.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=footer" aria-label="Ver ejemplo de informe" data-event="file_download" data-label="diag3d-footer-ejemplo" style="display: none;">Ver ejemplo de informe</a>
             </div>
         </div>
@@ -161,7 +164,7 @@
   },
   "areaServed": "ES",
   "serviceType": "Consulting",
-  "offers": "290€ - 350€",
+  "offers": "90–350€",
   "url": "https://www.oficioscirculares.com/servicios/diagnostico-3d"
 }, null, 2) %>
 </script>
