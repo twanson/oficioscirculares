@@ -1,0 +1,2532 @@
+/* ========================================
+   PAGES V2 - VISUAL LANGUAGE OVERRIDES
+   Interior Service Pages
+   ======================================== */
+
+/* Design tokens from home-v2.css */
+:root {
+  --font-headline: 'Newsreader', 'Georgia', serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --primary: #023429;
+  --primary-container: #1F4B3F;
+  --secondary: #934a1c;
+  --secondary-container: #fd9f6a;
+
+  --surface: #fbf9f8;
+  --surface-container-low: #f5f3f3;
+  --on-surface: #1b1c1c;
+  --on-surface-variant: #414845;
+
+  /* Shadows for depth */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+/* ========================================
+   TYPOGRAPHY OVERRIDES
+   ======================================== */
+
+/* Force Newsreader for all headlines */
+.impulso-3d h1,
+.impulso-3d h2,
+.impulso-3d h3,
+.impulso-3d h4,
+.page-service h1,
+.page-service h2,
+.page-service h3,
+.page-service h4 {
+  font-family: var(--font-headline);
+}
+
+/* Force Manrope for body text */
+.impulso-3d p,
+.impulso-3d li,
+.impulso-3d span,
+.impulso-3d a,
+.page-service p,
+.page-service li,
+.page-service span,
+.page-service a {
+  font-family: var(--font-body);
+}
+
+/* ========================================
+   HERO SECTION (.impulso-hero)
+   ======================================== */
+
+.impulso-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+}
+
+.impulso-hero h1 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Hero badge styling */
+.impulso-hero .hero-badge,
+.hero-badge {
+  display: inline-block;
+  background-color: var(--secondary-container);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  font-size: 0.75rem;
+  font-family: var(--font-body);
+}
+
+/* Hero claim styling */
+.impulso-hero .hero-claim,
+.hero-claim {
+  font-family: var(--font-headline);
+  font-style: italic;
+  color: var(--secondary-container);
+  font-weight: 500;
+}
+
+/* Hero subtitle */
+.impulso-hero .hero-subtitle,
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ========================================
+   BUTTONS - PILL SHAPE OVERRIDES
+   ======================================== */
+
+.btn,
+.btn-coral,
+.btn-green,
+.btn-outline-white,
+button {
+  border-radius: 100px;
+  padding: 16px 32px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Coral/Primary buttons */
+.btn-coral,
+.btn-primary {
+  background-color: var(--secondary-container);
+  color: var(--primary);
+  border: none;
+  box-shadow: 0 4px 16px rgba(253, 159, 106, 0.3);
+}
+
+.btn-coral:hover,
+.btn-primary:hover {
+  background-color: #f58850;
+  box-shadow: 0 6px 24px rgba(253, 159, 106, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Green/Secondary buttons */
+.btn-green,
+.btn-secondary {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(2, 52, 41, 0.3);
+}
+
+.btn-green:hover,
+.btn-secondary:hover {
+  background-color: var(--primary-container);
+  box-shadow: 0 6px 24px rgba(2, 52, 41, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Outline white buttons */
+.btn-outline-white {
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: none;
+}
+
+.btn-outline-white:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   SECTION HEADERS
+   ======================================== */
+
+/* Section label */
+.section-label,
+.section-tag {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--secondary);
+  font-family: var(--font-body);
+  margin-bottom: 12px;
+}
+
+/* H2 with responsive sizing — NO color here, let sections control it */
+.impulso-3d h2,
+.page-service h2,
+h2 {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Emphasize text in headings */
+.impulso-3d h2 em,
+.page-service h2 em,
+h2 em {
+  font-style: italic;
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+/* Remove old underline decorations */
+.section-title,
+.section-title::after {
+  position: relative;
+}
+
+.section-title::after {
+  display: none;
+}
+
+/* ========================================
+   DARK SECTION OVERRIDES
+   ======================================== */
+
+/* White text in ALL dark-background blocks (ai-block, circularidad-callout, final-cta, section-dark) */
+.impulso-3d .ai-block h2,
+.impulso-3d .ai-text h2,
+.impulso-3d .circularidad-callout h2,
+.impulso-3d .final-cta h2,
+.impulso-3d .impulso-section-dark h2,
+.impulso-3d .impulso-section-dark h3,
+.impulso-3d .impulso-section-dark h4,
+.ai-block h2,
+.ai-text h2,
+.circularidad-callout h2,
+.final-cta h2 {
+  color: #ffffff !important;
+}
+
+.impulso-3d .ai-text p,
+.impulso-3d .ai-block p,
+.impulso-3d .circularidad-callout p,
+.impulso-3d .final-cta p,
+.impulso-3d .impulso-section-dark p,
+.ai-text p,
+.ai-block p,
+.circularidad-callout p,
+.final-cta p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.impulso-3d .impulso-section-dark .section-header p,
+.impulso-3d .impulso-section-dark .section-label,
+.impulso-section-dark .section-label {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* Keep terracota for strong inside dark blocks */
+.ai-text strong,
+.impulso-3d .ai-text strong {
+  color: var(--secondary-container) !important;
+}
+
+/* ========================================
+   ESSENCE TRIGGER (hero dropdown)
+   ======================================== */
+
+.essence-trigger {
+  background: transparent;
+  border: 2px solid rgba(209, 123, 73, 0.6);
+  border-radius: 100px;
+  padding: 10px 20px;
+  color: var(--secondary-container);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid rgba(209, 123, 73, 0.6);
+}
+
+.essence-trigger:hover {
+  border-color: var(--secondary-container);
+  background: rgba(253, 159, 106, 0.1);
+}
+
+/* ========================================
+   PROFILE AVATARS — prevent head cropping
+   ======================================== */
+
+.impulso-profile-card .profile-avatar {
+  width: 110px;
+  height: 110px;
+}
+
+.impulso-profile-card .profile-avatar img {
+  object-fit: cover;
+  object-position: center 15%;
+}
+
+/* ========================================
+   AI FEATURE CARDS — bigger
+   ======================================== */
+
+.ai-feature {
+  padding: 28px 24px;
+  gap: 20px;
+  border-radius: 16px;
+}
+
+.ai-feature-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+}
+
+.ai-feature-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ai-feature h4 {
+  font-size: 1.1rem;
+  font-family: var(--font-headline);
+  margin-bottom: 6px;
+}
+
+.ai-feature p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.ai-visual {
+  gap: 20px;
+}
+
+/* ========================================
+   CARD STYLING
+   ======================================== */
+
+/* Generic card overrides */
+.problem-card,
+.phase-card,
+.price-card,
+.card,
+.service-card,
+.feature-card {
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.problem-card:hover,
+.phase-card:hover,
+.service-card:hover,
+.feature-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+/* Problem cards — proportional to home benefit cards */
+.problem-card {
+  padding: 40px 36px;
+}
+
+.problem-icon {
+  width: 56px;
+  height: 56px;
+  padding: 14px;
+  border-radius: 16px;
+}
+
+.problem-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.problem-card h4 {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.problem-card p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--on-surface-variant);
+  line-height: 1.65;
+}
+
+/* Section intro text proportional to home */
+.impulso-section .section-header p {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.impulso-section .section-header h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+/* Card typography */
+.phase-card h3,
+.service-card h3 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.phase-card p,
+.service-card p,
+.feature-card p {
+  font-family: var(--font-body);
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+/* ========================================
+   PRICING SECTION
+   ======================================== */
+
+.price-card {
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(31, 75, 63, 0.1);
+  transition: all 0.3s ease;
+  background-color: var(--surface);
+}
+
+.price-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+/* Featured pricing card */
+.price-card.featured,
+.price-card.featured-plan {
+  background: linear-gradient(135deg, var(--primary-container) 0%, var(--primary) 100%);
+  color: #ffffff;
+  border: none;
+  position: relative;
+  z-index: 10;
+  transform: scale(1.02);
+}
+
+.price-card.featured h3,
+.price-card.featured-plan h3 {
+  color: #ffffff;
+}
+
+.price-card.featured p,
+.price-card.featured-plan p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Price badge — fix clipping at top */
+.price-badge {
+  display: inline-block;
+  background-color: var(--secondary-container);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  font-size: 0.75rem;
+  font-family: var(--font-body);
+  margin-bottom: 16px;
+  position: relative;
+  top: 0;
+  z-index: 2;
+}
+
+/* Fix: featured card needs padding-top to accommodate the badge */
+.price-card.featured,
+.price-card.featured-plan {
+  padding-top: 52px;
+  overflow: visible;
+}
+
+.price-card.featured .price-badge,
+.price-card.featured-plan .price-badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* Price amount styling */
+.price-amount,
+.price-value {
+  margin: 24px 0;
+}
+
+.price-desde {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+  margin-bottom: 2px;
+}
+
+.price-card.featured .price-desde {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.price-amount .value,
+.price-value .value {
+  font-family: var(--font-headline);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.price-card.featured .price-amount .value,
+.price-card.featured-plan .price-amount .value {
+  color: #ffffff;
+}
+
+.price-amount .currency,
+.price-amount .period {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+}
+
+.price-card.featured .price-amount .currency,
+.price-card.featured .price-amount .period,
+.price-card.featured-plan .price-amount .currency,
+.price-card.featured-plan .price-amount .period {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Price card features list */
+.price-card ul,
+.price-card ol {
+  list-style: none;
+  padding: 0;
+}
+
+.price-card li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(31, 75, 63, 0.1);
+  font-family: var(--font-body);
+  color: var(--on-surface-variant);
+}
+
+/* Fix checks overlapping text — override impulso-3d.css ::before */
+.price-features li {
+  padding-left: 30px;
+  position: relative;
+}
+
+.price-features li::before {
+  top: 16px;
+}
+
+.price-card.featured li,
+.price-card.featured-plan li {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.price-card li:last-child {
+  border-bottom: none;
+}
+
+/* Force price cards to equal height and CTAs at bottom */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+  gap: 28px;
+}
+
+.impulso-3d .price-card,
+.price-card {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+/* Re-apply padding inside header and body instead */
+.price-card-header {
+  padding: 32px 28px 24px;
+}
+
+.impulso-3d .price-card-body,
+.price-card-body {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 24px 28px 28px;
+}
+
+.impulso-3d .price-card-body .btn,
+.impulso-3d .price-card-body .btn-coral,
+.price-card-body .btn,
+.price-card-body .btn-coral {
+  margin-top: auto !important;
+}
+
+.price-ideal {
+  margin-top: 16px;
+  flex-shrink: 0;
+}
+
+/* Featured card padding-top for badge */
+.impulso-3d .price-card.featured {
+  padding-top: 0 !important;
+}
+
+.impulso-3d .price-card.featured .price-card-header {
+  padding-top: 48px;
+}
+
+/* ========================================
+   FAQ SECTION
+   ======================================== */
+
+.faq-item,
+.accordion-item {
+  border-radius: 16px;
+  border: 1px solid rgba(31, 75, 63, 0.1);
+  background-color: var(--surface);
+  overflow: hidden;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover,
+.accordion-item:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(31, 75, 63, 0.2);
+}
+
+.faq-question h4,
+.accordion-header h4 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--on-surface);
+  font-size: 1.125rem;
+}
+
+.faq-answer,
+.accordion-body {
+  font-family: var(--font-body);
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+/* ========================================
+   PROFILE CARDS
+   ======================================== */
+
+.impulso-profile-card,
+.team-member-card,
+.profile-card {
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  background-color: var(--surface);
+  transition: all 0.3s ease;
+}
+
+.impulso-profile-card:hover,
+.team-member-card:hover,
+.profile-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.impulso-profile-card h3,
+.team-member-card h3,
+.profile-card h3 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-top: 16px;
+}
+
+.impulso-profile-card p,
+.team-member-card p,
+.profile-card p {
+  font-family: var(--font-body);
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+}
+
+/* ========================================
+   FOUNDER SECTION — scale up
+   ======================================== */
+
+.founder-card {
+  max-width: 900px;
+  padding: 48px;
+  gap: 48px;
+  border-radius: 20px;
+}
+
+.founder-photo img {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+.founder-info h2 {
+  font-family: var(--font-headline);
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  margin-bottom: 16px;
+}
+
+.founder-info p {
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.founder-quote {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  font-family: var(--font-headline);
+}
+
+.founder-link {
+  font-size: 1rem;
+}
+
+/* ========================================
+   SUPPORT CARDS — scale up
+   ======================================== */
+
+.support-grid {
+  gap: 32px;
+  max-width: 880px;
+}
+
+.support-card {
+  padding: 44px 40px;
+  border-radius: 20px;
+  border-top: 4px solid var(--primary);
+}
+
+.support-card h3 {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.support-price {
+  font-size: 2.2rem;
+  font-family: var(--font-headline);
+}
+
+.support-features li {
+  font-size: 1.02rem;
+  padding: 8px 0;
+  padding-left: 22px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   TESTIMONIALS
+   ======================================== */
+
+.testimonial,
+.testimonial-card {
+  border-radius: 20px;
+  padding: 32px;
+  background-color: var(--surface-container-low);
+  border-left: 4px solid var(--secondary);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.testimonial:hover,
+.testimonial-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.testimonial p,
+.testimonial-card p {
+  font-family: var(--font-body);
+  color: var(--on-surface);
+  line-height: 1.8;
+  font-size: 1.0625rem;
+}
+
+.testimonial-author,
+.testimonial-card .author {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 16px;
+}
+
+.testimonial-role,
+.testimonial-card .role {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  margin-top: 4px;
+}
+
+/* ========================================
+   FOOTER / CTA SECTION
+   ======================================== */
+
+.final-cta,
+.cta-section {
+  position: relative;
+  background: linear-gradient(135deg, rgba(2, 52, 41, 0.9) 0%, rgba(31, 75, 63, 0.9) 100%);
+  color: #ffffff;
+  padding: 80px 40px;
+  border-radius: 24px;
+  text-align: center;
+}
+
+.final-cta::before,
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.final-cta h2,
+.cta-section h2 {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24px;
+}
+
+.final-cta p,
+.cta-section p {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.95);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.final-cta .cta-button,
+.cta-section .cta-button {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   UTILITY CLASSES - GLASS & PAPER TEXTURE
+   ======================================== */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.paper-texture {
+  position: relative;
+  background-color: var(--surface);
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise'/%3E%3C/filter%3E%3Crect width='100' height='100' fill='%23fbf9f8' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ========================================
+   RESPONSIVE TYPOGRAPHY
+   ======================================== */
+
+@media (max-width: 768px) {
+  .impulso-3d h2,
+  .page-service h2,
+  h2 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .final-cta h2,
+  .cta-section h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .price-amount .value,
+  .price-value .value {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  .btn,
+  .btn-coral,
+  .btn-green,
+  .btn-outline-white {
+    padding: 14px 28px;
+    font-size: 0.95rem;
+  }
+
+  .price-card {
+    padding: 32px 24px;
+  }
+
+  .impulso-profile-card,
+  .team-member-card,
+  .profile-card {
+    padding: 24px;
+  }
+
+  .final-cta,
+  .cta-section {
+    padding: 60px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .impulso-3d h2,
+  .page-service h2,
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .final-cta h2,
+  .cta-section h2 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+    padding: 6px 12px;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+  }
+
+  .btn,
+  .btn-coral,
+  .btn-green,
+  .btn-outline-white {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .price-card {
+    padding: 24px 16px;
+  }
+
+  .impulso-profile-card,
+  .team-member-card,
+  .profile-card {
+    padding: 20px 16px;
+  }
+
+  .testimonial,
+  .testimonial-card {
+    padding: 24px 16px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY & FOCUS STATES
+   ======================================== */
+
+.btn:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--secondary-container);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+/* ========================================
+   PAGE-SERVICE OVERRIDES (Circularidad pages)
+   diagnostico-3d, roadmap-3d, sprint-3d
+
+   CRITICAL: styles.css has ~750 lines of page-specific rules
+   (.page-service.diag3d, .page-service.roadmap3d, .page-service.sprint3d)
+   with high specificity. We MUST use matching or higher specificity
+   + !important on EVERY property to override the old design.
+   ======================================== */
+
+/* --- GLOBAL FONT OVERRIDES --- */
+.page-service h1,
+.page-service h2,
+.page-service h3,
+.page-service h4,
+.page-service.diag3d h1,
+.page-service.diag3d h2,
+.page-service.diag3d h3,
+.page-service.diag3d h4,
+.page-service.roadmap3d h1,
+.page-service.roadmap3d h2,
+.page-service.roadmap3d h3,
+.page-service.roadmap3d h4,
+.page-service.sprint3d h1,
+.page-service.sprint3d h2,
+.page-service.sprint3d h3,
+.page-service.sprint3d h4 {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+}
+
+.page-service p,
+.page-service li,
+.page-service span,
+.page-service a,
+.page-service strong,
+.page-service em,
+.page-service blockquote,
+.page-service.diag3d p,
+.page-service.diag3d li,
+.page-service.roadmap3d p,
+.page-service.roadmap3d li,
+.page-service.sprint3d p,
+.page-service.sprint3d li {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+  color: #414845 !important;
+}
+
+/* --- ALL BUTTONS: pill, coral primary, green secondary --- */
+.page-service .btn,
+.page-service .btn-primary,
+.page-service .btn-secondary,
+.page-service .btn.btn-large,
+.page-service.diag3d .btn,
+.page-service.diag3d .hero-ctas .btn,
+.page-service.roadmap3d .btn,
+.page-service.roadmap3d .hero-ctas .btn,
+.page-service.sprint3d .btn,
+.page-service.sprint3d .hero-ctas .btn,
+.sticky-cta-mobile .btn {
+  border-radius: 100px !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  padding: 16px 32px !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.page-service .btn-primary,
+.page-service .btn.btn-primary,
+.page-service .btn-primary.btn-large,
+.page-service.diag3d .btn-primary,
+.page-service.roadmap3d .btn-primary,
+.page-service.sprint3d .btn-primary {
+  background: #fd9f6a !important;
+  color: #023429 !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(253, 159, 106, 0.3) !important;
+}
+
+.page-service .btn-primary:hover,
+.page-service.diag3d .btn-primary:hover,
+.page-service.roadmap3d .btn-primary:hover,
+.page-service.sprint3d .btn-primary:hover {
+  background: #f58850 !important;
+  box-shadow: 0 6px 24px rgba(253, 159, 106, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.page-service .btn-secondary,
+.page-service .btn.btn-secondary,
+.page-service.diag3d .btn-secondary,
+.page-service.roadmap3d .btn-secondary,
+.page-service.sprint3d .btn-secondary {
+  background: #023429 !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(2, 52, 41, 0.3) !important;
+}
+
+.page-service .btn-secondary:hover,
+.page-service.diag3d .btn-secondary:hover,
+.page-service.roadmap3d .btn-secondary:hover,
+.page-service.sprint3d .btn-secondary:hover {
+  background: #1F4B3F !important;
+  box-shadow: 0 6px 24px rgba(2, 52, 41, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Button large */
+.page-service .btn-large,
+.page-service .btn.btn-large {
+  padding: 20px 40px !important;
+  font-size: 1.125rem !important;
+}
+
+/* Kill the sweep ::before effect from styles.css */
+.page-service.diag3d .hero-ctas .btn::before,
+.page-service.roadmap3d .hero-ctas .btn::before,
+.page-service.sprint3d .hero-ctas .btn::before {
+  display: none !important;
+}
+
+/* --- HERO: dark green gradient (matches impulso-hero) --- */
+.page-service .service-hero {
+  background: linear-gradient(135deg, #023429 0%, #1F4B3F 100%) !important;
+  padding: 120px 0 100px !important;
+  position: relative !important;
+}
+
+.page-service .service-hero .container {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 32px !important;
+}
+
+.page-service .service-hero::before {
+  display: none !important;
+}
+
+.page-service .service-hero .hero-title,
+.page-service.diag3d h1.hero-title,
+.page-service.roadmap3d h1.hero-title,
+.page-service.sprint3d h1.hero-title {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  text-shadow: none !important;
+  line-height: 1.2 !important;
+}
+
+.page-service .service-hero .hero-sub {
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+  font-weight: 400 !important;
+}
+
+.page-service .service-hero .eyebrow {
+  display: inline-block !important;
+  background: #fd9f6a !important;
+  color: #023429 !important;
+  padding: 8px 16px !important;
+  border-radius: 100px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  margin-bottom: 16px !important;
+}
+
+/* Kill eyebrow ::after from styles.css */
+.page-service .service-hero .eyebrow::after {
+  display: none !important;
+}
+
+.page-service .service-hero .hero-bullets li {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+.page-service .service-hero .hero-bullets li::before {
+  color: #fd9f6a !important;
+}
+
+/* Hero title underline from styles.css mobile */
+.page-service .service-hero .hero-title::after {
+  display: none !important;
+}
+
+/* Hero buttons — must match impulso hero */
+.page-service .service-hero .btn-primary,
+.page-service .service-hero .btn.btn-primary,
+.page-service .service-hero .hero-ctas .btn-primary,
+.page-service.diag3d .hero-ctas .btn-primary,
+.page-service.roadmap3d .hero-ctas .btn-primary,
+.page-service.sprint3d .hero-ctas .btn-primary {
+  background: #fd9f6a !important;
+  color: #023429 !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(253, 159, 106, 0.3) !important;
+}
+
+.page-service .service-hero .btn-secondary,
+.page-service .service-hero .btn.btn-secondary,
+.page-service .service-hero .hero-ctas .btn-secondary,
+.page-service.diag3d .hero-ctas .btn-secondary,
+.page-service.roadmap3d .hero-ctas .btn-secondary,
+.page-service.sprint3d .hero-ctas .btn-secondary {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+.page-service .service-hero .btn-secondary:hover,
+.page-service.diag3d .hero-ctas .btn-secondary:hover,
+.page-service.roadmap3d .hero-ctas .btn-secondary:hover,
+.page-service.sprint3d .hero-ctas .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* Hero image */
+.page-service .service-hero .hero-media .media-frame {
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25) !important;
+  transform: rotate(1deg) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.page-service .service-hero .hero-media .media-frame:hover {
+  transform: rotate(0deg) translateY(-4px) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* --- SECTION LAYOUT & SPACING --- */
+.page-service .service-section {
+  padding: 100px 0 !important;
+  background-color: #fbf9f8 !important;
+}
+
+.page-service .service-section .container {
+  max-width: 960px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+
+.page-service .service-section:nth-of-type(even) {
+  background-color: #ffffff !important;
+}
+
+/* Every 3rd section gets a warm tinted background like impulso */
+.page-service .service-section:nth-of-type(3n) {
+  background-color: #f5f0eb !important;
+}
+
+/* Section titles — match impulso-section header h2 */
+.page-service .section-title.enhanced,
+.page-service.diag3d h2.section-title.enhanced,
+.page-service.roadmap3d h2.section-title.enhanced,
+.page-service.sprint3d h2.section-title.enhanced {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-size: clamp(2rem, 4vw, 2.8rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  margin-bottom: 56px !important;
+  color: #1b1c1c !important;
+  position: relative !important;
+  padding-top: 36px !important;
+}
+
+.page-service .section-title.enhanced::after {
+  display: none !important;
+}
+
+/* Simulate the .section-label that impulso has above each h2 */
+.page-service .section-title.enhanced::before {
+  content: attr(data-label) !important;
+  display: block !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  color: #934a1c !important;
+  font-family: 'Manrope', sans-serif !important;
+  margin-bottom: 12px !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  white-space: nowrap !important;
+}
+
+/* --- UI CARDS: match impulso problem-card/phase-card look --- */
+.page-service .ui-card,
+.page-service.diag3d .ui-card,
+.page-service.roadmap3d .ui-card,
+.page-service.sprint3d .ui-card {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 20px !important;
+  padding: 40px 36px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  transition: all 0.3s ease !important;
+  margin-bottom: 0 !important;
+}
+
+.page-service .ui-card:hover,
+.page-service.diag3d .ui-card:hover,
+.page-service.roadmap3d .ui-card:hover,
+.page-service.sprint3d .ui-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+  transform: translateY(-4px) !important;
+}
+
+.page-service .ui-card h3,
+.page-service.diag3d .ui-card h3,
+.page-service.roadmap3d .ui-card h3,
+.page-service.sprint3d .ui-card h3 {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-weight: 700 !important;
+  color: #1b1c1c !important;
+  font-size: 1.35rem !important;
+  margin-bottom: 16px !important;
+  line-height: 1.3 !important;
+}
+
+.page-service .ui-card h4 {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-weight: 700 !important;
+  color: #1b1c1c !important;
+}
+
+.page-service .ui-card p {
+  font-family: 'Manrope', sans-serif !important;
+  color: #414845 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+}
+
+.page-service .ui-card strong {
+  color: #1b1c1c !important;
+}
+
+/* Simple list items */
+.page-service .simple-list {
+  font-family: 'Manrope', sans-serif !important;
+}
+
+.page-service .simple-list li,
+.page-service.diag3d .simple-list li,
+.page-service.roadmap3d .simple-list li,
+.page-service.sprint3d .simple-list li {
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+  color: #414845 !important;
+  padding: 8px 0 !important;
+  margin: 0 !important;
+}
+
+.page-service .simple-list li strong {
+  color: #1b1c1c !important;
+}
+
+/* --- DELIVERABLES GRID: 2-col, colored left borders, NO top gradient bars --- */
+.page-service .deliverables-grid,
+.page-service.roadmap3d .deliverables-grid,
+.page-service.sprint3d .deliverables-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 28px !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+/* 3-col for pages with 3 cards (diagnostico) */
+.page-service.diag3d .deliverables-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  max-width: 100% !important;
+}
+
+.page-service .deliverables-grid .ui-card,
+.page-service.diag3d .deliverables-grid .ui-card,
+.page-service.roadmap3d .deliverables-grid .ui-card,
+.page-service.sprint3d .deliverables-grid .ui-card {
+  padding: 40px 36px !important;
+}
+
+/* Kill ALL ::before top gradient bars from styles.css */
+.page-service .deliverables-grid .ui-card::before,
+.page-service.diag3d .deliverables-grid .card-operacion::before,
+.page-service.diag3d .deliverables-grid .card-comercial::before,
+.page-service.diag3d .deliverables-grid .card-informe::before,
+.page-service.roadmap3d .deliverables-grid .card-operacion::before,
+.page-service.roadmap3d .deliverables-grid .card-comercial::before,
+.page-service.roadmap3d .deliverables-grid .card-informe::before,
+.page-service.sprint3d .deliverables-grid .card-operacion::before,
+.page-service.sprint3d .deliverables-grid .card-comercial::before,
+.page-service.sprint3d .deliverables-grid .card-informe::before {
+  display: none !important;
+}
+
+.page-service .deliverables-grid .ui-card h3,
+.page-service.diag3d .deliverables-grid .ui-card h3,
+.page-service.roadmap3d .deliverables-grid .ui-card h3,
+.page-service.sprint3d .deliverables-grid .ui-card h3 {
+  font-size: 1.2rem !important;
+  letter-spacing: 0.02em !important;
+  color: #023429 !important;
+  margin-bottom: 20px !important;
+}
+
+/* Override h3 color for specific card types from styles.css */
+.page-service.diag3d .deliverables-grid .card-comercial h3,
+.page-service.roadmap3d .deliverables-grid .card-comercial h3,
+.page-service.sprint3d .deliverables-grid .card-comercial h3 {
+  color: #023429 !important;
+}
+
+.page-service.diag3d .deliverables-grid .card-informe h3,
+.page-service.roadmap3d .deliverables-grid .card-informe h3,
+.page-service.sprint3d .deliverables-grid .card-informe h3 {
+  color: #023429 !important;
+}
+
+/* Left borders for card types — clean v2 design */
+.page-service .card-operacion,
+.page-service.diag3d .deliverables-grid .card-operacion,
+.page-service.roadmap3d .deliverables-grid .card-operacion,
+.page-service.sprint3d .deliverables-grid .card-operacion {
+  border: none !important;
+  border-left: 4px solid #023429 !important;
+  background: #ffffff !important;
+}
+
+.page-service .card-comercial,
+.page-service.diag3d .deliverables-grid .card-comercial,
+.page-service.roadmap3d .deliverables-grid .card-comercial,
+.page-service.sprint3d .deliverables-grid .card-comercial {
+  border: none !important;
+  border-left: 4px solid #934a1c !important;
+  background: #ffffff !important;
+}
+
+.page-service .card-informe,
+.page-service.diag3d .deliverables-grid .card-informe,
+.page-service.roadmap3d .deliverables-grid .card-informe,
+.page-service.sprint3d .deliverables-grid .card-informe {
+  border: none !important;
+  border-left: 4px solid #fd9f6a !important;
+  background: #ffffff !important;
+}
+
+/* --- TIMELINE: clean, no vertical line, numbered circles like impulso phases --- */
+.page-service .timeline {
+  max-width: 700px !important;
+  margin: 40px auto !important;
+  padding-left: 0 !important;
+  list-style: none !important;
+  counter-reset: timeline-step !important;
+  position: relative !important;
+}
+
+/* Kill the vertical gradient line from styles.css */
+.page-service .timeline::before {
+  display: none !important;
+}
+
+.page-service .timeline li {
+  counter-increment: timeline-step !important;
+  position: relative !important;
+  padding: 28px 28px 28px 72px !important;
+  margin-bottom: 16px !important;
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+  color: #414845 !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.page-service .timeline li:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-4px) !important;
+}
+
+.page-service .timeline li::before {
+  content: counter(timeline-step) !important;
+  position: absolute !important;
+  left: 22px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: #023429 !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  box-shadow: none !important;
+}
+
+.page-service .timeline li strong {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  color: #1b1c1c !important;
+  font-size: 1.15rem !important;
+  display: inline !important;
+}
+
+/* Also kill the sprint-specific timeline gradient */
+.page-service.sprint3d .timeline-4::before {
+  display: none !important;
+}
+
+/* --- EXAMPLE / TESTIMONIAL CARDS --- */
+.page-service .example-card,
+.page-service.diag3d .example-card,
+.page-service.roadmap3d .example-card,
+.page-service.sprint3d .example-card {
+  border-left: 4px solid #934a1c !important;
+  background: #f5f3f3 !important;
+  overflow: visible !important;
+}
+
+/* Kill decorative quote mark from styles.css */
+.page-service .example-card::before,
+.page-service.diag3d .example-card::before,
+.page-service.roadmap3d .example-card::before,
+.page-service.sprint3d .example-card::before {
+  display: none !important;
+}
+
+.page-service .example-card blockquote,
+.page-service.diag3d .example-card blockquote,
+.page-service.roadmap3d .example-card blockquote,
+.page-service.sprint3d .example-card blockquote {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-style: italic !important;
+  font-size: 1.1rem !important;
+  line-height: 1.7 !important;
+  color: #1b1c1c !important;
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+
+.page-service .example-card p:last-child,
+.page-service.diag3d .example-card p:last-child,
+.page-service.roadmap3d .example-card p:last-child,
+.page-service.sprint3d .example-card p:last-child {
+  color: #023429 !important;
+  font-weight: 600 !important;
+}
+
+/* --- ENCAJE WRAP --- */
+.page-service .encaje-wrap {
+  display: grid !important;
+  gap: 24px !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+}
+
+/* --- PREPARATION SECTION — constrained like encaje --- */
+.page-service .service-section#que-necesitas-preparar .ui-card {
+  max-width: 720px !important;
+  margin: 0 auto !important;
+}
+
+/* --- PRICE SECTION — match impulso price-card look --- */
+.page-service .service-section#precio .ui-card,
+.page-service.diag3d #precio .ui-card,
+.page-service.roadmap3d #precio .ui-card,
+.page-service.sprint3d #precio .ui-card {
+  max-width: 650px !important;
+  margin: 0 auto !important;
+  padding: 48px 40px !important;
+  text-align: center !important;
+  background: #ffffff !important;
+  border: none !important;
+}
+
+/* Kill euro sign decoration from styles.css */
+.page-service.diag3d #precio .ui-card::before,
+.page-service.roadmap3d #precio .ui-card::before,
+.page-service.sprint3d #precio .ui-card::before {
+  display: none !important;
+}
+
+.page-service .service-section#precio .ui-card > p:first-child,
+.page-service.diag3d #precio .ui-card p:first-child,
+.page-service.roadmap3d #precio .ui-card p:first-child,
+.page-service.sprint3d #precio .ui-card p:first-child {
+  font-size: 1.05rem !important;
+  color: #414845 !important;
+}
+
+.page-service .service-section#precio .ui-card > p:first-child strong,
+.page-service.diag3d #precio .ui-card p:first-child strong,
+.page-service.roadmap3d #precio .ui-card p:first-child strong,
+.page-service.sprint3d #precio .ui-card p:first-child strong {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+  font-weight: 700 !important;
+  color: #023429 !important;
+  display: block !important;
+  margin-bottom: 12px !important;
+  margin-right: 0 !important;
+}
+
+/* Nested ui-cards in price section */
+.page-service .service-section#precio .ui-card .ui-card {
+  max-width: 100% !important;
+  text-align: left !important;
+  padding: 24px 28px !important;
+  margin-top: 20px !important;
+}
+
+/* --- BADGES / PILLS — match impulso badge look --- */
+.page-service .badge,
+.page-service.diag3d .badge,
+.page-service.roadmap3d .badge,
+.page-service.sprint3d .badge {
+  border-radius: 100px !important;
+  padding: 8px 16px !important;
+  border: 1px solid rgba(31, 75, 63, 0.15) !important;
+  background: #fbf9f8 !important;
+  color: #023429 !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  font-family: 'Manrope', sans-serif !important;
+  box-shadow: none !important;
+}
+
+.page-service .badges,
+.page-service.diag3d #precio .badges,
+.page-service.roadmap3d #precio .badges,
+.page-service.sprint3d #precio .badges {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin-top: 20px !important;
+  flex-wrap: wrap !important;
+}
+
+/* --- FAQ GRID — 2 columns, match impulso FAQ style --- */
+.page-service .faq-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  margin-top: 32px !important;
+}
+
+.page-service .faq-grid .ui-card {
+  border-radius: 16px !important;
+  border: none !important;
+  border-left: 3px solid transparent !important;
+  padding: 28px 24px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.page-service .faq-grid .ui-card:hover {
+  border-left-color: #934a1c !important;
+  transform: translateY(-2px) !important;
+}
+
+.page-service .faq-grid .ui-card h3 {
+  font-family: 'Newsreader', 'Georgia', serif !important;
+  font-size: 1.125rem !important;
+  margin-bottom: 12px !important;
+  color: #1b1c1c !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.page-service .faq-grid .ui-card h3::before {
+  content: "?" !important;
+  background: #934a1c !important;
+  color: #ffffff !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  flex-shrink: 0 !important;
+}
+
+.page-service .faq-grid .ui-card p {
+  font-family: 'Manrope', sans-serif !important;
+  line-height: 1.6 !important;
+  color: #414845 !important;
+}
+
+/* --- CTA FINAL: dark gradient rounded box with SVG pattern (matches impulso final-cta) --- */
+.page-service .cta-final {
+  background: transparent !important;
+  padding: 40px 0 80px !important;
+}
+
+.page-service .cta-final .container {
+  position: relative !important;
+  background: linear-gradient(135deg, rgba(2, 52, 41, 0.95) 0%, rgba(31, 75, 63, 0.95) 100%) !important;
+  padding: 80px 40px !important;
+  border-radius: 24px !important;
+  text-align: center !important;
+  max-width: 900px !important;
+}
+
+.page-service .cta-final .container::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+  border-radius: 24px !important;
+  pointer-events: none !important;
+}
+
+.page-service .cta-final .section-title.enhanced {
+  color: #ffffff !important;
+  font-size: clamp(2rem, 4vw, 2.5rem) !important;
+  position: relative !important;
+  z-index: 1 !important;
+  margin-bottom: 24px !important;
+  padding-top: 0 !important;
+}
+
+/* Hide section label in CTA area */
+.page-service .cta-final .section-title.enhanced::before {
+  display: none !important;
+}
+
+.page-service .cta-final p {
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  max-width: 600px !important;
+  margin: 0 auto 32px !important;
+}
+
+.page-service .cta-final .hero-ctas {
+  position: relative !important;
+  z-index: 1 !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  gap: 20px !important;
+}
+
+.page-service .cta-final .btn-primary,
+.page-service .cta-final .btn.btn-primary {
+  background: #fd9f6a !important;
+  color: #023429 !important;
+}
+
+.page-service .cta-final .btn-secondary,
+.page-service .cta-final .btn.btn-secondary {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+/* --- PLAN DE ACCIÓN HIGHLIGHT --- */
+.page-service .plan-accion-highlight {
+  max-width: 600px !important;
+  margin: 24px auto 0 !important;
+  padding: 20px 28px !important;
+  background: linear-gradient(135deg, rgba(2, 52, 41, 0.06) 0%, rgba(31, 75, 63, 0.03) 100%) !important;
+  border-radius: 16px !important;
+  border-left: 4px solid #023429 !important;
+  text-align: center !important;
+}
+
+.page-service .plan-accion-highlight p {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 1.05rem !important;
+  color: #1b1c1c !important;
+}
+
+/* --- HERO SPLIT GRID: balanced 2-col like impulso --- */
+.page-service .service-hero .hero-split-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 60px !important;
+  align-items: center !important;
+}
+
+/* --- NOTE --- */
+.page-service .note {
+  font-family: 'Manrope', sans-serif !important;
+  color: #414845 !important;
+  font-size: 0.95rem !important;
+  background: rgba(31, 75, 63, 0.03) !important;
+  border-left: 3px solid #934a1c !important;
+  border-radius: 8px !important;
+  padding: 12px 20px !important;
+  font-style: italic !important;
+}
+
+/* --- INLINE CTA --- */
+.page-service .inline-cta {
+  margin-top: 40px !important;
+  text-align: center !important;
+}
+
+/* ========================================
+   PAGE-SERVICE RESPONSIVE
+   ======================================== */
+
+@media (max-width: 980px) {
+  .page-service .service-hero .hero-split-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-service .service-hero {
+    padding: 90px 0 70px !important;
+  }
+
+  .page-service .service-hero .hero-title,
+  .page-service.diag3d h1.hero-title,
+  .page-service.roadmap3d h1.hero-title,
+  .page-service.sprint3d h1.hero-title {
+    font-size: clamp(1.6rem, 5vw, 2.2rem) !important;
+  }
+
+  .page-service .service-section {
+    padding: 72px 0 !important;
+  }
+
+  .page-service .deliverables-grid,
+  .page-service.diag3d .deliverables-grid,
+  .page-service.roadmap3d .deliverables-grid,
+  .page-service.sprint3d .deliverables-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-service .faq-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-service .cta-final .container {
+    padding: 60px 24px !important;
+    margin: 0 16px !important;
+  }
+
+  .page-service .timeline li {
+    padding: 24px 20px 24px 60px !important;
+  }
+
+  .page-service .timeline li::before {
+    left: 14px !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .page-service .ui-card,
+  .page-service.diag3d .ui-card,
+  .page-service.roadmap3d .ui-card,
+  .page-service.sprint3d .ui-card {
+    padding: 28px 24px !important;
+  }
+
+  .page-service .btn,
+  .page-service .btn-primary,
+  .page-service .btn-secondary {
+    padding: 14px 28px !important;
+    font-size: 0.95rem !important;
+  }
+
+  .sticky-cta-mobile .btn {
+    border-radius: 100px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-service .service-hero {
+    padding: 70px 0 50px !important;
+  }
+
+  .page-service .service-hero .hero-title,
+  .page-service.diag3d h1.hero-title,
+  .page-service.roadmap3d h1.hero-title,
+  .page-service.sprint3d h1.hero-title {
+    font-size: clamp(1.4rem, 6vw, 1.8rem) !important;
+  }
+
+  .page-service .service-section {
+    padding: 48px 0 !important;
+  }
+
+  .page-service .ui-card,
+  .page-service.diag3d .ui-card,
+  .page-service.roadmap3d .ui-card,
+  .page-service.sprint3d .ui-card {
+    padding: 24px 20px !important;
+  }
+
+  .page-service .cta-final .container {
+    padding: 48px 20px !important;
+  }
+
+  .page-service .section-title.enhanced,
+  .page-service.diag3d h2.section-title.enhanced,
+  .page-service.roadmap3d h2.section-title.enhanced,
+  .page-service.sprint3d h2.section-title.enhanced {
+    font-size: clamp(1.4rem, 6vw, 2rem) !important;
+  }
+
+  .page-service .deliverables-grid {
+    gap: 16px !important;
+  }
+
+  .page-service .btn,
+  .page-service .btn-primary,
+  .page-service .btn-secondary {
+    padding: 12px 24px !important;
+    font-size: 0.9rem !important;
+    width: 100% !important;
+  }
+}
+
+@media print {
+  .btn,
+  .cta-button,
+  button {
+    border: 1px solid currentColor;
+    background: transparent;
+  }
+
+  .glass-card {
+    background: transparent;
+    border: 1px solid var(--on-surface);
+    box-shadow: none;
+  }
+}
+
+/* ======================================================================
+   RECURSOS LIST — v2 overrides
+   ====================================================================== */
+
+/* --- Section layout --- */
+.recursos-section {
+  padding: 100px 0 !important;
+  background: var(--surface, #fbf9f8) !important;
+}
+
+.recursos-section .container {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+
+/* --- Section header with data-label --- */
+.recursos-section .section-header {
+  text-align: center !important;
+  margin-bottom: 56px !important;
+  max-width: 640px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.recursos-section .section-header[data-label]::before {
+  content: attr(data-label) !important;
+  display: block !important;
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--secondary, #934a1c) !important;
+  margin-bottom: 12px !important;
+}
+
+.recursos-section .section-title {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: clamp(2rem, 5vw, 2.8rem) !important;
+  font-weight: 700 !important;
+  color: var(--primary, #023429) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 16px !important;
+}
+
+.recursos-section .section-subtitle {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-size: 1.1rem !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.7 !important;
+  line-height: 1.6 !important;
+}
+
+/* --- Grid --- */
+.recursos-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 28px !important;
+  margin-top: 0 !important;
+}
+
+/* --- Cards --- */
+.recurso-card {
+  background: white !important;
+  border-radius: 16px !important;
+  border: none !important;
+  box-shadow: 0 2px 16px rgba(31, 75, 63, 0.06) !important;
+  overflow: hidden !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.recurso-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 32px rgba(31, 75, 63, 0.10) !important;
+}
+
+.recurso-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+/* --- Card image --- */
+.recurso-image {
+  height: 200px !important;
+  overflow: hidden !important;
+  background: var(--surface, #fbf9f8) !important;
+}
+
+.recurso-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.4s ease !important;
+}
+
+.recurso-card:hover .recurso-image img {
+  transform: scale(1.03) !important;
+}
+
+/* --- Card content --- */
+.recurso-content {
+  padding: 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+}
+
+.recurso-title {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+  margin-bottom: 8px !important;
+  line-height: 1.3 !important;
+}
+
+.recurso-summary {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.65 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 20px !important;
+  flex: 1 !important;
+}
+
+/* --- Card button --- */
+.recurso-content .btn.btn-secondary {
+  display: inline-block !important;
+  align-self: flex-start !important;
+  padding: 10px 20px !important;
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+  background: transparent !important;
+  border: 1.5px solid rgba(31, 75, 63, 0.2) !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.recurso-card:hover .btn.btn-secondary {
+  background: var(--secondary-container, #fd9f6a) !important;
+  color: var(--primary, #023429) !important;
+  border-color: var(--secondary-container, #fd9f6a) !important;
+}
+
+/* --- Responsive --- */
+@media (max-width: 980px) {
+  .recursos-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .recursos-section {
+    padding: 80px 0 !important;
+  }
+
+  .recursos-section .section-header {
+    margin-bottom: 40px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .recursos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .recurso-image {
+    height: 180px !important;
+  }
+}
+
+/* ======================================================================
+   RECURSO DETAIL — v2 overrides
+   ====================================================================== */
+
+.recurso-detail-section {
+  padding: 100px 0 60px !important;
+  max-width: 100% !important;
+  background: var(--surface, #fbf9f8) !important;
+}
+
+.recurso-detail-section .container {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+
+/* --- Header --- */
+.recurso-detail-section .recurso-header {
+  text-align: center !important;
+  margin-bottom: 40px !important;
+}
+
+.recurso-detail-section .recurso-header .recurso-title {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: clamp(2rem, 5vw, 2.6rem) !important;
+  font-weight: 700 !important;
+  color: var(--primary, #023429) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 16px !important;
+}
+
+.recurso-detail-section .recurso-description {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-size: 1.1rem !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.7 !important;
+  max-width: 560px !important;
+  margin: 0 auto !important;
+  line-height: 1.6 !important;
+}
+
+/* --- Cover image --- */
+.recurso-detail-section .recurso-visual {
+  margin-bottom: 48px !important;
+}
+
+.recurso-detail-section .recurso-cover {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 24px rgba(31, 75, 63, 0.08) !important;
+}
+
+/* --- Content sections --- */
+.recurso-detail-section .recurso-content-detail {
+  max-width: 720px !important;
+  margin: 0 auto 48px auto !important;
+  padding: 0 !important;
+}
+
+.recurso-detail-section .content-section {
+  margin-bottom: 36px !important;
+}
+
+.recurso-detail-section .content-section h2 {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+  margin-bottom: 12px !important;
+}
+
+.recurso-detail-section .content-section p {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.75 !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+}
+
+.recurso-detail-section .content-section ul,
+.recurso-detail-section .content-section ol {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.75 !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+  padding-left: 1.25rem !important;
+}
+
+.recurso-detail-section .content-section li {
+  margin-bottom: 10px !important;
+}
+
+.recurso-detail-section .content-section li strong {
+  color: var(--primary, #023429) !important;
+  opacity: 1 !important;
+}
+
+/* --- CTA / Tally form section --- */
+.recurso-detail-section .recurso-cta {
+  background: white !important;
+  border: 1px solid rgba(31, 75, 63, 0.08) !important;
+  border-radius: 16px !important;
+  padding: 40px 32px !important;
+  color: var(--primary, #023429) !important;
+  text-align: center !important;
+  box-shadow: 0 4px 24px rgba(31, 75, 63, 0.06) !important;
+}
+
+.recurso-detail-section .cta-container h3 {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+  margin-bottom: 8px !important;
+}
+
+.recurso-detail-section .cta-container p {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.6 !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 24px !important;
+}
+
+.recurso-detail-section .form-info {
+  margin-top: 16px !important;
+}
+
+.recurso-detail-section .form-info p {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.45 !important;
+  font-size: 0.85rem !important;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .recurso-detail-section {
+    padding: 80px 0 40px !important;
+  }
+
+  .recurso-detail-section .recurso-cta {
+    padding: 32px 20px !important;
+  }
+}
+
+/* =====================================================
+   GRACIAS PAGE — v2 overrides
+   ===================================================== */
+.gracias-section {
+  padding: 100px 0 !important;
+  background: var(--surface, #fbf9f8) !important;
+}
+
+.gracias-content {
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.gracias-icon {
+  font-size: 3.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.gracias-title {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: clamp(2rem, 5vw, 2.8rem) !important;
+  font-weight: 700 !important;
+  color: var(--primary, #023429) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 1rem !important;
+}
+
+.gracias-subtitle {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-size: 1.1rem !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.7 !important;
+  line-height: 1.6 !important;
+}
+
+.gracias-section .download-action {
+  margin: 2rem 0 !important;
+}
+
+.gracias-section .download-action .btn-primary,
+.gracias-section .actions .btn-primary {
+  background: var(--primary, #023429) !important;
+  color: white !important;
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-weight: 600 !important;
+  padding: 14px 32px !important;
+  border-radius: 8px !important;
+  transition: all 0.25s ease !important;
+}
+
+.gracias-section .download-action .btn-primary:hover,
+.gracias-section .actions .btn-primary:hover {
+  background: var(--primary-container, #1F4B3F) !important;
+}
+
+.gracias-section .next-steps h2 {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.gracias-section .step-card {
+  background: white !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 16px rgba(31, 75, 63, 0.06) !important;
+  padding: 2rem !important;
+  text-align: center !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.gracias-section .step-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 32px rgba(31, 75, 63, 0.10) !important;
+}
+
+.gracias-section .step-card h3 {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+}
+
+.gracias-section .step-card .btn-secondary {
+  background: transparent !important;
+  color: var(--primary, #023429) !important;
+  border: 1.5px solid rgba(31, 75, 63, 0.2) !important;
+  border-radius: 8px !important;
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  padding: 10px 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.gracias-section .step-card:hover .btn-secondary {
+  background: var(--secondary-container, #fd9f6a) !important;
+  border-color: var(--secondary-container, #fd9f6a) !important;
+}
+
+@media (max-width: 768px) {
+  .gracias-section {
+    padding: 80px 0 !important;
+  }
+}
+
+/* =====================================================
+   COMING-SOON PAGE — v2 overrides
+   ===================================================== */
+.coming-soon-section {
+  padding: 100px 0 !important;
+  background: var(--surface, #fbf9f8) !important;
+}
+
+.coming-soon-content {
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.coming-soon-icon {
+  font-size: 3.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.coming-soon-title {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: clamp(2rem, 5vw, 2.8rem) !important;
+  font-weight: 700 !important;
+  color: var(--primary, #023429) !important;
+  line-height: 1.15 !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.coming-soon-subtitle {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.8 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.coming-soon-description {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-size: 1.05rem !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.65 !important;
+  line-height: 1.6 !important;
+  max-width: 560px !important;
+  margin: 0 auto 2rem !important;
+}
+
+.coming-soon-cta .btn-primary {
+  background: var(--primary, #023429) !important;
+  color: white !important;
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-weight: 600 !important;
+  padding: 14px 32px !important;
+  border-radius: 8px !important;
+  transition: all 0.25s ease !important;
+}
+
+.coming-soon-cta .btn-primary:hover {
+  background: var(--primary-container, #1F4B3F) !important;
+}
+
+.explore-section {
+  margin-top: 4rem !important;
+  padding-top: 3rem !important;
+  border-top: 1.5px solid rgba(31, 75, 63, 0.1) !important;
+}
+
+.explore-title {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+  margin-bottom: 2rem !important;
+}
+
+.explore-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+}
+
+.explore-card {
+  background: white !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 16px rgba(31, 75, 63, 0.06) !important;
+  padding: 2rem !important;
+  text-align: center !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.explore-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 32px rgba(31, 75, 63, 0.10) !important;
+}
+
+.explore-card h4 {
+  font-family: var(--font-headline, 'Newsreader', serif) !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: var(--primary, #023429) !important;
+}
+
+.explore-card p {
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  color: var(--primary, #023429) !important;
+  opacity: 0.6 !important;
+  font-size: 0.9rem !important;
+}
+
+.explore-card .btn-secondary {
+  background: transparent !important;
+  color: var(--primary, #023429) !important;
+  border: 1.5px solid rgba(31, 75, 63, 0.2) !important;
+  border-radius: 8px !important;
+  font-family: var(--font-body, 'Manrope', sans-serif) !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  padding: 10px 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+.explore-card:hover .btn-secondary {
+  background: var(--secondary-container, #fd9f6a) !important;
+  border-color: var(--secondary-container, #fd9f6a) !important;
+}
+
+@media (max-width: 768px) {
+  .coming-soon-section {
+    padding: 80px 0 !important;
+  }
+  .explore-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* =====================================================
+   RENOVAR ACCESO PAGE — v2 overrides
+   ===================================================== */
+.renovar-acceso-section {
+  padding: 100px 0 !important;
+  background: var(--surface, #fbf9f8) !important;
+}
+
+@media (max-width: 768px) {
+  .renovar-acceso-section {
+    padding: 80px 0 !important;
+  }
+}
