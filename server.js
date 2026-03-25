@@ -186,10 +186,46 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
   });
 });
 
+// Coming Soon (página genérica para secciones no disponibles)
+app.get('/coming-soon', (req, res) => {
+  res.render('coming-soon', {
+    title: 'Próximamente — Oficios Circulares',
+    description: 'Esta sección estará disponible pronto.',
+    canonical: '/coming-soon'
+  });
+});
+
+// Confirmación de registro en directorio (alias de /dir/confirmacion)
+app.get('/dir-confirmacion', (req, res) => {
+  res.render('dir-confirmacion', { q: req.query, noindex: true });
+});
+
+// Gracias E-WEAR (alias standalone)
+app.get('/gracias-ewear', (req, res) => {
+  res.set('X-Robots-Tag', 'noindex, nofollow');
+  res.render('gracias-ewear');
+});
+
+// Mapa gate (puerta de acceso al mapa — alias standalone)
+app.get('/mapa-gate', (req, res) => {
+  res.render('mapa-gate', { q: req.query, noindex: false });
+});
+
+// Directorio (alias de /dir — redirige a /dir con los mismos query params)
+app.get('/directorio', (req, res) => {
+  const q = req.originalUrl.split('?')[1];
+  res.redirect(301, q ? `/dir?${q}` : '/dir');
+});
+
 // Ruta Impulso 3D (artesanos y talleres pequeños)
 app.get('/impulso-3d', (req, res) => {
   res.render('impulso-3d');
 });
+
+// Redirects 301 para URLs antiguas de servicios
+app.get('/diagnostico-3d', (req, res) => res.redirect(301, '/servicios/diagnostico-3d'));
+app.get('/roadmap-3d', (req, res) => res.redirect(301, '/servicios/roadmap-3d'));
+app.get('/sprint-3d', (req, res) => res.redirect(301, '/servicios/sprint-3d'));
 
 // Rutas de servicios
 app.get('/servicios/diagnostico-3d', (req, res) => {
