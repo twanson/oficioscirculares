@@ -11,21 +11,31 @@ html, body {
 
 /* --- MOBILE NAV DROPDOWN FIXES --- */
 @media (max-width: 768px) {
-  .nav-menu.active .dropdown-menu.show .dropdown-item {
-    padding: 10px 16px;
-    margin: 4px 8px;
-    border-radius: 8px;
-    border-left: none;
-    font-size: 0.9rem;
+  .nav-menu.active .dropdown-menu .dropdown-item {
+    padding: 10px 16px !important;
+    margin: 4px 0 !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    font-size: 0.9rem !important;
   }
 
-  .nav-menu.active .dropdown-menu.show .dropdown-section-title {
-    font-size: 0.7rem;
-    padding: 4px 16px;
+  .nav-menu.active .dropdown-menu .dropdown-item:focus {
+    box-shadow: none !important;
+    border-left: none !important;
   }
 
-  .nav-menu.active .dropdown-menu.show .dropdown-divider {
-    margin: 4px 16px;
+  .nav-menu.active .dropdown-menu .dropdown-section-title {
+    font-size: 0.7rem !important;
+    padding: 4px 16px !important;
+  }
+
+  .nav-menu.active .dropdown-menu .dropdown-divider {
+    margin: 4px 16px !important;
   }
 }
 
