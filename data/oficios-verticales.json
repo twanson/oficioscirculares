@@ -49,7 +49,8 @@
       "comunicación taller cerámica",
       "marca personal ceramista",
       "cómo vender cerámica online España"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/ceramica-artesanal.jpg"
   },
   {
     "keyword": "comunicación barro artesanal construcción",
@@ -101,7 +102,8 @@
       "terracota artesanal marketing",
       "materiales naturales arquitectura",
       "todobarro comunicación"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/barro-artesanal.jpg"
   },
   {
     "keyword": "comunicación joyería artesanal",
@@ -153,7 +155,8 @@
       "marca personal joyero",
       "comunicación joyería autor",
       "branding joyería sostenible"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/joyeria-artesanal.jpg"
   },
   {
     "keyword": "comunicación cosmética natural artesanal",
@@ -205,7 +208,8 @@
       "marca cosmética ecológica España",
       "comunicación cosmética sostenible",
       "branding cosmética natural"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/cosmetica-natural.jpg"
   },
   {
     "keyword": "comunicación carpintería ebanistería artesanal",
@@ -257,7 +261,8 @@
       "cómo conseguir clientes carpintería",
       "presencia online carpintero",
       "SEO carpintería artesanal"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/carpinteria-y-ebanisteria.jpg"
   },
   {
     "keyword": "comunicación textil sostenible moda slow",
@@ -309,7 +314,8 @@
       "branding textil ecológico",
       "vender moda sostenible España",
       "marca de ropa sostenible comunicación"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/textil-sostenible.jpg"
   },
   {
     "keyword": "comunicación alimentación artesanal",
@@ -361,7 +367,8 @@
       "vender productos artesanales online",
       "branding cerveza artesanal",
       "marca panadería artesana"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/alimentacion-artesanal.jpg"
   },
   {
     "keyword": "comunicación restauración muebles upcycling",
@@ -413,7 +420,8 @@
       "vender muebles restaurados",
       "economía circular muebles",
       "taller restauración comunicación"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/restauracion-y-upcycling.jpg"
   },
   {
     "keyword": "comunicación marroquinería cuero artesanal",
@@ -465,7 +473,8 @@
       "vender productos de cuero artesanal",
       "marca artesanal cuero España",
       "branding marroquinería"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/cuero-y-marroquineria.jpg"
   },
   {
     "keyword": "comunicación herrería forja artística",
@@ -517,7 +526,8 @@
       "forja artística España",
       "herrero artístico presencia digital",
       "branding forja artesanal"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/forja-y-herreria.jpg"
   },
   {
     "keyword": "comunicación vidrio artesanal soplado",
@@ -569,7 +579,8 @@
       "vender vidrio artístico",
       "taller vidrio soplado comunicación",
       "branding vidrio artesanal"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/vidrio-artesanal.jpg"
   },
   {
     "keyword": "comunicación encuadernación artesanal",
@@ -621,7 +632,8 @@
       "comunicación taller encuadernación",
       "encuadernación España artesana",
       "branding encuadernación"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/encuadernacion-artesanal.jpg"
   },
   {
     "keyword": "comunicación lana costura artesanal",
@@ -673,6 +685,7 @@
       "comunicación costura artesanal",
       "marca artesana lana",
       "branding crochet artesanal España"
-    ]
+    ],
+    "card_image": "/assets/images/oficios/cards/lana-y-costura.jpg"
   }
 ]
