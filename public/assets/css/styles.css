@@ -1409,7 +1409,7 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 2fr 1fr;
     gap: 40px;
 }
 
