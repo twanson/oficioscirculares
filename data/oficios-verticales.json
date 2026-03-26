@@ -687,5 +687,58 @@
       "branding crochet artesanal España"
     ],
     "card_image": "/assets/images/oficios/cards/lana-y-costura.jpg"
+  },
+  {
+    "keyword": "comunicación cestería artesanal",
+    "slug": "cesteria-y-mimbre",
+    "titulo": "Comunicación para Cesteros y Artesanos del Mimbre | Oficios Circulares",
+    "h1": "Tus cestas cuentan más de lo que <em>imaginas</em>",
+    "subtitulo": "Trenzas fibras naturales con las manos, pero tu comunicación no refleja la historia que hay detrás de cada cesta. Te ayudamos a darle voz a tu oficio para que conecte con quien valora lo hecho a mano.",
+    "sector": "Cestería y Mimbre",
+    "sector_lower": "cestería y mimbre",
+    "badge": "Cestería y mimbre",
+    "hero_image": "/assets/images/oficios/cesteria-y-mimbre.jpg",
+    "problema": "Pasas horas seleccionando las varas, remojándolas, trenzando cada pieza con una técnica que aprendiste de generaciones. Pero cuando llega el momento de mostrar tu trabajo al mundo, sientes que las fotos no transmiten, que las redes te comen tiempo sin resultados, y que tus cestas acaban compitiendo en precio con las de importación industrial. Sabes que tu trabajo vale más, pero no encuentras la forma de comunicarlo sin sonar pretencioso ni perder autenticidad.",
+    "solucion": "En Oficios Circulares trabajamos contigo para construir una comunicación que haga justicia a tu oficio. Desde la identidad visual hasta la estrategia de contenido, te ayudamos a contar la historia de tus manos, tu material y tu territorio. Para que cada cesta llegue a quien sabe apreciar lo que significa.",
+    "beneficios": [
+      "Una marca que refleja la autenticidad de tu trabajo con la fibra natural y el trenzado tradicional",
+      "Una comunidad de seguidores que entienden el valor del mimbre frente al plástico y la producción en serie",
+      "Precios que honran tu maestría, no que compiten con las cestas de importación",
+      "Una presencia digital que convierte curiosos en clientes que buscan piezas únicas y con historia"
+    ],
+    "cards": [
+      {
+        "titulo": "Comunicación que fluye",
+        "texto": "Un sistema a tu medida para comunicar tu cestería sin improvisar ni perder horas de taller. Tú trenzas, nosotros te ayudamos a contar.",
+        "variante": "dark"
+      },
+      {
+        "titulo": "Circularidad con sentido",
+        "texto": "Tu mimbre crece, se corta, se trenza y vuelve a la tierra. Comunicamos ese ciclo como ventaja real, no como etiqueta verde.",
+        "variante": "light"
+      },
+      {
+        "titulo": "Más tiempo para crear",
+        "texto": "Menos gestión, más taller. Tu energía de vuelta a las varas, al agua, a tus manos.",
+        "variante": "accent"
+      }
+    ],
+    "cta_final_h2": "Tu cestería merece ser contada",
+    "cta_final_texto": "Un diagnóstico gratuito de 30 minutos donde analizamos tu comunicación actual y te mostramos el camino para que tu trabajo con el mimbre conecte con quien realmente lo valora.",
+    "related": [
+      "textil-sostenible",
+      "restauracion-y-upcycling",
+      "carpinteria-y-ebanisteria"
+    ],
+    "volumen_estimado": 2000,
+    "dificultad": 2,
+    "keywords_secundarias": [
+      "marketing para cesteros artesanales",
+      "vender cestería mimbre online España",
+      "marca personal artesano mimbre",
+      "comunicación taller cestería",
+      "cómo vender cestas artesanales"
+    ],
+    "card_image": "/assets/images/oficios/cards/cesteria-y-mimbre.jpg"
   }
 ]
