@@ -1437,6 +1437,21 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     color: var(--arena);
 }
 
+/* Footer Oficios grid – 2 columns */
+.footer-oficios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.footer-column--oficios {
+    min-width: 240px;
+}
+
+.footer-oficios-grid li {
+    margin-bottom: 0;
+}
+
 .footer-bottom {
     text-align: center;
     padding-top: 40px;
@@ -1792,6 +1807,10 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     .footer-links {
         grid-template-columns: 1fr;
         gap: 32px;
+    }
+
+    .footer-oficios-grid {
+        grid-template-columns: 1fr;
     }
 }
 
