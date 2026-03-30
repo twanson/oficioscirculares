@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './ia-para-artesanos/',
+      title: 'IA para artesanos: más taller, menos pantalla',
+      excerpt: 'Los oficios manuales son los más resistentes a la IA. Pero también pueden aprovecharla. Guía práctica con herramientas, ideas y ayudas según tu tipo de taller.',
+      date: '2026-03-30',
+      readingMinutes: 16,
+      cover: ASSETS_BASE + '/images/blog/ia-para-artesanos/hero_ia_artesanos.jpg',
+      tags: ['estrategia', 'circularidad']
+    },
+    {
       slug: './relevo-generacional-artesania/',
       title: 'Relevo generacional en artesanía: 5 palancas para que tu oficio no muera contigo',
       excerpt: 'Guía práctica con 5 palancas para activar el relevo generacional en tu taller. Con datos reales, casos en España y un plan de acción de 30 días.',
