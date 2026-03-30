@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F0E8"/>
+      <stop offset="100%" style="stop-color:#EDE7D9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative accent bar left -->
+  <rect x="0" y="0" width="8" height="630" fill="#C5D94A"/>
+
+  <!-- Decorative circles -->
+  <circle cx="1050" cy="100" r="120" fill="#C5D94A" opacity="0.15"/>
+  <circle cx="1100" cy="500" r="80" fill="#C17F59" opacity="0.12"/>
+  <circle cx="150" cy="550" r="60" fill="#2D3E2F" opacity="0.08"/>
+
+  <!-- Badge -->
+  <rect x="60" y="50" width="240" height="36" rx="18" fill="#C5D94A"/>
+  <text x="180" y="74" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#2D3E2F" text-anchor="middle" letter-spacing="1">GUIA GRATUITA · 10 PAG</text>
+
+  <!-- Title -->
+  <text x="60" y="150" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#2D3E2F">Kit de arranque IA</text>
+  <text x="60" y="215" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#2D3E2F">para tu taller artesano</text>
+
+  <!-- Subtitle -->
+  <text x="60" y="275" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#C17F59" font-weight="400">5 herramientas que puedes usar hoy mismo</text>
+  <text x="60" y="305" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#C17F59" font-weight="400">sin experiencia tecnica</text>
+
+  <!-- Tool icons list -->
+  <text x="60" y="380" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#2D3E2F" opacity="0.8">ChatGPT · Canva IA · Ideogram · Meta Business Suite · Tidio</text>
+
+  <!-- Bullet points -->
+  <circle cx="72" cy="425" r="4" fill="#C5D94A"/>
+  <text x="88" y="430" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2D3E2F" opacity="0.7">Guia paso a paso para cada herramienta</text>
+
+  <circle cx="72" cy="460" r="4" fill="#C5D94A"/>
+  <text x="88" y="465" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2D3E2F" opacity="0.7">Ejemplos reales de talleres</text>
+
+  <circle cx="72" cy="495" r="4" fill="#C5D94A"/>
+  <text x="88" y="500" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2D3E2F" opacity="0.7">Plan de 4 semanas + checklist</text>
+
+  <!-- PDF mockup -->
+  <g transform="translate(780, 120)">
+    <!-- Shadow -->
+    <rect x="8" y="8" width="280" height="380" rx="4" fill="#000" opacity="0.1"/>
+    <!-- Page -->
+    <rect x="0" y="0" width="280" height="380" rx="4" fill="#FFFFFF" stroke="#DDD" stroke-width="1"/>
+    <!-- Header bar -->
+    <rect x="0" y="0" width="280" height="60" rx="4" fill="#2D3E2F"/>
+    <rect x="0" y="30" width="280" height="30" fill="#2D3E2F"/>
+    <text x="140" y="38" font-family="Georgia, serif" font-size="16" fill="#F5F0E8" text-anchor="middle" font-weight="700">Kit de arranque IA</text>
+    <!-- Content lines -->
+    <rect x="24" y="80" width="180" height="8" rx="4" fill="#2D3E2F" opacity="0.15"/>
+    <rect x="24" y="100" width="230" height="8" rx="4" fill="#2D3E2F" opacity="0.1"/>
+    <rect x="24" y="120" width="160" height="8" rx="4" fill="#2D3E2F" opacity="0.1"/>
+    <!-- Icon circles -->
+    <circle cx="56" cy="175" r="20" fill="#C5D94A" opacity="0.3"/>
+    <circle cx="112" cy="175" r="20" fill="#C17F59" opacity="0.3"/>
+    <circle cx="168" cy="175" r="20" fill="#2D3E2F" opacity="0.15"/>
+    <circle cx="224" cy="175" r="20" fill="#C5D94A" opacity="0.3"/>
+    <!-- More content lines -->
+    <rect x="24" y="220" width="230" height="6" rx="3" fill="#2D3E2F" opacity="0.08"/>
+    <rect x="24" y="238" width="200" height="6" rx="3" fill="#2D3E2F" opacity="0.08"/>
+    <rect x="24" y="256" width="220" height="6" rx="3" fill="#2D3E2F" opacity="0.08"/>
+    <rect x="24" y="274" width="180" height="6" rx="3" fill="#2D3E2F" opacity="0.08"/>
+    <!-- Checklist -->
+    <rect x="24" y="310" width="14" height="14" rx="2" fill="none" stroke="#C5D94A" stroke-width="2"/>
+    <rect x="48" y="313" width="120" height="6" rx="3" fill="#2D3E2F" opacity="0.1"/>
+    <rect x="24" y="336" width="14" height="14" rx="2" fill="none" stroke="#C5D94A" stroke-width="2"/>
+    <rect x="48" y="339" width="140" height="6" rx="3" fill="#2D3E2F" opacity="0.1"/>
+  </g>
+
+  <!-- Footer: OC branding -->
+  <text x="60" y="580" font-family="Georgia, serif" font-size="20" fill="#2D3E2F" font-weight="400" opacity="0.6">Oficios Circulares</text>
+  <text x="60" y="605" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#2D3E2F" opacity="0.4">oficioscirculares.com</text>
+</svg>

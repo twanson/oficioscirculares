@@ -115,5 +115,22 @@
           "form_tally_id": "9qlRa5",
           "cta": "Descargar Test Gratis",
           "updated_at": "2026-03-18"
+    },
+    {
+          "slug": "kit-ia-taller-artesano",
+          "title": "Kit de arranque IA para tu taller artesano",
+          "type": "guia",
+          "summary": "5 herramientas de inteligencia artificial que puedes usar hoy mismo en tu taller — sin experiencia técnica. Guía paso a paso, ejemplos reales y plan de 4 semanas.",
+          "tags": [
+                  "inteligencia-artificial",
+                  "herramientas",
+                  "productividad",
+                  "tecnologia"
+          ],
+          "cover": "/img/recursos/covers/kit-ia-taller-artesano-cover.png",
+          "pdf": "/downloads/Kit-IA-Taller-Artesano-OC.pdf",
+          "form_tally_id": "pbGaWb",
+          "cta": "Descargar Kit Gratis",
+          "updated_at": "2026-03-30"
     }
 ]
