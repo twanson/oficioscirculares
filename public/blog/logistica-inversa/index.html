@@ -979,7 +979,25 @@
         navMenu.classList.toggle('active');
       });
     }
+
+    // Servicios dropdown
+    const dropdownBtn = document.getElementById('servicios-dropdown-btn');
+    const dropdownMenu = document.getElementById('servicios-dropdown-menu');
+    if (dropdownBtn && dropdownMenu) {
+      dropdownBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isOpen = dropdownBtn.getAttribute('aria-expanded') === 'false';
+        dropdownBtn.setAttribute('aria-expanded', isOpen);
+        dropdownMenu.classList.toggle('show', isOpen);
+      });
+      document.addEventListener('click', function(e) {
+        if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownBtn.setAttribute('aria-expanded', 'false');
+          dropdownMenu.classList.remove('show');
+        }
+      });
+    }
   </script>
-  <script src="../../assets/js/script.js"></script>
+  <script src="/assets/js/script.js"></script>
 </body>
 </html>
