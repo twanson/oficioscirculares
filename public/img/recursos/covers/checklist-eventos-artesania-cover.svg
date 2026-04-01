@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F0E8"/>
+      <stop offset="100%" style="stop-color:#EDE7D9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative accent bar left -->
+  <rect x="0" y="0" width="8" height="630" fill="#C5D94A"/>
+
+  <!-- Decorative circles -->
+  <circle cx="1050" cy="100" r="120" fill="#C5D94A" opacity="0.15"/>
+  <circle cx="1100" cy="500" r="80" fill="#C17F59" opacity="0.12"/>
+  <circle cx="150" cy="550" r="60" fill="#2D3E2F" opacity="0.08"/>
+
+  <!-- Badge -->
+  <rect x="60" y="50" width="300" height="36" rx="18" fill="#C5D94A"/>
+  <text x="210" y="74" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#2D3E2F" text-anchor="middle" letter-spacing="1">CHECKLIST GRATUITO · 2 PAG</text>
+
+  <!-- Title -->
+  <text x="60" y="150" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#2D3E2F">Checklist Express</text>
+  <text x="60" y="210" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#2D3E2F">Eventos y Ferias</text>
+  <text x="60" y="270" font-family="Georgia, serif" font-size="48" font-weight="700" fill="#2D3E2F">de Artesania</text>
+
+  <!-- Subtitle -->
+  <text x="60" y="325" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#C17F59" font-weight="400">Prepara, comunica, capta y cierra</text>
+  <text x="60" y="355" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#C17F59" font-weight="400">en cada evento artesanal</text>
+
+  <!-- Bullet points -->
+  <circle cx="72" cy="410" r="4" fill="#C5D94A"/>
+  <text x="88" y="415" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2D3E2F" opacity="0.7">6 bloques: logistica, mensaje, difusion, captacion, cierre</text>
+
+  <circle cx="72" cy="445" r="4" fill="#C5D94A"/>
+  <text x="88" y="450" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2D3E2F" opacity="0.7">Plantilla de elevator pitch incluida</text>
+
+  <circle cx="72" cy="480" r="4" fill="#C5D94A"/>
+  <text x="88" y="485" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#2D3E2F" opacity="0.7">Listo para imprimir y llevar al evento</text>
+
+  <!-- Checklist mockup -->
+  <g transform="translate(780, 100)">
+    <!-- Shadow -->
+    <rect x="8" y="8" width="280" height="400" rx="4" fill="#000" opacity="0.1"/>
+    <!-- Page -->
+    <rect x="0" y="0" width="280" height="400" rx="4" fill="#FFFFFF" stroke="#DDD" stroke-width="1"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="280" height="60" rx="4" fill="#2D3E2F"/>
+    <text x="140" y="28" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#C5D94A" text-anchor="middle" letter-spacing="0.5">CHECKLIST EXPRESS</text>
+    <text x="140" y="48" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.8">Eventos y Ferias de Artesania</text>
+
+    <!-- Checklist items -->
+    <rect x="24" y="80" width="14" height="14" rx="2" fill="none" stroke="#C5D94A" stroke-width="2"/>
+    <text x="48" y="92" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#2D3E2F">1. Definicion de actividad</text>
+    <line x1="26" y1="87" x2="32" y2="92" stroke="#C5D94A" stroke-width="2"/>
+    <line x1="32" y1="92" x2="36" y2="82" stroke="#C5D94A" stroke-width="2"/>
+
+    <rect x="24" y="110" width="14" height="14" rx="2" fill="none" stroke="#C5D94A" stroke-width="2"/>
+    <text x="48" y="122" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#2D3E2F">2. Registro y logistica</text>
+    <line x1="26" y1="117" x2="32" y2="122" stroke="#C5D94A" stroke-width="2"/>
+    <line x1="32" y1="122" x2="36" y2="112" stroke="#C5D94A" stroke-width="2"/>
+
+    <rect x="24" y="140" width="14" height="14" rx="2" fill="none" stroke="#C5D94A" stroke-width="2"/>
+    <text x="48" y="152" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#2D3E2F">3. Mensaje clave</text>
+    <line x1="26" y1="147" x2="32" y2="152" stroke="#C5D94A" stroke-width="2"/>
+    <line x1="32" y1="152" x2="36" y2="142" stroke="#C5D94A" stroke-width="2"/>
+
+    <rect x="24" y="170" width="14" height="14" rx="2" fill="none" stroke="#C17F59" stroke-width="2"/>
+    <text x="48" y="182" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#2D3E2F">4. Difusion minima</text>
+
+    <rect x="24" y="200" width="14" height="14" rx="2" fill="none" stroke="#C17F59" stroke-width="2"/>
+    <text x="48" y="212" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#2D3E2F">5. Captacion de contactos</text>
+
+    <rect x="24" y="230" width="14" height="14" rx="2" fill="none" stroke="#C17F59" stroke-width="2"/>
+    <text x="48" y="242" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#2D3E2F">6. Cierre comercial</text>
+
+    <!-- Separator -->
+    <line x1="24" y1="265" x2="256" y2="265" stroke="#EDE7D9" stroke-width="1"/>
+
+    <!-- Placeholder lines -->
+    <rect x="24" y="280" width="180" height="8" rx="4" fill="#EDE7D9"/>
+    <rect x="24" y="298" width="220" height="8" rx="4" fill="#EDE7D9"/>
+    <rect x="24" y="316" width="150" height="8" rx="4" fill="#EDE7D9"/>
+
+    <!-- Elevator pitch section -->
+    <rect x="24" y="340" width="232" height="40" rx="6" fill="#F5F0E8" stroke="#C5D94A" stroke-width="1"/>
+    <text x="140" y="358" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#2D3E2F" text-anchor="middle" opacity="0.7">Plantilla: elevator pitch en 1 frase</text>
+    <text x="140" y="372" font-family="Arial, Helvetica, sans-serif" font-size="8" fill="#C17F59" text-anchor="middle">"En [taller], mostramos como..."</text>
+  </g>
+
+  <!-- Footer line -->
+  <line x1="60" y1="560" x2="700" y2="560" stroke="#C5D94A" stroke-width="2" opacity="0.4"/>
+
+  <!-- Brand -->
+  <text x="60" y="590" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#2D3E2F" opacity="0.5">oficioscirculares.com</text>
+
+  <!-- OC Logo placeholder -->
+  <circle cx="730" y="580" r="16" fill="#2D3E2F" opacity="0.15" cy="580"/>
+  <text x="730" y="585" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#2D3E2F" text-anchor="middle" opacity="0.4">OC</text>
+</svg>
