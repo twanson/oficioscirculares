@@ -150,5 +150,18 @@
           "form_tally_id": "PdYORB",
           "cta": "Descargar Checklist Gratis",
           "updated_at": "2026-04-01"
+    },
+    {
+          "slug": "guia-artesania-lujo",
+          "title": "Guía: Posiciona tu artesanía como producto de lujo",
+          "type": "guia",
+          "summary": "7 palancas estratégicas para transformar la percepción de tu trabajo artesanal. Aprende a comunicar el valor real de lo que creas y atraer a clientes que buscan exclusividad, autenticidad y maestría.",
+          "tags": ["estrategia", "posicionamiento", "lujo", "marca", "pricing"],
+          "cover": "/img/recursos/covers/guia-artesania-lujo-cover.svg",
+          "pdf": "/downloads/Guia_Posicionar_Artesania_Lujo_OC_2026.pdf",
+          "form_tally_id": "Y5YlAN",
+          "cta": "Descargar Guía Gratuita",
+          "updated_at": "2026-04-06",
+          "listed": true
     }
 ]
