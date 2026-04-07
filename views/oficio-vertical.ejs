@@ -84,10 +84,13 @@
     <section class="hero-v2" id="hero">
         <div class="hero-v2-bg">
             <img class="hero-slide active" src="<%= oficio.hero_image %>"
-                 alt="<%= oficio.sector %> — Oficios Circulares"
+                 alt="<%= oficio.slug === 'barro-artesanal' ? 'Pavimento de barro cocido artesanal envejecido — foto: Everest Louis / Unsplash' : oficio.sector + ' — Oficios Circulares' %>"
                  style="object-position: center"
                  loading="eager">
             <div class="hero-v2-gradient"></div>
+            <% if (oficio.slug === 'barro-artesanal') { %>
+            <div class="hero-v2-left-fade" style="position:absolute;inset:0;background:linear-gradient(to right, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.3) 35%, transparent 55%);pointer-events:none;"></div>
+            <% } %>
         </div>
 
         <div class="hero-v2-content">
