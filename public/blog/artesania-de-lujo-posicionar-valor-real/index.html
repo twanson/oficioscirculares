@@ -272,11 +272,30 @@
         <div class="audio-version">
             <p class="audio-intro">🎧 <strong>¿No tienes 16 minutos para leer? Te lo contamos.</strong><br>
             Una conversación de 15 minutos entre dos voces sobre por qué tu artesanía ya es lujo y cómo el mercado lo está reconociendo. Dale al play y sigue con lo tuyo.</p>
-            <audio controls preload="metadata" aria-label="Versión en audio del artículo" onplay="if(window.dataLayer){window.dataLayer.push({event:'audio_play',post_slug:'artesania-de-lujo-posicionar-valor-real'});}">
+            <audio id="audio-blog-lujo" controls preload="metadata" aria-label="Versión en audio del artículo">
                 <source src="/audio/blog/artesania-de-lujo.mp3" type="audio/mpeg">
                 Tu navegador no soporta el reproductor de audio.
             </audio>
         </div>
+        <script>
+        (function(){
+          var SLUG='artesania-de-lujo-posicionar-valor-real';
+          var a=document.getElementById('audio-blog-lujo');
+          if(!a) return;
+          window.dataLayer=window.dataLayer||[];
+          function push(ev,extra){var p={event:ev,post_slug:SLUG};if(extra)for(var k in extra)p[k]=extra[k];window.dataLayer.push(p);}
+          var fired={play:false,p25:false,p50:false,p75:false,done:false};
+          a.addEventListener('play',function(){if(!fired.play){fired.play=true;push('audio_play');}});
+          a.addEventListener('timeupdate',function(){
+            if(!a.duration) return;
+            var pct=(a.currentTime/a.duration)*100;
+            if(pct>=25&&!fired.p25){fired.p25=true;push('audio_progress',{percent:25});}
+            if(pct>=50&&!fired.p50){fired.p50=true;push('audio_progress',{percent:50});}
+            if(pct>=75&&!fired.p75){fired.p75=true;push('audio_progress',{percent:75});}
+          });
+          a.addEventListener('ended',function(){if(!fired.done){fired.done=true;push('audio_complete');}});
+        })();
+        </script>
 
         <div class="hero-highlight">
             Un bolso de lujo con un PVP de 2.000 € tiene un coste real de unos 180 dólares. La diferencia no es la calidad: es la percepción. Y la percepción se construye. Esto es exactamente cómo.
