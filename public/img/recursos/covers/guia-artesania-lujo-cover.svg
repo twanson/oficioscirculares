@@ -1,32 +1,76 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800" height="450" viewBox="0 0 800 450">
   <defs>
-    <radialGradient id="glow" cx="50%" cy="35%" r="60%">
-      <stop offset="0%" style="stop-color:#3a3a3a"/>
-      <stop offset="100%" style="stop-color:#1e1e1e"/>
+    <radialGradient id="glow" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" style="stop-color:#3d3528"/>
+      <stop offset="60%" style="stop-color:#1f1c16"/>
+      <stop offset="100%" style="stop-color:#141210"/>
     </radialGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8a6f2b"/>
+      <stop offset="50%" style="stop-color:#E6C36A"/>
+      <stop offset="100%" style="stop-color:#8a6f2b"/>
+    </linearGradient>
+    <linearGradient id="goldText" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0D27A"/>
+      <stop offset="100%" style="stop-color:#B8892E"/>
+    </linearGradient>
   </defs>
 
-  <!-- Dark background matching PDF -->
-  <rect width="800" height="450" fill="#232323"/>
-  <rect width="800" height="450" fill="url(#glow)" opacity="0.5"/>
+  <!-- Dark background -->
+  <rect width="800" height="450" fill="#171410"/>
+  <rect width="800" height="450" fill="url(#glow)" opacity="0.9"/>
 
-  <!-- Thin border inset like PDF -->
-  <rect x="20" y="12" width="760" height="426" rx="0" fill="none" stroke="#444" stroke-width="0.5" opacity="0.5"/>
+  <!-- Decorative corner ornaments -->
+  <g stroke="url(#goldGrad)" stroke-width="1.2" fill="none" opacity="0.85">
+    <!-- Top-left -->
+    <path d="M 36 36 L 96 36"/>
+    <path d="M 36 36 L 36 96"/>
+    <circle cx="36" cy="36" r="3" fill="#C9A84C" stroke="none"/>
+    <!-- Top-right -->
+    <path d="M 764 36 L 704 36"/>
+    <path d="M 764 36 L 764 96"/>
+    <circle cx="764" cy="36" r="3" fill="#C9A84C" stroke="none"/>
+    <!-- Bottom-left -->
+    <path d="M 36 414 L 96 414"/>
+    <path d="M 36 414 L 36 354"/>
+    <circle cx="36" cy="414" r="3" fill="#C9A84C" stroke="none"/>
+    <!-- Bottom-right -->
+    <path d="M 764 414 L 704 414"/>
+    <path d="M 764 414 L 764 354"/>
+    <circle cx="764" cy="414" r="3" fill="#C9A84C" stroke="none"/>
+  </g>
 
-  <!-- OC Logo (real PNG) -->
-  <image href="oc-logo-dark.png" x="362" y="28" width="76" height="76"/>
+  <!-- Inner refined border -->
+  <rect x="56" y="56" width="688" height="338" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.5"/>
 
-  <!-- Main title — centered, multi-line -->
-  <text x="400" y="185" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="400" fill="#F0EBE0" text-anchor="middle">Guía práctica para posicionar</text>
-  <text x="400" y="222" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="400" fill="#F0EBE0" text-anchor="middle">tu artesanía como</text>
-  <text x="400" y="259" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="400" fill="#F0EBE0" text-anchor="middle">producto de
-    <tspan font-style="italic" fill="#C9A84C">lujo</tspan>
+  <!-- Top label / eyebrow -->
+  <text x="400" y="98" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#C9A84C" text-anchor="middle" letter-spacing="4" font-weight="600">GUÍA GRATUITA · OFICIOS CIRCULARES</text>
+
+  <!-- Decorative divider with diamond -->
+  <g transform="translate(400, 116)">
+    <line x1="-90" y1="0" x2="-12" y2="0" stroke="url(#goldGrad)" stroke-width="0.8"/>
+    <line x1="12" y1="0" x2="90" y2="0" stroke="url(#goldGrad)" stroke-width="0.8"/>
+    <path d="M 0 -5 L 6 0 L 0 5 L -6 0 Z" fill="#C9A84C"/>
+  </g>
+
+  <!-- Main title — bigger, bolder, multi-line -->
+  <text x="400" y="180" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="400" fill="#F4EFE3" text-anchor="middle">Posiciona tu artesanía</text>
+  <text x="400" y="232" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="400" fill="#F4EFE3" text-anchor="middle">como producto de
+    <tspan font-style="italic" fill="url(#goldText)" font-weight="600">lujo</tspan>
   </text>
 
   <!-- Subtitle -->
-  <text x="400" y="300" font-family="'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#a0a0a0" text-anchor="middle">6 claves + ejercicios prácticos para comunicar</text>
-  <text x="400" y="318" font-family="'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#a0a0a0" text-anchor="middle">y cobrar el valor real de lo que creas</text>
+  <text x="400" y="282" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#c8c0ad" text-anchor="middle">6 claves + ejercicios prácticos para comunicar y cobrar</text>
+  <text x="400" y="304" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#c8c0ad" text-anchor="middle">el valor real de lo que creas</text>
+
+  <!-- Decorative bottom ornament -->
+  <g transform="translate(400, 350)">
+    <line x1="-110" y1="0" x2="-18" y2="0" stroke="url(#goldGrad)" stroke-width="0.6" opacity="0.7"/>
+    <line x1="18" y1="0" x2="110" y2="0" stroke="url(#goldGrad)" stroke-width="0.6" opacity="0.7"/>
+    <circle cx="0" cy="0" r="4" fill="none" stroke="#C9A84C" stroke-width="1"/>
+    <circle cx="0" cy="0" r="1.5" fill="#C9A84C"/>
+  </g>
 
   <!-- URL at bottom -->
-  <text x="400" y="400" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#888" text-anchor="middle" letter-spacing="1">oficioscirculares.com</text>
+  <text x="400" y="382" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" fill="#9a8a5e" text-anchor="middle" letter-spacing="3">OFICIOSCIRCULARES.COM</text>
 </svg>
