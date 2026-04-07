@@ -337,5 +337,54 @@
             });
         }
     </script>
+
+    <!-- ===== Blog post slide-in card (Artesanía de lujo) ===== -->
+    <style>
+      .blog-popup{position:fixed;right:24px;bottom:24px;width:340px;max-width:calc(100vw - 32px);background:#fff;border-radius:14px;box-shadow:0 18px 50px rgba(20,20,20,.22),0 4px 14px rgba(20,20,20,.08);overflow:hidden;z-index:9990;font-family:'Manrope',sans-serif;transform:translateY(20px) scale(.96);opacity:0;pointer-events:none;transition:opacity .45s ease,transform .45s ease;border:1px solid rgba(201,168,76,.25)}
+      .blog-popup.is-visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+      .blog-popup__close{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;border:0;cursor:pointer;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s}
+      .blog-popup__close:hover{background:rgba(0,0,0,.8)}
+      .blog-popup__link{display:block;text-decoration:none;color:inherit}
+      .blog-popup__media{position:relative;height:150px;overflow:hidden;background:#1f1c16}
+      .blog-popup__img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+      .blog-popup__link:hover .blog-popup__img{transform:scale(1.05)}
+      .blog-popup__badge{position:absolute;top:12px;left:12px;background:rgba(201,168,76,.95);color:#1f1c16;font-size:10px;font-weight:700;letter-spacing:1.5px;padding:5px 10px;border-radius:4px;text-transform:uppercase}
+      .blog-popup__body{padding:16px 18px 18px}
+      .blog-popup__eyebrow{font-size:11px;color:#8a6f2b;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 6px}
+      .blog-popup__title{font-family:'Newsreader',Georgia,serif;font-size:17px;line-height:1.3;color:#1f1c16;margin:0 0 8px;font-weight:600}
+      .blog-popup__excerpt{font-size:13px;color:#5a544a;line-height:1.45;margin:0 0 12px}
+      .blog-popup__cta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#1F4B3F}
+      .blog-popup__cta::after{content:'→';transition:transform .2s}
+      .blog-popup__link:hover .blog-popup__cta::after{transform:translateX(4px)}
+      @media (max-width:480px){.blog-popup{right:12px;bottom:12px;width:calc(100vw - 24px)}}
+    </style>
+    <div class="blog-popup" id="blog-popup" role="dialog" aria-label="Nuevo artículo del blog" aria-hidden="true">
+      <button class="blog-popup__close" id="blog-popup-close" aria-label="Cerrar">×</button>
+      <a class="blog-popup__link" href="/blog/artesania-de-lujo-posicionar-valor-real/?utm_source=home&amp;utm_medium=popup&amp;utm_campaign=artesania-de-lujo">
+        <div class="blog-popup__media">
+          <img class="blog-popup__img" src="/assets/images/blog/artesania-de-lujo-posicionar-valor-real/hero-artesania-lujo.jpg" alt="Artesanía de lujo" loading="lazy">
+          <span class="blog-popup__badge">Nuevo en el blog</span>
+        </div>
+        <div class="blog-popup__body">
+          <p class="blog-popup__eyebrow">Estrategia · Posicionamiento</p>
+          <h3 class="blog-popup__title">Artesanía de lujo: por qué tu trabajo vale más de lo que cobras</h3>
+          <p class="blog-popup__excerpt">Las 7 palancas para que el mercado perciba tu artesanía como lujo, con datos del sector y casos reales en España.</p>
+          <span class="blog-popup__cta">Leer el artículo</span>
+        </div>
+      </a>
+    </div>
+    <script>
+      (function(){
+        var KEY='oc_blog_popup_lujo_dismissed';
+        try{ if(sessionStorage.getItem(KEY)) return; }catch(e){}
+        var el=document.getElementById('blog-popup');
+        var btn=document.getElementById('blog-popup-close');
+        if(!el||!btn) return;
+        function dismiss(){ el.classList.remove('is-visible'); el.setAttribute('aria-hidden','true'); try{sessionStorage.setItem(KEY,'1');}catch(e){} }
+        btn.addEventListener('click',function(ev){ ev.preventDefault(); ev.stopPropagation(); dismiss(); });
+        el.querySelector('.blog-popup__link').addEventListener('click',function(){ try{sessionStorage.setItem(KEY,'1');}catch(e){} });
+        setTimeout(function(){ el.classList.add('is-visible'); el.setAttribute('aria-hidden','false'); }, 4000);
+      })();
+    </script>
 </body>
 </html>
