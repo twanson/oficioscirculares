@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './artesania-de-lujo-posicionar-valor-real/',
+      title: 'Artesanía de lujo: por qué tu trabajo vale más de lo que cobras (y cómo comunicarlo)',
+      excerpt: 'Tu artesanía ya tiene todas las cualidades del lujo real. Las 7 palancas para que el mercado lo perciba así, con datos del sector y casos reales en España.',
+      date: '2026-04-07',
+      readingMinutes: 16,
+      cover: ASSETS_BASE + '/images/blog/artesania-de-lujo-posicionar-valor-real/hero-artesania-lujo.jpg',
+      tags: ['estrategia', 'circularidad']
+    },
+    {
       slug: './ia-para-artesanos/',
       title: 'IA para artesanos: más taller, menos pantalla',
       excerpt: 'Los oficios manuales son los más resistentes a la IA. Pero también pueden aprovecharla. Guía práctica con herramientas, ideas y ayudas según tu tipo de taller.',
