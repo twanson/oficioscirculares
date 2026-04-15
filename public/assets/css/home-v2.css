@@ -688,6 +688,11 @@ html, body {
     margin: 0 auto;
 }
 
+.comunidad-v2-grid--single {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+}
+
 .testimonio-v2 {
     background: var(--surface);
     padding: 28px;
