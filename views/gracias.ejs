@@ -44,6 +44,46 @@
           window.dataLayer.push({ event: '<%= isMapa ? "mapa_signup_complete" : "dir_signup_complete" %>' });
         </script>
       </main>
+      <% } else if (typeof isServicios3D !=='undefined' && isServicios3D) { %>
+        <main class="main-content">
+          <section class="gracias-section">
+            <div class="container">
+              <div class="gracias-content" style="max-width: 960px; margin: 0 auto;">
+                <div class="gracias-icon">🎉</div>
+                <h1 class="gracias-title" style="text-align: center;">¡Gracias! Ya tengo tus datos.</h1>
+                <p class="gracias-subtitle" style="text-align: center; font-size: 1.15rem; margin: 1rem 0 2rem;">
+                  Ahora elige el hueco que mejor te venga para nuestra llamada y nos vemos.
+                </p>
+
+                <div class="booking-embed" style="margin: 2rem auto; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08);">
+                  <iframe
+                    src="https://oficioscirculares.zohobookings.eu/portal-embed#/253003000000047054"
+                    frameborder="0"
+                    width="100%"
+                    height="720"
+                    style="display: block; border: 0;"
+                    allowfullscreen
+                    title="Reservar llamada — Oficios Circulares"></iframe>
+                </div>
+
+                <p class="note" style="text-align: center; font-size: 0.95rem; color: #666; margin-top: 1.5rem;">
+                  Si ninguno de los huecos te encaja, escríbeme a
+                  <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>
+                  y lo movemos.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Analytics -->
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: 'servicios_3d_form_complete',
+              service: '<%= typeof servicio !=="undefined" ? servicio : "" %>'
+            });
+          </script>
+        </main>
       <% } else { %>
         <main class="main-content">
           <section class="gracias-section">

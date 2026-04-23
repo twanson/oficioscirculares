@@ -277,6 +277,8 @@ app.get('/gracias', (req, res) => {
   const isDir = req.query.resource === 'dir';
   const isMapa = req.query.resource === 'mapa';
   const isEwear = req.query.resource === 'e-wear-docs';
+  const isServicios3D = req.query.source === 'servicios-3d';
+  const servicio = (req.query.service || '').trim();
   const rawEmail = (req.query.email || '').trim();
 
   // Si es E-WEAR, redirigir a la página específica
@@ -304,14 +306,19 @@ app.get('/gracias', (req, res) => {
   } else if (isMapa) {
     title = 'Ya formas parte de la comunidad';
     description = 'Te hemos enviado tu enlace de acceso al Mapa Circular y recibirás un email de bienvenida en 24-48h.';
+  } else if (isServicios3D) {
+    title = '¡Gracias! Ya tengo tus datos';
+    description = 'Ahora elige hueco para nuestra llamada.';
   }
 
   const viewModel = {
     isDir,
     isMapa,
+    isServicios3D,
+    servicio,
     maskedEmail: (isDir || isMapa) ? maskEmail(rawEmail) : null,
     q: req.query,
-    noindex: (isDir || isMapa),
+    noindex: (isDir || isMapa || isServicios3D),
     title,
     description,
     canonical: req.originalUrl
