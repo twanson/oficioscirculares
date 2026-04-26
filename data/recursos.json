@@ -163,5 +163,18 @@
           "cta": "Descargar Guía Gratuita",
           "updated_at": "2026-04-06",
           "listed": true
+    },
+    {
+          "slug": "guia-citricos",
+          "title": "Guía Cítricos: tintes, aceites y biomateriales paso a paso",
+          "type": "guia",
+          "summary": "Convierte la cáscara que sobra en color, aroma y biomaterial. 14 recetas verificadas para artesanos y pequeños talleres: tintes naturales con mordentado, aceites infusionados, extracto de limoneno, pectina casera y bioplásticos flexibles. Desde tu cocina o taller, sin laboratorio.",
+          "tags": ["circularidad", "biomateriales", "tintes-naturales", "residuos", "experimentacion"],
+          "cover": "/img/recursos/covers/guia-citricos-cover.webp",
+          "pdf": "/downloads/Guia_Citricos_OC_2026.pdf",
+          "form_tally_id": "Mer6EX",
+          "cta": "Descargar Guía Gratis",
+          "updated_at": "2026-04-26",
+          "listed": true
     }
 ]
