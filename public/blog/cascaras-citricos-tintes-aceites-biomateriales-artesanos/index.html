@@ -422,16 +422,30 @@
         <h1>Qué hacer con <em>cáscaras de naranja</em>: 5 caminos para revalorizarlas en tu taller</h1>
         <p class="hero-subtitle">Tintes, aceites infusionados y biomateriales — cómo convertir un residuo gratuito y local en pieza artesanal con propósito.</p>
 
-        <!-- Audio block — pendiente: Jose subirá MP3 a /audio/blog/cascaras-citricos.mp3
         <div class="audio-version">
-            <p class="audio-intro">🎧 <strong>¿No tienes 12 minutos para leer? Te lo contamos.</strong><br>
-            Una conversación de [Y] minutos entre dos voces sobre la cáscara cítrica como materia prima artesanal. Dale al play y sigue con lo tuyo.</p>
-            <audio id="audio-blog-citricos" controls preload="metadata" aria-label="Versión en audio del artículo">
+            <p class="audio-intro">🎧 <strong>¿No tienes 24 minutos para leer? Te lo contamos.</strong><br>
+            Una conversación de 24 minutos entre dos voces sobre la cáscara cítrica como materia prima artesanal: los cinco caminos, los casos en España y Europa, y la hoja de ruta para empezar mañana en tu taller. Dale al play y sigue con lo tuyo.</p>
+            <audio controls preload="metadata" aria-label="Versión en audio del artículo sobre cáscaras de cítricos para artesanos">
                 <source src="/audio/blog/cascaras-citricos.mp3" type="audio/mpeg">
                 Tu navegador no soporta el reproductor de audio.
             </audio>
         </div>
-        -->
+        <script>
+        (function(){
+          var a = document.querySelector('.audio-version audio');
+          if(!a) return;
+          var slug = 'cascaras-citricos-tintes-aceites-biomateriales-artesanos';
+          var played = false, marks = {25:false,50:false,75:false};
+          function push(ev, extra){ (window.dataLayer = window.dataLayer || []).push(Object.assign({event:ev, post_slug:slug}, extra||{})); }
+          a.addEventListener('play', function(){ if(!played){ played = true; push('audio_play'); } });
+          a.addEventListener('timeupdate', function(){
+            if(!a.duration) return;
+            var p = (a.currentTime / a.duration) * 100;
+            [25,50,75].forEach(function(m){ if(!marks[m] && p >= m){ marks[m] = true; push('audio_progress', {percent:m}); } });
+          });
+          a.addEventListener('ended', function(){ push('audio_complete'); });
+        })();
+        </script>
 
         <div class="hero-highlight">
             España produce 5,8 millones de toneladas de cítricos al año. Por cada naranja que se vuelve zumo, otra mitad acaba en una bolsa de basura. Y el precio que paga la frutería de tu barrio por deshacerse de ella es exactamente cero.
