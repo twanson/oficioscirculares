@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './cascaras-citricos-tintes-aceites-biomateriales-artesanos/',
+      title: 'Qué hacer con cáscaras de naranja: 5 caminos para revalorizarlas en tu taller',
+      excerpt: 'Tintes, aceites infusionados y biomateriales: 5 caminos verificados para convertir cáscaras de cítricos en pieza artesanal con propósito.',
+      date: '2026-04-27',
+      readingMinutes: 12,
+      cover: ASSETS_BASE + '/images/blog/cascaras-citricos-tintes-aceites-biomateriales-artesanos/hero-cascaras-citricos.png',
+      tags: ['circularidad', 'casos', 'materiales']
+    },
+    {
       slug: './artesania-de-lujo-posicionar-valor-real/',
       title: 'Artesanía de lujo: por qué tu trabajo vale más de lo que cobras (y cómo comunicarlo)',
       excerpt: 'Tu artesanía ya tiene todas las cualidades del lujo real. Las 7 palancas para que el mercado lo perciba así, con datos del sector y casos reales en España.',
