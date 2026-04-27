@@ -176,5 +176,17 @@
           "cta": "Descargar Guía Gratis",
           "updated_at": "2026-04-26",
           "listed": true
+    },
+    {
+          "slug": "marca-artesana-sin-marketinizar",
+          "title": "Marca artesana sin marketinizar (¿y qué quiere decir eso?)",
+          "type": "guia",
+          "summary": "Una guía corta para encontrar la identidad de tu marca artesana sin disfrazar tu oficio. Tres ejercicios accionables al final: la entrevista a tu oficio, el \"no soy\" de tu marca y la pieza ancla. 15 minutos de lectura.",
+          "tags": ["marca", "identidad", "comunicacion", "estrategia", "narrativa"],
+          "cover": "/img/recursos/covers/marca-artesana-sin-marketinizar-cover.png",
+          "pdf": "/downloads/Marca_Artesana_Sin_Marketinizar_OC_2026.pdf",
+          "cta": "Descargar la guía",
+          "updated_at": "2026-04-27",
+          "listed": false
     }
 ]

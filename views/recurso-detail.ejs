@@ -532,9 +532,63 @@
                                                 <p>PDF descargable con 14 recetas paso a paso, ingredientes con dónde comprar y precio orientativo, errores típicos por receta y aplicación concreta a cada oficio. Cada receta incluye procedimiento, troubleshooting y avisos de seguridad cuando proceden.</p>
                                             </div>
                                         </div>
+                                    <% } else if (recurso.slug==='marca-artesana-sin-marketinizar' ) { %>
+                                        <!-- Contenido específico para Marca artesana sin marketinizar -->
+                                        <div class="recurso-content-detail">
+
+                                            <div class="content-section">
+                                                <h2>¿Qué es?</h2>
+                                                <p>Una guía corta y accionable para artesanos que ya tienen oficio pero todavía no han encontrado la voz. Te ayuda a definir qué hace que tu marca sea reconocible <em>como tuya</em> antes de pensar en ningún canal — sin caer en plantillas genéricas ni en el lenguaje de las marcas que venden cursos online.</p>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>¿Para quién?</h2>
+                                                <ul>
+                                                    <li><strong>Artesanos y pequeños talleres</strong> que sienten que no encajan en los moldes de marketing al uso pero saben que tienen que comunicar.</li>
+                                                    <li><strong>Marcas artesanas con producto bueno</strong> y comunicación todavía intermitente o sin voz propia.</li>
+                                                    <li><strong>Cualquier proyecto con oficio</strong> que quiera construir identidad sin convertirse en una versión genérica de su sector.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué incluye</h2>
+                                                <ul>
+                                                    <li><strong>El cuadrante de las marcas artesanas:</strong> las cuatro casillas en las que casi todas se mueven (invisibilidad, autenticidad muda, marca disfrazada, identidad clara) y cómo identificar la tuya.</li>
+                                                    <li><strong>Las tres capas de una identidad propia:</strong> qué haces, cómo lo haces y por qué importa — con criterio para no caer en frases vacías.</li>
+                                                    <li><strong>Ejercicio 1 · La entrevista a tu oficio:</strong> 7 preguntas para sacar la voz que ya está en el taller pero no ha encontrado palabras.</li>
+                                                    <li><strong>Ejercicio 2 · El "no soy" de tu marca:</strong> 10 fronteras claras de lo que tu marca <em>no</em> es. La mejor protección de una marca pequeña.</li>
+                                                    <li><strong>Ejercicio 3 · La pieza ancla:</strong> qué contenido producir primero — uno solo — para que el resto se construya encima.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Cómo funciona</h2>
+                                                <ol>
+                                                    <li><strong>Léela en una sentada de quince minutos.</strong> Es corta a propósito.</li>
+                                                    <li><strong>Vuelve sobre los tres ejercicios con calma</strong> — uno por semana es un ritmo razonable.</li>
+                                                    <li><strong>Apóyate en lo que sale</strong> para tomar las decisiones de comunicación que tenías paradas.</li>
+                                                </ol>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué te resuelve</h2>
+                                                <ul>
+                                                    <li>Dejas de buscar referencias en marcas que no se parecen a la tuya.</li>
+                                                    <li>Tomas decisiones de comunicación con criterio propio, no copiando plantillas.</li>
+                                                    <li>El feed deja de ser una obligación y empieza a salir solo, porque la identidad está clara.</li>
+                                                    <li>Tienes argumentos concretos para explicar a clientes y aliados por qué tu trabajo vale lo que vale.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Formato</h2>
+                                                <p>PDF descargable de 11 páginas, lectura 15 min, con tres ejercicios accionables al final. Pensado para leer una vez y volver sobre los ejercicios cuando toque trabajarlos.</p>
+                                            </div>
+                                        </div>
                                     <% } %>
 
                                         <!-- FORMULARIO TALLY con parámetros optimizados -->
+                                        <% if (recurso.form_tally_id) { %>
                                         <section class="recurso-cta">
                                             <div class="cta-container">
                                                 <h3>Completa el formulario para recibir el recurso</h3>
@@ -594,6 +648,18 @@
                                                     </div>
                                             </div>
                                         </section>
+                                        <% } else { %>
+                                        <!-- Recurso de descarga directa (sin formulario Tally) -->
+                                        <section class="recurso-cta">
+                                            <div class="cta-container">
+                                                <h3>Descarga la guía</h3>
+                                                <p>Acceso directo al PDF, sin formularios.</p>
+                                                <a href="<%= recurso.pdf %>" class="btn btn-primary btn-lg" download>
+                                                    <%= recurso.cta || 'Descargar la guía' %>
+                                                </a>
+                                            </div>
+                                        </section>
+                                        <% } %>
                     </div>
                 </div>
             </section>
