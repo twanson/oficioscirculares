@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.oficioscirculares.com/</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://www.oficioscirculares.com/recursos</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -79,22 +79,46 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.oficioscirculares.com/recursos/guia-citricos</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.oficioscirculares.com/recursos/guia-artesania-lujo</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.oficioscirculares.com/recursos/checklist-eventos-artesania</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.oficioscirculares.com/blog/</loc>
-    <lastmod>2026-04-27</lastmod>
+    <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.oficioscirculares.com/blog/ia-para-artesanos/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.oficioscirculares.com/blog/cascaras-citricos-tintes-aceites-biomateriales-artesanos/</loc>
     <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.oficioscirculares.com/blog/artesania-de-lujo-posicionar-valor-real/</loc>
     <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.oficioscirculares.com/blog/relevo-generacional-artesania/</loc>
