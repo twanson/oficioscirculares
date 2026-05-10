@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './donde-comprar-lana-espanola/',
+      title: 'Dónde comprar lana española: 5 claves para elegir fibra con trazabilidad',
+      excerpt: 'España produce 23.000 t de lana al año pero encontrar hilo español es casi imposible. 5 claves para elegir fibra con trazabilidad real y precio justo.',
+      date: '2026-05-10',
+      readingMinutes: 14,
+      cover: ASSETS_BASE + '/images/blog/donde-comprar-lana-espanola/hero-ovejas-dehesa.jpg',
+      tags: ['circularidad', 'casos', 'estrategia']
+    },
+    {
       slug: './cascaras-citricos-tintes-aceites-biomateriales-artesanos/',
       title: 'Qué hacer con cáscaras de naranja: 5 caminos para revalorizarlas en tu taller',
       excerpt: 'Tintes, aceites infusionados y biomateriales: 5 caminos verificados para convertir cáscaras de cítricos en pieza artesanal con propósito.',
