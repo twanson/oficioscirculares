@@ -38,8 +38,8 @@
     "cta_final_texto": "Un diagnóstico gratuito de 30 minutos donde analizamos tu comunicación actual y te mostramos el camino para que tu trabajo conecte con quien realmente lo valora.",
     "related": [
       "barro-artesanal",
-      "joyeria-artesanal",
-      "restauracion-y-upcycling"
+      "materiales-construccion",
+      "joyeria-artesanal"
     ],
     "volumen_estimado": 2900,
     "dificultad": 3,
@@ -91,8 +91,8 @@
     "cta_final_texto": "Un diagnóstico gratuito donde analizamos tu comunicación actual y te mostramos cómo posicionar tu barro artesanal frente a arquitectos e interioristas.",
     "related": [
       "ceramica-artesanal",
-      "carpinteria-y-ebanisteria",
-      "forja-y-herreria"
+      "materiales-construccion",
+      "carpinteria-y-ebanisteria"
     ],
     "volumen_estimado": 1200,
     "dificultad": 2,
@@ -355,7 +355,7 @@
     "cta_final_texto": "Un diagnóstico gratuito donde analizamos tu comunicación actual y te mostramos cómo posicionar tu producto artesanal en un mercado inundado de industrial.",
     "related": [
       "cosmetica-natural",
-      "textil-sostenible",
+      "turismo-rural-sostenible",
       "lana-y-costura"
     ],
     "volumen_estimado": 2200,
@@ -726,7 +726,7 @@
     "cta_final_texto": "Un diagnóstico gratuito de 30 minutos donde analizamos tu comunicación actual y te mostramos el camino para que tu trabajo con el mimbre conecte con quien realmente lo valora.",
     "related": [
       "textil-sostenible",
-      "restauracion-y-upcycling",
+      "turismo-rural-sostenible",
       "carpinteria-y-ebanisteria"
     ],
     "volumen_estimado": 2000,
@@ -739,5 +739,113 @@
       "cómo vender cestas artesanales"
     ],
     "card_image": "/assets/images/oficios/cards/cesteria-y-mimbre.jpg"
+  },
+  {
+    "keyword": "comunicación materiales construcción tradicionales",
+    "slug": "materiales-construccion",
+    "titulo": "Comunicación para Fabricantes de Materiales Tradicionales de Construcción | Oficios Circulares",
+    "h1": "Tus materiales llevan siglos <em>demostrando que funcionan</em>",
+    "subtitulo": "Cal, tierra, corcho, piedra, baldosa hidráulica. Materiales que respiran, duran generaciones y vuelven a la tierra sin dejar rastro. Te ayudamos a documentar todo eso para que arquitectos y prescriptores puedan elegirte con argumentos.",
+    "sector": "Materiales de Construcción",
+    "sector_lower": "materiales artesanales de construcción",
+    "badge": "Materiales tradicionales",
+    "hero_image": "/assets/images/oficios/materiales-construccion.jpg",
+    "problema": "Tu cal reabsorbe CO₂ al carbonatar. Tus muros de tierra regulan la humedad sin máquinas. Tu baldosa hidráulica lleva un siglo en suelos que siguen vivos. En ciclo de vida, tus materiales ganan a casi todo lo que sale de una fábrica: transpirabilidad, reversibilidad, durabilidad secular. Pero cuando un arquitecto compara, el catálogo industrial llega con fichas técnicas, ensayos y documentación para el pliego — y tú llegas con tu palabra y tu experiencia. El resultado: te quedas fuera de proyectos que tu material resolvería mejor, y la bioconstrucción que querría prescribirte no encuentra los datos que necesita para defenderte.",
+    "solucion": "En Oficios Circulares convertimos tu práctica en documentación que prescribe. Primero medimos y ordenamos lo que ya haces: origen de la materia prima, proceso, comportamiento del material, ciclo de vida completo. Después lo transformamos en herramientas que abren puertas: fichas listas para pliegos, casos patrimoniales documentados con datos, y argumentos claros para arquitectos, aparejadores y estudios de bioconstrucción. Tu material ya gana en la realidad — solo falta que gane también sobre el papel.",
+    "beneficios": [
+      "Fichas de tus materiales con los datos que arquitectos y aparejadores necesitan para prescribirte",
+      "Casos documentados en obra y patrimonio que demuestran durabilidad con hechos, no con promesas",
+      "El ciclo de vida de tu material contado con datos: captura de CO₂, transpirabilidad, reversibilidad",
+      "Posicionamiento ante el sector de la bioconstrucción como proveedor fiable y documentado",
+      "Una presencia digital que responde a las dudas técnicas antes de que te las pregunten"
+    ],
+    "cards": [
+      {
+        "titulo": "Comunicación que fluye",
+        "texto": "Fichas, casos y argumentos listos para responder a arquitectos y prescriptores sin improvisar en cada obra.",
+        "variante": "dark"
+      },
+      {
+        "titulo": "Circularidad con sentido",
+        "texto": "Tu cal carbonata, tu tierra vuelve al suelo, tu piedra dura siglos. Lo convertimos en datos que prescriben.",
+        "variante": "light"
+      },
+      {
+        "titulo": "Más tiempo para crear",
+        "texto": "Menos papeleo improvisado y menos llamadas perdidas. Tu tiempo de vuelta al horno, a la obra, al oficio.",
+        "variante": "accent"
+      }
+    ],
+    "cta_final_h2": "Tus materiales merecen ser prescritos",
+    "cta_final_texto": "Un diagnóstico gratuito de 30 minutos donde analizamos cómo presentas tus materiales hoy y te mostramos qué documentación te falta para entrar en los proyectos donde deberías estar.",
+    "related": [
+      "ceramica-artesanal",
+      "barro-artesanal",
+      "restauracion-y-upcycling"
+    ],
+    "volumen_estimado": 1600,
+    "dificultad": 4,
+    "keywords_secundarias": [
+      "marketing materiales construcción sostenibles",
+      "ficha técnica cal aérea construcción",
+      "comunicación bioconstrucción España",
+      "vender materiales tradicionales construcción",
+      "prescripción materiales naturales arquitectos"
+    ],
+    "card_image": "/assets/images/oficios/cards/materiales-construccion.jpg"
+  },
+  {
+    "keyword": "comunicación turismo rural sostenible",
+    "slug": "turismo-rural-sostenible",
+    "titulo": "Comunicación para Ecoturismo y Turismo Rural Sostenible | Oficios Circulares",
+    "h1": "Tu sello dice que eres sostenible. <em>Tus datos lo demuestran</em>",
+    "subtitulo": "Gestionas un alojamiento rural con práctica sostenible real y certificaciones que lo avalan. Pero un sello certifica criterios, no cuantifica tu impacto. Te ayudamos a medir lo que haces y a contarlo con una memoria que te diferencia del greenwashing.",
+    "sector": "Turismo Rural Sostenible",
+    "sector_lower": "ecoturismo y turismo rural sostenible",
+    "badge": "Turismo rural sostenible",
+    "hero_image": "/assets/images/oficios/turismo-rural-sostenible.jpg",
+    "problema": "Compras a productores de la zona, gestionas el agua con cabeza, has invertido en biomasa o en placas, y tienes el sello de ecoturismo en la puerta. Pero ese sello dice que cumples criterios — no dice cuánta agua ahorras por estancia, cuánto compras a menos de 50 kilómetros ni cuántos residuos has dejado de generar. Y mientras tanto, cualquier alojamiento con cuatro frases verdes en la web aparenta lo mismo que tú. Cuando llega la renovación del sello, rebuscas papeles. Cuando sale una ayuda LEADER, te falta la memoria que justifique tu impacto. Y el viajero consciente que pagaría más por dormir en un sitio coherente no encuentra ningún dato que te distinga.",
+    "solucion": "En Oficios Circulares montamos contigo el registro de indicadores de tu alojamiento: agua, energía, residuos, compra local, lo que tenga sentido medir en tu caso. Sin complicarte la vida — un sistema sencillo que se alimenta de lo que ya haces. Y cada año lo convertimos en tu memoria de impacto: el documento que alimenta la renovación de tus sellos, respalda tus solicitudes de ayudas de desarrollo rural y te separa del greenwashing con números propios, no con adjetivos.",
+    "beneficios": [
+      "Un registro de indicadores sencillo: agua, energía, residuos y compra local, sin burocracia añadida",
+      "Tu memoria de impacto anual lista para renovaciones de sellos y certificaciones de ecoturismo",
+      "Expedientes más sólidos para ayudas de desarrollo rural como LEADER, con datos que justifican",
+      "Diferenciación real frente al greenwashing: tu impacto cuantificado, no frases verdes",
+      "Una historia que el viajero consciente entiende y por la que está dispuesto a pagar más"
+    ],
+    "cards": [
+      {
+        "titulo": "Comunicación que fluye",
+        "texto": "Tu memoria de impacto, tu web y tus redes contando lo mismo: práctica real con datos, sin improvisar.",
+        "variante": "dark"
+      },
+      {
+        "titulo": "Circularidad con sentido",
+        "texto": "Mides agua, energía, residuos y compra local. Tu sostenibilidad deja de ser una promesa y pasa a ser un dato.",
+        "variante": "light"
+      },
+      {
+        "titulo": "Más tiempo para crear",
+        "texto": "Menos papeles en cada renovación y cada ayuda. Tu tiempo de vuelta a tus huéspedes y a tu casa.",
+        "variante": "accent"
+      }
+    ],
+    "cta_final_h2": "Tu impacto merece ser contado",
+    "cta_final_texto": "Un diagnóstico gratuito de 30 minutos donde analizamos tu alojamiento, tus sellos y tus datos actuales, y te mostramos cómo convertir tu práctica sostenible en tu mejor argumento.",
+    "related": [
+      "alimentacion-artesanal",
+      "cesteria-y-mimbre",
+      "cosmetica-natural"
+    ],
+    "volumen_estimado": 2400,
+    "dificultad": 4,
+    "keywords_secundarias": [
+      "marketing turismo rural sostenible",
+      "memoria de sostenibilidad alojamiento rural",
+      "certificación ecoturismo España",
+      "comunicación ecoalojamiento",
+      "ayudas LEADER turismo rural"
+    ],
+    "card_image": "/assets/images/oficios/cards/turismo-rural-sostenible.jpg"
   }
 ]
