@@ -222,6 +222,11 @@ app.get('/impulso-3d', (req, res) => {
   res.render('impulso-3d');
 });
 
+// Conecta Lana — punto de encuentro de la lana española (landing standalone)
+app.get('/conecta-lana', (req, res) => {
+  res.render('conecta-lana');
+});
+
 // Redirects 301 para URLs antiguas de servicios
 app.get('/diagnostico-3d', (req, res) => res.redirect(301, '/servicios/diagnostico-3d'));
 app.get('/roadmap-3d', (req, res) => res.redirect(301, '/servicios/roadmap-3d'));
