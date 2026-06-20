@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './que-hacer-con-la-lana-de-oveja/',
+      title: 'Qué hacer con la lana de oveja: 5 salidas reales',
+      excerpt: 'La lana de tus ovejas no vale casi nada en bruto, pero tiene salida. 5 usos reales —textil, agrícola, aislamiento— y cómo conectar con quien la busca.',
+      date: '2026-06-20',
+      readingMinutes: 11,
+      cover: ASSETS_BASE + '/images/blog/que-hacer-con-la-lana-de-oveja/hero-vellon-crudo.jpg',
+      tags: ['estrategia', 'circularidad', 'casos', 'materiales']
+    },
+    {
       slug: './donde-comprar-lana-espanola/',
       title: 'Dónde comprar lana española: 5 claves para elegir fibra con trazabilidad',
       excerpt: 'España produce 23.000 t de lana al año pero encontrar hilo español es casi imposible. 5 claves para elegir fibra con trazabilidad real y precio justo.',
