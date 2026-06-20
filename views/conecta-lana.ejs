@@ -128,6 +128,63 @@
   .cl-half--b{border-radius:0 0 24px 24px;padding-top:30px}
   .cl-card{padding:30px 26px}
 }
+
+/* ============ EL PROBLEMA DE LA LANA (scrollytelling) ============ */
+/* Clases renombradas vs. la maqueta para no colisionar con la propia
+   página: cl-step→cl-why-step, cl-doors→cl-why-doors, cl-chips→cl-why-chips */
+/* position:sticky se rompe si un ancestro es contenedor de scroll. El body
+   global usa overflow-x:hidden; clip recorta el desbordamiento horizontal
+   SIN crear contenedor de scroll, así el panel sticky vuelve a funcionar. */
+html,body{overflow-x:clip}
+.cl-why{position:relative}
+.cl-sc{display:grid;grid-template-columns:1.18fr .82fr;background:linear-gradient(160deg,#06291f,#03201a)}
+.cl-left{padding:0 4.6vw}
+.cl-why-step{min-height:92vh;display:flex;flex-direction:column;justify-content:center;max-width:680px}
+.cl-k{font-family:var(--f-ui);font-weight:800;font-size:.86rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro)}
+.cl-big{font-family:var(--f-head);font-size:clamp(4.8rem,9vw,7.8rem);color:#fbf6ec;font-weight:600;line-height:.93;margin:16px 0 0;letter-spacing:-.026em}
+.cl-why-step h3{font-family:var(--f-head);font-size:clamp(3.2rem,5.8vw,5rem);color:#fbf6ec;font-weight:600;line-height:1.01;margin:16px 0 0;letter-spacing:-.016em}
+.cl-why-step h3 em{color:var(--oro);font-style:italic}
+.cl-why-step p{color:rgba(251,246,236,.88);font-size:1.4rem;line-height:1.48;margin:20px 0 0}
+.cl-viz{margin:36px 0 0;max-width:560px}
+.cl-bar{margin:20px 0 0}
+.cl-bar .cl-bl{display:flex;justify-content:space-between;align-items:baseline;font-size:.96rem;color:rgba(251,246,236,.76);margin-bottom:10px;font-weight:600}
+.cl-bar .cl-bl b{color:var(--oro);font-size:1.12rem}
+.cl-track{height:17px;border-radius:100px;background:rgba(251,246,236,.1);overflow:hidden}
+.cl-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#f6c98a,#e0a965)}
+.cl-fill.cl-dim{background:rgba(251,246,236,.26)}
+.cl-note{font-size:1.02rem;color:rgba(251,246,236,.64);margin-top:15px;line-height:1.45}
+.cl-why-chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.cl-why-chips span{font-size:.92rem;color:rgba(251,246,236,.88);background:rgba(246,201,138,.13);border:1px solid rgba(246,201,138,.28);padding:9px 16px;border-radius:100px;font-weight:600}
+.cl-why-doors{display:flex;align-items:center;gap:16px;margin-top:32px;max-width:520px}
+.cl-dm{flex:1;background:rgba(251,246,236,.05);border:1px solid rgba(246,201,138,.28);border-radius:16px;padding:18px 22px}
+.cl-dm b{display:block;color:#fbf6ec;font-family:var(--f-ui);font-weight:800;font-size:1.2rem}
+.cl-dm span{font-size:.9rem;color:rgba(251,246,236,.68)}
+.cl-knot{color:var(--oro);font-size:1.9rem;font-weight:700}
+.cl-right{position:relative}
+.cl-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cl-frame{position:absolute;width:78%;height:72%;border-radius:26px;overflow:hidden;box-shadow:0 44px 100px rgba(0,0,0,.55);opacity:0;transform:scale(1.05);transition:opacity .7s ease,transform 1s ease}
+.cl-frame.cl-on{opacity:1;transform:scale(1)}
+.cl-frame img{width:100%;height:100%;object-fit:cover}
+.cl-cap{position:absolute;left:18px;bottom:18px;background:rgba(2,40,31,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fbf6ec;font-family:var(--f-ui);font-weight:700;font-size:.9rem;padding:10px 16px;border-radius:100px;border:1px solid rgba(246,201,138,.32)}
+.cl-prog{position:absolute;top:50%;right:26px;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:3}
+.cl-prog i{width:8px;height:8px;border-radius:50%;background:rgba(246,201,138,.3);transition:.4s}
+.cl-prog i.cl-on{background:var(--oro);transform:scale(1.5)}
+.cl-why-mimg{display:none}
+/* enlace-cue del hero hacia la sección */
+.cl-why-link{display:inline-block;margin-top:20px;color:rgba(251,246,236,.82);font-family:var(--f-ui);font-weight:700;font-size:.92rem;letter-spacing:.01em;border-bottom:1px solid rgba(246,201,138,.5);padding-bottom:2px;transition:color .2s ease,border-color .2s ease;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.cl-why-link:hover{color:var(--oro);border-color:var(--oro)}
+@media(max-width:760px){
+  .cl-sc{grid-template-columns:1fr}
+  .cl-right{display:none}
+  .cl-left{padding:0 7vw}
+  .cl-why-step{min-height:auto;padding:54px 0}
+  .cl-big{font-size:clamp(3.4rem,13vw,4.6rem)}
+  .cl-why-step h3{font-size:clamp(2.6rem,9vw,3.4rem)}
+  .cl-why-step p{font-size:1.18rem}
+  .cl-viz{margin-top:28px}
+  .cl-why-mimg{display:block;position:relative;width:100%;border-radius:18px;overflow:hidden;margin:0 0 24px;box-shadow:0 22px 54px rgba(0,0,0,.5)}
+  .cl-why-mimg img{width:100%;height:230px;object-fit:cover;display:block}
+}
 </style>
 
 <main class="cl-landing">
@@ -184,6 +241,7 @@
         </a>
       </div>
       <div class="cl-micro">Soy ganadero · Busco materia prima &nbsp;·&nbsp; Gratis · sin comisión · de toda España</div>
+      <a class="cl-why-link" href="#por-que">Por qué se pierde la lana española ↓</a>
     </div>
   </section>
 
@@ -208,6 +266,70 @@
         <div class="cl-who">Eres artesano, hilandería, agricultor o investigas: necesitas lana española con origen.</div>
         <div class="cl-chips"><span class="cl-chip">elige raza y formato</span><span class="cl-chip">toda España</span><span class="cl-chip">te presentamos</span></div>
         <a class="cl-cta" href="https://tally.so/r/ODrGQM?utm_source=conecta-lana&utm_medium=web&utm_content=card" target="_blank" rel="noopener">Buscar lana →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== EL PROBLEMA DE LA LANA (scrollytelling) ============== -->
+  <section class="cl-why" id="por-que">
+    <div class="cl-sc">
+      <div class="cl-left">
+
+        <div class="cl-why-step" data-i="1">
+          <div class="cl-why-mimg"><img src="/assets/images/blog/donde-comprar-lana-espanola/hero-ovejas-dehesa.jpg" alt="Ovejas pastando en una dehesa española" loading="lazy"><span class="cl-cap">Casi 16 M de ovejas en España</span></div>
+          <div class="cl-k">El problema de la lana · 01</div>
+          <div class="cl-big">23.168 t</div>
+          <p>de lana se esquilan cada año en España. Producimos más que casi nadie en Europa.</p>
+          <div class="cl-viz">
+            <div class="cl-bar"><div class="cl-bl"><span>España sobre el total de la UE</span><b>30%</b></div><div class="cl-track"><div class="cl-fill" style="width:30%"></div></div></div>
+            <div class="cl-why-chips"><span>≈ 16 M de ovejas</span><span>109.756 explotaciones</span></div>
+          </div>
+        </div>
+
+        <div class="cl-why-step" data-i="2">
+          <div class="cl-why-mimg"><img src="/assets/images/blog/donde-comprar-lana-espanola/madeja-lana-detalle.jpg" alt="Detalle de una madeja de lana" loading="lazy"><span class="cl-cap">Lana cruda que no encuentra salida</span></div>
+          <div class="cl-k">El problema de la lana · 02</div>
+          <div class="cl-big">1,7%</div>
+          <p>es todo lo que se transforma dentro del país.</p>
+          <div class="cl-viz">
+            <div class="cl-bar"><div class="cl-bl"><span>Se transforma en España</span><b>1,7%</b></div><div class="cl-track"><div class="cl-fill" style="width:1.7%;min-width:7px"></div></div></div>
+            <p class="cl-note">De cada 100 kg esquilados, menos de 2 se convierten en producto aquí. El resto se va en bruto… o se tira.</p>
+          </div>
+        </div>
+
+        <div class="cl-why-step" data-i="3">
+          <div class="cl-why-mimg"><img src="/assets/images/blog/donde-comprar-lana-espanola/manos-lana-artesanal.jpg" alt="Manos trabajando lana artesanal" loading="lazy"><span class="cl-cap">El oficio que la rescata</span></div>
+          <div class="cl-k">El problema de la lana · 03</div>
+          <div class="cl-big">0,65 €/kg</div>
+          <p>cobra el ganadero por el vellón. Esquilar cada oveja le cuesta 3 €.</p>
+          <div class="cl-viz">
+            <div class="cl-bar"><div class="cl-bl"><span>Vellón español</span><b>0,65 €/kg</b></div><div class="cl-track"><div class="cl-fill" style="width:7%"></div></div></div>
+            <div class="cl-bar"><div class="cl-bl"><span>Merino australiano</span><span>9,40 €/kg</span></div><div class="cl-track"><div class="cl-fill cl-dim" style="width:100%"></div></div></div>
+            <div class="cl-why-chips"><span>misma fibra · 14× menos</span></div>
+          </div>
+        </div>
+
+        <div class="cl-why-step" data-i="4">
+          <div class="cl-why-mimg"><img src="/assets/images/blog/donde-comprar-lana-espanola/hero-ovejas-dehesa.jpg" alt="Ovejas pastando en una dehesa española" loading="lazy"><span class="cl-cap">Que ni un vellón se pierda</span></div>
+          <div class="cl-k">Por eso existe Conecta Lana</div>
+          <h3>No falta lana.<br>Falta <em>encontrarse</em>.</h3>
+          <p>Ponemos en contacto a quien tiene lana con quien la necesita — para textil o para el campo.</p>
+          <div class="cl-why-doors">
+            <div class="cl-dm"><b>Tengo lana</b><span>ganaderos</span></div>
+            <div class="cl-knot" aria-hidden="true">⟶</div>
+            <div class="cl-dm"><b>Busco lana</b><span>textil · campo</span></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="cl-right" aria-hidden="true">
+        <div class="cl-sticky">
+          <div class="cl-prog"><i class="cl-on" data-p="1"></i><i data-p="2"></i><i data-p="3"></i><i data-p="4"></i></div>
+          <div class="cl-frame cl-on" data-i="1"><img src="/assets/images/blog/donde-comprar-lana-espanola/hero-ovejas-dehesa.jpg" alt="" loading="lazy"><span class="cl-cap">Casi 16 M de ovejas en España</span></div>
+          <div class="cl-frame" data-i="2"><img src="/assets/images/blog/donde-comprar-lana-espanola/madeja-lana-detalle.jpg" alt="" loading="lazy"><span class="cl-cap">Lana cruda que no encuentra salida</span></div>
+          <div class="cl-frame" data-i="3"><img src="/assets/images/blog/donde-comprar-lana-espanola/manos-lana-artesanal.jpg" alt="" loading="lazy"><span class="cl-cap">El oficio que la rescata</span></div>
+          <div class="cl-frame" data-i="4"><img src="/assets/images/blog/donde-comprar-lana-espanola/hero-ovejas-dehesa.jpg" alt="" loading="lazy"><span class="cl-cap">Que ni un vellón se pierda</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -258,6 +380,23 @@
     v.addEventListener('timeupdate',t);
   }
   act(0); play(S[0]); watch(0);
+})();
+
+/* Scrollytelling "El problema de la lana": IntersectionObserver activa la
+   imagen + el punto de progreso del paso centrado en el viewport. */
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.cl-why-step'));
+  if(!steps.length) return;
+  var frames=[].slice.call(document.querySelectorAll('.cl-frame'));
+  var dots=[].slice.call(document.querySelectorAll('.cl-prog i'));
+  function setA(i){
+    frames.forEach(function(f){f.classList.toggle('cl-on',f.dataset.i===i);});
+    dots.forEach(function(d){d.classList.toggle('cl-on',d.dataset.p===i);});
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) setA(e.target.dataset.i); });
+  },{rootMargin:'-45% 0px -45% 0px'});
+  steps.forEach(function(s){io.observe(s);});
 })();
 </script>
 </body>
