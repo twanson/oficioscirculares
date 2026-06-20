@@ -467,6 +467,23 @@ html, body {
 .fr-card--tg .fr-btn { background: linear-gradient(135deg, #c98a5a, #9a5530); color: #fdf6ec; }
 .fr-card--tg .fr-link-sec { color: rgba(147, 74, 28, 0.8); }
 
+/* Tarjeta Conecta Lana — verde profundo + oro (marca Conecta Lana) */
+.fr-card--lana {
+    background: linear-gradient(158deg, #2f6151 0%, #023429 100%);
+    box-shadow: 0 8px 28px rgba(2, 52, 41, 0.22);
+}
+.fr-card--lana .fr-icon { background: rgba(246, 201, 138, 0.16); color: #f6c98a; }
+.fr-card--lana h3 { color: #fdf6ec; }
+.fr-card--lana p { color: rgba(253, 246, 236, 0.88); }
+.fr-card--lana .fr-ej { color: rgba(253, 246, 236, 0.72); border-top-color: rgba(246, 201, 138, 0.28); }
+.fr-card--lana .fr-btn { background: linear-gradient(135deg, #f6c98a, #e0a965); color: #023429; }
+.fr-card--lana .fr-link-sec { color: rgba(246, 201, 138, 0.9); }
+
+/* Forma parte de la Red: 4 tarjetas — grid propio del bloque (NO toca el .cards-v2-grid compartido) */
+.forma-red .cards-v2-grid { grid-template-columns: repeat(4, 1fr); max-width: 1280px; gap: 22px; }
+@media screen and (max-width: 1080px) { .forma-red .cards-v2-grid { grid-template-columns: repeat(2, 1fr); max-width: 760px; } }
+@media screen and (max-width: 600px)  { .forma-red .cards-v2-grid { grid-template-columns: 1fr; max-width: 420px; } }
+
 @media screen and (max-width: 768px) {
     .forma-red { padding: 56px 20px; }
 }
