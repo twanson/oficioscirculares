@@ -31,7 +31,20 @@
 .cl-nav .cl-links{display:flex;gap:24px;font-weight:600;font-size:.88rem;color:#fff}
 .cl-nav .cl-links a{text-shadow:0 1px 8px rgba(0,0,0,.4);transition:opacity .2s ease}
 .cl-nav .cl-links a:hover{opacity:.74}
-@media(max-width:860px){.cl-nav .cl-links,.cl-nav .cl-brand span{display:none}}
+/* Botón hamburguesa (solo móvil/tablet) */
+.cl-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:46px;height:46px;padding:11px;background:rgba(2,40,31,.34);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.24);border-radius:12px;cursor:pointer;z-index:40}
+.cl-burger span{display:block;width:100%;height:2px;background:#fff;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.cl-burger.cl-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.cl-burger.cl-open span:nth-child(2){opacity:0}
+.cl-burger.cl-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:860px){
+  .cl-nav .cl-brand span{display:none}
+  .cl-burger{display:flex}
+  .cl-nav .cl-links{position:absolute;top:calc(100% + 6px);right:20px;left:auto;flex-direction:column;gap:2px;min-width:220px;background:rgba(3,32,26,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(246,201,138,.28);border-radius:16px;padding:10px;box-shadow:0 24px 60px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .25s ease,transform .25s ease,visibility .25s ease}
+  .cl-nav .cl-links.cl-open{opacity:1;visibility:visible;transform:translateY(0)}
+  .cl-nav .cl-links a{padding:13px 16px;border-radius:10px;font-size:1.02rem;font-weight:700;color:#fbf6ec}
+  .cl-nav .cl-links a:hover{background:rgba(246,201,138,.12);opacity:1}
+}
 
 /* HERO con vídeo + crossfade */
 .cl-hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:130px 46px 80px}
@@ -122,10 +135,9 @@
   .cl-doors{padding:64px 22px}
   .cl-how{padding:62px 22px}
   .cl-trust{padding:42px 22px}
-  .cl-connector{flex-direction:column;width:100%;max-width:340px;border-radius:24px}
-  .cl-connector .cl-half{min-width:0;width:100%;font-size:1.18rem;padding:20px 24px}
-  .cl-half--t{border-radius:24px 24px 0 0;padding-bottom:30px}
-  .cl-half--b{border-radius:0 0 24px 24px;padding-top:30px}
+  .cl-connector{flex-direction:column;width:100%;max-width:340px;row-gap:34px;box-shadow:none}
+  .cl-connector .cl-half{min-width:0;width:100%;font-size:1.18rem;padding:21px 24px;border-radius:24px;box-shadow:0 14px 32px rgba(0,0,0,.32)}
+  .cl-node{width:54px;height:54px}
   .cl-card{padding:30px 26px}
 }
 
@@ -211,12 +223,15 @@ html,body{overflow-x:clip}
         <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
         <span>Oficios Circulares</span>
       </a>
-      <div class="cl-links">
+      <div class="cl-links" id="cl-links">
         <a href="/#servicios">Servicios</a>
         <a href="/blog/">Blog</a>
         <a href="/recursos">Recursos</a>
         <a href="/#comunidad">Comunidad</a>
       </div>
+      <button class="cl-burger" id="cl-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="cl-links">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
 
     <div class="cl-hero-in">
@@ -396,6 +411,23 @@ html,body{overflow-x:clip}
     es.forEach(function(e){ if(e.isIntersecting) setA(e.target.dataset.i); });
   },{rootMargin:'-45% 0px -45% 0px'});
   steps.forEach(function(s){io.observe(s);});
+})();
+
+/* Menú móvil (hamburguesa) del nav de Conecta Lana */
+(function(){
+  var b=document.getElementById('cl-burger');
+  var m=document.getElementById('cl-links');
+  if(!b||!m) return;
+  function close(){b.classList.remove('cl-open');m.classList.remove('cl-open');b.setAttribute('aria-expanded','false');}
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var open=m.classList.toggle('cl-open');
+    b.classList.toggle('cl-open',open);
+    b.setAttribute('aria-expanded',open?'true':'false');
+  });
+  m.addEventListener('click',function(e){ if(e.target.tagName==='A') close(); });
+  document.addEventListener('click',function(e){ if(!m.contains(e.target)&&!b.contains(e.target)) close(); });
+  window.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
 </body>
