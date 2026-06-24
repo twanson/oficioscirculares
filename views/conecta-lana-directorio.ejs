@@ -7,7 +7,7 @@
 }) %>
 
 <%
-  const mailto = (nombre) => 'mailto:hola@oficioscirculares.com?subject=' + encodeURIComponent('Me interesa: ' + (nombre || '') + ' · Conecta Lana');
+  const interesar = (nombre) => 'https://tally.so/r/zxg9Zq?proyecto=' + encodeURIComponent(nombre || '') + '&utm_source=conecta-lana&utm_medium=directorio&utm_content=ficha';
   const pin = '<svg class="cld-pin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
 %>
 
@@ -98,10 +98,16 @@ body { padding-top: 0; margin: 0; }
           <% var ofrece = [ e.cantidad ? (e.cantidad + ' kg') : '', e.raza_o_busca ].filter(Boolean).join(' · '); %>
           <% if (ofrece) { %><p class="cld-line"><strong>Ofrece:</strong> <%= ofrece %></p><% } %>
           <% if (e.estado_lana) { %><div class="cld-chips"><span class="cld-chip"><%= e.estado_lana %></span></div><% } %>
-          <a class="cld-btn" href="<%= mailto(e.nombre) %>">Me interesa →</a>
+          <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
         <% }) %>
-        <% if (!grouped.tengo.length) { %><p class="cld-note">Aún no hay registros publicados en esta sección.</p><% } %>
+        <article class="cld-card cld-card--ghost">
+          <h3>¿Tienes lana?</h3>
+          <div class="cld-zona"><%- pin %><span>—</span></div>
+          <p class="cld-line"><strong>Ofrece:</strong> tu raza, cantidad y zona…</p>
+          <p class="cld-note">Aparece en el directorio</p>
+          <a class="cld-btn" href="https://tally.so/r/GxkleO?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-tengo" target="_blank" rel="noopener">Me interesa →</a>
+        </article>
       </section>
 
       <!-- TRANSFORMAN LANA -->
@@ -113,7 +119,7 @@ body { padding-top: 0; margin: 0; }
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% if (e.servicios) { %><p class="cld-line"><strong>Servicios:</strong> <%= e.servicios %></p><% } %>
           <% if (e.trabajaTerceros) { %><p class="cld-note">Trabajan lana de terceros<%= e.tercerosExtra ? (' · ' + e.tercerosExtra) : '' %></p><% } %>
-          <a class="cld-btn" href="<%= mailto(e.nombre) %>">Me interesa →</a>
+          <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
         <% }) %>
         <!-- Capta transformadores: la transformación es el eslabón que falta -->
@@ -135,10 +141,16 @@ body { padding-top: 0; margin: 0; }
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% if (e.raza_o_busca) { %><p class="cld-line"><strong>Busca:</strong> <%= e.raza_o_busca %></p><% } %>
           <% if (e.para_que) { %><div class="cld-chips"><span class="cld-chip"><%= e.para_que %></span></div><% } %>
-          <a class="cld-btn" href="<%= mailto(e.nombre) %>">Me interesa →</a>
+          <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
         <% }) %>
-        <% if (!grouped.busco.length) { %><p class="cld-note">Aún no hay registros publicados en esta sección.</p><% } %>
+        <article class="cld-card cld-card--ghost">
+          <h3>¿Buscas lana?</h3>
+          <div class="cld-zona"><%- pin %><span>—</span></div>
+          <p class="cld-line"><strong>Busca:</strong> la lana que necesitas…</p>
+          <p class="cld-note">Aparece en el directorio</p>
+          <a class="cld-btn" href="https://tally.so/r/ODrGQM?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-busco" target="_blank" rel="noopener">Me interesa →</a>
+        </article>
       </section>
 
     </div>
