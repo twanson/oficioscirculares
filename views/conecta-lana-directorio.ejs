@@ -58,7 +58,7 @@ body { padding-top: 0; margin: 0; }
 .cld-card h3{font-family:var(--f-head);font-size:1.26rem;font-weight:700;color:var(--verde);margin:0 0 4px;line-height:1.15}
 .cld-zona{display:flex;align-items:center;gap:5px;color:var(--verde-medio);font-size:.9rem;margin-bottom:11px}
 .cld-zona .cld-pin{flex:0 0 auto;opacity:.85}
-.cld-line{font-size:.97rem;color:var(--on);margin:0 0 11px;line-height:1.45}
+.cld-line{font-size:.97rem;color:var(--on);margin:0 0 11px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .cld-line strong{color:var(--verde);font-weight:700}
 .cld-note{font-size:.89rem;color:var(--on-var);font-style:italic;margin:0 0 12px}
 .cld-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
@@ -115,7 +115,7 @@ body { padding-top: 0; margin: 0; }
         <article class="cld-card">
           <h3><%= e.nombre %></h3>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
-          <% var ofrece = [ e.cantidad ? (e.cantidad + ' kg') : '', e.raza_o_busca ].filter(Boolean).join(' · '); %>
+          <% var cant = (e.cantidad || '').trim(); var cantTxt = cant ? (/[a-zA-Z]/.test(cant) ? cant : cant + ' kg') : ''; var ofrece = [ cantTxt, e.raza_o_busca ].filter(Boolean).join(' · '); %>
           <% if (ofrece) { %><p class="cld-line"><strong>Ofrece:</strong> <%= ofrece %></p><% } %>
           <% if (e.estado_lana) { %><div class="cld-chips"><span class="cld-chip"><%= e.estado_lana %></span></div><% } %>
           <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
