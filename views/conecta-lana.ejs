@@ -70,11 +70,13 @@
 .cl-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:0 1 auto;white-space:nowrap;padding:19px 26px;color:#ffffff;font-family:var(--f-ui);font-weight:800;font-size:1.16rem;line-height:1.15;letter-spacing:.005em;border-radius:18px;box-shadow:0 16px 38px rgba(0,0,0,.34);transition:filter .22s ease,transform .22s ease,box-shadow .22s ease;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.3)}
 .cl-link .cl-ic{display:flex;flex:0 0 auto}
 .cl-link:hover{filter:brightness(1.1);transform:translateY(-2px)}
-.cl-link--tengo{background:linear-gradient(135deg,#357a5a,#256048)}
-.cl-link--transformo{background:linear-gradient(135deg,#b8801f,#8c5d12);box-shadow:0 18px 42px rgba(184,128,31,.42)}
+.cl-link--tengo{background:linear-gradient(135deg,#2f7d5b,#215e45)}
+.cl-link--transformo{background:linear-gradient(135deg,#f6c98a,#e0a965);box-shadow:0 18px 42px rgba(246,201,138,.42)}
 .cl-link--busco{background:linear-gradient(135deg,#b3683a,#7d3f1f)}
 /* texto blanco: sube especificidad para ganar a .cl-landing a{color:inherit} (0,1,1) */
 .cl-connector .cl-link{color:#ffffff}
+/* Transformo va sobre oro claro: texto e icono en verde oscuro para contraste */
+.cl-connector .cl-link--transformo{color:#023429}
 .cl-node{flex:0 0 auto;width:44px;height:44px;margin:0 -9px;border-radius:50%;background:#fbf6ec;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.38),0 0 0 5px rgba(251,246,236,.16);z-index:3;position:relative}
 .cl-hero .cl-micro{margin-top:18px;color:rgba(255,255,255,.78);font-size:.84rem;font-weight:600;letter-spacing:.02em;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 
@@ -125,6 +127,9 @@
 .cl-step .cl-pl{font-family:var(--f-ui);font-weight:800;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);margin-bottom:8px}
 .cl-step h4{font-family:var(--f-ui);font-weight:800;font-size:1.26rem;color:var(--primary);margin-bottom:9px}
 .cl-step p{color:var(--on-var);font-size:.98rem;line-height:1.55;max-width:240px;margin:0 auto}
+.cl-how-cta{text-align:center;margin-top:40px}
+.cl-how-cta a{display:inline-block;background:var(--primary);color:#f6ecd9;font-family:var(--f-ui);font-weight:800;font-size:1rem;padding:14px 30px;border-radius:100px;transition:transform .2s ease,box-shadow .2s ease}
+.cl-how-cta a:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(2,52,41,.25)}
 
 /* CONFIANZA */
 .cl-trust{padding:48px 46px;background:var(--primary);text-align:center}
@@ -192,6 +197,9 @@ html,body{overflow-x:clip}
 /* enlace-cue del hero hacia la sección */
 .cl-landing .cl-why-link{display:inline-block;margin-top:22px;color:var(--oro);background:rgba(2,40,31,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(246,201,138,.42);border-radius:100px;padding:11px 20px;font-family:var(--f-ui);font-weight:700;font-size:.92rem;letter-spacing:.01em;transition:background .2s ease,border-color .2s ease,color .2s ease;text-shadow:0 1px 6px rgba(0,0,0,.45)}
 .cl-landing .cl-why-link:hover{background:rgba(2,40,31,.8);border-color:var(--oro);color:#fff}
+.cl-landing .cl-dir-link{display:inline-block;margin-top:22px;margin-left:12px;color:#023429;background:linear-gradient(135deg,#f6c98a,#e0a965);border-radius:100px;padding:11px 20px;font-family:var(--f-ui);font-weight:800;font-size:.92rem;letter-spacing:.01em;box-shadow:0 8px 22px rgba(0,0,0,.28);transition:filter .2s ease,transform .2s ease}
+.cl-landing .cl-dir-link:hover{filter:brightness(1.05);transform:translateY(-1px)}
+@media(max-width:600px){.cl-landing .cl-dir-link{margin-left:0}}
 @media(max-width:760px){
   .cl-sc{grid-template-columns:1fr}
   .cl-right{display:none}
@@ -258,7 +266,7 @@ html,body{overflow-x:clip}
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#934a1c" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
         </span>
         <a class="cl-link cl-link--transformo" href="https://tally.so/r/xXgWMr?utm_source=conecta-lana&utm_medium=web&utm_content=hero" target="_blank" rel="noopener" aria-label="Transformo lana: ofrezco servicio de transformación">
-          <span class="cl-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.9v-2a4 4 0 0 1 4-4h14"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.1v2a4 4 0 0 1-4 4H3"/></svg></span>
+          <span class="cl-ic" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#023429" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.9v-2a4 4 0 0 1 4-4h14"/><path d="M7 21.9l-4-4 4-4"/><path d="M21 11.1v2a4 4 0 0 1-4 4H3"/></svg></span>
           Transformo lana
         </a>
         <span class="cl-node" aria-hidden="true">
@@ -271,6 +279,7 @@ html,body{overflow-x:clip}
       </div>
       <div class="cl-micro">Ganaderos · transformadores · artesanos &nbsp;·&nbsp; Gratis · sin comisión · de toda España</div>
       <a class="cl-why-link" href="#por-que">Por qué se pierde la lana española ↓</a>
+      <a class="cl-dir-link" href="/conecta-lana/directorio">Ver quién ya está dentro →</a>
     </div>
   </section>
 
@@ -380,6 +389,7 @@ html,body{overflow-x:clip}
       <div class="cl-step"><div class="cl-num">2</div><div class="cl-pl">Paso 2</div><h4>Buscamos encaje</h4><p>Revisamos a mano y cruzamos oferta y demanda dentro de nuestra red.</p></div>
       <div class="cl-step"><div class="cl-num">3</div><div class="cl-pl">Paso 3</div><h4>Os presentamos</h4><p>Te ponemos en contacto con la otra parte. El trato lo cerráis vosotros.</p></div>
     </div>
+    <div class="cl-how-cta"><a href="/conecta-lana/directorio">Ver quién ya está dentro →</a></div>
   </section>
 
   <!-- ======================= CONFIANZA ======================= -->

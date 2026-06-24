@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const recursos = require('./lib/recursos');
 const tokenValidator = require('./lib/tokenValidator');
 const directorio = require('./lib/directorio');
+const conectaLanaDir = require('./lib/conecta-lana-directorio');
 require('dotenv').config();
 
 const app = express();
@@ -225,6 +226,17 @@ app.get('/impulso-3d', (req, res) => {
 // Conecta Lana — punto de encuentro de la lana española (landing standalone)
 app.get('/conecta-lana', (req, res) => {
   res.render('conecta-lana');
+});
+
+// Directorio público de Conecta Lana (sin token: es captación)
+app.get('/conecta-lana/directorio', async (req, res) => {
+  let grouped = { tengo: [], transformo: [], busco: [] };
+  try {
+    grouped = await conectaLanaDir.getGrouped();
+  } catch (e) {
+    console.error('❌ Error directorio Conecta Lana:', e.message);
+  }
+  res.render('conecta-lana-directorio', { grouped });
 });
 
 // Redirects 301 para URLs antiguas de servicios
