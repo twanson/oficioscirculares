@@ -14,12 +14,13 @@
 <style>
 /* ===================================================================
    DIRECTORIO CONECTA LANA — público. Estilos scoped bajo .cld
-   DS v2 OC: verde #023429 · oro #f6c98a · terracota #934a1c
+   DS v2 OC: verde #023429 · terracota #934a1c · oro #c98a3f · crema
+   Secciones apiladas a lo ancho, cada una con su rejilla de fichas.
    =================================================================== */
 body { padding-top: 0; margin: 0; }
 .cld{
   --verde:#023429;--verde-hoja:#1F4B3F;--verde-medio:#3E7C59;
-  --oro:#f6c98a;--oro-medio:#e0a965;--terracota:#934a1c;--terracota-claro:#b3683a;
+  --oro:#f6c98a;--oro-acento:#c98a3f;--terracota:#934a1c;
   --crema:#f4efe6;--arena:#ece0cb;--on:#1C1E1B;--on-var:#5d5746;
   --f-head:'Newsreader',Georgia,serif;--f-body:'Manrope',system-ui,sans-serif;--f-ui:'Nunito',sans-serif;
   font-family:var(--f-body);color:var(--on);background:var(--crema);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;
@@ -28,50 +29,59 @@ body { padding-top: 0; margin: 0; }
 
 /* HERO */
 .cld-hero{background:linear-gradient(160deg,#06291f 0%,#023429 70%);padding:44px 46px 56px}
-.cld-hero-in{max-width:1240px;margin:0 auto}
+.cld-hero-in{max-width:1180px;margin:0 auto}
 .cld-back{display:inline-block;color:rgba(246,201,138,.92);font-family:var(--f-ui);font-weight:700;font-size:.84rem;margin-bottom:18px;transition:opacity .2s ease}
 .cld-back:hover{opacity:.7}
 .cld-ey{display:block;color:var(--oro);font-family:var(--f-ui);font-weight:800;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
 .cld-hero h1{font-family:var(--f-head);font-size:clamp(2rem,4.4vw,3rem);font-weight:600;color:#fff;line-height:1.08;letter-spacing:-.01em;margin:0 0 14px}
 .cld-hero h1 em{font-style:italic;color:var(--oro)}
-.cld-sub{color:rgba(251,246,236,.82);font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.55;max-width:640px;margin:0}
+.cld-sub{color:rgba(251,246,236,.82);font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.55;max-width:660px;margin:0}
 
-/* CUERPO */
-.cld-wrap{max-width:1240px;margin:0 auto;padding:38px 46px 64px}
-.cld-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;align-items:start}
+/* CUERPO — secciones apiladas (full-width) */
+.cld-wrap{max-width:1180px;margin:0 auto;padding:34px 46px 60px}
+.cld-sec{margin-bottom:46px}
+.cld-sec:last-of-type{margin-bottom:0}
+.cld-sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding-bottom:12px;margin-bottom:22px;border-bottom:3px solid var(--verde)}
+.cld-st h2{font-family:var(--f-head);font-size:clamp(1.4rem,2.4vw,1.7rem);font-weight:700;color:var(--verde);margin:0 0 2px;line-height:1.1}
+.cld-st span{font-size:.92rem;color:var(--on-var)}
+.cld-count{flex:0 0 auto;font-family:var(--f-ui);font-weight:800;font-size:.84rem;color:var(--verde);background:rgba(2,52,41,.07);padding:5px 13px;border-radius:100px;white-space:nowrap}
+.cld-sec--transformo .cld-sechead{border-bottom-color:var(--terracota)}
+.cld-sec--transformo .cld-count{color:var(--terracota);background:rgba(147,74,28,.1)}
+.cld-sec--busco .cld-sechead{border-bottom-color:var(--oro-acento)}
+.cld-sec--busco .cld-count{color:#9a6a1f;background:rgba(201,138,63,.15)}
 
-/* CABECERA DE COLUMNA */
-.cld-colhead{padding-bottom:14px;margin-bottom:22px;border-bottom:3px solid var(--verde-hoja)}
-.cld-colhead h2{font-family:var(--f-head);font-size:1.5rem;font-weight:700;color:var(--verde);margin:0 0 4px}
-.cld-colhead span{font-size:.92rem;color:var(--on-var)}
-.cld-col--transformo .cld-colhead{border-bottom-color:var(--terracota)}
-.cld-col--busco .cld-colhead{border-bottom-color:var(--oro-medio)}
+/* REJILLA de fichas: 3-4 por fila en escritorio, 2 en tablet, 1 en móvil */
+.cld-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;align-items:stretch}
 
-/* FICHAS */
-.cld-card{background:#fff;border:1px solid rgba(2,52,41,.07);border-radius:16px;padding:22px 24px;margin-bottom:20px;box-shadow:0 10px 26px rgba(2,52,41,.06)}
-.cld-card h3{font-family:var(--f-head);font-size:1.3rem;font-weight:700;color:var(--verde);margin:0 0 4px;line-height:1.15}
-.cld-zona{display:flex;align-items:center;gap:5px;color:var(--verde-medio);font-size:.9rem;margin-bottom:12px}
+/* FICHAS (altura igualada: botón siempre abajo) */
+.cld-card{background:#fff;border:1px solid rgba(2,52,41,.07);border-radius:16px;padding:20px 22px;box-shadow:0 8px 22px rgba(2,52,41,.06);display:flex;flex-direction:column}
+.cld-card h3{font-family:var(--f-head);font-size:1.26rem;font-weight:700;color:var(--verde);margin:0 0 4px;line-height:1.15}
+.cld-zona{display:flex;align-items:center;gap:5px;color:var(--verde-medio);font-size:.9rem;margin-bottom:11px}
 .cld-zona .cld-pin{flex:0 0 auto;opacity:.85}
-.cld-line{font-size:.98rem;color:var(--on);margin:0 0 12px;line-height:1.45}
+.cld-line{font-size:.97rem;color:var(--on);margin:0 0 11px;line-height:1.45}
 .cld-line strong{color:var(--verde);font-weight:700}
-.cld-note{font-size:.9rem;color:var(--on-var);font-style:italic;margin:0 0 14px}
-.cld-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.cld-note{font-size:.89rem;color:var(--on-var);font-style:italic;margin:0 0 12px}
+.cld-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .cld-chip{background:var(--arena);color:#8a5524;font-size:.8rem;font-weight:700;padding:5px 13px;border-radius:100px}
-.cld-btn{display:inline-block;background:var(--verde);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.92rem;padding:11px 20px;border-radius:100px;transition:background .2s ease,transform .2s ease}
+.cld-btn{margin-top:auto;align-self:flex-start;display:inline-block;background:var(--verde);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.92rem;padding:11px 20px;border-radius:100px;transition:background .2s ease,transform .2s ease}
 .cld-btn:hover{background:var(--verde-hoja);transform:translateY(-1px)}
 
-/* Ficha fantasma "Tu taller aquí" (capta transformadores) */
-.cld-card--ghost{background:rgba(255,255,255,.55);border:1px dashed rgba(147,74,28,.4);box-shadow:none}
-.cld-card--ghost h3{color:var(--terracota)}
-.cld-card--ghost .cld-zona{color:rgba(147,74,28,.6)}
+/* Ficha fantasma (capta altas) — primera de cada sección */
+.cld-card--ghost{background:rgba(255,255,255,.5);border:1px dashed rgba(2,52,41,.32);box-shadow:none}
+.cld-card--ghost h3{color:var(--verde)}
+.cld-card--ghost .cld-zona{opacity:.55}
+.cld-sec--transformo .cld-card--ghost{border-color:rgba(147,74,28,.42)}
+.cld-sec--transformo .cld-card--ghost h3{color:var(--terracota)}
+.cld-sec--busco .cld-card--ghost{border-color:rgba(201,138,63,.5)}
+.cld-sec--busco .cld-card--ghost h3{color:#9a6a1f}
 
-.cld-foot{max-width:760px;margin:40px auto 0;text-align:center;color:var(--on-var);font-size:.88rem;line-height:1.5}
+.cld-foot{max-width:760px;margin:44px auto 0;text-align:center;color:var(--on-var);font-size:.88rem;line-height:1.5}
 
-@media(max-width:880px){
-  .cld-cols{grid-template-columns:1fr;gap:14px;max-width:520px;margin:0 auto}
-  .cld-col{margin-bottom:18px}
+@media(max-width:600px){
   .cld-hero{padding:36px 22px 44px}
-  .cld-wrap{padding:30px 22px 52px}
+  .cld-wrap{padding:28px 18px 48px}
+  .cld-grid{grid-template-columns:1fr;gap:14px}
+  .cld-sec{margin-bottom:38px}
 }
 </style>
 
@@ -86,11 +96,21 @@ body { padding-top: 0; margin: 0; }
   </header>
 
   <div class="cld-wrap">
-    <div class="cld-cols">
 
-      <!-- TIENEN LANA -->
-      <section class="cld-col cld-col--tengo">
-        <div class="cld-colhead"><h2>Tienen lana</h2><span>Ganaderos y productores</span></div>
+    <!-- TIENEN LANA -->
+    <section class="cld-sec cld-sec--tengo">
+      <div class="cld-sechead">
+        <div class="cld-st"><h2>Tienen lana</h2><span>Ganaderos y productores</span></div>
+        <span class="cld-count"><%= grouped.tengo.length %> en el directorio</span>
+      </div>
+      <div class="cld-grid">
+        <article class="cld-card cld-card--ghost">
+          <h3>¿Tienes lana?</h3>
+          <div class="cld-zona"><%- pin %><span>—</span></div>
+          <p class="cld-line"><strong>Ofrece:</strong> tu raza, cantidad y zona…</p>
+          <p class="cld-note">Aparece en el directorio</p>
+          <a class="cld-btn" href="https://tally.so/r/GxkleO?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-tengo" target="_blank" rel="noopener">Me interesa →</a>
+        </article>
         <% grouped.tengo.forEach(function(e){ %>
         <article class="cld-card">
           <h3><%= e.nombre %></h3>
@@ -101,18 +121,23 @@ body { padding-top: 0; margin: 0; }
           <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
         <% }) %>
-        <article class="cld-card cld-card--ghost">
-          <h3>¿Tienes lana?</h3>
-          <div class="cld-zona"><%- pin %><span>—</span></div>
-          <p class="cld-line"><strong>Ofrece:</strong> tu raza, cantidad y zona…</p>
-          <p class="cld-note">Aparece en el directorio</p>
-          <a class="cld-btn" href="https://tally.so/r/GxkleO?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-tengo" target="_blank" rel="noopener">Me interesa →</a>
-        </article>
-      </section>
+      </div>
+    </section>
 
-      <!-- TRANSFORMAN LANA -->
-      <section class="cld-col cld-col--transformo">
-        <div class="cld-colhead"><h2>Transforman lana</h2><span>Lavado · hilado · fieltro · prenda</span></div>
+    <!-- TRANSFORMAN LANA -->
+    <section class="cld-sec cld-sec--transformo">
+      <div class="cld-sechead">
+        <div class="cld-st"><h2>Transforman lana</h2><span>Lavado · hilado · fieltro · prenda</span></div>
+        <span class="cld-count"><%= grouped.transformo.length %> en el directorio</span>
+      </div>
+      <div class="cld-grid">
+        <article class="cld-card cld-card--ghost">
+          <h3>Tu taller aquí</h3>
+          <div class="cld-zona"><%- pin %><span>—</span></div>
+          <p class="cld-line"><strong>Servicios:</strong> Lavado · Fieltrado · Teñido…</p>
+          <p class="cld-note">¿Transformas lana? Aparece en el directorio</p>
+          <a class="cld-btn" href="https://tally.so/r/xXgWMr?utm_source=conecta-lana&utm_medium=directorio&utm_content=tu-taller" target="_blank" rel="noopener">Me interesa →</a>
+        </article>
         <% grouped.transformo.forEach(function(e){ %>
         <article class="cld-card">
           <h3><%= e.nombre %></h3>
@@ -122,19 +147,23 @@ body { padding-top: 0; margin: 0; }
           <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
         <% }) %>
-        <!-- Capta transformadores: la transformación es el eslabón que falta -->
-        <article class="cld-card cld-card--ghost">
-          <h3>Tu taller aquí</h3>
-          <div class="cld-zona"><%- pin %><span>—</span></div>
-          <p class="cld-line"><strong>Servicios:</strong> Lavado · Fieltrado · Teñido…</p>
-          <p class="cld-note">¿Transformas lana? Aparece en el directorio</p>
-          <a class="cld-btn" href="https://tally.so/r/xXgWMr?utm_source=conecta-lana&utm_medium=directorio&utm_content=tu-taller" target="_blank" rel="noopener">Me interesa →</a>
-        </article>
-      </section>
+      </div>
+    </section>
 
-      <!-- BUSCAN LANA -->
-      <section class="cld-col cld-col--busco">
-        <div class="cld-colhead"><h2>Buscan lana</h2><span>Artesanas · agricultores · I+D</span></div>
+    <!-- BUSCAN LANA -->
+    <section class="cld-sec cld-sec--busco">
+      <div class="cld-sechead">
+        <div class="cld-st"><h2>Buscan lana</h2><span>Artesanas · agricultores · I+D</span></div>
+        <span class="cld-count"><%= grouped.busco.length %> en el directorio</span>
+      </div>
+      <div class="cld-grid">
+        <article class="cld-card cld-card--ghost">
+          <h3>¿Buscas lana?</h3>
+          <div class="cld-zona"><%- pin %><span>—</span></div>
+          <p class="cld-line"><strong>Busca:</strong> la lana que necesitas…</p>
+          <p class="cld-note">Aparece en el directorio</p>
+          <a class="cld-btn" href="https://tally.so/r/ODrGQM?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-busco" target="_blank" rel="noopener">Me interesa →</a>
+        </article>
         <% grouped.busco.forEach(function(e){ %>
         <article class="cld-card">
           <h3><%= e.nombre %></h3>
@@ -144,16 +173,8 @@ body { padding-top: 0; margin: 0; }
           <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
         <% }) %>
-        <article class="cld-card cld-card--ghost">
-          <h3>¿Buscas lana?</h3>
-          <div class="cld-zona"><%- pin %><span>—</span></div>
-          <p class="cld-line"><strong>Busca:</strong> la lana que necesitas…</p>
-          <p class="cld-note">Aparece en el directorio</p>
-          <a class="cld-btn" href="https://tally.so/r/ODrGQM?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-busco" target="_blank" rel="noopener">Me interesa →</a>
-        </article>
-      </section>
-
-    </div>
+      </div>
+    </section>
 
     <p class="cld-foot">Solo aparecen quienes han aceptado figurar en el directorio público · Los contactos los gestiona Oficios Circulares.</p>
   </div>
