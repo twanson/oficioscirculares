@@ -168,7 +168,8 @@ body { padding-top: 0; margin: 0; }
         <article class="cld-card">
           <h3><%= e.nombre %></h3>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
-          <% if (e.raza_o_busca) { %><p class="cld-line"><strong>Busca:</strong> <%= e.raza_o_busca %></p><% } %>
+          <% var cantB = (e.cantidad || '').trim(); var cantBTxt = cantB ? (/[a-zA-Z]/.test(cantB) ? cantB : cantB + ' kg') : ''; var busca = [ cantBTxt, e.raza_o_busca ].filter(Boolean).join(' · '); %>
+          <% if (busca) { %><p class="cld-line"><strong>Busca:</strong> <%= busca %></p><% } %>
           <% if (e.para_que) { %><div class="cld-chips"><span class="cld-chip"><%= e.para_que %></span></div><% } %>
           <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
