@@ -201,8 +201,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const serviceSelector = document.getElementById('service-selector');
     const tallyIframe = document.getElementById('tally-iframe');
     
-    // Si no hay servicio, mostrar selector
+    // Si no hay servicio, mostrar selector (arrastrando sector/utm a los enlaces)
     if (!service) {
+        const carry = new URLSearchParams();
+        ['sector','utm_source','utm_medium','utm_campaign','utm_content','page_path'].forEach(function(k){
+            const v = urlParams.get(k);
+            if (v) carry.set(k, v);
+        });
+        if (Array.from(carry).length) {
+            document.querySelectorAll('#service-selector a[href*="/contacto?service="]').forEach(function(a){
+                a.href = a.getAttribute('href') + '&' + carry.toString();
+            });
+        }
         serviceSelector.style.display = 'block';
         tallyIframe.style.display = 'none';
         return;
@@ -215,6 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dynamicHeight: '1',
         hideTitle: '1',
         service: urlParams.get('service') || '',
+        sector: urlParams.get('sector') || '',
         utm_source: urlParams.get('utm_source') || '',
         utm_medium: urlParams.get('utm_medium') || '',
         utm_campaign: urlParams.get('utm_campaign') || '',
