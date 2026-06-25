@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './imprenta-artesanal-historia/',
+      title: 'Imprenta artesanal: del plomo que mataba al lujo de hoy',
+      excerpt: 'Un oficio que cambió el mundo, que llegó a matar a quienes lo ejercían y que hoy se vende como un lujo. La historia de la imprenta artesanal: del plomo al fotopolímero.',
+      date: '2026-06-25',
+      readingMinutes: 13,
+      cover: ASSETS_BASE + '/images/blog/imprenta-artesanal-historia/hero-tipos-moviles.jpg',
+      tags: ['circularidad', 'casos', 'oficios']
+    },
+    {
       slug: './que-hacer-con-la-lana-de-oveja/',
       title: 'Qué hacer con la lana de oveja: 5 salidas reales',
       excerpt: 'La lana de tus ovejas no vale casi nada en bruto, pero tiene salida. 5 usos reales —textil, agrícola, aislamiento— y cómo conectar con quien la busca.',

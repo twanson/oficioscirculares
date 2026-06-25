@@ -124,15 +124,15 @@
         .breadcrumbs span { margin: 0 0.5rem; }
 
         .article-hero {
-            background: linear-gradient(rgba(2, 52, 41, 0.74), rgba(2, 52, 41, 0.88)), url('../../assets/images/blog/imprenta-artesanal-historia/hero-tipos-moviles.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(2, 52, 41, 0.46) 0%, rgba(2, 52, 41, 0.70) 50%, rgba(2, 52, 41, 0.88) 100%), url('../../assets/images/blog/imprenta-artesanal-historia/hero-tipos-moviles.jpg') center/cover no-repeat;
             padding: 5rem 3rem;
             text-align: center;
             color: white;
         }
         .hero-badge { display: inline-block; background: var(--oc-ocre); color: var(--oc-negro-verdoso); padding: 0.4rem 1.2rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 1.5rem; text-transform: uppercase; }
-        .article-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; max-width: 900px; margin: 0 auto 1.5rem; line-height: 1.2; color: white; }
+        .article-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; max-width: 900px; margin: 0 auto 1.5rem; line-height: 1.2; color: white; text-shadow: 0 2px 18px rgba(0,0,0,0.42); }
         .article-hero h1 em { color: var(--oc-ocre); font-weight: 500; }
-        .hero-subtitle { font-size: 1.15rem; max-width: 780px; margin: 0 auto 2rem; opacity: 0.95; line-height: 1.7; color: #fff; }
+        .hero-subtitle { font-size: 1.15rem; max-width: 780px; margin: 0 auto 2rem; opacity: 0.95; line-height: 1.7; color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,0.4); }
         .hero-highlight { background: rgba(255,255,255,0.08); border-left: 4px solid var(--oc-ocre); padding: 1.2rem 1.5rem; max-width: 750px; margin: 2rem auto; font-style: italic; text-align: left; border-radius: 0 8px 8px 0; }
         .hero-meta { display: flex; justify-content: center; gap: 2rem; font-size: 0.9rem; opacity: 0.9; margin-top: 2rem; flex-wrap: wrap; }
 
@@ -182,7 +182,8 @@
         .mito-verdad th { background: var(--oc-arena); color: var(--oc-verde-profundo); }
         .mito-verdad td:first-child { color: var(--oc-texto-suave); font-weight: 500; text-decoration: line-through; text-decoration-color: rgba(147,74,28,0.55); white-space: normal; }
         .mito-verdad td:nth-child(2) { font-family: var(--font-body); color: var(--oc-verde-profundo); font-weight: 600; white-space: normal; }
-        .mv-check { color: var(--oc-terracota); font-weight: 800; margin-right: 0.4rem; }
+        .mv-check { color: var(--oc-terracota); font-weight: 800; margin-right: 0.5rem; }
+        .mito-verdad td:nth-child(2) .mv-check { display: inline-block; color: var(--oc-terracota); font-weight: 800; margin-right: 0.5rem; }
         .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 2rem 0; }
         .table-scroll > .razas-table { margin: 0; }
 
@@ -200,6 +201,11 @@
         .inline-image { margin: 2.5rem 0; }
         .inline-image img { width: 100%; height: auto; border-radius: 14px; display: block; }
         .image-caption { font-size: 0.85rem; color: var(--oc-texto-suave); text-align: center; margin-top: 0.75rem; font-style: italic; }
+
+        /* Figuras de foto (cuerpo) */
+        figure.post-figure { margin: 2.75rem 0; }
+        figure.post-figure img { width: 100%; height: auto; border-radius: 16px; display: block; box-shadow: 0 10px 30px rgba(2,52,41,0.10); }
+        figure.post-figure figcaption { font-size: 0.85rem; color: var(--oc-texto-suave); text-align: center; margin-top: 0.85rem; font-style: italic; line-height: 1.5; }
 
         /* Fichas de talleres */
         .talleres-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin: 2rem 0; }
@@ -405,6 +411,11 @@
 
             <p>En 1884, Ottmar Mergenthaler patentó la <strong>linotipia</strong>: una máquina que fundía el plomo en caliente, línea a línea (de ahí el nombre, <em>line o' type</em>), <strong>al lado mismo del operario</strong>. Aquello multiplicó la velocidad de la prensa diaria —un periódico entero podía componerse en horas, no en días— y por eso conquistó todas las redacciones del mundo. Pero también llenó los talleres de un vapor de plomo que los linotipistas respiraban turno tras turno.</p>
 
+            <figure class="post-figure">
+                <img src="../../assets/images/blog/imprenta-artesanal-historia/tipos-plomo.jpg" alt="tipos móviles de plomo en la caja de una imprenta" loading="lazy">
+                <figcaption>Tipos de plomo: el material que componía cada página… y el que envenenaba el aire al fundirlo.</figcaption>
+            </figure>
+
             <p>La intoxicación crónica por plomo tiene nombre: <strong>saturnismo</strong>. Afecta al sistema nervioso, a la sangre y a los riñones, y fue una de las enfermedades laborales más extendidas de toda la era industrial. Los linotipistas estaban entre los más expuestos, junto a fundidores y pintores. ¿La «protección» de la época? Aquel famoso litro de leche diario, recogido incluso en convenio. Un parche que tranquilizaba conciencias pero no limpiaba el aire que se respiraba.</p>
 
             <!-- VISUAL 3: PULL-QUOTE -->
@@ -506,29 +517,11 @@
 
             <p>Con el plomo fuera de la ecuación, pasó algo que nadie esperaba: la gente <strong>volvió a quererlo</strong>. Diseñadores, ilustradores y marcas empezaron a buscar justo lo que una pantalla no da: la huella del tipo sobre el papel, el relieve que se toca, la pieza que no se copia con un clic. Lo que durante siglos fue la forma normal —y barata— de imprimir, se convirtió en un <strong>acabado premium</strong>.</p>
 
-            <!-- VISUAL 5: FIGURA DE PROCESO (letterpress en relieve) -->
-            <div class="proceso-figure">
-                <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="card-title card-desc">
-                    <title id="card-title">Tarjeta de letterpress con relieve sobre papel de algodón</title>
-                    <desc id="card-desc">Una tarjeta de papel de algodón de alto gramaje en la que la palabra «letterpress» queda hundida en el papel: el bajorrelieve característico de la imprenta artesanal, un efecto físico que se toca y que una impresión digital no consigue.</desc>
-                    <!-- sombra de la tarjeta -->
-                    <rect x="46" y="56" width="430" height="200" rx="12" fill="#cdbfa4" opacity="0.35"/>
-                    <!-- tarjeta papel de algodón -->
-                    <rect x="40" y="48" width="430" height="200" rx="12" fill="#FAF9F7" stroke="#e7dcc4" stroke-width="1.5"/>
-                    <!-- borde de bisel cálido superior -->
-                    <rect x="40" y="48" width="430" height="200" rx="12" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
-                    <!-- texto debossed: highlight inferior + sombra superior + cara -->
-                    <g font-family="Newsreader, Georgia, serif" font-weight="600" text-anchor="middle">
-                        <text x="255.6" y="151.6" font-size="50" fill="#ffffff" opacity="0.9">letterpress</text>
-                        <text x="254.6" y="148.6" font-size="50" fill="#d6c8ab">letterpress</text>
-                        <text x="255" y="150" font-size="50" fill="#efe6d4">letterpress</text>
-                    </g>
-                    <!-- pequeño filete decorativo -->
-                    <line x1="190" y1="186" x2="320" y2="186" stroke="#E8D5B7" stroke-width="2"/>
-                    <text x="255" y="208" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12.5" letter-spacing="3" fill="#934A1C">PAPEL DE ALGODÓN</text>
-                </svg>
-                <p class="image-caption">El relieve hundido —el bajorrelieve del tipo sobre papel de algodón— es el efecto que hoy se paga. Antes era un defecto a evitar.</p>
-            </div>
+            <!-- VISUAL 5: FOTO DE PROCESO (taller letterpress) -->
+            <figure class="post-figure">
+                <img src="../../assets/images/blog/imprenta-artesanal-historia/letterpress-taller.jpg" alt="impresión en letterpress en un taller artesanal" loading="lazy">
+                <figcaption>El relieve hundido sobre el papel: el efecto que hoy se paga como acabado premium.</figcaption>
+            </figure>
 
             <p>Hoy la imprenta artesanal vive sobre todo de tres frentes. De las <strong>invitaciones de boda y la papelería de evento</strong>, donde el relieve y el tacto comunican cuidado y singularidad mucho antes de que se lea una sola palabra. De las <strong>tarjetas de visita y la identidad de marca</strong>, donde una tarjeta con bajorrelieve sobre papel de algodón deja una impresión —literal— que una digital no consigue. Y de la <strong>edición y la obra gráfica</strong>, donde el letterpress se cruza con el grabado, la ilustración y los libros de artista. Es el mismo movimiento que vive cualquier oficio que aprende a <a href="/blog/artesania-de-lujo-posicionar-valor-real/">posicionar su artesanía como producto de lujo</a>: dejar de competir por precio y empezar a competir por valor.</p>
 
@@ -570,6 +563,11 @@
             <h2>Talleres vivos: el mapa de la imprenta artesanal en España</h2>
 
             <p>Cuando publicamos sobre este tema en nuestras redes, pasó lo mejor que puede pasar: el oficio respondió. En los comentarios fueron apareciendo decenas de talleres que siguen imprimiendo con tipos móviles, de punta a punta del país. No son piezas de museo: son negocios que abren cada mañana. Estos son algunos de los que dan la cara por la imprenta artesanal en España.</p>
+
+            <figure class="post-figure">
+                <img src="../../assets/images/blog/imprenta-artesanal-historia/manos-componiendo.jpg" alt="manos componiendo con tipos móviles en un taller de imprenta artesanal" loading="lazy">
+                <figcaption>Componer a mano, letra a letra: el gesto que sigue vivo en talleres de toda España.</figcaption>
+            </figure>
 
             <div class="talleres-grid">
                 <div class="taller-card">
