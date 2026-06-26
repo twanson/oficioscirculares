@@ -61,6 +61,7 @@ body { padding-top: 0; margin: 0; }
 .cld-line{font-size:.97rem;color:var(--on);margin:0 0 11px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .cld-line strong{color:var(--verde);font-weight:700}
 .cld-note{font-size:.89rem;color:var(--on-var);font-style:italic;margin:0 0 12px}
+.cld-desc{font-size:.92rem;color:var(--on-var);line-height:1.5;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .cld-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .cld-chip{background:var(--arena);color:#8a5524;font-size:.8rem;font-weight:700;padding:5px 13px;border-radius:100px}
 .cld-btn{margin-top:auto;align-self:flex-start;display:inline-block;background:var(--verde);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.92rem;padding:11px 20px;border-radius:100px;transition:background .2s ease,transform .2s ease}
@@ -144,6 +145,9 @@ body { padding-top: 0; margin: 0; }
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% if (e.servicios) { %><p class="cld-line"><strong>Servicios:</strong> <%= e.servicios %></p><% } %>
           <% if (e.trabajaTerceros) { %><p class="cld-note">Trabajan lana de terceros<%= e.tercerosExtra ? (' · ' + e.tercerosExtra) : '' %></p><% } %>
+          <% if (e.raza_o_busca) { %><p class="cld-line"><strong>Trabaja con:</strong> <%= e.raza_o_busca %></p><% } %>
+          <% if (e.cantidad) { %><p class="cld-line"><strong>Capacidad:</strong> <%= e.cantidad %></p><% } %>
+          <% if (e.descripcion) { %><p class="cld-desc"><%= e.descripcion %></p><% } %>
           <a class="cld-btn" href="<%= interesar(e.nombre) %>" target="_blank" rel="noopener">Me interesa →</a>
         </article>
         <% }) %>
