@@ -62,6 +62,11 @@ body { padding-top: 0; margin: 0; }
 .cld-line strong{color:var(--verde);font-weight:700}
 .cld-note{font-size:.89rem;color:var(--on-var);font-style:italic;margin:0 0 12px}
 .cld-desc{font-size:.92rem;color:var(--on-var);line-height:1.5;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* "…ver más" — desplegar textos truncados */
+.cld-line.is-expanded,.cld-desc.is-expanded{display:block;-webkit-line-clamp:unset;line-clamp:unset;overflow:visible}
+.cld-more{align-self:flex-start;display:inline-block;background:none;border:0;padding:0;margin:-6px 0 12px;color:var(--verde);font-family:var(--f-ui);font-size:.88rem;font-weight:600;line-height:1.3;text-align:left;cursor:pointer}
+.cld-more:hover{text-decoration:underline}
+.cld-more:focus-visible{outline:2px solid var(--verde);outline-offset:2px;border-radius:3px}
 .cld-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .cld-chip{background:var(--arena);color:#8a5524;font-size:.8rem;font-weight:700;padding:5px 13px;border-radius:100px}
 .cld-btn{margin-top:auto;align-self:flex-start;display:inline-block;background:var(--verde);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.92rem;padding:11px 20px;border-radius:100px;transition:background .2s ease,transform .2s ease}
@@ -184,6 +189,44 @@ body { padding-top: 0; margin: 0; }
     <p class="cld-foot">Solo aparecen quienes han aceptado figurar en el directorio público · Los contactos los gestiona Oficios Circulares.</p>
   </div>
 </main>
+
+<script>
+/* Directorio — "…ver más"/"ver menos" en los textos que se truncan con line-clamp. */
+(function () {
+  var SEL = '.cld-card:not(.cld-card--ghost) .cld-line, .cld-card:not(.cld-card--ghost) .cld-desc';
+  function isTruncated(el) { return el.scrollHeight - el.clientHeight > 4; }
+  function ensureToggle(el) {
+    if (el.classList.contains('is-expanded')) return; // expandido por el usuario: respetar
+    var next = el.nextElementSibling;
+    var hasBtn = !!(next && next.classList && next.classList.contains('cld-more'));
+    if (isTruncated(el)) {
+      if (hasBtn) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cld-more';
+      btn.textContent = '…ver más';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function () {
+        var open = el.classList.toggle('is-expanded');
+        btn.textContent = open ? 'ver menos' : '…ver más';
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      el.insertAdjacentElement('afterend', btn);
+    } else if (hasBtn) {
+      next.remove(); // dejó de truncarse (p. ej. al ensanchar) y está contraído → quitar enlace
+    }
+  }
+  function run() {
+    var els = document.querySelectorAll(SEL);
+    for (var i = 0; i < els.length; i++) ensureToggle(els[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(run, 200); });
+})();
+</script>
 
 </body>
 </html>
