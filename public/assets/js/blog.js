@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const posts = [
     {
+      slug: './por-que-la-artesania-es-mejor-que-el-lujo/',
+      title: 'Por qué la artesanía es mejor que el lujo (y cómo explicárselo a tu cliente)',
+      excerpt: 'Tu cliente te compara con lo industrial o con el lujo y malvendes. Aquí tienes el argumento —valor justo, coste por uso, circularidad— y cómo explicárselo.',
+      date: '2026-06-28',
+      readingMinutes: 9,
+      cover: ASSETS_BASE + '/images/oficios/ceramica-artesanal.jpg',
+      tags: ['estrategia', 'circularidad']
+    },
+    {
       slug: './imprenta-artesanal-historia/',
       title: 'Imprenta artesanal: del plomo que mataba al lujo de hoy',
       excerpt: 'Un oficio que cambió el mundo, que llegó a matar a quienes lo ejercían y que hoy se vende como un lujo. La historia de la imprenta artesanal: del plomo al fotopolímero.',
