@@ -401,8 +401,10 @@ html, body {
 }
 
 .fr-btn {
-    display: inline-flex;
+    display: flex;
+    align-self: stretch;          /* mismo ancho en las 4 tarjetas (= ancho de la tarjeta) */
     align-items: center;
+    justify-content: center;      /* texto centrado al ser ancho completo */
     gap: 8px;
     padding: 13px 24px;
     border-radius: 11px;
