@@ -1,4 +1,4 @@
-<%- include('partials/head-meta', { title, description, canonical }) %>
+<%- include('partials/head-meta', { title, description, canonical, ogImage: recurso.cover ? ('https://www.oficioscirculares.com' + recurso.cover) : undefined, ogImageAlt: recurso.title }) %>
     <%- include('partials/header') %>
 
         <main class="main-content">
