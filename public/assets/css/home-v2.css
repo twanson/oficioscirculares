@@ -422,9 +422,13 @@ html, body {
     align-items: center;
     gap: 6px;
     font-size: 0.85rem;
+    line-height: 1.45;
     font-weight: 600;
     text-decoration: none;
     transition: gap 0.25s ease;
+    /* Reserva la misma altura (≈2 líneas) en las 4 tarjetas — incluido el placeholder
+       oculto de Telegram/Conecta Lana — para que los botones queden a la misma altura. */
+    min-height: 2.5rem;
 }
 
 .fr-card:hover .fr-link-sec {
