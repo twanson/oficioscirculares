@@ -264,7 +264,9 @@ app.get('/contacto', (req, res) => {
 
 // Rutas de recursos
 app.get('/recursos', (req, res) => {
-  const visibles = recursos.getAllRecursos().filter(r => r.listed !== false);
+  const visibles = recursos.getAllRecursos()
+    .filter(r => r.listed !== false)
+    .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
   res.render('recursos-list', {
     title: 'Recursos descargables',
     description: 'Guías, tests y herramientas para aplicar circularidad con criterio.',
