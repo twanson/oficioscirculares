@@ -160,7 +160,7 @@
         .image-caption { font-size: 0.85rem; color: var(--color-text-light); text-align: center; margin-top: 0.75rem; font-style: italic; }
 
         /* Coste por uso chart */
-        .viz { background: white; border: 1px solid var(--color-sand-dark); border-radius: 16px; padding: 1.75rem; margin: 2.5rem 0; }
+        .viz { background: white; border: 1px solid var(--color-sand-dark); border-radius: 16px; padding: 1.75rem; margin: 2.5rem 0; overflow-x: auto; }
         .viz-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--color-primary); margin-bottom: 0.25rem; font-weight: 600; }
         .viz-sub { font-size: 0.9rem; color: var(--color-text-light); margin-bottom: 1.25rem; }
         .viz svg { width: 100%; height: auto; display: block; }
@@ -236,6 +236,7 @@
             .article-container { padding: 2rem 1.5rem; }
             .hero-meta { gap: 1rem; }
             .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .data-card-number { font-size: 1.9rem; }
             .inline-image img { height: 220px; }
             .scenario-grid { grid-template-columns: 1fr; }
             .triangle-table { font-size: 0.85rem; }
@@ -398,21 +399,21 @@
             <div class="viz">
                 <div class="viz-title">El coste por uso le da la vuelta al "qué caro"</div>
                 <div class="viz-sub">Precio ÷ número de usos. La prenda "cara" sale casi a mitad de precio por uso.</div>
-                <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparativa de coste por uso: prenda artesana de 50 euros a 0,25 euros por uso frente a prenda barata de 20 euros a 0,40 euros por uso">
+                <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparativa de coste por uso: prenda artesana de 50 euros a 0,25 euros por uso frente a prenda barata de 20 euros a 0,40 euros por uso">
                     <!-- baseline -->
-                    <line x1="60" y1="210" x2="600" y2="210" stroke="#E8E0D5" stroke-width="2"/>
+                    <line x1="60" y1="230" x2="600" y2="230" stroke="#E8E0D5" stroke-width="2"/>
                     <!-- bar A: 0.25 (green) -->
-                    <rect x="130" y="98" width="150" height="112" rx="8" fill="#27AE60" fill-opacity="0.85"/>
-                    <text x="205" y="86" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="30" font-weight="600" fill="#1F4B3F">0,25 €</text>
-                    <text x="205" y="234" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#1a1a1a">Prenda de 50 €</text>
-                    <text x="205" y="254" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#555">usada 4 años</text>
+                    <rect x="130" y="118" width="150" height="112" rx="8" fill="#27AE60" fill-opacity="0.85"/>
+                    <text x="205" y="106" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="28" font-weight="600" fill="#1F4B3F">0,25 €</text>
+                    <text x="205" y="254" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#1a1a1a">Prenda de 50 €</text>
+                    <text x="205" y="274" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#555">usada 4 años</text>
                     <!-- bar B: 0.40 (terracotta) -->
-                    <rect x="370" y="30" width="150" height="180" rx="8" fill="#C17F59" fill-opacity="0.85"/>
-                    <text x="445" y="18" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="30" font-weight="600" fill="#8a4b2f">0,40 €</text>
-                    <text x="445" y="234" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#1a1a1a">Prenda de 20 €</text>
-                    <text x="445" y="254" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#555">dura 1 año</text>
+                    <rect x="370" y="50" width="150" height="180" rx="8" fill="#C17F59" fill-opacity="0.85"/>
+                    <text x="445" y="38" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="28" font-weight="600" fill="#8a4b2f">0,40 €</text>
+                    <text x="445" y="254" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#1a1a1a">Prenda de 20 €</text>
+                    <text x="445" y="274" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#555">dura 1 año</text>
                     <!-- axis label -->
-                    <text x="60" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#999" transform="rotate(-90 60 150)">€ por uso</text>
+                    <text x="60" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#999" transform="rotate(-90 60 170)">€ por uso</text>
                 </svg>
             </div>
 
