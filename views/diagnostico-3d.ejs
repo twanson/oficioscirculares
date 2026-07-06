@@ -22,7 +22,8 @@
                     </ul>
                     <div class="hero-ctas">
                         <a id="cta-hero" href="/contacto?service=diagnostico-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=hero&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar Diagnóstico 3D" data-event="click_cta" data-label="diag3d-hero">Quiero mi Diagnóstico 3D</a>
-                        <a id="cta-hero-email" href="/downloads/ejemplo-informe-diag3d.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=hero" class="btn btn-secondary" aria-label="Ver ejemplo de informe" data-event="file_download" data-label="diag3d-hero-ejemplo" style="display: none;">Ver ejemplo de informe</a>
+                        <a id="cta-hero-email-marca" href="/downloads/diagnostico-3d-ejemplo-marca-artesanal.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=hero" class="btn btn-secondary" aria-label="Ver ejemplo de informe · marca artesanal" data-event="file_download" data-label="diag3d-hero-marca">Ver ejemplo · marca artesanal</a>
+                        <a id="cta-hero-email-taller" href="/downloads/diagnostico-3d-ejemplo-taller-pequeno.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=hero" class="btn btn-secondary" aria-label="Ver ejemplo de informe · taller pequeño" data-event="file_download" data-label="diag3d-hero-taller">Ver ejemplo · taller pequeño</a>
                     </div>
                 </div>
                 <div class="hero-media" aria-hidden="true">
@@ -144,7 +145,8 @@
             <p>En 45 minutos sabrás exactamente qué puedes mejorar y cómo comunicarlo. Y en 48h tendrás el informe en tus manos.</p>
             <div class="hero-ctas">
                 <a id="cta-footer" href="/contacto?service=diagnostico-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=footer&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar Diagnóstico 3D" data-event="click_cta" data-label="diag3d-footer">Reservar mi Diagnóstico 3D</a>
-                <a id="cta-footer-email" class="btn btn-secondary" href="/downloads/ejemplo-informe-diag3d.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=footer" aria-label="Ver ejemplo de informe" data-event="file_download" data-label="diag3d-footer-ejemplo" style="display: none;">Ver ejemplo de informe</a>
+                <a id="cta-footer-email-marca" class="btn btn-secondary" href="/downloads/diagnostico-3d-ejemplo-marca-artesanal.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=footer" aria-label="Ver ejemplo de informe · marca artesanal" data-event="file_download" data-label="diag3d-footer-marca">Ver ejemplo · marca artesanal</a>
+                <a id="cta-footer-email-taller" class="btn btn-secondary" href="/downloads/diagnostico-3d-ejemplo-taller-pequeno.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-diagnostico-3d&utm_content=footer" aria-label="Ver ejemplo de informe · taller pequeño" data-event="file_download" data-label="diag3d-footer-taller">Ver ejemplo · taller pequeño</a>
             </div>
         </div>
     </section>
@@ -200,11 +202,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   attachTracking(document.getElementById('cta-hero'), 'hero');
-  attachTracking(document.getElementById('cta-hero-email'), 'hero');
+  attachTracking(document.getElementById('cta-hero-email-marca'), 'hero');
+  attachTracking(document.getElementById('cta-hero-email-taller'), 'hero');
   attachTracking(document.getElementById('cta-flow'), 'flow');
   attachTracking(document.getElementById('cta-ejemplo'), 'ejemplo');
   attachTracking(document.getElementById('cta-footer'), 'footer');
-  attachTracking(document.getElementById('cta-footer-email'), 'footer');
+  attachTracking(document.getElementById('cta-footer-email-marca'), 'footer');
+  attachTracking(document.getElementById('cta-footer-email-taller'), 'footer');
   attachTracking(document.getElementById('cta-sticky-primary'), 'sticky');
   attachTracking(document.getElementById('cta-sticky-secondary'), 'sticky');
 });
