@@ -2104,7 +2104,7 @@
       tocContent.appendChild(list);
     })();
 
-    // Comprobar existencia de PDFs y ocultar botones si no existen; añadir noindex si faltan pruebas
+    // Comprobar existencia de PDFs y ocultar botones si no existen
     (async function(){
       async function exists(url){
         try { const res = await fetch(url, { method: 'HEAD' }); return res.ok; } catch { return false; }
@@ -2115,12 +2115,6 @@
       if (ficha && !fichaOk) ficha.style.display = 'none';
       const ensayoOk = ensayo ? await exists(ensayo.href) : false;
       if (ensayo && !ensayoOk) ensayo.style.display = 'none';
-      if (!fichaOk && !ensayoOk) {
-        const m = document.createElement('meta');
-        m.setAttribute('name','robots');
-        m.setAttribute('content','noindex, follow');
-        document.head.appendChild(m);
-      }
       // Relato completo condicional
       const relato = document.getElementById('relato-link');
       if (relato) {
