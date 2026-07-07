@@ -1,5 +1,20 @@
 [
     {
+          "slug": "calcula-tu-precio",
+          "title": "Calcula tu precio: la estructura completa",
+          "type": "guia",
+          "summary": "La guía de trabajo para construir el precio de tus piezas paso a paso: tu hora, materiales, amortización, taller, costes invisibles, impuestos y el margen con criterios. Con el ejemplo desglosado y hoja de cálculo rellenable.",
+          "tags": ["estrategia", "pricing", "precios", "margen"],
+          "cover": "/img/recursos/covers/calcula-tu-precio-cover.jpg",
+          "pdf": "/downloads/OC_Calcula_Tu_Precio.pdf",
+          "form_tally_id": "D4y52R",
+          "cta": "Descargar la guía gratis",
+          "updated_at": "2026-07-06",
+          "listed": true,
+          "related": ["defiende-tu-precio"],
+          "related_post": { "slug": "como-poner-precio-artesania", "url": "/blog/como-poner-precio-artesania/" }
+    },
+    {
           "slug": "guia-materiales",
           "title": "Guía de Materiales · Completa",
           "type": "guia",
@@ -175,7 +190,8 @@
           "form_tally_id": "obpov5",
           "cta": "Descargar el kit gratis",
           "updated_at": "2026-06-28",
-          "listed": true
+          "listed": true,
+          "related": ["calcula-tu-precio"]
     },
     {
           "slug": "guia-citricos",

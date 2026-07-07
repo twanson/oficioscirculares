@@ -641,6 +641,48 @@
                                                 <p>PDF descargable de 11 páginas, lectura 15 min, con tres ejercicios accionables al final. Pensado para leer una vez y volver sobre los ejercicios cuando toque trabajarlos.</p>
                                             </div>
                                         </div>
+                                    <% } else if (recurso.slug==='calcula-tu-precio' ) { %>
+                                        <!-- Contenido específico para Calcula tu precio -->
+                                        <div class="recurso-content-detail">
+                                            <div class="content-section">
+                                                <h2>¿Qué es?</h2>
+                                                <p>La guía de trabajo para <strong>construir el precio de tus piezas capa a capa</strong>, sin adivinar. Recoge la estructura completa —tu hora, materiales, amortización, goteo del taller, costes invisibles, impuestos y el margen con criterios— con los porcentajes orientativos de cada capa, el ejemplo desglosado céntimo a céntimo y una hoja de cálculo rellenable para tus propias piezas.</p>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>¿Para quién?</h2>
+                                                <ul>
+                                                    <li><strong>Artesanos y pequeños talleres</strong> que cobran "a ojo" y sospechan que están financiando con sus horas el precio de otros.</li>
+                                                    <li><strong>Marcas artesanas</strong> que quieren pasar de la intuición a una estructura de precio defendible.</li>
+                                                    <li><strong>Cualquier oficio</strong> que se plantee vender a tiendas y necesite entender la regla del canal (coste ×2 ×2) antes de dar un precio.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué incluye</h2>
+                                                <ul>
+                                                    <li><strong>Las 7 capas del precio honesto</strong> — tu hora, materiales, amortización, taller, invisibles, impuestos y margen— con fórmula y porcentaje orientativo de cada una.</li>
+                                                    <li><strong>El ejemplo desglosado</strong> — unos calcetines de lana calculados céntimo a céntimo, de coste real a precio honesto.</li>
+                                                    <li><strong>Hoja de cálculo rellenable</strong> para pasar tus piezas por la estructura sin hacer cuentas a mano.</li>
+                                                    <li><strong>Los criterios del margen</strong> por canal, unicidad y posicionamiento, y la regla del precio mayorista.</li>
+                                                    <li><strong>El matiz del IVA del 10%</strong> para obra de autor (art. 136 LIVA) y los cinco errores que más dinero cuestan.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué te resuelve</h2>
+                                                <ul>
+                                                    <li>Dejas de cobrar tu hora a cero y de calcular el margen sobre un precio con IVA que no es tuyo.</li>
+                                                    <li>Sabes con números si una pieza es viable para mayorista antes de ofrecerla.</li>
+                                                    <li>Pones precio con una estructura que puedes explicar —y defender— con tranquilidad.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Formato</h2>
+                                                <p>PDF descargable con los 7 pasos, los porcentajes de cada capa, el ejemplo resuelto y la hoja de cálculo rellenable. Pensado para tenerlo al lado mientras pones precio a tus piezas.</p>
+                                            </div>
+                                        </div>
                                     <% } %>
 
                                         <!-- FORMULARIO TALLY con parámetros optimizados -->
@@ -715,6 +757,38 @@
                                                 </a>
                                             </div>
                                         </section>
+                                        <% } %>
+
+                                        <!-- CTA al post relacionado (con puerta de publicación) -->
+                                        <% if (recurso.related_post) { %>
+                                            <section class="recurso-post-cta" style="margin-top:2.5rem;background:#934A1C;border-radius:16px;padding:2rem;color:#fff;text-align:center;">
+                                                <% if (typeof relatedPostPublished !== 'undefined' && relatedPostPublished) { %>
+                                                    <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:1.4rem;margin:0 0 .6rem;color:#fff;">¿Quieres el método explicado paso a paso?</h3>
+                                                    <p style="margin:0 auto 1.25rem;max-width:520px;opacity:.95;">Lo desarrollamos entero en el blog, con calculadora interactiva y el ejemplo resuelto.</p>
+                                                    <a href="<%= recurso.related_post.url %>" style="display:inline-block;background:#FD9F6A;color:#1C1E1B;padding:.9rem 1.8rem;border-radius:8px;text-decoration:none;font-weight:700;">Leer el artículo completo &rarr;</a>
+                                                <% } else { %>
+                                                    <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:1.4rem;margin:0 0 .6rem;color:#fff;">El método completo, muy pronto en el blog</h3>
+                                                    <p style="margin:0 auto;max-width:520px;opacity:.95;">Estamos rematando el artículo con el paso a paso, la calculadora interactiva y el ejemplo resuelto. Mientras, tienes toda la estructura en la guía de arriba.</p>
+                                                <% } %>
+                                            </section>
+                                        <% } %>
+
+                                        <!-- Te irá bien con: recursos relacionados -->
+                                        <% if (typeof related !== 'undefined' && related && related.length) { %>
+                                            <section class="recurso-related" style="margin-top:2.5rem;">
+                                                <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:1.35rem;color:#1F4B3F;margin:0 0 1rem;">Te irá bien con</h3>
+                                                <div class="related-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+                                                    <% related.forEach(rel => { %>
+                                                        <a href="/recursos/<%= rel.slug %>" class="related-card" style="display:block;text-decoration:none;color:inherit;border:1px solid #E8E0D5;border-radius:12px;overflow:hidden;background:#fff;transition:box-shadow .2s ease;">
+                                                            <img loading="lazy" src="<%= rel.cover %>" alt="<%= rel.title %>" style="width:100%;height:140px;object-fit:cover;display:block;">
+                                                            <div style="padding:1rem;">
+                                                                <span style="display:block;font-weight:700;color:#1F4B3F;line-height:1.3;margin-bottom:.35rem;"><%= rel.title %></span>
+                                                                <span style="display:inline-block;color:#934A1C;font-weight:600;font-size:.9rem;">Ver recurso &rarr;</span>
+                                                            </div>
+                                                        </a>
+                                                    <% }) %>
+                                                </div>
+                                            </section>
                                         <% } %>
                     </div>
                 </div>

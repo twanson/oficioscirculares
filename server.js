@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const fetch = require('node-fetch');
 const recursos = require('./lib/recursos');
+const posts = require('./lib/posts');
 const tokenValidator = require('./lib/tokenValidator');
 const directorio = require('./lib/directorio');
 const conectaLanaDir = require('./lib/conecta-lana-directorio');
@@ -278,11 +280,21 @@ app.get('/recursos', (req, res) => {
 app.get('/recursos/:slug', (req, res) => {
   const r = recursos.getRecursoBySlug(req.params.slug);
   if (!r) return res.status(404).send('Recurso no encontrado');
+  // Recursos relacionados (bloque "Te irá bien con") a partir de r.related (array de slugs).
+  const related = (r.related || [])
+    .map(slug => recursos.getRecursoBySlug(slug))
+    .filter(Boolean);
+  // Si el recurso enlaza a un post con puerta de publicación, calculamos si ya es visible.
+  const relatedPostPublished = r.related_post
+    ? posts.isPublished(r.related_post.slug)
+    : true;
   res.render('recurso-detail', {
     title: r.title,
     description: r.summary,
     canonical: `/recursos/${r.slug}`,
-    recurso: r
+    recurso: r,
+    related,
+    relatedPostPublished
   });
 });
 
@@ -631,6 +643,39 @@ app.post('/api/renew-access', rateLimitMiddleware, async (req, res) => {
     ok: true,
     message: "Si tu email está en la comunidad, te hemos enviado un nuevo enlace."
   });
+});
+
+// ── Puerta de publicación programada (publish_at) ──
+// Mecanismo genérico y reutilizable: los posts con publish_at futuro
+// (definido en data/posts.json) no son accesibles hasta su fecha.
+// Debe ir ANTES de express.static para interceptar el HTML del post.
+app.use((req, res, next) => {
+  // Captura /blog/<slug>, /blog/<slug>/ y /blog/<slug>/index.html
+  const m = req.path.match(/^\/blog\/([^\/]+)\/?(?:index\.html)?$/);
+  if (m) {
+    const slug = decodeURIComponent(m[1]);
+    if (!posts.isPublished(slug)) {
+      return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+    }
+  }
+  next();
+});
+
+// Sitemap con la misma puerta: las URLs de posts con publish_at futuro
+// se omiten hasta su fecha. El resto del sitemap.xml estático se sirve tal cual.
+app.get('/sitemap.xml', (req, res) => {
+  try {
+    let xml = fs.readFileSync(path.join(__dirname, 'public', 'sitemap.xml'), 'utf8');
+    posts.futureSlugs().forEach(slug => {
+      // Elimina el bloque <url>…/blog/<slug>/…</url> completo mientras esté embargado.
+      const re = new RegExp('\\s*<url>(?:(?!</url>)[\\s\\S])*?/blog/' + slug + '/[\\s\\S]*?</url>', 'g');
+      xml = xml.replace(re, '');
+    });
+    res.type('application/xml').send(xml);
+  } catch (e) {
+    console.error('❌ Error sirviendo sitemap:', e.message);
+    res.status(500).send('Error');
+  }
 });
 
 app.use(express.static('public'));
