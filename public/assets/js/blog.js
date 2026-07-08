@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
       slug: './como-poner-precio-artesania/',
       title: 'Cómo poner precio a tu artesanía: la estructura completa',
       excerpt: 'El método completo para calcular el precio de tus piezas: tu hora, materiales, costes invisibles, impuestos y el margen. Con calculadora y ejemplo real.',
-      date: '2026-07-10',
+      date: '2026-07-21',
       readingMinutes: 12,
       cover: ASSETS_BASE + '/images/oficios/lana-y-costura.jpg',
       tags: ['estrategia', 'pricing'],
-      publishAt: '2026-07-10T08:00:00+02:00'
+      publishAt: '2026-07-21T08:00:00+02:00'
     },
     {
       slug: './por-que-la-artesania-es-mejor-que-el-lujo/',
