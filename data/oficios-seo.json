@@ -28,6 +28,8 @@
   },
   "verticals": {
     "alimentacion-artesanal": {
+      "nombreCorto": "alimentación artesanal",
+      "cover": "/assets/diagnosticos/alimentacion-artesanal-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un obrador familiar de conservas y dulces de temporada: práctica impecable de proximidad que en la estantería resultaba indistinguible de la industria que usa las mismas palabras.",
         "cita": "En vuestras etiquetas pone 'artesano' y 'de proximidad' — como en las de media industria alimentaria. La diferencia es que en vuestro caso es verdad. Solo falta poder demostrarlo en treinta segundos.",
@@ -54,6 +56,8 @@
       ]
     },
     "barro-artesanal": {
+      "nombreCorto": "barro artesanal",
+      "cover": "/assets/diagnosticos/barro-artesanal-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con una alfarería familiar de tercera generación: arcilla del término, horno de leña de poda y cazuelas que compiten mudas en la feria contra imitaciones a un tercio del precio.",
         "cita": "Vuestro oficio era circular siglos antes de que existiera la palabra: tierra del término, leña de poda, piezas que duran una vida y vuelven a la tierra. Todo eso es verdad — y no se puede leer en ninguna parte.",
@@ -80,6 +84,8 @@
       ]
     },
     "carpinteria-y-ebanisteria": {
+      "nombreCorto": "carpintería y ebanistería",
+      "cover": "/assets/diagnosticos/carpinteria-y-ebanisteria-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con una ebanistería de tercera generación: mueble a medida y restauración con madera local, compitiendo contra el \"estilo artesano\" de gran superficie que solo se distingue entrando al taller.",
         "cita": "Un mueble vuestro dura tres generaciones. Eso, dicho así, es una frase bonita. Documentado — especie, monte, acabados, reparabilidad — es un argumento de venta que ningún mueble de gran superficie puede imitar.",
@@ -106,6 +112,8 @@
       ]
     },
     "ceramica-artesanal": {
+      "nombreCorto": "cerámica artesanal",
+      "cover": "/assets/diagnosticos/ceramica-artesanal-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un taller cerámico de cuarta generación con sello de calidad artesanal: oficio de sobra y activos dispersos que no llegaban al mercado que mejor los pagaría.",
         "cita": "Lo importante no es lo que sabéis hacer — lo importante es que el mercado adecuado lo entienda. Y eso, hoy, no está pasando.",
@@ -132,6 +140,8 @@
       ]
     },
     "cesteria-y-mimbre": {
+      "nombreCorto": "cestería y mimbre",
+      "cover": "/assets/diagnosticos/cesteria-y-mimbre-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un taller de mimbre, esparto y caña al que el interiorismo había venido a buscar — sin que taller y mercado hablaran todavía el mismo idioma.",
         "cita": "Trabajáis el material más circular que existe: se planta, se cosecha cada año, se trenza y vuelve a la tierra. Y el mercado del interiorismo lo está buscando como nunca. Lo único que falta es el puente — y el puente son los datos.",
@@ -158,6 +168,8 @@
       ]
     },
     "cosmetica-natural": {
+      "nombreCorto": "cosmética natural",
+      "cover": "/assets/diagnosticos/cosmetica-natural-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un obrador de saponificación en frío en el sector con más greenwashing por metro cuadrado: las tres pruebas que la industria no puede falsificar estaban ahí, sin traducir a datos.",
         "cita": "'Natural' es la palabra más usada y menos creída de la cosmética. Vosotras tenéis lo que casi nadie: un INCI corto de verdad, aceite de oliva con apellido y un obrador que se puede visitar. Falta convertirlo en datos.",
@@ -184,6 +196,8 @@
       ]
     },
     "cuero-y-marroquineria": {
+      "nombreCorto": "cuero y marroquinería",
+      "cover": "/assets/diagnosticos/cuero-y-marroquineria-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un taller de marroquinería de segunda generación que peleaba la batalla más injusta del artesanado — piel noble contra sustituto plástico con mejor naming — sin usar sus mejores armas.",
         "cita": "La piel es el material más atacado y peor defendido del artesanado. Vosotros tenéis la defensa perfecta — subproducto rescatado, curtido vegetal, décadas de uso — y no la estáis usando.",
@@ -210,6 +224,8 @@
       ]
     },
     "encuadernacion-artesanal": {
+      "nombreCorto": "encuadernación artesanal",
+      "cover": "/assets/diagnosticos/encuadernacion-artesanal-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un taller de encuadernación de autor y restauración: el único producto que se compra para durar más que su dueño, vendiéndose como una libreta bonita.",
         "cita": "Hacéis el único producto que se compra para durar más que su dueño. Un álbum cosido a mano con papel de conservación es un objeto de siglos — y se está vendiendo como una libreta bonita.",
@@ -236,6 +252,8 @@
       ]
     },
     "forja-y-herreria": {
+      "nombreCorto": "forja y herrería",
+      "cover": "/assets/diagnosticos/forja-y-herreria-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un taller de forja de tercera generación que perdía obras contra materiales peores por papeles, no por calidad: el aluminio llegaba con ficha y la forja, con palabras.",
         "cita": "El hierro que forjáis hoy puede llevar dentro tres vidas anteriores — y durar otras tres. Trabajáis el material infinitamente reciclable con el oficio que más dura. Falta que eso conste en alguna parte.",
@@ -262,6 +280,8 @@
       ]
     },
     "joyeria-artesanal": {
+      "nombreCorto": "joyería artesanal",
+      "cover": "/assets/diagnosticos/joyeria-artesanal-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un estudio de joyería contemporánea con taller abierto: refundición semanal y transformación de herencias — circularidad de manual contada con las mismas tres palabras que usa la bisutería de importación.",
         "cita": "La joyería es el único oficio donde el material ya es eterno — el oro se refunde desde hace cinco mil años. Lo que falta no es circularidad: es poder demostrar la vuestra en un sector lleno de palabras bonitas y minas amargas.",
@@ -288,6 +308,8 @@
       ]
     },
     "lana-y-costura": {
+      "nombreCorto": "lana y costura",
+      "cover": "/assets/diagnosticos/lana-y-costura-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un obrador de punto que teje lana merina de rebaños a menos de sesenta kilómetros, lavada e hilada en la península — con toda esa trazabilidad viviendo solo en la conversación de mostrador.",
         "cita": "Vuestra etiqueta dice 'lana merina' — exactamente lo mismo que la de una cadena que la trae del otro hemisferio. La vuestra viene de rebaños a cuarenta kilómetros y se hila en la península. La diferencia existe de verdad: solo falta que se pueda leer.",
@@ -315,6 +337,8 @@
       ]
     },
     "materiales-construccion": {
+      "nombreCorto": "materiales de construcción",
+      "cover": "/assets/diagnosticos/materiales-construccion-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con una calera de cuarta generación: el único material de construcción que reabsorbe CO₂ durante toda su vida, compitiendo sin ficha contra la industria del saco, que tiene fichas y mal ciclo.",
         "cita": "Vendéis el único material de construcción que respira y reabsorbe CO₂ durante toda su vida — en plena fiebre normativa por la descarbonización. Y vuestro mejor argumento está sin escribir.",
@@ -341,6 +365,8 @@
       ]
     },
     "restauracion-y-upcycling": {
+      "nombreCorto": "restauración y upcycling",
+      "cover": "/assets/diagnosticos/restauracion-y-upcycling-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un taller de restauración y upcycling donde la circularidad no es un atributo del producto — es el producto — y el relato se evaporaba con cada antes-y-después publicado.",
         "cita": "En tu oficio, la circularidad no es un atributo del producto — ES el producto. Cada mueble que sale de tu taller es un dato: tantos kilos que no fueron al vertedero. Solo falta contarlos.",
@@ -367,6 +393,8 @@
       ]
     },
     "textil-sostenible": {
+      "nombreCorto": "textil sostenible",
+      "cover": "/assets/diagnosticos/textil-sostenible-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un estudio textil unipersonal de telar manual: producto circular por diseño — durabilidad, pieza única, fibra natural — sin un solo dato medido que lo hiciera cobrable.",
         "cita": "Tu producto ya es circular por diseño. Lo que no es todavía es demostrable — y lo que no se puede demostrar, hoy, no se puede cobrar.",
@@ -393,6 +421,8 @@
       ]
     },
     "turismo-rural-sostenible": {
+      "nombreCorto": "turismo rural sostenible",
+      "cover": "/assets/diagnosticos/turismo-rural-sostenible-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un ecoalojamiento familiar de montaña: quince años de circularidad real en energía, agua, huerta y residuos — sin un solo indicador unificado que la demostrara.",
         "cita": "Los sellos certifican que cumplís criterios. Lo que ningún sello cuenta son vuestros números — y los números son lo único que nadie os puede copiar.",
@@ -419,6 +449,8 @@
       ]
     },
     "vidrio-artesanal": {
+      "nombreCorto": "vidrio artesanal",
+      "cover": "/assets/diagnosticos/vidrio-artesanal-cover.jpg",
       "ejemplo": {
         "intro": "Así trabajamos con un taller de vidrio soplado de segunda generación: la circularidad más literal que existe — la refundición — practicada a diario y sin un solo dato que la contara.",
         "cita": "Trabajáis el único material que se puede refundir infinitas veces sin perder calidad — y nadie lo sabe al comprar vuestras piezas. Tenéis la economía circular perfecta entre las manos, sin contar.",

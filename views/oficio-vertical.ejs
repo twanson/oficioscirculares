@@ -80,20 +80,35 @@
         .breadcrumbs-vertical span.sep { margin: 0 0.45rem; }
         .breadcrumbs-vertical span.current { color: #1F4B3F; font-weight: 600; }
 
-        .ejemplo-diagnostico { background: #FAF9F7; }
-        .ejemplo-diagnostico .ejemplo-inner { max-width: 820px; margin: 0 auto; }
-        .ejemplo-diagnostico h2 { font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.6rem, 3.5vw, 2.1rem); color: #023429; font-weight: 600; margin-bottom: 1rem; }
-        .ejemplo-diagnostico > .container > .ejemplo-inner > p { font-size: 1.08rem; line-height: 1.7; color: #1C1E1B; margin-bottom: 1.5rem; }
-        .ejemplo-diagnostico blockquote { margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: #fff; border-left: 4px solid #934A1C; border-radius: 0 10px 10px 0; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 1.15rem; line-height: 1.55; color: #1F4B3F; }
-        .ejemplo-diagnostico blockquote cite { display: block; margin-top: 0.6rem; font-size: 0.85rem; font-style: normal; color: #6b6b6b; font-family: 'Manrope', sans-serif; }
-        .ejemplo-diagnostico ul.ejemplo-bullets { list-style: none; padding: 0; margin: 1.5rem 0; }
-        .ejemplo-diagnostico ul.ejemplo-bullets li { position: relative; padding-left: 1.75rem; margin-bottom: 0.85rem; line-height: 1.6; color: #1C1E1B; }
-        .ejemplo-diagnostico ul.ejemplo-bullets li::before { content: '→'; position: absolute; left: 0; color: #D17B49; font-weight: 700; }
-        .ejemplo-diagnostico p.nota { font-size: 0.9rem; color: #6b6b6b; font-style: italic; margin: 1.5rem 0; }
-        .ejemplo-diagnostico .ejemplo-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
-        .ejemplo-diagnostico .btn-ejemplo { display: inline-block; background: #934A1C; color: #fff; padding: 0.85rem 1.6rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-family: 'Manrope', sans-serif; transition: background 0.2s ease; }
-        .ejemplo-diagnostico .btn-ejemplo:hover { background: #7d3f18; }
-        .ejemplo-diagnostico .link-como { color: #1F4B3F; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+        /* Sección "Ejemplo de Diagnóstico 3D" — franja verde profundo, dos columnas */
+        .ejemplo-diagnostico { background: var(--primary, #023429); padding: 88px 24px; }
+        .ejemplo-diagnostico__inner { max-width: var(--maxw, 1040px); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+        .ejemplo-diagnostico__eyebrow { font-family: var(--font-body, 'Manrope', sans-serif); font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracota, #D17B49); font-weight: 700; margin: 0 0 14px; }
+        .ejemplo-diagnostico h2 { font-family: var(--font-headline, 'Newsreader', serif); font-size: clamp(28px, 4vw, 36px); line-height: 1.15; color: var(--blanco-calido, #FAF9F7); margin: 0 0 16px; }
+        .ejemplo-diagnostico__intro { font-size: 17px; line-height: 1.65; color: var(--arena, #E8D5B7); margin: 0 0 22px; }
+        .ejemplo-diagnostico__quote { border-left: 3px solid var(--terracota, #D17B49); margin: 0 0 24px; padding: 4px 0 4px 18px; }
+        .ejemplo-diagnostico__quote p { font-family: var(--font-headline, 'Newsreader', serif); font-style: italic; font-size: 17.5px; line-height: 1.55; color: var(--blanco-calido, #FAF9F7); margin: 0 0 6px; }
+        .ejemplo-diagnostico__quote cite { font-family: var(--font-body, 'Manrope', sans-serif); font-style: normal; font-size: 13px; color: rgba(232, 213, 183, 0.75); }
+        .ejemplo-diagnostico__bullets { list-style: none; margin: 0 0 22px; padding: 0; }
+        .ejemplo-diagnostico__bullets li { position: relative; padding-left: 28px; margin-bottom: 10px; font-size: 15.5px; line-height: 1.5; color: var(--blanco-calido, #FAF9F7); }
+        .ejemplo-diagnostico__bullets li::before { content: "→"; position: absolute; left: 0; color: var(--terracota, #D17B49); font-weight: 700; }
+        .ejemplo-diagnostico__nota { font-size: 13.5px; font-style: italic; color: rgba(232, 213, 183, 0.75); margin: 0 0 28px; }
+        .ejemplo-diagnostico__ctas { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+        .btn-ejemplo { background: var(--terracota, #D17B49); color: var(--blanco-calido, #FAF9F7); font-family: var(--font-body, 'Manrope', sans-serif); font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 10px; text-decoration: none; transition: var(--transition-smooth, all 0.3s ease); }
+        .btn-ejemplo:hover { background: #b96539; transform: translateY(-1px); }
+        .link-ejemplo { color: var(--arena, #E8D5B7); font-size: 14.5px; text-decoration: none; border-bottom: 1px solid rgba(232, 213, 183, 0.4); padding-bottom: 2px; }
+        .link-ejemplo:hover { color: var(--blanco-calido, #FAF9F7); border-color: currentColor; }
+        .ejemplo-diagnostico__coverwrap { display: flex; justify-content: center; }
+        .ejemplo-diagnostico__coverwrap a { position: relative; display: block; transform: rotate(2.5deg); transition: var(--transition-smooth, all 0.3s ease); }
+        .ejemplo-diagnostico__coverwrap a:hover { transform: rotate(0deg) scale(1.02); }
+        .ejemplo-diagnostico__coverwrap img { width: 100%; max-width: 260px; height: auto; display: block; border-radius: 6px; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); }
+        .ejemplo-diagnostico__chip { position: absolute; top: -12px; right: -14px; background: var(--blanco-calido, #FAF9F7); color: var(--primary, #023429); font-family: var(--font-body, 'Manrope', sans-serif); font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 20px; transform: rotate(5deg); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+        @media (max-width: 820px) {
+          .ejemplo-diagnostico { padding: 64px 24px; }
+          .ejemplo-diagnostico__inner { grid-template-columns: 1fr; gap: 40px; }
+          .ejemplo-diagnostico__coverwrap { order: -1; }
+          .ejemplo-diagnostico__coverwrap img { max-width: 200px; }
+        }
 
         .vertical-faq { max-width: 820px; margin: 0 auto; }
         .vertical-faq h2 { font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.5rem, 3vw, 1.9rem); color: #023429; font-weight: 600; margin-bottom: 1.25rem; }
@@ -295,6 +310,40 @@
     </section>
 
     <!-- ═══════════════════════════════════
+         EJEMPLO DE DIAGNÓSTICO 3D (tras la metodología)
+         ═══════════════════════════════════ -->
+    <% if (typeof seo !== 'undefined' && seo) {
+        const ejemploPdf = '/downloads/diagnosticos/ejemplo-diagnostico-' + oficio.slug + '.pdf?utm_source=web&utm_medium=vertical&utm_campaign=ejemplo_diagnostico'; %>
+    <section class="ejemplo-diagnostico">
+      <div class="ejemplo-diagnostico__inner">
+        <div class="ejemplo-diagnostico__text">
+          <p class="ejemplo-diagnostico__eyebrow">Ejemplo real anonimizado</p>
+          <h2>Cómo es un Diagnóstico 3D de <%= seo.nombreCorto %></h2>
+          <p class="ejemplo-diagnostico__intro"><%= seo.ejemplo.intro %></p>
+          <blockquote class="ejemplo-diagnostico__quote">
+            <p>"<%= seo.ejemplo.cita %>"</p>
+            <cite>— Del ejemplo de diagnóstico</cite>
+          </blockquote>
+          <ul class="ejemplo-diagnostico__bullets">
+            <% seo.ejemplo.bullets.forEach(function (b) { %><li><%= b %></li><% }) %>
+          </ul>
+          <p class="ejemplo-diagnostico__nota">Mismo método y profundidad que el entregable real: identidad cambiada, cifras ilustrativas y sin precios.</p>
+          <div class="ejemplo-diagnostico__ctas">
+            <a class="btn-ejemplo" href="<%= ejemploPdf %>" target="_blank" rel="noopener">Ver ejemplo completo (PDF)</a>
+            <a class="link-ejemplo" href="/servicios/diagnostico-3d">Cómo funciona el Diagnóstico 3D &rarr;</a>
+          </div>
+        </div>
+        <div class="ejemplo-diagnostico__coverwrap">
+          <a href="<%= ejemploPdf %>" target="_blank" rel="noopener" aria-label="Abrir el ejemplo de diagnóstico en PDF">
+            <img src="<%= seo.cover %>" alt="Portada del ejemplo de Diagnóstico 3D para <%= seo.nombreCorto %>" width="600" height="849" loading="lazy">
+            <span class="ejemplo-diagnostico__chip">Ejemplo anonimizado · sin precios</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <% } %>
+
+    <!-- ═══════════════════════════════════
          COMUNIDAD — Testimonial cards (IGUAL QUE HOME)
          ═══════════════════════════════════ -->
     <section class="comunidad-v2" id="comunidad">
@@ -375,29 +424,6 @@
     </section>
 
     <% if (typeof seo !== 'undefined' && seo) { %>
-    <!-- ═══════════════════════════════════
-         EJEMPLO DE DIAGNÓSTICO 3D (SEO)
-         ═══════════════════════════════════ -->
-    <section class="ejemplo-diagnostico" style="padding: 4rem 0;">
-        <div class="container">
-            <div class="ejemplo-inner">
-                <h2>Cómo es un Diagnóstico 3D de <%= oficio.sector_lower %></h2>
-                <p><%= seo.ejemplo.intro %></p>
-                <blockquote><%= seo.ejemplo.cita %> <cite>— Del ejemplo de diagnóstico</cite></blockquote>
-                <ul class="ejemplo-bullets">
-                    <% seo.ejemplo.bullets.forEach(function (b) { %>
-                    <li><%= b %></li>
-                    <% }); %>
-                </ul>
-                <p class="nota">Ejemplo real anonimizado: mismo método, misma profundidad, identidad cambiada. Sin precios y con cifras ilustrativas.</p>
-                <div class="ejemplo-ctas">
-                    <a class="btn-ejemplo" href="/downloads/diagnosticos/ejemplo-diagnostico-<%= oficio.slug %>.pdf?utm_source=web&amp;utm_medium=vertical&amp;utm_campaign=ejemplo_diagnostico" target="_blank" rel="noopener">Ver ejemplo de diagnóstico (PDF)</a>
-                    <a class="link-como" href="/servicios/diagnostico-3d">Cómo funciona el Diagnóstico 3D &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ═══════════════════════════════════
          MINI-FAQ POR VERTICAL (SEO) — schema en <head>
          ═══════════════════════════════════ -->
