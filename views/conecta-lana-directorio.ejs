@@ -18,6 +18,16 @@
   // atributos de filtrado por ficha
   const q = (s) => String(s || '').replace(/"/g, '&quot;');
   const attrs = (e) => 'data-ccaa="' + q(e.ccaa) + '" data-uso="' + q(e.uso) + '" data-estado="' + q(e.estado_lana) + '" data-search="' + q([e.nombre, e.zona, e.provincia, e.raza_o_busca, e.para_que, e.servicios || ''].join(' ')) + '"';
+  // inicial para el avatar de cada ficha
+  const inicial = (n) => String(n || '?').trim().charAt(0).toUpperCase();
+  // kg totales ofrecidos (para la píldora del hero)
+  let kgTotal = 0;
+  (grouped.tengo || []).forEach(function(e){ const k = parseFloat(e.kg); if (k > 0) kgTotal += k; });
+  const kgFmt = kgTotal >= 1000 ? (Math.round(kgTotal / 1000) + '.000') : String(Math.round(kgTotal));
+  // iconos de sección (trazo, mismo estilo que el pin)
+  const icoLana = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M4 10c5-3 11-3 16 0M4 14c5 3 11 3 16 0M12 3.5c-3 5-3 12 0 17M12 3.5c3 5 3 12 0 17"/></svg>';
+  const icoTaller = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4.5M19.5 6H17M9.5 14.5 8 20.5M14.5 14.5 16 20.5M8 20.5h8"/></svg>';
+  const icoBusca = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>';
 %>
 
 <style>
@@ -36,8 +46,12 @@ body { padding-top: 0; margin: 0; }
 }
 .cld a{text-decoration:none}
 
-/* HERO */
-.cld-hero{background:linear-gradient(160deg,#06291f 0%,#023429 70%);padding:44px 46px 56px}
+/* HERO — foto de dehesa con velo verde (B4 estética) */
+.cld-hero{position:relative;background:linear-gradient(160deg,rgba(4,32,24,.93) 0%,rgba(2,52,41,.88) 70%),url('/assets/images/conecta-lana-poster.jpg') center 35%/cover no-repeat;padding:52px 46px 60px}
+.cld-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:26px;background:linear-gradient(to top,var(--crema),transparent)}
+.cld-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.cld-stat{display:inline-flex;align-items:baseline;gap:7px;background:rgba(251,246,236,.08);border:1px solid rgba(246,201,138,.35);border-radius:100px;padding:8px 16px;color:rgba(251,246,236,.9);font-family:var(--f-ui);font-size:.86rem;font-weight:600;backdrop-filter:blur(2px)}
+.cld-stat b{font-family:var(--f-head);font-size:1.25rem;font-weight:700;color:var(--oro)}
 .cld-hero-in{max-width:1180px;margin:0 auto}
 .cld-back{display:inline-block;color:rgba(246,201,138,.92);font-family:var(--f-ui);font-weight:700;font-size:.84rem;margin-bottom:18px;transition:opacity .2s ease}
 .cld-back:hover{opacity:.7}
@@ -63,8 +77,18 @@ body { padding-top: 0; margin: 0; }
 .cld-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;align-items:stretch}
 
 /* FICHAS (altura igualada: botón siempre abajo) */
-.cld-card{background:#fff;border:1px solid rgba(2,52,41,.07);border-radius:16px;padding:20px 22px;box-shadow:0 8px 22px rgba(2,52,41,.06);display:flex;flex-direction:column}
-.cld-card h3{font-family:var(--f-head);font-size:1.26rem;font-weight:700;color:var(--verde);margin:0 0 4px;line-height:1.15}
+.cld-card{background:#fff;border:1px solid rgba(2,52,41,.07);border-top:3px solid var(--verde);border-radius:16px;padding:20px 22px;box-shadow:0 8px 22px rgba(2,52,41,.06);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+.cld-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(2,52,41,.13)}
+.cld-sec--transformo .cld-card{border-top-color:var(--terracota)}
+.cld-sec--busco .cld-card{border-top-color:var(--oro-acento)}
+.cld-cardhead{display:flex;align-items:center;gap:11px;margin:0 0 6px}
+.cld-avatar{flex:0 0 auto;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-size:1.15rem;font-weight:700;background:rgba(2,52,41,.08);color:var(--verde)}
+.cld-sec--transformo .cld-avatar{background:rgba(147,74,28,.1);color:var(--terracota)}
+.cld-sec--busco .cld-avatar{background:rgba(201,138,63,.16);color:#9a6a1f}
+.cld-card h3{font-family:var(--f-head);font-size:1.26rem;font-weight:700;color:var(--verde);margin:0;line-height:1.15}
+.cld-ico{display:inline-flex;vertical-align:-3px;margin-right:8px;color:var(--verde);opacity:.85}
+.cld-sec--transformo .cld-ico{color:var(--terracota)}
+.cld-sec--busco .cld-ico{color:#9a6a1f}
 .cld-zona{display:flex;align-items:center;gap:5px;color:var(--verde-medio);font-size:.9rem;margin-bottom:11px}
 .cld-zona .cld-pin{flex:0 0 auto;opacity:.85}
 .cld-line{font-size:.97rem;color:var(--on);margin:0 0 11px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
@@ -133,6 +157,12 @@ body { padding-top: 0; margin: 0; }
       <span class="cld-ey">Un proyecto de Oficios Circulares</span>
       <h1>Directorio · Conecta <em>Lana</em></h1>
       <p class="cld-sub">Quién tiene lana, quién la transforma y quién la busca, en España. Apúntate gratis y te conectamos. Pulsa «Me interesa» y os presentamos.</p>
+      <div class="cld-stats">
+        <span class="cld-stat"><b><%= grouped.tengo.length %></b> ofrecen lana</span>
+        <span class="cld-stat"><b><%= grouped.transformo.length %></b> la transforman</span>
+        <span class="cld-stat"><b><%= grouped.busco.length %></b> la buscan</span>
+        <% if (kgTotal > 0) { %><span class="cld-stat"><b>≈<%= kgFmt %> kg</b> buscando salida</span><% } %>
+      </div>
     </div>
   </header>
 
@@ -179,7 +209,7 @@ body { padding-top: 0; margin: 0; }
     <!-- TIENEN LANA -->
     <section class="cld-sec cld-sec--tengo">
       <div class="cld-sechead">
-        <div class="cld-st"><h2>Tienen lana</h2><span>Ganaderos y productores</span></div>
+        <div class="cld-st"><h2><span class="cld-ico"><%- icoLana %></span>Tienen lana</h2><span>Ganaderos y productores</span></div>
         <span class="cld-count"><%= grouped.tengo.length %> en el directorio</span>
       </div>
       <div class="cld-grid">
@@ -193,7 +223,7 @@ body { padding-top: 0; margin: 0; }
         <div class="cld-empty">Nadie encaja con esos filtros en esta sección — prueba a quitar alguno.</div>
         <% grouped.tengo.forEach(function(e){ %>
         <article class="cld-card" <%- attrs(e) %>>
-          <h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3>
+          <div class="cld-cardhead"><span class="cld-avatar" aria-hidden="true"><%= inicial(e.nombre) %></span><h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3></div>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% var cant = (e.cantidad || '').trim(); var cantTxt = cant ? (/[a-zA-Z]/.test(cant) ? cant : cant + ' kg') : ''; var ofrece = [ cantTxt, e.raza_o_busca ].filter(Boolean).join(' · '); %>
           <% if (ofrece) { %><p class="cld-line"><strong>Ofrece:</strong> <%= ofrece %></p><% } %>
@@ -207,7 +237,7 @@ body { padding-top: 0; margin: 0; }
     <!-- TRANSFORMAN LANA -->
     <section class="cld-sec cld-sec--transformo">
       <div class="cld-sechead">
-        <div class="cld-st"><h2>Transforman lana</h2><span>Lavado · hilado · fieltro · prenda</span></div>
+        <div class="cld-st"><h2><span class="cld-ico"><%- icoTaller %></span>Transforman lana</h2><span>Lavado · hilado · fieltro · prenda</span></div>
         <span class="cld-count"><%= grouped.transformo.length %> en el directorio</span>
       </div>
       <div class="cld-grid">
@@ -221,7 +251,7 @@ body { padding-top: 0; margin: 0; }
         <div class="cld-empty">Nadie encaja con esos filtros en esta sección — prueba a quitar alguno.</div>
         <% grouped.transformo.forEach(function(e){ %>
         <article class="cld-card" <%- attrs(e) %>>
-          <h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3>
+          <div class="cld-cardhead"><span class="cld-avatar" aria-hidden="true"><%= inicial(e.nombre) %></span><h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3></div>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% if (e.servicios) { %><p class="cld-line"><strong>Servicios:</strong> <%= e.servicios %></p><% } %>
           <% if (e.trabajaTerceros) { %><p class="cld-note">Trabajan lana de terceros<%= e.tercerosExtra ? (' · ' + e.tercerosExtra) : '' %></p><% } %>
@@ -237,7 +267,7 @@ body { padding-top: 0; margin: 0; }
     <!-- BUSCAN LANA -->
     <section class="cld-sec cld-sec--busco">
       <div class="cld-sechead">
-        <div class="cld-st"><h2>Buscan lana</h2><span>Artesanas · agricultores · I+D</span></div>
+        <div class="cld-st"><h2><span class="cld-ico"><%- icoBusca %></span>Buscan lana</h2><span>Artesanas · agricultores · I+D</span></div>
         <span class="cld-count"><%= grouped.busco.length %> en el directorio</span>
       </div>
       <div class="cld-grid">
@@ -251,7 +281,7 @@ body { padding-top: 0; margin: 0; }
         <div class="cld-empty">Nadie encaja con esos filtros en esta sección — prueba a quitar alguno.</div>
         <% grouped.busco.forEach(function(e){ %>
         <article class="cld-card" <%- attrs(e) %>>
-          <h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3>
+          <div class="cld-cardhead"><span class="cld-avatar" aria-hidden="true"><%= inicial(e.nombre) %></span><h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3></div>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% var cantB = (e.cantidad || '').trim(); var cantBTxt = cantB ? (/[a-zA-Z]/.test(cantB) ? cantB : cantB + ' kg') : ''; var busca = [ cantBTxt, e.raza_o_busca ].filter(Boolean).join(' · '); %>
           <% if (busca) { %><p class="cld-line"><strong>Busca:</strong> <%= busca %></p><% } %>
