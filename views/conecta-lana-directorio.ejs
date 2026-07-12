@@ -9,6 +9,15 @@
 <%
   const interesar = (nombre) => 'https://tally.so/r/zxg9Zq?proyecto=' + encodeURIComponent(nombre || '') + '&utm_source=conecta-lana&utm_medium=directorio&utm_content=ficha';
   const pin = '<svg class="cld-pin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+  // B4 (jul 2026): filtros — opciones de CCAA a partir de los datos reales
+  const ccaaSet = new Set();
+  ['tengo', 'transformo', 'busco'].forEach(function(k){ (grouped[k] || []).forEach(function(e){
+    if (e.ccaa && e.ccaa !== 'Toda España' && e.ccaa !== 'Varias zonas') ccaaSet.add(e.ccaa);
+  }); });
+  const ccaaList = Array.from(ccaaSet).sort(function(a, b){ return a.localeCompare(b, 'es'); });
+  // atributos de filtrado por ficha
+  const q = (s) => String(s || '').replace(/"/g, '&quot;');
+  const attrs = (e) => 'data-ccaa="' + q(e.ccaa) + '" data-uso="' + q(e.uso) + '" data-estado="' + q(e.estado_lana) + '" data-search="' + q([e.nombre, e.zona, e.provincia, e.raza_o_busca, e.para_que, e.servicios || ''].join(' ')) + '"';
 %>
 
 <style>
@@ -83,6 +92,32 @@ body { padding-top: 0; margin: 0; }
 
 .cld-foot{max-width:760px;margin:44px auto 0;text-align:center;color:var(--on-var);font-size:.88rem;line-height:1.5}
 
+/* B4 — BARRA DE FILTROS */
+.cld-filters{position:sticky;top:0;z-index:20;background:var(--crema);border-bottom:1px solid rgba(2,52,41,.12);padding:14px 0;margin-bottom:26px}
+.cld-filters-in{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.cld-filters label{font-family:var(--f-ui);font-weight:700;font-size:.78rem;color:var(--verde);display:block;margin:0 0 3px}
+.cld-f{display:flex;flex-direction:column}
+.cld-filters input[type="search"],.cld-filters select{font-family:var(--f-body);font-size:.92rem;color:var(--on);background:#fff;border:1px solid rgba(2,52,41,.18);border-radius:10px;padding:9px 12px;min-width:170px}
+.cld-filters input[type="search"]{min-width:220px;flex:1}
+.cld-filters input:focus,.cld-filters select:focus{outline:2px solid var(--verde);outline-offset:1px}
+.cld-clear{align-self:flex-end;background:none;border:1px solid rgba(2,52,41,.25);color:var(--verde);font-family:var(--f-ui);font-weight:700;font-size:.84rem;border-radius:100px;padding:9px 16px;cursor:pointer;transition:background .2s ease}
+.cld-clear:hover{background:rgba(2,52,41,.06)}
+.cld-fhint{width:100%;font-size:.8rem;color:var(--on-var);margin:2px 0 0}
+
+/* B4 — badge "Nuevo" */
+.cld-new{display:inline-block;vertical-align:middle;margin-left:8px;background:var(--verde-medio);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:100px}
+
+/* B4 — sin resultados */
+.cld-empty{display:none;background:rgba(255,255,255,.6);border:1px dashed rgba(2,52,41,.25);border-radius:14px;padding:18px 20px;color:var(--on-var);font-size:.94rem;grid-column:1/-1}
+.cld-sec.is-empty .cld-empty{display:block}
+
+@media(max-width:600px){
+  .cld-filters{padding:12px 0}
+  .cld-filters input[type="search"],.cld-filters select{min-width:100%;width:100%}
+  .cld-f{width:100%}
+  .cld-clear{width:100%;align-self:stretch}
+}
+
 @media(max-width:600px){
   .cld-hero{padding:36px 22px 44px}
   .cld-wrap{padding:28px 18px 48px}
@@ -103,6 +138,44 @@ body { padding-top: 0; margin: 0; }
 
   <div class="cld-wrap">
 
+    <!-- B4: FILTROS -->
+    <div class="cld-filters">
+      <div class="cld-filters-in">
+        <div class="cld-f" style="flex:1;min-width:220px">
+          <label for="cld-q">Buscar</label>
+          <input type="search" id="cld-q" placeholder="Raza, zona, nombre… (p. ej. merina, Galicia)" autocomplete="off">
+        </div>
+        <div class="cld-f">
+          <label for="cld-ccaa">Comunidad autónoma</label>
+          <select id="cld-ccaa">
+            <option value="">Todas</option>
+            <% ccaaList.forEach(function(c){ %><option value="<%= c %>"><%= c %></option><% }) %>
+          </select>
+        </div>
+        <div class="cld-f">
+          <label for="cld-uso">Uso (buscan lana)</label>
+          <select id="cld-uso">
+            <option value="">Todos</option>
+            <option value="textil">Producto textil</option>
+            <option value="agrícola">Acolchado / agrícola</option>
+            <option value="I+D">I+D / investigación</option>
+          </select>
+        </div>
+        <div class="cld-f">
+          <label for="cld-estado">Estado de la lana (tienen)</label>
+          <select id="cld-estado">
+            <option value="">Todos</option>
+            <option value="vellon sucio">Vellón sucio (sin lavar)</option>
+            <option value="lavada">Lavada</option>
+            <option value="cardada">Cardada</option>
+            <option value="hilada">Hilada</option>
+          </select>
+        </div>
+        <button type="button" class="cld-clear" id="cld-clear">Limpiar filtros</button>
+        <p class="cld-fhint">Quien sirve a «Toda España» aparece también al filtrar por tu comunidad.</p>
+      </div>
+    </div>
+
     <!-- TIENEN LANA -->
     <section class="cld-sec cld-sec--tengo">
       <div class="cld-sechead">
@@ -117,9 +190,10 @@ body { padding-top: 0; margin: 0; }
           <p class="cld-note">Aparece en el directorio</p>
           <a class="cld-btn" href="https://tally.so/r/GxkleO?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-tengo" target="_blank" rel="noopener">Me interesa →</a>
         </article>
+        <div class="cld-empty">Nadie encaja con esos filtros en esta sección — prueba a quitar alguno.</div>
         <% grouped.tengo.forEach(function(e){ %>
-        <article class="cld-card">
-          <h3><%= e.nombre %></h3>
+        <article class="cld-card" <%- attrs(e) %>>
+          <h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% var cant = (e.cantidad || '').trim(); var cantTxt = cant ? (/[a-zA-Z]/.test(cant) ? cant : cant + ' kg') : ''; var ofrece = [ cantTxt, e.raza_o_busca ].filter(Boolean).join(' · '); %>
           <% if (ofrece) { %><p class="cld-line"><strong>Ofrece:</strong> <%= ofrece %></p><% } %>
@@ -144,9 +218,10 @@ body { padding-top: 0; margin: 0; }
           <p class="cld-note">¿Transformas lana? Aparece en el directorio</p>
           <a class="cld-btn" href="https://tally.so/r/xXgWMr?utm_source=conecta-lana&utm_medium=directorio&utm_content=tu-taller" target="_blank" rel="noopener">Me interesa →</a>
         </article>
+        <div class="cld-empty">Nadie encaja con esos filtros en esta sección — prueba a quitar alguno.</div>
         <% grouped.transformo.forEach(function(e){ %>
-        <article class="cld-card">
-          <h3><%= e.nombre %></h3>
+        <article class="cld-card" <%- attrs(e) %>>
+          <h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% if (e.servicios) { %><p class="cld-line"><strong>Servicios:</strong> <%= e.servicios %></p><% } %>
           <% if (e.trabajaTerceros) { %><p class="cld-note">Trabajan lana de terceros<%= e.tercerosExtra ? (' · ' + e.tercerosExtra) : '' %></p><% } %>
@@ -173,9 +248,10 @@ body { padding-top: 0; margin: 0; }
           <p class="cld-note">Aparece en el directorio</p>
           <a class="cld-btn" href="https://tally.so/r/ODrGQM?utm_source=conecta-lana&utm_medium=directorio&utm_content=placeholder-busco" target="_blank" rel="noopener">Me interesa →</a>
         </article>
+        <div class="cld-empty">Nadie encaja con esos filtros en esta sección — prueba a quitar alguno.</div>
         <% grouped.busco.forEach(function(e){ %>
-        <article class="cld-card">
-          <h3><%= e.nombre %></h3>
+        <article class="cld-card" <%- attrs(e) %>>
+          <h3><%= e.nombre %><% if (e.esNuevo) { %> <span class="cld-new">Nuevo</span><% } %></h3>
           <% if (e.zona) { %><div class="cld-zona"><%- pin %><span><%= e.zona %></span></div><% } %>
           <% var cantB = (e.cantidad || '').trim(); var cantBTxt = cantB ? (/[a-zA-Z]/.test(cantB) ? cantB : cantB + ' kg') : ''; var busca = [ cantBTxt, e.raza_o_busca ].filter(Boolean).join(' · '); %>
           <% if (busca) { %><p class="cld-line"><strong>Busca:</strong> <%= busca %></p><% } %>
@@ -189,6 +265,55 @@ body { padding-top: 0; margin: 0; }
     <p class="cld-foot">Solo aparecen quienes han aceptado figurar en el directorio público · Los contactos los gestiona Oficios Circulares.</p>
   </div>
 </main>
+
+<script>
+/* B4 — Filtros del directorio (cliente, sin dependencias). */
+(function () {
+  var q = document.getElementById('cld-q');
+  var selCcaa = document.getElementById('cld-ccaa');
+  var selUso = document.getElementById('cld-uso');
+  var selEstado = document.getElementById('cld-estado');
+  var btnClear = document.getElementById('cld-clear');
+  if (!q || !selCcaa) return;
+
+  function deacc(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  function apply() {
+    var term = deacc(q.value.trim());
+    var ccaa = selCcaa.value;
+    var uso = selUso.value;
+    var estado = deacc(selEstado.value);
+    document.querySelectorAll('.cld-sec').forEach(function (sec) {
+      var esBusco = sec.classList.contains('cld-sec--busco');
+      var esTengo = sec.classList.contains('cld-sec--tengo');
+      var visibles = 0;
+      sec.querySelectorAll('.cld-card:not(.cld-card--ghost)').forEach(function (card) {
+        var show = true;
+        var cardCcaa = card.getAttribute('data-ccaa') || '';
+        if (ccaa && !(cardCcaa === ccaa || cardCcaa === 'Toda España' || cardCcaa === 'Varias zonas')) show = false;
+        if (uso && esBusco && (card.getAttribute('data-uso') || '') !== uso) show = false;
+        if (estado && esTengo && deacc(card.getAttribute('data-estado')).indexOf(estado) === -1) show = false;
+        if (term && deacc(card.getAttribute('data-search')).indexOf(term) === -1) show = false;
+        card.style.display = show ? '' : 'none';
+        if (show) visibles++;
+      });
+      var count = sec.querySelector('.cld-count');
+      if (count) count.textContent = visibles + ' en el directorio';
+      sec.classList.toggle('is-empty', visibles === 0);
+    });
+  }
+
+  var t;
+  q.addEventListener('input', function () { clearTimeout(t); t = setTimeout(apply, 150); });
+  [selCcaa, selUso, selEstado].forEach(function (el) { el.addEventListener('change', apply); });
+  btnClear.addEventListener('click', function () {
+    q.value = ''; selCcaa.value = ''; selUso.value = ''; selEstado.value = '';
+    apply();
+  });
+})();
+</script>
 
 <script>
 /* Directorio — "…ver más"/"ver menos" en los textos que se truncan con line-clamp. */
