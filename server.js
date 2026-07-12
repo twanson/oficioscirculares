@@ -139,6 +139,20 @@ app.set('views', path.join(__dirname, 'views'));
 // Middleware
 app.use(express.json());
 
+// Canonicalización: 301 de /ruta/ → /ruta SOLO en rutas EJS cuya URL canónica
+// es sin barra final. Se excluyen adrede los directorios estáticos (blog, casos,
+// faqs, privacidad, sobre-nosotros, plantillas…), cuya canónica lleva barra y que
+// express.static ya auto-redirige — tocarlos crearía un bucle de redirección.
+const CANONICAL_NO_SLASH = /^\/(?:oficios\/[^/]+|recursos(?:\/[^/]+)?|servicios\/[^/]+|contacto|impulso-3d|conecta-lana)\/$/;
+app.use((req, res, next) => {
+  if (req.method === 'GET' && CANONICAL_NO_SLASH.test(req.path)) {
+    const stripped = req.path.replace(/\/+$/, '');
+    const q = req.originalUrl.slice(req.path.length);
+    return res.redirect(301, stripped + q);
+  }
+  next();
+});
+
 // Middleware para redirecciones PDF (maneja varias codificaciones)
 app.use('/', (req, res, next) => {
   const url = req.path;
@@ -678,10 +692,17 @@ app.get('/sitemap.xml', (req, res) => {
   }
 });
 
+// Los PDFs descargables no deben indexarse (compiten con las landings).
+app.use('/downloads', (req, res, next) => {
+  res.set('X-Robots-Tag', 'noindex');
+  next();
+});
+
 app.use(express.static('public'));
 
 // ── SEO Programático: Landing pages por verticales de oficios ──
 const oficiosData = require('./data/oficios-verticales.json');
+const oficiosSeo = require('./data/oficios-seo.json');
 
 app.get('/oficios/:slug', (req, res) => {
   const oficio = oficiosData.find(o => o.slug === req.params.slug);
@@ -690,7 +711,9 @@ app.get('/oficios/:slug', (req, res) => {
   }
   res.render('oficio-vertical', {
     oficio: oficio,
-    allOficios: oficiosData
+    allOficios: oficiosData,
+    seo: oficiosSeo.verticals[oficio.slug] || null,
+    linkTitles: oficiosSeo.linkTitles || {}
   });
 });
 

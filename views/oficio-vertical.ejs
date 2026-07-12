@@ -46,6 +46,73 @@
     }
     </script>
 
+    <!-- Breadcrumb JSON-LD -->
+    <script type="application/ld+json">
+    <%- JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.oficioscirculares.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Oficios", "item": "https://www.oficioscirculares.com/oficios" },
+            { "@type": "ListItem", "position": 3, "name": oficio.sector, "item": "https://www.oficioscirculares.com/oficios/" + oficio.slug }
+        ]
+    }) %>
+    </script>
+
+    <% if (typeof seo !== 'undefined' && seo && seo.faqs && seo.faqs.length) { %>
+    <!-- FAQPage JSON-LD -->
+    <script type="application/ld+json">
+    <%- JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": seo.faqs.map(function (f) {
+            return { "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } };
+        })
+    }) %>
+    </script>
+    <% } %>
+
+    <!-- Estilos de las secciones SEO (breadcrumb, ejemplo, FAQ, enlaces) -->
+    <style>
+        .breadcrumbs-vertical { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem 0; font-family: 'Manrope', sans-serif; font-size: 0.85rem; color: #6b6b6b; }
+        .breadcrumbs-vertical a { color: #6b6b6b; text-decoration: none; }
+        .breadcrumbs-vertical a:hover { color: #934A1C; }
+        .breadcrumbs-vertical span.sep { margin: 0 0.45rem; }
+        .breadcrumbs-vertical span.current { color: #1F4B3F; font-weight: 600; }
+
+        .ejemplo-diagnostico { background: #FAF9F7; }
+        .ejemplo-diagnostico .ejemplo-inner { max-width: 820px; margin: 0 auto; }
+        .ejemplo-diagnostico h2 { font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.6rem, 3.5vw, 2.1rem); color: #023429; font-weight: 600; margin-bottom: 1rem; }
+        .ejemplo-diagnostico > .container > .ejemplo-inner > p { font-size: 1.08rem; line-height: 1.7; color: #1C1E1B; margin-bottom: 1.5rem; }
+        .ejemplo-diagnostico blockquote { margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: #fff; border-left: 4px solid #934A1C; border-radius: 0 10px 10px 0; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 1.15rem; line-height: 1.55; color: #1F4B3F; }
+        .ejemplo-diagnostico blockquote cite { display: block; margin-top: 0.6rem; font-size: 0.85rem; font-style: normal; color: #6b6b6b; font-family: 'Manrope', sans-serif; }
+        .ejemplo-diagnostico ul.ejemplo-bullets { list-style: none; padding: 0; margin: 1.5rem 0; }
+        .ejemplo-diagnostico ul.ejemplo-bullets li { position: relative; padding-left: 1.75rem; margin-bottom: 0.85rem; line-height: 1.6; color: #1C1E1B; }
+        .ejemplo-diagnostico ul.ejemplo-bullets li::before { content: '→'; position: absolute; left: 0; color: #D17B49; font-weight: 700; }
+        .ejemplo-diagnostico p.nota { font-size: 0.9rem; color: #6b6b6b; font-style: italic; margin: 1.5rem 0; }
+        .ejemplo-diagnostico .ejemplo-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+        .ejemplo-diagnostico .btn-ejemplo { display: inline-block; background: #934A1C; color: #fff; padding: 0.85rem 1.6rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-family: 'Manrope', sans-serif; transition: background 0.2s ease; }
+        .ejemplo-diagnostico .btn-ejemplo:hover { background: #7d3f18; }
+        .ejemplo-diagnostico .link-como { color: #1F4B3F; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+        .vertical-faq { max-width: 820px; margin: 0 auto; }
+        .vertical-faq h2 { font-family: 'Newsreader', Georgia, serif; font-size: clamp(1.5rem, 3vw, 1.9rem); color: #023429; font-weight: 600; margin-bottom: 1.25rem; }
+        .vertical-faq details { border-bottom: 1px solid #E8E0D5; padding: 0.35rem 0; }
+        .vertical-faq summary { font-family: 'Newsreader', Georgia, serif; font-size: 1.12rem; font-weight: 600; color: #1F4B3F; padding: 1rem 0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+        .vertical-faq summary::-webkit-details-marker { display: none; }
+        .vertical-faq summary::after { content: '+'; color: #D17B49; font-size: 1.4rem; font-weight: 300; flex-shrink: 0; }
+        .vertical-faq details[open] summary::after { content: '\2013'; }
+        .vertical-faq .faq-a { padding: 0 0 1.1rem; color: #4a4a4a; line-height: 1.7; font-size: 0.98rem; }
+
+        .recursos-oficio { max-width: 820px; margin: 0 auto; }
+        .recursos-oficio h2 { font-family: 'Newsreader', Georgia, serif; font-size: 1.35rem; color: #023429; font-weight: 600; margin-bottom: 1rem; }
+        .recursos-oficio ul { list-style: none; padding: 0; margin: 0; }
+        .recursos-oficio li { padding: 0.5rem 0 0.5rem 1.5rem; position: relative; line-height: 1.5; }
+        .recursos-oficio li::before { content: '↗'; position: absolute; left: 0; color: #D17B49; }
+        .recursos-oficio a { color: #1F4B3F; text-decoration: none; font-weight: 600; }
+        .recursos-oficio a:hover { color: #934A1C; text-decoration: underline; }
+    </style>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,6 +183,15 @@
             </div>
         </div>
     </section>
+
+    <!-- Breadcrumbs visibles (SEO) -->
+    <nav class="breadcrumbs-vertical" aria-label="Migas de pan">
+        <a href="/">Inicio</a>
+        <span class="sep">&rsaquo;</span>
+        <a href="/oficios">Oficios</a>
+        <span class="sep">&rsaquo;</span>
+        <span class="current"><%= oficio.sector %></span>
+    </nav>
 
     <!-- ═══════════════════════════════════
          BENEFICIOS — 3 value propositions (ADAPTADO A VERTICAL)
@@ -297,6 +373,68 @@
             </div>
         </div>
     </section>
+
+    <% if (typeof seo !== 'undefined' && seo) { %>
+    <!-- ═══════════════════════════════════
+         EJEMPLO DE DIAGNÓSTICO 3D (SEO)
+         ═══════════════════════════════════ -->
+    <section class="ejemplo-diagnostico" style="padding: 4rem 0;">
+        <div class="container">
+            <div class="ejemplo-inner">
+                <h2>Cómo es un Diagnóstico 3D de <%= oficio.sector_lower %></h2>
+                <p><%= seo.ejemplo.intro %></p>
+                <blockquote><%= seo.ejemplo.cita %> <cite>— Del ejemplo de diagnóstico</cite></blockquote>
+                <ul class="ejemplo-bullets">
+                    <% seo.ejemplo.bullets.forEach(function (b) { %>
+                    <li><%= b %></li>
+                    <% }); %>
+                </ul>
+                <p class="nota">Ejemplo real anonimizado: mismo método, misma profundidad, identidad cambiada. Sin precios y con cifras ilustrativas.</p>
+                <div class="ejemplo-ctas">
+                    <a class="btn-ejemplo" href="/downloads/diagnosticos/ejemplo-diagnostico-<%= oficio.slug %>.pdf?utm_source=web&amp;utm_medium=vertical&amp;utm_campaign=ejemplo_diagnostico" target="_blank" rel="noopener">Ver ejemplo de diagnóstico (PDF)</a>
+                    <a class="link-como" href="/servicios/diagnostico-3d">Cómo funciona el Diagnóstico 3D &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         MINI-FAQ POR VERTICAL (SEO) — schema en <head>
+         ═══════════════════════════════════ -->
+    <% if (seo.faqs && seo.faqs.length) { %>
+    <section class="vertical-faq-section" style="padding: 0 0 3.5rem;">
+        <div class="container">
+            <div class="vertical-faq">
+                <h2>Preguntas frecuentes</h2>
+                <% seo.faqs.forEach(function (f) { %>
+                <details>
+                    <summary><%= f.q %></summary>
+                    <div class="faq-a"><%= f.a %></div>
+                </details>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+    <% } %>
+
+    <!-- ═══════════════════════════════════
+         RECURSOS Y LECTURAS (enlaces internos contextuales)
+         ═══════════════════════════════════ -->
+    <% if (seo.links && seo.links.length) { %>
+    <section class="recursos-oficio-section" style="padding: 0 0 4rem;">
+        <div class="container">
+            <div class="recursos-oficio">
+                <h2>Recursos y lecturas para tu oficio</h2>
+                <ul>
+                    <% seo.links.forEach(function (u) { var t = (linkTitles && linkTitles[u]) ? linkTitles[u] : u; %>
+                    <li><a href="<%= u %>"><%= t %></a></li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <% } %>
+    <% } %>
 
     <!-- ═══════════════════════════════════
          RELATED PAGES — Internal linking SEO

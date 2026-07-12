@@ -20,6 +20,9 @@
     <meta name="twitter:description" content="Te ayudamos a potenciar tu proyecto, comunicarlo con claridad y avanzar hacia un modelo más circular y sostenible.">
     <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png">
 
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.oficioscirculares.com/">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,6 +52,33 @@
 
     <script>document.documentElement.classList.remove('no-js');</script>
     <script src="/assets/js/traffic-source-detector.js" async></script>
+
+    <!-- Schema.org: Organization + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.oficioscirculares.com/#org",
+          "name": "Oficios Circulares",
+          "url": "https://www.oficioscirculares.com/",
+          "logo": "https://www.oficioscirculares.com/assets/images/logodegraoscuro.png",
+          "email": "hola@oficioscirculares.com",
+          "founder": { "@type": "Person", "name": "Jose María Moscardó" },
+          "areaServed": "ES",
+          "description": "Estrategia, comunicación y economía circular para artesanos y proyectos con propósito. Metodología Círculo de Valor 3D: Diagnosticar, Diseñar, Difundir."
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://www.oficioscirculares.com/",
+          "name": "Oficios Circulares",
+          "inLanguage": "es",
+          "publisher": { "@id": "https://www.oficioscirculares.com/#org" }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->

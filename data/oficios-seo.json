@@ -1,0 +1,448 @@
+{
+  "linkTitles": {
+    "/blog/cascaras-citricos-tintes-aceites-biomateriales-artesanos/": "Qué hacer con cáscaras de naranja: 5 caminos para revalorizarlas en tu taller",
+    "/recursos/guia-citricos": "Guía Cítricos: tintes, aceites y biomateriales paso a paso",
+    "/recursos/calcula-tu-precio": "Calcula tu precio: la estructura completa",
+    "/blog/5-filtros-residuo-material/": "¿Tu residuo local puede convertirse en material? Método práctico en 5 filtros",
+    "/recursos/guia-materiales": "Guía de Materiales · Completa",
+    "/recursos/defiende-tu-precio": "Defiende tu precio sin pedir perdón",
+    "/blog/relevo-generacional-artesania/": "Relevo generacional en artesanía: 5 palancas para que tu oficio no muera contigo",
+    "/recursos/guia-materiales-corta": "Guía de Materiales · Corta (Resumen)",
+    "/recursos/checklist-eventos-artesania": "Checklist Exprés: Eventos y Ferias de Artesanía",
+    "/recursos/marca-artesana-sin-marketinizar": "Marca artesana sin marketinizar (¿y qué quiere decir eso?)",
+    "/blog/por-que-la-artesania-es-mejor-que-el-lujo/": "Por qué la artesanía es mejor que el lujo (y cómo explicárselo a tu cliente)",
+    "/recursos/guia-artesania-lujo": "Guía: Posiciona tu artesanía como producto de lujo",
+    "/blog/imprenta-artesanal-historia/": "Imprenta artesanal: del plomo que mataba al lujo de hoy",
+    "/recursos/encargar-letterpress": "Cómo encargar letterpress sin equivocarte",
+    "/recursos/test-relevo-generacional": "Test de Autodiagnóstico: Relevo Generacional",
+    "/blog/artesania-de-lujo-posicionar-valor-real/": "Artesanía de lujo: por qué tu trabajo vale más de lo que cobras (y cómo comunicarlo)",
+    "/blog/donde-comprar-lana-espanola/": "Dónde comprar lana española: 5 claves para elegir fibra con trazabilidad",
+    "/blog/que-hacer-con-la-lana-de-oveja/": "Qué hacer con la lana de oveja: 5 salidas reales",
+    "/recursos/directorio-lana-espanola": "Directorio de Lana Española",
+    "/conecta-lana": "Conecta Lana",
+    "/blog/perte-economia-circular/": "PERTE Economía Circular para PYMEs Artesanales: Guía de los 5 Pasos",
+    "/blog/logistica-inversa/": "Logística inversa para marcas artesanales: cuándo tiene sentido y cuándo no",
+    "/recursos/plantilla-dpp": "Plantilla Base DPP + Checklist 30 días",
+    "/recursos/guia-upcycling-artistas": "Guía Artistas Upcycling + Toolkit Práctico",
+    "/casos/e-wear/": "E-WEAR: De residuo electrónico a joya con historia"
+  },
+  "verticals": {
+    "alimentacion-artesanal": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un obrador familiar de conservas y dulces de temporada: práctica impecable de proximidad que en la estantería resultaba indistinguible de la industria que usa las mismas palabras.",
+        "cita": "En vuestras etiquetas pone 'artesano' y 'de proximidad' — como en las de media industria alimentaria. La diferencia es que en vuestro caso es verdad. Solo falta poder demostrarlo en treinta segundos.",
+        "bullets": [
+          "El lote con historia: trazabilidad del productor a la etiqueta, escaneable",
+          "El descarte rescatado, medido en kilos — la bandera que la industria no puede copiar",
+          "Kit para tienda gourmet y hostelería, y el circuito de retorno del tarro"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo puede un obrador artesano diferenciarse de la industria que también dice \"artesano\" y \"de proximidad\"?",
+          "a": "Con datos que la industria no puede copiar: nombre del productor, kilómetros del ingrediente, kilos de descarte aprovechado. En el Diagnóstico 3D identificamos qué datos ya existen en tu obrador y cómo hacerlos visibles en la etiqueta y el punto de venta."
+        },
+        {
+          "q": "¿Qué incluye un Diagnóstico 3D para alimentación artesanal?",
+          "a": "Análisis de tu trazabilidad real, tus canales (directa, gourmet, hostelería) y tu comunicación, con 4 oportunidades priorizadas y un plan de acción. Descarga el ejemplo anonimizado para ver el formato exacto."
+        }
+      ],
+      "links": [
+        "/blog/cascaras-citricos-tintes-aceites-biomateriales-artesanos/",
+        "/recursos/guia-citricos",
+        "/recursos/calcula-tu-precio"
+      ]
+    },
+    "barro-artesanal": {
+      "ejemplo": {
+        "intro": "Así trabajamos con una alfarería familiar de tercera generación: arcilla del término, horno de leña de poda y cazuelas que compiten mudas en la feria contra imitaciones a un tercio del precio.",
+        "cita": "Vuestro oficio era circular siglos antes de que existiera la palabra: tierra del término, leña de poda, piezas que duran una vida y vuelven a la tierra. Todo eso es verdad — y no se puede leer en ninguna parte.",
+        "bullets": [
+          "Trazar la tierra: arcilla local y leña de poda, con números",
+          "La ficha de circularidad que responde a la pregunta del precio en treinta segundos",
+          "El retorno del cascote: la pieza rota vuelve a la mezcla como chamota"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo defiende una alfarería su precio frente a la imitación industrial?",
+          "a": "Documentando lo que ya es verdad: arcilla local, leña de poda, durabilidad de décadas y cascote que vuelve a la mezcla como chamota. Una ficha de una página responde a la pregunta del precio en treinta segundos."
+        },
+        {
+          "q": "¿El horno de leña es un problema para comunicar sostenibilidad?",
+          "a": "No si se pone en contexto con datos: combustible de poda que iba a quema agrícola, cocciones llenas y kilómetro cero. Esconderlo es peor que explicarlo — en el ejemplo de diagnóstico verás cómo."
+        }
+      ],
+      "links": [
+        "/blog/5-filtros-residuo-material/",
+        "/recursos/guia-materiales",
+        "/recursos/defiende-tu-precio"
+      ]
+    },
+    "carpinteria-y-ebanisteria": {
+      "ejemplo": {
+        "intro": "Así trabajamos con una ebanistería de tercera generación: mueble a medida y restauración con madera local, compitiendo contra el \"estilo artesano\" de gran superficie que solo se distingue entrando al taller.",
+        "cita": "Un mueble vuestro dura tres generaciones. Eso, dicho así, es una frase bonita. Documentado — especie, monte, acabados, reparabilidad — es un argumento de venta que ningún mueble de gran superficie puede imitar.",
+        "bullets": [
+          "Del tablón al mueble: trazar la madera local",
+          "El pasaporte del mueble: la durabilidad, documentada",
+          "El kit del prescriptor para interioristas y las mermas convertidas en relato e ingreso"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo se demuestra que un mueble artesano dura más que uno industrial?",
+          "a": "Con un pasaporte de mueble: especie, origen de la madera, acabados y reparabilidad, documentados pieza a pieza. Es la diferencia entre una frase bonita y un argumento de venta."
+        },
+        {
+          "q": "¿Qué puede hacer una ebanistería con sus mermas y virutas?",
+          "a": "Medirlas y darles destino visible: briquetas, composta, pequeño formato. En el Diagnóstico 3D mapeamos qué flujo de residuo tiene salida comercial o narrativa en tu taller."
+        }
+      ],
+      "links": [
+        "/blog/5-filtros-residuo-material/",
+        "/recursos/guia-materiales",
+        "/blog/relevo-generacional-artesania/"
+      ]
+    },
+    "ceramica-artesanal": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un taller cerámico de cuarta generación con sello de calidad artesanal: oficio de sobra y activos dispersos que no llegaban al mercado que mejor los pagaría.",
+        "cita": "Lo importante no es lo que sabéis hacer — lo importante es que el mercado adecuado lo entienda. Y eso, hoy, no está pasando.",
+        "bullets": [
+          "Catálogo prescriptor para arquitectos: del producto al pliego",
+          "Casos de obra documentados como piezas editoriales",
+          "La línea circular: del residuo del taller a producto premium"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo llega un taller cerámico artesanal al canal de arquitectos y prescriptores?",
+          "a": "Con un catálogo técnico que hable su idioma: formatos, acabados, plazos y fichas listas para el pliego. El oficio ya lo tienes; falta la traducción."
+        },
+        {
+          "q": "¿Qué es un Diagnóstico 3D para cerámica artesanal?",
+          "a": "Un análisis de tu taller en tres ejes — Diagnosticar, Diseñar, Difundir — que identifica tu circularidad real (materiales locales, mermas, durabilidad) y la convierte en oportunidades comerciales priorizadas."
+        }
+      ],
+      "links": [
+        "/blog/5-filtros-residuo-material/",
+        "/recursos/guia-materiales",
+        "/blog/relevo-generacional-artesania/"
+      ]
+    },
+    "cesteria-y-mimbre": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un taller de mimbre, esparto y caña al que el interiorismo había venido a buscar — sin que taller y mercado hablaran todavía el mismo idioma.",
+        "cita": "Trabajáis el material más circular que existe: se planta, se cosecha cada año, se trenza y vuelve a la tierra. Y el mercado del interiorismo lo está buscando como nunca. Lo único que falta es el puente — y el puente son los datos.",
+        "bullets": [
+          "El idioma del interiorismo: fichas, plazos y método",
+          "Del cultivo al techo: el ciclo del material, documentado",
+          "La restauración como línea circular visible y el trenzado en vivo como canal"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Por qué el interiorismo busca fibras vegetales y cómo aprovecharlo?",
+          "a": "Porque es el material natural del momento: renovable cada cosecha y biodegradable. Para venderle al interiorismo hacen falta fichas, plazos y método — el puente que montamos en el Diagnóstico 3D."
+        },
+        {
+          "q": "¿La cestería puede vivir de algo más que la pieza pequeña de feria?",
+          "a": "Sí: encargo de interiorismo, restauración de piezas y formación. El ejemplo de diagnóstico muestra cómo se prioriza ese salto sin abandonar el canal directo."
+        }
+      ],
+      "links": [
+        "/recursos/guia-materiales-corta",
+        "/blog/5-filtros-residuo-material/",
+        "/recursos/checklist-eventos-artesania"
+      ]
+    },
+    "cosmetica-natural": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un obrador de saponificación en frío en el sector con más greenwashing por metro cuadrado: las tres pruebas que la industria no puede falsificar estaban ahí, sin traducir a datos.",
+        "cita": "'Natural' es la palabra más usada y menos creída de la cosmética. Vosotras tenéis lo que casi nadie: un INCI corto de verdad, aceite de oliva con apellido y un obrador que se puede visitar. Falta convertirlo en datos.",
+        "bullets": [
+          "El INCI traducido: la prueba que ya está en la etiqueta",
+          "El aceite con apellido: la almazara como origen trazado",
+          "El kit del canal para herbolarios y el circuito completo del envase"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo se comunica cosmética natural sin caer en el greenwashing?",
+          "a": "Con las pruebas que la industria no puede falsificar: INCI corto traducido al cliente, origen del aceite con nombre de almazara y proceso de baja energía. Datos, no adjetivos."
+        },
+        {
+          "q": "¿Qué incluye un Diagnóstico 3D para un obrador de cosmética?",
+          "a": "Análisis de etiqueta, canal (herbolarios, tiendas eco, online) y circularidad del envase, con 4 oportunidades priorizadas. Descarga el ejemplo para ver la profundidad real."
+        }
+      ],
+      "links": [
+        "/blog/cascaras-citricos-tintes-aceites-biomateriales-artesanos/",
+        "/recursos/guia-citricos",
+        "/recursos/marca-artesana-sin-marketinizar"
+      ]
+    },
+    "cuero-y-marroquineria": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un taller de marroquinería de segunda generación que peleaba la batalla más injusta del artesanado — piel noble contra sustituto plástico con mejor naming — sin usar sus mejores armas.",
+        "cita": "La piel es el material más atacado y peor defendido del artesanado. Vosotros tenéis la defensa perfecta — subproducto rescatado, curtido vegetal, décadas de uso — y no la estáis usando.",
+        "bullets": [
+          "La defensa de la piel: el argumentario documentado",
+          "El pasaporte de pieza: numerar lo que ya se firma",
+          "La reparación y los veteranos: la durabilidad demostrada, retales incluidos"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo responde un taller de piel a la crítica del material?",
+          "a": "Con la defensa documentada: piel como subproducto rescatado, curtido vegetal y décadas de uso frente al sustituto plástico que se agrieta en dos años. Es un argumentario de hechos, no de opiniones."
+        },
+        {
+          "q": "¿Qué es el pasaporte de pieza en marroquinería?",
+          "a": "Numerar y documentar lo que ya firmas: origen de la piel, curtido, horas de trabajo y servicio de reparación. Cada bolso sale del taller con sus papeles."
+        }
+      ],
+      "links": [
+        "/blog/por-que-la-artesania-es-mejor-que-el-lujo/",
+        "/recursos/defiende-tu-precio",
+        "/recursos/guia-artesania-lujo"
+      ]
+    },
+    "encuadernacion-artesanal": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un taller de encuadernación de autor y restauración: el único producto que se compra para durar más que su dueño, vendiéndose como una libreta bonita.",
+        "cita": "Hacéis el único producto que se compra para durar más que su dueño. Un álbum cosido a mano con papel de conservación es un objeto de siglos — y se está vendiendo como una libreta bonita.",
+        "bullets": [
+          "El argumento de archivo: la conservación, por escrito",
+          "El kit del fotógrafo: armar al prescriptor que ya vende",
+          "La restauración con nombre y los álbumes veteranos como prueba del tiempo"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Qué diferencia un álbum artesanal de uno de imprenta digital?",
+          "a": "El tiempo: papel de conservación y costura a mano hacen un objeto de siglos; la imprenta se deslamina en una década. Esa diferencia técnica y emocional se puede escribir y cobrar."
+        },
+        {
+          "q": "¿Cómo consigue más encargos un taller de encuadernación?",
+          "a": "Armando a su mejor prescriptor: el fotógrafo que ya vende álbumes. Un kit con argumento de archivo, muestras y precios le da lo que necesita para defender tu trabajo."
+        }
+      ],
+      "links": [
+        "/blog/imprenta-artesanal-historia/",
+        "/recursos/encargar-letterpress",
+        "/recursos/calcula-tu-precio"
+      ]
+    },
+    "forja-y-herreria": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un taller de forja de tercera generación que perdía obras contra materiales peores por papeles, no por calidad: el aluminio llegaba con ficha y la forja, con palabras.",
+        "cita": "El hierro que forjáis hoy puede llevar dentro tres vidas anteriores — y durar otras tres. Trabajáis el material infinitamente reciclable con el oficio que más dura. Falta que eso conste en alguna parte.",
+        "bullets": [
+          "El idioma del prescriptor: fichas y memoria de material para el arquitecto",
+          "El porfolio centenario: la durabilidad que ya está en la calle",
+          "El metal contado: reciclado de origen, residuo cero y servicio anti-obsolescencia"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Por qué una herrería pierde obras frente al aluminio y cómo evitarlo?",
+          "a": "Porque el arquitecto especifica lo que puede justificar en su memoria: el aluminio llega con ficha y la forja con palabras. En criterios de ciclo de vida la forja gana — solo hay que escribirlo."
+        },
+        {
+          "q": "¿Qué activos circulares tiene ya un taller de forja?",
+          "a": "Hierro infinitamente reciclable, chatarra reincorporada, piezas centenarias aún en la calle y capacidad de reparar y reproducir. El Diagnóstico 3D los convierte en fichas y porfolio."
+        }
+      ],
+      "links": [
+        "/blog/relevo-generacional-artesania/",
+        "/recursos/test-relevo-generacional",
+        "/recursos/defiende-tu-precio"
+      ]
+    },
+    "joyeria-artesanal": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un estudio de joyería contemporánea con taller abierto: refundición semanal y transformación de herencias — circularidad de manual contada con las mismas tres palabras que usa la bisutería de importación.",
+        "cita": "La joyería es el único oficio donde el material ya es eterno — el oro se refunde desde hace cinco mil años. Lo que falta no es circularidad: es poder demostrar la vuestra en un sector lleno de palabras bonitas y minas amargas.",
+        "bullets": [
+          "El metal contado: pesar lo que ya se refunde",
+          "El certificado de origen circular: el papel del estuche",
+          "\"Segunda Vida\": herencias transformadas con nombre propio y el banco a la vista"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo demuestra una joyería que su metal es responsable?",
+          "a": "Pesando lo que ya refunde: metal recuperado, herencias transformadas, merma reincorporada. Un certificado de origen circular en el estuche vale más que cualquier eslogan."
+        },
+        {
+          "q": "¿Qué es la transformación de herencias y por qué interesa comunicarla?",
+          "a": "Convertir el oro heredado en pieza nueva es el servicio más circular y emocional de la joyería. Con nombre propio y proceso documentado se convierte en tu producto estrella."
+        }
+      ],
+      "links": [
+        "/blog/artesania-de-lujo-posicionar-valor-real/",
+        "/recursos/guia-artesania-lujo",
+        "/recursos/calcula-tu-precio"
+      ]
+    },
+    "lana-y-costura": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un obrador de punto que teje lana merina de rebaños a menos de sesenta kilómetros, lavada e hilada en la península — con toda esa trazabilidad viviendo solo en la conversación de mostrador.",
+        "cita": "Vuestra etiqueta dice 'lana merina' — exactamente lo mismo que la de una cadena que la trae del otro hemisferio. La vuestra viene de rebaños a cuarenta kilómetros y se hila en la península. La diferencia existe de verdad: solo falta que se pueda leer.",
+        "bullets": [
+          "El circuito corto documentado: del rebaño a la percha, con nombres y kilómetros",
+          "La etiqueta que habla: ficha por modelo y QR en la prenda",
+          "La prenda vuelve: reparación con nombre y recogida de lana para hilo recuperado"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Qué diferencia la lana española trazable del \"merino\" genérico?",
+          "a": "Que se puede nombrar: rebaño, esquileo, lavadero e hilatura peninsular en un circuito corto, frente a la lana anónima que cruza medio mundo. La diferencia existe — falta que la etiqueta la cuente."
+        },
+        {
+          "q": "¿Cómo se comunica que la lana no pica y se puede lavar?",
+          "a": "Con pedagogía en ficha y etiqueta: la finura de la merina, el lavado real (airear más, lavar menos) y la reparación del propio obrador. Responder antes de la duda vende más que responder después."
+        }
+      ],
+      "links": [
+        "/blog/donde-comprar-lana-espanola/",
+        "/blog/que-hacer-con-la-lana-de-oveja/",
+        "/recursos/directorio-lana-espanola",
+        "/conecta-lana"
+      ]
+    },
+    "materiales-construccion": {
+      "ejemplo": {
+        "intro": "Así trabajamos con una calera de cuarta generación: el único material de construcción que reabsorbe CO₂ durante toda su vida, compitiendo sin ficha contra la industria del saco, que tiene fichas y mal ciclo.",
+        "cita": "Vendéis el único material de construcción que respira y reabsorbe CO₂ durante toda su vida — en plena fiebre normativa por la descarbonización. Y vuestro mejor argumento está sin escribir.",
+        "bullets": [
+          "El argumento del carbono: el ciclo del CO₂, por escrito",
+          "La ficha de pliego: hablar el idioma de quien especifica",
+          "Las obras patrimoniales que avalan y la escuela de cal para el canal"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Por qué la cal y los materiales tradicionales ganan con la descarbonización?",
+          "a": "Porque tienen los números buenos: la cal reabsorbe CO₂ durante toda su vida útil mientras el sector busca desesperadamente bajar huella. Falta ponerlo por escrito en el idioma del pliego."
+        },
+        {
+          "q": "¿Cómo entra un fabricante tradicional en la obra prescrita?",
+          "a": "Con ficha técnica y ambiental que el arquitecto pueda citar en su memoria, y casos de obra patrimonial documentados. El ejemplo de diagnóstico muestra el camino completo."
+        }
+      ],
+      "links": [
+        "/blog/perte-economia-circular/",
+        "/blog/logistica-inversa/",
+        "/recursos/plantilla-dpp"
+      ]
+    },
+    "restauracion-y-upcycling": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un taller de restauración y upcycling donde la circularidad no es un atributo del producto — es el producto — y el relato se evaporaba con cada antes-y-después publicado.",
+        "cita": "En tu oficio, la circularidad no es un atributo del producto — ES el producto. Cada mueble que sale de tu taller es un dato: tantos kilos que no fueron al vertedero. Solo falta contarlos.",
+        "bullets": [
+          "El contador de rescate: pesar lo que ya se salva",
+          "La ficha de rescate: cada pieza con sus papeles",
+          "El encargo con nombre y un sistema de contenido que trabaja solo"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo defiende su precio un taller de upcycling?",
+          "a": "Con el dato que ya produce cada pieza: kilos rescatados del vertedero, horas de trabajo, historia del mueble. La ficha de rescate convierte la emoción del antes-y-después en argumento de compra."
+        },
+        {
+          "q": "¿Qué es el contador de rescate?",
+          "a": "Un registro simple de lo que el taller salva cada mes: muebles, kilos, materiales. Alimenta la comunicación, los encargos y cualquier memoria de impacto futura."
+        }
+      ],
+      "links": [
+        "/recursos/guia-upcycling-artistas",
+        "/blog/logistica-inversa/",
+        "/blog/5-filtros-residuo-material/"
+      ]
+    },
+    "textil-sostenible": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un estudio textil unipersonal de telar manual: producto circular por diseño — durabilidad, pieza única, fibra natural — sin un solo dato medido que lo hiciera cobrable.",
+        "cita": "Tu producto ya es circular por diseño. Lo que no es todavía es demostrable — y lo que no se puede demostrar, hoy, no se puede cobrar.",
+        "bullets": [
+          "La fibra con historia: del proveedor genérico a la lana local",
+          "El pasaporte de pieza: la numeración convertida en trazabilidad",
+          "El kit del prescriptor para el canal selecto y las mermas del telar como detalle que firma"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Cómo se cobra lo que un textil artesanal ya es?",
+          "a": "Haciéndolo demostrable: fibra con origen, numeración convertida en trazabilidad y ficha que viaja con la pieza. Lo que no se puede demostrar, hoy, no se puede cobrar."
+        },
+        {
+          "q": "¿Qué incluye un Diagnóstico 3D para un estudio textil?",
+          "a": "Análisis de fibra, proceso y canales (tienda de museo, selecto, online) con 4 oportunidades priorizadas y plan realista para una marca unipersonal. Descarga el ejemplo para ver el formato."
+        }
+      ],
+      "links": [
+        "/casos/e-wear/",
+        "/blog/cascaras-citricos-tintes-aceites-biomateriales-artesanos/",
+        "/recursos/plantilla-dpp"
+      ]
+    },
+    "turismo-rural-sostenible": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un ecoalojamiento familiar de montaña: quince años de circularidad real en energía, agua, huerta y residuos — sin un solo indicador unificado que la demostrara.",
+        "cita": "Los sellos certifican que cumplís criterios. Lo que ningún sello cuenta son vuestros números — y los números son lo único que nadie os puede copiar.",
+        "bullets": [
+          "El registro único: medir una vez, usar en todas partes",
+          "La memoria de impacto anual: el documento que trabaja solo",
+          "Ayudas rurales con los deberes hechos y formación B2B para otros alojamientos"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Qué aporta medir el impacto en un alojamiento rural que ya tiene sellos?",
+          "a": "Los sellos certifican criterios; tus números — energía, agua, huerta, residuos — son tuyos y nadie los puede copiar. Una memoria anual de impacto trabaja sola ante huéspedes, ayudas y prensa."
+        },
+        {
+          "q": "¿Cómo se diferencia un ecoalojamiento del \"eco\" de postureo?",
+          "a": "Con un registro único de indicadores reales y quince años de práctica contados con datos. El greenwashing no sobrevive a una tabla honesta."
+        }
+      ],
+      "links": [
+        "/blog/perte-economia-circular/",
+        "/recursos/checklist-eventos-artesania",
+        "/blog/relevo-generacional-artesania/"
+      ]
+    },
+    "vidrio-artesanal": {
+      "ejemplo": {
+        "intro": "Así trabajamos con un taller de vidrio soplado de segunda generación: la circularidad más literal que existe — la refundición — practicada a diario y sin un solo dato que la contara.",
+        "cita": "Trabajáis el único material que se puede refundir infinitas veces sin perder calidad — y nadie lo sabe al comprar vuestras piezas. Tenéis la economía circular perfecta entre las manos, sin contar.",
+        "bullets": [
+          "Medir la mezcla: el casco reciclado y la refundición, con números",
+          "La ficha de circularidad por serie: el papel que pide hostelería",
+          "El programa de retorno: la pieza rota vuelve al crisol"
+        ]
+      },
+      "faqs": [
+        {
+          "q": "¿Qué hace circular al vidrio soplado artesanal?",
+          "a": "Es el único material que se refunde infinitas veces sin perder calidad: mermas al crisol, casco local en la mezcla y piezas que duran décadas. Medirlo lo convierte en argumento de venta."
+        },
+        {
+          "q": "¿Cómo responde un taller de vidrio a la pregunta del consumo del horno?",
+          "a": "Con contexto documentado: refundición infinita, casco reciclado y kilómetro cero. El horno se explica con datos, no se esconde."
+        }
+      ],
+      "links": [
+        "/blog/5-filtros-residuo-material/",
+        "/recursos/guia-materiales",
+        "/recursos/calcula-tu-precio"
+      ]
+    }
+  }
+}
