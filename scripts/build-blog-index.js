@@ -30,7 +30,10 @@ const FALLBACK = '../assets/images/cases/e-wear/placeholder-16x9.jpg?v=1';
 
 const cards = published.map(p => {
   const tags = (p.tags || []).map(t => `<span class="post-tag">${esc(t)}</span>`).join('');
-  return `        <a href="${esc(p.slug)}" class="post-card-link" style="text-decoration: none; color: inherit;">
+  // href absoluto (crawlable) resolviendo el slug relativo de blog.js:
+  //   './x/' -> /blog/x/   ·   '../casos/e-wear/' -> /casos/e-wear/
+  const href = new URL(p.slug, 'https://oficioscirculares.com/blog/').pathname;
+  return `        <a href="${esc(href)}" class="post-card-link" style="text-decoration: none; color: inherit;">
           <article class="post-card">
             <img src="${esc(p.cover)}?v=1" alt="${esc(p.title)}" class="post-card-image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${FALLBACK}'" />
             <div class="post-card-content">
@@ -45,9 +48,11 @@ const cards = published.map(p => {
 
 const idxPath = path.join(ROOT, 'public/blog/index.html');
 let html = fs.readFileSync(idxPath, 'utf8');
+// Ancla el cierre en `</div></main>` (no en el primer </div> interno de una
+// tarjeta) para que el regenerado sea idempotente aunque el div ya esté poblado.
 html = html.replace(
-  /<div id="posts" class="posts-grid">[\s\S]*?<\/div>/,
-  `<div id="posts" class="posts-grid">\n${cards}\n    </div>`
+  /<div id="posts" class="posts-grid">[\s\S]*?<\/div>(\s*<\/main>)/,
+  `<div id="posts" class="posts-grid">\n${cards}\n    </div>$1`
 );
 fs.writeFileSync(idxPath, html, 'utf8');
 console.log(`✓ ${published.length} posts inyectados en public/blog/index.html (excluidos por puerta: ${allPosts.length - published.length}).`);
