@@ -1,0 +1,395 @@
+/* ===================================================================
+   EL CLUB DE OFICIOS CIRCULARES — landing standalone
+   OC Design System v2.
+
+   Estilos 100% scoped bajo .club-landing para aislarlos del CSS global
+   del sitio (las clases .hero/.btn/.wrap/.final/.card ya existen).
+   - .hero  -> .club-hero  (el .hero global fuerza height:100vh y padding-left)
+   - .btn   -> .club-btn    (el .btn global trae 63 reglas, ::before y otra fuente)
+   El resto se aísla por especificidad con el prefijo .club-landing.
+
+   El navbar y el footer los aporta el layout del sitio (partials/header,
+   partials/footer). Las fuentes (Newsreader + Manrope) las carga head-meta.
+   =================================================================== */
+
+html{scroll-behavior:smooth}
+
+/* position:sticky se rompe si un ancestro es contenedor de scroll. El body
+   global del sitio usa overflow-x:hidden; `clip` recorta el desbordamiento
+   horizontal SIN crear contenedor de scroll, así el panel sticky del
+   scrollytelling (.prob-sticky) vuelve a funcionar. (Solo carga en /club.) */
+html,body{overflow-x:clip}
+
+/* ================= Tokens + base ================= */
+.club-landing{
+  --verde:#023429;
+  --verde-hondo:#032A20;      /* fondo scrollytelling, como conecta-lana */
+  --verde-medio:#0A4A3A;
+  --terracota:#934A1C;
+  --terracota-viva:#B05E2B;
+  --arena:#E8D5B7;
+  --arena-clara:#F4EBDB;
+  --crema:#FBF7EF;
+  --hueso:#F6F3EC;
+  --tinta:#1E2321;
+  --tinta-suave:#4A544F;
+  --blanco:#FFFFFF;
+  --radius:20px;
+  --radius-sm:14px;
+  --sombra:0 20px 55px rgba(2,52,41,.16);
+  --serif:'Newsreader',Georgia,serif;
+  --sans:'Manrope',-apple-system,'Segoe UI',Roboto,sans-serif;
+  box-sizing:border-box;
+  font-family:var(--sans);color:var(--tinta);background:var(--crema);
+  line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased;
+}
+.club-landing *,.club-landing *::before,.club-landing *::after{margin:0;padding:0;box-sizing:border-box}
+.club-landing h1,.club-landing h2,.club-landing h3{font-family:var(--serif);font-weight:600;line-height:1.08;color:var(--verde)}
+.club-landing em{font-family:var(--serif);font-style:italic}
+.club-landing img{display:block;max-width:100%}
+.club-landing a{text-decoration:none;color:var(--terracota)}
+.club-landing .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.club-landing .wrap-n{max-width:820px;margin:0 auto;padding:0 24px}
+/* anclas: compensar navbar fija (80px) del sitio + sub-barra */
+.club-landing section[id],.club-landing header[id]{scroll-margin-top:96px}
+.club-landing .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota);margin-bottom:18px}
+.club-landing .eyebrow--arena{color:var(--arena)}
+
+/* ================= Botones (pill, como la web) ================= */
+.club-landing .club-btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:16.5px;padding:17px 34px;border-radius:999px;transition:transform .18s ease,box-shadow .18s ease;cursor:pointer;border:none;font-family:var(--sans);line-height:1.2}
+.club-landing .club-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(2,52,41,.28)}
+.club-landing .club-btn--terracota{background:var(--terracota);color:#fff}
+.club-landing .club-btn--terracota:hover{background:var(--terracota-viva)}
+.club-landing .club-btn--ghost{background:rgba(251,247,239,.08);color:var(--crema);border:1.5px solid rgba(251,247,239,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.club-landing .club-btn--verde{background:var(--verde);color:var(--crema)}
+.club-landing .club-btn--arena{background:var(--arena);color:var(--verde)}
+.club-landing .pill-sec{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:11px 22px;border-radius:999px;transition:background .15s}
+.club-landing .pill-sec--dark{background:rgba(2,42,32,.55);color:var(--crema);border:1px solid rgba(251,247,239,.22)}
+.club-landing .pill-sec--dark:hover{background:rgba(2,42,32,.8)}
+.club-landing .pill-sec--arena{background:var(--arena);color:var(--verde)}
+.club-landing .pill-sec--arena:hover{background:#efdfc4}
+.club-landing .micro{display:block;margin-top:14px;font-size:13.5px;color:var(--tinta-suave)}
+.club-landing .micro--luz{color:rgba(251,247,239,.72)}
+
+/* ================= Barra sticky (sub-barra bajo el navbar del sitio) ================= */
+.club-landing .topbar{position:fixed;top:80px;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:10px 22px;background:rgba(251,247,239,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(2,52,41,.08);box-shadow:0 6px 20px rgba(2,52,41,.08);transform:translateY(-130%);transition:transform .3s ease}
+.club-landing .topbar.visible{transform:translateY(0)}
+.club-landing .topbar .marca{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:17px;color:var(--verde)}
+.club-landing .topbar .marca img{width:34px;height:34px}
+.club-landing .topbar .club-btn{padding:11px 24px;font-size:14.5px}
+
+/* ================= HERO (estilo Conecta Lana) ================= */
+.club-landing .club-hero{position:relative;min-height:96vh;display:flex;align-items:center;overflow:hidden;background:var(--verde)}
+.club-landing .hero-media{position:absolute;inset:0}
+.club-landing .hero-slides{position:absolute;inset:0}
+/* Variante A: slideshow Ken Burns, 4 imágenes en crossfade */
+.club-landing .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:club-kb 28s infinite}
+.club-landing .hero-media img:nth-child(1){animation-delay:0s}
+.club-landing .hero-media img:nth-child(2){animation-delay:7s}
+.club-landing .hero-media img:nth-child(3){animation-delay:14s}
+.club-landing .hero-media img:nth-child(4){animation-delay:21s}
+@keyframes club-kb{
+  0%{opacity:0;transform:scale(1.06)}
+  4%{opacity:1}
+  25%{opacity:1}
+  32%{opacity:0;transform:scale(1.14)}
+  100%{opacity:0}
+}
+.club-landing .hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.club-landing .hero-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(2,42,32,.94) 0%,rgba(2,42,32,.78) 34%,rgba(2,42,32,.38) 62%,rgba(2,42,32,.18) 100%)}
+.club-landing .hero-overlay::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;background:linear-gradient(180deg,transparent,rgba(3,42,32,.85))}
+.club-landing .hero-inner{position:relative;z-index:2;width:100%;max-width:1120px;margin:0 auto;padding:120px 24px 90px}
+.club-landing .hero-badge{display:inline-flex;align-items:center;gap:9px;background:rgba(2,42,32,.55);border:1px solid rgba(251,247,239,.25);color:var(--crema);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 18px;border-radius:999px;margin-bottom:26px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.club-landing .hero-badge img{width:20px;height:20px}
+.club-landing .club-hero h1{font-size:clamp(46px,7.4vw,92px);color:var(--crema);max-width:13ch;margin-bottom:22px;font-weight:600;letter-spacing:-.01em}
+.club-landing .club-hero h1 em{color:var(--arena);font-weight:500}
+.club-landing .club-hero .sub{font-size:clamp(17px,1.6vw,20px);color:rgba(251,247,239,.9);max-width:56ch;margin-bottom:36px;font-weight:500}
+.club-landing .club-hero .sub strong{color:var(--crema)}
+.club-landing .club-hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.club-landing .club-hero .datos-linea{font-size:13.5px;color:rgba(251,247,239,.72);letter-spacing:.02em;margin-bottom:30px}
+.club-landing .club-hero .pills-row{display:flex;gap:12px;flex-wrap:wrap}
+.club-landing .hero-benef{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+.club-landing .benef{display:flex;align-items:center;gap:11px;background:rgba(2,42,32,.5);border:1px solid rgba(251,247,239,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:14px;padding:13px 19px;color:var(--crema);font-size:14px;font-weight:700;line-height:1.3}
+.club-landing .benef svg{width:19px;height:19px;flex-shrink:0;color:var(--arena)}
+.club-landing .benef span b{color:var(--arena);font-weight:800}
+
+/* ================= SCROLLYTELLING problema (estilo Conecta Lana) ================= */
+.club-landing .prob{background:var(--verde-hondo);padding:40px 0 0}
+.club-landing .prob-grid{display:grid;grid-template-columns:1fr 460px;gap:64px;max-width:1120px;margin:0 auto;padding:0 24px}
+.club-landing .beats{padding:40px 0}
+.club-landing .beat{min-height:78vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
+.club-landing .beat .eyebrow{margin-bottom:14px}
+.club-landing .beat .grande{font-family:var(--serif);font-weight:600;color:var(--crema);font-size:clamp(52px,7.5vw,104px);line-height:1;letter-spacing:-.015em;margin-bottom:22px}
+.club-landing .beat .grande em{color:var(--arena)}
+/* Frases largas: cuerpo menor y saltos controlados */
+.club-landing .beat .grande--frase{font-size:clamp(34px,4.4vw,58px);line-height:1.16;max-width:16ch}
+/* Cifras compuestas: siempre en una sola línea */
+.club-landing .beat .grande--uno{font-size:clamp(38px,5.2vw,74px);white-space:nowrap}
+.club-landing .beat p{color:rgba(251,247,239,.85);font-size:18px;max-width:46ch}
+.club-landing .beat p+p{margin-top:14px}
+.club-landing .beat p em{color:var(--arena)}
+.club-landing .bar{margin-top:26px;max-width:440px}
+.club-landing .bar .bar-label{display:flex;justify-content:space-between;font-size:13.5px;color:rgba(251,247,239,.75);font-weight:600;margin-bottom:8px}
+.club-landing .bar .bar-label b{color:var(--arena)}
+.club-landing .bar .track{height:9px;border-radius:999px;background:rgba(251,247,239,.14);overflow:hidden}
+.club-landing .bar .fill{height:100%;border-radius:999px;background:var(--arena)}
+.club-landing .pildoras{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.club-landing .pildora{font-size:12.5px;font-weight:600;color:var(--crema);border:1px solid rgba(251,247,239,.28);background:rgba(251,247,239,.06);padding:7px 15px;border-radius:999px}
+.club-landing .prob-visual{position:relative}
+.club-landing .prob-sticky{position:sticky;top:calc(9vh + 80px);height:82vh;border-radius:26px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.club-landing .prob-sticky img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease;filter:grayscale(100%) contrast(1.05) brightness(.94)}
+.club-landing .prob-sticky img.activa{opacity:1}
+.club-landing .prob-sticky::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,42,32,.12),transparent 30%,transparent 70%,rgba(3,42,32,.35));pointer-events:none;z-index:2}
+.club-landing .prob-movil img{filter:grayscale(100%) contrast(1.05) brightness(.94)}
+.club-landing .prob-sticky .pie{position:absolute;left:18px;bottom:18px;z-index:3;background:rgba(2,42,32,.72);color:var(--crema);font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:999px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+
+/* Resolución — manifiesto centrado */
+.club-landing .resol{background:radial-gradient(760px 480px at 50% 42%,rgba(232,213,183,.1),transparent 65%),var(--verde-hondo);padding:150px 24px 150px;text-align:center;position:relative}
+.club-landing .resol::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:90px;background:linear-gradient(180deg,transparent,rgba(232,213,183,.55))}
+.club-landing .resol .sello{width:52px;height:52px;border-radius:50%;margin:0 auto 28px;display:block;box-shadow:0 0 0 8px rgba(232,213,183,.07)}
+.club-landing .resol h2{font-size:clamp(44px,6.4vw,82px);color:var(--crema);line-height:1.06;margin:0 auto 30px;max-width:16ch}
+.club-landing .resol h2 em{color:var(--arena)}
+.club-landing .resol p{color:rgba(251,247,239,.85);font-size:19px;max-width:56ch;margin:0 auto 18px}
+.club-landing .resol .puente{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--arena);margin:26px auto 40px}
+
+/* ================= Banda de credibilidad ================= */
+.club-landing .cred{background:var(--verde-hondo);border-top:1px solid rgba(232,213,183,.14);padding:34px 0 56px}
+.club-landing .cred-inner{text-align:center}
+.club-landing .cred-titulo{display:block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,213,183,.6);margin-bottom:22px}
+.club-landing .cred-items{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.club-landing .cred-item{border:1px solid rgba(251,247,239,.18);background:rgba(251,247,239,.04);border-radius:16px;padding:16px 26px;min-width:220px}
+.club-landing .cred-item b{display:block;font-family:var(--serif);font-size:20px;color:var(--arena);margin-bottom:2px}
+.club-landing .cred-item span{font-size:13px;color:rgba(251,247,239,.7)}
+
+/* ================= CAJAS "qué incluye" (estilo home) ================= */
+.club-landing .cajas{background:radial-gradient(900px 520px at 88% 0%,rgba(232,213,183,.4),transparent 62%),radial-gradient(700px 460px at 0% 100%,rgba(147,74,28,.07),transparent 60%),var(--crema);padding:110px 0}
+.club-landing .cajas .cab{text-align:center;max-width:720px;margin:0 auto 60px;padding:0 24px}
+.club-landing .cajas h2{font-size:clamp(34px,4.4vw,50px);margin-bottom:14px}
+.club-landing .cajas h2 em{color:var(--terracota)}
+.club-landing .cajas .cab p{color:var(--tinta-suave);font-size:17.5px}
+.club-landing .cajas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.club-landing .caja{border-radius:24px;padding:0 34px 34px;display:flex;flex-direction:column;box-shadow:0 8px 30px rgba(2,52,41,.08);overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+.club-landing .caja:hover{transform:translateY(-6px);box-shadow:0 26px 56px rgba(2,52,41,.16)}
+.club-landing .caja-foto{height:172px;margin:0 -34px 0;position:relative;overflow:hidden}
+.club-landing .caja-foto img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.club-landing .caja:hover .caja-foto img{transform:scale(1.05)}
+.club-landing .caja-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(2,42,32,.28))}
+.club-landing .caja .chip{width:58px;height:58px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:-29px 0 18px;position:relative;z-index:2;box-shadow:0 8px 20px rgba(2,52,41,.22)}
+.club-landing .caja .chip svg{width:26px;height:26px}
+.club-landing .caja .num{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.club-landing .caja h3{font-size:26px;margin-bottom:8px}
+.club-landing .caja .lema{font-size:15px;margin-bottom:22px;line-height:1.55}
+.club-landing .caja ul{list-style:none;display:grid;gap:12px;margin-bottom:24px}
+.club-landing .caja li{padding-left:22px;position:relative;font-size:14.8px;line-height:1.5}
+.club-landing .caja li::before{content:"—";position:absolute;left:0;font-weight:800}
+.club-landing .caja .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.club-landing .caja .tag{font-size:12px;font-weight:600;padding:6px 13px;border-radius:999px}
+.club-landing .caja--dark{background:linear-gradient(165deg,var(--verde) 0%,#03392C 100%);color:rgba(251,247,239,.88)}
+.club-landing .caja--dark h3{color:var(--crema)}
+.club-landing .caja--dark .num{color:var(--arena)}
+.club-landing .caja--dark .lema{color:rgba(251,247,239,.75)}
+.club-landing .caja--dark .chip{background:linear-gradient(150deg,#0C5140,#023429);color:var(--arena);border:1px solid rgba(232,213,183,.3)}
+.club-landing .caja--dark li::before{color:var(--arena)}
+.club-landing .caja--dark li strong{color:var(--crema)}
+.club-landing .caja--dark .tag{background:rgba(251,247,239,.1);color:var(--arena);border:1px solid rgba(251,247,239,.18)}
+.club-landing .caja--light{background:var(--blanco);border:1px solid rgba(2,52,41,.09);color:var(--tinta)}
+.club-landing .caja--light .num{color:var(--terracota)}
+.club-landing .caja--light .lema{color:var(--tinta-suave)}
+.club-landing .caja--light .chip{background:linear-gradient(150deg,#FFFDF8,#F0EADC);color:var(--terracota);border:1px solid rgba(147,74,28,.18)}
+.club-landing .caja--light li::before{color:var(--terracota)}
+.club-landing .caja--light li strong{color:var(--verde)}
+.club-landing .caja--light .tag{background:#F3EFE6;color:var(--terracota)}
+.club-landing .caja--accent{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);color:var(--tinta)}
+.club-landing .caja--accent h3{color:var(--verde)}
+.club-landing .caja--accent .num{color:var(--terracota)}
+.club-landing .caja--accent .lema{color:#5d5347}
+.club-landing .caja--accent .chip{background:linear-gradient(150deg,#F7E9D2,#EFDCBB);color:var(--terracota);border:1px solid rgba(147,74,28,.2)}
+.club-landing .caja--accent li::before{color:var(--terracota)}
+.club-landing .caja--accent li strong{color:var(--verde)}
+.club-landing .caja--accent .tag{background:rgba(147,74,28,.1);color:var(--terracota)}
+.club-landing .cajas .regla{text-align:center;margin-top:36px;font-size:15.5px;color:var(--tinta-suave)}
+.club-landing .cajas .regla b{color:var(--verde)}
+
+/* ================= PASOS primera semana ================= */
+.club-landing .pasos{background:radial-gradient(800px 480px at 12% 8%,rgba(232,213,183,.5),transparent 60%),var(--hueso);padding:110px 0}
+.club-landing .pasos .cab{text-align:center;margin-bottom:56px;padding:0 24px}
+.club-landing .pasos h2{font-size:clamp(34px,4.4vw,50px)}
+.club-landing .pasos h2 em{color:var(--terracota)}
+.club-landing .pasos .cab p{color:var(--tinta-suave);margin-top:12px}
+.club-landing .pasos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}
+.club-landing .pasos-grid::before{content:"";position:absolute;top:66px;left:11%;right:11%;border-top:2px dashed rgba(147,74,28,.3);z-index:0}
+.club-landing .paso{background:var(--blanco);border-radius:var(--radius-sm);padding:38px 26px 32px;text-align:center;box-shadow:0 10px 30px rgba(2,52,41,.07);position:relative;z-index:1;transition:transform .25s ease,box-shadow .25s ease}
+.club-landing .paso:hover{transform:translateY(-5px);box-shadow:0 22px 46px rgba(2,52,41,.13)}
+.club-landing .paso .bola{width:58px;height:58px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 6px 16px rgba(2,52,41,.28),0 0 0 6px rgba(2,52,41,.05)}
+.club-landing .paso .cuando{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+.club-landing .paso h3{font-size:19px;margin-bottom:10px}
+.club-landing .paso p{font-size:14.5px;color:var(--tinta-suave);line-height:1.55}
+
+/* ================= TESTIMONIOS (duotono, estilo home) ================= */
+.club-landing .testi{background:var(--crema);padding:110px 0}
+.club-landing .testi .cab{text-align:center;margin-bottom:56px;padding:0 24px}
+.club-landing .testi h2{font-size:clamp(34px,4.4vw,50px)}
+.club-landing .testi .cab p{font-style:italic;font-family:var(--serif);color:var(--tinta-suave);margin-top:10px;font-size:18px}
+.club-landing .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.club-landing .testi-card{background:var(--blanco);border-radius:var(--radius);box-shadow:0 10px 32px rgba(2,52,41,.08);padding:34px 32px;position:relative;transition:transform .25s ease,box-shadow .25s ease;display:flex;flex-direction:column}
+.club-landing .testi-card:hover{transform:translateY(-5px);box-shadow:0 22px 48px rgba(2,52,41,.14)}
+.club-landing .testi-card .comillas{font-family:var(--serif);font-style:italic;font-size:64px;line-height:1;color:rgba(147,74,28,.25);margin-bottom:8px}
+.club-landing .testi-card p{font-size:19.5px;color:var(--tinta);line-height:1.55;font-family:var(--serif);flex:1}
+.club-landing .testi-card .firma{display:flex;align-items:center;gap:14px;margin-top:24px}
+.club-landing .testi-card .avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.club-landing .testi-card .avatar img{width:100%;height:100%;object-fit:cover}
+.club-landing .testi-card h3{font-size:17px;margin-bottom:1px}
+.club-landing .testi-card .rol{font-size:13px;color:var(--terracota);font-weight:700}
+.club-landing .testi .nota{text-align:center;margin-top:28px;font-size:13px;color:var(--tinta-suave);font-style:italic}
+
+/* ================= QUIÉN ESTÁ DETRÁS ================= */
+.club-landing .detras{background:var(--crema);padding:30px 0 110px}
+.club-landing .detras-grid{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:center}
+.club-landing .detras-foto{border-radius:24px;overflow:hidden;box-shadow:var(--sombra)}
+.club-landing .detras-foto img{width:100%;height:auto;display:block}
+.club-landing .detras-texto h2{font-size:clamp(30px,3.8vw,44px);margin-bottom:20px}
+.club-landing .detras-texto h2 em{color:var(--terracota)}
+.club-landing .detras-texto p{font-size:17px;color:var(--tinta-suave);margin-bottom:16px;max-width:54ch}
+.club-landing .detras-firma{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--verde);border-left:4px solid var(--terracota);padding-left:20px;margin-top:24px}
+
+/* ================= PARA QUIÉN ================= */
+.club-landing .quien{background:var(--hueso);padding:110px 0}
+.club-landing .quien h2{font-size:clamp(34px,4.4vw,50px);text-align:center;margin-bottom:52px}
+.club-landing .quien h2 em{color:var(--terracota)}
+.club-landing .quien-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.club-landing .quien-col{border-radius:28px;padding:44px 42px;box-shadow:0 14px 40px rgba(2,52,41,.1);transition:transform .25s ease;position:relative;overflow:hidden}
+.club-landing .quien-col:hover{transform:translateY(-4px)}
+.club-landing .quien-col::before{content:"";position:absolute;top:0;left:0;right:0;height:5px}
+.club-landing .quien-col.si{background:linear-gradient(165deg,var(--verde),#03392C);color:rgba(251,247,239,.92)}
+.club-landing .quien-col.si::before{background:linear-gradient(90deg,var(--arena),rgba(232,213,183,.15))}
+.club-landing .quien-col.si h3{color:var(--crema)}
+.club-landing .quien-col.no{background:var(--blanco)}
+.club-landing .quien-col.no::before{background:linear-gradient(90deg,var(--terracota),rgba(147,74,28,.15))}
+.club-landing .quien-col h3{font-size:23px;display:flex;align-items:center;gap:15px;padding-bottom:22px;margin-bottom:26px;border-bottom:1px dashed rgba(2,52,41,.14)}
+.club-landing .quien-col.si h3{border-bottom-color:rgba(251,247,239,.18)}
+.club-landing .quien-col h3::before{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;font-family:var(--sans);flex-shrink:0}
+.club-landing .quien-col.si h3::before{content:"✓";background:rgba(232,213,183,.16);color:var(--arena)}
+.club-landing .quien-col.no h3::before{content:"✕";background:rgba(147,74,28,.1);color:var(--terracota)}
+.club-landing .quien-col ul{list-style:none;display:grid;gap:17px}
+.club-landing .quien-col li{padding-left:38px;position:relative;font-size:15.5px;line-height:1.55}
+.club-landing .quien-col li::before{position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;line-height:24px;text-align:center}
+.club-landing .quien-col.si li::before{content:"✓";background:rgba(232,213,183,.16);color:var(--arena)}
+.club-landing .quien-col.si a{color:var(--arena)}
+.club-landing .quien-col.no li::before{content:"✕";background:rgba(147,74,28,.1);color:var(--terracota)}
+.club-landing .quien-cta{text-align:center;margin-top:40px;font-size:17px;color:var(--tinta-suave)}
+.club-landing .quien-cta a{font-weight:800;color:var(--terracota)}
+
+/* ================= PRECIOS ================= */
+.club-landing .precios{background:#F4F3F0;padding:110px 0}
+.club-landing .precios .cab{text-align:center;margin-bottom:64px;padding:0 24px}
+.club-landing .precios h2{font-size:clamp(34px,4.4vw,50px);color:var(--verde)}
+.club-landing .precios h2 em{color:var(--terracota)}
+.club-landing .precios .cab p{color:var(--tinta-suave);margin-top:12px;max-width:64ch;margin-left:auto;margin-right:auto}
+.club-landing .planes{display:grid;grid-template-columns:1.12fr .88fr;gap:26px;max-width:940px;margin:14px auto 36px;align-items:start}
+.club-landing .plan{border-radius:28px;padding:46px 42px 40px;position:relative;transition:transform .25s ease,box-shadow .25s ease}
+.club-landing .plan:hover{transform:translateY(-5px)}
+.club-landing .plan::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;border-radius:28px 28px 0 0}
+.club-landing .plan-eyebrow{display:block;font-size:11.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.club-landing .plan--destacado{background:linear-gradient(180deg,#FFFFFF 0%,#FFFDF8 55%,#F9F1E1 100%);box-shadow:0 30px 70px rgba(2,52,41,.18),0 0 0 1px rgba(232,213,183,.9)}
+.club-landing .plan--destacado::before{background:linear-gradient(90deg,var(--terracota),var(--arena))}
+.club-landing .plan--destacado .plan-eyebrow{color:var(--terracota)}
+.club-landing .plan-badge{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--terracota),var(--terracota-viva));color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:9px 22px;border-radius:999px;box-shadow:0 8px 20px rgba(147,74,28,.35);white-space:nowrap}
+.club-landing .plan h3{font-size:24px;margin-bottom:18px}
+.club-landing .plan-precio{font-family:var(--serif);font-weight:600;font-size:clamp(52px,5.6vw,72px);color:var(--verde);line-height:1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.club-landing .plan-precio s{font-size:25px;color:#A6906F;font-weight:400;text-decoration-thickness:2px;text-decoration-color:rgba(147,74,28,.55)}
+.club-landing .plan-precio span{font-family:var(--sans);font-size:17px;color:var(--tinta-suave);font-weight:600}
+.club-landing .plan-equiv{font-size:15px;color:var(--terracota);font-weight:700;margin:12px 0 0}
+.club-landing .plan ul{list-style:none;display:grid;gap:13px;margin:24px 0 6px;padding-top:26px;border-top:1px dashed rgba(2,52,41,.16)}
+.club-landing .plan li{padding-left:34px;position:relative;font-size:15.5px;line-height:1.5}
+.club-landing .plan li::before{content:"✓";position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:rgba(2,52,41,.08);color:var(--verde)}
+.club-landing .plan .club-btn{width:100%;justify-content:center;margin-top:26px}
+.club-landing .plan--destacado .club-btn{background:linear-gradient(135deg,var(--terracota),var(--terracota-viva))}
+.club-landing .plan .micro{text-align:center;color:#8a7a5f}
+.club-landing .plan--mensual{background:linear-gradient(165deg,var(--verde),#03392C);color:rgba(251,247,239,.88);margin-top:16px;box-shadow:0 20px 50px rgba(2,52,41,.25)}
+.club-landing .plan--mensual::before{background:linear-gradient(90deg,var(--arena),rgba(232,213,183,.15))}
+.club-landing .plan--mensual .plan-eyebrow{color:rgba(232,213,183,.75)}
+.club-landing .plan--mensual h3{color:var(--crema)}
+.club-landing .plan--mensual .plan-precio{color:var(--crema)}
+.club-landing .plan--mensual .plan-precio s{color:rgba(251,247,239,.42);text-decoration-color:rgba(251,247,239,.4)}
+.club-landing .plan--mensual .plan-precio span{color:rgba(251,247,239,.65)}
+.club-landing .plan--mensual .plan-equiv{color:var(--arena)}
+.club-landing .plan--mensual ul{border-top-color:rgba(251,247,239,.2)}
+.club-landing .plan--mensual li::before{background:rgba(232,213,183,.15);color:var(--arena)}
+.club-landing .plan--mensual .micro{color:rgba(251,247,239,.6)}
+.club-landing .perks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;max-width:940px;margin:0 auto 34px}
+.club-landing .perk{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px;flex:1;min-width:230px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+.club-landing .perk b{display:block;font-family:var(--serif);font-size:19px;color:var(--verde);margin-bottom:3px}
+.club-landing .perk span{font-size:13px;color:var(--tinta-suave);line-height:1.5}
+.club-landing .pro-nota{text-align:center;font-size:14.5px;color:var(--tinta-suave);max-width:620px;margin:0 auto;line-height:1.7}
+.club-landing .pro-nota b{color:var(--terracota)}
+
+/* ================= FAQ ================= */
+.club-landing .faq{background:var(--crema);padding:110px 0}
+.club-landing .faq h2{font-size:clamp(34px,4.4vw,50px);text-align:center;margin-bottom:52px}
+.club-landing .faq h2 em{color:var(--terracota)}
+.club-landing .faq details{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:var(--radius-sm);margin-bottom:14px;overflow:hidden;box-shadow:0 4px 16px rgba(2,52,41,.04);transition:border-color .2s,box-shadow .2s}
+.club-landing .faq details:hover{border-color:rgba(147,74,28,.35);box-shadow:0 8px 24px rgba(2,52,41,.08)}
+.club-landing .faq summary{cursor:pointer;padding:23px 60px 23px 28px;font-weight:700;font-size:16.5px;color:var(--verde);list-style:none;position:relative}
+.club-landing .faq summary::-webkit-details-marker{display:none}
+.club-landing .faq summary::after{content:"+";position:absolute;right:26px;top:50%;transform:translateY(-50%);font-size:26px;color:var(--terracota);font-weight:400;font-family:var(--serif)}
+.club-landing .faq details[open] summary::after{content:"–"}
+.club-landing .faq .resp{padding:0 28px 26px;color:var(--tinta-suave);font-size:15.5px;line-height:1.7}
+
+/* ================= CTA FINAL (foto full-bleed, estilo home) ================= */
+.club-landing .final{position:relative;padding:150px 24px;text-align:center;overflow:hidden}
+.club-landing .final .fondo{position:absolute;inset:0}
+.club-landing .final .fondo img{width:100%;height:100%;object-fit:cover}
+.club-landing .final .fondo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,42,32,.88),rgba(2,42,32,.82))}
+.club-landing .final .contenido{position:relative;z-index:2}
+.club-landing .final h2{font-size:clamp(34px,5vw,58px);color:var(--crema);max-width:850px;margin:0 auto 22px;line-height:1.12}
+.club-landing .final h2 em{color:var(--arena)}
+.club-landing .final p{color:rgba(251,247,239,.88);font-size:19px;max-width:600px;margin:0 auto 40px}
+.club-landing .final .pd{margin-top:48px;font-size:14.5px;color:rgba(251,247,239,.65);max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
+.club-landing .final .pd a{color:var(--arena);font-weight:700}
+
+/* ================= Banda de confianza ================= */
+.club-landing .confianza{background:var(--verde-hondo);padding:56px 24px;text-align:center}
+.club-landing .confianza img{width:46px;height:46px;margin:0 auto 16px;border-radius:50%}
+.club-landing .confianza p{max-width:640px;margin:0 auto;color:rgba(251,247,239,.78);font-size:15px;line-height:1.7}
+.club-landing .confianza p b{color:var(--arena)}
+
+/* ================= Reveal on scroll ================= */
+.club-landing .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.club-landing .reveal.in{opacity:1;transform:none}
+.club-landing .cajas-grid .caja:nth-child(2),.club-landing .pasos-grid .paso:nth-child(2),.club-landing .testi-grid .testi-card:nth-child(2){transition-delay:.12s}
+.club-landing .cajas-grid .caja:nth-child(3),.club-landing .pasos-grid .paso:nth-child(3),.club-landing .testi-grid .testi-card:nth-child(3){transition-delay:.24s}
+.club-landing .pasos-grid .paso:nth-child(4){transition-delay:.36s}
+@media(prefers-reduced-motion:reduce){
+  .club-landing .reveal{opacity:1;transform:none;transition:none}
+  .club-landing .hero-media img{animation:none;opacity:1}
+  .club-landing .hero-media img:not(:first-child){display:none}
+}
+
+/* ================= Responsive ================= */
+.club-landing .prob-movil{display:none}
+@media(max-width:980px){
+  .club-landing .prob-grid{grid-template-columns:1fr}
+  .club-landing .prob-visual{display:none}
+  .club-landing .prob-movil{display:block!important;border-radius:20px;overflow:hidden;margin:10px 0 30px}
+  .club-landing .beat{min-height:0;padding:56px 0}
+  .club-landing .cajas-grid{grid-template-columns:1fr;max-width:560px;margin:0 auto}
+  .club-landing .pasos-grid{grid-template-columns:1fr 1fr}
+  .club-landing .pasos-grid::before{display:none}
+  .club-landing .testi-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+  .club-landing .quien-grid,.club-landing .planes{grid-template-columns:1fr}
+  .club-landing .plan--mensual{margin-top:0}
+  .club-landing .detras-grid{grid-template-columns:1fr;gap:30px}
+  .club-landing .detras-foto{max-width:280px;margin:0 auto}
+}
+@media(max-width:640px){
+  .club-landing .hero-inner{padding:96px 20px 64px}
+  .club-landing .hero-benef{display:none} /* los beneficios reaparecen en "Qué te llevas" — el hero móvil respira */
+  .club-landing .pill-sec--arena{display:none}
+  .club-landing .club-hero .sub{margin-bottom:28px}
+  .club-landing .pasos-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .club-landing .plan{padding:38px 26px 34px}
+  .club-landing .cajas,.club-landing .pasos,.club-landing .testi,.club-landing .quien,.club-landing .precios,.club-landing .faq{padding:76px 0}
+  /* La sub-barra en móvil: solo logo + CTA, sin el rótulo largo */
+  .club-landing .topbar .marca span{display:none}
+  .club-landing .topbar{padding:8px 16px}
+}

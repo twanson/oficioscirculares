@@ -360,4 +360,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- TODO (lanzamiento del Club): descomentar y quitar el noindex de views/club.ejs
+       cuando existan los Payment Links de Stripe y se confirmen los permisos de testimonios.
+  <url>
+    <loc>https://www.oficioscirculares.com/club</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  -->
 </urlset>

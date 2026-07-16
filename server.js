@@ -244,6 +244,13 @@ app.get('/conecta-lana', (req, res) => {
   res.render('conecta-lana');
 });
 
+// El Club de Oficios Circulares — landing de membresía (beta fundador)
+// noindex en la vista hasta lanzamiento; los CTA de Stripe son placeholders
+// ([ENLACE_STRIPE_ANUAL] / [ENLACE_STRIPE_MENSUAL]) hasta tener los Payment Links.
+app.get('/club', (req, res) => {
+  res.render('club');
+});
+
 // Directorio público de Conecta Lana (sin token: es captación)
 app.get('/conecta-lana/directorio', async (req, res) => {
   let grouped = { tengo: [], transformo: [], busco: [] };

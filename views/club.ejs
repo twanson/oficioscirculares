@@ -1,0 +1,543 @@
+<%- include('partials/head-meta', {
+    title: 'El Club de Oficios Circulares — Deja de depender de las ferias. Vende todo el año.',
+    description: 'La comunidad donde artesanos y pequeños talleres aprenden a conseguir clientes online, mes a mes: lecciones cortas, revisión en vivo, radar de ayudas y gente de tu oficio.',
+    canonical: '/club',
+    noindex: true,
+    ogImage: 'https://www.oficioscirculares.com/assets/images/puliendo%20madera.jpg',
+    ogImageAlt: 'Artesano puliendo madera en su taller — El Club de Oficios Circulares'
+}) %>
+
+<link rel="stylesheet" href="/assets/css/club.css?v=20260716">
+
+<%- include('partials/header') %>
+
+<main class="club-landing" id="maincontent">
+
+<!-- Barra sticky: aparece al pasar el hero (sub-barra bajo el navbar del sitio) -->
+<div class="topbar" id="topbar">
+  <div class="marca">
+    <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+    <span>El Club de Oficios Circulares</span>
+  </div>
+  <a class="club-btn club-btn--terracota" href="#precios">Plazas fundador</a>
+</div>
+
+<!-- ============================================================
+     HERO — estilo Conecta Lana, con TEST A/B:
+     Variante A "slides": slideshow Ken Burns (4 fotos).
+     Variante B "video": montaje multi-oficio (torno · forja · telar).
+     Reparto 50/50 persistido en localStorage; forzable con
+     ?hero=video o ?hero=slides. La variante se envía a GTM.
+============================================================ -->
+<header class="club-hero">
+  <div class="hero-media" aria-hidden="true">
+    <div class="hero-slides" id="heroSlides">
+      <img src="/assets/images/club/hero-1.jpg" alt="">
+      <img src="/assets/images/club/hero-2.jpg" alt="">
+      <img src="/assets/images/club/hero-3.jpg" alt="">
+      <img src="/assets/images/club/hero-4.jpg" alt="">
+    </div>
+    <video id="heroVideo" muted loop playsinline preload="none" style="display:none" poster="/assets/images/club/hero-1.jpg">
+      <source data-src="/assets/videos/club/hero-oficios.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="hero-badge"><img src="/assets/images/logodegraoscuro.png" alt="">El Club de Oficios Circulares</span>
+    <h1>Deja de depender de las ferias. <em>Vende todo el año.</em></h1>
+    <p class="sub">La comunidad donde artesanos y pequeños talleres aprenden a conseguir clientes online, mes a mes. Sin humo y sin dejar de ser taller.</p>
+    <div class="hero-benef">
+      <div class="benef">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><b>Lecciones de 5–20 min</b><br>las aplicas la misma tarde</span>
+      </div>
+      <div class="benef">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        <span><b>Revisión en vivo cada mes</b><br>tu perfil o tu tienda, en directo</span>
+      </div>
+      <div class="benef">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span><b>Radar de ayudas</b><br>te avisamos antes del plazo</span>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
+      <a class="club-btn club-btn--ghost" href="#incluye">Ver qué incluye</a>
+    </div>
+    <span class="datos-linea">Precio fundador: 12 €/mes o 120 €/año, para siempre · Sin permanencia · 40 plazas hasta el 23 de septiembre</span>
+    <div class="pills-row">
+      <a class="pill-sec pill-sec--dark" href="#problema">Por qué montamos el Club ↓</a>
+      <a class="pill-sec pill-sec--arena" href="#semana">Tu primera semana →</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     SCROLLYTELLING — el problema, contado como en Conecta Lana:
+     beats con dato gigante a la izquierda + foto sticky a la derecha.
+============================================================ -->
+<section class="prob" id="problema">
+  <div class="prob-grid">
+    <div class="beats">
+
+      <!-- Foto estática solo en móvil -->
+      <div class="prob-movil"><img loading="lazy" src="/assets/images/club/prob-1.jpg" alt="Artesana trabajando sola en su taller"></div>
+
+      <div class="beat" data-foto="0">
+        <span class="eyebrow eyebrow--arena">La vida del taller · 01</span>
+        <div class="grande grande--frase">"¿Y ahora qué,<br><em>hasta la próxima?"</em></div>
+        <p>Sales de una feria buena y esa misma noche ya está ahí la pregunta. Trabajas bien y lo sabes. Pero entre feria y feria llegan los meses flojos, los precios que aceptas por no perder la venta, y ese Instagram del taller que lleva tres semanas sin publicar porque no sabes qué poner.</p>
+        <div class="pildoras">
+          <span class="pildora">meses flojos</span>
+          <span class="pildora">regateos que duelen</span>
+          <span class="pildora">"no sé qué publicar"</span>
+        </div>
+      </div>
+
+      <div class="beat" data-foto="1">
+        <span class="eyebrow eyebrow--arena">La vida del taller · 02</span>
+        <div class="grande">363 <em>días</em></div>
+        <p>La feria te da un fin de semana. Internet te da los otros 363 días. Y hoy tu taller apuesta la caseta, el viaje y dos días de producción parada a que haga bueno y baje gente.</p>
+        <div class="bar">
+          <div class="bar-label"><span>Días que te da una feria</span><b>2 de 365</b></div>
+          <div class="track"><div class="fill" style="width:5%"></div></div>
+        </div>
+      </div>
+
+      <div class="beat" data-foto="2">
+        <span class="eyebrow eyebrow--arena">La vida del taller · 03</span>
+        <div class="grande grande--uno">8 <em>de cada 10</em></div>
+        <p>pagarían algo más por lo hecho aquí al lado. Y más de la mitad pagaría más por piezas que duran y se reparan — justo lo que tú haces desde siempre.</p>
+        <p><em>La pregunta no es si tu trabajo vale. Es si te encuentran.</em></p>
+        <div class="pildoras">
+          <span class="pildora">Consumo en España</span>
+          <span class="pildora">km0 = confianza</span>
+          <span class="pildora">durabilidad = precio justo</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="prob-visual">
+      <div class="prob-sticky" id="probSticky">
+        <img class="activa" loading="lazy" src="/assets/images/club/prob-1.jpg" alt="Artesana trabajando sola en su taller">
+        <img loading="lazy" src="/assets/images/club/prob-2.jpg" alt="Ceramista concentrada en su estudio">
+        <img loading="lazy" src="/assets/images/club/prob-3.jpg" alt="Ceramista sonriendo con una de sus piezas">
+        <span class="pie" id="probPie">El domingo después de la feria</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Resolución — manifiesto centrado -->
+<section class="resol">
+  <img class="sello" src="/assets/images/logodegraoscuro.png" alt="">
+  <span class="eyebrow eyebrow--arena">Por eso existe el Club</span>
+  <h2>No te falta oficio.<br>Falta <em>que te encuentren.</em></h2>
+  <p>A hacer tu oficio te enseñó un maestro, horas y años de taller. A venderlo no te enseñó nadie. Y vender también es un oficio: tiene técnica, tiene herramientas y se aprende mucho mejor acompañado.</p>
+  <p class="puente">Método, revisión y gente de tu oficio. Eso es el Club.</p>
+  <a class="pill-sec pill-sec--arena" href="#incluye">Ver qué hay dentro ↓</a>
+</section>
+
+<!-- Banda de credibilidad -->
+<section class="cred">
+  <div class="wrap cred-inner">
+    <span class="cred-titulo">No somos nuevos en esto</span>
+    <div class="cred-items">
+      <div class="cred-item"><b>Conecta Lana</b><span>la bolsa de la lana española, creada por nosotros</span></div>
+      <div class="cred-item"><b>+200 talleres</b><span>en el Mapa Circular Artesano</span></div>
+      <div class="cred-item"><b>Impulso 3D</b><span>talleres acompañados uno a uno, cada mes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUÉ INCLUYE — sistema de cajas de la home (dark / light / accent)
+============================================================ -->
+<section class="cajas" id="incluye">
+  <div class="cab">
+    <span class="eyebrow">Qué incluye</span>
+    <h2>Qué te llevas <em>al entrar</em></h2>
+    <p>Tres pilares que trabajan juntos: método, alguien que revisa y gente alrededor.</p>
+  </div>
+  <div class="wrap">
+    <div class="cajas-grid">
+
+      <div class="caja caja--dark reveal">
+        <div class="caja-foto"><img loading="lazy" src="/assets/images/oficios/cards/carpinteria-y-ebanisteria.jpg" alt="Artesana lijando madera en su taller"></div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <span class="num">Pilar 01</span>
+        <h3>Aprende</h3>
+        <p class="lema">Lecciones de 5 a 20 minutos, pensadas para verse con el café y aplicarse antes de cerrar el taller.</p>
+        <ul>
+          <li><strong>Foto y vídeo con tu móvil</strong> — tu pieza se ve como merece, sin pagar fotógrafo.</li>
+          <li><strong>Reels del proceso</strong> — lo que para ti es "un martes en el taller", para la gente es fascinante.</li>
+          <li><strong>Vender online sin líos</strong> — tienda propia o Etsy, y el papeleo explicado en cristiano.</li>
+          <li><strong>Precios con margen</strong> — cobra lo que vale tu trabajo, con números y sin culpa.</li>
+          <li><strong>Instagram con constancia</strong> — un calendario realista para no quemarte ni dejar el torno.</li>
+        </ul>
+        <div class="tags"><span class="tag">5–20 min</span><span class="tag">con tu móvil</span><span class="tag">aplicable hoy</span></div>
+      </div>
+
+      <div class="caja caja--light reveal">
+        <div class="caja-foto"><img loading="lazy" src="/assets/images/oficios/cards/joyeria-artesanal.jpg" alt="Manos de joyero trabajando una pieza"></div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+        <span class="num">Pilar 02</span>
+        <h3>Acompaña</h3>
+        <p class="lema">Lo que no se puede descargar: alguien que mira tu caso y te dice por dónde.</p>
+        <ul>
+          <li><strong>Directo mensual con revisión en vivo</strong> — traes tu perfil o tu tienda y sales con deberes concretos, no con teoría.</li>
+          <li><strong>Radar de ayudas y subvenciones</strong> — vigilamos tu comunidad autónoma y te avisamos a tiempo, con plantillas. Una sola ayuda puede pagarte años de Club.</li>
+          <li><strong>Biblioteca de plantillas</strong> — ficha de producto, presupuesto, calendario, guiones de reel. Rellenas y listo.</li>
+        </ul>
+        <div class="tags"><span class="tag">en directo</span><span class="tag">tu caso</span><span class="tag">por CCAA</span></div>
+      </div>
+
+      <div class="caja caja--accent reveal">
+        <div class="caja-foto"><img loading="lazy" src="/assets/images/oficios/cards/cesteria-y-mimbre.jpg" alt="Cestería artesana"></div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span class="num">Pilar 03</span>
+        <h3>Pertenece</h3>
+        <p class="lema">La parte que no se copia: gente de tu oficio alrededor.</p>
+        <ul>
+          <li><strong>Chat por oficios y zonas</strong> — preguntas a las diez de la noche y te contesta alguien que ha pasado por lo mismo.</li>
+          <li><strong>Retos trimestrales</strong> — "12 reels en 30 días", "monta tu tienda". En grupo, esta vez sí lo terminas.</li>
+          <li><strong>Mercados colectivos</strong> — visibilidad cruzada: el escaparate de todos también es el tuyo.</li>
+          <li><strong>Círculo de materiales</strong> — lo que a ti te sobra, a otro taller le sirve. Como ya hacemos con Conecta Lana.</li>
+          <li><strong>Maestros y nuevos</strong> — quien lleva años comparte oficio; quien llega, trae aire nuevo.</li>
+        </ul>
+        <div class="tags"><span class="tag">por oficios</span><span class="tag">retos</span><span class="tag">colaboraciones</span></div>
+      </div>
+
+    </div>
+    <p class="regla">Todo con una regla: <b>máximo dos horas a la semana.</b> El Club trabaja para tu taller, no al revés.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRIMERA SEMANA — estilo "Tres pasos, cero complicación"
+============================================================ -->
+<section class="pasos" id="semana">
+  <div class="cab">
+    <span class="eyebrow">Cómo funciona</span>
+    <h2>Tu primera semana, <em>con victoria incluida</em></h2>
+    <p>Nada de perderte en una biblioteca de vídeos. Entras y a los 7 días has publicado.</p>
+  </div>
+  <div class="wrap">
+    <div class="pasos-grid">
+      <div class="paso reveal">
+        <div class="bola">1</div>
+        <div class="cuando">Día 1</div>
+        <h3>Entras y te sitúas</h3>
+        <p>Bienvenida, te presentas en el chat de tu oficio y eliges tu primer objetivo con nuestra guía de arranque.</p>
+      </div>
+      <div class="paso reveal">
+        <div class="bola">2</div>
+        <div class="cuando">Días 2 a 6</div>
+        <h3>Tu primera victoria</h3>
+        <p>Con una lección corta y una plantilla, preparas tu primer reel del proceso o tu ficha de producto. Te damos feedback antes de publicar.</p>
+      </div>
+      <div class="paso reveal">
+        <div class="bola">3</div>
+        <div class="cuando">Día 7</div>
+        <h3>Publicado</h3>
+        <p>Tu primera pieza de presencia digital hecha con método. No te vas a hacer viral: vas a empezar a existir online. Que es lo que cuenta.</p>
+      </div>
+      <div class="paso reveal">
+        <div class="bola">4</div>
+        <div class="cuando">Cada mes</div>
+        <h3>Ritmo de taller</h3>
+        <p>Una lección corta a la semana, el reto del trimestre, el chat siempre abierto y el directo mensual con revisiones en vivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMUNIDAD — testimonios duotono (estilo home)
+============================================================ -->
+<section class="testi">
+  <div class="cab">
+    <span class="eyebrow">Comunidad</span>
+    <h2>Gente que también <em>huele a taller</em></h2>
+    <p>Lo que nos escriben quienes ya trabajan con nosotros.</p>
+  </div>
+  <div class="wrap">
+    <div class="testi-grid">
+      <!-- APROBADO por Blanca el 16 jul 2026 — versión redactada por ella misma. -->
+      <div class="testi-card reveal">
+        <div class="comillas">"</div>
+        <p>Tener todo configurado y explicado —plantillas con mi logo, blog y guía paso a paso— facilita mucho las cosas. Es una forma excelente de empezar.</p>
+        <div class="firma">
+          <div class="avatar"><img loading="lazy" src="/assets/images/club/blanca-hilandia.jpg" alt="Blanca tejiendo con el mandil de Hilandia"></div>
+          <div>
+            <h3>Blanca Fernández</h3>
+            <div class="rol">Hilandia · tejido artesanal</div>
+          </div>
+        </div>
+      </div>
+      <!-- Cita literal de correo real (14 jul 2026). PENDIENTE DE PERMISO — no publicar en main hasta confirmar. Avatar Pexels PROVISIONAL. -->
+      <div class="testi-card reveal">
+        <div class="comillas">"</div>
+        <p>Muchísimas gracias. Esta labor que hacéis es de agradecer.</p>
+        <div class="firma">
+          <div class="avatar"><img loading="lazy" src="/assets/images/club/avatar-maika.jpg" alt=""></div>
+          <div>
+            <h3>Maika</h3>
+            <div class="rol">Encontró lana para su aula con Conecta Lana</div>
+          </div>
+        </div>
+      </div>
+      <!-- Cita literal de correo real (16 jul 2026). PENDIENTE DE PERMISO — no publicar en main hasta confirmar. Avatar Pexels PROVISIONAL. -->
+      <div class="testi-card reveal">
+        <div class="comillas">"</div>
+        <p>Estamos encantados. Ya estamos gestionando el envío con la ganadera que nos presentasteis.</p>
+        <div class="firma">
+          <div class="avatar"><img loading="lazy" src="/assets/images/club/avatar-jorge.jpg" alt=""></div>
+          <div>
+            <h3>Jorge Esteban</h3>
+            <div class="rol">Empresa conectada con lana española vía Conecta Lana</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="nota">Citas de correos reales de clientes y miembros de la red, publicadas con su permiso.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUIÉN ESTÁ DETRÁS
+     TODO: sustituir la foto por una foto real de Jose en el taller
+     (mejora la conversión de tráfico frío).
+============================================================ -->
+<section class="detras">
+  <div class="wrap detras-grid">
+    <div class="detras-foto reveal">
+      <img loading="lazy" src="/assets/images/fotosobrenosotrosOC.png" alt="José Moscardó, fundador de Oficios Circulares">
+    </div>
+    <div class="detras-texto reveal">
+      <span class="eyebrow">Quién está detrás</span>
+      <h2>Hola, soy <em>Jose</em></h2>
+      <p>Fundador de Oficios Circulares. Llevo más de diez años trabajando en comunicación, estrategia y sostenibilidad, y hoy lo pongo al servicio de lo que más me importa: los oficios. Acompaño a talleres uno a uno —diagnósticos, sistemas de comunicación, presencia digital— y he montado cosas como Conecta Lana, la bolsa de la lana española.</p>
+      <p>El Club nace de lo que veo cada semana: el acompañamiento funciona, pero uno a uno no llega a todos los talleres que lo necesitan. Juntándonos, sí.</p>
+      <p class="detras-firma">"El puente entre el saber ancestral y las necesidades del presente."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARA QUIÉN SÍ / NO
+============================================================ -->
+<section class="quien">
+  <div class="wrap">
+    <h2>Esto es para ti <em>(y esto no)</em></h2>
+    <div class="quien-grid">
+      <div class="quien-col si reveal">
+        <h3>El Club es para ti si…</h3>
+        <ul>
+          <li>Ya vendes —en ferias, por encargo, algo por redes— y quieres que internet te traiga clientes sin esperar al próximo fin de semana.</li>
+          <li>Tienes un taller pequeño (tú, o tú y un par de manos más) y ambición de profesionalizarlo.</li>
+          <li>Puedes dedicarle un par de horas a la semana. Con eso basta.</li>
+          <li>Crees que el oficio se defiende mejor acompañado que solo.</li>
+        </ul>
+      </div>
+      <div class="quien-col no reveal">
+        <h3>El Club NO es para ti si…</h3>
+        <ul>
+          <li>Buscas una fórmula para vender mucho sin cambiar nada. No la tenemos, y quien te la venda te está mintiendo.</li>
+          <li>Todavía no vendes nada y lo tuyo es un hobby. Nos encanta, pero le sacarás partido más adelante.</li>
+          <li>Quieres que alguien publique por ti. Eso no lo ofrecemos: tu oficio lo cuenta mejor quien lo hace. Lo que sí existe es nuestro <a href="https://www.oficioscirculares.com/impulso-3d">Impulso 3D</a>, que te deja el sistema montado a tu medida (marca, plantillas, guías); el Club es donde lo haces tuyo, semana a semana.</li>
+          <li>No puedes dedicarle ni dos horas a la semana. Sin ese mínimo no vas a ver resultados, y no queremos tu cuota sin más.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="quien-cta">¿Te has visto en la primera lista? <a href="#precios">Reserva tu plaza de fundador →</a></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRECIOS + OFERTA FUNDADOR
+     TODO: sustituir [ENLACE_STRIPE_ANUAL] y [ENLACE_STRIPE_MENSUAL]
+     por los Payment Links reales antes de publicar.
+============================================================ -->
+<section class="precios" id="precios">
+  <div class="cab">
+    <span class="eyebrow">Oferta fundador — beta</span>
+    <h2>Entra como fundador. <em>Este precio, para siempre.</em></h2>
+    <p>Abrimos el Club con 40 plazas hasta el 23 de septiembre. ¿Por qué un límite? Porque los directos con revisión en vivo funcionan con decenas de personas, no con cientos. La escasez no es teatro: es aforo.</p>
+  </div>
+  <div class="wrap">
+    <div class="planes">
+      <div class="plan plan--destacado reveal">
+        <span class="plan-badge">Recomendado</span>
+        <span class="plan-eyebrow">El Club completo · un año · 2 meses gratis</span>
+        <h3>Fundador anual</h3>
+        <div class="plan-precio"><s>150 €</s>120 €<span>/año</span></div>
+        <p class="plan-equiv">Sale a 10 €/mes. Una pieza vendida de más al año y el Club te ha salido gratis.</p>
+        <ul>
+          <li>Todas las lecciones cortas de venta online</li>
+          <li>Directo mensual con revisión en vivo de tu perfil o tienda</li>
+          <li>Radar de ayudas y subvenciones con plantillas</li>
+          <li>Chat por oficios, retos y mercados colectivos</li>
+          <li>Tu primera victoria en 7 días, con nuestra revisión</li>
+        </ul>
+        <a class="club-btn club-btn--terracota" href="[ENLACE_STRIPE_ANUAL]" onclick="window.dataLayer&&window.dataLayer.push({event:'club_checkout_click',plan:'fundador_anual',hero_variant:(function(){try{return localStorage.getItem('ocClubHeroVar')||'slides'}catch(e){return 'slides'}})()})">Quiero mi plaza anual →</a>
+        <span class="micro">Precio congelado mientras sigas dentro · No se renueva si no quieres</span>
+      </div>
+      <div class="plan plan--mensual reveal">
+        <span class="plan-eyebrow">El Club completo · mes a mes</span>
+        <h3>Fundador mensual</h3>
+        <div class="plan-precio"><s>15 €</s>12 €<span>/mes</span></div>
+        <p class="plan-equiv">Lo mismo, mes a mes. Para entrar con un pie y quedarte cuando lo veas claro.</p>
+        <ul>
+          <li>Acceso completo al Club</li>
+          <li>Mismo precio fundador congelado</li>
+          <li>Sin permanencia: te vas en dos clics</li>
+        </ul>
+        <a class="club-btn club-btn--ghost" href="[ENLACE_STRIPE_MENSUAL]" onclick="window.dataLayer&&window.dataLayer.push({event:'club_checkout_click',plan:'fundador_mensual',hero_variant:(function(){try{return localStorage.getItem('ocClubHeroVar')||'slides'}catch(e){return 'slides'}})()})">Empezar por meses →</a>
+      </div>
+    </div>
+    <div class="perks">
+      <div class="perk"><b>Precio para siempre</b><span>Aunque suba después, tú te quedas en precio fundador mientras sigas dentro.</span></div>
+      <div class="perk"><b>Voz y voto</b><span>Las primeras lecciones y retos se deciden también con lo que tú pidas.</span></div>
+      <div class="perk"><b>Sello de fundador</b><span>Tu estatus en la comunidad cuando esto crezca. Los primeros se recuerdan.</span></div>
+    </div>
+    <p class="pro-nota">¿Buscas acompañamiento 1:1? El plan <b>Taller Pro</b> (35 €/mes, con revisión personalizada trimestral) se abrirá después de la beta — y los fundadores tendréis preferencia.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="faq">
+  <div class="wrap-n">
+    <h2>Dudas <em>honestas</em></h2>
+
+    <details>
+      <summary>"No tengo tiempo. Bastante tengo con producir."</summary>
+      <p class="resp">Por eso el Club está diseñado con una regla: máximo dos horas a la semana. Lecciones de 5 a 20 minutos, plantillas que rellenas y listo. Y si una semana el horno no da tregua, no pasa nada: esto no es un curso que caduca, el Club sigue aquí cuando vuelvas.</p>
+    </details>
+    <details>
+      <summary>"Yo no soy de redes."</summary>
+      <p class="resp">Tampoco eras del torno, del telar o de la gubia el primer día. Es técnica, y se aprende. Empezamos por lo más básico con el móvil que ya tienes, y no hace falta bailar ni ponerse delante de la cámara: tus manos y tu proceso son el contenido. De hecho, son el contenido que mejor funciona.</p>
+    </details>
+    <details>
+      <summary>"¿Otra cuota más? Bastante tengo con la de autónomos."</summary>
+      <p class="resp">Lo sabemos, y por eso el número es el que es. La cuenta honesta: 150 € al año (120 € como fundador). Si el radar de ayudas te consigue una sola subvención, o vendes una sola pieza más gracias a lo que aplicas, ya está pagado. Si en unos meses sientes que no te compensa, te vas sin permanencia y tan amigos.</p>
+    </details>
+    <details>
+      <summary>"Yo vivo de las ferias. Me funcionan."</summary>
+      <p class="resp">Y nadie te pide dejarlas: te pedimos que no sean tu única fuente. Además, la presencia digital hace mejores tus ferias: la gente te descubre antes de ir y te sigue comprando después. Y el radar de ayudas incluye las subvenciones para ferias de tu comunidad, así que hasta la caseta puede salirte más barata.</p>
+    </details>
+    <details>
+      <summary>"¿Esto es un curso online?"</summary>
+      <p class="resp">No. Un curso se acaba y te deja solo con los vídeos. El Club es un taller continuo: método, revisión en vivo y gente de tu oficio. Entras, avanzas a tu ritmo y cada mes hay algo vivo esperándote.</p>
+    </details>
+    <details>
+      <summary>"¿Cuándo veré resultados?"</summary>
+      <p class="resp">Tu primera victoria, en 7 días: tu primer reel o tu ficha de producto publicados con método. ¿Clientes constantes? Eso son meses de constancia, y quien te prometa otra cosa te engaña. Lo que sí te prometemos: método probado, revisión cada mes y no volver a trabajar a ciegas.</p>
+    </details>
+    <details>
+      <summary>"¿Puedo darme de baja cuando quiera?"</summary>
+      <p class="resp">Sí. Desde tu cuenta, en dos clics, sin permanencia y sin preguntas incómodas. El plan anual no se renueva si no quieres.</p>
+    </details>
+    <details>
+      <summary>"¿Qué es eso de 'circular'? Yo hago mi trabajo de siempre."</summary>
+      <p class="resp">Exacto: material de cerca, piezas que duran y se reparan, nada se tira. Trabajas en circular sin llamarlo así. Lo que hacemos en el Club es convertir esa forma de trabajar en argumento de venta — porque el cliente de hoy la valora y está dispuesto a pagarla.</p>
+    </details>
+    <details>
+      <summary>"Soy de cerámica / cuero / madera / vidrio / textil… ¿me sirve?"</summary>
+      <p class="resp">Sí. La técnica de venta es común a todos los oficios: foto, precio, historia, tienda. Y el chat se organiza por oficios y zonas, así que la conversación fina la tienes con los tuyos.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA FINAL — foto full-bleed con overlay (estilo home)
+============================================================ -->
+<section class="final">
+  <div class="fondo" aria-hidden="true"><img loading="lazy" src="/assets/images/workshop_tools.jpg" alt=""></div>
+  <div class="contenido">
+    <span class="eyebrow eyebrow--arena">El Club de Oficios Circulares</span>
+    <h2>Tu oficio lleva generaciones pasando de mano en mano. Que no se pare en la tuya <em>por falta de clientes.</em></h2>
+    <p>Entra al Club, publica tu primera pieza esta semana y deja de trabajar solo.</p>
+    <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
+    <span class="micro micro--luz">40 plazas fundador · Cierre: 23 de septiembre · 12 €/mes o 120 €/año, para siempre · Sin permanencia</span>
+    <p class="pd">¿Dudas antes de entrar? Escríbenos a <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>. Te contesta una persona, no un robot. Somos un taller pequeño, como el tuyo.</p>
+  </div>
+</section>
+
+<!-- Banda de confianza (estilo Conecta Lana) -->
+<section class="confianza">
+  <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+  <p><b>Sin permanencia. Primera victoria en 7 días.</b> Un proyecto de Oficios Circulares para que los talleres de este país vivan de su oficio todo el año — no solo los fines de semana de feria.</p>
+</section>
+
+</main>
+
+<script>
+  // Test A/B del hero: 'slides' (Ken Burns) vs 'video' (montaje multi-oficio).
+  // 50/50 persistido en localStorage; forzable con ?hero=video / ?hero=slides.
+  let heroVar = new URLSearchParams(location.search).get('hero');
+  if (heroVar !== 'video' && heroVar !== 'slides') { try { heroVar = localStorage.getItem('ocClubHeroVar'); } catch(e){} }
+  if (heroVar !== 'video' && heroVar !== 'slides') heroVar = Math.random() < 0.5 ? 'video' : 'slides';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) heroVar = 'slides';
+  try { localStorage.setItem('ocClubHeroVar', heroVar); } catch(e){}
+  if (heroVar === 'video') {
+    const vid = document.getElementById('heroVideo');
+    const src = vid.querySelector('source');
+    src.src = src.dataset.src; vid.load();
+    document.getElementById('heroSlides').style.display = 'none';
+    vid.style.display = 'block';
+    vid.play().catch(function(){});
+  }
+  window.dataLayer && window.dataLayer.push({event: 'hero_variant', hero_variant: heroVar});
+
+  // Barra sticky: aparece al pasar el hero
+  const topbar = document.getElementById('topbar');
+  const hero = document.querySelector('.club-hero');
+  new IntersectionObserver(([e]) => {
+    topbar.classList.toggle('visible', !e.isIntersecting);
+  }, {threshold: 0.08}).observe(hero);
+
+  // Scrollytelling: la foto sticky cambia con cada beat
+  const fotos = document.querySelectorAll('#probSticky img');
+  const pies = ['El domingo después de la feria', 'El oficio que no se ve, no se vende', 'La demanda existe. Faltas tú'];
+  const pie = document.getElementById('probPie');
+  const beatObserver = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        const i = parseInt(en.target.dataset.foto, 10);
+        fotos.forEach((f, j) => f.classList.toggle('activa', i === j));
+        if (pies[i]) pie.textContent = pies[i];
+      }
+    });
+  }, {threshold: 0.45});
+  document.querySelectorAll('.beat').forEach(b => beatObserver.observe(b));
+
+  // Reveal on scroll
+  const rev = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); rev.unobserve(en.target); }
+    });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "No tengo tiempo, ¿puedo aprovechar el Club?", "acceptedAnswer": {"@type": "Answer", "text": "El Club está diseñado con una regla de máximo dos horas a la semana: lecciones de 5 a 20 minutos y plantillas listas para rellenar. No es un curso que caduca; avanzas a tu ritmo."}},
+    {"@type": "Question", "name": "No soy de redes sociales, ¿me sirve?", "acceptedAnswer": {"@type": "Answer", "text": "Es técnica y se aprende, empezando por lo básico con tu móvil. No hace falta ponerse delante de la cámara: tus manos y tu proceso son el contenido que mejor funciona."}},
+    {"@type": "Question", "name": "¿Merece la pena la cuota?", "acceptedAnswer": {"@type": "Answer", "text": "150 € al año (120 € como fundador). Una sola subvención conseguida con el radar de ayudas o una pieza más vendida al año ya lo paga. Sin permanencia."}},
+    {"@type": "Question", "name": "Vivo de las ferias, ¿esto es para mí?", "acceptedAnswer": {"@type": "Answer", "text": "Sí: no se trata de dejar las ferias sino de no depender solo de ellas. La presencia digital mejora tus ferias y el radar incluye ayudas para ferias de tu comunidad."}},
+    {"@type": "Question", "name": "¿Es un curso online?", "acceptedAnswer": {"@type": "Answer", "text": "No. Es un taller continuo: método, revisión en vivo mensual y comunidad de tu oficio. Cada mes hay algo vivo esperándote."}},
+    {"@type": "Question", "name": "¿Cuándo veré resultados?", "acceptedAnswer": {"@type": "Answer", "text": "Tu primera victoria en 7 días: tu primer reel o ficha de producto publicados con método. Los clientes constantes llegan con meses de constancia acompañada."}},
+    {"@type": "Question", "name": "¿Puedo darme de baja cuando quiera?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, desde tu cuenta, en dos clics, sin permanencia. El plan anual no se renueva si no quieres."}},
+    {"@type": "Question", "name": "¿Qué significa 'circular'?", "acceptedAnswer": {"@type": "Answer", "text": "Material de cerca, piezas que duran y se reparan, aprovechamiento de retales. El Club convierte esa forma de trabajar en argumento de venta."}}
+  ]
+}
+</script>
+
+<%- include('partials/footer') %>
