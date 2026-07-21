@@ -116,6 +116,32 @@
         .article-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 500; max-width: 920px; margin: 0 auto 1.5rem; line-height: 1.15; color: white; }
         .article-hero h1 em { color: var(--terra-light); font-style: italic; }
         .hero-subtitle { font-size: 1.15rem; max-width: 760px; margin: 0 auto 2rem; opacity: 0.95; line-height: 1.7; font-weight: 400; }
+
+        /* DS v2 — bloque audio. Sobre header verde profundo: borde ocre + texto crema + blur. */
+        .audio-version {
+            background: rgba(250, 249, 247, 0.10);
+            border-left: 3px solid #FD9F6A;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin: 0 auto 2rem;
+            max-width: 720px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            text-align: left;
+        }
+        .audio-version .audio-intro {
+            color: #FAF9F7;
+            margin: 0 0 0.85rem 0;
+            font-family: 'Manrope', -apple-system, sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+        .audio-version .audio-intro strong { color: #FD9F6A; font-weight: 700; }
+        .audio-version audio { width: 100%; border-radius: 8px; }
+        @media (max-width: 600px) {
+            .audio-version { padding: 1rem 1.1rem; margin-left: 0.5rem; margin-right: 0.5rem; }
+        }
+
         .hero-highlight { background: rgba(255,255,255,0.10); border-left: 4px solid var(--terra-light); padding: 1.2rem 1.5rem; max-width: 760px; margin: 2rem auto 0; font-style: italic; text-align: left; border-radius: 0 8px 8px 0; }
         .hero-meta { display: flex; justify-content: center; gap: 2rem; font-size: 0.9rem; opacity: 0.85; margin-top: 2rem; flex-wrap: wrap; }
 
@@ -388,6 +414,32 @@
         <div class="hero-badge">Estrategia &middot; Precios</div>
         <h1>Cómo poner <em>precio</em> a tu artesanía: la estructura completa</h1>
         <p class="hero-subtitle">Construye el precio de una pieza capa a capa —tu hora, los materiales, el taller, los costes invisibles, los impuestos y, por fin, el margen— con fórmulas, porcentajes y una calculadora para hacerlo con una pieza tuya.</p>
+
+        <div class="audio-version">
+            <p class="audio-intro">🎧 <strong>¿No tienes 13 minutos para leer? Te lo contamos.</strong><br>
+            Una conversación de 26 minutos sobre cómo construir el precio de tus piezas de verdad —tu hora, el margen y todo lo que se te olvida cobrar—. Dale al play y sigue con lo tuyo.</p>
+            <audio controls preload="metadata" aria-label="Versión en audio del artículo">
+                <source src="/audio/blog/como-poner-precio.mp3" type="audio/mpeg">
+                Tu navegador no soporta el reproductor de audio.
+            </audio>
+        </div>
+        <script>
+        (function(){
+          var a = document.querySelector('.audio-version audio');
+          if(!a) return;
+          var slug = 'como-poner-precio-artesania';
+          var played = false, marks = {25:false,50:false,75:false};
+          function push(ev, extra){ (window.dataLayer = window.dataLayer || []).push(Object.assign({event:ev, post_slug:slug}, extra||{})); }
+          a.addEventListener('play', function(){ if(!played){ played = true; push('audio_play'); } });
+          a.addEventListener('timeupdate', function(){
+            if(!a.duration) return;
+            var p = (a.currentTime / a.duration) * 100;
+            [25,50,75].forEach(function(m){ if(!marks[m] && p >= m){ marks[m] = true; push('audio_progress', {percent:m}); } });
+          });
+          a.addEventListener('ended', function(){ push('audio_complete'); });
+        })();
+        </script>
+
         <div class="hero-highlight">
             No es un artículo sobre cobrar caro. Es un artículo sobre dejar de pagar tú lo que tu precio no cobra.
         </div>
