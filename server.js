@@ -245,8 +245,8 @@ app.get('/conecta-lana', (req, res) => {
 });
 
 // El Club de Oficios Circulares — landing de membresía (beta fundador)
-// noindex en la vista hasta lanzamiento; los CTA de Stripe son placeholders
-// ([ENLACE_STRIPE_ANUAL] / [ENLACE_STRIPE_MENSUAL]) hasta tener los Payment Links.
+// noindex en la vista hasta lanzamiento (pendiente: permisos de testimonios).
+// CTA con Payment Links de Stripe reales.
 app.get('/club', (req, res) => {
   res.render('club');
 });
