@@ -64,7 +64,8 @@
                 <a href="/blog/" class="nav-link">Blog</a>
                 <a href="/recursos" class="nav-link">Recursos</a>
                 <a href="/conecta-lana?utm_source=home&utm_medium=nav&utm_campaign=conecta-lana" class="nav-link">Conecta Lana</a>
-                <a href="/#forma-parte-red" class="nav-link cta-nav">Únete a la Red</a>
+                <%# CTA del nav: personalizable por vista (p.ej. /club pasa navCtaText/navCtaHref) %>
+                <a href="<%= typeof navCtaHref !== 'undefined' && navCtaHref ? navCtaHref : '/#forma-parte-red' %>" class="nav-link cta-nav"><%= typeof navCtaText !== 'undefined' && navCtaText ? navCtaText : 'Únete a la Red' %></a>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>

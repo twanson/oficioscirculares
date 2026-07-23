@@ -50,7 +50,7 @@ html,body{overflow-x:clip}
 .club-landing a{text-decoration:none;color:var(--terracota)}
 .club-landing .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 .club-landing .wrap-n{max-width:820px;margin:0 auto;padding:0 24px}
-/* anclas: compensar navbar fija (80px) del sitio + sub-barra */
+/* anclas: compensar la navbar fija (80px) del sitio */
 .club-landing section[id],.club-landing header[id]{scroll-margin-top:96px}
 .club-landing .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota);margin-bottom:18px}
 .club-landing .eyebrow--arena{color:var(--arena)}
@@ -70,13 +70,6 @@ html,body{overflow-x:clip}
 .club-landing .pill-sec--arena:hover{background:#efdfc4}
 .club-landing .micro{display:block;margin-top:14px;font-size:13.5px;color:var(--tinta-suave)}
 .club-landing .micro--luz{color:rgba(251,247,239,.72)}
-
-/* ================= Barra sticky (sub-barra bajo el navbar del sitio) ================= */
-.club-landing .topbar{position:fixed;top:80px;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:10px 22px;background:rgba(251,247,239,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(2,52,41,.08);box-shadow:0 6px 20px rgba(2,52,41,.08);transform:translateY(-130%);transition:transform .3s ease}
-.club-landing .topbar.visible{transform:translateY(0)}
-.club-landing .topbar .marca{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:17px;color:var(--verde)}
-.club-landing .topbar .marca img{width:34px;height:34px}
-.club-landing .topbar .club-btn{padding:11px 24px;font-size:14.5px}
 
 /* ================= HERO (estilo Conecta Lana) ================= */
 .club-landing .club-hero{position:relative;min-height:96vh;display:flex;align-items:center;overflow:hidden;background:var(--verde)}
@@ -389,7 +382,4 @@ html,body{overflow-x:clip}
   .club-landing .pasos-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
   .club-landing .plan{padding:38px 26px 34px}
   .club-landing .cajas,.club-landing .pasos,.club-landing .testi,.club-landing .quien,.club-landing .precios,.club-landing .faq{padding:76px 0}
-  /* La sub-barra en móvil: solo logo + CTA, sin el rótulo largo */
-  .club-landing .topbar .marca span{display:none}
-  .club-landing .topbar{padding:8px 16px}
 }

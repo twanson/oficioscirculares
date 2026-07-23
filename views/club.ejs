@@ -7,20 +7,13 @@
     ogImageAlt: 'Artesano puliendo madera en su taller — El Club de Oficios Circulares'
 }) %>
 
-<link rel="stylesheet" href="/assets/css/club.css?v=20260716">
+<link rel="stylesheet" href="/assets/css/club.css?v=20260716b">
 
-<%- include('partials/header') %>
+<%# En esta vista el CTA del nav del sitio pasa a ser "Plazas fundador" -> #precios
+    (sustituye a la antigua .topbar propia del club: una sola barra fija al hacer scroll) %>
+<%- include('partials/header', { navCtaText: 'Plazas fundador', navCtaHref: '#precios' }) %>
 
 <main class="club-landing" id="maincontent">
-
-<!-- Barra sticky: aparece al pasar el hero (sub-barra bajo el navbar del sitio) -->
-<div class="topbar" id="topbar">
-  <div class="marca">
-    <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
-    <span>El Club de Oficios Circulares</span>
-  </div>
-  <a class="club-btn club-btn--terracota" href="#precios">Plazas fundador</a>
-</div>
 
 <!-- ============================================================
      HERO — estilo Conecta Lana, con TEST A/B:
@@ -491,13 +484,6 @@
     vid.play().catch(function(){});
   }
   window.dataLayer && window.dataLayer.push({event: 'hero_variant', hero_variant: heroVar});
-
-  // Barra sticky: aparece al pasar el hero
-  const topbar = document.getElementById('topbar');
-  const hero = document.querySelector('.club-hero');
-  new IntersectionObserver(([e]) => {
-    topbar.classList.toggle('visible', !e.isIntersecting);
-  }, {threshold: 0.08}).observe(hero);
 
   // Scrollytelling: la foto sticky cambia con cada beat
   const fotos = document.querySelectorAll('#probSticky img');
