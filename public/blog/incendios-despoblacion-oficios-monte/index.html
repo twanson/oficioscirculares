@@ -116,6 +116,32 @@
         .article-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 500; max-width: 940px; margin: 0 auto 1.5rem; line-height: 1.15; color: white; }
         .article-hero h1 em { color: var(--terra-light); font-style: italic; }
         .hero-subtitle { font-size: 1.15rem; max-width: 780px; margin: 0 auto 1rem; opacity: 0.95; line-height: 1.7; font-weight: 400; }
+
+        /* DS v2 — bloque audio. Sobre header verde profundo: borde ocre + texto crema + blur. */
+        .audio-version {
+            background: rgba(250, 249, 247, 0.10);
+            border-left: 3px solid #FD9F6A;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem auto 0;
+            max-width: 720px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            text-align: left;
+        }
+        .audio-version .audio-intro {
+            color: #FAF9F7;
+            margin: 0 0 0.85rem 0;
+            font-family: 'Manrope', -apple-system, sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+        .audio-version .audio-intro strong { color: #FD9F6A; font-weight: 700; }
+        .audio-version audio { width: 100%; border-radius: 8px; }
+        @media (max-width: 600px) {
+            .audio-version { padding: 1rem 1.1rem; margin-left: 0.5rem; margin-right: 0.5rem; }
+        }
+
         .hero-meta { display: flex; justify-content: center; gap: 2rem; font-size: 0.9rem; opacity: 0.85; margin-top: 2rem; flex-wrap: wrap; }
 
         .article-container { max-width: 1200px; margin: 0 auto; padding: 3rem; }
@@ -301,6 +327,32 @@
         <div class="hero-badge">Estrategia &middot; Circularidad &middot; Casos</div>
         <h1>Incendios y despoblación: por qué <em>arde</em> el monte en España</h1>
         <p class="hero-subtitle">El 80% de lo que arde en España no es bosque: es lo que dejó de trabajarse. Datos, casos y cinco palancas para devolver el oficio al monte.</p>
+
+        <div class="audio-version">
+            <p class="audio-intro">🎧 <strong>¿Prefieres escucharlo? Te lo contamos.</strong><br>
+            Una conversación de unos 19 minutos sobre por qué arde el monte en España —el abandono, los oficios que lo cuidaban y las cinco palancas que ya funcionan—. Dale al play y sigue con lo tuyo.</p>
+            <audio controls preload="metadata" aria-label="Versión en audio del artículo sobre incendios, despoblación y oficios del monte">
+                <source src="/audio/blog/incendios-despoblacion-oficios-monte.mp3" type="audio/mpeg">
+                Tu navegador no soporta el reproductor de audio.
+            </audio>
+        </div>
+        <script>
+        (function(){
+          var a = document.querySelector('.audio-version audio');
+          if(!a) return;
+          var slug = 'incendios-despoblacion-oficios-monte';
+          var played = false, marks = {25:false,50:false,75:false};
+          function push(ev, extra){ (window.dataLayer = window.dataLayer || []).push(Object.assign({event:ev, post_slug:slug}, extra||{})); }
+          a.addEventListener('play', function(){ if(!played){ played = true; push('audio_play'); } });
+          a.addEventListener('timeupdate', function(){
+            if(!a.duration) return;
+            var p = (a.currentTime / a.duration) * 100;
+            [25,50,75].forEach(function(m){ if(!marks[m] && p >= m){ marks[m] = true; push('audio_progress', {percent:m}); } });
+          });
+          a.addEventListener('ended', function(){ push('audio_complete'); });
+        })();
+        </script>
+
         <div class="hero-meta">
             <span>Oficios Circulares</span>
             <span>Julio 2026</span>
@@ -465,7 +517,7 @@
                 <cite>— Juan Picos, Universidad de Vigo</cite>
             </div>
 
-            <p>Esa frase es la bisagra del artículo. Y explica por qué una consultoría de economía circular aplicada a oficios tiene algo que decir sobre incendios.</p>
+            <p>Ahí está la clave de todo esto: si el fuego es un problema territorial y social, la solución también pasa por la gente que vive y trabaja el monte. Por eso este tema nos toca de lleno.</p>
 
             <h3>El monte tuvo nómina</h3>
 
