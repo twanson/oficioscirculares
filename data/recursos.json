@@ -1,5 +1,27 @@
 [
     {
+          "slug": "guia-corcho",
+          "title": "Guía del corcho: qué hacer con tus tapones usados",
+          "type": "guia",
+          "summary": "De un puñado y una cuchilla a montar un circuito de recogida. Recetas con proporciones y equipo, seguridad y directorio por comunidad — según cuánto corcho tengas. Con fuentes.",
+          "tags": ["corcho", "residuos", "biomateriales", "circularidad", "upcycling"],
+          "cover": "/img/recursos/covers/guia-corcho-cover.jpg",
+          "pdf": "/downloads/Guia_Corcho_OC_2026.pdf",
+          "form_tally_id": "2EzPeV",
+          "cta": "Descargar la guía gratis",
+          "updated_at": "2026-08-06",
+          "listed": true,
+          "publish_at": "2026-08-06T08:00:00+02:00",
+          "related_post": {
+                  "slug": "reciclar-tapones-de-corcho",
+                  "url": "/blog/reciclar-tapones-de-corcho/",
+                  "cta_title": "¿Y por qué apenas se recicla el corcho?",
+                  "cta_text": "Lo contamos entero en el blog: los datos, los mitos y qué hacer con tus tapones. Con fuentes.",
+                  "cta_title_pending": "El reportaje del corcho, muy pronto en el blog",
+                  "cta_text_pending": "Estamos rematando el artículo —los datos, los mitos y el sistema del corcho, con fuentes—. Mientras, tienes toda la práctica en la guía de arriba."
+          }
+    },
+    {
           "slug": "calcula-tu-precio",
           "title": "Calcula tu precio: la estructura completa",
           "type": "guia",

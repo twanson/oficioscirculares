@@ -1,4 +1,4 @@
-<%- include('partials/head-meta', { title, description, canonical, ogImage: recurso.cover ? ('https://www.oficioscirculares.com' + recurso.cover) : undefined, ogImageAlt: recurso.title }) %>
+<%- include('partials/head-meta', { title, description, canonical, ogImage: recurso.cover ? ('https://www.oficioscirculares.com' + recurso.cover) : undefined, ogImageAlt: recurso.title, noindex: (typeof noindex !== 'undefined' ? noindex : false) }) %>
     <%- include('partials/header') %>
 
         <main class="main-content">
@@ -476,6 +476,61 @@
                                                 <p>PDF descargable con las 7 palancas, checklist de autodiagnóstico y plan de acción paso a paso. Diseñado para leer y aplicar en una tarde.</p>
                                             </div>
                                         </div>
+                                    <% } else if (recurso.slug==='guia-corcho' ) { %>
+                                        <!-- Contenido específico para Guía del Corcho -->
+                                        <div class="recurso-content-detail">
+
+                                            <div class="content-section">
+                                                <h2>¿Qué es?</h2>
+                                                <p>Una guía práctica para convertir los tapones de corcho usados —esos que todo el mundo guarda en un cajón— en pieza y en material, <strong>según cuánto corcho tengas</strong>. Recetas con proporciones y equipo exactos, lo que <strong>no</strong> se puede hacer en un taller, y dónde conseguir más. Con fuentes, sin mitos.</p>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>¿Para quién?</h2>
+                                                <ul>
+                                                    <li><strong>Artesanos y makers</strong> que quieren incorporar un material noble y local a sus piezas sin comprarlo nuevo.</li>
+                                                    <li><strong>Talleres de mosaico, diseño de objeto, encuadernación y superficie</strong> que buscan un residuo con carácter y trazable.</li>
+                                                    <li><strong>Marcas con propósito</strong> que quieren trabajar con un residuo local y contarlo sin caer en greenwashing.</li>
+                                                    <li><strong>Cualquiera con un cajón lleno de tapones</strong>, una cuchilla y ganas de cerrar el bucle desde lo más cotidiano.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué encontrarás dentro</h2>
+                                                <ul>
+                                                    <li><strong>Los 3 niveles según cuánto corcho tengas:</strong> un puñado y una cuchilla · una caja · un cubo a la semana. Cada nivel, con lo que sí puedes hacer.</li>
+                                                    <li><strong>Recetas con proporciones y equipo exactos:</strong> mosaico y superficies, mortero de cal con corcho que aísla hasta un 58&nbsp;% más, moldeado en frío del granulado, y más.</li>
+                                                    <li><strong>Lo que NO se puede hacer en un taller</strong> (y por qué): el aglomerado expandido industrial, por ejemplo, necesita autoclave. Te ahorramos el intento.</li>
+                                                    <li><strong>Directorio de dónde conseguir corcho, por comunidad:</strong> quién recoge tapones y quién vende granulado o polvo a pequeña escala.</li>
+                                                    <li><strong>Ficha de seguridad</strong> (polvo de corcho, molienda, suberosis) y un <strong>cuaderno</strong> para documentar tus propias pruebas.</li>
+                                                    <li><strong>Todo con fuentes:</strong> cada dato con su origen y sus matices declarados. Sin mitos.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Cómo funciona (3 pasos)</h2>
+                                                <ol>
+                                                    <li><strong>Descarga la guía</strong> y localiza tu nivel según cuánto corcho tengas ahora mismo.</li>
+                                                    <li><strong>Reúne el material:</strong> tus tapones, o consíguelos en bares y salas de cata aliadas (en la guía, cómo pedirlo y dónde).</li>
+                                                    <li><strong>Empieza por una receta sencilla</strong> —un mosaico o una superficie— y documenta el resultado en el cuaderno.</li>
+                                                </ol>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué te resuelve</h2>
+                                                <ul>
+                                                    <li>Das salida a un material noble que tardó más de 40 años en existir, en vez de tirarlo.</li>
+                                                    <li>Incorporas un residuo local y trazable a tus piezas, sin comprarlo nuevo.</li>
+                                                    <li>Tienes criterio para hablar del corcho sin caer en greenwashing: la guía cita fuentes y límites reales.</li>
+                                                    <li>Sabes dónde está el muro —la logística— y a qué escala este material tiene sentido: local.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Formato</h2>
+                                                <p>PDF descargable con las recetas paso a paso por nivel, proporciones y equipo, lo que no se puede hacer, el directorio por comunidad, la ficha de seguridad y el cuaderno de pruebas. Cada dato con su fuente.</p>
+                                            </div>
+                                        </div>
                                     <% } else if (recurso.slug==='guia-citricos' ) { %>
                                         <!-- Contenido específico para Guía Cítricos -->
                                         <div class="recurso-content-detail">
@@ -763,12 +818,12 @@
                                         <% if (recurso.related_post) { %>
                                             <section class="recurso-post-cta" style="margin-top:2.5rem;background:#934A1C;border-radius:16px;padding:2rem;color:#fff;text-align:center;">
                                                 <% if (typeof relatedPostPublished !== 'undefined' && relatedPostPublished) { %>
-                                                    <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:1.4rem;margin:0 0 .6rem;color:#fff;">¿Quieres el método explicado paso a paso?</h3>
-                                                    <p style="margin:0 auto 1.25rem;max-width:520px;opacity:.95;">Lo desarrollamos entero en el blog, con calculadora interactiva y el ejemplo resuelto.</p>
+                                                    <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:1.4rem;margin:0 0 .6rem;color:#fff;"><%= (recurso.related_post && recurso.related_post.cta_title) || '¿Quieres el método explicado paso a paso?' %></h3>
+                                                    <p style="margin:0 auto 1.25rem;max-width:520px;opacity:.95;"><%= (recurso.related_post && recurso.related_post.cta_text) || 'Lo desarrollamos entero en el blog, con calculadora interactiva y el ejemplo resuelto.' %></p>
                                                     <a href="<%= recurso.related_post.url %>" style="display:inline-block;background:#FD9F6A;color:#1C1E1B;padding:.9rem 1.8rem;border-radius:8px;text-decoration:none;font-weight:700;">Leer el artículo completo &rarr;</a>
                                                 <% } else { %>
-                                                    <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:1.4rem;margin:0 0 .6rem;color:#fff;">El método completo, muy pronto en el blog</h3>
-                                                    <p style="margin:0 auto;max-width:520px;opacity:.95;">Estamos rematando el artículo con el paso a paso, la calculadora interactiva y el ejemplo resuelto. Mientras, tienes toda la estructura en la guía de arriba.</p>
+                                                    <h3 style="font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:1.4rem;margin:0 0 .6rem;color:#fff;"><%= (recurso.related_post && recurso.related_post.cta_title_pending) || 'El método completo, muy pronto en el blog' %></h3>
+                                                    <p style="margin:0 auto;max-width:520px;opacity:.95;"><%= (recurso.related_post && recurso.related_post.cta_text_pending) || 'Estamos rematando el artículo con el paso a paso, la calculadora interactiva y el ejemplo resuelto. Mientras, tienes toda la estructura en la guía de arriba.' %></p>
                                                 <% } %>
                                             </section>
                                         <% } %>
