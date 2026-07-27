@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const allPosts = [
     {
+      slug: './incendios-despoblacion-oficios-monte/',
+      title: 'Incendios y despoblación: por qué arde el monte en España',
+      excerpt: 'El 80% de lo que arde en España no es bosque: es lo que dejó de trabajarse. Datos, casos y cinco palancas para devolver el oficio al monte.',
+      date: '2026-07-27',
+      readingMinutes: 14,
+      cover: ASSETS_BASE + '/images/blog/incendios-despoblacion-oficios-monte/hero-matorral.jpg',
+      tags: ['estrategia', 'circularidad', 'casos']
+    },
+    {
       slug: './como-poner-precio-artesania/',
       title: 'Cómo poner precio a tu artesanía: la estructura completa',
       excerpt: 'El método completo para calcular el precio de tus piezas: tu hora, materiales, costes invisibles, impuestos y el margen. Con calculadora y ejemplo real.',
