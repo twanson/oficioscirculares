@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const allPosts = [
     {
+      slug: './reciclar-tapones-de-corcho/',
+      title: '¿De verdad se recicla el corcho? La respuesta honesta, con datos',
+      excerpt: 'Solo el 3 % de los tapones de corcho se recicla en España. Qué es verdad, qué es mito y qué hacer con los tuyos.',
+      date: '2026-08-06',
+      readingMinutes: 8,
+      cover: ASSETS_BASE + '/images/blog/reciclar-tapones-de-corcho/bodegon-1080.jpg',
+      tags: ['circularidad', 'materiales', 'datos'],
+      publishAt: '2026-08-06T00:00:00+02:00'
+    },
+    {
       slug: './incendios-despoblacion-oficios-monte/',
       title: 'Incendios y despoblación: por qué arde el monte en España',
       excerpt: 'El 80% de lo que arde en España no es bosque: es lo que dejó de trabajarse. Datos, casos y cinco palancas para devolver el oficio al monte.',
