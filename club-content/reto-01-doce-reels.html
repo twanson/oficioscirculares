@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reto nº1 — 12 reels en 30 días · El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  .doc{max-width:820px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:66ch}
+  strong{color:var(--verde)}
+
+  /* ====== Cabecera — la pared del taller ====== */
+  .lec-head{display:grid;grid-template-columns:1.02fr .98fr;min-height:72vh;background:linear-gradient(180deg,#F4E9E0,#EDDCCC);border-bottom:1px solid rgba(2,52,41,.07);position:relative;overflow:hidden}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota)}
+  .lec-head h1{font-size:clamp(44px,5.4vw,76px);color:var(--verde);margin-bottom:22px;max-width:12ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--terracota)}
+  .lec-head .sub{font-size:20px;color:var(--tinta-suave);max-width:42ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(147,74,28,.3);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:var(--tinta-suave);background:var(--blanco)}
+  .lec-meta b{color:var(--terracota)}
+
+  /* Pared del taller: fondo barro oscuro + calendario clavado */
+  .pared{position:relative;min-height:540px;overflow:hidden;background:
+    linear-gradient(168deg,rgba(32,17,8,.45),rgba(24,12,5,.68)),
+    url('https://images.pexels.com/photos/11966615/pexels-photo-11966615.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover}
+  .firma-pared{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(32,17,8,.55);border:1px solid rgba(232,213,183,.25);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  .cal-pared{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-1.2deg);width:min(360px,82%);background:var(--crema);border-radius:6px;padding:24px 22px 20px;box-shadow:0 34px 70px rgba(0,0,0,.55);z-index:3}
+  .cal-pared::before{content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(3deg);width:86px;height:26px;background:rgba(232,213,183,.85);opacity:.9;box-shadow:0 2px 5px rgba(0,0,0,.15)}
+  .cal-pared .cp-mes{text-align:center;font-family:var(--serif);font-size:17px;color:var(--verde);margin-bottom:4px}
+  .cal-pared .cp-sub{text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota);margin-bottom:14px}
+  .cp-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+  .cp-dia{aspect-ratio:1;border:1px solid rgba(2,52,41,.14);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--tinta-suave);position:relative;background:var(--blanco)}
+  .cp-dia.pub{background:#FBEFE4;border-color:rgba(147,74,28,.4)}
+  .cp-dia.pub::after{content:"✕";position:absolute;font-family:var(--serif);font-style:italic;font-weight:700;font-size:20px;color:var(--terracota);transform:rotate(-6deg)}
+  .cp-dia.pub span{opacity:.35}
+  .cal-pared .cp-pie{text-align:center;font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--tinta-suave);margin-top:14px;border-top:1px dashed rgba(2,52,41,.15);padding-top:10px}
+  .cal-pared .cp-pie b{color:var(--terracota);font-style:normal}
+
+  /* ====== Secciones ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:18px}
+  .cap h2 em{color:var(--terracota)}
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+
+  /* Reglas */
+  .reglas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+  .regla{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:22px 24px;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .regla::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .regla .rn{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--terracota);margin-bottom:6px}
+  .regla b{display:block;font-size:15.5px;color:var(--verde);margin-bottom:4px}
+  .regla span{font-size:14px;color:var(--tinta-suave);line-height:1.6;display:block}
+
+  /* Calendario del reto */
+  .semana{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;margin:18px 0;overflow:hidden;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .semana .sem-cab{display:flex;align-items:baseline;gap:14px;background:linear-gradient(90deg,#FBEFE4,var(--crema));padding:14px 24px;border-bottom:1px solid rgba(147,74,28,.15)}
+  .semana .sem-cab .sn{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--terracota)}
+  .semana .sem-cab .st{font-size:13px;font-weight:700;color:var(--tinta-suave)}
+  .semana .reel-row{display:grid;grid-template-columns:92px 150px 1fr;gap:0;border-bottom:1px dashed rgba(2,52,41,.1);align-items:center}
+  .semana .reel-row:last-child{border-bottom:none}
+  .semana .reel-row > div{padding:13px 16px}
+  .reel-row .rr-n{font-family:var(--serif);font-style:italic;color:var(--terracota);font-size:15px;padding-left:24px!important}
+  .reel-row .rr-f{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--verde)}
+  .reel-row .rr-d{font-size:13.5px;color:var(--tinta-suave);line-height:1.55}
+  .reel-row .rr-d b{color:var(--verde)}
+  .reel-row .rr-d .gancho{display:block;margin-top:4px;font-family:var(--serif);font-style:italic;font-size:13px;color:var(--terracota)}
+
+  /* Sesiones de grabación */
+  .sesion{background:var(--verde-hondo);color:rgba(251,247,239,.92);border-radius:18px;padding:28px 32px;margin:20px 0}
+  .sesion .s-cab{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--arena);margin-bottom:12px}
+  .sesion p{color:rgba(251,247,239,.92);font-size:14.5px;margin-bottom:10px;max-width:none}
+  .sesion b{color:var(--arena)}
+
+  .pie-doc{text-align:center;padding:40px 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+
+  @media(max-width:720px){
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .pared{order:2;min-height:480px}
+    .reglas{grid-template-columns:1fr}
+    .semana .reel-row{grid-template-columns:1fr;gap:2px}
+    .reel-row .rr-n{padding:12px 16px 0!important}
+    .reel-row .rr-f{padding-top:0}
+    .reel-row .rr-d{padding-top:0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · Reto nº1</span>
+    </div>
+    <h1>Doce reels <em>en treinta días</em></h1>
+    <p class="sub">El reto fundacional del Club: un mes publicando el proceso de tu taller, con calendario cerrado, guiones hechos y el grupo empujando. Al terminar, tu cuenta ya no es la misma.</p>
+    <div class="lec-meta">
+      <span><b>30</b> días</span>
+      <span><b>12</b> reels · 3 por semana</span>
+      <span><b>2</b> sesiones de grabación</span>
+    </div>
+  </div>
+  <div class="pared" aria-label="Calendario del reto clavado en la pared del taller">
+    <span class="firma-pared">la pared del taller</span>
+    <div class="cal-pared">
+      <div class="cp-mes">El mes del reto</div>
+      <div class="cp-sub">Lunes · Miércoles · Viernes</div>
+      <div class="cp-grid">
+        <div class="cp-dia pub"><span>1</span></div><div class="cp-dia">2</div><div class="cp-dia pub"><span>3</span></div><div class="cp-dia">4</div><div class="cp-dia pub"><span>5</span></div><div class="cp-dia">6</div>
+        <div class="cp-dia">7</div><div class="cp-dia pub"><span>8</span></div><div class="cp-dia">9</div><div class="cp-dia pub"><span>10</span></div><div class="cp-dia">11</div><div class="cp-dia pub"><span>12</span></div>
+        <div class="cp-dia">13</div><div class="cp-dia">14</div><div class="cp-dia pub"><span>15</span></div><div class="cp-dia">16</div><div class="cp-dia pub"><span>17</span></div><div class="cp-dia">18</div>
+        <div class="cp-dia pub"><span>19</span></div><div class="cp-dia">20</div><div class="cp-dia">21</div><div class="cp-dia pub"><span>22</span></div><div class="cp-dia">23</div><div class="cp-dia pub"><span>24</span></div>
+        <div class="cp-dia">25</div><div class="cp-dia">26</div><div class="cp-dia">27</div><div class="cp-dia pub"><span>28</span></div><div class="cp-dia">29</div><div class="cp-dia">30</div>
+      </div>
+      <div class="cp-pie">Cada ✕ es un reel publicado · <b>12 de 12</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ============ 01 POR QUÉ ============ -->
+  <section class="cap">
+    <div class="cap-num">01 · El porqué</div>
+    <h2>Por qué doce, por qué <em>treinta días</em></h2>
+    <p>Un reel suelto no hace nada. Instagram enseña tu contenido a más gente cuando publicas <strong>con constancia</strong> — y treinta días es justo lo que tarda el algoritmo en entender de qué va tu cuenta y a quién enseñársela. Doce reels (tres por semana) es el ritmo que funciona sin comerse tu taller: con dos tardes de grabación tienes el material del mes entero.</p>
+    <p>Un dato para que sepas por qué merece la pena hacerlo bien: los reels que consiguen que la gente se quede los primeros 3 segundos llegan a <strong>entre 5 y 10 veces más gente</strong> que los que no. Todo el reto está montado alrededor de esa idea — cada reel del calendario lleva su gancho pensado.</p>
+    <p>Y hay una razón menos técnica: <strong>después de doce, grabar ya no te da vergüenza.</strong> El reto no va de hacerse viral — va de convertir "publicar" en un gesto tan normal como barrer el taller al cerrar.</p>
+  </section>
+
+  <!-- ============ 02 REGLAS ============ -->
+  <section class="cap">
+    <div class="cap-num">02 · Las reglas</div>
+    <h2>Cinco reglas, <em>ninguna trampa</em></h2>
+    <div class="reglas">
+      <div class="regla"><div class="rn">Regla 1</div><b>Publicado gana a perfecto</b><span>Un reel decente publicado vale más que uno perfecto en el carrete. Si dudas, publica.</span></div>
+      <div class="regla"><div class="rn">Regla 2</div><b>Lunes, miércoles, viernes</b><span>Tres días fijos. Si un día se te escapa, publica al siguiente — pero nunca dos huecos seguidos.</span></div>
+      <div class="regla"><div class="rn">Regla 3</div><b>Graba en lote, publica en calma</b><span>Dos sesiones de grabación al mes (ver sección 04). El resto de días solo le das a publicar.</span></div>
+      <div class="regla"><div class="rn">Regla 4</div><b>Cada reel al chat con #reto1</b><span>Pega el enlace en el grupo. Ver los reels de los demás es la mitad del aprendizaje — y el empujón para no descolgarte.</span></div>
+      <div class="regla"><div class="rn">Regla 5</div><b>Nada de compararse</b><span>Tu única competencia es tu cuenta hace 30 días. Las vistas de los demás no son tu problema.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 03 CALENDARIO ============ -->
+  <section class="cap">
+    <div class="cap-num">03 · El calendario</div>
+    <h2>Los doce, <em>uno a uno</em></h2>
+    <p>Cada reel tiene formato asignado — sacado del repertorio de la lección 02 y de los guiones de la Caja de Herramientas. No hay que pensar qué toca: solo grabar lo que pone.</p>
+
+    <div class="semana">
+      <div class="sem-cab"><span class="sn">Semana 1</span><span class="st">Calentar: lo que sabes hacer seguro</span></div>
+      <div class="reel-row"><div class="rr-n">Reel 1</div><div class="rr-f">El proceso</div><div class="rr-d"><b>Guion 1 de la Caja.</b> Manos → proceso → pieza. Tu básico: empieza por aquí, es el que no falla.<span class="gancho">Gancho: "Así nace un/una ____ que nadie más tiene"</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 2</div><div class="rr-f">El satisfying</div><div class="rr-d"><b>Guion 3.</b> Tu momento más placentero en bucle (desmoldar, primer corte, esmalte cayendo). Sonido real, alto.<span class="gancho">Gancho: sin texto — el gesto ES el gancho. Empieza en el milímetro antes del momento</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 3</div><div class="rr-f">El gesto estrella</div><div class="rr-d"><b>De tu vertical (lección 02, "En tu oficio").</b> El movimiento que solo alguien de tu oficio sabe hacer.<span class="gancho">Gancho: "Este gesto lleva ____ años haciéndose igual"</span></div></div>
+    </div>
+
+    <div class="semana">
+      <div class="sem-cab"><span class="sn">Semana 2</span><span class="st">Contar: la historia detrás</span></div>
+      <div class="reel-row"><div class="rr-n">Reel 4</div><div class="rr-f">La transformación</div><div class="rr-d"><b>Guion 2.</b> "De esto… a esto." Material en bruto → pieza acabada. El favorito del público.<span class="gancho">Gancho: el material en bruto quieto 2 segundos + "Esto va a ser un/una ____"</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 5</div><div class="rr-f">El material con nombre</div><div class="rr-d">De dónde viene lo que usas: la lana de tal ganadero, la madera de tal sierra, el barro de tal cantera. Origen = valor.<span class="gancho">Gancho: "Esta lana tiene nombre y apellidos"</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 6</div><div class="rr-f">Tu porqué</div><div class="rr-d">Cara o voz en off: por qué haces esto y no otra cosa. El reel que convierte seguidores en clientes.<span class="gancho">Gancho: "Dejé ____ para hacer esto" / "Nadie entendió por qué monté un taller de ____"</span></div></div>
+    </div>
+
+    <div class="semana">
+      <div class="sem-cab"><span class="sn">Semana 3</span><span class="st">Confiar: enseñar lo imperfecto</span></div>
+      <div class="reel-row"><div class="rr-n">Reel 7</div><div class="rr-f">El error honesto</div><div class="rr-d">La pieza que salió mal y qué hiciste con ella (¿se repara? ¿se reaprovecha?). Honestidad que fideliza — y tu circularidad en acción.<span class="gancho">Gancho: "Esta pieza me salió mal. No la tiré."</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 8</div><div class="rr-f">Un día en el taller</div><div class="rr-d">6-8 clips de 1-2s de tu jornada, de abrir a cerrar. Sin guion: la vida real del oficio.<span class="gancho">Gancho: "Un martes cualquiera en un taller de ____"</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 9</div><div class="rr-f">El proceso II</div><div class="rr-d">Guion 1 otra vez, con otra pieza. Repetir formato no aburre: construye tu sello.<span class="gancho">Gancho: "El paso que nadie ve (y el que más tiempo lleva)"</span></div></div>
+    </div>
+
+    <div class="semana">
+      <div class="sem-cab"><span class="sn">Semana 4</span><span class="st">Rematar: cerrar el círculo</span></div>
+      <div class="reel-row"><div class="rr-n">Reel 10</div><div class="rr-f">El encargo</div><div class="rr-d">Una pieza con destino: para quién es, qué pidió, cómo quedó. Siembra los encargos futuros.<span class="gancho">Gancho: "Me pidieron algo que no había hecho nunca"</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 11</div><div class="rr-f">El satisfying II</div><div class="rr-d">Otro bucle, otro gesto. Ya sabes cuál funcionó mejor la primera vez — repite fórmula.<span class="gancho">Gancho: de nuevo sin texto. Corta el final para que empalme con el principio</span></div></div>
+      <div class="reel-row"><div class="rr-n">Reel 12</div><div class="rr-f">El antes y después</div><div class="rr-d">Tu cuenta hace 30 días y hoy: qué has publicado, qué has aprendido, qué viene. Cierra el reto contándolo.<span class="gancho">Gancho: "Hace 30 días no había publicado un reel en mi vida"</span></div></div>
+    </div>
+
+    <div class="tip"><b>El orden importa:</b> la semana 1 es material que ya dominas (cero fricción para arrancar), la 2 añade historia, la 3 pide un poco de valentía y la 4 remata. Si un formato no encaja en tu oficio, cámbialo por otro del repertorio de la lección 02 — el calendario es tuyo.</div>
+  </section>
+
+  <!-- ============ 04 BANCO DE VARIACIONES ============ -->
+  <section class="cap">
+    <div class="cap-num">04 · El banco de cambios</div>
+    <h2>Doce variaciones <em>por si alguna no te encaja</em></h2>
+    <p>¿Un formato del calendario no va con tu oficio o con tu carácter? Cámbialo por cualquiera de estos. Todos funcionan con los mismos planos de las dos sesiones de grabación:</p>
+    <div class="reglas">
+      <div class="regla"><div class="rn">Cambio 1</div><b>"¿Cuánto cuesta hacer esto?"</b><span>Desglosa una pieza en pantalla: material, horas, horno/herramienta. La gente no tiene ni idea — y cuando lo ve, el precio se defiende solo.</span></div>
+      <div class="regla"><div class="rn">Cambio 2</div><b>La herramienta con historia</b><span>Tu herramienta más vieja o más querida: de dónde salió, cuántos años lleva contigo, qué hace que ninguna moderna hace.</span></div>
+      <div class="regla"><div class="rn">Cambio 3</div><b>Responde a un comentario</b><span>¿Te preguntaron algo por mensajes o en un mercado? Grábate respondiendo. Es contenido que ya sabes que interesa.</span></div>
+      <div class="regla"><div class="rn">Cambio 4</div><b>Lo que se ve / lo que no se ve</b><span>La foto bonita de la pieza vs los tres días de trabajo detrás. Formato en dos mitades que educa sin sermonear.</span></div>
+      <div class="regla"><div class="rn">Cambio 5</div><b>Empaquetando un pedido</b><span>Del estante al paquete cerrado con su etiqueta. Satisfying + prueba de que la gente compra (sin decirlo).</span></div>
+      <div class="regla"><div class="rn">Cambio 6</div><b>"3 cosas que no sabías de ____"</b><span>Tu material o tu oficio en tres datos que sorprendan. Formato lista: de los que más se guardan y comparten.</span></div>
+      <div class="regla"><div class="rn">Cambio 7</div><b>El rincón del taller</b><span>Un paseo lento de 15 segundos por tu espacio de trabajo real, con su desorden honesto. La gente se queda a vivir.</span></div>
+      <div class="regla"><div class="rn">Cambio 8</div><b>Antes y después de una reparación</b><span>Una pieza que llegó rota y salió viva. Si reparas, este reel es tu mejor argumento de venta circular.</span></div>
+      <div class="regla"><div class="rn">Cambio 9</div><b>"Por qué tarda ____ semanas"</b><span>El tiempo de secado, de reposo, de horno. Lo que parece lentitud contado como lo que es: parte del oficio.</span></div>
+      <div class="regla"><div class="rn">Cambio 10</div><b>ASMR del taller</b><span>Solo sonidos: el torno, la lija, el telar, la fragua. Sin música, sin texto. Sube el micro y deja que el oficio suene.</span></div>
+      <div class="regla"><div class="rn">Cambio 11</div><b>La pieza que no venderías</b><span>La primera que hiciste, la que te enseñó algo, la que guardas. Historia personal = conexión.</span></div>
+      <div class="regla"><div class="rn">Cambio 12</div><b>Timelapse de una jornada</b><span>El móvil fijo en una esquina toda una sesión, acelerado a 30 segundos. Mínimo esfuerzo, máximo "cuánto trabajo hay aquí".</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 05 LOS DOS PRIMEROS SEGUNDOS ============ -->
+  <section class="cap">
+    <div class="cap-num">05 · El arranque</div>
+    <h2>Los dos primeros segundos <em>lo son casi todo</em></h2>
+    <p>La mitad de la gente decide en menos de 3 segundos si se queda o pasa al siguiente. Instagram lo mide — y si se van pronto, deja de enseñar tu reel. Por eso cada reel del calendario lleva su gancho. Las reglas del arranque:</p>
+    <p><strong>Empieza por el momento más potente, no por el principio.</strong> Nada de logo, nada de "hola, soy…", nada de plano de la puerta del taller. El barro girando, la chispa de la fragua, el corte — eso va en el segundo cero.</p>
+    <p><strong>El texto del gancho: corto y afirmativo.</strong> Máximo 6-8 palabras, centrado, con buen contraste sobre la imagen. Y mejor una afirmación que una pregunta: "Esta pieza me salió mal" para más gente que "¿Quieres saber qué hago con las piezas rotas?".</p>
+    <p><strong>La duración también juega.</strong> Para satisfying y procesos rápidos, 15-20 segundos y a correr. Si cuentas una historia (tu porqué, el encargo, el error), vete a 45-60 y cuéntala entera. La zona intermedia de 30-40 segundos es la peor: demasiado larga para un vistazo, demasiado corta para una historia.</p>
+    <div class="tip"><b>La prueba del pulgar:</b> antes de publicar, mira tu reel como si no fuera tuyo. Si en los 2 primeros segundos no hay nada que te haga parar el dedo, corta el principio y empieza más adentro. Casi siempre el problema se arregla quitando los 3 primeros segundos.</div>
+  </section>
+
+  <!-- ============ 06 SONIDO, TEXTO Y PORTADA ============ -->
+  <section class="cap">
+    <div class="cap-num">06 · El acabado</div>
+    <h2>Sonido, subtítulos <em>y portada</em></h2>
+    <p><strong>El sonido, según el formato.</strong> Para satisfying y ASMR: sonido real del taller, alto y limpio — es tu firma y nadie puede copiártela. Para transformaciones y "día en el taller": música. Si eliges una que esté en tendencia (en la app, los audios con la flechita ↗ junto al nombre están subiendo), Instagram le da un empujón extra. Truco: cuando oigas un audio que te pegue, toca el nombre y dale a guardar — así el día de montar no empiezas de cero.</p>
+    <p><strong>Subtítulos siempre.</strong> Muchísima gente mira reels sin sonido (en el bus, en la cama). Si hablas a cámara o en off, activa los subtítulos automáticos (al editar: pegatinas → subtítulos) y revisa que no haya erratas. Un reel hablado sin subtítulos pierde a media audiencia antes de empezar.</p>
+    <p><strong>La portada trabaja para tu feed.</strong> Antes de publicar, en "Editar portada", elige un fotograma limpio de la pieza o del gesto — no uno movido a mitad de acción. Tus 12 portadas van a convivir en tu cuadrícula: si mantienes un estilo (mismo encuadre, mismos tonos), el feed queda de catálogo. Con la lección 01 hecha, ya sabes cuál es tu estilo.</p>
+  </section>
+
+  <!-- ============ 07 SESIONES ============ -->
+  <section class="cap">
+    <div class="cap-num">07 · La producción</div>
+    <h2>Dos tardes de grabación <em>y listo</em></h2>
+    <p>El error clásico es grabar el mismo día que publicas: agota a cualquiera en una semana. El reto entero sale de <strong>dos sesiones de lote</strong>:</p>
+    <div class="sesion">
+      <div class="s-cab">Sesión 1 — antes de empezar (2-3 horas)</div>
+      <p>Graba el material de las semanas 1 y 2: <b>tres procesos distintos</b> (manos, ambiente, pieza — la lección 02 te da los planos), <b>dos momentos satisfying</b>, el <b>material en bruto</b> para la transformación, y tu <b>gesto estrella</b>. Truco: deja el móvil en el trípode toda la tarde y trabaja normal — el 80% del material sale solo.</p>
+    </div>
+    <div class="sesion">
+      <div class="s-cab">Sesión 2 — al empezar la semana 3 (2 horas)</div>
+      <p>Con lo aprendido de las dos primeras semanas: el <b>error honesto</b>, los clips del <b>día en el taller</b> (estos se graban sueltos, 2 segundos cada vez que te acuerdes), el <b>encargo</b> y tu <b>porqué</b>. El reel 12 no se graba: se monta el último día con capturas y clips que ya tienes.</p>
+    </div>
+    <p>Montar cada reel: 15-20 minutos con el guion de la Caja de Herramientas delante. Los días de publicar solo abres la app, pegas el caption y le das al botón.</p>
+  </section>
+
+  <!-- ============ 05 SI TE ATASCAS ============ -->
+  <section class="cap">
+    <div class="cap-num">08 · El plan B</div>
+    <h2>Si te atascas <em>(te vas a atascar)</em></h2>
+    <p>A todo el mundo se le cae el reto en algún punto — normalmente en la semana 2 o 3. Para eso está esto:</p>
+    <p><strong>Si no te da la vida:</strong> baja a 2 por semana (lunes y viernes) y termina en 6 semanas. Terminar lento gana a abandonar rápido.</p>
+    <p><strong>Si un reel te da vergüenza:</strong> sáltate ese formato y repite uno que ya te salió. El reto pide 12 reels, no 12 actos de valentía.</p>
+    <p><strong>Si no sabes qué falla:</strong> pega el reel en el chat con #reto1 y "¿qué le cambiaríais?". Para eso está el grupo — y los atascos del reto alimentan la cola del directo mensual.</p>
+    <div class="tip"><b>El mínimo indispensable:</b> si una semana se derrumba entera, publica al menos UN reel — el que sea. La constancia que Instagram premia no es la perfecta, es la que no desaparece.</div>
+  </section>
+
+  <!-- ============ 06 MEDIR ============ -->
+  <section class="cap">
+    <div class="cap-num">09 · El cierre</div>
+    <h2>Qué mirar al terminar <em>(y qué ignorar)</em></h2>
+    <p>El día 30, abre las estadísticas (cuenta profesional → Panel) y apunta solo cuatro cosas: <strong>tu reel más visto</strong> (ese formato es tu mina: repítelo cada semana desde ahora), <strong>tu reel más guardado o compartido</strong> (ese es el que convierte: los guardados valen más que los likes), <strong>cuántas cuentas alcanzadas no te seguían</strong> (esa es la puerta que los reels te han abierto), y en tus dos mejores reels, <strong>la gráfica de retención</strong> (dentro de las estadísticas del reel): el punto donde la gente se va te dice exactamente qué recortar la próxima vez.</p>
+    <p>Ignora los seguidores. En 30 días el número se mueve poco — lo que se mueve es el alcance, y los seguidores llegan detrás, con retraso, siempre.</p>
+    <p>Y lo último: <strong>cuéntalo en el directo del mes.</strong> Tu mejor reel, tu peor momento y qué harías distinto. Lo que tú aprendiste atascándote es exactamente lo que otro miembro necesita oír.</p>
+  </section>
+
+  <p class="pie-doc">El Club de Oficios Circulares · Reto nº1 · Cuando termines los doce, en el chat: <b>#reto1 completado</b> — y te toca elegir el siguiente.</p>
+
+</div>
+</body>
+</html>

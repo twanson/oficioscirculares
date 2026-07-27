@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Caja de Herramientas — Biblioteca de plantillas · El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  img{display:block;max-width:100%}
+  .doc{max-width:820px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:66ch}
+  .lead{font-size:19px;color:var(--tinta-suave)}
+  strong{color:var(--verde)}
+
+  /* ====== Cabecera — la caja de herramientas ====== */
+  .lec-head{display:grid;grid-template-columns:1.02fr .98fr;min-height:70vh;background:linear-gradient(180deg,#F7EDE4,#F0DFD0);border-bottom:1px solid rgba(2,52,41,.07);position:relative;overflow:hidden}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota)}
+  .lec-head h1{font-size:clamp(44px,5.4vw,76px);color:var(--verde);margin-bottom:22px;max-width:13ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--terracota)}
+  .lec-head .sub{font-size:20px;color:var(--tinta-suave);max-width:42ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(147,74,28,.3);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:var(--tinta-suave);background:var(--blanco)}
+  .lec-meta b{color:var(--terracota)}
+  .lec-mesa{position:relative;min-height:520px;overflow:hidden;background:linear-gradient(168deg,rgba(2,36,27,.4),rgba(2,26,20,.62)),url('https://www.oficioscirculares.com/assets/images/Herramientas%20moderno-301703.jpg') center/cover}
+  .lec-num-mesa{position:absolute;right:22px;bottom:6px;z-index:1;font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(110px,12vw,170px);line-height:1;color:rgba(251,247,239,.16);user-select:none;pointer-events:none}
+  .firma-mesa{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(2,42,32,.55);border:1px solid rgba(232,213,183,.25);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  /* Fichas del índice flotando sobre las herramientas */
+  .indice-flotante{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;padding:40px}
+  .indice-card{background:rgba(251,247,239,.96);border-radius:22px;padding:30px 34px;box-shadow:0 30px 70px rgba(0,0,0,.45);max-width:340px;backdrop-filter:blur(6px)}
+  .indice-card .t{font-family:var(--serif);font-size:19px;color:var(--verde);margin-bottom:14px}
+  .indice-card ol{list-style:none;counter-reset:ix}
+  .indice-card li{counter-increment:ix;font-size:14px;padding:7px 0 7px 34px;position:relative;border-bottom:1px dashed rgba(2,52,41,.1)}
+  .indice-card li:last-child{border-bottom:none}
+  .indice-card li::before{content:counter(ix,decimal-leading-zero);position:absolute;left:0;font-family:var(--serif);font-style:italic;color:var(--terracota);font-size:14px}
+  .indice-card a{color:var(--tinta);text-decoration:none;font-weight:600}
+  .indice-card a:hover{color:var(--terracota)}
+
+  /* ====== Secciones (molde) ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:12px}
+  .cap h2 em{color:var(--terracota)}
+  .cap .para-que{font-size:15px;color:var(--tinta-suave);margin-bottom:22px;max-width:62ch}
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+
+  /* ====== Plantillas rellenables ====== */
+  .plantilla{background:var(--arena-clara);border:1.5px dashed rgba(147,74,28,.4);border-radius:18px;padding:30px 34px;margin:26px 0}
+  .plantilla .titulo-p{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:16px}
+  .plantilla .campo{margin-bottom:16px}
+  .plantilla .campo label{display:block;font-size:13px;font-weight:700;color:var(--verde);margin-bottom:5px}
+  .plantilla .campo .relleno{display:block;background:var(--blanco);border:1px solid rgba(2,52,41,.12);border-radius:10px;padding:12px 16px;font-size:15px;min-height:44px;color:var(--tinta);outline:none}
+  .plantilla .campo .relleno:focus{border-color:var(--terracota)}
+  .plantilla .campo .pista{font-size:12.5px;color:#8a7a5f;margin-top:4px;display:block}
+
+  /* ====== Bloques copiables ====== */
+  .copiable{background:var(--verde-hondo);color:rgba(251,247,239,.92);border-radius:16px;padding:24px 28px;margin:18px 0;font-size:14.5px;line-height:1.7}
+  .copiable .etiq2{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);display:block;margin-bottom:10px}
+  .copiable p{color:rgba(251,247,239,.92);margin:0 0 10px;max-width:none}
+  .copiable p:last-child{margin-bottom:0}
+  .copiable .hueco{color:var(--arena);font-style:italic}
+
+  /* ====== Calendario mensual ====== */
+  .calendario{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;padding:28px 32px;margin:26px 0;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .cal-sem{display:grid;grid-template-columns:110px 1fr 1fr;gap:0;border-bottom:1px dashed rgba(2,52,41,.12)}
+  .cal-sem:last-child{border-bottom:none}
+  .cal-sem > div{padding:14px 12px}
+  .cal-sem .sem{font-family:var(--serif);font-style:italic;color:var(--terracota);font-size:15px}
+  .cal-sem .post b{display:block;font-size:13.5px;color:var(--verde);margin-bottom:2px}
+  .cal-sem .post span{font-size:12.5px;color:var(--tinta-suave);display:block;line-height:1.5}
+  .cal-cab{display:grid;grid-template-columns:110px 1fr 1fr;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);border-bottom:2px solid rgba(147,74,28,.25);padding-bottom:8px;margin-bottom:4px}
+  .cal-cab div{padding:0 12px}
+
+  /* ====== Etiqueta imprimible ====== */
+  .etiqueta-demo{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;margin:26px 0}
+  .etiqueta-papel{flex:0 0 300px;background:var(--blanco);border:1px solid rgba(2,52,41,.15);border-radius:4px;padding:24px 22px;box-shadow:0 12px 30px rgba(2,52,41,.12);position:relative}
+  .etiqueta-papel::before{content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:var(--crema);box-shadow:inset 0 0 0 2px rgba(2,52,41,.3)}
+  .etiqueta-papel .ep-taller{text-align:center;font-family:var(--serif);font-size:16px;color:var(--verde);margin:14px 0 4px}
+  .etiqueta-papel .ep-pieza{text-align:center;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--terracota);margin-bottom:12px;border-bottom:1px dashed rgba(2,52,41,.2);padding-bottom:10px}
+  .etiqueta-papel .ep-linea{font-size:11.5px;color:var(--tinta-suave);padding:4px 0;display:flex;gap:8px}
+  .etiqueta-papel .ep-linea b{color:var(--verde);font-weight:700;white-space:nowrap}
+  .etiqueta-papel .ep-firma{text-align:center;font-family:var(--serif);font-style:italic;font-size:11px;color:var(--tinta-suave);margin-top:12px;border-top:1px dashed rgba(2,52,41,.2);padding-top:10px}
+  .etiqueta-notas{flex:1;min-width:260px}
+
+  .pie-doc{text-align:center;padding:40px 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+
+  /* ====== Botones copiar / imprimir ====== */
+  .btn-util{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border:none;border-radius:999px;padding:10px 20px;cursor:pointer;transition:transform .15s ease,opacity .15s ease}
+  .btn-util:hover{transform:translateY(-1px)}
+  .btn-util:active{transform:translateY(0)}
+  .btn-copiar{background:var(--arena);color:var(--verde);margin-top:14px}
+  .btn-copiar.ok{background:#DCEFE4;color:var(--verde)}
+  .btn-imprimir{background:var(--verde);color:var(--arena);margin:6px 0 14px}
+
+  @media print{
+    body{background:#fff}
+    .lec-head,.pie-doc,.btn-util,.tip{display:none!important}
+    body.print-modo .cap{display:none!important}
+    body.print-modo .cap.print-target{display:block!important;padding:0}
+    .plantilla{border-color:#999;background:#fff}
+    .etiqueta-papel{box-shadow:none;border:1.5px dashed #999}
+    .relleno{border:1px solid #bbb!important;min-height:52px!important}
+  }
+
+  @media(max-width:720px){
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .lec-mesa{order:2;min-height:480px}
+    .indice-flotante{padding:20px}
+    .cal-sem,.cal-cab{grid-template-columns:1fr}
+    .cal-cab div:not(:first-child){display:none}
+    .plantilla{padding:24px 20px}
+    .etiqueta-papel{flex:1 1 100%}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · Biblioteca de plantillas</span>
+    </div>
+    <h1>La caja de <em>herramientas</em></h1>
+    <p class="sub">Siete plantillas listas para rellenar, copiar e imprimir. Las horas de "¿cómo escribo esto?" que ya no vas a gastar — porque la primera versión siempre está hecha.</p>
+    <div class="lec-meta">
+      <span><b>7</b> herramientas</span>
+      <span><b>Uso</b> rellenar y listo</span>
+      <span><b>Se amplía</b> con lo que pidáis en #pido</span>
+    </div>
+  </div>
+  <div class="lec-mesa" aria-label="Herramientas de taller con el índice de plantillas">
+    <span class="firma-mesa">rellenar y listo</span>
+    <div class="lec-num-mesa">✦</div>
+    <div class="indice-flotante">
+      <div class="indice-card">
+        <div class="t">Qué hay en la caja</div>
+        <ol>
+          <li><a href="#p1">La ficha de producto</a></li>
+          <li><a href="#p2">El calendario de contenido mensual</a></li>
+          <li><a href="#p3">El presupuesto de encargo</a></li>
+          <li><a href="#p4">Tres guiones de reel</a></li>
+          <li><a href="#p5">La etiqueta que cuenta la historia</a></li>
+          <li><a href="#p6">Respuestas de WhatsApp</a></li>
+          <li><a href="#p7">El email de después de la venta</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ============ P1: FICHA DE PRODUCTO ============ -->
+  <section class="cap" id="p1">
+    <div class="cap-num">Herramienta 01</div>
+    <h2>La ficha <em>de producto</em></h2>
+    <p class="para-que"><strong>Para qué:</strong> tu vendedor silencioso. La rellenas una vez por pieza y sirve para el post, el catálogo de WhatsApp, la feria y la tienda online. (Es la de tu Primera Victoria — aquí para las siguientes.)</p>
+    <div class="plantilla">
+      <div class="titulo-p">Plantilla · Ficha de producto</div>
+      <div class="campo"><label>Nombre de la pieza (evocador, no técnico)</label><span class="relleno" contenteditable="true"></span><span class="pista">"Cuenco Amanecer" cuenta más que "cuenco esmaltado ref. 04". Los nombres de tu zona funcionan de maravilla.</span></div>
+      <div class="campo"><label>Su historia, en 3 frases</label><span class="relleno" contenteditable="true">Qué te llevó a hacerla · qué tiene de especial el proceso · qué la hace única</span></div>
+      <div class="campo"><label>Materiales y de dónde vienen</label><span class="relleno" contenteditable="true"></span><span class="pista">La procedencia cercana vale oro: dila siempre que puedas.</span></div>
+      <div class="campo"><label>Medidas y peso</label><span class="relleno" contenteditable="true"></span></div>
+      <div class="campo"><label>Cuidados — y qué pasa si se estropea</label><span class="relleno" contenteditable="true"></span><span class="pista">"Esta pieza se repara: si algún día se te rompe, escríbeme." La frase que justifica precio y fideliza.</span></div>
+      <div class="campo"><label>Precio (calculado con la Lección 03)</label><span class="relleno" contenteditable="true"></span></div>
+      <div class="campo"><label>Cómo se consigue</label><span class="relleno" contenteditable="true">Encargo por WhatsApp / tienda online / próxima feria en ____</span></div>
+    </div>
+  </section>
+
+  <!-- ============ P2: CALENDARIO ============ -->
+  <section class="cap" id="p2">
+    <div class="cap-num">Herramienta 02</div>
+    <h2>El calendario de contenido <em>que no quema</em></h2>
+    <p class="para-que"><strong>Para qué:</strong> publicar con constancia sin pensar cada semana qué toca. Dos publicaciones por semana bastan — el ritmo sostenible que Instagram premia y tu taller aguanta. Rota los tres tipos y no repitas tipo dos veces seguidas.</p>
+    <div class="calendario">
+      <div class="cal-cab"><div>Semana</div><div>Publicación A</div><div>Publicación B</div></div>
+      <div class="cal-sem"><div class="sem">Semana 1</div><div class="post"><b>Pieza</b><span>Ficha de producto de una pieza (foto entera + historia de caption)</span></div><div class="post"><b>Proceso</b><span>Reel del gesto estrella (guion 1 de la herramienta 04)</span></div></div>
+      <div class="cal-sem"><div class="sem">Semana 2</div><div class="post"><b>Persona</b><span>Tú o el taller: quién hay detrás, tu porqué, tu rincón</span></div><div class="post"><b>Pieza</b><span>El detalle que grita "hecho a mano" (foto 2 + qué lo hace único)</span></div></div>
+      <div class="cal-sem"><div class="sem">Semana 3</div><div class="post"><b>Proceso</b><span>Reel: transformación o momento satisfying (guiones 2-3)</span></div><div class="post"><b>Educar</b><span>Coste por uso, cuidados, o "por qué tarda lo que tarda"</span></div></div>
+      <div class="cal-sem"><div class="sem">Semana 4</div><div class="post"><b>Pieza en contexto</b><span>La pieza en su vida real (foto 3) o foto de cliente</span></div><div class="post"><b>Comunidad</b><span>La feria del finde, el encargo entregado, el material que llegó</span></div></div>
+    </div>
+    <div class="tip"><b>El truco del lote:</b> no publiques al día — produce en lote. Una sesión de fotos (lección 01) + una tarde de grabación (lección 02) = material para el mes entero. Media hora los lunes para programar, y el resto de la semana al torno.</div>
+  </section>
+
+  <!-- ============ P3: PRESUPUESTO ============ -->
+  <section class="cap" id="p3">
+    <div class="cap-num">Herramienta 03</div>
+    <h2>El presupuesto de encargo <em>que protege</em></h2>
+    <p class="para-que"><strong>Para qué:</strong> el mensaje que envías cuando te piden algo a medida. Cierra alcance, plazo, precio y señal — os protege a los dos y filtra a los curiosos. Cópialo y rellena los huecos.</p>
+    <div class="copiable">
+      <span class="etiq2">Para copiar — WhatsApp o email</span>
+      <p>¡Hola <span class="hueco">[nombre]</span>! Gracias por pensar en mi taller para esto. Te dejo el presupuesto:</p>
+      <p><span class="hueco">[Descripción de la pieza: qué es, medidas aproximadas, material, acabado]</span></p>
+      <p>Precio: <span class="hueco">[X]</span> € (IVA incluido). Incluye <span class="hueco">[embalaje / envío / entrega en mano...]</span>.<br>
+      Plazo: <span class="hueco">[X semanas]</span> desde la señal — cada pieza se hace de una en una, y la tuya tendrá su tiempo.</p>
+      <p>Para reservar tu hueco en el taller: señal del 50% (<span class="hueco">[X]</span> €) por <span class="hueco">[Bizum/transferencia]</span>, y el resto al terminar, cuando te enseñe la pieza acabada.</p>
+      <p>Si te encaja, me dices y nos ponemos. Cualquier duda, aquí estoy.</p>
+    </div>
+    <div class="tip"><b>Las tres reglas del encargo:</b> precio cerrado antes de tocar material (nunca "ya me dirás") · 50% de señal siempre (quien no la paga, no iba en serio) · y el plazo con margen: mejor sorprender entregando antes que disculparse después.</div>
+  </section>
+
+  <!-- ============ P4: GUIONES DE REEL ============ -->
+  <section class="cap" id="p4">
+    <div class="cap-num">Herramienta 04</div>
+    <h2>Tres guiones de reel <em>listos</em></h2>
+    <p class="para-que"><strong>Para qué:</strong> los tres formatos del repertorio (lección 02) ya estructurados. Elige uno, graba los planos indicados y rellena el texto.</p>
+    <div class="copiable">
+      <span class="etiq2">Guion 1 · El proceso (tu básico de siempre)</span>
+      <p>Planos: manos (8s) → proceso con taller de fondo (10s) → pieza terminada (6s)<br>
+      Texto en pantalla: <span class="hueco">"Así nace un/una ____ en mi taller de ____"</span><br>
+      Caption: <span class="hueco">"Cada ____ pasa por estas manos [X horas / X pasos]. Sin moldes ni prisas. ¿Quieres verla terminada? Te la enseño en el siguiente post."</span></p>
+    </div>
+    <div class="copiable">
+      <span class="etiq2">Guion 2 · La transformación (el favorito del público)</span>
+      <p>Planos: el material en bruto, quieto (3s) → corte seco → 2-3 momentos del proceso (12s) → la pieza acabada con buena luz (5s)<br>
+      Texto en pantalla: <span class="hueco">"De esto… a esto."</span><br>
+      Caption: <span class="hueco">"Esto era [un vellón / un tablón / una plancha] hace [X días]. Ahora es ____. El camino entero está en mis destacados."</span></p>
+    </div>
+    <div class="copiable">
+      <span class="etiq2">Guion 3 · El momento satisfying (el bucle)</span>
+      <p>Un solo plano: tu momento más placentero (desmoldar, primer corte, esmalte cayendo, viruta rizándose) — 5-8s cortados para que el final empalme con el principio<br>
+      Texto en pantalla: ninguno (o solo tu nombre de taller, pequeño)<br>
+      Caption: <span class="hueco">"El momento favorito del día en el taller. ¿El tuyo cuál sería?"</span> · Sonido: el real, alto y limpio</p>
+    </div>
+  </section>
+
+  <!-- ============ P5: ETIQUETA ============ -->
+  <section class="cap" id="p5">
+    <div class="cap-num">Herramienta 05</div>
+    <h2>La etiqueta que <em>cuenta la historia</em></h2>
+    <p class="para-que"><strong>Para qué:</strong> que la pieza se explique sola cuando tú no estás delante — en la feria, en la tienda que te compra, en casa del cliente. Justifica el precio sin ti y convierte cada venta en una historia que se repite. Imprímela, recórtala, átala con cordel.</p>
+    <div class="etiqueta-demo">
+      <div class="etiqueta-papel">
+        <div class="ep-taller">[Nombre de tu taller]</div>
+        <div class="ep-pieza">"[Nombre de la pieza]"</div>
+        <div class="ep-linea"><b>Hecha por</b> [tu nombre], en [pueblo/comarca]</div>
+        <div class="ep-linea"><b>Lleva</b> [X horas] de trabajo a mano</div>
+        <div class="ep-linea"><b>Material</b> [cuál y de dónde viene]</div>
+        <div class="ep-linea"><b>Cuidados</b> [cómo limpiarla / guardarla]</div>
+        <div class="ep-linea"><b>Y si se estropea</b> se repara — escríbeme</div>
+        <div class="ep-firma">No hay dos iguales. Esta es la tuya.</div>
+      </div>
+      <div class="etiqueta-notas">
+        <p style="font-size:15px">Los seis datos que debe llevar, en este orden: <strong>quién</strong> la hizo y dónde, las <strong>horas</strong> que lleva, el <strong>material</strong> y su origen, los <strong>cuidados</strong>, la promesa de <strong>reparación</strong> (tu circularidad hecha frase) y el cierre de pieza única.</p>
+        <p style="font-size:15px">Con tu Instagram o un QR pequeño detrás, la etiqueta además trae seguidores desde la feria — el puente del mundo físico al digital que casi nadie construye.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ P6: WHATSAPP ============ -->
+  <section class="cap" id="p6">
+    <div class="cap-num">Herramienta 06</div>
+    <h2>Respuestas de WhatsApp <em>que no se improvisan</em></h2>
+    <p class="para-que"><strong>Para qué:</strong> los tres mensajes que más veces vas a escribir en tu vida, resueltos de una vez. Guárdalos como respuestas rápidas en WhatsApp Business (Ajustes → Herramientas para la empresa → Respuestas rápidas).</p>
+    <div class="copiable">
+      <span class="etiq2">1 · "¿Me pasas info/precio?" — responder con todo, sin pereza</span>
+      <p>¡Hola! Claro 😊 Te cuento: es <span class="hueco">[pieza]</span>, hecha a mano en <span class="hueco">[material y origen]</span> — lleva <span class="hueco">[X horas]</span> de trabajo. Mide <span class="hueco">[medidas]</span> y cuesta <span class="hueco">[precio]</span> € (IVA incluido). Te paso un par de fotos por aquí. Si la quieres, la reservo y te digo plazos. ¿Alguna duda?</p>
+    </div>
+    <div class="copiable">
+      <span class="etiq2">2 · "Uy, qué caro" — el guion del coste por uso, sin disculparse</span>
+      <p>Te entiendo — déjame contarte por qué cuesta eso: está hecha a mano, de una en una, con <span class="hueco">[material]</span> de <span class="hueco">[origen]</span>, y te va a durar años (y si algún día se estropea, se repara). Si divides el precio entre las veces que la vas a usar, sale más barata que comprar tres veces lo mismo. Y no hay otra igual en ningún sitio 😉</p>
+    </div>
+    <div class="copiable">
+      <span class="etiq2">3 · "¿Me haces uno personalizado?" — encauzar al presupuesto</span>
+      <p>¡Me encanta la idea! Los encargos a medida son de lo que más disfruto. Cuéntame qué tienes en mente (medidas, colores, para qué es) y te preparo un presupuesto cerrado con plazo incluido. Trabajo con el 50% de señal para reservar tu hueco en el taller, y el resto al entregar. ¿Me cuentas?</p>
+    </div>
+  </section>
+
+  <!-- ============ P7: EMAIL POST-VENTA ============ -->
+  <section class="cap" id="p7">
+    <div class="cap-num">Herramienta 07</div>
+    <h2>El email de <em>después de la venta</em></h2>
+    <p class="para-que"><strong>Para qué:</strong> el mensaje que casi nadie envía y que convierte compradores en clientes de por vida (retener cuesta 8 veces menos que captar). Envíalo 3-5 días después de la entrega.</p>
+    <div class="copiable">
+      <span class="etiq2">Para copiar — email o WhatsApp, 3-5 días tras la entrega</span>
+      <p>¡Hola <span class="hueco">[nombre]</span>! Espero que <span class="hueco">[la pieza]</span> ya esté instalada en su nueva casa 😊</p>
+      <p>Te dejo tres cosas rápidas:</p>
+      <p>1. <strong>Cuidados:</strong> <span class="hueco">[cómo limpiarla/guardarla en una frase]</span>. Con eso te durará años.<br>
+      2. <strong>Si algún día se estropea, no la tires:</strong> escríbeme y la reparamos. Mis piezas se arreglan — es parte del trato.<br>
+      3. Si te apetece, <strong>mándame una foto de la pieza en su sitio</strong> — me hace ilusión ver dónde acaban, y si me dejas, la comparto (contigo o sin nombrarte, como prefieras).</p>
+      <p>Gracias de verdad por apoyar el trabajo hecho a mano. Aquí me tienes para lo que necesites — y si algún día quieres regalar algo especial, ya sabes dónde está el taller 😉</p>
+      <p><span class="hueco">[Tu nombre y taller]</span></p>
+    </div>
+    <div class="tip"><b>Por qué funciona:</b> los cuidados alargan la vida de la pieza (tu promesa circular cumplida), la foto del cliente es tu mejor contenido futuro (con permiso ya pedido), y el cierre siembra el regalo — la segunda compra más habitual en artesanía.</div>
+  </section>
+
+  <p class="pie-doc">El Club de Oficios Circulares · La Caja de Herramientas · ¿Falta una plantilla que necesitas? Pídela en el chat con <b>#pido</b> — la caja crece con vosotros.</p>
+
+</div>
+
+<script>
+(function(){
+  // Botón "Copiar texto" en cada bloque copiable
+  document.querySelectorAll('.copiable').forEach(function(bloque){
+    var btn=document.createElement('button');
+    btn.className='btn-util btn-copiar';
+    btn.textContent='Copiar texto';
+    btn.addEventListener('click',function(){
+      var clon=bloque.cloneNode(true);
+      var etiq=clon.querySelector('.etiq2'); if(etiq) etiq.remove();
+      var b=clon.querySelector('.btn-copiar'); if(b) b.remove();
+      var texto=clon.innerText.replace(/\n{3,}/g,'\n\n').trim();
+      navigator.clipboard.writeText(texto).then(function(){
+        btn.textContent='Copiado ✓'; btn.classList.add('ok');
+        setTimeout(function(){btn.textContent='Copiar texto'; btn.classList.remove('ok');},2000);
+      });
+    });
+    bloque.appendChild(btn);
+  });
+  // Botón "Imprimir / guardar PDF" en ficha (p1) y etiqueta (p5)
+  ['p1','p5'].forEach(function(id){
+    var sec=document.getElementById(id); if(!sec) return;
+    var btn=document.createElement('button');
+    btn.className='btn-util btn-imprimir';
+    btn.textContent=(id==='p1'?'Imprimir la ficha / guardar PDF':'Imprimir la etiqueta / guardar PDF');
+    btn.addEventListener('click',function(){
+      document.body.classList.add('print-modo');
+      sec.classList.add('print-target');
+      window.print();
+      document.body.classList.remove('print-modo');
+      sec.classList.remove('print-target');
+    });
+    var paraQue=sec.querySelector('.para-que');
+    paraQue.insertAdjacentElement('afterend',btn);
+  });
+})();
+</script>
+</body>
+</html>

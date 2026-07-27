@@ -1,0 +1,112 @@
+/* ===================================================================
+   ÁREA DE MIEMBROS DEL CLUB — /club/entrar, /club/dentro, /club/lista-espera
+   Scoped bajo .club-area para no colisionar con el CSS global del sitio.
+   DS OC v2 (Newsreader + Manrope los carga head-meta).
+   =================================================================== */
+html,body{overflow-x:clip}
+
+.club-area{
+  --verde:#023429;--verde-hondo:#032A20;--terracota:#934A1C;--terracota-viva:#B05E2B;
+  --arena:#E8D5B7;--crema:#FBF7EF;--hueso:#F6F3EC;--tinta:#1E2321;--tinta-suave:#4A544F;--blanco:#fff;
+  --serif:'Newsreader',Georgia,serif;--sans:'Manrope',-apple-system,'Segoe UI',Roboto,sans-serif;
+  box-sizing:border-box;font-family:var(--sans);color:var(--tinta);background:var(--crema);
+  min-height:100vh;line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased;
+}
+.club-area *,.club-area *::before,.club-area *::after{margin:0;padding:0;box-sizing:border-box}
+.club-area h1,.club-area h2,.club-area h3{font-family:var(--serif);font-weight:600;line-height:1.1;color:var(--verde)}
+.club-area em{font-family:var(--serif);font-style:italic}
+.club-area a{color:var(--terracota);text-decoration:none}
+.club-area img{display:block;max-width:100%}
+.ca-wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* Barra superior del área */
+.ca-top{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 24px;background:rgba(251,247,239,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(2,52,41,.1)}
+.ca-top .ca-brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:17px;color:var(--verde)}
+.ca-top .ca-brand img{width:32px;height:32px}
+.ca-top .ca-top-actions{display:flex;align-items:center;gap:16px;font-size:14.5px;font-weight:600}
+.ca-top .ca-salir{color:var(--tinta-suave)}
+.ca-top .ca-salir:hover{color:var(--terracota)}
+
+/* Botón pill */
+.ca-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);font-weight:700;
+  font-size:16px;padding:15px 30px;border-radius:999px;border:none;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;text-align:center}
+.ca-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(2,52,41,.22)}
+.ca-btn--terracota{background:var(--terracota);color:#fff}
+.ca-btn--terracota:hover{background:var(--terracota-viva)}
+.ca-btn--full{width:100%}
+
+/* Inputs */
+.ca-field{display:block;width:100%;font-family:var(--sans);font-size:16.5px;padding:15px 18px;border-radius:14px;
+  border:1.5px solid rgba(2,52,41,.18);background:var(--blanco);color:var(--tinta);transition:border-color .15s,box-shadow .15s}
+.ca-field:focus{outline:none;border-color:var(--terracota);box-shadow:0 0 0 4px rgba(147,74,28,.12)}
+.ca-label{display:block;font-size:14px;font-weight:700;color:var(--verde);margin-bottom:8px}
+
+/* ---------- LOGIN / LISTA ESPERA (centrado) ---------- */
+.ca-center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 24px;
+  background:radial-gradient(680px 420px at 50% 0%,rgba(232,213,183,.5),transparent 60%),var(--crema)}
+.ca-card{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:24px;box-shadow:0 24px 60px rgba(2,52,41,.14);
+  padding:48px 44px;max-width:480px;width:100%;text-align:center}
+.ca-card .ca-logo{width:52px;height:52px;margin:0 auto 22px}
+.ca-card .ca-eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota);margin-bottom:14px}
+.ca-card h1{font-size:clamp(28px,4vw,36px);margin-bottom:14px}
+.ca-card p.lead{color:var(--tinta-suave);font-size:16.5px;margin-bottom:28px}
+.ca-form{display:grid;gap:14px;text-align:left}
+.ca-form .ca-btn{margin-top:4px}
+.ca-msg{border-radius:14px;padding:16px 18px;font-size:15px;line-height:1.5;margin-bottom:22px;text-align:left}
+.ca-msg--ok{background:rgba(2,52,41,.06);border:1px solid rgba(2,52,41,.14);color:var(--verde)}
+.ca-msg--warn{background:rgba(147,74,28,.08);border:1px solid rgba(147,74,28,.22);color:var(--terracota)}
+.ca-fine{font-size:13px;color:var(--tinta-suave);margin-top:20px;line-height:1.55}
+.ca-fine a{font-weight:600}
+.ca-back{display:inline-block;margin-top:18px;font-size:14px;color:var(--tinta-suave)}
+
+/* ---------- HOGAR /club/dentro ---------- */
+.ca-hola{padding:52px 0 8px}
+.ca-hola .ca-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--terracota),var(--terracota-viva));
+  color:#fff;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:8px 16px;border-radius:999px;margin-bottom:18px}
+.ca-hola h1{font-size:clamp(30px,4.4vw,46px);margin-bottom:8px}
+.ca-hola h1 em{color:var(--terracota)}
+.ca-hola .ca-sub{color:var(--tinta-suave);font-size:17px}
+
+/* Empieza aquí (destacado) */
+.ca-featured{position:relative;margin:30px 0 12px;border-radius:24px;overflow:hidden;
+  background:linear-gradient(165deg,var(--verde) 0%,#03392C 100%);color:rgba(251,247,239,.9);
+  padding:40px 42px;box-shadow:0 20px 50px rgba(2,52,41,.2)}
+.ca-featured .ca-kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);margin-bottom:12px;display:block}
+.ca-featured h2{color:var(--crema);font-size:clamp(24px,3vw,34px);margin-bottom:10px}
+.ca-featured p{max-width:52ch;margin-bottom:24px;color:rgba(251,247,239,.82)}
+.ca-featured .ca-btn--terracota{background:var(--arena);color:var(--verde)}
+.ca-featured .ca-btn--terracota:hover{background:#efdfc4}
+
+/* Rejilla de piezas */
+.ca-section-title{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota);margin:44px 0 18px}
+.ca-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ca-piece{display:flex;flex-direction:column;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;
+  padding:26px 24px;box-shadow:0 8px 24px rgba(2,52,41,.06);transition:transform .22s ease,box-shadow .22s ease;color:inherit}
+.ca-piece:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(2,52,41,.13)}
+.ca-piece .ca-kicker{font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.ca-piece h3{font-size:20px;margin-bottom:8px}
+.ca-piece p{font-size:14.5px;color:var(--tinta-suave);line-height:1.5;flex:1}
+.ca-piece .ca-go{margin-top:16px;font-size:14px;font-weight:700;color:var(--terracota)}
+.ca-piece--verde .ca-kicker{color:var(--verde)}
+.ca-piece--terracota .ca-kicker{color:var(--terracota)}
+.ca-piece--arena .ca-kicker{color:#9a7b3f}
+
+/* Bloque "este mes" */
+.ca-mes{margin:44px 0 10px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ca-mes .ca-mes-card{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);border-radius:18px;padding:28px 30px}
+.ca-mes .ca-mes-card h3{font-size:20px;margin-bottom:8px}
+.ca-mes .ca-mes-card p{color:#5d5347;font-size:15px;margin-bottom:16px}
+.ca-foot{margin:40px 0 60px;padding-top:26px;border-top:1px dashed rgba(2,52,41,.16);font-size:13.5px;color:var(--tinta-suave);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:center}
+.ca-foot a{font-weight:600}
+
+@media(max-width:820px){
+  .ca-grid{grid-template-columns:1fr 1fr}
+  .ca-mes{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .ca-grid{grid-template-columns:1fr}
+  .ca-card{padding:36px 26px}
+  .ca-featured{padding:32px 26px}
+}

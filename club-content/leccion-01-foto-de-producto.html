@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lección 01 · Foto de producto con tu móvil — El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  img{display:block;max-width:100%}
+  .doc{max-width:820px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:66ch}
+  .lead{font-size:19px;color:var(--tinta-suave)}
+  strong{color:var(--verde)}
+
+  /* ====== Cabecera de lección — portada de revista partida ====== */
+  .lec-head{display:grid;grid-template-columns:1.02fr .98fr;min-height:76vh;background:linear-gradient(180deg,#FFFDF8,var(--crema));border-bottom:1px solid rgba(2,52,41,.07);position:relative;overflow:hidden}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota)}
+  .lec-head h1{font-size:clamp(46px,5.6vw,80px);color:var(--verde);margin-bottom:22px;max-width:12ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--terracota)}
+  .lec-head .sub{font-size:20px;color:var(--tinta-suave);max-width:40ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(147,74,28,.3);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:var(--tinta-suave);background:var(--blanco)}
+  .lec-meta b{color:var(--terracota)}
+  /* El tendedero de revelado: cuerdas + pinzas + polaroids cuadradas de una misma sesión */
+  .lec-mesa{position:relative;min-height:600px;background:radial-gradient(640px 400px at 50% -6%,rgba(232,213,183,.2),transparent 62%),linear-gradient(168deg,rgba(3,50,38,.86),rgba(2,32,24,.9)),url('https://images.pexels.com/photos/7790143/pexels-photo-7790143.jpeg?auto=compress&cs=tinysrgb&w=1400') center/cover;overflow:hidden}
+  .lec-mesa .grano{position:absolute;inset:0;z-index:0;opacity:.35;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+  .lec-num-mesa{position:absolute;right:22px;bottom:6px;z-index:1;font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(130px,14vw,190px);line-height:1;color:rgba(232,213,183,.1);user-select:none;pointer-events:none}
+  .lec-mesa .firma-mesa{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(2,42,32,.55);border:1px solid rgba(232,213,183,.25);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  .cuerda{position:absolute;left:-5%;right:-5%;height:3px;background:linear-gradient(90deg,#C9AE85,#A98D63,#C9AE85);border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.45);z-index:1}
+  .cuerda-1{top:15%;transform:rotate(-1.6deg)}
+  .cuerda-2{top:57%;transform:rotate(1.3deg)}
+  .pol{position:absolute;background:#FFFDF8;padding:9px 9px 34px;box-shadow:0 18px 38px rgba(0,0,0,.5);transition:transform .3s ease;z-index:2;transform-origin:top center}
+  .pol:hover{transform:rotate(0deg) scale(1.05)!important;z-index:9}
+  .pol::before{content:"";position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:15px;height:28px;background:linear-gradient(180deg,#D3AC74,#A97F49);border-radius:4px;box-shadow:0 2px 5px rgba(0,0,0,.4);z-index:3}
+  .pol::after{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:3px;height:12px;background:rgba(60,40,18,.4);border-radius:2px;z-index:4}
+  .pol img{width:100%;aspect-ratio:1/1;height:auto;object-fit:cover}
+  .pol span{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--tinta-suave)}
+  .pol-1{left:4%;top:14%;width:29%;transform:rotate(-2.5deg)}
+  .pol-2{left:36%;top:16.5%;width:27%;transform:rotate(1.5deg)}
+  .pol-3{right:4%;top:13.5%;width:28%;transform:rotate(3deg)}
+  .pol-4{left:13%;top:56.5%;width:29%;transform:rotate(2deg)}
+  .pol-5{right:14%;top:58%;width:31%;transform:rotate(-2.2deg)}
+
+  /* ====== Resultado de hoy ====== */
+  .resultado{background:linear-gradient(160deg,#EFDFC2,var(--arena) 60%,#E0C69E);border-radius:24px;padding:38px 42px;margin:-38px auto 0;position:relative;z-index:3;box-shadow:0 18px 48px rgba(2,52,41,.14)}
+  .resultado .etiq{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);display:block;margin-bottom:10px}
+  .resultado p{font-family:var(--serif);font-size:21px;line-height:1.4;color:var(--verde);margin:0;max-width:none}
+
+  /* ====== El set (diagrama) ====== */
+  .set{background:var(--verde);border-radius:24px;padding:40px 42px;margin:30px 0}
+  .set .set-titulo{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);display:block;margin-bottom:24px;text-align:center}
+  .set-escena{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+  .set-el{text-align:center}
+  .set-caja{border:1.5px dashed rgba(232,213,183,.5);border-radius:14px;padding:18px 20px;color:var(--crema);font-size:13.5px;font-weight:700;min-width:110px}
+  .set-caja.pieza{background:var(--arena);color:var(--verde);border:none;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+  .set-el small{display:block;margin-top:8px;font-size:11.5px;color:rgba(251,247,239,.6);font-weight:600;max-width:130px}
+  .set-flecha{color:var(--arena);font-size:22px;font-family:var(--serif);font-style:italic}
+  .set-nota{text-align:center;margin-top:22px;font-size:13.5px;color:rgba(251,247,239,.75)}
+  .set-nota b{color:var(--arena)}
+
+  /* ====== Trío de encuadres con foto ====== */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0 10px}
+  .trio-card{background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:18px;overflow:hidden;box-shadow:0 10px 28px rgba(2,52,41,.08)}
+  .trio-card img{width:100%;height:190px;object-fit:cover}
+  .trio-card .cuerpo{padding:18px 20px 20px}
+  .trio-card .num-t{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--terracota);display:block;margin-bottom:4px}
+  .trio-card b{font-family:var(--serif);font-size:18px;color:var(--verde);display:block;margin-bottom:6px}
+  .trio-card p{font-size:13.5px;color:var(--tinta-suave);margin:0;line-height:1.55}
+
+  /* ====== Secciones ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:20px}
+  .cap h2 em{color:var(--terracota)}
+  .pull{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,28px);line-height:1.32;color:var(--verde);border-left:5px solid var(--terracota);padding:6px 0 6px 26px;margin:34px 0;max-width:none}
+
+  /* ====== Pasos ====== */
+  .paso-linea{display:grid;grid-template-columns:52px 1fr;gap:18px;margin-bottom:24px}
+  .paso-linea .n{width:44px;height:44px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 5px 14px rgba(2,52,41,.22)}
+  .paso-linea h4{font-size:19px;margin-bottom:6px}
+  .paso-linea p{font-size:15px;color:var(--tinta-suave)}
+
+  /* ====== Tips / errores (estilo landing) ====== */
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+  .error{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:16px;padding:18px 24px 18px 66px;margin:12px 0;font-size:15px;box-shadow:0 4px 14px rgba(2,52,41,.04)}
+  .error::before{content:"✕";position:absolute;left:20px;top:17px;width:28px;height:28px;border-radius:50%;background:rgba(147,74,28,.1);color:var(--terracota);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+  .error b{color:var(--terracota)}
+
+  /* ====== En tu oficio (16 verticales) ====== */
+  .en-tu-oficio{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:20px;padding:30px 34px;margin:28px 0;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .en-tu-oficio .titulo-o{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .en-tu-oficio .titulo-o b{font-family:var(--serif);font-size:21px;color:var(--verde)}
+  .en-tu-oficio .titulo-o::before{content:"✦";width:34px;height:34px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .en-tu-oficio .sub-o{font-size:14px;color:var(--tinta-suave);margin-bottom:20px}
+  .oficios-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 32px}
+  .of{padding:11px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:13.5px;line-height:1.5}
+  .of b{display:block;font-family:var(--serif);font-size:15.5px;color:var(--verde);margin-bottom:2px}
+  .of span{display:block;color:var(--tinta-suave)}
+  .of em{color:var(--terracota)}
+  @media(max-width:640px){.oficios-grid{grid-template-columns:1fr}}
+
+  /* ====== Comparativa sí/no ====== */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+  .duo-col{border-radius:20px;padding:28px 30px;position:relative;overflow:hidden}
+  .duo-col::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .duo-col.si{background:linear-gradient(165deg,var(--verde),#03392C);color:rgba(251,247,239,.9)}
+  .duo-col.si::before{background:linear-gradient(90deg,var(--arena),rgba(232,213,183,.15))}
+  .duo-col.si h4{color:var(--crema);font-size:18px;margin-bottom:14px}
+  .duo-col.no{background:var(--blanco);border:1px solid rgba(2,52,41,.08)}
+  .duo-col.no::before{background:linear-gradient(90deg,var(--terracota),rgba(147,74,28,.15))}
+  .duo-col.no h4{font-size:18px;margin-bottom:14px}
+  .duo-col ul{list-style:none;display:grid;gap:10px}
+  .duo-col li{padding-left:30px;position:relative;font-size:14.5px;line-height:1.5}
+  .duo-col li::before{position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+  .duo-col.si li::before{content:"✓";background:rgba(232,213,183,.16);color:var(--arena)}
+  .duo-col.no li::before{content:"✕";background:rgba(147,74,28,.1);color:var(--terracota)}
+
+  /* ====== Práctica ====== */
+  .practica{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);border-radius:24px;padding:40px 44px;margin:40px 0;position:relative;overflow:hidden}
+  .practica::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .practica .etiq{display:block;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .practica h3{font-size:24px;margin-bottom:14px}
+  .practica p{font-size:15.5px;color:#5d5347}
+  .practica ol{margin:18px 0 0;padding:0;list-style:none;counter-reset:pr}
+  .practica ol li{counter-increment:pr;position:relative;padding:10px 0 10px 46px;font-size:15px}
+  .practica ol li::before{content:counter(pr);position:absolute;left:0;top:8px;width:32px;height:32px;border-radius:50%;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .copiable{background:var(--verde-hondo);color:rgba(251,247,239,.92);border-radius:16px;padding:22px 26px;margin:20px 0 0;font-size:14.5px}
+  .copiable .etiq2{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);display:block;margin-bottom:10px}
+  .copiable p{color:rgba(251,247,239,.92);margin:0;max-width:none}
+
+  /* ====== Checklist ====== */
+  .checklist{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;padding:28px 32px;margin:26px 0}
+  .checklist .titulo-c{font-family:var(--serif);font-size:20px;color:var(--verde);margin-bottom:18px}
+  .check{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:15px}
+  .check:last-child{border-bottom:none}
+  .check input[type=checkbox]{appearance:none;width:24px;height:24px;border:2px solid rgba(2,52,41,.3);border-radius:7px;cursor:pointer;flex-shrink:0;position:relative;margin-top:1px;background:var(--crema)}
+  .check input[type=checkbox]:checked{background:var(--verde);border-color:var(--verde)}
+  .check input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--arena);font-size:14px;font-weight:800}
+  .check label{cursor:pointer}
+  .check label b{color:var(--verde)}
+
+  /* ====== Cierre / siguiente ====== */
+  .siguiente{background:var(--verde);border-radius:24px;padding:44px 46px;margin:60px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .siguiente .txt b{display:block;font-family:var(--serif);font-size:22px;color:var(--crema);margin-bottom:6px}
+  .siguiente .txt span{font-size:14.5px;color:rgba(251,247,239,.75)}
+  .siguiente .pill{background:var(--arena);color:var(--verde);font-weight:800;font-size:14.5px;padding:13px 26px;border-radius:999px;white-space:nowrap}
+  .pie-doc{text-align:center;padding:0 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+
+  @media(max-width:720px){
+    .resultado{padding:28px 24px}
+    .duo,.trio{grid-template-columns:1fr}
+    .practica{padding:30px 24px}
+    .siguiente{padding:32px 26px}
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .lec-mesa{order:2;min-height:500px}
+    .lec-num-mesa{font-size:100px}
+    .cuerda-1{top:13%}
+    .cuerda-2{top:55%}
+    .pol-1{left:4%;top:12%;width:42%}
+    .pol-2{right:5%;top:14%;width:40%}
+    .pol-3{display:none}
+    .pol-4{left:8%;top:54.5%;width:41%}
+    .pol-5{right:6%;top:56%;width:43%}
+    .set{padding:28px 20px}
+    .set-flecha{transform:rotate(90deg)}
+    .set-escena{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA — portada de revista partida ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · Pilar Aprende · Lección 01</span>
+    </div>
+    <h1>Foto de producto <em>con tu móvil</em></h1>
+    <p class="sub">Que tu pieza se vea como merece — sin fotógrafo, sin focos y sin salir del taller. Solo tu móvil, una ventana y diez minutos de método.</p>
+    <div class="lec-meta">
+      <span><b>Lectura</b> 10 min</span>
+      <span><b>Práctica</b> 30 min</span>
+      <span><b>Necesitas</b> móvil · ventana · una pieza</span>
+    </div>
+  </div>
+  <!-- Tendedero de revelado — serie coherente: misma alfarera, mismo taller (Pexels, sesión 4241xxx) -->
+  <div class="lec-mesa" aria-label="Tendedero con la sesión de fotos de un mismo taller">
+    <div class="grano"></div>
+    <span class="firma-mesa">recién reveladas</span>
+    <div class="lec-num-mesa">01</div>
+    <div class="cuerda cuerda-1"></div>
+    <div class="cuerda cuerda-2"></div>
+    <div class="pol pol-1"><img src="https://images.pexels.com/photos/4241339/pexels-photo-4241339.jpeg?auto=compress&cs=tinysrgb&w=800" alt="El set: la artesana trabajando con luz lateral"><span>el set: luz de lado</span></div>
+    <div class="pol pol-2"><img src="https://images.pexels.com/photos/4241340/pexels-photo-4241340.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Las manos sobre el barro, de cerca"><span>2 · el detalle, sin zoom</span></div>
+    <div class="pol pol-3"><img src="https://images.pexels.com/photos/4241336/pexels-photo-4241336.jpeg?auto=compress&cs=tinysrgb&w=800" alt="La pieza girando en el torno"><span>el proceso, sin flash</span></div>
+    <div class="pol pol-4"><img src="https://images.pexels.com/photos/4241343/pexels-photo-4241343.jpeg?auto=compress&cs=tinysrgb&w=800" alt="La pieza terminada, en las manos de su autora"><span>1 · la pieza terminada</span></div>
+    <div class="pol pol-5"><img src="https://images.pexels.com/photos/4241341/pexels-photo-4241341.jpeg?auto=compress&cs=tinysrgb&w=800" alt="La artesana en su taller, entre sus piezas"><span>3 · el contexto: tú y tu oficio</span></div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <section class="resultado">
+    <span class="etiq">Lo que consigues hoy</span>
+    <p>Tres fotos de una de tus piezas —entera, detalle y en contexto— con calidad para publicar, vender por WhatsApp o presumir en tu próxima ficha de producto.</p>
+  </section>
+
+  <!-- ============ 1. POR QUÉ ============ -->
+  <section class="cap">
+    <div class="cap-num">01 · Por qué importa</div>
+    <h2>La foto decide <em>antes que el precio</em></h2>
+    <p>En una feria, tu pieza se defiende sola: la luz del día, el tacto, tu conversación. Online, todo eso lo tiene que hacer una foto. Una pieza extraordinaria con mala foto pierde contra una pieza mediocre bien fotografiada — injusto, pero es la regla del escaparate digital.</p>
+    <p>La buena noticia: el 90% de una buena foto de producto no es la cámara. Es <strong>la luz y el fondo</strong>, y esos son gratis. Tu móvil, sea el que sea, sobra.</p>
+    <div class="pull">No necesitas hacer mejores fotos que un fotógrafo. Necesitas que tu pieza se reconozca como lo que es: trabajo bien hecho.</div>
+  </section>
+
+  <!-- ============ 2. LA LUZ ============ -->
+  <section class="cap">
+    <div class="cap-num">02 · La luz</div>
+    <h2>Una ventana lo es <em>todo</em></h2>
+    <p>Regla única: <strong>luz natural, lateral, suave</strong>. Se traduce así:</p>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Apaga las luces del taller</h4><p>Los fluorescentes tiñen de verde y el flash aplana. Mezclarlas con la ventana es lo peor de ambos mundos. Todo apagado.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>Mesa junto a la ventana, luz de lado</h4><p>La pieza a 30-50 cm de la ventana, con la luz entrando desde un LATERAL (no de frente, no de espaldas a ti). La luz lateral dibuja el volumen y la textura — justo lo que hace "artesanal" a tu pieza.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>Elige la hora</h4><p>Cielo nublado o media mañana/media tarde: luz suave, perfecta. Sol directo entrando a chorro: sombras duras — corre una cortina blanca fina o espera una hora.</p></div></div>
+    <div class="tip"><b>El reflector de pobre (y de profesional):</b> una cartulina o tabla blanca al lado contrario de la ventana rebota luz sobre la parte en sombra de la pieza. Dos euros, y es el truco que más "nivel" da a una foto.</div>
+
+    <div class="set">
+      <span class="set-titulo">Tu set, visto desde arriba</span>
+      <div class="set-escena">
+        <div class="set-el"><div class="set-caja">VENTANA</div><small>luz suave, de lado</small></div>
+        <div class="set-flecha">⟶</div>
+        <div class="set-el"><div class="set-caja pieza">TU PIEZA</div><small>sobre mesa, a 30-50 cm</small></div>
+        <div class="set-flecha">⟵</div>
+        <div class="set-el"><div class="set-caja">CARTULINA BLANCA</div><small>rebota luz a la sombra</small></div>
+      </div>
+      <div class="set-nota">Y tú con el móvil <b>de frente a la pieza</b>, con la ventana a tu izquierda o derecha. Eso es todo el estudio.</div>
+    </div>
+  </section>
+
+  <!-- ============ 3. EL FONDO ============ -->
+  <section class="cap">
+    <div class="cap-num">03 · El fondo</div>
+    <h2>Que solo se vea <em>lo que vendes</em></h2>
+    <p>El fondo tiene un único trabajo: no competir con la pieza. En tu taller ya tienes tres que funcionan:</p>
+    <div class="duo">
+      <div class="duo-col si">
+        <h4>Fondos que suman</h4>
+        <ul>
+          <li>Tabla de madera vieja o banco de trabajo despejado</li>
+          <li>Tela lisa de lino o algodón en crudo, sin arrugas marcadas</li>
+          <li>Pared encalada o de piedra del propio taller</li>
+          <li>Cartulina grande curvada contra la pared (fondo "infinito" por 3 €)</li>
+        </ul>
+      </div>
+      <div class="duo-col no">
+        <h4>Fondos que restan</h4>
+        <ul>
+          <li>El desorden del taller detrás (herramientas, cajas, cables)</li>
+          <li>Estampados, toallas, mantas de colores</li>
+          <li>Encimeras con brillos o mármol falso</li>
+          <li>Césped y suelos de exterior (roban color a la pieza)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip"><b>Matiz importante:</b> el taller desordenado NO vale de fondo para la foto de producto… pero es oro para las fotos de proceso (eso fue la Ruta A de tu primera victoria). Cada foto, su trabajo.</div>
+  </section>
+
+  <!-- ============ 4. LAS 3 FOTOS ============ -->
+  <section class="cap">
+    <div class="cap-num">04 · El encuadre</div>
+    <h2>Las 3 fotos que <em>venden</em></h2>
+    <p>Toda pieza bien contada necesita este trío — es el mismo de tu ficha de producto:</p>
+    <div class="trio">
+      <div class="trio-card">
+        <img src="https://www.oficioscirculares.com/assets/images/oficios/ceramica-artesanal.jpg" alt="Piezas de cerámica completas sobre fondo neutro">
+        <div class="cuerpo"><span class="num-t">Foto 1</span><b>La entera</b><p>La pieza completa, centrada, con aire alrededor. Tu foto de portada en el post, la ficha o WhatsApp.</p></div>
+      </div>
+      <div class="trio-card">
+        <img src="https://www.oficioscirculares.com/assets/images/oficios/cards/encuadernacion-artesanal.jpg" alt="Detalle de textura de cuero">
+        <div class="cuerpo"><span class="num-t">Foto 2</span><b>El detalle</b><p>Cerca (con los pies, no con zoom) de lo que la hace tuya: textura, esmalte, puntada, veta. La que grita "hecho a mano".</p></div>
+      </div>
+      <div class="trio-card">
+        <img src="https://www.oficioscirculares.com/assets/images/oficios/alimentacion-artesanal.jpg" alt="Pan artesano en contexto con trigo">
+        <div class="cuerpo"><span class="num-t">Foto 3</span><b>El contexto</b><p>La pieza en su vida real: la taza con café, el cesto con fruta. Un objeto reconocible al lado regala la escala.</p></div>
+      </div>
+    </div>
+    <div class="tip"><b>El anti-devoluciones:</b> la foto de contexto con referencia de escala (una mano, una manzana) evita el clásico "pensaba que era más grande" — la queja número uno de la venta online de piezas.</div>
+
+    <div class="en-tu-oficio">
+      <div class="titulo-o"><b>En tu oficio: el detalle que grita "hecho a mano"</b></div>
+      <p class="sub-o">Tu foto 2 es esta. El rasgo que ninguna fábrica puede imitar — acércate a él:</p>
+      <div class="oficios-grid">
+        <div class="of"><b>Cerámica</b><span>las líneas del torno bajo el esmalte; la base sin vidriar</span></div>
+        <div class="of"><b>Barro y alfarería</b><span>el borde levemente irregular que dice "a mano"</span></div>
+        <div class="of"><b>Joyería</b><span>la textura del martillado; el cierre hecho a medida</span></div>
+        <div class="of"><b>Carpintería y ebanistería</b><span>la veta continua; el ensamble visto</span></div>
+        <div class="of"><b>Cosmética natural</b><span>el veteado único de cada corte de jabón</span></div>
+        <div class="of"><b>Textil</b><span>la orilla del telar; el grosor vivo del tejido</span></div>
+        <div class="of"><b>Alimentación</b><span>la greña del pan; la burbuja de la miga</span></div>
+        <div class="of"><b>Restauración y upcycling</b><span>la capa antigua asomando bajo la nueva vida</span></div>
+        <div class="of"><b>Cuero</b><span>el poro de la flor; la puntada ensillada</span></div>
+        <div class="of"><b>Forja y herrería</b><span>las marcas del martillo que ningún molde deja</span></div>
+        <div class="of"><b>Vidrio</b><span>la burbuja atrapada; la irregularidad que atrapa la luz</span></div>
+        <div class="of"><b>Encuadernación</b><span>el cosido visto en el lomo; el papel al corte</span></div>
+        <div class="of"><b>Lana y costura</b><span>la torsión irregular del hilo hilado a mano</span></div>
+        <div class="of"><b>Cestería y mimbre</b><span>el entrelazado apretado; el arranque del asa</span></div>
+        <div class="of"><b>Construcción tradicional</b><span>la huella de la llana en la cal; la teja envejecida</span></div>
+        <div class="of"><b>Turismo rural</b><span>el rincón del taller donde pasa la magia <em>(tu detalle es el lugar)</em></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. EL MÓVIL ============ -->
+  <section class="cap">
+    <div class="cap-num">05 · El móvil</div>
+    <h2>Cuatro ajustes y <em>ya está</em></h2>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Limpia la lente</h4><p>Con la camiseta o el mandil, dos segundos. En un taller, la lente lleva polvo, grasa o barro seguro — y es la diferencia entre foto nítida y foto "con niebla". El truco más infravalorado que existe.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>Activa la cuadrícula</h4><p>Ajustes → Cámara → Cuadrícula. Te ayuda a poner la pieza recta y en su sitio. Las líneas torcidas se notan aunque no se sepa por qué.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>Toca la pieza en pantalla</h4><p>Al tocar, el móvil enfoca y mide la luz ahí. Si la foto sale oscura o quemada, desliza el dedo arriba/abajo tras tocar: es el control de brillo. Con eso controlas el 90% de la exposición.</p></div></div>
+    <div class="paso-linea"><div class="n">4</div><div><h4>Nada de zoom, nada de flash</h4><p>El zoom digital emborrona: acércate andando. Y el flash aplana y quema los brillos: la ventana ya hace su trabajo.</p></div></div>
+    <div class="tip"><b>Edición mínima (2 minutos, en el propio móvil):</b> abre la foto → Editar → sube un poco "Brillo" si quedó oscura y un punto de "Nitidez". Para. Los filtros de Instagram cambian los colores reales de tu pieza — y el cliente que recibe algo distinto a la foto es una devolución.</div>
+  </section>
+
+  <!-- ============ 6. CASOS ESPECIALES ============ -->
+  <section class="cap">
+    <div class="cap-num">06 · Casos reales</div>
+    <h2>¿Sin ventana? ¿Piezas <em>rebeldes?</em></h2>
+
+    <h3 style="font-size:21px;margin:26px 0 14px">Si tu taller no tiene ventana (o trabajas de noche)</h3>
+    <div class="paso-linea"><div class="n">a</div><div><h4>Saca la pieza fuera, a la sombra</h4><p>Un balcón, un patio o la puerta del taller en sombra abierta (nunca al sol directo) dan la misma luz suave que una ventana. Cinco minutos y de vuelta.</p></div></div>
+    <div class="paso-linea"><div class="n">b</div><div><h4>O monta la "ventana de mentira"</h4><p>Una lámpara LED de luz blanca fría (la de taller vale) apuntando a la pieza DESDE UN LADO, con papel de horno pegado delante como difusor. No es perfecta, pero es digna — y te libera del horario del sol.</p></div></div>
+
+    <h3 style="font-size:21px;margin:30px 0 14px">Las piezas que se resisten</h3>
+    <div class="paso-linea"><div class="n">a</div><div><h4>Vidrio, esmaltes y metal (reflejan)</h4><p>El reflejo que ves en la pieza eres tú y tu móvil. Sepárate más (y recorta después), ponte ropa neutra y desplázate unos pasos hasta que el reflejo caiga fuera. Con vidrio, un fondo oscuro dibuja mejor la silueta.</p></div></div>
+    <div class="paso-linea"><div class="n">b</div><div><h4>Textil (se arruga y "se desinfla")</h4><p>Vapor de plancha diez minutos antes, y mejor colgado o puesto que doblado: la caída de la tela ES el producto. Los jerséis, en plano cenital sobre lino, con las mangas colocadas con intención.</p></div></div>
+    <div class="paso-linea"><div class="n">c</div><div><h4>Joyería y pieza pequeña (sale borrosa)</h4><p>Tu móvil tiene una distancia mínima de enfoque: si te acercas más, emborrona. Sepárate un palmo, haz la foto con más aire y recorta después — el recorte conserva nitidez, el zoom no. Y mucha luz: la pieza pequeña la pide doble.</p></div></div>
+  </section>
+
+  <!-- ============ 7. ERRORES ============ -->
+  <section class="cap">
+    <div class="cap-num">07 · Los clásicos</div>
+    <h2>Los 5 errores que delatan <em>una foto amateur</em></h2>
+    <div class="error"><b>Foto de noche con luz de techo.</b> Amarillea todo y aplana la textura. La foto de producto se hace de día, siempre.</div>
+    <div class="error"><b>La pieza en el suelo.</b> Perspectiva desde arriba, sombras raras y connotación de mercadillo. Mesa, banco o repisa.</div>
+    <div class="error"><b>Veinte fotos iguales.</b> Tres buenas > veinte regulares. Si dudas entre dos, la de mejor luz gana.</div>
+    <div class="error"><b>Filtro "vintage" sobre pieza artesana.</b> Tu pieza ya tiene carácter; el filtro le pone disfraz. Colores reales, siempre.</div>
+    <div class="error"><b>Fondo blanco puro "de Amazon".</b> Para marketplaces técnicos vale, pero en Instagram te roba la calidez de taller. Madera, lino, cal: tus fondos hablan de ti.</div>
+
+    <div class="tip"><b>El remate de sistema (2 minutos que te ahorran horas):</b> haz las fotos en vertical pensando en el recorte 4:5 de Instagram (deja aire arriba y abajo), y crea en tu móvil un álbum llamado <b>"Catálogo"</b> donde guardes solo la foto buena de cada pieza. La próxima vez que alguien te pida "¿me pasas fotos?", tardas diez segundos, no media hora.</div>
+  </section>
+
+  <!-- ============ PRÁCTICA ============ -->
+  <section class="practica">
+    <span class="etiq">La práctica de hoy</span>
+    <h3>Tres fotos de una pieza, esta tarde</h3>
+    <p>Elige tu pieza estrella (o la que tengas más a mano — no lo pienses mucho) y:</p>
+    <ol>
+      <li>Monta el set: mesa junto a la ventana, fondo elegido, luces apagadas, lente limpia. (5 min)</li>
+      <li>Haz la <b>entera</b>, el <b>detalle</b> y el <b>contexto</b>. Dos o tres tomas de cada, moviendo la pieza, no el zoom. (15 min)</li>
+      <li>Elige la mejor de cada tipo, edición mínima, y súbelas al chat. (10 min)</li>
+    </ol>
+    <div class="copiable">
+      <span class="etiq2">Mensaje para el chat — copia y pega</span>
+      <p>📷 Lección 1 hecha. Os dejo mis 3 fotos (entera / detalle / contexto). ¿Cuál usaríais de portada y por qué?</p>
+    </div>
+    <div class="tip" style="margin-top:20px"><b>El test de los 3 segundos (tu control de calidad de bolsillo):</b> enséñale la foto a alguien de casa durante tres segundos y pregúntale dos cosas: "¿qué es?" y "¿cuánto crees que vale?". Si acierta lo primero y no se queda corto en lo segundo, la foto funciona. Si duda, casi siempre es luz o fondo — vuelve a los pasos 02 y 03.</div>
+  </section>
+
+  <!-- ============ CHECKLIST ============ -->
+  <div class="checklist">
+    <div class="titulo-c">Checklist de la foto que vende</div>
+    <div class="check"><input type="checkbox" id="k1"><label for="k1"><b>Luz natural lateral</b> — de ventana, sin fluorescentes ni flash.</label></div>
+    <div class="check"><input type="checkbox" id="k2"><label for="k2"><b>Fondo tranquilo</b> — madera, lino o cal; nada compitiendo detrás.</label></div>
+    <div class="check"><input type="checkbox" id="k3"><label for="k3"><b>Lente limpia y cuadrícula activada</b> — pieza recta y nítida.</label></div>
+    <div class="check"><input type="checkbox" id="k4"><label for="k4"><b>Las 3 fotos</b> — entera, detalle y contexto con referencia de escala.</label></div>
+    <div class="check"><input type="checkbox" id="k5"><label for="k5"><b>Colores reales</b> — edición mínima, sin filtros.</label></div>
+    <div class="check"><input type="checkbox" id="k6"><label for="k6"><b>Subidas al chat</b> — con el mensaje de arriba, a por feedback.</label></div>
+  </div>
+
+  <!-- ============ SIGUIENTE ============ -->
+  <section class="siguiente">
+    <div class="txt">
+      <b>Siguiente lección: Tu primer reel del proceso</b>
+      <span>Las fotos enseñan la pieza; el vídeo enseña por qué vale lo que vale.</span>
+    </div>
+    <span class="pill">Lección 02 →</span>
+  </section>
+
+  <p class="pie-doc">El Club de Oficios Circulares · Lección 01 · ¿Se te atasca algo o quieres que exista una lección concreta? Dilo en el chat con <b>#pido</b> — las próximas se deciden contigo.</p>
+
+</div>
+</body>
+</html>

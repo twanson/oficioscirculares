@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El mapa del contenido · El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  .doc{max-width:840px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:68ch}
+  strong{color:var(--verde)}
+
+  /* ====== Cabecera — la mesa del explorador ====== */
+  .lec-head{display:grid;grid-template-columns:1.02fr .98fr;min-height:72vh;background:linear-gradient(180deg,#FBF7EF,#F2E9D8);border-bottom:1px solid rgba(2,52,41,.07);position:relative;overflow:hidden}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota)}
+  .lec-head h1{font-size:clamp(44px,5.4vw,76px);color:var(--verde);margin-bottom:22px;max-width:12ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--terracota)}
+  .lec-head .sub{font-size:20px;color:var(--tinta-suave);max-width:42ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(147,74,28,.3);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:var(--tinta-suave);background:var(--blanco)}
+  .lec-meta b{color:var(--terracota)}
+
+  /* La mesa del explorador: mapa real + leyenda flotante */
+  .mapa-zona{position:relative;min-height:560px;overflow:hidden;background:
+    linear-gradient(168deg,rgba(32,22,8,.28),rgba(24,15,5,.55)),
+    url('https://images.pexels.com/photos/697662/pexels-photo-697662.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover}
+  .firma-mapa{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(32,22,8,.55);border:1px solid rgba(232,213,183,.3);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  .leyenda-flotante{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;padding:40px}
+  .leyenda-card{background:rgba(251,247,239,.96);border-radius:22px;padding:28px 32px;box-shadow:0 30px 70px rgba(0,0,0,.5);max-width:350px;backdrop-filter:blur(6px);transform:rotate(-.6deg)}
+  .leyenda-card .t{font-family:var(--serif);font-size:19px;color:var(--verde);margin-bottom:2px}
+  .leyenda-card .s{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--terracota);margin-bottom:14px}
+  .leyenda-card ol{list-style:none}
+  .leyenda-card li{font-size:13.5px;padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed rgba(2,52,41,.1);color:var(--tinta)}
+  .leyenda-card li:last-child{border-bottom:none}
+  .leyenda-card li::before{position:absolute;left:2px;font-size:13px}
+  .leyenda-card li.l-guia::before{content:"⌂"}
+  .leyenda-card li.l-lec::before{content:"◆";color:var(--terracota)}
+  .leyenda-card li.l-caja::before{content:"⚒";color:var(--verde-medio)}
+  .leyenda-card li.l-reto::before{content:"✕";color:var(--terracota-viva);font-weight:700}
+  .leyenda-card li.l-radar::before{content:"◉";color:var(--verde-medio)}
+  .leyenda-card li.l-mapa::before{content:"❖";color:var(--terracota)}
+  .leyenda-card li.l-futuro::before{content:"?";color:var(--terracota);font-weight:800}
+  .leyenda-card li.l-futuro{font-family:var(--serif);font-style:italic;color:var(--terracota)}
+  .leyenda-card li b{font-weight:700;color:var(--verde)}
+
+  /* ====== Secciones ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:18px}
+  .cap h2 em{color:var(--terracota)}
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+
+  /* Ruta de lectura */
+  .ruta{margin:26px 0}
+  .hito{display:flex;gap:20px;padding:0 0 26px;position:relative}
+  .hito::before{content:"";position:absolute;left:21px;top:46px;bottom:0;border-left:2px dashed rgba(147,74,28,.35)}
+  .hito:last-child::before{display:none}
+  .hito .h-punto{flex:0 0 44px;height:44px;border-radius:50%;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;font-size:18px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+  .hito .h-cuerpo{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:18px 24px;flex:1;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .hito .h-cuerpo .h-cuando{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--terracota);margin-bottom:4px}
+  .hito .h-cuerpo b{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--verde);display:block;margin-bottom:4px}
+  .hito .h-cuerpo span{font-size:14px;color:var(--tinta-suave);line-height:1.6;display:block}
+
+  /* Itinerarios por perfil */
+  .perfiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0}
+  .perfil{border-radius:18px;padding:26px 24px;position:relative;overflow:hidden}
+  .perfil.p1{background:var(--verde-hondo)}
+  .perfil.p2{background:linear-gradient(165deg,#FBEFE4,#F4E3D2);border:1px solid rgba(147,74,28,.2)}
+  .perfil.p3{background:var(--blanco);border:1px solid rgba(2,52,41,.12)}
+  .perfil .p-etiq{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .perfil.p1 .p-etiq{color:var(--terracota-viva)}
+  .perfil.p2 .p-etiq,.perfil.p3 .p-etiq{color:var(--terracota)}
+  .perfil h3{font-size:19px;margin-bottom:10px}
+  .perfil.p1 h3{color:var(--arena)}
+  .perfil ol{list-style:none;counter-reset:pi}
+  .perfil li{counter-increment:pi;font-size:13.5px;line-height:1.55;padding:7px 0 7px 26px;position:relative}
+  .perfil.p1 li{color:rgba(251,247,239,.82);border-bottom:1px dashed rgba(232,213,183,.15)}
+  .perfil.p2 li,.perfil.p3 li{color:var(--tinta-suave);border-bottom:1px dashed rgba(2,52,41,.1)}
+  .perfil li:last-child{border-bottom:none}
+  .perfil li::before{content:counter(pi);position:absolute;left:0;top:8px;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .perfil.p1 li::before{background:rgba(232,213,183,.18);color:var(--arena)}
+  .perfil.p2 li::before{background:rgba(147,74,28,.15);color:var(--terracota)}
+  .perfil.p3 li::before{background:rgba(2,52,41,.08);color:var(--verde)}
+  .perfil li b{font-weight:700}
+  .perfil.p1 li b{color:var(--arena)}
+  .perfil.p2 li b,.perfil.p3 li b{color:var(--verde)}
+
+  /* SOS problema → pieza */
+  .sos{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;margin:26px 0;overflow:hidden;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .sos-fila{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px dashed rgba(2,52,41,.1)}
+  .sos-fila:last-child{border-bottom:none}
+  .sos-fila > div{padding:16px 24px}
+  .sos-fila .sos-p{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--tinta);background:linear-gradient(90deg,#FBEFE4,transparent)}
+  .sos-fila .sos-r{font-size:13.5px;color:var(--tinta-suave);line-height:1.6}
+  .sos-fila .sos-r b{color:var(--terracota)}
+  .sos-cab{display:grid;grid-template-columns:1fr 1fr;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--terracota);border-bottom:2px solid rgba(147,74,28,.25)}
+  .sos-cab div{padding:12px 24px}
+
+  /* Flujo mensual */
+  .flujo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+  .mes-item{background:var(--verde-hondo);border-radius:16px;padding:24px 26px}
+  .mes-item .m-etiq{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota-viva);margin-bottom:8px}
+  .mes-item b{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--arena);display:block;margin-bottom:5px}
+  .mes-item span{font-size:13.5px;color:rgba(251,247,239,.78);line-height:1.6;display:block}
+
+  /* Hashtags / leyenda */
+  .tags{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+  .tag-card{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:22px 24px;box-shadow:0 6px 20px rgba(2,52,41,.05);position:relative;overflow:hidden}
+  .tag-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .tag-card .t-tag{display:inline-block;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--terracota);background:#FBEFE4;border-radius:999px;padding:4px 18px;margin-bottom:10px}
+  .tag-card span{font-size:14px;color:var(--tinta-suave);line-height:1.6;display:block}
+  .tag-card span b{color:var(--verde)}
+
+  /* Expediciones votables */
+  .votable{background:var(--arena-clara);border:1.5px dashed rgba(147,74,28,.4);border-radius:18px;padding:24px 28px;margin:16px 0;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+  .votable .v-info b{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--verde);display:block;margin-bottom:4px}
+  .votable .v-info span{font-size:14px;color:var(--tinta-suave);line-height:1.6;display:block;max-width:56ch}
+  .votable .v-voto{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--terracota);text-align:center;border:1.5px solid rgba(147,74,28,.35);border-radius:999px;padding:10px 20px;white-space:nowrap;background:var(--blanco)}
+
+  /* Horizonte */
+  .horizonte{background:linear-gradient(165deg,#053528,#021B14);border-radius:20px;padding:34px 38px;margin:26px 0}
+  .horizonte h3{color:var(--arena);font-size:20px;margin-bottom:16px}
+  .hz-fila{display:grid;grid-template-columns:150px 1fr;gap:0;border-bottom:1px dashed rgba(232,213,183,.18);padding:13px 0;align-items:baseline}
+  .hz-fila:last-child{border-bottom:none}
+  .hz-fila .hz-cuando{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--terracota-viva)}
+  .hz-fila .hz-que{font-size:14px;color:rgba(251,247,239,.82);line-height:1.6}
+  .hz-fila .hz-que b{color:var(--arena)}
+
+  .pie-doc{text-align:center;padding:40px 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+
+  @media(max-width:720px){
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .mapa-zona{order:2;min-height:500px}
+    .leyenda-flotante{padding:20px}
+    .flujo,.tags,.perfiles{grid-template-columns:1fr}
+    .sos-fila,.sos-cab{grid-template-columns:1fr}
+    .sos-cab div:last-child{display:none}
+    .sos-fila .sos-r{padding-top:0}
+    .votable{grid-template-columns:1fr}
+    .votable .v-voto{justify-self:start}
+    .hz-fila{grid-template-columns:1fr;gap:2px}
+    .horizonte{padding:26px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · El mapa</span>
+    </div>
+    <h1>El mapa del <em>contenido</em></h1>
+    <p class="sub">Todo lo que hay en el Club, en qué orden recorrerlo según tu situación, qué llega cada mes — y las próximas rutas, que se deciden votando. Este mapa lo dibujamos entre todos.</p>
+    <div class="lec-meta">
+      <span><b>9</b> piezas desde el día 1</span>
+      <span><b>1</b> lección nueva al mes</span>
+      <span><b>Tú</b> votas la siguiente</span>
+    </div>
+  </div>
+  <div class="mapa-zona" aria-label="Mapa antiguo con brújula y la leyenda del territorio del Club">
+    <span class="firma-mapa">el territorio del Club</span>
+    <div class="leyenda-flotante">
+      <div class="leyenda-card">
+        <div class="t">Leyenda del territorio</div>
+        <div class="s">Lo que hay dentro, a día uno</div>
+        <ol>
+          <li class="l-guia"><b>La guía</b> · tu primera victoria en 7 días</li>
+          <li class="l-lec"><b>4 lecciones</b> · foto, reel, precios, bio</li>
+          <li class="l-caja"><b>La caja</b> · 7 plantillas listas para usar</li>
+          <li class="l-reto"><b>Reto nº1</b> · doce reels en 30 días</li>
+          <li class="l-radar"><b>El radar</b> · ayudas y subvenciones</li>
+          <li class="l-mapa"><b>Este mapa</b> · para no perderte</li>
+          <li class="l-futuro">La siguiente ruta… la votas tú</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ============ 01 LA RUTA ============ -->
+  <section class="cap">
+    <div class="cap-num">01 · La ruta marcada</div>
+    <h2>El camino general <em>(si acabas de llegar)</em></h2>
+    <p>Nada de esto es deberes: es un camino señalizado para que nunca te preguntes "¿y ahora qué?". Con la regla de las 2 horas semanales de la guía basta para recorrerlo entero:</p>
+    <div class="ruta">
+      <div class="hito"><div class="h-punto">1</div><div class="h-cuerpo"><div class="h-cuando">Semana 1</div><b>La guía "Tu primera victoria en 7 días"</b><span>Tu punto de partida: el plan de la primera semana, tus accesos y la primera publicación real. Si solo haces una cosa el primer mes, que sea esta.</span></div></div>
+      <div class="hito"><div class="h-punto">2</div><div class="h-cuerpo"><div class="h-cuando">Semanas 2-5 · una por semana</div><b>Las 4 lecciones del arranque</b><span>01 Foto de producto → 02 Tu primer reel → 03 Precios con margen → 04 La bio que vende. En ese orden: cada una usa lo de la anterior. Todas terminan con una práctica de resultados visibles.</span></div></div>
+      <div class="hito"><div class="h-punto">3</div><div class="h-cuerpo"><div class="h-cuando">Siempre a mano</div><b>La caja de herramientas</b><span>Las 7 plantillas (ficha, calendario, presupuesto, guiones, etiqueta, WhatsApp, email post-venta). No se estudia — se abre cuando la necesitas, como una caja de herramientas de verdad.</span></div></div>
+      <div class="hito"><div class="h-punto">4</div><div class="h-cuerpo"><div class="h-cuando">Cuando termines las lecciones</div><b>El Reto nº1: doce reels en 30 días</b><span>El mes que cambia tu cuenta. Con calendario cerrado, ganchos escritos y el grupo empujando con #reto1.</span></div></div>
+      <div class="hito"><div class="h-punto">5</div><div class="h-cuerpo"><div class="h-cuando">Una tarde al trimestre</div><b>El radar de ayudas</b><span>Revisa qué hay abierto en tu comunidad y monta tu alerta. La tarde mejor pagada del trimestre. Primera gestión si no lo tienes: el carné de artesano (el radar te lo explica paso a paso).</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 02 ITINERARIOS ============ -->
+  <section class="cap">
+    <div class="cap-num">02 · Atajos</div>
+    <h2>Tu itinerario según <em>dónde estás</em></h2>
+    <p>La ruta general funciona para todos — pero si te reconoces en uno de estos tres casos, hay un orden mejor para ti:</p>
+    <div class="perfiles">
+      <div class="perfil p1">
+        <div class="p-etiq">Perfil A</div>
+        <h3>"Empiezo de cero en redes"</h3>
+        <ol>
+          <li><b>La guía</b>, sin saltarte nada — está hecha exactamente para ti.</li>
+          <li><b>Lección 04 (bio)</b> antes que ninguna: ordena tu escaparate antes de traer visitas.</li>
+          <li><b>Lección 01 (foto)</b> y publica tus 3 primeras piezas.</li>
+          <li>El resto de la ruta, a tu ritmo. El reto, cuando tengas 4-5 publicaciones hechas.</li>
+        </ol>
+      </div>
+      <div class="perfil p2">
+        <div class="p-etiq">Perfil B</div>
+        <h3>"Publico, pero no vendo"</h3>
+        <ol>
+          <li><b>Lección 03 (precios)</b> primero: la mayoría de "no vendo" son en realidad "no defiendo mi precio".</li>
+          <li><b>Lección 04 (bio)</b>: revisa si quien llega entiende qué vendes y cómo comprarte.</li>
+          <li><b>La caja</b>: respuestas de WhatsApp y email post-venta — ahí se escapan ventas cada semana.</li>
+          <li><b>El reto</b>: alcance nuevo para tu perfil ya afinado.</li>
+        </ol>
+      </div>
+      <div class="perfil p3">
+        <div class="p-etiq">Perfil C</div>
+        <h3>"Vendo, pero sin tiempo para nada"</h3>
+        <ol>
+          <li><b>La caja</b> entera: plantillas = horas recuperadas cada semana.</li>
+          <li><b>Lección 02 (reel)</b> solo por la parte de grabar en lote: un mes de contenido en dos tardes.</li>
+          <li><b>El radar</b>: con lo que facturas, una ayuda de taller o ferias es dinero serio.</li>
+          <li>El directo mensual como mantenimiento: 1h al mes y al taller.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 SOS ============ -->
+  <section class="cap">
+    <div class="cap-num">03 · Primeros auxilios</div>
+    <h2>Si tu problema es… <em>ve aquí</em></h2>
+    <p>El mapa también sirve al revés: desde el problema hasta la pieza que lo resuelve.</p>
+    <div class="sos">
+      <div class="sos-cab"><div>Te pasa esto</div><div>Tu ruta directa</div></div>
+      <div class="sos-fila"><div class="sos-p">"Mis fotos no le hacen justicia a mis piezas"</div><div class="sos-r"><b>Lección 01</b> — luz de ventana, 3 encuadres y la prueba de los 3 segundos. Sin comprar nada.</div></div>
+      <div class="sos-fila"><div class="sos-p">"Me da vergüenza grabarme / no sé qué grabar"</div><div class="sos-r"><b>Lección 02</b> (no hace falta salir tú) + los 3 guiones hechos de <b>la caja</b>.</div></div>
+      <div class="sos-fila"><div class="sos-p">"Me regatean o me dicen que soy caro"</div><div class="sos-r"><b>Lección 03</b> con su calculadora + la respuesta 2 de WhatsApp de <b>la caja</b> (el coste por uso).</div></div>
+      <div class="sos-fila"><div class="sos-p">"Me visitan el perfil pero no me siguen ni compran"</div><div class="sos-r"><b>Lección 04</b> — la prueba de los 5 segundos: nombre buscable, bio de 3 líneas, un solo enlace.</div></div>
+      <div class="sos-fila"><div class="sos-p">"Publico cuando me acuerdo, o sea, nunca"</div><div class="sos-r">El calendario mensual de <b>la caja</b> (2 publicaciones/semana) y, cuando estés listo, el <b>Reto nº1</b>.</div></div>
+      <div class="sos-fila"><div class="sos-p">"Un encargo se me torció (plazos, precio, cambios…)"</div><div class="sos-r">El presupuesto de encargo de <b>la caja</b>: precio cerrado, 50% de señal, plazo con margen. Para el próximo.</div></div>
+      <div class="sos-fila"><div class="sos-p">"Necesito dinero para el taller / una feria / la web"</div><div class="sos-r"><b>El radar</b>, sección "busca por lo que necesitas". Y el carné de artesano primero.</div></div>
+      <div class="sos-fila"><div class="sos-p">"Estoy atascado y no sé ni qué preguntar"</div><div class="sos-r">Al chat, tal cual: "estoy atascado con X". O pide <b>#revisión</b> y lo vemos en el directo del mes.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ 04 EL FLUJO ============ -->
+  <section class="cap">
+    <div class="cap-num">04 · El pulso</div>
+    <h2>Qué llega <em>cada mes</em></h2>
+    <p>El Club no es una biblioteca que se visita — es un pulso mensual. Esto es lo que te llega estando dentro:</p>
+    <div class="flujo">
+      <div class="mes-item"><div class="m-etiq">Cada mes</div><b>El directo</b><span>Sesión en grupo: revisiones de cuentas y piezas de miembros en vivo (pide la tuya con #revisión), y preguntas abiertas. Siempre grabado, por si no llegas.</span></div>
+      <div class="mes-item"><div class="m-etiq">Cada mes</div><b>Una lección nueva</b><span>Con el mismo nivel de detalle que las del arranque. El tema sale de las votaciones (sección 06) y de lo que aparece en el chat.</span></div>
+      <div class="mes-item"><div class="m-etiq">Cada trimestre</div><b>Radar de ayudas + reto nuevo</b><span>Edición fresca del radar con los plazos del trimestre, y un reto colectivo nuevo cuando cerramos el anterior.</span></div>
+      <div class="mes-item"><div class="m-etiq">Todos los días</div><b>El chat</b><span>Dudas, hallazgos, avances del reto y peticiones. La mitad del valor del Club vive aquí — y no hace falta estar: se lee en 5 minutos al día.</span></div>
+    </div>
+    <div class="tip"><b>Tu mes tipo, en 2 horas:</b> 1 hora el directo (o su grabación mientras trabajas en el taller) + 45 minutos la lección del mes + 15 minutos de chat repartidos. Todo lo demás — plantillas, radar, reto — es cuando tú lo necesites. El Club está diseñado para caber en la vida de un taller, no para competir con ella.</div>
+  </section>
+
+  <!-- ============ 05 LA LEYENDA ============ -->
+  <section class="cap">
+    <div class="cap-num">05 · Las señales</div>
+    <h2>Los cuatro hashtags <em>que mueven el Club</em></h2>
+    <p>En el chat todo se organiza con cuatro señales. Aprenderlas es aprender a usar el Club:</p>
+    <div class="tags">
+      <div class="tag-card"><span class="t-tag">#pido</span><span>Pide o vota contenido: la próxima lección, una plantilla nueva para la caja, un tema para el directo. <b>Lo más pedido se hace.</b> Así de simple.</span></div>
+      <div class="tag-card"><span class="t-tag">#revisión</span><span>Apúntate a que revisemos tu cuenta, pieza o duda <b>en el directo del mes</b>, en vivo y con cariño. Si hay más peticiones que hueco, se guarda tu turno para el siguiente.</span></div>
+      <div class="tag-card"><span class="t-tag">#reto1</span><span>El hilo del reto en marcha: pega tu reel al publicarlo, mira los de los demás, pide auxilio si te atascas. <b>El empujón de grupo es la mitad del reto.</b></span></div>
+      <div class="tag-card"><span class="t-tag">#radar</span><span>¿Has visto una ayuda, feria o convocatoria que otros deberían conocer? Compártela con esta señal y <b>entra en la próxima edición del radar</b> con tu nombre.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 06 PRÓXIMAS EXPEDICIONES ============ -->
+  <section class="cap">
+    <div class="cap-num">06 · Rutas por abrir</div>
+    <h2>Las próximas lecciones <em>las eliges tú</em></h2>
+    <p>Estas cuatro están sobre la mesa. Se vota en el chat durante el mes (<strong>#pido</strong> + el nombre), el recuento se anuncia en el directo, y la ganadora se convierte en la lección del mes siguiente:</p>
+    <div class="votable"><div class="v-info"><b>WhatsApp Business a pleno rendimiento</b><span>Catálogo, respuestas rápidas, etiquetas de clientes y el mensaje de ausencia que vende por ti. La herramienta que ya usas, configurada como un mostrador profesional.</span></div><div class="v-voto">#pido whatsapp</div></div>
+    <div class="votable"><div class="v-info"><b>Etsy vs. tienda propia (vs. no tener tienda)</b><span>Dónde vender online según tu volumen: comisiones reales, quién se queda a tus clientes y cuándo NO te conviene montar tienda todavía.</span></div><div class="v-voto">#pido etsy</div></div>
+    <div class="votable"><div class="v-info"><b>Ferias que venden (y las que no)</b><span>Cómo elegir feria, calcular si sale a cuenta (con la calculadora de la lección 03), montar un puesto que pare a la gente y convertir visitantes en seguidores.</span></div><div class="v-voto">#pido ferias</div></div>
+    <div class="votable"><div class="v-info"><b>Email básico para talleres</b><span>Una lista pequeña de clientes vale más que mil seguidores. Cómo empezarla desde cero (sin herramientas de pago) y qué mandar sin dar la lata.</span></div><div class="v-voto">#pido email</div></div>
+    <div class="tip"><b>¿Falta la tuya?</b> Propónla igual: #pido + dos líneas de qué necesitas. Las lecciones de este Club nacen de problemas reales de talleres reales — así se han hecho todas las que ya has leído.</div>
+  </section>
+
+  <!-- ============ 07 HORIZONTE ============ -->
+  <section class="cap">
+    <div class="cap-num">07 · El horizonte</div>
+    <h2>Hacia dónde crece <em>el territorio</em></h2>
+    <p>Ser fundador significa entrar cuando el mapa aún tiene zonas por dibujar — y voz para decidir qué se dibuja. Lo que ya está en el horizonte:</p>
+    <div class="horizonte">
+      <h3>Lo que viene detrás de esta edición</h3>
+      <div class="hz-fila"><div class="hz-cuando">Otoño 2026</div><div class="hz-que"><b>Primera lección votada</b> por los fundadores + <b>Radar edición 1</b> con los plazos de otoño + cierre del Reto nº1 en el directo.</div></div>
+      <div class="hz-fila"><div class="hz-cuando">Cada trimestre</div><div class="hz-que"><b>Reto nuevo y radar nuevo.</b> El ritmo fijo del Club: siempre hay una campaña en marcha y una edición fresca de ayudas.</div></div>
+      <div class="hz-fila"><div class="hz-cuando">Al crecer</div><div class="hz-que"><b>Mesas de oficio:</b> cuando haya suficientes miembros de un mismo gremio (ceramistas, textiles, madera…), espacios y contenidos propios por oficio. Los fundadores estrenan las suyas.</div></div>
+      <div class="hz-fila"><div class="hz-cuando">Siempre</div><div class="hz-que"><b>La biblioteca crece, la cuota del fundador no.</b> Todo lo nuevo entra en tu misma membresía — tu precio queda congelado para siempre por haber estado el primer día.</div></div>
+    </div>
+  </section>
+
+  <p class="pie-doc">El Club de Oficios Circulares · El mapa del contenido · Se redibuja cada mes con lo que votéis en <b>#pido</b>.</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lección 03 · Precios con margen — El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  img{display:block;max-width:100%}
+  .doc{max-width:820px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:66ch}
+  .lead{font-size:19px;color:var(--tinta-suave)}
+  strong{color:var(--verde)}
+  a{color:var(--terracota)}
+
+  /* ====== Cabecera — la trastienda de los números ====== */
+  .lec-head{display:grid;grid-template-columns:1.02fr .98fr;min-height:76vh;background:linear-gradient(180deg,#FAF3E3,#F0E2C8);border-bottom:1px solid rgba(2,52,41,.07);position:relative;overflow:hidden}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota)}
+  .lec-head h1{font-size:clamp(46px,5.6vw,80px);color:var(--verde);margin-bottom:22px;max-width:12ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--terracota)}
+  .lec-head .sub{font-size:20px;color:var(--tinta-suave);max-width:40ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(147,74,28,.3);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:var(--tinta-suave);background:var(--blanco)}
+  .lec-meta b{color:var(--terracota)}
+
+  /* La pizarra de la trastienda: pizarra real llena de cuentas + ticket + etiqueta */
+  .lec-mesa{position:relative;min-height:620px;overflow:hidden;background:linear-gradient(168deg,rgba(2,38,29,.68),rgba(2,26,20,.78)),url('https://images.pexels.com/photos/22690751/pexels-photo-22690751/free-photo-of-close-up-of-complicated-equations-written-on-a-blackboard.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover}
+  .lec-mesa .grano{position:absolute;inset:0;z-index:0;opacity:.35;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+  .lec-num-mesa{position:absolute;right:22px;bottom:6px;z-index:1;font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(130px,14vw,190px);line-height:1;color:rgba(232,213,183,.1);user-select:none;pointer-events:none}
+  .firma-mesa{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(2,42,32,.55);border:1px solid rgba(232,213,183,.25);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  .ticket{position:absolute;left:10%;top:12%;width:min(300px,52%);background:#FFFDF6;padding:24px 26px 22px;box-shadow:0 26px 60px rgba(0,0,0,.6);transform:rotate(-2.5deg);z-index:3;font-size:13.5px;color:var(--tinta)}
+  .ticket::before{content:"";position:absolute;left:0;right:0;top:-11px;height:12px;background:linear-gradient(-135deg,transparent 8px,#FFFDF6 0) 0 0/16px 100% repeat-x, linear-gradient(135deg,transparent 8px,#FFFDF6 0) 8px 0/16px 100% repeat-x}
+  .ticket::after{content:"";position:absolute;left:0;right:0;bottom:-11px;height:12px;background:linear-gradient(-45deg,transparent 8px,#FFFDF6 0) 0 0/16px 100% repeat-x, linear-gradient(45deg,transparent 8px,#FFFDF6 0) 8px 0/16px 100% repeat-x}
+  .ticket .cab-t{text-align:center;font-family:var(--serif);color:var(--verde);font-size:15px;letter-spacing:.06em;border-bottom:1.5px dashed rgba(2,52,41,.25);padding-bottom:10px;margin-bottom:12px}
+  .ticket .cab-t small{display:block;font-family:'Courier New',monospace;font-size:10px;color:var(--tinta-suave);letter-spacing:.12em;margin-top:3px}
+  .ticket .fila{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-family:'Courier New',monospace;font-size:13px}
+  .ticket .fila span:last-child{font-weight:700;color:var(--verde);white-space:nowrap}
+  .ticket .fila.total{border-top:1.5px dashed rgba(2,52,41,.25);margin-top:10px;padding-top:12px;font-size:14px;font-weight:700}
+  .ticket .fila.total span:last-child{color:var(--terracota);font-size:20px}
+  .ticket .nota-t{text-align:center;font-family:var(--serif);font-style:italic;font-size:12px;color:var(--tinta-suave);margin-top:10px}
+  .ticket .codigo{margin-top:12px;height:30px;background:repeating-linear-gradient(90deg,var(--tinta) 0 2px,transparent 2px 4px,var(--tinta) 4px 5px,transparent 5px 9px,var(--tinta) 9px 12px,transparent 12px 14px);opacity:.75}
+  .ticket .sello-t{position:absolute;right:-16px;top:-18px;width:86px;height:86px;border:2.5px dashed var(--terracota);border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--terracota);transform:rotate(12deg);background:rgba(255,253,246,.92);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+  .etiqueta-colgante{position:absolute;right:9%;bottom:13%;z-index:3;width:210px;background:linear-gradient(160deg,#EFDFC2,var(--arena));border-radius:14px;padding:24px 20px;text-align:center;transform:rotate(3.5deg);box-shadow:0 22px 54px rgba(0,0,0,.6)}
+  .etiqueta-colgante::before{content:"";position:absolute;top:-26px;left:50%;transform:translateX(-50%);width:2.5px;height:30px;background:#C9AE85}
+  .etiqueta-colgante::after{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--crema);box-shadow:inset 0 0 0 2.5px #A98D63}
+  .etiqueta-colgante .ep-l{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota);display:block;margin:10px 0 4px}
+  .etiqueta-colgante .ep-p{font-family:var(--serif);font-size:38px;color:var(--verde);line-height:1}
+  .etiqueta-colgante .ep-n{font-family:var(--serif);font-style:italic;font-size:12.5px;color:#6b5c48;display:block;margin-top:8px}
+
+  /* ====== Resultado ====== */
+  .resultado{background:linear-gradient(160deg,#EFDFC2,var(--arena) 60%,#E0C69E);border-radius:24px;padding:38px 42px;margin:-38px auto 0;position:relative;z-index:3;box-shadow:0 18px 48px rgba(2,52,41,.14)}
+  .resultado .etiq{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);display:block;margin-bottom:10px}
+  .resultado p{font-family:var(--serif);font-size:21px;line-height:1.4;color:var(--verde);margin:0;max-width:none}
+
+  /* ====== Secciones (molde) ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:20px}
+  .cap h2 em{color:var(--terracota)}
+  .pull{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,28px);line-height:1.32;color:var(--verde);border-left:5px solid var(--terracota);padding:6px 0 6px 26px;margin:34px 0;max-width:none}
+  .paso-linea{display:grid;grid-template-columns:52px 1fr;gap:18px;margin-bottom:24px}
+  .paso-linea .n{width:44px;height:44px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 5px 14px rgba(2,52,41,.22)}
+  .paso-linea h4{font-size:19px;margin-bottom:6px}
+  .paso-linea p{font-size:15px;color:var(--tinta-suave)}
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+  .error{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:16px;padding:18px 24px 18px 66px;margin:12px 0;font-size:15px;box-shadow:0 4px 14px rgba(2,52,41,.04)}
+  .error::before{content:"✕";position:absolute;left:20px;top:17px;width:28px;height:28px;border-radius:50%;background:rgba(147,74,28,.1);color:var(--terracota);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+  .error b{color:var(--terracota)}
+
+  /* ====== Calculadora ====== */
+  .calc{background:linear-gradient(165deg,var(--verde),#03392C);border-radius:26px;padding:44px 46px;margin:34px 0;color:rgba(251,247,239,.9);position:relative;overflow:hidden}
+  .calc::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--terracota),var(--arena));border-radius:26px 26px 0 0}
+  .calc h3{color:var(--crema);font-size:24px;margin-bottom:6px}
+  .calc .sub-c{font-size:14.5px;color:rgba(251,247,239,.7);margin-bottom:28px}
+  .calc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 24px;margin-bottom:10px}
+  .campo-c label{display:block;font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--arena);margin-bottom:7px}
+  .campo-c input,.campo-c select{width:100%;background:rgba(251,247,239,.08);border:1.5px solid rgba(232,213,183,.3);border-radius:12px;padding:13px 16px;font-size:17px;font-weight:700;color:var(--crema);font-family:var(--sans);outline:none}
+  .campo-c input:focus,.campo-c select:focus{border-color:var(--arena)}
+  .campo-c select option{color:var(--tinta)}
+  .campo-c .mini{font-size:12px;color:rgba(251,247,239,.55);margin-top:5px;display:block;font-weight:500}
+  .calc-out{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .out-card{background:rgba(251,247,239,.07);border:1px solid rgba(232,213,183,.22);border-radius:16px;padding:20px 22px;text-align:center}
+  .out-card .ol{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(251,247,239,.6);display:block;margin-bottom:6px}
+  .out-card .ov{font-family:var(--serif);font-size:clamp(26px,3.4vw,36px);color:var(--crema);line-height:1}
+  .out-card.destacada{background:var(--arena);border:none}
+  .out-card.destacada .ol{color:var(--terracota)}
+  .out-card.destacada .ov{color:var(--verde)}
+  .calc .uso-linea{margin-top:24px;background:rgba(2,42,32,.45);border:1px dashed rgba(232,213,183,.35);border-radius:14px;padding:18px 22px;font-size:15px}
+  .calc .uso-linea b{color:var(--arena)}
+  .calc .uso-linea .frase{font-family:var(--serif);font-style:italic;color:var(--crema);display:block;margin-top:8px}
+
+  /* ====== En tu oficio ====== */
+  .en-tu-oficio{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:20px;padding:30px 34px;margin:28px 0;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .en-tu-oficio .titulo-o{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .en-tu-oficio .titulo-o b{font-family:var(--serif);font-size:21px;color:var(--verde)}
+  .en-tu-oficio .titulo-o::before{content:"✦";width:34px;height:34px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .en-tu-oficio .sub-o{font-size:14px;color:var(--tinta-suave);margin-bottom:20px}
+  .oficios-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 32px}
+  .of{padding:11px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:13.5px;line-height:1.5}
+  .of b{display:block;font-family:var(--serif);font-size:15.5px;color:var(--verde);margin-bottom:2px}
+  .of span{display:block;color:var(--tinta-suave)}
+  .of em{color:var(--terracota)}
+
+  /* ====== Chuleta companion ====== */
+  .companion{display:flex;gap:22px;align-items:center;background:linear-gradient(160deg,#EFDFC2,var(--arena));border-radius:20px;padding:28px 32px;margin:28px 0}
+  .companion .icono-c{width:64px;height:80px;background:var(--blanco);border-radius:6px;box-shadow:0 8px 20px rgba(2,52,41,.2);flex-shrink:0;position:relative;transform:rotate(-3deg)}
+  .companion .icono-c::before{content:"";position:absolute;left:10px;right:10px;top:14px;height:4px;background:var(--terracota);border-radius:2px;box-shadow:0 10px 0 rgba(2,52,41,.15),0 20px 0 rgba(2,52,41,.15),0 30px 0 rgba(2,52,41,.15),0 40px 0 rgba(2,52,41,.15)}
+  .companion h4{font-size:19px;margin-bottom:4px}
+  .companion p{font-size:14px;color:#5d5347;margin:0 0 8px}
+  .companion a{font-weight:800;font-size:14px}
+
+  /* ====== Práctica / checklist / cierre ====== */
+  .practica{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);border-radius:24px;padding:40px 44px;margin:40px 0;position:relative;overflow:hidden}
+  .practica::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .practica .etiq{display:block;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .practica h3{font-size:24px;margin-bottom:14px}
+  .practica p{font-size:15.5px;color:#5d5347}
+  .practica ol{margin:18px 0 0;padding:0;list-style:none;counter-reset:pr}
+  .practica ol li{counter-increment:pr;position:relative;padding:10px 0 10px 46px;font-size:15px}
+  .practica ol li::before{content:counter(pr);position:absolute;left:0;top:8px;width:32px;height:32px;border-radius:50%;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .copiable{background:var(--verde-hondo);color:rgba(251,247,239,.92);border-radius:16px;padding:22px 26px;margin:20px 0 0;font-size:14.5px}
+  .copiable .etiq2{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);display:block;margin-bottom:10px}
+  .copiable p{color:rgba(251,247,239,.92);margin:0;max-width:none}
+  .checklist{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;padding:28px 32px;margin:26px 0}
+  .checklist .titulo-c{font-family:var(--serif);font-size:20px;color:var(--verde);margin-bottom:18px}
+  .check{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:15px}
+  .check:last-child{border-bottom:none}
+  .check input[type=checkbox]{appearance:none;width:24px;height:24px;border:2px solid rgba(2,52,41,.3);border-radius:7px;cursor:pointer;flex-shrink:0;position:relative;margin-top:1px;background:var(--crema)}
+  .check input[type=checkbox]:checked{background:var(--verde);border-color:var(--verde)}
+  .check input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--arena);font-size:14px;font-weight:800}
+  .check label{cursor:pointer}
+  .check label b{color:var(--verde)}
+  .siguiente{background:var(--verde);border-radius:24px;padding:44px 46px;margin:60px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .siguiente .txt b{display:block;font-family:var(--serif);font-size:22px;color:var(--crema);margin-bottom:6px}
+  .siguiente .txt span{font-size:14.5px;color:rgba(251,247,239,.75)}
+  .siguiente .pill{background:var(--arena);color:var(--verde);font-weight:800;font-size:14.5px;padding:13px 26px;border-radius:999px;white-space:nowrap}
+  .pie-doc{text-align:center;padding:0 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+
+  @media(max-width:720px){
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .lec-mesa{order:2;min-height:540px}
+    .ticket{left:5%;top:8%;width:min(270px,72%)}
+    .etiqueta-colgante{right:5%;bottom:7%;width:175px}
+    .resultado{padding:28px 24px}
+    .calc{padding:30px 24px}
+    .calc-grid{grid-template-columns:1fr}
+    .calc-out{grid-template-columns:1fr}
+    .oficios-grid{grid-template-columns:1fr}
+    .companion{flex-direction:column;text-align:center}
+    .practica{padding:30px 24px}
+    .siguiente{padding:32px 26px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA — la trastienda de los números ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · Pilar Aprende · Lección 03</span>
+    </div>
+    <h1>Precios <em>con margen</em></h1>
+    <p class="sub">No eres lo caro: eres lo justo. Hoy le ponemos números a esa frase — tu precio calculado de verdad, con todas tus horas dentro, y el argumento para defenderlo sin pedir perdón.</p>
+    <div class="lec-meta">
+      <span><b>Lectura</b> 16 min</span>
+      <span><b>Práctica</b> 25 min</span>
+      <span><b>Necesitas</b> una pieza · sus números · valentía</span>
+    </div>
+  </div>
+  <!-- La trastienda: el ticket de coste real + la etiqueta del precio justo -->
+  <div class="lec-mesa" aria-label="Pizarra con ticket de costes y etiqueta de precio">
+    <div class="grano"></div>
+    <span class="firma-mesa">la pizarra de la trastienda</span>
+    <div class="lec-num-mesa">03</div>
+    <div class="ticket">
+      <span class="sello-t">coste<br>real</span>
+      <div class="cab-t">TU PIEZA<small>taller · nº 001 · hecho a mano</small></div>
+      <div class="fila"><span>Materiales</span><span>9,00 €</span></div>
+      <div class="fila"><span>3,5 h × 18 €/h</span><span>63,00 €</span></div>
+      <div class="fila"><span>Gastos taller 15%</span><span>10,80 €</span></div>
+      <div class="fila total"><span>COSTE REAL</span><span>82,80 €</span></div>
+      <div class="nota-t">esto todavía no es tu precio…</div>
+      <div class="codigo"></div>
+    </div>
+    <div class="etiqueta-colgante">
+      <span class="ep-l">Precio justo</span>
+      <span class="ep-p">165 €</span>
+      <span class="ep-n">redondo, con margen · y sin pedir perdón</span>
+    </div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <section class="resultado">
+    <span class="etiq">Lo que consigues hoy</span>
+    <p>El precio real de tu pieza estrella, calculado con todas tus horas dentro — y las dos frases para defenderlo la próxima vez que oigas "qué caro".</p>
+  </section>
+
+  <!-- ============ 1. POR QUÉ ============ -->
+  <section class="cap">
+    <div class="cap-num">01 · Por qué importa</div>
+    <h2>El precio también <em>comunica</em></h2>
+    <p>En el blog te contamos <a href="https://www.oficioscirculares.com/blog/por-que-la-artesania-es-mejor-que-el-lujo/" target="_blank" rel="noopener">por qué tu trabajo es el punto óptimo entre lo industrial y el lujo</a>: precio justo + alma + durabilidad. Cuando alguien compra lujo, la mayor parte paga el logo (el margen bruto de LVMH ronda el 69%); cuando te compra a ti, paga el producto. Esa es tu posición — pero solo se sostiene si tu precio está bien calculado.</p>
+    <p>Y aquí está la trampa en la que cae medio sector: <strong>el precio bajo también espanta</strong>. Una pieza artesanal sospechosamente barata hace pensar "no será tan buena" o "algo esconde". Cobrar de menos no es humildad: es mandar el mensaje equivocado — y de paso, condenar tu taller a no poder vivir de él.</p>
+    <div class="pull">Cobrar de menos no te hace más accesible. Te hace menos creíble — y a tu taller, insostenible.</div>
+  </section>
+
+  <!-- ============ 2. LA FÓRMULA ============ -->
+  <section class="cap">
+    <div class="cap-num">02 · La fórmula honesta</div>
+    <h2>Tu precio, en <em>tres sumas y una multiplicación</em></h2>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Materiales — todos</h4><p>Lo que va dentro de la pieza Y lo que se gasta haciéndola: el esmalte que se queda en el bote, la aguja que se rompe, el embalaje. Si tocas la pieza con algo que se gasta, va aquí.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>Tus horas × una tarifa digna</h4><p>TODAS las horas: hacer, pero también preparar, rematar y empaquetar. ¿La tarifa? La prueba del ayudante: si contrataras a alguien con tus manos, ¿le pagarías 6 €/hora? Pues tú tampoco trabajas por eso. Suelo digno de partida: <strong>15-20 €/h</strong> según experiencia y oficio.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>Los gastos del taller — un 15% de colchón</h4><p>Luz, alquiler, herramientas que se desgastan, cuota de autónomos, la feria del mes que viene. No se pueden repartir pieza a pieza con precisión, así que se aproximan: suma un 10-20% sobre materiales+horas. Si nunca lo has contado, empieza por 15%.</p></div></div>
+    <div class="paso-linea"><div class="n">4</div><div><h4>× 2 — y esto no es avaricia, es futuro</h4><p>El coste real cubre lo que YA has gastado. El margen (×2 en venta directa) paga lo que viene: las piezas que salen mal, los meses flojos, tu formación, poder hacer descuento a quien quieras sin perder dinero, y que el taller crezca. <strong>Si algún día vendes a tiendas, ellas necesitan su margen: tu precio de mayorista es el coste real ×1,2-1,4, y por eso el ×2 en directa no es opcional</strong> — es lo que hace compatibles ambos canales.</p></div></div>
+    <div class="tip"><b>La cuenta del pánico:</b> al ver tu precio real por primera vez, casi todos descubren que llevaban años cobrando por debajo del COSTE — regalando las horas. Si te pasa, respira: es lo normal, y por eso existe esta lección. El plan de subida está en la práctica de hoy.</div>
+  </section>
+
+  <!-- ============ 3. CALCULADORA ============ -->
+  <section class="cap">
+    <div class="cap-num">03 · Tu calculadora</div>
+    <h2>Ponle números <em>a tu pieza estrella</em></h2>
+    <p class="lead">Rellena con una pieza concreta que tengas delante. Los resultados se actualizan solos.</p>
+    <div class="calc">
+      <h3>La cuenta clara</h3>
+      <p class="sub-c">Coste real = (materiales + horas × tarifa) + gastos del taller · Precio = coste real × margen</p>
+      <div class="calc-grid">
+        <div class="campo-c"><label>Materiales (€)</label><input type="number" id="cMat" value="9" min="0" step="0.5"><span class="mini">todo lo que se gasta al hacerla</span></div>
+        <div class="campo-c"><label>Horas de trabajo</label><input type="number" id="cHoras" value="3.5" min="0" step="0.5"><span class="mini">hacer + preparar + rematar + empaquetar</span></div>
+        <div class="campo-c"><label>Tu tarifa (€/hora)</label><input type="number" id="cTarifa" value="18" min="0" step="1"><span class="mini">suelo digno: 15-20 €/h</span></div>
+        <div class="campo-c"><label>Gastos del taller (%)</label><input type="number" id="cGastos" value="15" min="0" max="60" step="1"><span class="mini">luz, autónomos, ferias, desgaste — si dudas, 15</span></div>
+        <div class="campo-c"><label>Margen (venta directa)</label><select id="cMargen"><option value="1.8">×1,8 — ajustado</option><option value="2" selected>×2 — recomendado</option><option value="2.2">×2,2 — con colchón</option></select><span class="mini">para mayorista se usa ×1,2-1,4 sobre coste</span></div>
+        <div class="campo-c"><label>Años de vida de la pieza</label><input type="number" id="cVida" value="10" min="1" step="1"><span class="mini">para tu argumento de coste por uso</span></div>
+      </div>
+      <div class="calc-out">
+        <div class="out-card"><span class="ol">Coste real</span><span class="ov" id="oCoste">—</span></div>
+        <div class="out-card destacada"><span class="ol">Tu precio (directa)</span><span class="ov" id="oPvp">—</span></div>
+        <div class="out-card"><span class="ol">Mayorista (×1,3)</span><span class="ov" id="oMayor">—</span></div>
+      </div>
+      <div class="uso-linea">
+        <b>Tu argumento de coste por uso, listo para decir:</b>
+        <span class="frase" id="oUso">—</span>
+      </div>
+    </div>
+    <div class="tip"><b>De dónde sale el ×2:</b> es el estándar del sector handmade en venta directa (y Etsy lo recomienda igual). No lo bajes para "ser competitivo": ahí abajo no hay clientes buenos, hay ruina con buena intención.</div>
+  </section>
+
+  <!-- ============ 4. LOS GASTOS QUE OLVIDAS ============ -->
+  <section class="cap">
+    <div class="cap-num">04 · La letra pequeña</div>
+    <h2>Las horas y euros <em>que nadie cuenta</em></h2>
+    <p>La diferencia entre un taller que va justo y uno que respira suele estar aquí — en lo que no se apunta:</p>
+    <div class="paso-linea"><div class="n">a</div><div><h4>Las piezas que no salen</h4><p>La que se agrieta en el horno, el tinte que no agarra, la prueba. Las piezas buenas pagan a las que se quedaron por el camino: si 1 de cada 10 falla, tu coste real es un 10% mayor.</p></div></div>
+    <div class="paso-linea"><div class="n">b</div><div><h4>El tiempo que no es "hacer"</h4><p>Preparar material, limpiar, fotografiar, responder mensajes, empaquetar, ir a correos. Un truco: apunta una semana TODO el tiempo de taller y compáralo con las horas "de pieza". El agujero suele ser del 30-40%.</p></div></div>
+    <div class="paso-linea"><div class="n">c</div><div><h4>La feria entera, no solo la caseta</h4><p>Caseta + gasolina + comidas + los dos días sin producir. Esa cifra, dividida entre lo que vendes allí, va al precio de cada pieza. (Y el radar de ayudas del Club existe para recortarla.)</p></div></div>
+  </section>
+
+  <!-- ============ 5. DEFENDERLO ============ -->
+  <section class="cap">
+    <div class="cap-num">05 · Defenderlo</div>
+    <h2>El precio se calcula en la trastienda, <em>se defiende en el mostrador</em></h2>
+    <p>Tu mejor arma es el <strong>coste por uso</strong> (precio ÷ veces que se usará): una prenda de 50 € usada cuatro años sale a 0,25 € por uso; una de 20 € que dura uno, a 0,40 €. La "cara" es la barata. La calculadora de arriba ya te ha escrito tu frase — apréndetela.</p>
+    <p>Y recuerda las dos reglas del post: <strong>nunca te disculpes por tu precio</strong> (cada disculpa dice "ni yo me lo creo") y <strong>nunca compitas por precio</strong> con lo industrial — tu terreno es el valor. Con piezas que duran y se reparan, tu circularidad ES el argumento: "esto se repara, no se tira" justifica más precio que cualquier adjetivo.</p>
+    <div class="companion">
+      <div class="icono-c"></div>
+      <div>
+        <h4>Tu chuleta para el mostrador</h4>
+        <p>Las 8 objeciones más comunes con su respuesta literal ("es caro", "¿me haces descuento?", "lo he visto más barato"...), el guion del coste por uso y la frase para no olvidar quién eres. Imprímela y tenla en el taller.</p>
+        <a href="https://www.oficioscirculares.com/recursos/defiende-tu-precio?utm_source=club&utm_medium=leccion-03" target="_blank" rel="noopener">Descargar "Defiende tu precio sin pedir perdón" →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. ARQUITECTURA DEL CATÁLOGO ============ -->
+  <section class="cap">
+    <div class="cap-num">06 · La arquitectura</div>
+    <h2>Tu catálogo necesita <em>tres alturas</em></h2>
+    <p>Los precios no viven solos: se leen unos contra otros. Un catálogo bien construido vende más sin bajar nada — así:</p>
+    <div class="paso-linea"><div class="n">1</div><div><h4>La pieza de entrada (el imán)</h4><p>Algo pequeño y bien hecho en la franja 15-30 €: el jaboncito, la taza, el llavero de cuero. No es donde ganas — es donde te descubren y donde el que duda se estrena contigo. Muchos vuelven a por la grande.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>La pieza corazón (donde vives)</h4><p>Tu producto principal con el ×2 sano de esta lección. Es la que debe venderse más — y toda la arquitectura trabaja para ella.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>La pieza cumbre (el ancla)</h4><p>Tu obra mayor, cara sin complejos: la pieza de encargo, la edición limitada, la serie especial. Quizá vendas dos al año — da igual: su trabajo es <strong>hacer parecer sensato el precio de la corazón</strong> (el anclaje desplaza la elección hacia el término medio de forma consistente) y decirle al mundo de qué eres capaz.</p></div></div>
+    <div class="tip"><b>Números redondos, siempre:</b> el 19,99 es lenguaje de outlet — en artesanía huele a rebaja y abarata la percepción. El número redondo (20, 45, 165) transmite seguridad y calidad. Regla de la casa: redondo y en múltiplos de 5.</div>
+    <div class="tip"><b>Encargos personalizados:</b> precio +20-30% sobre la pieza equivalente (lo hecho a medida vale más, y lo saben) y <strong>50% por adelantado</strong> al confirmar — filtra curiosos, financia el material y os protege a los dos. Nunca "ya me dirás qué te parece": presupuesto cerrado antes de tocar material.</div>
+    <div class="tip"><b>¿Y las rebajas?</b> Mejor nunca en %: cada "-20%" enseña que tu precio de partida sobraba. Si quieres mover pieza (enero, cambio de colección), usa el lote con historia — pieza + kit de cuidado + envío — o la "pieza del mes". Mueves stock sin tocar el ancla de tu precio.</div>
+  </section>
+
+  <!-- ============ 7. EN TU OFICIO ============ -->
+  <section class="cap">
+    <div class="cap-num">07 · En tu oficio</div>
+    <h2>El coste invisible <em>de cada taller</em></h2>
+    <div class="en-tu-oficio">
+      <div class="titulo-o"><b>En tu oficio: lo que casi nadie mete en el precio</b></div>
+      <p class="sub-o">Cada oficio tiene un coste que se escapa de la cuenta. El tuyo es este — métele número:</p>
+      <div class="oficios-grid">
+        <div class="of"><b>Cerámica</b><span>las mermas del horno: las piezas buenas pagan a las agrietadas</span></div>
+        <div class="of"><b>Barro y alfarería</b><span>dos horneadas por pieza (bizcocho + esmalte): dobla la energía</span></div>
+        <div class="of"><b>Joyería</b><span>el metal que se va en limaduras — recupéralas y pésalas</span></div>
+        <div class="of"><b>Carpintería y ebanistería</b><span>el 30% del tablón que acaba en viruta y recortes</span></div>
+        <div class="of"><b>Cosmética natural</b><span>registro, normativa y lo caducado sin vender</span></div>
+        <div class="of"><b>Textil</b><span>el urdido: horas de telar antes de la primera pasada</span></div>
+        <div class="of"><b>Alimentación</b><span>la merma del día: lo que no se vende hoy no se vende</span></div>
+        <div class="of"><b>Restauración y upcycling</b><span>el diagnóstico: horas de estudiar la pieza antes de tocarla</span></div>
+        <div class="of"><b>Cuero</b><span>el perímetro de la piel que no es aprovechable</span></div>
+        <div class="of"><b>Forja y herrería</b><span>la fragua consume mientras piensas, no solo mientras golpeas</span></div>
+        <div class="of"><b>Vidrio</b><span>el horno no se apaga: tu coste es por día, no por pieza</span></div>
+        <div class="of"><b>Encuadernación</b><span>las pruebas de imposición y el papel sacrificado</span></div>
+        <div class="of"><b>Lana y costura</b><span>lavar y cardar: la fibra lleva horas antes de la primera puntada</span></div>
+        <div class="of"><b>Cestería y mimbre</b><span>el remojo y la preparación de la vara: empieza el día antes</span></div>
+        <div class="of"><b>Construcción tradicional</b><span>desplazamientos y montaje: la obra empieza en la furgoneta</span></div>
+        <div class="of"><b>Turismo rural</b><span>las plazas vacías: tu coste corre aunque no venga nadie <em>(precio por grupo mínimo, no por persona)</em></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. ERRORES ============ -->
+  <section class="cap">
+    <div class="cap-num">08 · Los clásicos</div>
+    <h2>Los 5 errores que <em>vacían talleres</em></h2>
+    <div class="error"><b>Copiar el precio del compañero de feria.</b> Sus costes no son los tuyos, y quizá él también lo está haciendo mal. La cuenta es tuya o no es.</div>
+    <div class="error"><b>Cobrar solo las horas "de hacer".</b> Preparar, rematar, fotografiar y empaquetar son trabajo. Si no las cobras, las regalas.</div>
+    <div class="error"><b>El descuento por sistema.</b> Descuento sin motivo = "mi precio de partida era mentira". Reserva la generosidad para quien tú elijas, desde un precio que la aguante.</div>
+    <div class="error"><b>Mismo precio en directa y a tiendas.</b> O pierdes tú o revienta el canal. Directa ×2, mayorista ×1,2-1,4 — dos precios, en paz.</div>
+    <div class="error"><b>No subir nunca.</b> Los materiales suben, tu oficio mejora — tu precio no puede quedarse en 2019. Revisión una vez al año, sin drama y sin pedir perdón.</div>
+  </section>
+
+  <!-- ============ PRÁCTICA ============ -->
+  <section class="practica">
+    <span class="etiq">La práctica de hoy</span>
+    <h3>El precio real de tu pieza estrella</h3>
+    <p>Con la calculadora de arriba y tu pieza de siempre:</p>
+    <ol>
+      <li><b>Calcula su precio real.</b> Con todas las horas — sé honesto en la casilla de horas, que ahí está la trampa. (10 min)</li>
+      <li><b>Compáralo con lo que cobras hoy.</b> Si sale por encima (saldrá), NO lo subas todo de golpe: precio nuevo para piezas nuevas y próxima colección; lo ya publicado, sube por tramos. (5 min)</li>
+      <li><b>Escribe tu frase de coste por uso</b> (la calculadora te la da hecha) y compártela en el chat con el mensaje de abajo. (10 min)</li>
+    </ol>
+    <div class="copiable">
+      <span class="etiq2">Mensaje para el chat — copia y pega</span>
+      <p>💰 Lección 3 hecha. Mi pieza estrella: cobraba __ € y su precio real es __ €. Mi frase de coste por uso: "____". ¿Cómo lo veis?</p>
+    </div>
+  </section>
+
+  <!-- ============ CHECKLIST ============ -->
+  <div class="checklist">
+    <div class="titulo-c">Checklist del precio con margen</div>
+    <div class="check"><input type="checkbox" id="k1"><label for="k1"><b>Todas las horas contadas</b> — hacer, preparar, rematar, empaquetar.</label></div>
+    <div class="check"><input type="checkbox" id="k2"><label for="k2"><b>Tarifa digna</b> — la que le pagarías a alguien con tus manos (15-20 €/h de suelo).</label></div>
+    <div class="check"><input type="checkbox" id="k3"><label for="k3"><b>15% de gastos del taller</b> incluido — luz, autónomos, ferias, desgaste.</label></div>
+    <div class="check"><input type="checkbox" id="k4"><label for="k4"><b>×2 aplicado sin remordimiento</b> — el margen es futuro, no avaricia.</label></div>
+    <div class="check"><input type="checkbox" id="k5"><label for="k5"><b>Tu frase de coste por uso escrita</b> — y la chuleta descargada para el mostrador.</label></div>
+    <div class="check"><input type="checkbox" id="k6"><label for="k6"><b>Plan de subida decidido</b> — nuevas piezas ya, catálogo por tramos, revisión anual.</label></div>
+  </div>
+
+  <!-- ============ SIGUIENTE ============ -->
+  <section class="siguiente">
+    <div class="txt">
+      <b>Siguiente lección: La bio que vende</b>
+      <span>Ya tienes foto, reel y precio. Ahora, que tu perfil cierre el círculo en 5 segundos.</span>
+    </div>
+    <span class="pill">Lección 04 →</span>
+  </section>
+
+  <p class="pie-doc">El Club de Oficios Circulares · Lección 03 · ¿Se te atasca algo o quieres que exista una lección concreta? Dilo en el chat con <b>#pido</b> — las próximas se deciden contigo.</p>
+
+</div>
+
+<script>
+  // Calculadora de precios — se actualiza en vivo
+  const $ = id => document.getElementById(id);
+  const fmt = n => n.toLocaleString('es-ES', {minimumFractionDigits: 0, maximumFractionDigits: 0}) + ' €';
+  function calcula(){
+    const mat = parseFloat($('cMat').value) || 0;
+    const horas = parseFloat($('cHoras').value) || 0;
+    const tarifa = parseFloat($('cTarifa').value) || 0;
+    const gastos = (parseFloat($('cGastos').value) || 0) / 100;
+    const margen = parseFloat($('cMargen').value) || 2;
+    const vida = Math.max(1, parseFloat($('cVida').value) || 1);
+    const base = mat + horas * tarifa;
+    const coste = base * (1 + gastos);
+    const pvp = coste * margen;
+    const mayor = coste * 1.3;
+    $('oCoste').textContent = fmt(coste);
+    $('oPvp').textContent = fmt(Math.ceil(pvp / 5) * 5); // redondeo comercial a 5
+    $('oMayor').textContent = fmt(mayor);
+    const usosAno = 100; // uso semanal aprox ×2 — conservador
+    const porUso = pvp / (vida * usosAno);
+    const cent = porUso < 1 ? Math.max(1, Math.round(porUso * 100)) + ' céntimos' : porUso.toLocaleString('es-ES',{maximumFractionDigits:2}) + ' €';
+    $('oUso').textContent = '"No mires el precio, mira el coste por uso: cuesta ' + fmt(Math.ceil(pvp/5)*5) + ' y te durará ' + vida + ' años — sale a ' + cent + ' por uso. Lo barato se compra una y otra vez."';
+  }
+  ['cMat','cHoras','cTarifa','cGastos','cMargen','cVida'].forEach(id => { $(id).addEventListener('input', calcula); $(id).addEventListener('change', calcula); });
+  calcula();
+</script>
+</body>
+</html>

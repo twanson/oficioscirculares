@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Primera Victoria — Guía de arranque · El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  img{display:block;max-width:100%}
+  .doc{max-width:860px;margin:0 auto;padding:0 28px}
+  .cap{padding:84px 0 20px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(30px,4.6vw,42px);margin-bottom:22px}
+  .cap h2 em{color:var(--terracota)}
+  p{margin-bottom:16px;max-width:66ch}
+  .lead{font-size:19px;color:var(--tinta-suave)}
+  strong{color:var(--verde)}
+
+  /* ====== Portada ====== */
+  .portada{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--verde)}
+  .portada img.fondo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .portada::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,42,32,.35),rgba(2,42,32,.55) 45%,rgba(3,42,32,.94))}
+  .portada-inner{position:relative;z-index:2;width:100%;max-width:860px;margin:0 auto;padding:60px 28px 72px}
+  .sello{width:58px;height:58px;border-radius:50%;box-shadow:0 0 0 8px rgba(232,213,183,.12);margin-bottom:28px}
+  .badge-fundador{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--terracota),var(--terracota-viva));color:#fff;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:10px 22px;border-radius:999px;margin-bottom:26px;box-shadow:0 10px 26px rgba(0,0,0,.35)}
+  .portada .kicker{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--arena);margin-bottom:16px}
+  .portada h1{font-size:clamp(52px,8.4vw,96px);color:var(--crema);letter-spacing:-.01em;margin-bottom:18px}
+  .portada h1 em{color:var(--arena)}
+  .portada .sub{font-size:19px;color:rgba(251,247,239,.88);max-width:52ch}
+  .portada .meta{margin-top:36px;display:flex;gap:26px;flex-wrap:wrap;font-size:13.5px;color:rgba(251,247,239,.65)}
+  .portada .meta b{color:var(--arena);font-weight:700}
+
+  /* ====== Carta ====== */
+  .carta{background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:26px;padding:52px 54px;margin-top:-46px;position:relative;z-index:3;box-shadow:0 30px 70px rgba(2,52,41,.14)}
+  .carta .saludo{font-family:var(--serif);font-size:24px;color:var(--verde);margin-bottom:18px}
+  .carta p{font-size:17px}
+  .carta .firma{display:flex;align-items:center;gap:18px;margin-top:30px}
+  .carta .firma img{width:62px;height:62px;border-radius:50%;object-fit:cover;object-position:top}
+  .carta .firma .nombre{font-family:var(--serif);font-size:20px;color:var(--verde)}
+  .carta .firma .cargo{font-size:13.5px;color:var(--terracota);font-weight:700}
+
+  /* ====== Caja fundador ====== */
+  .fundador-box{background:linear-gradient(160deg,#EFDFC2,var(--arena) 55%,#E0C69E);border-radius:26px;padding:46px 48px;margin:60px 0 0;position:relative;overflow:hidden}
+  .fundador-box::before{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;border:40px solid rgba(147,74,28,.08)}
+  .fundador-box>*{position:relative}
+  .fundador-box h3{font-size:26px;margin-bottom:14px}
+  .fundador-box h3 em{color:var(--terracota)}
+  .fundador-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+  .fundador-item{background:rgba(251,247,239,.55);border-radius:16px;padding:18px 20px}
+  .fundador-item b{display:block;font-family:var(--serif);font-size:17px;color:var(--verde);margin-bottom:4px}
+  .fundador-item span{font-size:13.5px;color:#5d5347;line-height:1.5;display:block}
+  .num-plaza{display:inline-block;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;font-size:18px;padding:8px 22px;border-radius:999px;margin-top:24px}
+
+  /* ====== Mapa del club — cajas estilo landing ====== */
+  .mapa{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:34px 0 10px}
+  .mapa-item{border-radius:22px;padding:30px 30px 28px;position:relative;overflow:hidden;box-shadow:0 12px 34px rgba(2,52,41,.09);transition:transform .22s ease,box-shadow .22s ease}
+  .mapa-item:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(2,52,41,.14)}
+  .mapa-item::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .chip-mini{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .chip-mini svg{width:22px;height:22px}
+  .mapa-item b{display:block;font-family:var(--serif);font-size:20px;margin-bottom:7px}
+  .mapa-item p{font-size:14.5px;margin:0}
+  .mapa-item--dark{background:linear-gradient(165deg,var(--verde),#03392C)}
+  .mapa-item--dark::before{background:linear-gradient(90deg,var(--arena),rgba(232,213,183,.15))}
+  .mapa-item--dark .chip-mini{background:rgba(232,213,183,.14);color:var(--arena)}
+  .mapa-item--dark b{color:var(--crema)}
+  .mapa-item--dark p{color:rgba(251,247,239,.78)}
+  .mapa-item--light{background:var(--blanco);border:1px solid rgba(2,52,41,.08)}
+  .mapa-item--light::before{background:linear-gradient(90deg,var(--terracota),rgba(147,74,28,.15))}
+  .mapa-item--light .chip-mini{background:#F3EFE6;color:var(--terracota)}
+  .mapa-item--light b{color:var(--verde)}
+  .mapa-item--light p{color:var(--tinta-suave)}
+  .mapa-item--accent{background:linear-gradient(180deg,#FBF2E2,#F5E7CF)}
+  .mapa-item--accent::before{background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .mapa-item--accent .chip-mini{background:rgba(147,74,28,.12);color:var(--terracota)}
+  .mapa-item--accent b{color:var(--verde)}
+  .mapa-item--accent p{color:#5d5347}
+  .regla-2h{background:var(--verde);color:var(--crema);border-radius:20px;padding:30px 36px;margin-top:26px;display:flex;gap:20px;align-items:center}
+  .regla-2h .reloj{font-family:var(--serif);font-style:italic;font-size:44px;color:var(--arena);flex-shrink:0;line-height:1}
+  .regla-2h p{margin:0;font-size:16px;color:rgba(251,247,239,.92)}
+  .regla-2h b{color:var(--arena)}
+
+  /* ====== Pull quote ====== */
+  .pull{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--verde);border-left:5px solid var(--terracota);padding:6px 0 6px 28px;margin:38px 0;max-width:none}
+
+  /* ====== Rutas ====== */
+  .rutas{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:30px 0}
+  .ruta-card{border-radius:22px;overflow:hidden;box-shadow:0 14px 40px rgba(2,52,41,.12);display:flex;flex-direction:column}
+  .ruta-card .foto{height:170px;overflow:hidden}
+  .ruta-card .foto img{width:100%;height:100%;object-fit:cover}
+  .ruta-card .cuerpo{padding:26px 28px 30px;flex:1;display:flex;flex-direction:column}
+  .ruta-card .letra{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--terracota);margin-bottom:6px}
+  .ruta-card h3{font-size:22px;margin-bottom:10px}
+  .ruta-card p{font-size:14.5px;color:var(--tinta-suave);margin-bottom:14px}
+  .ruta-card .ideal{font-size:13px;background:var(--arena-clara);border-radius:10px;padding:10px 14px;color:#5d5347;margin-top:auto}
+  .ruta-card .ideal b{color:var(--verde)}
+  .ruta-a{background:var(--blanco);border:1px solid rgba(2,52,41,.08)}
+  .ruta-b{background:var(--blanco);border:1px solid rgba(2,52,41,.08)}
+
+  /* ====== Timeline 7 días ====== */
+  .dias{margin:34px 0 10px;display:grid;gap:14px}
+  .dia{display:grid;grid-template-columns:92px 1fr;gap:0;background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:16px;overflow:hidden}
+  .dia .cuando{background:var(--verde);color:var(--arena);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 8px;font-family:var(--serif);font-style:italic}
+  .dia .cuando .d{font-size:26px;line-height:1}
+  .dia .cuando .l{font-size:11px;font-family:var(--sans);font-style:normal;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:4px;color:rgba(232,213,183,.75)}
+  .dia .que{padding:18px 24px}
+  .dia .que b{font-family:var(--serif);font-size:17.5px;color:var(--verde);display:block;margin-bottom:3px}
+  .dia .que p{font-size:14.5px;color:var(--tinta-suave);margin:0}
+
+  /* ====== Pasos numerados ====== */
+  .paso-linea{display:grid;grid-template-columns:52px 1fr;gap:18px;margin-bottom:22px}
+  .paso-linea .n{width:44px;height:44px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 5px 14px rgba(2,52,41,.22)}
+  .paso-linea h4{font-size:19px;margin-bottom:6px}
+  .paso-linea p{font-size:15px;color:var(--tinta-suave)}
+
+  /* ====== Plantillas rellenables ====== */
+  .plantilla{background:var(--arena-clara);border:1.5px dashed rgba(147,74,28,.4);border-radius:18px;padding:30px 34px;margin:26px 0}
+  .plantilla .titulo-p{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .plantilla .campo{margin-bottom:16px}
+  .plantilla .campo label{display:block;font-size:13px;font-weight:700;color:var(--verde);margin-bottom:5px}
+  .plantilla .campo .relleno{display:block;background:var(--blanco);border:1px solid rgba(2,52,41,.12);border-radius:10px;padding:12px 16px;font-size:15px;min-height:44px;color:var(--tinta);outline:none}
+  .plantilla .campo .relleno:focus{border-color:var(--terracota)}
+  .plantilla .campo .pista{font-size:12.5px;color:#8a7a5f;margin-top:4px;display:block}
+  .plantilla .nota-editable{font-size:12.5px;color:#8a7a5f;font-style:italic;font-family:var(--serif);margin-top:6px}
+
+  /* ====== Checklist ====== */
+  .checklist{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;padding:28px 32px;margin:26px 0}
+  .checklist .titulo-c{font-family:var(--serif);font-size:20px;color:var(--verde);margin-bottom:18px}
+  .check{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:15px}
+  .check:last-child{border-bottom:none}
+  .check input[type=checkbox]{appearance:none;width:24px;height:24px;border:2px solid rgba(2,52,41,.3);border-radius:7px;cursor:pointer;flex-shrink:0;position:relative;margin-top:1px;background:var(--crema)}
+  .check input[type=checkbox]:checked{background:var(--verde);border-color:var(--verde)}
+  .check input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--arena);font-size:14px;font-weight:800}
+  .check label{cursor:pointer}
+  .check label b{color:var(--verde)}
+
+  /* ====== Consejos / errores — estilo landing ====== */
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+  .error{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:16px;padding:18px 24px 18px 66px;margin:12px 0;font-size:15px;box-shadow:0 4px 14px rgba(2,52,41,.04)}
+  .error::before{content:"✕";position:absolute;left:20px;top:17px;width:28px;height:28px;border-radius:50%;background:rgba(147,74,28,.1);color:var(--terracota);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+  .error b{color:var(--terracota)}
+
+  /* ====== Lo que NO necesitas ====== */
+  .no-necesitas{background:linear-gradient(165deg,var(--verde),#03392C);border-radius:24px;padding:40px 44px;margin:34px 0 10px;position:relative;overflow:hidden}
+  .no-necesitas::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:30px solid rgba(232,213,183,.06)}
+  .no-necesitas h3{color:var(--crema);font-size:24px;margin-bottom:8px;position:relative}
+  .no-necesitas h3 em{color:var(--arena)}
+  .no-necesitas>p{color:rgba(251,247,239,.75);font-size:15px;position:relative}
+  .no-lista{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;position:relative}
+  .no-lista span{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(251,247,239,.22);background:rgba(251,247,239,.05);border-radius:999px;padding:10px 20px;font-size:14px;font-weight:600;color:rgba(251,247,239,.9)}
+  .no-lista span::before{content:"✕";color:var(--arena);font-weight:800;font-size:12px}
+
+  /* ====== Plan de 30 minutos ====== */
+  .plan30{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);border-radius:24px;padding:38px 42px;margin:34px 0;position:relative;overflow:hidden}
+  .plan30::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .plan30 .eyebrow-p{display:block;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .plan30 h3{font-size:23px;margin-bottom:12px}
+  .plan30 p{font-size:15px;color:#5d5347}
+  .plan30 ol{margin:16px 0 0 0;padding-left:0;list-style:none;counter-reset:p30}
+  .plan30 ol li{counter-increment:p30;position:relative;padding:10px 0 10px 44px;font-size:15px;color:var(--tinta)}
+  .plan30 ol li::before{content:counter(p30);position:absolute;left:0;top:8px;width:30px;height:30px;border-radius:50%;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;display:flex;align-items:center;justify-content:center;font-size:14px}
+
+  /* ====== Glosario ====== */
+  .glosario{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin:28px 0 10px}
+  .glos-item{background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:14px;padding:16px 20px}
+  .glos-item dt{font-family:var(--serif);font-size:17px;color:var(--verde);margin-bottom:3px}
+  .glos-item dd{font-size:13.5px;color:var(--tinta-suave);margin:0}
+
+  /* ====== Mensaje copiable ====== */
+  .copiable{background:var(--verde-hondo);color:rgba(251,247,239,.92);border-radius:18px;padding:28px 32px;margin:24px 0;font-size:15px;position:relative}
+  .copiable .etiq{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);display:block;margin-bottom:12px}
+  .copiable p{color:rgba(251,247,239,.92);margin-bottom:8px;max-width:none}
+
+  /* ====== Separador de capítulo con foto ====== */
+  .inter{height:300px;border-radius:24px;overflow:hidden;position:relative;margin:70px 0 0}
+  .inter img{width:100%;height:100%;object-fit:cover}
+  .inter::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(2,42,32,.35))}
+  .inter .pie-foto{position:absolute;bottom:16px;left:20px;z-index:2;background:rgba(2,42,32,.72);color:var(--crema);font-size:12.5px;font-weight:600;padding:7px 15px;border-radius:999px}
+
+  /* ====== Cierre ====== */
+  .cierre{background:var(--verde);border-radius:26px;padding:64px 56px;margin:80px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .cierre::before{content:"";position:absolute;left:-90px;bottom:-90px;width:300px;height:300px;border-radius:50%;border:44px solid rgba(232,213,183,.06)}
+  .cierre h2{color:var(--crema);font-size:clamp(28px,4vw,40px);margin-bottom:18px;position:relative}
+  .cierre h2 em{color:var(--arena)}
+  .cierre p{color:rgba(251,247,239,.85);max-width:54ch;margin:0 auto 14px;position:relative}
+  .cierre .contacto{margin-top:26px;font-size:14.5px;color:rgba(251,247,239,.65)}
+  .cierre .contacto b{color:var(--arena)}
+
+  @media(max-width:720px){
+    .carta{padding:36px 26px}
+    .fundador-grid,.mapa,.rutas,.glosario{grid-template-columns:1fr}
+    .no-necesitas{padding:30px 24px}
+    .plan30{padding:28px 24px}
+    .fundador-box{padding:34px 26px}
+    .dia{grid-template-columns:72px 1fr}
+    .cierre{padding:44px 26px}
+    .plantilla{padding:24px 20px}
+  }
+  @media print{
+    .portada{min-height:auto}
+    body{font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PORTADA ============ -->
+<header class="portada">
+  <img class="fondo" src="https://images.pexels.com/photos/4241339/pexels-photo-4241339.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="portada-inner">
+    <img class="sello" src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+    <div class="badge-fundador">Edición fundador</div>
+    <div class="kicker">El Club de Oficios Circulares · Guía de arranque</div>
+    <h1>La Primera <em>Victoria</em></h1>
+    <p class="sub">De cero a tu primera pieza de presencia digital publicada con método. En siete días, con nuestra revisión, y sin dejar el taller.</p>
+    <div class="meta">
+      <span><b>Para:</b> fundadores del Club</span>
+      <span><b>Tiempo total:</b> ~2 horas en 7 días</span>
+      <span><b>Resultado:</b> tu primer reel o tu ficha de producto, publicados</span>
+    </div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ============ CARTA ============ -->
+  <section class="carta">
+    <div class="saludo">Bienvenido/a al Club.</div>
+    <p>Si estás leyendo esto, eres una de las <strong>40 personas</strong> que han decidido entrar antes que nadie. Eso dice algo de ti: eres de los que no esperan a que las cosas pasen.</p>
+    <p>Esta guía existe por una razón muy simple: no quiero que tu primera semana en el Club sea "mirar vídeos". Quiero que sea <strong>publicar algo de lo que estés orgulloso</strong>. Algo hecho con método, revisado por nosotros, que empiece a trabajar por tu taller desde el primer día.</p>
+    <p>No hace falta que sepas de redes. No hace falta cámara. Hace falta tu oficio —que ya lo tienes— y un par de horas esta semana. Del resto nos encargamos juntos.</p>
+    <div class="firma">
+      <img src="https://www.oficioscirculares.com/assets/images/fotosobrenosotrosOC.png" alt="Jose">
+      <div>
+        <div class="nombre">Jose Moscardó</div>
+        <div class="cargo">Fundador de Oficios Circulares</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FUNDADOR ============ -->
+  <section class="fundador-box">
+    <h3>Esto significa ser <em>fundador</em></h3>
+    <p style="color:#5d5347">El Club se termina de construir contigo dentro. Los primeros no sois un número: sois el criterio con el que decidimos qué se hace y qué no.</p>
+    <div class="fundador-grid">
+      <div class="fundador-item"><b>Tu precio, para siempre</b><span>12 €/mes o 120 €/año congelados mientras sigas dentro, suba lo que suba después.</span></div>
+      <div class="fundador-item"><b>Voz y voto</b><span>Las próximas lecciones y retos se deciden también con lo que tú pidas. Pide sin cortarte.</span></div>
+      <div class="fundador-item"><b>Sello de fundador</b><span>Tu nombre queda en la primera hornada. Cuando esto crezca, los primeros se recuerdan.</span></div>
+    </div>
+    <span class="num-plaza">Plaza de fundador Nº ____ de 40</span>
+  </section>
+
+  <!-- ============ CAP 1: EL MAPA ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 01</div>
+    <h2>El Club, en <em>un vistazo</em></h2>
+    <p class="lead">Cuatro cosas viven aquí dentro. No hace falta usarlas todas desde el primer día — esta semana solo necesitas la primera.</p>
+    <div class="mapa">
+      <div class="mapa-item mapa-item--dark">
+        <div class="chip-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <b>El chat, por oficios y zonas</b><p>Tu taller ya no decide solo. Preguntas a las diez de la noche y contesta alguien que ha pasado por lo mismo. Aquí es donde pedirás tu primera revisión.</p>
+      </div>
+      <div class="mapa-item mapa-item--light">
+        <div class="chip-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <b>El directo mensual</b><p>Una sesión en vivo al mes: revisamos perfiles y tiendas de miembros delante de todos. Sales con deberes concretos, no con teoría.</p>
+      </div>
+      <div class="mapa-item mapa-item--accent">
+        <div class="chip-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <b>El radar de ayudas</b><p>Vigilamos las subvenciones de tu comunidad autónoma —digitalización, ferias— y te avisamos a tiempo, con plantillas de solicitud.</p>
+      </div>
+      <div class="mapa-item mapa-item--light">
+        <div class="chip-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+        <b>Los retos trimestrales</b><p>"12 reels en 30 días", "monta tu tienda". Avanzar en grupo es lo que hace que esta vez sí lo termines.</p>
+      </div>
+    </div>
+    <div class="regla-2h">
+      <div class="reloj">2h</div>
+      <p><b>La regla de la casa:</b> el Club está diseñado para caber en dos horas a la semana como máximo. Tu trabajo es hacer piezas; el Club trabaja para tu taller, no al revés. Si una semana el horno no da tregua, aquí seguimos cuando vuelvas.</p>
+    </div>
+
+    <!-- ACCESOS: rellenar los [corchetes] antes del primer envío a fundadores -->
+    <div class="checklist" style="margin-top:26px">
+      <div class="titulo-c">Tus accesos — guárdalos a mano</div>
+      <div class="check"><span style="width:24px;flex-shrink:0;text-align:center;color:var(--terracota);font-weight:800">→</span><label><b>El chat del Club:</b> [ENLACE DE TELEGRAM] — entra hoy y preséntate, es el día 1 de tu semana.</label></div>
+      <div class="check"><span style="width:24px;flex-shrink:0;text-align:center;color:var(--terracota);font-weight:800">→</span><label><b>Tu primer directo:</b> [DÍA Y HORA — p. ej. jueves 24 de septiembre, 19:00] — el enlace se comparte en el chat ese mismo día.</label></div>
+      <div class="check"><span style="width:24px;flex-shrink:0;text-align:center;color:var(--terracota);font-weight:800">→</span><label><b>El radar de ayudas:</b> te llega por correo desde hola@oficioscirculares.com — añádenos a contactos para que no caiga en spam.</label></div>
+      <div class="check"><span style="width:24px;flex-shrink:0;text-align:center;color:var(--terracota);font-weight:800">→</span><label><b>Tu suscripción y recibos:</b> [ENLACE AL PORTAL DE STRIPE] — cambiar tarjeta o darte de baja, en dos clics, sin preguntar a nadie.</label></div>
+    </div>
+  </section>
+
+  <!-- ============ CAP 2: LA PRIMERA VICTORIA ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 02</div>
+    <h2>Por qué publicar <em>en 7 días</em></h2>
+    <p>Llevamos años acompañando talleres y hay un patrón que se repite: quien empieza "preparándose" —mirando cursos, esperando a tener mejor cámara, mejor logo, mejor momento— no publica nunca. Quien publica una primera pieza imperfecta pero hecha con método, sigue publicando.</p>
+    <p>Por eso tu primera semana en el Club no va de aprender. Va de <strong>existir online</strong>: una sola pieza, bien hecha, revisada por nosotros antes de salir.</p>
+    <div class="pull">No te vas a hacer viral esta semana. Vas a empezar a existir. Que es exactamente lo que cuenta.</div>
+    <p>Y hay una razón más, práctica: cuando la gente te descubre —en una feria, por un conocido, por un encargo— lo primero que hace es buscarte en el móvil. Esa primera pieza es la diferencia entre que te encuentren o que encuentren un perfil vacío de hace dos años.</p>
+
+    <div class="no-necesitas">
+      <h3>Lo que <em>NO</em> necesitas esta semana</h3>
+      <p>Quítate esto de la cabeza. Nada de lo siguiente es requisito para tu primera victoria — y perseguirlo es la forma más habitual de no publicar nunca:</p>
+      <div class="no-lista">
+        <span>Un logo nuevo</span>
+        <span>Una página web</span>
+        <span>Una cámara "de verdad"</span>
+        <span>Miles de seguidores</span>
+        <span>Publicar todos los días</span>
+        <span>Saber de marketing</span>
+        <span>Salir hablando a cámara</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAP 3: ELIGE TU RUTA ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 03</div>
+    <h2>Elige tu <em>ruta</em></h2>
+    <p class="lead">Hay dos caminos a la primera victoria. Los dos valen igual: elige el que te pida menos esfuerzo de arranque, no el que creas que "deberías" hacer.</p>
+    <div class="rutas">
+      <div class="ruta-card ruta-a">
+        <div class="foto"><img src="https://images.pexels.com/photos/9736864/pexels-photo-9736864.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Artesana trabajando en su estudio"></div>
+        <div class="cuerpo">
+          <div class="letra">Ruta A</div>
+          <h3>Tu primer reel del proceso</h3>
+          <p>Un vídeo corto (20-30 segundos) de tus manos trabajando. Sin hablar a cámara, sin bailar, sin enseñar la cara si no quieres. El proceso ES el contenido.</p>
+          <div class="ideal"><b>Ideal si:</b> tu oficio es visual en movimiento (torno, telar, forja, gubia...) y tienes un rato de trabajo esta semana que puedas grabar.</div>
+        </div>
+      </div>
+      <div class="ruta-card ruta-b">
+        <div class="foto"><img src="https://images.pexels.com/photos/20561176/pexels-photo-20561176/free-photo-of-smiling-woman-in-apron-holding-bottle.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Ceramista con una de sus piezas"></div>
+        <div class="cuerpo">
+          <div class="letra">Ruta B</div>
+          <h3>Tu ficha de producto profesional</h3>
+          <p>Una pieza tuya, bien fotografiada y bien contada: historia, materiales, medidas, cuidados y precio. El documento que vende por ti cuando tú no estás.</p>
+          <div class="ideal"><b>Ideal si:</b> la cámara te impone, tienes una pieza estrella terminada, o quieres algo que sirva también para WhatsApp, ferias y encargos.</div>
+        </div>
+      </div>
+    </div>
+    <div class="tip"><b>¿Dudas?</b> Pregunta en el chat qué ruta le pega más a tu oficio — para eso está. Y no es una decisión para siempre: la semana que viene puedes hacer la otra.</div>
+  </section>
+
+  <!-- ============ CAP 4: EL PLAN ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 04</div>
+    <h2>Tu semana, <em>día a día</em></h2>
+    <div class="dias">
+      <div class="dia"><div class="cuando"><span class="d">1</span><span class="l">Día</span></div><div class="que"><b>Entras y te sitúas</b><p>Preséntate en el chat de tu oficio (nombre, oficio, de dónde eres, qué haces — tres líneas bastan) y di qué ruta eliges. 15 minutos.</p></div></div>
+      <div class="dia"><div class="cuando"><span class="d">2-3</span><span class="l">Días</span></div><div class="que"><b>Preparas el material</b><p>Ruta A: grabas los 3 planos durante tu trabajo normal. Ruta B: haces las 3 fotos de tu pieza con luz de ventana. 30-40 minutos.</p></div></div>
+      <div class="dia"><div class="cuando"><span class="d">4-5</span><span class="l">Días</span></div><div class="que"><b>Montas y escribes</b><p>Rellenas la plantilla de tu ruta (guion + texto, o ficha campo a campo). Con las plantillas de esta guía es rellenar huecos. 30 minutos.</p></div></div>
+      <div class="dia"><div class="cuando"><span class="d">6</span><span class="l">Día</span></div><div class="que"><b>Pides revisión</b><p>Subes tu borrador al chat con el mensaje del capítulo 7. Te devolvemos feedback concreto en menos de 24h laborables. 10 minutos.</p></div></div>
+      <div class="dia"><div class="cuando"><span class="d">7</span><span class="l">Día</span></div><div class="que"><b>Publicas</b><p>Aplicas los retoques y le das a publicar. Avisa en el chat: tu primera victoria se celebra. 15 minutos.</p></div></div>
+    </div>
+
+    <div class="plan30">
+      <span class="eyebrow-p">Plan de emergencia</span>
+      <h3>¿La semana se ha torcido? La victoria de 30 minutos</h3>
+      <p>Pedidos, feria, la vida. Si llegas al día 6 sin nada, no pasas de semana en blanco: haz esta versión mínima y la victoria sigue siendo tuya.</p>
+      <ol>
+        <li><b>Una foto</b> de la pieza que tengas más a mano, junto a la ventana, sobre fondo liso (10 min).</li>
+        <li><b>Tres frases de caption:</b> qué es, cómo está hecha, cómo conseguirla (10 min).</li>
+        <li><b>La bio arreglada</b> con la plantilla del capítulo 7, y publicas (10 min).</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="inter">
+    <img src="https://images.pexels.com/photos/34116079/pexels-photo-34116079/free-photo-of-skilled-craftsmanship-blacksmith-at-work.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Herrero trabajando el metal">
+    <span class="pie-foto">Ruta A · El proceso es el contenido</span>
+  </div>
+
+  <!-- ============ CAP 5: RUTA A ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 05 · Ruta A</div>
+    <h2>Tu primer reel <em>del proceso</em></h2>
+    <p class="lead">Lo que para ti es "un martes cualquiera en el taller", para quien mira desde fuera es hipnótico. Solo vas a ponerle un marco.</p>
+
+    <h3 style="font-size:22px;margin:30px 0 18px">Los 3 planos que necesitas</h3>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Las manos (plano cerca)</h4><p>Tu gesto más característico: el barro subiendo en el torno, la gubia sacando viruta, el hilo tensándose. 10-15 segundos seguidos, móvil quieto (apóyalo en algo, no lo sostengas).</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>El proceso (plano medio)</h4><p>Tú trabajando, desde un lateral o desde atrás — no hace falta cara. Se tiene que ver el taller de fondo: esa "textura" de taller real es lo que nadie puede copiar. Otros 10-15 segundos.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>La pieza (plano final)</h4><p>El resultado, quieto, con buena luz. Puede ser la pieza girando despacio en tus manos o simplemente posada donde le dé la luz de la ventana. 5-10 segundos.</p></div></div>
+
+    <div class="tip"><b>Ajustes del móvil (una sola vez):</b> graba en horizontal NO — vertical siempre (9:16). Resolución: la más alta que tenga tu móvil (Ajustes → Cámara). Limpia la lente con la camiseta antes de grabar: es el "truco profesional" más infravalorado que existe.</div>
+    <div class="tip"><b>La luz:</b> apaga los fluorescentes y acércate a la ventana. Luz natural lateral, siempre. Si el taller es oscuro, graba a primera hora de la mañana o última de la tarde, cuando el sol entra bajo.</div>
+
+    <h3 style="font-size:22px;margin:34px 0 6px">Tu guion, para rellenar</h3>
+    <p class="nota-editable" style="font-family:var(--serif);font-style:italic;color:#8a7a5f;font-size:14px">Puedes escribir directamente sobre los recuadros — esta guía es tuya.</p>
+    <div class="plantilla">
+      <div class="titulo-p">Plantilla · Reel del proceso (20-30 s)</div>
+      <div class="campo"><label>Orden de los planos (montaje simple: uno detrás de otro)</label><span class="relleno" contenteditable="true">Manos (8 s) → Proceso (10 s) → Pieza (7 s)</span><span class="pista">Corta cada clip por donde el gesto esté más vivo. La app de edición del propio Instagram sirve de sobra.</span></div>
+      <div class="campo"><label>Texto sobre el vídeo (una frase, aparece los 3 primeros segundos)</label><span class="relleno" contenteditable="true">Así nace un/una __________ en mi taller de __________</span><span class="pista">Otras que funcionan: "De un trozo de ____ a ____ en ____ horas" · "Esto no sale de una fábrica" · "El gesto que llevo ____ años puliendo"</span></div>
+      <div class="campo"><label>Caption (el texto de debajo)</label><span class="relleno" contenteditable="true">Cada __________ que sale de mi taller lleva [material de la zona / X horas de trabajo / técnica]. No hay dos iguales, y esa es la gracia. ¿Quieres ver cómo termina? Te leo en comentarios.</span><span class="pista">Termina siempre con una pregunta o invitación: es lo que hace que la gente comente.</span></div>
+      <div class="campo"><label>Música</label><span class="relleno" contenteditable="true">Una instrumental tranquila del catálogo de Instagram (busca "aesthetic" o "calm") — o el SONIDO REAL del taller, que funciona aún mejor si es rítmico</span></div>
+    </div>
+
+    <h3 style="font-size:22px;margin:34px 0 14px">Los 4 errores del primer reel</h3>
+    <div class="error"><b>Grabar 20 clips distintos.</b> Tres planos. Más material = más horas de edición = reel que nunca se publica.</div>
+    <div class="error"><b>Esperar el "momento perfecto" del taller.</b> El polvo, las herramientas por medio y el mandil manchado no son un problema: son la prueba de que es real.</div>
+    <div class="error"><b>Ponerle 5 frases de texto encima.</b> Una frase. El vídeo ya habla.</div>
+    <div class="error"><b>Borrarlo a las dos horas porque "no funciona".</b> Un reel trabaja durante días. No se toca en al menos una semana.</div>
+  </section>
+
+  <div class="inter">
+    <img src="https://images.pexels.com/photos/9304295/pexels-photo-9304295.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Alfarera con su pieza">
+    <span class="pie-foto">Ruta B · La ficha que vende por ti</span>
+  </div>
+
+  <!-- ============ CAP 6: RUTA B ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 06 · Ruta B</div>
+    <h2>Tu ficha de producto <em>profesional</em></h2>
+    <p class="lead">Una pieza bien contada se defiende sola: en Instagram, en WhatsApp cuando te piden "más info", en la feria con el móvil en la mano. La haces una vez y trabaja para siempre.</p>
+
+    <h3 style="font-size:22px;margin:30px 0 18px">Primero, las 3 fotos</h3>
+    <div class="paso-linea"><div class="n">1</div><div><h4>La pieza entera</h4><p>Sobre fondo neutro y limpio: una tabla de madera, una tela lisa, la pared encalada. Junto a una ventana, con la luz llegando de lado. Nada más en el encuadre.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>El detalle</h4><p>Acércate a lo que hace única la pieza: la textura, la firma, el esmalte, la costura. Es la foto que dice "esto está hecho a mano".</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>La pieza en uso o en contexto</h4><p>La taza con café, la lámpara encendida, el cesto con fruta. Ayuda a imaginarla en casa — y a justificar su precio.</p></div></div>
+    <div class="tip"><b>Truco de escala:</b> incluye en alguna foto un objeto reconocible (una mano, una manzana) — evita el clásico "pensaba que era más grande" de las devoluciones.</div>
+
+    <h3 style="font-size:22px;margin:34px 0 6px">La ficha, campo a campo</h3>
+    <p class="nota-editable" style="font-family:var(--serif);font-style:italic;color:#8a7a5f;font-size:14px">Rellénala aquí mismo con tu pieza estrella. Esta será tu plantilla para todas las demás.</p>
+    <div class="plantilla">
+      <div class="titulo-p">Plantilla · Ficha de producto</div>
+      <div class="campo"><label>Nombre de la pieza (evocador, no técnico)</label><span class="relleno" contenteditable="true"></span><span class="pista">"Cuenco Amanecer" cuenta más que "cuenco esmaltado ref. 04". Los nombres de lugares de tu zona funcionan de maravilla.</span></div>
+      <div class="campo"><label>Su historia, en 3 frases</label><span class="relleno" contenteditable="true">Qué te llevó a hacerla · qué tiene de especial el proceso · qué la hace única</span><span class="pista">La gente no compra solo la pieza: compra poder contarla cuando alguien pregunte "¿y esto?".</span></div>
+      <div class="campo"><label>Materiales y de dónde vienen</label><span class="relleno" contenteditable="true"></span><span class="pista">"Lana de oveja castellana de una ganadería a 40 km" vale oro: 8 de cada 10 pagarían más por lo hecho cerca.</span></div>
+      <div class="campo"><label>Medidas y peso</label><span class="relleno" contenteditable="true"></span></div>
+      <div class="campo"><label>Cuidados — y qué pasa si se estropea</label><span class="relleno" contenteditable="true"></span><span class="pista">"Esta pieza se repara: si algún día se te rompe, escríbeme". Esa frase justifica precio y fideliza como ninguna otra. Es tu circularidad convertida en argumento.</span></div>
+      <div class="campo"><label>Precio</label><span class="relleno" contenteditable="true"></span><span class="pista">Regla rápida anti-regateo: (materiales + tus horas × lo que vale tu hora) × 2. Si te da vértigo, es que ibas cobrando de menos. En el Club hay una lección entera de precios esperándote.</span></div>
+      <div class="campo"><label>Cómo se consigue</label><span class="relleno" contenteditable="true">Encargo por WhatsApp / tienda online / próxima feria en ____</span></div>
+    </div>
+    <div class="tip"><b>Dónde usarla desde ya:</b> como post de Instagram (foto 1 + la historia de caption), como respuesta guardada en WhatsApp Business para los "¿me pasas info?", e impresa junto a la pieza en tu próxima feria.</div>
+  </section>
+
+  <!-- ============ CAP 7: REVISIÓN Y PUBLICACIÓN ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 07</div>
+    <h2>Pide revisión y <em>publica</em></h2>
+    <p>El día 6, sube tu borrador al chat de tu oficio. Nada de "a ver si alguien puede mirarlo": usa este mensaje tal cual, que para eso está.</p>
+    <div class="copiable">
+      <span class="etiq">Mensaje para el chat — copia y pega</span>
+      <p>🏁 Primera victoria en marcha. Soy [nombre], de [taller/oficio]. Ruta [A/B]: os dejo mi [reel/ficha] para revisión antes de publicar. ¿Qué mejoraríais? Gracias!</p>
+    </div>
+    <p>Te devolvemos feedback concreto en menos de 24 horas laborables — de nosotros y muchas veces también de otros compañeros. Aplica lo que te encaje (es tu pieza, tuya es la última palabra) y publica el día 7.</p>
+    <div class="checklist">
+      <div class="titulo-c">Checklist final antes de darle a publicar</div>
+      <div class="check"><input type="checkbox" id="c1"><label for="c1"><b>La luz es natural</b> — nada de fluorescente verdoso ni flash directo.</label></div>
+      <div class="check"><input type="checkbox" id="c2"><label for="c2"><b>Se lee en 3 segundos</b> qué haces y qué se ve (texto o primera frase del caption).</label></div>
+      <div class="check"><input type="checkbox" id="c3"><label for="c3"><b>Hay una invitación al final</b> — pregunta, "escríbeme", "te leo".</label></div>
+      <div class="check"><input type="checkbox" id="c4"><label for="c4"><b>Tu perfil dice quién eres</b> — bio arreglada con la plantilla de aquí abajo (5 minutos que valen mucho).</label></div>
+      <div class="check"><input type="checkbox" id="c5"><label for="c5"><b>Has pasado por revisión</b> — ninguna primera victoria sale sin una segunda mirada.</label></div>
+      <div class="check"><input type="checkbox" id="c6"><label for="c6"><b>Publicado, avisas en el chat</b> — celebramos todas. Sin excepción.</label></div>
+    </div>
+
+    <h3 style="font-size:22px;margin:34px 0 6px">Bonus: tu bio en 3 líneas</h3>
+    <p class="nota-editable" style="font-family:var(--serif);font-style:italic;color:#8a7a5f;font-size:14px">Cinco minutos que multiplican todo lo demás: es lo primero que ve quien llega a tu perfil.</p>
+    <div class="plantilla">
+      <div class="titulo-p">Plantilla · Bio de Instagram</div>
+      <div class="campo"><label>Línea 1 — Qué haces y dónde</label><span class="relleno" contenteditable="true">[Oficio] hecho a mano en [pueblo/comarca]</span><span class="pista">Ej.: "Cerámica de leña hecha a mano en la Sierra de Gata"</span></div>
+      <div class="campo"><label>Línea 2 — Qué te hace distinto</label><span class="relleno" contenteditable="true">[Material local / técnica / años de oficio / piezas que duran y se reparan]</span><span class="pista">Ej.: "Lana de ovejas de mi valle · piezas que se heredan"</span></div>
+      <div class="campo"><label>Línea 3 — Cómo comprarte</label><span class="relleno" contenteditable="true">Encargos por DM o WhatsApp ↓</span><span class="pista">Y en el enlace de la bio: tu WhatsApp, tienda o formulario. Uno solo, el que mejor te funcione.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CAP 8: DESPUÉS ============ -->
+  <section class="cap">
+    <div class="cap-num">Capítulo 08</div>
+    <h2>¿Y <em>después</em>?</h2>
+    <p>Publicada tu primera pieza, ya no eres un taller invisible. Ahora toca convertir ese primer paso en costumbre — y de eso va el resto del Club:</p>
+    <div class="paso-linea"><div class="n">→</div><div><h4>Apúntate al directo de este mes</h4><p>Trae tu perfil recién estrenado y lo revisamos en vivo. Sales con tus siguientes tres pasos claros.</p></div></div>
+    <div class="paso-linea"><div class="n">→</div><div><h4>Súmate al reto del trimestre</h4><p>La constancia en grupo no pesa. El calendario del reto está fijado en el chat.</p></div></div>
+    <div class="paso-linea"><div class="n">→</div><div><h4>Y ejerce de fundador</h4><p>¿Qué lección necesitas que exista? ¿Qué te está costando de verdad? Dilo en el chat con la etiqueta #pido. Las próximas lecciones se deciden con eso.</p></div></div>
+  </section>
+
+  <!-- ============ APÉNDICE: GLOSARIO ============ -->
+  <section class="cap">
+    <div class="cap-num">Apéndice</div>
+    <h2>Palabras <em>sin humo</em></h2>
+    <p class="lead">Las únicas que necesitas esta semana. Si alguien usa jerga que no está aquí, probablemente no la necesitas todavía.</p>
+    <dl class="glosario">
+      <div class="glos-item"><dt>Reel</dt><dd>Vídeo corto y vertical en Instagram. El formato que más lejos llega sin pagar.</dd></div>
+      <div class="glos-item"><dt>Caption</dt><dd>El texto que acompaña a una publicación. Donde vive tu historia.</dd></div>
+      <div class="glos-item"><dt>Bio</dt><dd>Las 3-4 líneas de tu perfil. Tu escaparate de 5 segundos.</dd></div>
+      <div class="glos-item"><dt>Hashtag (#)</dt><dd>Etiqueta para que te encuentren. Con 4-5 basta: #tuoficio #artesanía #tuzona #hechoamano.</dd></div>
+      <div class="glos-item"><dt>Stories</dt><dd>Publicaciones que desaparecen en 24h. El "detrás de cámaras" informal. Aún no te preocupes.</dd></div>
+      <div class="glos-item"><dt>DM</dt><dd>Mensaje directo/privado. Donde suelen empezar los encargos.</dd></div>
+      <div class="glos-item"><dt>Ficha de producto</dt><dd>Una pieza contada completa: fotos, historia, materiales, medidas, precio. Tu vendedor silencioso.</dd></div>
+      <div class="glos-item"><dt>Ken Burns, scrim, funnel...</dt><dd>Jerga de marketing. Respira: no la necesitas. Para eso estamos nosotros.</dd></div>
+    </dl>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section class="cierre">
+    <h2>El oficio se aprende con un maestro al lado. <em>Venderlo, también.</em></h2>
+    <p>Gracias por estar en la primera hornada. Lo que construyamos aquí dentro va a llegar mucho más lejos que tu taller o el mío — y va a llevar tu sello de fundador.</p>
+    <p class="contacto">¿Atascado en cualquier punto? Escríbeme al chat o a <b>hola@oficioscirculares.com</b> — te contesta una persona, no un robot.</p>
+  </section>
+
+</div>
+</body>
+</html>

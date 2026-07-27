@@ -1,0 +1,89 @@
+<%- include('partials/head-meta', {
+    title: 'El Club · Área de miembros',
+    description: 'Tu área de miembros del Club de Oficios Circulares.',
+    canonical: '/club/dentro',
+    noindex: true
+}) %>
+
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260727">
+<%
+  var featured = pieces.find(function(p){ return p.group === 'empieza'; });
+  var rest = pieces.filter(function(p){ return p.group !== 'empieza'; });
+  var nombre = (email || '').split('@')[0];
+%>
+
+<main class="club-area">
+  <header class="ca-top">
+    <a class="ca-brand" href="/club/dentro">
+      <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club</span>
+    </a>
+    <div class="ca-top-actions">
+      <span style="color:var(--tinta-suave);"><%= email %></span>
+      <a class="ca-salir" href="/club/salir">Salir</a>
+    </div>
+  </header>
+
+  <div class="ca-wrap">
+    <section class="ca-hola">
+      <% if (member && member.founder_number) { %>
+        <span class="ca-badge">Fundador · Plaza Nº <%= member.founder_number %> de <%= config.plazas_totales %></span>
+      <% } else if (member && member.founder) { %>
+        <span class="ca-badge">Miembro fundador</span>
+      <% } %>
+      <h1>Hola, <em><%= nombre %></em></h1>
+      <p class="ca-sub">Este es tu taller dentro del Club. Empieza por la guía y ve a tu ritmo — máximo dos horas a la semana.</p>
+
+      <% if (member && member.status === 'past_due') { %>
+        <div class="ca-msg ca-msg--warn" style="margin-top:22px;max-width:640px;">
+          Hay un problema con tu último pago. Sigues teniendo acceso, pero revisa tu método de pago en
+          <a href="<%= billingPortal %>" target="_blank" rel="noopener">el portal de tu suscripción</a> para no perderlo.
+        </div>
+      <% } %>
+    </section>
+
+    <% if (featured) { %>
+      <a class="ca-featured" href="/club/dentro/lecciones/<%= featured.slug %>" style="display:block;text-decoration:none;">
+        <span class="ca-kicker"><%= featured.kicker %></span>
+        <h2><%= featured.title %></h2>
+        <p><%= featured.desc %></p>
+        <span class="ca-btn ca-btn--terracota">Empezar por aquí →</span>
+      </a>
+    <% } %>
+
+    <h2 class="ca-section-title">Todo el contenido</h2>
+    <div class="ca-grid">
+      <% rest.forEach(function(p){ %>
+        <a class="ca-piece ca-piece--<%= p.accent %>" href="/club/dentro/lecciones/<%= p.slug %>">
+          <span class="ca-kicker"><%= p.kicker %></span>
+          <h3><%= p.title %></h3>
+          <p><%= p.desc %></p>
+          <span class="ca-go">Abrir →</span>
+        </a>
+      <% }); %>
+    </div>
+
+    <h2 class="ca-section-title">Este mes en el Club</h2>
+    <div class="ca-mes">
+      <div class="ca-mes-card">
+        <h3>El chat del Club</h3>
+        <p>Preguntas a las diez de la noche y te contesta alguien que ha pasado por lo mismo. Tu oficio, tu zona, tu gente.</p>
+        <% if (config.telegram_invite_url) { %>
+          <a class="ca-btn ca-btn--terracota" href="<%= config.telegram_invite_url %>" target="_blank" rel="noopener">Unirme al grupo →</a>
+        <% } else { %>
+          <p style="font-style:italic;">Te enviaremos el enlace del grupo por correo en breve.</p>
+        <% } %>
+      </div>
+      <div class="ca-mes-card">
+        <h3>Próximo directo</h3>
+        <p><strong><%= config.proximo_directo || 'Por anunciar' %></strong></p>
+        <p style="margin-bottom:0;">Revisión en vivo de perfiles y tiendas. Trae tu caso.</p>
+      </div>
+    </div>
+
+    <div class="ca-foot">
+      <span>¿Necesitas gestionar tu suscripción? <a href="<%= billingPortal %>" target="_blank" rel="noopener">Abrir el portal</a>.</span>
+      <a href="/club/salir">Cerrar sesión</a>
+    </div>
+  </div>
+</main>

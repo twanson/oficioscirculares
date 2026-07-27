@@ -1,0 +1,39 @@
+<%- include('partials/head-meta', {
+    title: 'Lista de espera — El Club de Oficios Circulares',
+    description: 'Las plazas fundador del Club de Oficios Circulares están cerradas. Déjanos tu correo y serás el primero en saber cuándo abrimos de nuevo.',
+    canonical: '/club/lista-espera',
+    ogImage: 'https://www.oficioscirculares.com/assets/images/puliendo%20madera.jpg'
+}) %>
+
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260727">
+
+<main class="club-area">
+  <div class="ca-center">
+    <div class="ca-card">
+      <img class="ca-logo" src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span class="ca-eyebrow">El Club de Oficios Circulares</span>
+
+      <% if (typeof done !== 'undefined' && done) { %>
+        <h1>Estás en la lista</h1>
+        <div class="ca-msg ca-msg--ok">
+          Apuntado. Cuando reabramos plazas, los de esta lista entráis primero — y te avisamos solo para eso.
+        </div>
+        <a class="ca-back" href="/club">Volver al Club</a>
+      <% } else { %>
+        <h1>Las plazas fundador están <em>cerradas</em></h1>
+        <p class="lead">Déjanos tu correo y serás el primero en saber cuándo abrimos de nuevo. Los de esta lista entran antes.</p>
+        <% if (typeof error !== 'undefined' && error === 'email') { %>
+          <div class="ca-msg ca-msg--warn">Ese correo no parece válido. Revísalo e inténtalo otra vez.</div>
+        <% } %>
+        <form class="ca-form" method="POST" action="/club/lista-espera">
+          <div>
+            <label class="ca-label" for="email">Tu correo</label>
+            <input class="ca-field" type="email" id="email" name="email" required autocomplete="email" placeholder="tu@correo.com">
+          </div>
+          <button class="ca-btn ca-btn--terracota ca-btn--full" type="submit">Avisadme cuando abráis</button>
+        </form>
+        <p class="ca-fine">Solo te escribimos para avisarte de la reapertura. Nada de spam.</p>
+      <% } %>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar de Ayudas · Edición 0 — Verano 2026 · El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  a{color:var(--terracota);text-decoration:none;border-bottom:1px solid rgba(147,74,28,.3)}
+  a:hover{border-bottom-color:var(--terracota)}
+  .doc{max-width:860px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:68ch}
+  strong{color:var(--verde)}
+
+  /* ====== Cabecera — la pantalla del radar ====== */
+  .lec-head{display:grid;grid-template-columns:1.02fr .98fr;min-height:72vh;background:linear-gradient(180deg,#F6F4EA,#EBE8D8);border-bottom:1px solid rgba(2,52,41,.07);position:relative;overflow:hidden}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracota)}
+  .lec-head h1{font-size:clamp(42px,5.2vw,72px);color:var(--verde);margin-bottom:22px;max-width:13ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--terracota)}
+  .lec-head .sub{font-size:20px;color:var(--tinta-suave);max-width:44ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(147,74,28,.3);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:var(--tinta-suave);background:var(--blanco)}
+  .lec-meta b{color:var(--terracota)}
+
+  .radar-zona{position:relative;min-height:540px;overflow:hidden;background:radial-gradient(ellipse 120% 90% at 50% 45%,#06423316,transparent),linear-gradient(160deg,#053528,#021B14 75%)}
+  .firma-radar{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(2,27,20,.55);border:1px solid rgba(232,213,183,.25);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  .radar{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(420px,88%);aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(232,213,183,.35);background:
+    repeating-radial-gradient(circle at center,transparent 0 24.5%,rgba(232,213,183,.14) 24.5% 25%),
+    linear-gradient(rgba(232,213,183,.1),rgba(232,213,183,.1)) center/100% 1px no-repeat,
+    linear-gradient(rgba(232,213,183,.1),rgba(232,213,183,.1)) center/1px 100% no-repeat}
+  .radar::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(232,213,183,.32),transparent 70deg,transparent 360deg);animation:barrido 6s linear infinite}
+  @keyframes barrido{to{transform:rotate(360deg)}}
+  .blip{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--arena);box-shadow:0 0 14px rgba(232,213,183,.8);animation:late 3s ease-in-out infinite}
+  .blip.t{background:var(--terracota-viva);box-shadow:0 0 14px rgba(176,94,43,.9)}
+  @keyframes late{0%,100%{opacity:.5}50%{opacity:1}}
+  .blip span{position:absolute;left:16px;top:-4px;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:rgba(232,213,183,.85);white-space:nowrap}
+  .radar-pie{position:absolute;bottom:20px;left:0;right:0;text-align:center;font-family:var(--serif);font-style:italic;font-size:13.5px;color:rgba(232,213,183,.7);z-index:4}
+
+  /* ====== Secciones ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:18px}
+  .cap h2 em{color:var(--terracota)}
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+
+  /* Abiertas ahora */
+  .ahora{background:var(--verde-hondo);border-radius:20px;padding:32px 36px;margin:26px 0;color:rgba(251,247,239,.9)}
+  .ahora .a-cab{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .ahora .a-punto{width:12px;height:12px;border-radius:50%;background:var(--terracota-viva);box-shadow:0 0 12px rgba(176,94,43,.9);animation:late 2s ease-in-out infinite}
+  .ahora .a-cab h3{color:var(--arena);font-size:20px}
+  .ahora-item{display:grid;grid-template-columns:170px 1fr;gap:0;border-bottom:1px dashed rgba(232,213,183,.2);padding:14px 0;align-items:baseline}
+  .ahora-item:last-child{border-bottom:none}
+  .ahora-item .ai-plazo{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--terracota-viva)}
+  .ahora-item .ai-que b{color:var(--arena);display:block;font-size:15px;margin-bottom:2px}
+  .ahora-item .ai-que span{font-size:13.5px;color:rgba(251,247,239,.75);line-height:1.55;display:block}
+  .ahora-item a{color:var(--arena);border-bottom-color:rgba(232,213,183,.35)}
+
+  /* Fichas evergreen / necesidad */
+  .fichas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+  .ficha{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:22px 24px;position:relative;overflow:hidden;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .ficha::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--verde-medio),var(--arena))}
+  .ficha .f-etiq{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .ficha b{display:block;font-size:16px;color:var(--verde);margin-bottom:5px;font-family:var(--serif);font-weight:600}
+  .ficha span{font-size:14px;color:var(--tinta-suave);line-height:1.6;display:block}
+
+  /* Calendario del año */
+  .trimestre{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;margin:18px 0;overflow:hidden;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .trimestre .t-cab{display:flex;align-items:baseline;gap:14px;background:linear-gradient(90deg,#EDF3EC,var(--crema));padding:14px 24px;border-bottom:1px solid rgba(2,52,41,.1)}
+  .trimestre .t-cab .tn{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--terracota)}
+  .trimestre .t-cab .tt{font-size:13px;font-weight:700;color:var(--tinta-suave)}
+  .trimestre ul{list-style:none;padding:8px 24px 14px}
+  .trimestre li{padding:9px 0 9px 26px;position:relative;font-size:14.5px;color:var(--tinta-suave);border-bottom:1px dashed rgba(2,52,41,.08)}
+  .trimestre li:last-child{border-bottom:none}
+  .trimestre li::before{content:"›";position:absolute;left:4px;color:var(--terracota);font-weight:800}
+  .trimestre li b{color:var(--verde)}
+
+  /* CCAA */
+  .ccaa-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0}
+  .ccaa{background:var(--arena-clara);border:1px solid rgba(147,74,28,.18);border-radius:16px;padding:20px 22px}
+  .ccaa .c-nombre{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .ccaa .c-nombre b{font-family:var(--serif);font-size:17px;color:var(--verde);font-weight:600}
+  .ccaa .estado{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .estado.abierta{background:#DCEFE4;color:#0A5B38}
+  .estado.cerrada{background:#EFE3D8;color:var(--terracota)}
+  .estado.anual{background:#E8E9E2;color:var(--tinta-suave)}
+  .ccaa p{font-size:13.5px;color:var(--tinta-suave);line-height:1.6;margin-bottom:8px;max-width:none}
+  .ccaa .c-donde{font-size:12.5px;color:var(--tinta-suave)}
+  .ccaa .c-donde b{color:var(--verde);font-weight:700}
+
+  /* Pasos BDNS */
+  .pasos{counter-reset:paso;margin:26px 0}
+  .paso{display:flex;gap:20px;padding:18px 0;border-bottom:1px dashed rgba(2,52,41,.12)}
+  .paso:last-child{border-bottom:none}
+  .paso::before{counter-increment:paso;content:counter(paso);flex:0 0 44px;height:44px;border-radius:50%;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center}
+  .paso div b{color:var(--verde);display:block;margin-bottom:3px;font-size:15.5px}
+  .paso div span{font-size:14.5px;color:var(--tinta-suave);line-height:1.6;display:block}
+
+  .pie-doc{text-align:center;padding:40px 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+  .aviso{font-size:12.5px;color:var(--tinta-suave);background:var(--hueso);border-radius:12px;padding:14px 20px;margin:26px 0;line-height:1.6}
+
+  @media(max-width:720px){
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .radar-zona{order:2;min-height:440px}
+    .fichas,.ccaa-grid{grid-template-columns:1fr}
+    .ahora-item{grid-template-columns:1fr;gap:2px}
+    .ahora{padding:24px 22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · Radar de Ayudas</span>
+    </div>
+    <h1>Radar de ayudas <em>· Edición 0</em></h1>
+    <p class="sub">Las subvenciones, bonos y premios que puedes pedir siendo artesano en España — quién los da, cuánto, cuándo abren y cómo no perdértelos. Actualizado a julio de 2026. Cada trimestre, edición nueva.</p>
+    <div class="lec-meta">
+      <span><b>4</b> convocatorias abiertas ahora</span>
+      <span><b>17</b> comunidades revisadas</span>
+      <span><b>Trimestral</b> próxima: otoño 2026</span>
+    </div>
+  </div>
+  <div class="radar-zona" aria-label="Pantalla de radar con las ayudas detectadas">
+    <span class="firma-radar">detectando convocatorias</span>
+    <div class="radar">
+      <div class="blip t" style="top:24%;left:62%"><span>Cataluña · hasta 12 ago</span></div>
+      <div class="blip t" style="top:44%;left:30%"><span>Aragón · hasta 1 sept</span></div>
+      <div class="blip t" style="top:63%;left:55%"><span>Cantabria · hasta 31 jul</span></div>
+      <div class="blip" style="top:74%;left:34%"><span>Kit Digital · sin cierre</span></div>
+      <div class="blip" style="top:34%;left:45%"><span>Cámaras · todo el año</span></div>
+    </div>
+    <div class="radar-pie">Edición 0 · Verano 2026</div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ============ 01 CÓMO FUNCIONA ============ -->
+  <section class="cap">
+    <div class="cap-num">01 · Cómo se lee</div>
+    <h2>Cómo funciona <em>el radar</em></h2>
+    <p>Las ayudas a la artesanía en España tienen tres pisos: <strong>las estatales</strong> (pocas pero gordas: Kit Digital, Premios Nacionales), <strong>las autonómicas</strong> (el grueso: cada comunidad convoca la suya, casi siempre una vez al año, casi siempre en las mismas fechas) y <strong>las locales</strong> (ayuntamientos, diputaciones y Cámaras de Comercio — pequeñas pero con poca competencia).</p>
+    <p>El radar te da cuatro cosas: lo que está <strong>abierto ahora mismo</strong>, lo que está <strong>siempre disponible</strong>, el <strong>calendario del año</strong> para que ninguna te pille sin papeles, y <strong>tu comunidad</strong> en detalle. Cada trimestre sale edición nueva con los plazos frescos — y entre edición y edición, lo que caiga se avisa en el chat con <strong>#radar</strong>.</p>
+    <div class="tip"><b>La llave que abre casi todas:</b> el carné o registro de artesano de tu comunidad (Documento de Calificación Artesana, Registro de Artesanía…). La mayoría de convocatorias lo exigen — y tramitarlo lleva semanas. Si aún no lo tienes, esa es tu primera gestión, hoy. Es gratis o casi en todas las comunidades. <a href="#llave">En la sección 08 tienes el paso a paso completo, comunidad a comunidad</a>.</div>
+  </section>
+
+  <!-- ============ 02 ABIERTAS AHORA ============ -->
+  <section class="cap">
+    <div class="cap-num">02 · En pantalla</div>
+    <h2>Abiertas <em>ahora mismo</em></h2>
+    <div class="ahora">
+      <div class="a-cab"><span class="a-punto"></span><h3>Julio 2026 — con plazo corriendo</h3></div>
+      <div class="ahora-item">
+        <div class="ai-plazo">Hasta el 31 jul</div>
+        <div class="ai-que"><b>Cantabria — Ayudas a la artesanía 2026</b><span>Plazo largo (abrió el 2 de enero) que se acaba en días. Si eres de Cantabria, esta semana.</span></div>
+      </div>
+      <div class="ahora-item">
+        <div class="ai-plazo">Hasta el 12 ago</div>
+        <div class="ai-que"><b>Cataluña — Subvenciones CCAM 2026</b><span>Competitividad, digitalización, relevo generacional e internacionalización para empresa artesana. Solicitud en la sede del CCAM desde el 15 de julio.</span></div>
+      </div>
+      <div class="ahora-item">
+        <div class="ai-plazo">Hasta el 1 sept</div>
+        <div class="ai-que"><b>Aragón — Ayudas a pymes artesanas 2026</b><span>Tres líneas: reforma y mejora del taller, participación en ferias y formación especializada. Exige estar en el Registro General de Artesanía de Aragón.</span></div>
+      </div>
+      <div class="ahora-item">
+        <div class="ai-plazo">Sin fecha de cierre</div>
+        <div class="ai-que"><b>Kit Digital — fase de ampliación (estatal)</b><span>Bono de hasta 3.000 € para autónomos (web, tienda online, redes, facturación). Los fondos se dan por orden de llegada: cuanto antes, mejor. Piden 6 meses de antigüedad como autónomo.</span></div>
+      </div>
+    </div>
+    <div class="tip"><b>Regla de oro antes de gastar:</b> en casi todas las convocatorias autonómicas, la inversión solo cuenta si se hace dentro del periodo que marca la convocatoria (y a veces, solo después de solicitar). Si estás pensando en reformar el taller o ir a una feria grande, mira primero cuándo abre tu comunidad — te puede salir al 50-80%.</div>
+  </section>
+
+  <!-- ============ 03 EVERGREEN ============ -->
+  <section class="cap">
+    <div class="cap-num">03 · Las fijas</div>
+    <h2>Las de siempre <em>(estén o no en plazo)</em></h2>
+    <p>Estas no dependen de pillar una convocatoria al vuelo: o están siempre disponibles, o vuelven cada año como las golondrinas. Son la base del radar:</p>
+    <div class="fichas">
+      <div class="ficha"><div class="f-etiq">Estatal · siempre</div><b>Tarifa plana de autónomos</b><span>80 €/mes el primer año (prorrogable si facturas poco) al darte de alta. Y varias comunidades la dejan en 0 € ("cuota cero") devolviéndote el resto. Si estás empezando o conoces a alguien que va a empezar, esto es lo primero.</span></div>
+      <div class="ficha"><div class="f-etiq">Estatal · orden de llegada</div><b>Kit Digital</b><span>Hasta 3.000 € para digitalizarte con un "agente digitalizador": web, tienda online, gestión de redes, facturación electrónica. No es dinero en mano — es un bono que gastas con proveedores adheridos.</span></div>
+      <div class="ficha"><div class="f-etiq">Estatal · anual (primavera)</div><b>Premios Nacionales de Artesanía</b><span>Los convoca el Ministerio de Industria vía EOI/Fundesarte. Ojo a la modalidad de <em>Emprendimiento</em>: para talleres con menos de 5 años. En 2026 cerró el 15 de junio — apúntalo para la primavera que viene: además del premio, la visibilidad vale oro.</span></div>
+      <div class="ficha"><div class="f-etiq">Local · todo el año</div><b>Tu Cámara de Comercio</b><span>Programas cofinanciados con fondos europeos que casi nadie del sector pide: Pyme Digital (asesoría + ayudas TIC), Xpande Digital (vender fuera, hasta ~3.200 €) y Apoyo al Comercio Minorista. Llama a tu Cámara territorial y pregunta qué tienen abierto.</span></div>
+      <div class="ficha"><div class="f-etiq">Autonómica · recurrente</div><b>La convocatoria de artesanía de tu comunidad</b><span>Casi todas las CCAA convocan una vez al año, en fechas parecidas (ver calendario). Suelen cubrir taller, ferias, digitalización y promoción, entre el 50% y el 80% del gasto.</span></div>
+      <div class="ficha"><div class="f-etiq">Autonómica · creciente</div><b>Relevo generacional y medio rural</b><span>Línea en auge: Extremadura, Castilla-La Mancha (hasta 9.000 €), Aragón o el programa Tierra de Campos en Castilla y León (15.000 € fijos por instalarse en municipios de Zamora, León, Palencia o Valladolid). Si vas a coger un taller que cierra, o a montarte en un pueblo, mira esto antes que nada.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 04 CALENDARIO ============ -->
+  <section class="cap">
+    <div class="cap-num">04 · El año</div>
+    <h2>El calendario de las ayudas <em>(para no llegar tarde)</em></h2>
+    <p>Las convocatorias autonómicas repiten patrón año tras año. Este es el mapa de temporadas, con lo observado en 2026 — las fechas exactas bailan unas semanas, pero la estación se mantiene:</p>
+
+    <div class="trimestre">
+      <div class="t-cab"><span class="tn">Invierno (ene–mar)</span><span class="tt">Empiezan las tempraneras — y se preparan papeles</span></div>
+      <ul>
+        <li><b>Cantabria</b> abre en enero (plazo largo, hasta verano).</li>
+        <li><b>Madrid</b> abre a finales de febrero con plazo corto (~3 semanas): hasta 3.000 €, el 60% del proyecto, para promoción, ferias y formación.</li>
+        <li>Temporada de <b>poner papeles en orden</b>: carné de artesano, certificados de estar al corriente con Hacienda y Seguridad Social, presupuestos de lo que quieras pedir.</li>
+      </ul>
+    </div>
+
+    <div class="trimestre">
+      <div class="t-cab"><span class="tn">Primavera (mar–jun)</span><span class="tt">La temporada alta — el grueso del año</span></div>
+      <ul>
+        <li><b>Andalucía</b>: finales de marzo a finales de abril.</li>
+        <li><b>La Rioja</b>: hasta finales de abril (promoción y dinamización).</li>
+        <li><b>Castilla-La Mancha</b>: hasta 15.000 € por taller para digitalización, promoción e inversión.</li>
+        <li><b>Comunidad Valenciana</b> (CREA Artesanía): cierra en junio; cubre ferias dentro y fuera de la Comunitat — stand, montaje, decoración.</li>
+        <li><b>Extremadura</b>: competitividad del sector artesano + línea de relevo generacional (cierra en junio).</li>
+        <li><b>Premios Nacionales de Artesanía</b>: candidaturas hasta mediados de junio.</li>
+      </ul>
+    </div>
+
+    <div class="trimestre">
+      <div class="t-cab"><span class="tn">Verano (jul–sept)</span><span class="tt">Las del este y el norte — con agosto por medio</span></div>
+      <ul>
+        <li><b>Cataluña</b> (CCAM): de mediados de julio a mediados de agosto. Plazo con agosto dentro: la que más gente se pierde por vacaciones.</li>
+        <li><b>Aragón</b>: hasta el 1 de septiembre (taller, ferias, formación).</li>
+        <li>Cantabria <b>cierra</b> a finales de julio.</li>
+      </ul>
+    </div>
+
+    <div class="trimestre">
+      <div class="t-cab"><span class="tn">Otoño (oct–dic)</span><span class="tt">Remanentes, locales — y preparar el año que viene</span></div>
+      <ul>
+        <li>Pocas autonómicas nuevas: es época de <b>resoluciones y justificaciones</b> (guarda TODAS las facturas de lo subvencionado).</li>
+        <li>Aparecen <b>ampliaciones y remanentes</b> (fondos europeos sin gastar — así nació la fase actual del Kit Digital) y convocatorias de <b>ayuntamientos y diputaciones</b>.</li>
+        <li>El momento de <b>planificar</b>: ¿qué inversión harás el año que viene? Pídela en la convocatoria de primavera, no la pagues en noviembre por impaciencia.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 05 POR COMUNIDAD ============ -->
+  <section class="cap">
+    <div class="cap-num">05 · Tu zona</div>
+    <h2>Comunidad a <em>comunidad</em></h2>
+    <p>El estado a fecha de esta edición (julio 2026). "Anual" significa que la convocatoria de este año ya pasó o no está confirmada — pero vuelve, y el trimestre indicado te dice cuándo vigilar:</p>
+    <div class="ccaa-grid">
+      <div class="ccaa"><div class="c-nombre"><b>Andalucía</b><span class="estado cerrada">Cerró en abril</span></div><p>Líneas de comercio y artesanía; también ayudas a ayuntamientos y asociaciones para ferias locales.</p><div class="c-donde"><b>Vigilar:</b> primavera · Junta de Andalucía</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Aragón</b><span class="estado abierta">Abierta · 1 sept</span></div><p>Pymes artesanas: reforma de taller, ferias y formación. Exige Registro General de Artesanía de Aragón.</p><div class="c-donde"><b>Dónde:</b> aragon.es → trámites artesanía</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Asturias</b><span class="estado anual">Recurrente</span></div><p>Ayudas a talleres para asistencia a ferias y cursos de especialización.</p><div class="c-donde"><b>Dónde:</b> artesania.asturias.es → ayudas</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Baleares</b><span class="estado anual">Plurianual</span></div><p>Línea de consolidación del trabajo autónomo 2024-2027; artesanía vía consells insulars.</p><div class="c-donde"><b>Dónde:</b> caib.es + tu consell insular</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Canarias</b><span class="estado anual">Por cabildos</span></div><p>La artesanía se gestiona sobre todo por cabildos (carné artesano incluido). Cada isla, su convocatoria.</p><div class="c-donde"><b>Dónde:</b> tu cabildo insular + BDNS</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Cantabria</b><span class="estado abierta">Abierta · 31 jul</span></div><p>Ayudas a la artesanía 2026 con plazo enero-julio. Si llegas, esta semana.</p><div class="c-donde"><b>Dónde:</b> sede del Gobierno de Cantabria</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Castilla-La Mancha</b><span class="estado anual">Primavera</span></div><p>Hasta 15.000 € por taller: digitalización, promoción comercial e inversión. También línea de relevo generacional (hasta 9.000 €).</p><div class="c-donde"><b>Vigilar:</b> primavera · castillalamancha.es</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Castilla y León</b><span class="estado anual">Variable</span></div><p>Ayudas de comercio y artesanía + programa Tierra de Campos (15.000 € por instalarse en municipios de Zamora, León, Palencia, Valladolid).</p><div class="c-donde"><b>Dónde:</b> economia.jcyl.es → comercio y artesanía</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Cataluña</b><span class="estado abierta">Abierta · 12 ago</span></div><p>CCAM: competitividad, digitalización, internacionalización y relevo para empresa artesana (carné/censo requerido).</p><div class="c-donde"><b>Dónde:</b> ccam.gencat.cat → subvencions</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>C. Valenciana</b><span class="estado cerrada">Cerró en junio</span></div><p>CREA Artesanía: ferias (dentro y fuera de la CV), inversión y promoción. Necesitas el DCA (documento de calificación artesana).</p><div class="c-donde"><b>Vigilar:</b> primavera · gva.es + Centro de Artesanía CV</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Extremadura</b><span class="estado cerrada">Cerró en junio</span></div><p>Competitividad del sector artesano + línea específica de relevo generacional.</p><div class="c-donde"><b>Vigilar:</b> primavera · juntaex.es</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Galicia</b><span class="estado anual">Recurrente</span></div><p>De las más generosas: hasta el 80% de la inversión para talleres (pymes de máx. 10 empleados). Requiere estar en el registro de Artesanía de Galicia (obradoiro artesán).</p><div class="c-donde"><b>Dónde:</b> artesaniadegalicia.xunta.gal → convocatorias</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>La Rioja</b><span class="estado cerrada">Cerró en abril</span></div><p>Promoción y dinamización de la artesanía.</p><div class="c-donde"><b>Vigilar:</b> primavera · larioja.org</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Madrid</b><span class="estado cerrada">Cerró en marzo</span></div><p>Hasta 3.000 € (60% del proyecto) para promoción, ferias y formación. Plazo corto de ~3 semanas: hay que tenerlo preparado antes de que abra.</p><div class="c-donde"><b>Vigilar:</b> febrero · sede.comunidad.madrid</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Murcia</b><span class="estado anual">Sin confirmar</span></div><p>Convocatorias de artesanía intermitentes; el carné artesano regional sigue activo.</p><div class="c-donde"><b>Dónde:</b> carm.es + alerta en BDNS (sección 07)</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Navarra</b><span class="estado anual">Sin confirmar</span></div><p>Ayudas de comercio/artesanía por convocatoria; consulta también las de desarrollo rural.</p><div class="c-donde"><b>Dónde:</b> navarra.es + alerta en BDNS</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>País Vasco</b><span class="estado anual">Por diputaciones</span></div><p>Buena parte se gestiona vía diputaciones forales (Bizkaia, Gipuzkoa, Araba) además del Gobierno Vasco.</p><div class="c-donde"><b>Dónde:</b> euskadi.eus + tu diputación foral</div></div>
+    </div>
+    <div class="aviso">Los plazos y cuantías son los publicados a fecha de cierre de esta edición (24 de julio de 2026) y pueden cambiar: verifica siempre en la sede oficial antes de solicitar. Si detectas un cambio o una convocatoria nueva de tu zona, al chat con #radar — así se actualiza entre ediciones.</div>
+  </section>
+
+  <!-- ============ 06 POR NECESIDAD ============ -->
+  <section class="cap">
+    <div class="cap-num">06 · Tu caso</div>
+    <h2>Busca por lo que necesitas, <em>no por tu oficio</em></h2>
+    <p>Las convocatorias casi nunca distinguen entre ceramista, tejedora o luthier: distinguen entre <em>para qué</em> quieres el dinero. Encuentra tu caso:</p>
+    <div class="fichas">
+      <div class="ficha"><div class="f-etiq">Quiero…</div><b>Reformar o equipar el taller</b><span>Convocatoria autonómica (línea de inversión): Galicia hasta el 80%, CLM hasta 15.000 €, Aragón, Cataluña… Pide ANTES de gastar y guarda cada factura.</span></div>
+      <div class="ficha"><div class="f-etiq">Quiero…</div><b>Ir a ferias y mercados</b><span>Línea de ferias de tu autonómica (Valencia la cubre incluso fuera de la comunidad; Madrid, Aragón, Asturias también). Cubre stand, montaje, decoración — a veces viaje.</span></div>
+      <div class="ficha"><div class="f-etiq">Quiero…</div><b>Web, tienda online, redes</b><span>Kit Digital (hasta 3.000 €, sin fecha de cierre, orden de llegada) + línea de digitalización autonómica + Pyme Digital de tu Cámara. Son compatibles entre sí en muchos casos — pregunta antes de duplicar.</span></div>
+      <div class="ficha"><div class="f-etiq">Quiero…</div><b>Formarme o especializarme</b><span>Línea de formación de la autonómica (Aragón, Madrid, Asturias) + cursos gratuitos de Cámaras y de escuelas de artesanía públicas.</span></div>
+      <div class="ficha"><div class="f-etiq">Quiero…</div><b>Empezar de cero o coger un relevo</b><span>Tarifa plana / cuota cero + línea de relevo generacional (Extremadura, CLM, Aragón) + programas rurales (Tierra de Campos: 15.000 €). Empezar en un pueblo suma casi siempre.</span></div>
+      <div class="ficha"><div class="f-etiq">Quiero…</div><b>Reconocimiento y visibilidad</b><span>Premios Nacionales de Artesanía (modalidad Emprendimiento si llevas menos de 5 años) + premios autonómicos y de fundaciones. No es solo dinero: es prensa, contactos y argumento de venta.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 07 PESCAR ============ -->
+  <section class="cap">
+    <div class="cap-num">07 · Tu caña de pescar</div>
+    <h2>Monta tu alerta <em>en 10 minutos</em></h2>
+    <p>El radar sale cada trimestre — pero tú puedes tener un radar propio funcionando 24/7. Todas las ayudas públicas de España (estatales, autonómicas y municipales) se publican por ley en un solo sitio: la <strong>Base de Datos Nacional de Subvenciones</strong>. Así se domestica:</p>
+    <div class="pasos">
+      <div class="paso"><div><b>Entra en infosubvenciones.es</b><span>Es el buscador público de la BDNS. Gratis, sin registro para buscar. Pestaña "Convocatorias".</span></div></div>
+      <div class="paso"><div><b>Busca con varias palabras, no una</b><span>El buscador no entiende sinónimos: busca "artesanía", pero también "artesano", "taller artesano", "comercio minorista" y "oficios". Filtra por tu comunidad y por "plazo abierto".</span></div></div>
+      <div class="paso"><div><b>Crea tu alerta</b><span>Regístrate y suscríbete a alertas personalizadas: cada vez que se publique una convocatoria que encaje con tus palabras y tu zona, te llega un correo. Es literalmente el radar en tu buzón.</span></div></div>
+      <div class="paso"><div><b>Cuando salte una, mira solo 4 cosas</b><span>¿Puedo pedirla? (requisitos: carné de artesano, antigüedad, tamaño) · ¿Qué cubre y qué %? · ¿Plazo de solicitud? · ¿El gasto puede ser anterior a la solicitud o no? Con esas cuatro respuestas decides en 10 minutos si te interesa.</span></div></div>
+      <div class="paso"><div><b>Si te interesa y te abruma el papeleo</b><span>Las asociaciones de artesanos de tu comunidad suelen ayudar a tramitar gratis a sus socios (y a veces las Cámaras). Y si la ayuda es grande, un gestor cobra ~100-300 € por tramitarla: sobre una ayuda de 5.000 €, es la mejor inversión del año.</span></div></div>
+    </div>
+    <div class="tip"><b>La cuenta que casi nadie hace:</b> una tarde al trimestre revisando el radar + una alerta bien montada puede suponer 3.000-15.000 € al año en un taller pequeño. Es, por hora invertida, el trabajo mejor pagado de tu negocio.</div>
+  </section>
+
+  <!-- ============ 08 LA LLAVE ============ -->
+  <section class="cap" id="llave">
+    <div class="cap-num">08 · La llave</div>
+    <h2>Consigue tu carné de artesano <em>paso a paso</em></h2>
+    <p>Cada comunidad lo llama de una manera (carné, carta, DCA, inscripción en el registro), pero el proceso es casi idéntico en todas. Es <strong>voluntario, gratuito o casi, y sin él no puedes pedir la mayoría de ayudas</strong> de este radar — además de darte derecho a usar el distintivo de artesanía de tu comunidad en tus etiquetas. El camino:</p>
+    <div class="pasos">
+      <div class="paso"><div><b>Comprueba que tu oficio está en el repertorio</b><span>Cada comunidad tiene una lista oficial de oficios artesanos (el "repertorio"). Ceramista, tejedora, luthier, forjador… están casi siempre; oficios nuevos o híbridos, no siempre. Búscala en la web de artesanía de tu comunidad — si tu oficio no aparece, se puede pedir la inclusión, pero cuenta con meses.</span></div></div>
+      <div class="paso"><div><b>Reúne la acreditación de tu oficio</b><span>Lo que más miedo da y menos debería: vale un título o curso del oficio, PERO también la experiencia demostrable. Si no tienes formación reglada, la mayoría de comunidades aceptan vida laboral + memoria de tu actividad (fotos del taller, piezas, ferias, web). Castilla-La Mancha, por ejemplo, pide solo 6 meses de ejercicio demostrable.</span></div></div>
+      <div class="paso"><div><b>Ten el alta en regla</b><span>Casi todas piden estar de alta en el IAE/autónomos en el epígrafe de tu actividad (algunas aceptan solicitar el carné antes de darte de alta — útil si estás empezando). Ten a mano el certificado de situación censal, que se descarga gratis de la web de Hacienda.</span></div></div>
+      <div class="paso"><div><b>Presenta la solicitud</b><span>Por sede electrónica (necesitas certificado digital o Cl@ve — si no lo tienes, sácalo: lo vas a usar para TODAS las ayudas) o presencial en registro. El formulario es corto: datos, oficio, y la documentación de los pasos 2 y 3 adjunta.</span></div></div>
+      <div class="paso"><div><b>Espera la resolución — y apunta la caducidad</b><span>Suele tardar de semanas a 2-3 meses. El carné caduca: 4 años en la Comunitat Valenciana, 5 en Castilla-La Mancha… La renovación es más simple que el alta, pero si se te pasa, vuelves a la casilla de salida justo cuando abre la convocatoria. Ponte un recordatorio.</span></div></div>
+    </div>
+
+    <p style="margin-top:10px">Dónde se tramita, comunidad a comunidad (las de nombre y trámite confirmados a fecha de esta edición):</p>
+    <div class="ccaa-grid">
+      <div class="ccaa"><div class="c-nombre"><b>Andalucía</b></div><p><strong>Carta de Artesano/a</strong> — inscripción en el Registro de Artesanía de Andalucía. Piden alta en IAE + título o certificado de formación en el oficio (del Repertorio de Oficios Artesanos de Andalucía).</p><div class="c-donde"><b>Dónde:</b> juntadeandalucia.es → procedimiento 1057</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Aragón</b></div><p><strong>Documento de Calificación Artesanal</strong> — el "carné artesano" aragonés. Imprescindible para la ayuda autonómica (abierta hasta el 1 de septiembre).</p><div class="c-donde"><b>Dónde:</b> aragon.es → tramitador → "carnet artesano"</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Castilla-La Mancha</b></div><p><strong>Carné de Artesano</strong> — requisito: 6 meses de ejercicio profesional demostrable + cualificación. Validez 5 años, renovable.</p><div class="c-donde"><b>Dónde:</b> jccm.es → sede → trámite 324</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Cataluña</b></div><p><strong>Carnet d'artesà/ana</strong> — acreditación de la Generalitat que reconoce el dominio del oficio y te incluye en la base de datos oficial de artesanos.</p><div class="c-donde"><b>Dónde:</b> Canal Empresa (canalempresa.gencat.cat) → "Carnet d'artesà"</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>C. Valenciana</b></div><p><strong>Documento de Calificación Artesana (DCA)</strong> — lo emite el Centro de Artesanía CV. Currículum + acreditación del oficio (formación o aprendizaje con maestro). Renovación cada 4 años. Tel. 961 839 355 — atienden dudas.</p><div class="c-donde"><b>Dónde:</b> gva.es → procedimiento 381 · centroartesaniacv.com</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Galicia</b></div><p><strong>Ojo, cambió:</strong> la Ley 8/2023 eliminó la antigua "carta de artesán". Ahora el acceso es la inscripción en el registro (taller/obradoiro artesán). Consulta el trámite vigente antes de nada.</p><div class="c-donde"><b>Dónde:</b> artesaniadegalicia.xunta.gal → trámites</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Madrid</b></div><p><strong>Registro de Actividades Artesanas</strong> — voluntario y gratuito, para artesanos, empresas y productos. Es el requisito de la ayuda madrileña de febrero.</p><div class="c-donde"><b>Dónde:</b> sede.comunidad.madrid → "registro actividades artesanas"</div></div>
+      <div class="ccaa"><div class="c-nombre"><b>Canarias</b></div><p><strong>Carné de artesano</strong> — se tramita en tu <em>cabildo insular</em> (y el de maestro artesano, en la sede del Gobierno de Canarias). Cada isla gestiona el suyo.</p><div class="c-donde"><b>Dónde:</b> tu cabildo + sede.gobiernodecanarias.org</div></div>
+    </div>
+    <div class="aviso">¿Tu comunidad no está en la lista? El truco universal: busca en Google "carné artesano + [tu comunidad] + sede" o llama a la dirección general de comercio/artesanía de tu consejería — el trámite existe en todas, solo cambia el nombre. Y si te atascas, pregunta en el chat con #radar: seguro que otro miembro de tu zona ya lo ha pasado.</div>
+    <div class="tip"><b>El efecto secundario que nadie cuenta:</b> estar en el registro no solo abre ayudas — te mete en el directorio oficial de artesanos de tu comunidad (que la gente y las tiendas consultan), te da acceso a ferias oficiales reservadas a artesanos acreditados, y te permite etiquetar tus piezas con el distintivo de artesanía. Es la credencial que separa "hago cosas a mano" de "soy un taller artesano reconocido".</div>
+  </section>
+
+  <!-- ============ 09 GLOSARIO ============ -->
+  <section class="cap">
+    <div class="cap-num">09 · El idioma</div>
+    <h2>Palabras sin humo <em>(edición subvenciones)</em></h2>
+    <p>Las convocatorias están escritas en administrativo, un idioma diseñado para que parezca más difícil de lo que es. Traducción:</p>
+    <div class="fichas">
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Concurrencia competitiva</b><span>No hay dinero para todos: se reparten puntos según criterios (antigüedad, proyecto, zona rural…) y cobran los mejores hasta agotar el presupuesto. Moraleja: cuida la memoria que presentas.</span></div>
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Orden de llegada (concesión directa)</b><span>Lo contrario: cobra quien llega antes, hasta que se acaba la bolsa. Aquí no gana el mejor proyecto — gana el más rápido. El Kit Digital funciona así.</span></div>
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Ayudas de minimis</b><span>Tope europeo a lo que un negocio puede recibir en ayudas "pequeñas" en 3 años (300.000 € desde 2024). Un taller no se acerca ni de lejos: firma la declaración sin miedo, es un formulario estándar.</span></div>
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Gasto subvencionable</b><span>Lo que la ayuda acepta pagar, en qué fechas y con qué justificante. Si compras fuera del periodo o sin factura completa (con tu NIF), ese gasto no cuenta. Léelo ANTES de gastar.</span></div>
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Justificación</b><span>Después de cobrar (o antes, según el caso) tienes que demostrar que gastaste el dinero en lo prometido: facturas + comprobantes de pago por banco (transferencia, no efectivo). Guárdalo TODO en una carpeta desde el día uno.</span></div>
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Anticipo vs. reembolso</b><span>Algunas ayudas pagan por adelantado (anticipo); la mayoría pagan DESPUÉS de que tú hayas gastado y justificado (reembolso). Importante para tu tesorería: quizá tengas que adelantar el dinero unos meses.</span></div>
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Estar al corriente</b><span>No deber nada a Hacienda ni a la Seguridad Social. Se acredita con dos certificados que se descargan online en 5 minutos — pero si tienes un aplazamiento o un despiste, arréglalo antes de solicitar.</span></div>
+      <div class="ficha"><div class="f-etiq">Dicen</div><b>Resolución y silencio administrativo</b><span>La respuesta oficial (concedida o denegada). Si pasa el plazo máximo sin respuesta, en subvenciones el silencio casi siempre significa NO — pero no te rindas: mira el listado de concesiones publicado, a veces la notificación simplemente no llega.</span></div>
+    </div>
+  </section>
+
+  <p class="pie-doc">El Club de Oficios Circulares · Radar de Ayudas · Edición 0 — Verano 2026 · ¿Has visto una convocatoria que no está aquí? Al chat con <b>#radar</b> y entra en la próxima edición.</p>
+
+</div>
+</body>
+</html>

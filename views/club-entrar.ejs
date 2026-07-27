@@ -1,0 +1,58 @@
+<%- include('partials/head-meta', {
+    title: 'Entrar al Club — Oficios Circulares',
+    description: 'Accede al área de miembros del Club de Oficios Circulares.',
+    canonical: '/club/entrar',
+    noindex: true
+}) %>
+
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260727">
+
+<main class="club-area">
+  <div class="ca-center">
+    <div class="ca-card">
+      <img class="ca-logo" src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span class="ca-eyebrow">El Club · Área de miembros</span>
+
+      <% if (typeof sent !== 'undefined' && sent) { %>
+        <h1>Revisa tu correo</h1>
+        <div class="ca-msg ca-msg--ok">
+          Si tu correo está en el Club, te acaba de llegar un enlace para entrar. Ábrelo desde este mismo dispositivo. Puede tardar un par de minutos; mira también en spam.
+        </div>
+        <a class="ca-back" href="/club/entrar">Volver</a>
+      <% } else if (typeof loggedOut !== 'undefined' && loggedOut) { %>
+        <h1>Has salido</h1>
+        <p class="lead">Tu sesión se ha cerrado. Cuando quieras volver, te enviamos un enlace nuevo.</p>
+        <form class="ca-form" method="POST" action="/club/entrar">
+          <div>
+            <label class="ca-label" for="email">Tu correo</label>
+            <input class="ca-field" type="email" id="email" name="email" required autocomplete="email" placeholder="tu@correo.com">
+          </div>
+          <button class="ca-btn ca-btn--terracota ca-btn--full" type="submit">Envíame mi enlace</button>
+        </form>
+      <% } else { %>
+        <% if (typeof error !== 'undefined' && error === 'inactivo') { %>
+          <h1>Tu suscripción no está activa</h1>
+          <div class="ca-msg ca-msg--warn">
+            No encontramos una suscripción activa con esa cuenta. Si quieres reactivarla, puedes gestionarlo desde
+            <a href="<%= billingPortal %>" target="_blank" rel="noopener">el portal de tu suscripción</a>.
+            ¿Crees que es un error? Escríbenos a <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>.
+          </div>
+        <% } else if (typeof error !== 'undefined' && error === 'link') { %>
+          <div class="ca-msg ca-msg--warn">Ese enlace ha caducado o ya se había usado. Pide uno nuevo abajo.</div>
+        <% } else if (typeof error !== 'undefined' && error === 'email') { %>
+          <div class="ca-msg ca-msg--warn">Ese correo no parece válido. Revísalo e inténtalo otra vez.</div>
+        <% } %>
+        <h1>Entra al Club</h1>
+        <p class="lead">Sin contraseñas. Te llega un enlace al correo y estás dentro.</p>
+        <form class="ca-form" method="POST" action="/club/entrar">
+          <div>
+            <label class="ca-label" for="email">Tu correo</label>
+            <input class="ca-field" type="email" id="email" name="email" required autocomplete="email" placeholder="tu@correo.com">
+          </div>
+          <button class="ca-btn ca-btn--terracota ca-btn--full" type="submit">Envíame mi enlace</button>
+        </form>
+        <p class="ca-fine">Usa el correo con el que te suscribiste. ¿Aún no eres del Club? <a href="/club">Conócelo aquí</a>.</p>
+      <% } %>
+    </div>
+  </div>
+</main>

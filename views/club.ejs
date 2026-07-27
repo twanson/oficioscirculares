@@ -358,6 +358,8 @@
     <p>Abrimos el Club con 40 plazas hasta el 23 de septiembre. ¿Por qué un límite? Porque los directos con revisión en vivo funcionan con decenas de personas, no con cientos. La escasez no es teatro: es aforo.</p>
   </div>
   <div class="wrap">
+    <% var plazasOpen = (typeof plazasAbiertas === 'undefined') ? true : plazasAbiertas; %>
+    <% if (plazasOpen) { %>
     <div class="planes">
       <div class="plan plan--destacado reveal">
         <span class="plan-badge">Recomendado</span>
@@ -393,6 +395,18 @@
       <div class="perk"><b>Voz y voto</b><span>Las primeras lecciones y retos se deciden también con lo que tú pidas.</span></div>
       <div class="perk"><b>Sello de fundador</b><span>Tu estatus en la comunidad cuando esto crezca. Los primeros se recuerdan.</span></div>
     </div>
+    <% } else { %>
+    <div class="planes-cerrado" style="max-width:620px;margin:0 auto;text-align:center;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:28px;box-shadow:0 20px 50px rgba(2,52,41,.12);padding:48px 40px">
+      <span class="plan-eyebrow" style="color:var(--terracota)">Plazas fundador agotadas</span>
+      <h3 style="font-size:clamp(26px,3.4vw,34px);margin:6px 0 14px">Las 40 plazas fundador han volado</h3>
+      <p style="max-width:52ch;margin:0 auto 26px;color:var(--tinta-suave)">Déjanos tu correo: los de esta lista entran primero en la próxima apertura (y te avisamos solo para eso).</p>
+      <form method="POST" action="/club/lista-espera" style="display:flex;gap:10px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+        <input type="email" name="email" required autocomplete="email" placeholder="tu@correo.com" aria-label="Tu correo" style="flex:1;min-width:240px;padding:15px 20px;border-radius:999px;border:1.5px solid rgba(2,52,41,.2);font-family:inherit;font-size:16px;background:#fff;color:var(--tinta)">
+        <button class="club-btn club-btn--terracota" type="submit">Avisadme →</button>
+      </form>
+      <span class="micro" style="margin-top:16px">Lista propia del Club · Solo te escribimos para la reapertura</span>
+    </div>
+    <% } %>
     <p class="pro-nota">¿Buscas acompañamiento 1:1? El plan <b>Taller Pro</b> (35 €/mes, con revisión personalizada trimestral) se abrirá después de la beta — y los fundadores tendréis preferencia.</p>
   </div>
 </section>
