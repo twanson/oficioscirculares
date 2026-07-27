@@ -288,7 +288,7 @@ app.get('/contacto', (req, res) => {
 // Rutas de recursos
 app.get('/recursos', (req, res) => {
   const visibles = recursos.getAllRecursos()
-    .filter(r => r.listed !== false)
+    .filter(r => r.listed !== false && recursos.isPublished(r.slug))
     .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
   res.render('recursos-list', {
     title: 'Recursos descargables',
@@ -315,7 +315,10 @@ app.get('/recursos/:slug', (req, res) => {
     canonical: `/recursos/${r.slug}`,
     recurso: r,
     related,
-    relatedPostPublished
+    relatedPostPublished,
+    // Recurso con publish_at futuro: accesible por URL directa (para probar el flujo)
+    // pero noindex/nofollow hasta su fecha. Pierde el noindex solo al llegar publish_at.
+    noindex: !recursos.isPublished(r.slug)
   });
 });
 
@@ -690,6 +693,11 @@ app.get('/sitemap.xml', (req, res) => {
     posts.futureSlugs().forEach(slug => {
       // Elimina el bloque <url>…/blog/<slug>/…</url> completo mientras esté embargado.
       const re = new RegExp('\\s*<url>(?:(?!</url>)[\\s\\S])*?/blog/' + slug + '/[\\s\\S]*?</url>', 'g');
+      xml = xml.replace(re, '');
+    });
+    // Misma puerta para recursos con publish_at futuro (URL sin barra final).
+    recursos.futureSlugs().forEach(slug => {
+      const re = new RegExp('\\s*<url>(?:(?!</url>)[\\s\\S])*?/recursos/' + slug + '</loc>[\\s\\S]*?</url>', 'g');
       xml = xml.replace(re, '');
     });
     res.type('application/xml').send(xml);
