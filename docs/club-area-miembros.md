@@ -13,6 +13,7 @@ misma; los precios y el billing portal también).
 
 | Variable | Qué es | Dónde se saca |
 |---|---|---|
+| `APP_URL` | URL pública del sitio, SIN barra final. Staging: `https://oficioscirculares-production.up.railway.app` · Producción: `https://www.oficioscirculares.com`. Se usa para construir el `emailRedirectTo` del magic link | tú |
 | `SUPABASE_URL` | URL del proyecto Supabase | Supabase → Project Settings → API |
 | `SUPABASE_ANON_KEY` | anon/public key | Supabase → Project Settings → API |
 | `SUPABASE_SERVICE_ROLE_KEY` | service role key (secreta) | Supabase → Project Settings → API |
@@ -41,8 +42,32 @@ Opcionales (tienen valor por defecto en el código):
    - `https://www.oficioscirculares.com/auth/callback`
    Sin esto, el magic link no vuelve al sitio.
 3. **Site URL**: pon `https://www.oficioscirculares.com` (o la de staging mientras pruebas).
-4. **Email**: por defecto usa el email de Supabase (rate-limitado). Para volumen
-   real conviene un SMTP propio (Auth → Email → SMTP), pero para la beta vale el de Supabase.
+4. **Emails de Supabase** (Authentication → Emails). Dos cosas:
+
+   **a) Plantilla del magic link** (pestaña *Magic Link*), en castellano y con tono OC.
+   - *Subject*: `Tu enlace para entrar al Club`
+   - *Message body* (HTML):
+     ```html
+     <p>Hola,</p>
+     <p>Aquí tienes tu enlace para entrar al Club de Oficios Circulares.
+        Ábrelo desde este mismo dispositivo y estarás dentro — sin contraseñas.</p>
+     <p><a href="{{ .ConfirmationURL }}">Entrar al Club</a></p>
+     <p>El enlace caduca en una hora y solo funciona una vez. Si no lo has pedido tú, ignóralo.</p>
+     <p>Un abrazo,<br>Oficios Circulares</p>
+     ```
+     > `{{ .ConfirmationURL }}` ya incluye el `emailRedirectTo` (APP_URL/auth/callback) y el token: aterriza en `/auth/callback?code=…` y el servidor cierra la sesión. Es la opción sencilla (mismo dispositivo).
+     > *Opcional, cross-device* (abrir el correo en el móvil habiendo pedido el enlace en el ordenador): usa
+     > `<a href="{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=email">Entrar al Club</a>`.
+     > El callback ya soporta `token_hash` (`verifyOtp`) además de `code`.
+   - Revisa también la plantilla *Confirm signup* (por si `shouldCreateUser` crea el usuario la primera vez); mismo tono/subject.
+
+   **b) SMTP propio con Brevo** (Project Settings → Authentication → SMTP Settings → *Enable Custom SMTP*).
+   Imprescindible antes de la apertura: el remitente por defecto de Supabase está
+   limitado a ~2-4 emails/hora y el día de la apertura lo reventamos.
+   - Host: `smtp-relay.brevo.com` · Port: `587`
+   - User: tu login SMTP de Brevo (Brevo → SMTP & API → *SMTP*) · Password: la SMTP key de Brevo
+   - Sender email: `hola@oficioscirculares.com` (dominio verificado en Brevo) · Sender name: `Oficios Circulares`
+   - Sube el *rate limit* de emails en Auth → Rate Limits una vez el SMTP propio esté activo.
 5. **Fundadores ya pagados**: antes de activar el webhook, da de alta a mano con
    el SEED comentado al final de `db/club-members.sql` (incluye su `stripe_customer_id`,
    lo ves en Stripe, para que la cancelación futura se sincronice sola).

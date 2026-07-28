@@ -43,9 +43,11 @@ html,body{overflow-x:clip}
 .ca-field:focus{outline:none;border-color:var(--terracota);box-shadow:0 0 0 4px rgba(147,74,28,.12)}
 .ca-label{display:block;font-size:14px;font-weight:700;color:var(--verde);margin-bottom:8px}
 
-/* ---------- LOGIN / LISTA ESPERA (centrado) ---------- */
-.ca-center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 24px;
-  background:radial-gradient(680px 420px at 50% 0%,rgba(232,213,183,.5),transparent 60%),var(--crema)}
+/* ---------- LOGIN / LISTA ESPERA (centrado, foto de taller + velo verde) ---------- */
+.ca-center{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 24px;
+  background:linear-gradient(158deg,rgba(2,42,32,.92) 0%,rgba(2,42,32,.8) 52%,rgba(3,42,32,.92) 100%),
+    url('/assets/images/club/hero-1.jpg') center/cover no-repeat;
+  background-color:var(--verde-hondo)}
 .ca-card{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:24px;box-shadow:0 24px 60px rgba(2,52,41,.14);
   padding:48px 44px;max-width:480px;width:100%;text-align:center}
 .ca-card .ca-logo{width:52px;height:52px;margin:0 auto 22px}

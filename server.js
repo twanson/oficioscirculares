@@ -344,6 +344,13 @@ function baseUrl(req) {
   const proto = req.headers['x-forwarded-proto'] || req.protocol || 'https';
   return `${proto}://${req.get('host')}`;
 }
+// URL pública fija para los enlaces del magic link. Usar APP_URL evita depender
+// de cabeceras de proxy y garantiza que emailRedirectTo coincida EXACTAMENTE con
+// una de las Redirect URLs permitidas en Supabase (si no coincide, Supabase
+// ignora el redirect y manda al Site URL — ese era el bug). Fallback: la del request.
+function appUrl(req) {
+  return (process.env.APP_URL || baseUrl(req)).replace(/\/+$/, '');
+}
 
 // Middleware: sesión Supabase válida + email con acceso en club_members.
 async function requireMember(req, res, next) {
@@ -402,7 +409,7 @@ app.post('/club/entrar', rateLimitMiddleware, async (req, res) => {
     if (await clubMembers.isActive(email)) {
       const supabase = createServerSupabase(req, res);
       if (supabase) {
-        const emailRedirectTo = `${baseUrl(req)}/auth/callback?next=%2Fclub%2Fdentro`;
+        const emailRedirectTo = `${appUrl(req)}/auth/callback`;
         const { error } = await supabase.auth.signInWithOtp({
           email, options: { emailRedirectTo, shouldCreateUser: true }
         });
@@ -413,15 +420,22 @@ app.post('/club/entrar', rateLimitMiddleware, async (req, res) => {
   return res.redirect('/club/entrar?sent=1'); // neutro: no revelar quién es miembro
 });
 
-// GET /auth/callback — intercambia el code del magic link por sesión (cookies)
+// GET /auth/callback — cierra el magic link creando la sesión (cookies httpOnly).
+// Soporta las dos formas de enlace de Supabase:
+//   - PKCE: ?code=...            -> exchangeCodeForSession (mismo navegador)
+//   - token_hash: ?token_hash=...&type=email -> verifyOtp (sirve cross-device)
 app.get('/auth/callback', async (req, res) => {
-  const code = typeof req.query.code === 'string' ? req.query.code : null;
   const next = (typeof req.query.next === 'string' && req.query.next.startsWith('/')) ? req.query.next : '/club/dentro';
+  const code = typeof req.query.code === 'string' ? req.query.code : null;
+  const tokenHash = typeof req.query.token_hash === 'string' ? req.query.token_hash : null;
+  const type = typeof req.query.type === 'string' ? req.query.type : 'email';
   const supabase = createServerSupabase(req, res);
-  if (!code || !supabase) return res.redirect('/club/entrar?error=link');
+  if (!supabase || (!code && !tokenHash)) return res.redirect('/club/entrar?error=link');
   try {
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (error) { console.error('exchangeCodeForSession:', error.message); return res.redirect('/club/entrar?error=link'); }
+    const { error } = code
+      ? await supabase.auth.exchangeCodeForSession(code)
+      : await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
+    if (error) { console.error('auth/callback:', error.message); return res.redirect('/club/entrar?error=link'); }
   } catch (e) { console.error('auth/callback:', e.message); return res.redirect('/club/entrar?error=link'); }
   return res.redirect(next);
 });
