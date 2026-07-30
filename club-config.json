@@ -2,6 +2,8 @@
   "plazas_abiertas": true,
   "plazas_totales": 40,
   "proximo_directo": "Por anunciar — te avisamos por Telegram",
+  "proximo_directo_fecha": "",
   "telegram_invite_url": "",
+  "video_bienvenida_url": "",
   "stripe_billing_portal": "https://billing.stripe.com/p/login/9AQbMF7WPe2nfccdQQ"
 }

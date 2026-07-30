@@ -95,10 +95,21 @@ Opcionales (tienen valor por defecto en el código):
   "plazas_abiertas": true,
   "plazas_totales": 40,
   "proximo_directo": "Miércoles 8 de octubre, 19:00 (online)",
+  "proximo_directo_fecha": "2026-10-08",
   "telegram_invite_url": "https://t.me/…",
+  "video_bienvenida_url": "",
   "stripe_billing_portal": "https://billing.stripe.com/p/login/9AQbMF7WPe2nfccdQQ"
 }
 ```
+
+Claves del hogar `/club/dentro`:
+- `proximo_directo`: texto que se muestra (libre).
+- `proximo_directo_fecha`: fecha ISO (`YYYY-MM-DD`) SOLO para la cuenta atrás
+  ("Faltan X días"). Si está vacía, no se muestra cuenta atrás. Debe cuadrar con
+  el texto de `proximo_directo`.
+- `video_bienvenida_url`: URL del vídeo de bienvenida (MP4 directo, p. ej.
+  `/assets/videos/club/bienvenida.mp4`). Vacía = no se muestra el reproductor.
+  Jose lo graba en agosto; al subirlo, rellenar esta clave.
 
 **Cerrar las plazas** (cambio de un minuto — el 23 de septiembre O antes si se llenan las 40):
 1. Edita `club-config.json`: `"plazas_abiertas": false`.

@@ -5,11 +5,27 @@
     noindex: true
 }) %>
 
-<link rel="stylesheet" href="/assets/css/club-area.css?v=20260727b">
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260730">
 <%
   var featured = pieces.find(function(p){ return p.group === 'empieza'; });
   var rest = pieces.filter(function(p){ return p.group !== 'empieza'; });
-  var nombre = (email || '').split('@')[0];
+  var localPart = (email || '').split('@')[0];
+  var nombre = (member && member.name) ? member.name
+             : (localPart ? localPart.charAt(0).toUpperCase() + localPart.slice(1) : '');
+  // Mapa slug -> portada (las portadas llevan el título integrado; ratio 16:10)
+  var covers = {
+    'guia-primera-victoria': 'guia-primera-victoria.jpg',
+    'leccion-01-foto-de-producto': 'leccion-01.jpg',
+    'leccion-02-tu-primer-reel': 'leccion-02.jpg',
+    'leccion-03-precios-con-margen': 'leccion-03.jpg',
+    'leccion-04-la-bio-que-vende': 'leccion-04.jpg',
+    'biblioteca-plantillas': 'biblioteca.jpg',
+    'reto-01-doce-reels': 'reto-01.jpg',
+    'radar-ayudas': 'radar.jpg',
+    'mapa-del-contenido': 'mapa.jpg'
+  };
+  var videoBienvenida = config && config.video_bienvenida_url;
+  var fechaDirecto = config && config.proximo_directo_fecha;
 %>
 
 <main class="club-area">
@@ -24,66 +40,175 @@
     </div>
   </header>
 
-  <div class="ca-wrap">
-    <section class="ca-hola">
+  <!-- 1. Hero de bienvenida -->
+  <section class="ca-hero">
+    <div class="ca-hero-bg" style="background-image:url('/assets/images/club/hero-2.jpg')"></div>
+    <div class="ca-hero-veil"></div>
+    <div class="ca-hero-inner">
+      <span class="ca-eyebrow">El Club de Oficios Circulares · Tu taller</span>
+      <h1>Bienvenido/a al taller<em><%= nombre %></em></h1>
       <% if (member && member.founder_number) { %>
-        <span class="ca-badge">Fundador · Plaza Nº <%= member.founder_number %> de <%= config.plazas_totales %></span>
-      <% } else if (member && member.founder) { %>
-        <span class="ca-badge">Miembro fundador</span>
-      <% } %>
-      <h1>Hola, <em><%= nombre %></em></h1>
-      <p class="ca-sub">Este es tu taller dentro del Club. Empieza por la guía y ve a tu ritmo — máximo dos horas a la semana.</p>
-
-      <% if (member && member.status === 'past_due') { %>
-        <div class="ca-msg ca-msg--warn" style="margin-top:22px;max-width:640px;">
-          Hay un problema con tu último pago. Sigues teniendo acceso, pero revisa tu método de pago en
-          <a href="<%= billingPortal %>" target="_blank" rel="noopener">el portal de tu suscripción</a> para no perderlo.
+        <div class="ca-placa">
+          <img src="/assets/images/logodegraoscuro.png" alt="">
+          <span>Fundador · Plaza Nº <%= member.founder_number %> de <%= config.plazas_totales %></span>
         </div>
       <% } %>
-    </section>
+      <p class="ca-hero-ctx">Máximo dos horas a la semana. El Club trabaja para tu taller, no al revés.</p>
+      <% if (videoBienvenida) { %>
+        <div class="ca-bienvenida" data-video="<%= videoBienvenida %>" style="background-image:url('/assets/images/club/hero-4.jpg')" role="button" tabindex="0" aria-label="Reproducir el vídeo de bienvenida">
+          <div class="ca-play"><span class="ca-play-btn" aria-hidden="true"></span></div>
+          <span class="ca-play-label">Un minuto de bienvenida</span>
+        </div>
+      <% } %>
+    </div>
+  </section>
 
+  <div class="ca-wrap">
+    <!-- 2. Tu primera victoria -->
     <% if (featured) { %>
-      <a class="ca-featured" href="/club/dentro/lecciones/<%= featured.slug %>" style="display:block;text-decoration:none;">
-        <span class="ca-kicker"><%= featured.kicker %></span>
-        <h2><%= featured.title %></h2>
-        <p><%= featured.desc %></p>
-        <span class="ca-btn ca-btn--terracota">Empezar por aquí →</span>
-      </a>
+      <div class="ca-featured wow" id="victoria">
+        <div class="ca-featured-body">
+          <span class="ca-kicker" id="victoriaKicker">Empieza aquí<span class="ca-done-sello" aria-hidden="true">✓</span></span>
+          <h2><%= featured.title %></h2>
+          <p class="ca-featured-lead"><%= featured.desc %></p>
+          <ul class="ca-check" id="victoriaCheck">
+            <li><label class="ca-check-item"><input type="checkbox" data-victoria="0"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Leí la guía y elegí mi ruta</span></label></li>
+            <li><label class="ca-check-item"><input type="checkbox" data-victoria="1"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Hice mis 3 fotos (lección 01)</span></label></li>
+            <li><label class="ca-check-item"><input type="checkbox" data-victoria="2"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Preparé mi ficha o mi reel</span></label></li>
+            <li><label class="ca-check-item"><input type="checkbox" data-victoria="3"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Lo publiqué</span></label></li>
+            <li><label class="ca-check-item"><input type="checkbox" data-victoria="4"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Lo compartí en el chat</span></label></li>
+          </ul>
+          <div class="ca-progress">
+            <div class="ca-progress-track"><div class="ca-progress-fill" id="victoriaFill"></div></div>
+            <span class="ca-progress-num" id="victoriaNum">0 de 5</span>
+          </div>
+          <a class="ca-featured-link" href="/club/dentro/lecciones/<%= featured.slug %>">Abrir la guía completa →</a>
+        </div>
+        <div class="ca-featured-cover" style="background-image:url('/assets/images/club/covers/<%= covers[featured.slug] %>')"></div>
+      </div>
     <% } %>
 
-    <h2 class="ca-section-title">Todo el contenido</h2>
-    <div class="ca-grid">
-      <% rest.forEach(function(p){ %>
-        <a class="ca-piece ca-piece--<%= p.accent %>" href="/club/dentro/lecciones/<%= p.slug %>">
-          <span class="ca-kicker"><%= p.kicker %></span>
-          <h3><%= p.title %></h3>
-          <p><%= p.desc %></p>
-          <span class="ca-go">Abrir →</span>
+    <!-- 3. La estantería -->
+    <h2 class="ca-section-title wow">La estantería</h2>
+    <div class="ca-shelf">
+      <% rest.forEach(function(p, i){ %>
+        <a class="ca-book wow" href="/club/dentro/lecciones/<%= p.slug %>">
+          <div class="ca-book-cover"><img src="/assets/images/club/covers/<%= covers[p.slug] %>" alt="<%= p.title %>"<% if (i > 1) { %> loading="lazy"<% } %>></div>
+          <div class="ca-book-band">
+            <p><%= p.desc %></p>
+            <span class="ca-go">Abrir →</span>
+          </div>
         </a>
       <% }); %>
     </div>
-
-    <h2 class="ca-section-title">Este mes en el Club</h2>
-    <div class="ca-mes">
-      <div class="ca-mes-card">
-        <h3>El chat del Club</h3>
-        <p>Preguntas a las diez de la noche y te contesta alguien que ha pasado por lo mismo. Tu oficio, tu zona, tu gente.</p>
-        <% if (config.telegram_invite_url) { %>
-          <a class="ca-btn ca-btn--terracota" href="<%= config.telegram_invite_url %>" target="_blank" rel="noopener">Unirme al grupo →</a>
-        <% } else { %>
-          <p style="font-style:italic;">Te enviaremos el enlace del grupo por correo en breve.</p>
-        <% } %>
-      </div>
-      <div class="ca-mes-card">
-        <h3>Próximo directo</h3>
-        <p><strong><%= config.proximo_directo || 'Por anunciar' %></strong></p>
-        <p style="margin-bottom:0;">Revisión en vivo de perfiles y tiendas. Trae tu caso.</p>
-      </div>
-    </div>
-
-    <div class="ca-foot">
-      <span>¿Necesitas gestionar tu suscripción? <a href="<%= billingPortal %>" target="_blank" rel="noopener">Abrir el portal</a>.</span>
-      <a href="/club/salir">Cerrar sesión</a>
-    </div>
   </div>
+
+  <!-- 4. Este mes en el Club -->
+  <section class="ca-mes-band">
+    <div class="ca-wrap">
+      <h2 class="ca-section-title wow">Este mes en el Club</h2>
+      <div class="ca-mes">
+        <div class="ca-mes-card wow">
+          <h3>El directo del mes</h3>
+          <span class="ca-fecha"><%= (config && config.proximo_directo) || 'Por anunciar' %></span>
+          <% if (fechaDirecto) { %><div class="ca-count" data-fecha="<%= fechaDirecto %>"></div><% } %>
+          <p>Revisión en vivo de perfiles y tiendas. Pide tu turno con <span class="ca-hash">#revisión</span> en el chat.</p>
+        </div>
+        <div class="ca-mes-card wow">
+          <h3>El chat del Club</h3>
+          <% if (config && config.telegram_invite_url) { %>
+            <p>Preguntas a las diez de la noche y te contesta alguien que ha pasado por lo mismo.</p>
+            <a class="ca-btn ca-btn--arena" href="<%= config.telegram_invite_url %>" target="_blank" rel="noopener">Unirme al grupo →</a>
+          <% } else { %>
+            <p>El grupo se estrena con la primera hornada — te llegará el enlace por correo.</p>
+          <% } %>
+        </div>
+        <div class="ca-mes-card wow">
+          <h3>Se vota la próxima lección</h3>
+          <ul class="ca-vota">
+            <li>WhatsApp Business</li>
+            <li>Etsy vs tienda propia</li>
+            <li>Ferias que venden</li>
+            <li>Email básico</li>
+          </ul>
+          <p>Vota con <span class="ca-hash">#pido</span> en el chat.</p>
+        </div>
+      </div>
+      <div class="ca-foot">
+        <span>¿Necesitas gestionar tu suscripción? <a href="<%= billingPortal %>" target="_blank" rel="noopener">Abrir el portal</a>.</span>
+        <a href="/club/salir">Cerrar sesión</a>
+      </div>
+    </div>
+  </section>
 </main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Entrada escalonada
+  var wow = Array.prototype.slice.call(document.querySelectorAll('.wow'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    wow.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold: 0.08});
+    wow.forEach(function(el, i){ el.style.transitionDelay = Math.min(i, 6) * 80 + 'ms'; io.observe(el); });
+  }
+
+  // Checklist "primera victoria" (localStorage)
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('[data-victoria]'));
+  var fill = document.getElementById('victoriaFill');
+  var num = document.getElementById('victoriaNum');
+  var card = document.getElementById('victoria');
+  var kicker = document.getElementById('victoriaKicker');
+  var KEY = 'clubPrimeraVictoria';
+  function loadState(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
+  function saveState(s){ try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e){} }
+  function render(){
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    if (fill) fill.style.width = (boxes.length ? (done / boxes.length * 100) : 0) + '%';
+    if (num) num.textContent = done + ' de ' + boxes.length;
+    var complete = boxes.length > 0 && done === boxes.length;
+    if (card) card.classList.toggle('is-done', complete);
+    if (kicker && kicker.childNodes[0]) kicker.childNodes[0].nodeValue = complete ? 'Primera victoria conseguida' : 'Empieza aquí';
+  }
+  if (boxes.length) {
+    var state = loadState();
+    boxes.forEach(function(b){
+      var i = b.getAttribute('data-victoria');
+      if (state[i]) b.checked = true;
+      b.addEventListener('change', function(){ state[i] = b.checked; saveState(state); render(); });
+    });
+    render();
+  }
+
+  // Cuenta atrás del directo
+  var cnt = document.querySelector('[data-fecha]');
+  if (cnt) {
+    var target = new Date(cnt.getAttribute('data-fecha'));
+    if (!isNaN(target.getTime())) {
+      var now = new Date();
+      var days = Math.round((new Date(target.getFullYear(), target.getMonth(), target.getDate())
+                 - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 86400000);
+      cnt.textContent = days > 1 ? ('Faltan ' + days + ' días') : (days === 1 ? 'Es mañana' : (days === 0 ? 'Es hoy' : ''));
+    }
+  }
+
+  // Vídeo de bienvenida (click-to-play)
+  var biv = document.querySelector('.ca-bienvenida');
+  if (biv) {
+    var playVideo = function(){
+      var url = biv.getAttribute('data-video');
+      if (!url) return;
+      var v = document.createElement('video');
+      v.src = url; v.controls = true; v.autoplay = true; v.setAttribute('playsinline', '');
+      v.style.width = '100%'; v.style.height = '100%';
+      biv.innerHTML = ''; biv.appendChild(v); biv.style.cursor = 'default';
+    };
+    biv.addEventListener('click', playVideo);
+    biv.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playVideo(); } });
+  }
+})();
+</script>
