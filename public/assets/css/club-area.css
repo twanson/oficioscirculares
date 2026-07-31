@@ -75,13 +75,17 @@ html,body{overflow-x:clip}
 .ca-hero{position:relative;min-height:clamp(440px,70vh,660px);display:flex;align-items:flex-end;overflow:hidden;
   background:var(--verde-hondo)}
 .ca-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center}
-.ca-hero-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,52,41,.82),rgba(2,52,41,.6) 60%,rgba(2,52,41,.42));z-index:1}
-.ca-hero-veil::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;background:linear-gradient(180deg,transparent,var(--crema))}
-.ca-hero-inner{position:relative;z-index:2;width:100%;max-width:1080px;margin:0 auto;padding:96px 24px 60px}
+/* Velo: base horizontal (izquierda oscura para el texto) + vertical que se
+   mantiene OSCURO en la zona del contenido (hasta ~90%) y solo funde a crema
+   en el borde inferior. Así el saludo/placa/contexto tienen contraste AA. */
+.ca-hero-veil{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(2,52,41,.86) 0%,rgba(2,52,41,.62) 52%,rgba(2,52,41,.44) 100%),
+             linear-gradient(180deg,rgba(2,42,32,.18) 0%,transparent 26%,rgba(2,42,32,.42) 60%,rgba(2,42,32,.85) 90%,var(--crema) 100%)}
+.ca-hero-inner{position:relative;z-index:2;width:100%;max-width:1080px;margin:0 auto;padding:96px 24px 76px}
 .ca-hero .ca-eyebrow{color:var(--arena);margin-bottom:16px}
 .ca-hero h1{color:var(--crema);font-size:clamp(44px,6.6vw,72px);line-height:1.02;letter-spacing:-.01em;margin:0}
 .ca-hero h1 em{display:block;color:#F0DFC2;font-weight:500}
-.ca-hero .ca-hero-ctx{margin-top:18px;max-width:46ch;color:rgba(251,247,239,.82);font-size:16px}
+.ca-hero .ca-hero-ctx{margin-top:16px;max-width:46ch;color:rgba(251,247,239,.92);font-size:16px}
 
 /* Placa de fundador (latón grabado) */
 .ca-placa{display:inline-flex;align-items:center;gap:14px;margin-top:24px;padding:11px 20px;border-radius:6px;
@@ -103,7 +107,7 @@ html,body{overflow-x:clip}
 .ca-bienvenida video{width:100%;height:100%;display:block;object-fit:cover}
 
 /* ---------- 2. Tu primera victoria (tarjeta hero + checklist) ---------- */
-.ca-featured{position:relative;display:grid;grid-template-columns:1.35fr .65fr;margin:-34px 0 12px;border-radius:24px;overflow:hidden;
+.ca-featured{position:relative;display:grid;grid-template-columns:1.2fr 1fr;margin:-34px 0 12px;border-radius:24px;overflow:hidden;
   background:linear-gradient(165deg,var(--verde) 0%,#03392C 100%);color:rgba(251,247,239,.9);
   box-shadow:0 24px 60px rgba(2,52,41,.24);border:1.5px solid transparent;transition:border-color .5s ease;z-index:3}
 .ca-featured.is-done{border-color:var(--arena)}
@@ -114,7 +118,9 @@ html,body{overflow-x:clip}
 .ca-featured h2{color:var(--crema);font-size:clamp(24px,3vw,32px);margin-bottom:10px}
 .ca-featured .ca-featured-lead{max-width:46ch;margin-bottom:20px;color:rgba(251,247,239,.8);font-size:15.5px}
 .ca-featured-cover{position:relative;background-size:cover;background-position:center}
-.ca-featured-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--verde),rgba(2,52,41,.12) 55%,transparent)}
+/* Solo un degradado estrecho en el borde de unión (izquierda) para fundir la
+   portada con el cuerpo verde; el resto de la foto se ve de verdad. */
+.ca-featured-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#03392C 0%,rgba(3,57,44,.5) 10%,transparent 30%)}
 
 /* checklist */
 .ca-check{list-style:none;display:grid;gap:11px;margin:0 0 20px}
@@ -171,13 +177,13 @@ html,body{overflow-x:clip}
   .ca-shelf{grid-template-columns:1fr 1fr}
   .ca-mes{grid-template-columns:1fr}
   .ca-featured{grid-template-columns:1fr}
-  .ca-featured-cover{min-height:150px;order:-1}
-  .ca-featured-cover::after{background:linear-gradient(0deg,var(--verde),rgba(2,52,41,.12) 60%,transparent)}
+  .ca-featured-cover{min-height:190px;order:-1}
+  .ca-featured-cover::after{background:linear-gradient(0deg,#03392C 0%,rgba(3,57,44,.5) 14%,transparent 38%)}
 }
 @media(max-width:560px){
   .ca-shelf{grid-template-columns:1fr}
   .ca-card{padding:36px 26px}
   .ca-featured-body{padding:30px 26px}
-  .ca-hero-inner{padding:80px 20px 52px}
+  .ca-hero-inner{padding:76px 20px 60px}
   .ca-placa span{font-size:11.5px;letter-spacing:.14em}
 }

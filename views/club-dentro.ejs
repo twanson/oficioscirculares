@@ -5,7 +5,7 @@
     noindex: true
 }) %>
 
-<link rel="stylesheet" href="/assets/css/club-area.css?v=20260730">
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260731">
 <%
   var featured = pieces.find(function(p){ return p.group === 'empieza'; });
   var rest = pieces.filter(function(p){ return p.group !== 'empieza'; });
@@ -47,13 +47,13 @@
     <div class="ca-hero-inner">
       <span class="ca-eyebrow">El Club de Oficios Circulares · Tu taller</span>
       <h1>Bienvenido/a al taller<em><%= nombre %></em></h1>
+      <p class="ca-hero-ctx">Máximo dos horas a la semana. El Club trabaja para tu taller, no al revés.</p>
       <% if (member && member.founder_number) { %>
         <div class="ca-placa">
           <img src="/assets/images/logodegraoscuro.png" alt="">
           <span>Fundador · Plaza Nº <%= member.founder_number %> de <%= config.plazas_totales %></span>
         </div>
       <% } %>
-      <p class="ca-hero-ctx">Máximo dos horas a la semana. El Club trabaja para tu taller, no al revés.</p>
       <% if (videoBienvenida) { %>
         <div class="ca-bienvenida" data-video="<%= videoBienvenida %>" style="background-image:url('/assets/images/club/hero-4.jpg')" role="button" tabindex="0" aria-label="Reproducir el vídeo de bienvenida">
           <div class="ca-play"><span class="ca-play-btn" aria-hidden="true"></span></div>
