@@ -36,7 +36,10 @@ Opcionales (tienen valor por defecto en el código):
 ## 2. Supabase
 
 1. **Tabla**: ejecuta `db/club-members.sql` en el SQL Editor del proyecto. Crea
-   `club_members` con RLS activada (solo el service role escribe/lee).
+   `club_members` con RLS activada (solo el service role escribe/lee). Es
+   idempotente: si la tabla ya existía, el script hace `add column if not exists
+   nombre` (columna opcional para saludar por su nombre en el hogar; si está
+   vacía, el hero muestra solo "Bienvenido/a al taller").
 2. **Redirect URLs** (Authentication → URL Configuration → Redirect URLs): añade
    - `https://oficioscirculares-production.up.railway.app/auth/callback`
    - `https://www.oficioscirculares.com/auth/callback`

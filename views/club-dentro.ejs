@@ -5,13 +5,13 @@
     noindex: true
 }) %>
 
-<link rel="stylesheet" href="/assets/css/club-area.css?v=20260731b">
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260803">
 <%
   var featured = pieces.find(function(p){ return p.group === 'empieza'; });
   var rest = pieces.filter(function(p){ return p.group !== 'empieza'; });
-  var localPart = (email || '').split('@')[0];
-  var nombre = (member && member.name) ? member.name
-             : (localPart ? localPart.charAt(0).toUpperCase() + localPart.slice(1) : '');
+  // Nombre SOLO desde la columna club_members.nombre (opcional). Si no hay, el
+  // hero se queda en "Bienvenido/a al taller" — nada de derivarlo del email.
+  var nombre = (member && member.nombre) ? String(member.nombre).trim() : '';
   // Mapa slug -> portada (las portadas llevan el título integrado; ratio 16:10)
   var covers = {
     'guia-primera-victoria': 'guia-primera-victoria.jpg',
@@ -46,7 +46,7 @@
     <div class="ca-hero-veil"></div>
     <div class="ca-hero-inner">
       <span class="ca-eyebrow">El Club de Oficios Circulares · Tu taller</span>
-      <h1>Bienvenido/a al taller<em><%= nombre %></em></h1>
+      <h1>Bienvenido/a al taller<% if (nombre) { %><em><%= nombre %></em><% } %></h1>
       <p class="ca-hero-ctx">Máximo dos horas a la semana. El Club trabaja para tu taller, no al revés.</p>
       <% if (member && member.founder_number) { %>
         <div class="ca-placa">
@@ -98,7 +98,9 @@
             </div>
           </div>
         </div>
-        <div class="ca-featured-cover" style="background-image:url('/assets/images/club/covers/<%= covers[featured.slug] %>')"></div>
+        <!-- Pieza vertical a medida para este hueco (760x1000, velo hacia la derecha, sin texto).
+             La cubierta completa 16:10 (covers/guia-primera-victoria.jpg) se reserva para tarjetas horizontales. -->
+        <div class="ca-featured-cover" style="background-image:url('/assets/images/club/covers/guia-panel.jpg')"></div>
       </div>
     <% } %>
 

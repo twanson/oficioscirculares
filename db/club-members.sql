@@ -6,6 +6,7 @@
 create table if not exists public.club_members (
   id uuid primary key default gen_random_uuid(),
   email text unique not null,
+  nombre text,                              -- nombre a mostrar en el hero (opcional; si NULL, no se muestra)
   status text not null default 'active',   -- active | canceled | past_due
   plan text,                                -- monthly | annual
   founder boolean default true,
@@ -14,6 +15,9 @@ create table if not exists public.club_members (
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
+
+-- Si la tabla ya existía sin la columna, añádela (idempotente):
+alter table public.club_members add column if not exists nombre text;
 
 -- Búsquedas rápidas por email (login) y por customer (webhook).
 create unique index if not exists club_members_email_idx on public.club_members (lower(email));
@@ -30,12 +34,15 @@ alter table public.club_members enable row level security;
 --  cancelación futura se sincronice sola; sin él, si cancelan habría que
 --  ponerlos a 'canceled' a mano.
 -- ============================================================
--- insert into public.club_members (email, status, plan, founder, founder_number, stripe_customer_id)
+-- `nombre` es opcional: rellénalo para saludar por su nombre en el hero; si lo
+-- dejas NULL, el hogar muestra solo "Bienvenido/a al taller".
+-- insert into public.club_members (email, nombre, status, plan, founder, founder_number, stripe_customer_id)
 -- values
---   ('fundador1@correo.com', 'active', 'annual',  true, 1, 'cus_XXXXXXXX'),
---   ('fundador2@correo.com', 'active', 'monthly', true, 2, 'cus_YYYYYYYY')
+--   ('fundador1@correo.com', 'Blanca', 'active', 'annual',  true, 1, 'cus_XXXXXXXX'),
+--   ('fundador2@correo.com', NULL,     'active', 'monthly', true, 2, 'cus_YYYYYYYY')
 -- on conflict (email) do update
---   set status = excluded.status,
+--   set nombre = coalesce(excluded.nombre, public.club_members.nombre),
+--       status = excluded.status,
 --       plan = excluded.plan,
 --       founder_number = coalesce(excluded.founder_number, public.club_members.founder_number),
 --       stripe_customer_id = coalesce(excluded.stripe_customer_id, public.club_members.stripe_customer_id),

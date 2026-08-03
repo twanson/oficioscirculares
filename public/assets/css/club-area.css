@@ -124,9 +124,9 @@ html,body{overflow-x:clip}
 .ca-featured h2{color:var(--crema);font-size:clamp(24px,3vw,32px);margin-bottom:10px}
 .ca-featured .ca-featured-lead{max-width:46ch;margin-bottom:20px;color:rgba(251,247,239,.8);font-size:15.5px}
 .ca-featured-cover{position:relative;background-size:cover;background-position:center}
-/* Solo un degradado estrecho en el borde de unión (izquierda) para fundir la
-   portada con el cuerpo verde; el resto de la foto se ve de verdad. */
-.ca-featured-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#03392C 0%,rgba(3,57,44,.5) 10%,transparent 30%)}
+/* La portada guia-panel.jpg ya trae su velo hacia la derecha; solo fusionamos
+   el borde de unión (izquierda) con un degradado muy estrecho. */
+.ca-featured-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#03392C 0%,transparent 15%)}
 
 /* checklist */
 .ca-check{list-style:none;display:grid;gap:11px;margin:0 0 20px}
