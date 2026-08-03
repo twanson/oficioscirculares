@@ -5,7 +5,7 @@
     noindex: true
 }) %>
 
-<link rel="stylesheet" href="/assets/css/club-area.css?v=20260731">
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260731b">
 <%
   var featured = pieces.find(function(p){ return p.group === 'empieza'; });
   var rest = pieces.filter(function(p){ return p.group !== 'empieza'; });
@@ -68,21 +68,35 @@
     <% if (featured) { %>
       <div class="ca-featured wow" id="victoria">
         <div class="ca-featured-body">
-          <span class="ca-kicker" id="victoriaKicker">Empieza aquí<span class="ca-done-sello" aria-hidden="true">✓</span></span>
-          <h2><%= featured.title %></h2>
-          <p class="ca-featured-lead"><%= featured.desc %></p>
-          <ul class="ca-check" id="victoriaCheck">
-            <li><label class="ca-check-item"><input type="checkbox" data-victoria="0"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Leí la guía y elegí mi ruta</span></label></li>
-            <li><label class="ca-check-item"><input type="checkbox" data-victoria="1"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Hice mis 3 fotos (lección 01)</span></label></li>
-            <li><label class="ca-check-item"><input type="checkbox" data-victoria="2"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Preparé mi ficha o mi reel</span></label></li>
-            <li><label class="ca-check-item"><input type="checkbox" data-victoria="3"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Lo publiqué</span></label></li>
-            <li><label class="ca-check-item"><input type="checkbox" data-victoria="4"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Lo compartí en el chat</span></label></li>
-          </ul>
-          <div class="ca-progress">
-            <div class="ca-progress-track"><div class="ca-progress-fill" id="victoriaFill"></div></div>
-            <span class="ca-progress-num" id="victoriaNum">0 de 5</span>
+          <!-- Estado en progreso -->
+          <div class="ca-victoria-progress">
+            <span class="ca-kicker">Empieza aquí</span>
+            <h2><%= featured.title %></h2>
+            <p class="ca-featured-lead"><%= featured.desc %></p>
+            <ul class="ca-check" id="victoriaCheck">
+              <li><label class="ca-check-item"><input type="checkbox" data-victoria="0"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Me he presentado en el chat con una foto de mi taller</span></label></li>
+              <li><label class="ca-check-item"><input type="checkbox" data-victoria="1"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Tengo apuntado el primer directo</span></label></li>
+              <li><label class="ca-check-item"><input type="checkbox" data-victoria="2"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Leí la guía y elegí mi ruta</span></label></li>
+              <li><label class="ca-check-item"><input type="checkbox" data-victoria="3"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Hice mis 3 fotos (lección 01)</span></label></li>
+              <li><label class="ca-check-item"><input type="checkbox" data-victoria="4"><span class="ca-check-box" aria-hidden="true"></span><span class="ca-check-txt">Publiqué mi primera pieza contada</span></label></li>
+            </ul>
+            <div class="ca-progress">
+              <div class="ca-progress-track"><div class="ca-progress-fill" id="victoriaFill"></div></div>
+              <span class="ca-progress-num" id="victoriaNum">0 de 5</span>
+            </div>
+            <a class="ca-featured-link" href="/club/dentro/lecciones/<%= featured.slug %>">Abrir la guía completa →</a>
           </div>
-          <a class="ca-featured-link" href="/club/dentro/lecciones/<%= featured.slug %>">Abrir la guía completa →</a>
+          <!-- Estado conseguido (reencuadre hacia constancia) -->
+          <div class="ca-victoria-done">
+            <span class="ca-kicker"><span class="ca-done-sello" aria-hidden="true">✓</span> Primera victoria conseguida</span>
+            <h2>Ya sabes hacerlo. Ahora viene lo que cambia el taller.</h2>
+            <p class="ca-featured-lead">Publicar una pieza bien contada era el arranque, no la meta. Lo que mueve un taller de verdad es la constancia — y eso no se hace solo.</p>
+            <p class="ca-featured-lead">Tu siguiente paso: el reto del trimestre y el directo de este mes. Ahí es donde esto se convierte en oficio.</p>
+            <div class="ca-done-cta">
+              <a class="ca-btn ca-btn--arena" href="/club/dentro/lecciones/reto-01-doce-reels">Ver el reto →</a>
+              <a class="ca-btn ca-btn--ghost-arena" href="#este-mes">El directo de este mes →</a>
+            </div>
+          </div>
         </div>
         <div class="ca-featured-cover" style="background-image:url('/assets/images/club/covers/<%= covers[featured.slug] %>')"></div>
       </div>
@@ -104,7 +118,7 @@
   </div>
 
   <!-- 4. Este mes en el Club -->
-  <section class="ca-mes-band">
+  <section class="ca-mes-band" id="este-mes">
     <div class="ca-wrap">
       <h2 class="ca-section-title wow">Este mes en el Club</h2>
       <div class="ca-mes">
@@ -134,6 +148,9 @@
           <p>Vota con <span class="ca-hash">#pido</span> en el chat.</p>
         </div>
       </div>
+      <div class="ca-radar-nota wow">
+        <p>Cada trimestre revisamos las ayudas de tu comunidad por ti — es lo que no vas a encontrar en ningún otro sitio. <a href="/club/dentro/lecciones/radar-ayudas">Ver el radar de ayudas →</a></p>
+      </div>
       <div class="ca-foot">
         <span>¿Necesitas gestionar tu suscripción? <a href="<%= billingPortal %>" target="_blank" rel="noopener">Abrir el portal</a>.</span>
         <a href="/club/salir">Cerrar sesión</a>
@@ -162,8 +179,8 @@
   var fill = document.getElementById('victoriaFill');
   var num = document.getElementById('victoriaNum');
   var card = document.getElementById('victoria');
-  var kicker = document.getElementById('victoriaKicker');
-  var KEY = 'clubPrimeraVictoria';
+  // Clave nueva: el checklist cambió de orden/significado; no reutilizar el progreso viejo.
+  var KEY = 'clubPrimeraVictoria2';
   function loadState(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
   function saveState(s){ try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e){} }
   function render(){
@@ -172,7 +189,6 @@
     if (num) num.textContent = done + ' de ' + boxes.length;
     var complete = boxes.length > 0 && done === boxes.length;
     if (card) card.classList.toggle('is-done', complete);
-    if (kicker && kicker.childNodes[0]) kicker.childNodes[0].nodeValue = complete ? 'Primera victoria conseguida' : 'Empieza aquí';
   }
   if (boxes.length) {
     var state = loadState();

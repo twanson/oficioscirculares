@@ -113,8 +113,14 @@ html,body{overflow-x:clip}
 .ca-featured.is-done{border-color:var(--arena)}
 .ca-featured-body{padding:38px 40px}
 .ca-featured .ca-kicker{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);margin-bottom:12px;display:inline-flex;align-items:center;gap:10px}
-.ca-featured .ca-done-sello{display:none;width:20px;height:20px;border-radius:50%;background:var(--arena);color:var(--verde);align-items:center;justify-content:center;font-size:12px;font-weight:900}
-.ca-featured.is-done .ca-done-sello{display:inline-flex}
+.ca-featured .ca-done-sello{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--arena);color:var(--verde);align-items:center;justify-content:center;font-size:12px;font-weight:900}
+/* Dos estados de "Tu primera victoria": en progreso -> conseguido */
+.ca-victoria-done{display:none}
+.ca-featured.is-done .ca-victoria-progress{display:none}
+.ca-featured.is-done .ca-victoria-done{display:block}
+.ca-done-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.ca-btn--ghost-arena{background:transparent;color:var(--arena);border:1.5px solid rgba(232,213,183,.5)}
+.ca-btn--ghost-arena:hover{background:rgba(232,213,183,.12)}
 .ca-featured h2{color:var(--crema);font-size:clamp(24px,3vw,32px);margin-bottom:10px}
 .ca-featured .ca-featured-lead{max-width:46ch;margin-bottom:20px;color:rgba(251,247,239,.8);font-size:15.5px}
 .ca-featured-cover{position:relative;background-size:cover;background-position:center}
@@ -151,7 +157,7 @@ html,body{overflow-x:clip}
 .ca-book-band .ca-go{font-size:14px;font-weight:700;color:var(--terracota)}
 
 /* ---------- 4. Banda "Este mes" (full-width verde hondo) ---------- */
-.ca-mes-band{background:var(--verde-hondo);color:rgba(251,247,239,.88);margin-top:56px;padding:56px 0 40px}
+.ca-mes-band{background:var(--verde-hondo);color:rgba(251,247,239,.88);margin-top:56px;padding:56px 0 40px;scroll-margin-top:76px}
 .ca-mes-band .ca-section-title{color:var(--arena);margin:0 0 28px}
 .ca-mes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .ca-mes-card{background:rgba(251,247,239,.05);border:1px solid rgba(232,213,183,.18);border-radius:18px;padding:26px 26px}
@@ -165,6 +171,10 @@ html,body{overflow-x:clip}
 .ca-vota{list-style:none;display:grid;gap:8px;margin:0 0 12px}
 .ca-vota li{position:relative;padding-left:18px;font-size:14.5px;color:rgba(251,247,239,.85)}
 .ca-vota li::before{content:"—";position:absolute;left:0;color:var(--arena)}
+/* Radar de ayudas: razón de permanencia, con peso propio */
+.ca-radar-nota{margin-top:24px;padding:20px 24px;border-radius:16px;background:rgba(232,213,183,.08);border:1px solid rgba(232,213,183,.28);border-left:4px solid var(--arena)}
+.ca-radar-nota p{margin:0;color:rgba(251,247,239,.9);font-size:15.5px;line-height:1.55}
+.ca-radar-nota a{color:var(--arena);font-weight:700;white-space:nowrap}
 .ca-foot{margin-top:32px;padding-top:22px;border-top:1px dashed rgba(232,213,183,.2);font-size:13.5px;color:rgba(251,247,239,.65);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:center}
 .ca-foot a{color:var(--arena);font-weight:600}
 
