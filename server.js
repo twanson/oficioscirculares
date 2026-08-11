@@ -390,6 +390,13 @@ function serveClubPiece(res, piece) {
   res.type('html').send(html);
 }
 
+// GET /club/bienvenida — post-pago. Es la URL de retorno de los payment links de
+// Stripe: el comprador llega SIN sesión, así que es pública (sin requireMember).
+app.get('/club/bienvenida', (req, res) => {
+  const cfg = clubConfig.getConfig();
+  res.render('club-bienvenida', { billingPortal: cfg.stripe_billing_portal });
+});
+
 // GET /club/entrar — login (campo email + magic link)
 app.get('/club/entrar', (req, res) => {
   const cfg = clubConfig.getConfig();

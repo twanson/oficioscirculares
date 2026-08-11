@@ -1,0 +1,56 @@
+<%- include('partials/head-meta', {
+    title: 'Bienvenido al Club — Oficios Circulares',
+    description: 'Tu plaza de fundador del Club de Oficios Circulares queda reservada.',
+    canonical: '/club/bienvenida',
+    noindex: true
+}) %>
+
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260805">
+
+<main class="club-area">
+  <div class="ca-center">
+    <div class="ca-card ca-card--ancha wow">
+      <img class="ca-logo" src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span class="ca-eyebrow">El Club de Oficios Circulares</span>
+      <h1>Ya está. <em>Bienvenido/a al Club.</em></h1>
+      <p class="lead">Tu plaza de fundador queda reservada. Ahora, dos cosas:</p>
+
+      <div class="ca-pasos">
+        <div class="ca-paso">
+          <span class="ca-paso-num" aria-hidden="true">1</span>
+          <div>
+            <h2>Entra en tu taller</h2>
+            <p>El área de miembros ya te está esperando: la guía de arranque, las lecciones y el radar de ayudas.</p>
+            <a class="ca-btn ca-btn--terracota" href="/club/entrar">Entrar al Club →</a>
+            <p class="ca-paso-nota">Usa <strong>el mismo correo con el que acabas de pagar</strong> — te llegará tu enlace de acceso.</p>
+          </div>
+        </div>
+
+        <div class="ca-paso">
+          <span class="ca-paso-num" aria-hidden="true">2</span>
+          <div>
+            <h2>Revisa tu correo estos días</h2>
+            <p>Te llegará el correo de arranque con la Guía de la Primera Victoria, tu número de plaza y el enlace al grupo de Telegram.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="ca-cierre">Gracias por estar en los primeros 40. Esto lo construimos contigo.</p>
+
+      <div class="ca-card-foot">
+        ¿Alguna duda? Escríbenos a <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>.<br>
+        <a href="<%= billingPortal %>" target="_blank" rel="noopener">Gestionar tu suscripción</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var card = document.querySelector('.wow');
+  if (!card) return;
+  if (reduce) { card.classList.add('in'); return; }
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ card.classList.add('in'); }); });
+})();
+</script>
