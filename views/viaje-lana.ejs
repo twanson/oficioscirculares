@@ -41,7 +41,11 @@ body{background:#fbf9f8}
   --bar:56px;
   font-family:var(--f-body);color:var(--on);line-height:1.62;-webkit-font-smoothing:antialiased;background:var(--surface)
 }
-.vj h1,.vj h2,.vj h3,.vj h4,.vj p{margin:0}
+/* :where() deja el reset con especificidad 0 en la parte del tipo, así que
+   cualquier regla de una sola clase (.vj-cierre, .vj-nota…) puede recuperar
+   sus márgenes. Con `.vj p{margin:0}` ganaba el reset y los bloques perdían
+   el `margin:auto` — se pegaban al margen izquierdo. */
+.vj :where(h1,h2,h3,h4,p){margin:0}
 /* Los enlaces sin clase heredan color; los que llevan clase mandan sobre su
    propio color (si no, `.vj a` gana por especificidad y los deja ilegibles). */
 .vj a{text-decoration:none}
@@ -53,7 +57,11 @@ body{background:#fbf9f8}
 .vj-w{max-width:68ch;margin:0 auto}
 
 /* ============ CABECERA STICKY (chrome mínimo + progreso) ============ */
-.vj-bar{position:sticky;top:0;z-index:60;background:#03231b;border-bottom:1px solid rgba(246,201,138,.2)}
+/* La barra va por encima de TODO el contenido: además del z-index alto,
+   `main` abre su propio contexto de apilamiento (z-index:0), así que ningún
+   z-index ni transform de dentro puede escalar por encima de ella. */
+.vj-bar{position:sticky;top:0;z-index:100;background:#03231b;border-bottom:1px solid rgba(246,201,138,.2);box-shadow:0 6px 22px rgba(2,32,25,.34)}
+.vj-main{position:relative;z-index:0}
 .vj-bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--bar);padding:0 14px;max-width:1100px;margin:0 auto}
 .vj-brand{display:flex;align-items:center;gap:9px;min-width:0}
 .vj-brand img{height:26px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
@@ -87,7 +95,7 @@ body{background:#fbf9f8}
 .vj-start:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
 /* ======================= EL CAMINO (ruta) ======================= */
-.vj-camino{position:relative;height:clamp(132px,20vh,186px);background:var(--surface)}
+.vj-camino{position:relative;height:clamp(84px,11vh,116px);background:var(--surface)}
 .vj-linea{position:absolute;inset:0;width:100%;height:100%}
 .vj-linea path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .vj-linea-base{stroke:rgba(2,52,41,.22);stroke-width:2.4;stroke-dasharray:1.6 6}
@@ -108,6 +116,10 @@ body{background:#fbf9f8}
 .vj-est-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
 .vj-est-hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(2,40,31,.3) 0%,rgba(2,40,31,.18) 30%,rgba(2,40,31,.86) 82%,rgba(2,40,31,.96) 100%)}
 .vj-est--ocre .vj-est-hero::after{background:linear-gradient(180deg,rgba(58,30,12,.34) 0%,rgba(58,30,12,.2) 30%,rgba(74,38,15,.86) 82%,rgba(74,38,15,.96) 100%)}
+/* Estación 4: teñido más denso y cálido. La foto de atardecer llega lavada y
+   el final tiene que sentirse distinto del principio, no una repetición. */
+.vj-est--final .vj-est-hero img{filter:saturate(1.12) contrast(1.06)}
+.vj-est--final .vj-est-hero::after{background:linear-gradient(180deg,rgba(96,44,12,.5) 0%,rgba(112,54,16,.42) 26%,rgba(66,30,10,.9) 76%,rgba(48,21,7,.98) 100%)}
 .vj-est-hero-in{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto}
 .vj-ey{display:block;font-family:var(--f-ui);font-weight:800;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:10px}
 .vj-est-hero h2{font-family:var(--f-head);font-size:clamp(2.3rem,10vw,3.7rem);font-weight:700;color:#fff;line-height:1;letter-spacing:-.02em;text-shadow:0 3px 26px rgba(0,0,0,.45)}
@@ -120,22 +132,41 @@ body{background:#fbf9f8}
 .vj-est-body h3{font-family:var(--f-ui);font-weight:800;font-size:1.16rem;color:var(--primary);margin:30px 0 12px}
 
 /* Botón "siguiente estación" (cierra cada bloque) */
-.vj-next-wrap{padding:38px 22px clamp(58px,9vh,86px);text-align:center;background:var(--surface)}
+.vj-next-wrap{padding:32px 22px 34px;text-align:center;background:var(--surface)}
 .vj-next{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:0;cursor:pointer;border-radius:100px;background:var(--primary);color:#f6ecd9;font-family:var(--f-ui);font-weight:800;font-size:1.04rem;box-shadow:0 12px 30px rgba(2,52,41,.24);transition:transform .22s ease,box-shadow .22s ease,background .3s ease}
 .vj-next:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(2,52,41,.3)}
 .vj-next.vj-hecho{background:linear-gradient(135deg,#3E7C59,#1F4B3F)}
 .vj-next--oro{background:linear-gradient(135deg,#f6c98a,#e0a965);color:#023429;box-shadow:0 14px 34px rgba(224,169,101,.4)}
 .vj-next--oro.vj-hecho{background:linear-gradient(135deg,#f6c98a,#e0a965)}
 
-/* ---------- Estación 1: vídeos ---------- */
-.vj-media{margin:24px auto 0;max-width:540px}
-.vj-ig{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 18px 44px rgba(2,52,41,.22)}
+/* ---------- Estación 1: la sala de cine ----------
+   Banda oscura a todo el ancho: el reel es el momento cumbre del viaje y
+   necesita escenario, no una tarjeta suelta sobre fondo claro. */
+.vj-cine{background:radial-gradient(120% 80% at 50% 0%,#0a3327 0%,#052018 62%,#03150f 100%);padding:34px 22px 38px;text-align:center}
+.vj-cine-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(246,201,138,.14);border:1px solid rgba(246,201,138,.42);color:var(--oro);font-family:var(--f-ui);font-weight:800;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px}
+/* El tope en vh evita que el cartel 9:16 (o el propio reel) se coma la
+   pantalla en viewports bajos — y mantiene el cartel del mismo tamaño que su
+   contenedor, sin marco vacío alrededor. */
+.vj-media{margin:0 auto;max-width:min(420px,44vh)}
+.vj-ig{position:relative;border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 1px rgba(246,201,138,.16)}
 /* embed.js sustituye el blockquote por un iframe conservando la clase: el
    selector cubre los dos estados para que nunca desborde en 375 px. */
-.vj-ig .instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important;width:100%!important;border-radius:20px!important}
-.vj-ig-fallback{padding:34px 24px;text-align:center;color:var(--crema);background:linear-gradient(160deg,#0a2a21,#03201a);border-radius:20px}
-.vj-ig-fallback p{color:rgba(251,246,236,.86)!important;font-size:1rem!important;margin-bottom:18px}
-.vj .vj-ig-fallback a{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:100px;background:linear-gradient(135deg,#f6c98a,#e0a965);color:#023429;font-family:var(--f-ui);font-weight:800;font-size:.98rem}
+.vj-ig .instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important;width:100%!important;border-radius:22px!important}
+/* El embed vive superpuesto e invisible hasta que PINTA de verdad: así tiene
+   ancho real para medirse, pero nunca deja un hueco blanco en la página. */
+.vj-ig-embed{position:absolute;inset:0;opacity:0;pointer-events:none;overflow:hidden;border-radius:22px;transition:opacity .3s ease}
+.vj-ig.vj-ig-ok .vj-ig-embed{position:static;opacity:1;pointer-events:auto;overflow:visible}
+.vj-ig.vj-ig-ok .vj-ig-card{display:none}
+/* Cartel del reel: es el estado por defecto, no un plan B feo. */
+.vj-ig-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;aspect-ratio:9/16;padding:28px 22px;border-radius:22px;overflow:hidden;background:#06251c}
+.vj-ig-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.vj-ig-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,25,19,.6),rgba(3,25,19,.9))}
+.vj-ig-card>*{position:relative;z-index:2}
+.vj-ig-play{flex:0 0 auto;width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#f6c98a,#e0a965);display:flex;align-items:center;justify-content:center;color:#023429;font-size:1.6rem;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.vj-ig-card b{font-family:var(--f-head);font-size:clamp(1.15rem,4.4vw,1.5rem);font-weight:600;color:#fff;line-height:1.2;max-width:16ch}
+.vj-ig-card small{color:rgba(251,246,236,.76);font-size:.9rem;line-height:1.45;max-width:26ch}
+.vj .vj-ig-card a{display:inline-flex;align-items:center;gap:8px;margin-top:2px;padding:13px 22px;border-radius:100px;background:linear-gradient(135deg,#f6c98a,#e0a965);color:#023429;font-family:var(--f-ui);font-weight:800;font-size:.95rem;white-space:nowrap}
+.vj-cine .vj-nota{margin-top:24px;border-left-color:var(--oro);background:rgba(246,201,138,.1);color:rgba(251,246,236,.86);text-align:left;max-width:460px}
 .vj-nota{margin:20px auto 0;max-width:540px;padding:16px 20px;border-left:3px solid var(--oro);background:rgba(246,201,138,.14);border-radius:0 14px 14px 0;font-size:.96rem;line-height:1.55;color:var(--on-var)}
 .vj-det{margin:26px auto 0;max-width:540px;border:1px solid rgba(2,52,41,.14);border-radius:16px;background:#fff;overflow:hidden}
 .vj-det summary{cursor:pointer;list-style:none;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--f-ui);font-weight:800;font-size:.98rem;color:var(--primary)}
@@ -160,7 +191,7 @@ body{background:#fbf9f8}
 .vj-check input:checked{background:var(--primary);border-color:var(--primary)}
 .vj-check input:checked::after{content:"";position:absolute;left:7px;top:2.5px;width:5px;height:11px;border:solid var(--oro);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
 .vj-check input:checked+span{color:var(--on-var);text-decoration:line-through;text-decoration-color:rgba(2,52,41,.35)}
-.vj-cierre{margin:28px auto 0;max-width:540px;font-family:var(--f-head);font-size:1.42rem;font-style:italic;line-height:1.35;color:var(--primary);text-align:center}
+.vj-cierre{margin:4px 0 0;padding:20px 0 14px;border-top:1px solid rgba(2,52,41,.08);font-family:var(--f-head);font-size:1.3rem;font-style:italic;line-height:1.35;color:var(--primary);text-align:center}
 
 /* ---------- Estación 3: el test ---------- */
 .vj-q{margin:24px auto 0;max-width:540px;padding:22px 20px;border-radius:18px;background:#fff;border:1px solid rgba(2,52,41,.1);box-shadow:0 12px 30px rgba(2,52,41,.06)}
@@ -220,11 +251,17 @@ body{background:#fbf9f8}
 .vj .vj-foot a{color:rgba(251,246,236,.82);text-decoration:underline;text-underline-offset:3px}
 .vj-foot .vj-foot-links{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;font-size:.84rem}
 
-/* ======================= REVEALS / MOTION ======================= */
-.vj-rev{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
-.vj-rev.vj-in{opacity:1;transform:none}
+/* ======================= REVEALS / MOTION =======================
+   Corto (250 ms) y de recorrido mínimo: el texto tiene que estar legible en
+   cuanto entra en pantalla, no "aparecer" durante medio segundo.
+   El estado oculto SOLO existe bajo .vj-js, que pone el propio script: si el
+   JS no llega a ejecutarse, todo se ve — nunca un bloque fantasma. */
+.vj-js .vj-rev{opacity:0;transform:translateY(14px);transition:opacity .25s ease-out,transform .25s ease-out}
+.vj-js .vj-rev.vj-in{opacity:1;transform:none}
+/* Lo que ya está en pantalla al cargar entra sin animación ninguna. */
+.vj-js .vj-rev.vj-in--now{transition:none}
 @media(prefers-reduced-motion:reduce){
-  .vj-rev{opacity:1;transform:none;transition:none}
+  .vj-js .vj-rev{opacity:1;transform:none;transition:none}
   .vj-linea-draw{transition:none;stroke-dashoffset:0}
   .vj-hito.vj-done{animation:none}
   .vj-fill{transition:none}
@@ -234,9 +271,10 @@ body{background:#fbf9f8}
 @media(min-width:760px){
   .vj-intro{padding:120px 46px 64px}
   .vj-est-hero{min-height:56vh;padding:110px 46px 40px}
-  .vj-est-body{padding:48px 46px 0}
-  .vj-next-wrap{padding:48px 46px clamp(80px,12vh,130px)}
-  .vj-camino{height:clamp(160px,16vh,210px)}
+  .vj-est-body{padding:44px 46px 0}
+  .vj-next-wrap{padding:38px 46px 44px}
+  .vj-camino{height:clamp(96px,10vh,132px)}
+  .vj-cine{padding:48px 46px 52px}
   .vj-final{padding:110px 46px}
   .vj-est-body p{font-size:1.1rem}
   .vj-ctas{flex-direction:row;flex-wrap:wrap;justify-content:center;max-width:none}
@@ -244,7 +282,9 @@ body{background:#fbf9f8}
   .vj-cta--3{flex:1 0 100%}
   .vj-doble{flex-direction:row;max-width:900px}
   .vj-concl{flex:1}
-  .vj-media,.vj-nota,.vj-det,.vj-marcas,.vj-check,.vj-q,.vj-uso,.vj-cierre{max-width:600px}
+  .vj-media{max-width:min(460px,46vh)}
+  .vj-nota,.vj-det,.vj-marcas,.vj-check,.vj-q,.vj-uso{max-width:600px}
+  .vj-cine .vj-nota{max-width:520px}
 }
 </style>
 
@@ -267,14 +307,15 @@ body{background:#fbf9f8}
     </div>
   </header>
 
-  <main id="maincontent">
+  <main class="vj-main" id="maincontent">
 
     <!-- ========================= INTRO ========================= -->
     <section class="vj-intro">
-      <%# LCP de la página: el póster (1280px, 79 KB) pesa un tercio que
-          conecta-cover.jpg y es la misma dehesa. La cover se reserva para el OG. %>
+      <%# Imagen propia del viaje (no la dehesa de Conecta Lana): vellón crudo
+          contra la chapa, textura potente que aguanta el degradado verde.
+          Derivada optimizada de conecta-lana/vellon-crudo.jpg — es el LCP. %>
       <div class="vj-intro-media" aria-hidden="true">
-        <img src="/assets/images/conecta-lana-poster.jpg" alt="" fetchpriority="high" width="1280" height="720">
+        <img src="/assets/images/viaje-lana/intro-vellon.jpg" alt="" fetchpriority="high" width="733" height="1100">
       </div>
       <div class="vj-intro-in">
         <span class="vj-kicker">
@@ -301,7 +342,7 @@ body{background:#fbf9f8}
     <!-- ============ ESTACIÓN 1 — De la oveja al ovillo ============ -->
     <section class="vj-est" id="estacion-1" data-est="1" aria-labelledby="t-est-1">
       <div class="vj-est-hero">
-        <img src="/assets/images/conecta-lana/vellon-crudo.jpg" alt="Vellón de lana cruda recién esquilada" loading="lazy">
+        <img src="/assets/images/blog/que-hacer-con-la-lana-de-oveja/lana-amontonada-nave.jpg" alt="Vellones de lana recién esquilada amontonados en el suelo de una nave" loading="lazy">
         <div class="vj-est-hero-in">
           <span class="vj-ey">Estación 1 de 4 · El proceso real</span>
           <h2 id="t-est-1">De la oveja <em>al ovillo</em></h2>
@@ -311,25 +352,38 @@ body{background:#fbf9f8}
         <div class="vj-w vj-rev">
           <p class="vj-lead">Antes de hablar de precios, mira lo que cuesta <em>hacer</em>. Sube el volumen, dale al play y déjate llevar. Aquí no hay prisa.</p>
         </div>
+      </div>
 
-        <!-- Pieza principal: reel de Wooldreamers (embed oficial de IG) -->
+      <!-- La sala de cine: el reel a oscuras, que es el momento cumbre -->
+      <div class="vj-cine">
+        <span class="vj-cine-badge vj-rev">🎧 Sube el volumen</span>
+
         <div class="vj-media vj-rev">
           <div class="vj-ig" id="vjIg">
-            <blockquote class="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/reel/DYCsLK1Mr_P/?utm_source=ig_embed&amp;utm_campaign=loading"
-              data-instgrm-version="14"
-              style="background:#FFF;border:0;border-radius:20px;margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-            </blockquote>
-            <!-- Fallback: se muestra si el embed de Instagram no llega a renderizar -->
-            <div class="vj-ig-fallback" id="vjIgFallback" hidden>
-              <p><strong>El sonido detrás de nuestros ovillos.</strong> Un día en la hilatura, paso a paso — con el sonido de protagonista.</p>
-              <a href="https://www.instagram.com/reel/DYCsLK1Mr_P/" target="_blank" rel="noopener">▶ Ábrelo en Instagram — y vuelve, te esperamos aquí</a>
+            <%# El cartel es el estado por defecto. El embed se superpone
+                invisible y solo toma el sitio cuando ha pintado de verdad. %>
+            <div class="vj-ig-card" id="vjIgCard">
+              <img src="/assets/images/blog/donde-comprar-lana-espanola/madeja-lana-detalle.jpg" alt="" loading="lazy">
+              <span class="vj-ig-play" aria-hidden="true">▶</span>
+              <b>El sonido detrás de nuestros ovillos</b>
+              <small>Un día en la hilatura, paso a paso — con el sonido de protagonista.</small>
+              <a href="https://www.instagram.com/reel/DYCsLK1Mr_P/" target="_blank" rel="noopener">▶ Ábrelo en Instagram</a>
+              <small>Y vuelve — te esperamos aquí.</small>
+            </div>
+            <div class="vj-ig-embed" id="vjIgEmbed">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/DYCsLK1Mr_P/?utm_source=ig_embed&amp;utm_campaign=loading"
+                data-instgrm-version="14"
+                style="background:#FFF;border:0;border-radius:22px;margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+              </blockquote>
             </div>
           </div>
         </div>
 
         <p class="vj-nota vj-rev">La hilatura del vídeo lleva más de un siglo lavando e hilando lana española, con maquinaria centenaria y manos que saben lo que hacen. Esto no es una fábrica cualquiera: es un oficio vivo.</p>
+      </div>
 
+      <div class="vj-est-body">
         <!-- Pieza secundaria (opcional): Monesma, la memoria del oficio -->
         <details class="vj-det vj-rev" id="vjMonesma">
           <summary>¿Quieres ver cómo se hacía todo a mano?</summary>
@@ -356,7 +410,9 @@ body{background:#fbf9f8}
     <!-- ============ ESTACIÓN 2 — El paseo detective ============ -->
     <section class="vj-est vj-est--ocre" id="estacion-2" data-est="2" aria-labelledby="t-est-2">
       <div class="vj-est-hero">
-        <img src="/assets/images/blog/donde-comprar-lana-espanola/madeja-lana-detalle.jpg" alt="Detalle de una madeja de lana hilada" loading="lazy">
+        <%# El lenguaje visual del lujo (bodegón de estudio) es justo lo que
+            esta estación va a desmontar. Nítida a 1920px, aguanta la sangre. %>
+        <img src="/assets/images/blog/artesania-de-lujo-posicionar-valor-real/hero-artesania-lujo.jpg" alt="Bodegón de joyería dorada sobre fondo claro, en el estilo de la fotografía de producto del lujo" loading="lazy">
         <div class="vj-est-hero-in">
           <span class="vj-ey">Estación 2 de 4 · Las webs del lujo</span>
           <h2 id="t-est-2">El paseo <em>detective</em></h2>
@@ -378,9 +434,10 @@ body{background:#fbf9f8}
           <label><input type="checkbox" data-check="2"><span>¿Cuántas veces leen "artesanal", "savoir-faire" o "excelencia"?</span></label>
           <label><input type="checkbox" data-check="3"><span>¿Encuentras en la ficha QUIÉN lo fabrica y DÓNDE?</span></label>
           <label><input type="checkbox" data-check="4"><span>¿Dice algo del ganadero o del precio de la fibra en origen?</span></label>
+          <%# El cierre vive dentro de la carta: fuera se alineaba con el borde
+              de la página en vez de con la columna de contenido. %>
+          <p class="vj-cierre">¿Mucho relato y pocos datos? No es casualidad. Siguiente estación.</p>
         </div>
-
-        <p class="vj-cierre vj-rev">¿Mucho relato y pocos datos? No es casualidad. Siguiente estación.</p>
       </div>
       <div class="vj-next-wrap">
         <button type="button" class="vj-next" data-next="2" data-goto="#estacion-3">Siguiente estación →</button>
@@ -399,7 +456,7 @@ body{background:#fbf9f8}
     <!-- ================== ESTACIÓN 3 — El test ================== -->
     <section class="vj-est" id="estacion-3" data-est="3" aria-labelledby="t-est-3">
       <div class="vj-est-hero">
-        <img src="/assets/images/blog/donde-comprar-lana-espanola/manos-lana-artesanal.jpg" alt="Manos trabajando lana artesanal" loading="lazy">
+        <img src="/assets/images/viaje-lana/telar-artesano.jpg" alt="Artesano tejiendo en un telar de madera con urdimbre de lana cruda" loading="lazy">
         <div class="vj-est-hero-in">
           <span class="vj-ey">Estación 3 de 4 · Tres datos</span>
           <h2 id="t-est-3">El <em>test</em></h2>
@@ -476,21 +533,21 @@ body{background:#fbf9f8}
     </div>
 
     <!-- ============== ESTACIÓN 4 — Final del viaje ============== -->
-    <section class="vj-est vj-est--ocre" id="estacion-4" data-est="4" aria-labelledby="t-est-4">
+    <section class="vj-est vj-est--final" id="estacion-4" data-est="4" aria-labelledby="t-est-4">
       <div class="vj-est-hero">
-        <img src="/assets/images/blog/donde-comprar-lana-espanola/hero-ovejas-dehesa.jpg" alt="Ovejas pastando en una dehesa española" loading="lazy">
+        <img src="/assets/images/blog/que-hacer-con-la-lana-de-oveja/cierre-rebano-atardecer.jpg" alt="Rebaño descansando en la ladera a contraluz, al atardecer" loading="lazy">
         <div class="vj-est-hero-in">
           <span class="vj-ey">Estación 4 de 4 · La conclusión</span>
           <h2 id="t-est-4">Final <em>del viaje</em></h2>
         </div>
       </div>
       <div class="vj-est-body">
-        <div class="vj-doble vj-rev">
-          <div class="vj-concl vj-concl--consumidor">
+        <div class="vj-doble">
+          <div class="vj-concl vj-concl--consumidor vj-rev">
             <span class="vj-concl-k">Si compras</span>
             <p>El problema no es que el lujo sea caro. Es que su precio no cuenta la verdad. Mientras tanto, la mejor lana de Europa se tira o se malvende a céntimos. Cuando compras a quien trabaja la fibra de verdad, cada euro va al producto: materiales, tiempo y manos.</p>
           </div>
-          <div class="vj-concl vj-concl--artesano">
+          <div class="vj-concl vj-concl--artesano vj-rev">
             <span class="vj-concl-k">Si tejes, hilas o fieltras</span>
             <p>Acabas de ver lo que cobra el lujo por un relato que el tuyo cuenta de verdad. <strong>Tu precio no es caro. Es justo.</strong> Y este argumento es tuyo: úsalo con tus clientes.</p>
           </div>
@@ -550,6 +607,55 @@ body{background:#fbf9f8}
   var TOTAL = 4;
   var root = document.getElementById('vj');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Activa los estados ocultos de los reveals. Sin esta clase todo se ve:
+  // si el script fallara, nadie se queda con bloques a medio pintar.
+  root.classList.add('vj-js');
+
+  /* ---------- "Cuando esto se vea, haz aquello" ----------
+     IntersectionObserver como vía principal, pero con dos redes debajo: un
+     repaso en cada scroll (pasivo, con rAF) y un plazo máximo. Depender solo
+     del observer dejaba bloques semitransparentes si el callback no llegaba. */
+  var pendientes = [];
+  function visible(el, margen){
+    var r = el.getBoundingClientRect();
+    return r.top < window.innerHeight + (margen || 0) && r.bottom > -(margen || 0);
+  }
+  function cuandoSeVea(el, fn, opts){
+    opts = opts || {};
+    var hecho = false;
+    function disparar(inmediato){
+      if (hecho) return;
+      hecho = true;
+      fn(el, inmediato === true);
+    }
+    if (visible(el, opts.margen)) { disparar(true); return; }
+    pendientes.push({el:el, margen:opts.margen || 0, run:disparar});
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(es){
+        if (es[0].isIntersecting){ io.disconnect(); disparar(false); }
+      }, {threshold:0, rootMargin:(opts.margen || 0) ? opts.margen+'px 0px' : '0px 0px -6% 0px'});
+      io.observe(el);
+    }
+  }
+  var repasando = false;
+  function repasar(){
+    repasando = false;
+    pendientes = pendientes.filter(function(p){
+      if (!visible(p.el, p.margen)) return true;
+      p.run(false);
+      return false;
+    });
+  }
+  window.addEventListener('scroll', function(){
+    if (repasando || !pendientes.length) return;
+    repasando = true;
+    requestAnimationFrame(repasar);
+  }, {passive:true});
+  window.addEventListener('resize', repasar, {passive:true});
+  // Último recurso: a los 6 s no queda nada oculto, se vea o no.
+  setTimeout(function(){
+    pendientes.splice(0).forEach(function(p){ p.run(false); });
+  }, 6000);
 
   /* ---------- Estado ---------- */
   function load(){
@@ -644,70 +750,50 @@ body{background:#fbf9f8}
     c.querySelector('.vj-linea-draw').style.strokeDashoffset = '0px';
   }
   caminos.forEach(medir);
-  if (!reduce && 'IntersectionObserver' in window){
-    var ioCam = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (e.isIntersecting){ dibujar(e.target); ioCam.unobserve(e.target); }
-      });
-    }, {threshold:0.35});
-    caminos.forEach(function(c){ ioCam.observe(c); });
-  } else {
-    caminos.forEach(dibujar);
-  }
+  if (reduce) caminos.forEach(dibujar);
+  else caminos.forEach(function(c){ cuandoSeVea(c, dibujar); });
   var reMedir;
   window.addEventListener('resize', function(){
     clearTimeout(reMedir);
     reMedir = setTimeout(function(){ caminos.forEach(medir); }, 180);
   });
 
-  /* ---------- Reveals (patrón de club.ejs) ---------- */
-  if ('IntersectionObserver' in window){
-    var ioRev = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (e.isIntersecting){ e.target.classList.add('vj-in'); ioRev.unobserve(e.target); }
-      });
-    }, {threshold:0.12});
-    document.querySelectorAll('.vj-rev').forEach(function(el){ ioRev.observe(el); });
-  } else {
-    document.querySelectorAll('.vj-rev').forEach(function(el){ el.classList.add('vj-in'); });
-  }
+  /* ---------- Reveals: en cuanto asoma el bloque, legible ---------- */
+  document.querySelectorAll('.vj-rev').forEach(function(el){
+    cuandoSeVea(el, function(e, inmediato){
+      // Lo que ya se ve al cargar entra directo, sin fundido de entrada.
+      e.classList.add('vj-in');
+      if (inmediato) e.classList.add('vj-in--now');
+    });
+  });
 
-  /* ---------- Estación 1: embed de Instagram (perezoso) + fallback ---------- */
-  var igWrap = document.getElementById('vjIg');
-  var igFb   = document.getElementById('vjIgFallback');
+  /* ---------- Estación 1: embed de Instagram ----------
+     El cartel del reel es el estado por defecto y solo cede el sitio cuando
+     el iframe ha PINTADO (alto real > 200 px), no cuando existe en el DOM:
+     un iframe recién insertado mide 0 y dejaba un hueco blanco enorme. */
+  var igWrap  = document.getElementById('vjIg');
+  var igEmbed = document.getElementById('vjIgEmbed');
+  var ALTO_MINIMO = 200;
+  function embedPintado(){
+    var f = igEmbed && igEmbed.querySelector('iframe');
+    return !!f && f.getBoundingClientRect().height > ALTO_MINIMO;
+  }
   function cargarIG(){
-    if (igWrap.dataset.cargado) return;
+    if (!igWrap || igWrap.dataset.cargado) return;
     igWrap.dataset.cargado = '1';
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.instagram.com/embed.js';
-    s.onerror = mostrarFallback;
     document.body.appendChild(s);
-    // Si a los 4,5 s el embed no ha renderizado su iframe, damos la salida manual.
-    setTimeout(function(){
-      if (!igWrap.querySelector('iframe')) mostrarFallback();
-    }, 4500);
+    // Se sondea hasta 15 s. Si no pinta, el cartel se queda — que es un
+    // estado válido y bonito, no un error.
+    var intentos = 0;
+    var t = setInterval(function(){
+      if (embedPintado()){ igWrap.classList.add('vj-ig-ok'); clearInterval(t); }
+      else if (++intentos > 38) clearInterval(t);
+    }, 400);
   }
-  function mostrarFallback(){
-    if (!igFb || !igFb.hidden) return;
-    igFb.hidden = false;
-    // Si el embed acaba llegando (red lenta), se queda él y se retira la
-    // salida manual: nunca deben verse los dos a la vez.
-    if ('MutationObserver' in window){
-      var mo = new MutationObserver(function(){
-        if (igWrap.querySelector('iframe')){ igFb.hidden = true; mo.disconnect(); }
-      });
-      mo.observe(igWrap, {childList:true, subtree:true});
-    }
-  }
-  if (igWrap){
-    if ('IntersectionObserver' in window){
-      var ioIg = new IntersectionObserver(function(es){
-        es.forEach(function(e){ if (e.isIntersecting){ cargarIG(); ioIg.disconnect(); } });
-      }, {rootMargin:'400px 0px'});
-      ioIg.observe(igWrap);
-    } else { cargarIG(); }
-  }
+  if (igWrap) cuandoSeVea(igWrap, cargarIG, {margen:400});
 
   /* ---------- Estación 1: YouTube (Monesma) solo al desplegar ---------- */
   var det = document.getElementById('vjMonesma');
