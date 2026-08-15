@@ -143,7 +143,7 @@ app.use(express.json());
 // es sin barra final. Se excluyen adrede los directorios estáticos (blog, casos,
 // faqs, privacidad, sobre-nosotros, plantillas…), cuya canónica lleva barra y que
 // express.static ya auto-redirige — tocarlos crearía un bucle de redirección.
-const CANONICAL_NO_SLASH = /^\/(?:oficios\/[^/]+|recursos(?:\/[^/]+)?|servicios\/[^/]+|contacto|impulso-3d|conecta-lana)\/$/;
+const CANONICAL_NO_SLASH = /^\/(?:oficios\/[^/]+|recursos(?:\/[^/]+)?|servicios\/[^/]+|contacto|impulso-3d|conecta-lana|viaje\/lana)\/$/;
 app.use((req, res, next) => {
   if (req.method === 'GET' && CANONICAL_NO_SLASH.test(req.path)) {
     const stripped = req.path.replace(/\/+$/, '');
@@ -242,6 +242,12 @@ app.get('/impulso-3d', (req, res) => {
 // Conecta Lana — punto de encuentro de la lana española (landing standalone)
 app.get('/conecta-lana', (req, res) => {
   res.render('conecta-lana');
+});
+
+// El Viaje de la Lana — hub de la experiencia guiada enlazada desde Instagram
+// (4 estaciones, ~15 min, termina en Conecta Lana). Tráfico casi todo móvil.
+app.get('/viaje/lana', (req, res) => {
+  res.render('viaje-lana');
 });
 
 // Directorio público de Conecta Lana (sin token: es captación)
