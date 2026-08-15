@@ -142,21 +142,33 @@ body{background:#fbf9f8}
 /* ---------- Estación 1: la sala de cine ----------
    Banda oscura a todo el ancho: el reel es el momento cumbre del viaje y
    necesita escenario, no una tarjeta suelta sobre fondo claro. */
-.vj-cine{background:radial-gradient(120% 80% at 50% 0%,#0a3327 0%,#052018 62%,#03150f 100%);padding:34px 22px 38px;text-align:center}
+.vj-cine{background:radial-gradient(120% 80% at 50% 0%,#0a3327 0%,#052018 62%,#03150f 100%);padding:clamp(40px,6vh,60px) 22px 44px;text-align:center}
+.vj-cine-lead{max-width:34ch;margin:0 auto 30px!important;font-size:clamp(1.3rem,4.5vw,1.5rem);line-height:1.5;color:var(--crema)}
+.vj-cine-lead em{font-style:italic;color:var(--oro);font-weight:600}
 .vj-cine-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(246,201,138,.14);border:1px solid rgba(246,201,138,.42);color:var(--oro);font-family:var(--f-ui);font-weight:800;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px}
 /* El tope en vh evita que el cartel 9:16 (o el propio reel) se coma la
    pantalla en viewports bajos — y mantiene el cartel del mismo tamaño que su
    contenedor, sin marco vacío alrededor. */
 .vj-media{margin:0 auto;max-width:min(420px,44vh)}
-.vj-ig{position:relative;border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 1px rgba(246,201,138,.16)}
+/* Rejilla de una sola celda: el cartel y el embed se apilan ahí. La altura de
+   la fila es siempre la del más alto, así que el contenedor NUNCA puede quedar
+   más bajo que el cartel. Esta es la garantía de que no se ve una caja vacía:
+   está en el layout, no en un callback de JS que pueda congelarse. */
+.vj-ig{position:relative;display:grid;border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 1px rgba(246,201,138,.16)}
 /* embed.js sustituye el blockquote por un iframe conservando la clase: el
    selector cubre los dos estados para que nunca desborde en 375 px. */
 .vj-ig .instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important;width:100%!important;border-radius:22px!important}
 /* El embed vive superpuesto e invisible hasta que PINTA de verdad: así tiene
    ancho real para medirse, pero nunca deja un hueco blanco en la página. */
+/* Mientras no manda, el embed va fuera de flujo: así no estira la caja antes
+   de tiempo. Al ceder el sitio entra en la celda y la fila crece con él. */
 .vj-ig-embed{position:absolute;inset:0;opacity:0;pointer-events:none;overflow:hidden;border-radius:22px;transition:opacity .3s ease}
-.vj-ig.vj-ig-ok .vj-ig-embed{position:static;opacity:1;pointer-events:auto;overflow:visible}
-.vj-ig.vj-ig-ok .vj-ig-card{display:none}
+.vj-ig.vj-ig-ok .vj-ig-embed{position:relative;grid-area:1/1;z-index:1;opacity:1;pointer-events:auto;overflow:visible}
+/* El cartel NUNCA se borra: se queda debajo, marcando el alto mínimo y
+   tapando cualquier hueco si el iframe pintara transparente o se cayera.
+   Solo se retira su enlace, para no dejar foco atrapado tras el embed. */
+.vj-ig-card{grid-area:1/1;z-index:0}
+.vj-ig.vj-ig-ok .vj-ig-card a{display:none}
 /* Cartel del reel: es el estado por defecto, no un plan B feo. */
 .vj-ig-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;aspect-ratio:9/16;padding:28px 22px;border-radius:22px;overflow:hidden;background:#06251c}
 .vj-ig-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
@@ -370,7 +382,7 @@ body{background:#fbf9f8}
   .vj-est-body{padding:44px 46px 0}
   .vj-next-wrap{padding:38px 46px 44px}
   .vj-camino{height:clamp(96px,10vh,132px)}
-  .vj-cine{padding:48px 46px 52px}
+  .vj-cine{padding:clamp(56px,8vh,80px) 46px 60px}
   .vj-final{padding:110px 46px}
   .vj-est-body p{font-size:1.22rem}
   .vj-ctas{flex-direction:row;flex-wrap:wrap;justify-content:center;max-width:none}
@@ -449,14 +461,11 @@ body{background:#fbf9f8}
           <h2 id="t-est-1">De la oveja <em>al ovillo</em></h2>
         </div>
       </div>
-      <div class="vj-est-body">
-        <div class="vj-w vj-rev">
-          <p class="vj-lead">Antes de hablar de precios, mira lo que cuesta <em>hacer</em>. Sube el volumen, dale al play y déjate llevar. Aquí no hay prisa.</p>
-        </div>
-      </div>
-
-      <!-- La sala de cine: el reel a oscuras, que es el momento cumbre -->
+      <%# La sala de cine arranca justo debajo del hero: el párrafo de entrada
+          vive DENTRO de la banda oscura. Antes iba en una franja blanca
+          estrecha entre el hero y el cine, sin aire y pegada a los bordes. %>
       <div class="vj-cine">
+        <p class="vj-cine-lead vj-rev">Antes de hablar de precios, mira lo que cuesta <em>hacer</em>. Sube el volumen, dale al play y déjate llevar. Aquí no hay prisa.</p>
         <span class="vj-cine-badge vj-rev">🎧 Sube el volumen</span>
 
         <div class="vj-media vj-rev">
@@ -1082,30 +1091,75 @@ body{background:#fbf9f8}
   });
 
   /* ---------- Estación 1: embed de Instagram ----------
-     El cartel del reel es el estado por defecto y solo cede el sitio cuando
-     el iframe ha PINTADO (alto real > 200 px), no cuando existe en el DOM:
-     un iframe recién insertado mide 0 y dejaba un hueco blanco enorme. */
+     El cartel del reel es el ESTADO NORMAL. El embed solo le quita el sitio
+     si cumple las dos condiciones: su iframe ha disparado `load` Y mide de
+     verdad. Que el iframe exista, o que tenga alto reservado, no basta:
+     Instagram fija la altura antes de pintar nada, y en localhost el embed
+     falla casi siempre — con eso se veía una caja oscura vacía.
+     Después del cambio se sigue vigilando: si el iframe se cae o se queda
+     sin altura, vuelve el cartel. Nunca debe verse un hueco. */
   var igWrap  = document.getElementById('vjIg');
   var igEmbed = document.getElementById('vjIgEmbed');
   var ALTO_MINIMO = 200;
-  function embedPintado(){
+
+  function altoReal(){
     var f = igEmbed && igEmbed.querySelector('iframe');
-    return !!f && f.getBoundingClientRect().height > ALTO_MINIMO;
+    return f ? f.getBoundingClientRect().height : 0;
   }
+  var ro = null;
+  function mostrarEmbed(){
+    if (igWrap.classList.contains('vj-ig-ok')) return;
+    if (altoReal() <= ALTO_MINIMO) return;
+    igWrap.classList.add('vj-ig-ok');
+    vigilar();
+  }
+  function volverAlCartel(){
+    igWrap.classList.remove('vj-ig-ok');
+  }
+  // Vigilancia permanente, no un sondeo con caducidad: si el embed se queda
+  // sin altura o desaparece en cualquier momento, vuelve el cartel.
+  function vigilar(){
+    var f = igEmbed.querySelector('iframe');
+    if (!f || !('ResizeObserver' in window)) return;
+    if (ro) ro.disconnect();
+    ro = new ResizeObserver(function(){
+      if (igWrap.classList.contains('vj-ig-ok') && altoReal() <= ALTO_MINIMO) volverAlCartel();
+    });
+    ro.observe(f);
+  }
+
   function cargarIG(){
     if (!igWrap || igWrap.dataset.cargado) return;
     igWrap.dataset.cargado = '1';
+
+    // El iframe lo inserta embed.js: se engancha su `load` en cuanto aparece.
+    function engancharIframe(f){
+      if (!f || f.dataset.enganchado) return;
+      f.dataset.enganchado = '1';
+      f.addEventListener('load', function(){
+        // El alto definitivo llega por postMessage justo después del load.
+        setTimeout(mostrarEmbed, 400);
+        setTimeout(mostrarEmbed, 1200);
+      });
+    }
+    if ('MutationObserver' in window){
+      // Observador permanente y sin desconectar al primer iframe: embed.js
+      // puede reemplazarlo (el sustituto necesita su propio `load`) o
+      // retirarlo (entonces hay que recuperar el cartel al vuelo).
+      var mo = new MutationObserver(function(){
+        var f = igEmbed.querySelector('iframe');
+        if (f){ engancharIframe(f); vigilar(); }
+        else if (igWrap.classList.contains('vj-ig-ok')) volverAlCartel();
+      });
+      mo.observe(igEmbed, {childList:true, subtree:true});
+      // Si el iframe ya estuviera puesto antes de observar.
+      engancharIframe(igEmbed.querySelector('iframe'));
+    }
+
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.instagram.com/embed.js';
     document.body.appendChild(s);
-    // Se sondea hasta 15 s. Si no pinta, el cartel se queda — que es un
-    // estado válido y bonito, no un error.
-    var intentos = 0;
-    var t = setInterval(function(){
-      if (embedPintado()){ igWrap.classList.add('vj-ig-ok'); clearInterval(t); }
-      else if (++intentos > 38) clearInterval(t);
-    }, 400);
   }
   if (igWrap) cuandoSeVea(igWrap, cargarIG, {margen:400});
 
