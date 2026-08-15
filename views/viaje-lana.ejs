@@ -278,6 +278,32 @@ body{background:#fbf9f8}
 .vj-casc-remate{margin-top:36px!important;padding-top:30px;border-top:1px solid rgba(246,201,138,.24);font-family:var(--f-head);font-style:italic;font-size:clamp(1.5rem,5.6vw,2.1rem);line-height:1.3;color:var(--crema);text-align:center}
 .vj-casc-remate em{color:var(--oro);font-style:italic}
 
+/* ============= BLOQUE "¿Y POR QUÉ NO SE HACE AQUÍ?" =============
+   Testimonio de Ramón Cobo (Wooldreamers). Va sobre crema para respirar
+   después de la cascada oscura, y sin foto nueva: manda el titular.
+   Los beats van en Newsreader cursiva porque son SUS palabras, no datos. */
+.vj-ramon{background:linear-gradient(178deg,var(--crema) 0%,#f5efe2 100%);padding:clamp(56px,9vh,88px) 22px}
+.vj-ramon-in{max-width:660px;margin:0 auto}
+.vj-ramon .vj-ey{color:var(--secondary)}
+.vj-ramon h2{font-family:var(--f-head);font-size:clamp(2.8rem,11vw,4.4rem);font-weight:700;color:var(--primary);line-height:.98;letter-spacing:-.02em}
+.vj-ramon h2 em{font-style:italic;color:var(--secondary)}
+.vj-ramon-lead{margin-top:20px!important;font-size:clamp(1.3rem,4.5vw,1.5rem);line-height:1.5;color:var(--on)}
+.vj-ramon-fuente{margin-top:26px!important;padding:13px 18px;border-radius:12px;background:rgba(147,74,28,.09);border:1px solid rgba(147,74,28,.2);font-size:1rem!important;line-height:1.5;color:#5d5746!important}
+.vj-ramon-fuente b{color:var(--secondary)}
+.vj-beats{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.vj-beat-btn{width:100%;display:flex;align-items:flex-start;gap:14px;text-align:left;cursor:pointer;padding:20px 20px;border:1px solid rgba(2,52,41,.12);border-left:4px solid var(--secondary);border-radius:16px;background:#fff;font-family:inherit;box-shadow:0 10px 26px rgba(2,52,41,.06);transition:background .2s ease,box-shadow .2s ease}
+.vj-beat-btn:hover{background:#fffdf8;box-shadow:0 14px 32px rgba(2,52,41,.1)}
+.vj-beat[data-abierto] .vj-beat-btn{border-radius:16px 16px 0 0;background:#fffdf8;padding-bottom:14px;box-shadow:none}
+.vj-beat-n{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:rgba(147,74,28,.1);border:1px solid rgba(147,74,28,.28);color:var(--secondary);font-family:var(--f-head);font-style:italic;font-size:1.1rem;display:flex;align-items:center;justify-content:center}
+.vj-beat-t{flex:1 1 auto;font-family:var(--f-head);font-style:italic;font-size:1.34rem;font-weight:600;line-height:1.28;color:var(--primary)}
+.vj-beat-mas{flex:0 0 auto;margin-top:6px;color:var(--secondary);font-size:1rem;transition:transform .25s ease}
+.vj-beat[data-abierto] .vj-beat-mas{transform:rotate(180deg)}
+.vj-beat-p{margin-top:-6px;padding:2px 20px 20px 20px;border:1px solid rgba(2,52,41,.12);border-top:0;border-left:4px solid var(--secondary);border-radius:0 0 16px 16px;background:#fffdf8}
+.vj-beat-p p{font-size:1.14rem!important;line-height:1.65;color:var(--on-var)!important}
+.vj-cita--ramon{margin-top:34px!important;padding-top:30px;border-top:1px solid rgba(147,74,28,.22)}
+.vj-ramon-remate{margin-top:32px!important;font-size:1.19rem!important;line-height:1.7;color:var(--on-var)!important}
+.vj-ramon-remate strong{color:var(--primary)}
+
 /* ============= CALCULADORA DE COSTE POR USO ============= */
 .vj-calc{margin:26px auto 0;max-width:540px;padding:26px 22px;border-radius:20px;background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema)}
 .vj-calc h3{font-family:var(--f-head)!important;font-size:1.7rem!important;font-weight:600;color:var(--crema)!important;margin:0 0 6px!important}
@@ -355,7 +381,8 @@ body{background:#fbf9f8}
   .vj-media{max-width:min(460px,46vh)}
   .vj-nota,.vj-det,.vj-marcas,.vj-check,.vj-q,.vj-uso,.vj-calc,.vj-historia{max-width:600px}
   .vj-cine .vj-nota{max-width:520px}
-  .vj-cascada{padding:clamp(80px,11vh,120px) 46px}
+  .vj-cascada,.vj-ramon{padding:clamp(80px,11vh,120px) 46px}
+  .vj-beat-t{font-size:1.5rem}
   .vj-esc-item{padding-left:calc((var(--i) - 1) * 18px)}
   .vj-esc-btn{padding:22px 24px}
   .vj-esc-t{font-size:1.24rem}
@@ -576,6 +603,64 @@ body{background:#fbf9f8}
         </ol>
 
         <p class="vj-casc-remate vj-rev">La lana no vale poco. Vale poco <em>donde está el ganadero</em>. Cada paso del oficio multiplica el valor — la pregunta del viaje es quién se queda cada tramo.</p>
+      </div>
+    </section>
+
+    <%# ===================================================================
+        BLOQUE "¿Y POR QUÉ NO SE HACE AQUÍ?"
+        Testimonio directo de Ramón Cobo (Wooldreamers), conversación con
+        Jose, ago-2026. PENDIENTE DEL OK DE RAMÓN A LAS CITAS: no debe pasar
+        a main hasta que Jose lo confirme.
+        =================================================================== %>
+    <section class="vj-ramon" id="por-que-no-aqui" aria-labelledby="t-ramon">
+      <div class="vj-ramon-in">
+        <div class="vj-rev">
+          <span class="vj-ey">La pregunta incómoda</span>
+          <h2 id="t-ramon">¿Y por qué no se hace <em>aquí</em>?</h2>
+          <p class="vj-ramon-lead">La cascada deja una pregunta: si cada paso multiplica el valor, ¿por qué España regala el primero y no se queda ninguno de los demás? Se lo preguntamos a quien lo vive por dentro: Ramón Cobo, de Wooldreamers — la hilatura del vídeo que viste en la estación 1.</p>
+        </div>
+
+        <p class="vj-ramon-fuente vj-rev"><b>Ojo al tipo de dato:</b> lo que sigue no sale de un informe. Es lo que cuenta Ramón desde dentro del oficio.</p>
+
+        <ol class="vj-beats vj-rev">
+          <li class="vj-beat" data-beat="1">
+            <button type="button" class="vj-beat-btn" aria-expanded="false" aria-controls="beat-1">
+              <span class="vj-beat-n" aria-hidden="true">1</span>
+              <span class="vj-beat-t">"Los sintéticos juegan con precios que mienten."</span>
+              <span class="vj-beat-mas" aria-hidden="true">▾</span>
+            </button>
+            <div class="vj-beat-p" id="beat-1" hidden>
+              <p>El poliéster es barato en la etiqueta y carísimo para la sociedad y el medio ambiente. Con esos precios como vara de medir, la fibra natural solo puede competir en una cosa: coste.</p>
+            </div>
+          </li>
+          <li class="vj-beat" data-beat="2">
+            <button type="button" class="vj-beat-btn" aria-expanded="false" aria-controls="beat-2">
+              <span class="vj-beat-n" aria-hidden="true">2</span>
+              <span class="vj-beat-t">"Y compitiendo en coste, Europa pierde siempre."</span>
+              <span class="vj-beat-mas" aria-hidden="true">▾</span>
+            </button>
+            <div class="vj-beat-p" id="beat-2" hidden>
+              <p>La industria europea cumple normas, paga sueldos, respeta requisitos. Por eso China puede pagar más que nadie por la lana sucia: se la lleva en bruto y se queda todos los oficios del valor añadido — lavar, peinar, teñir, hilar, tejer. Aquí solo queda clasificarla.</p>
+            </div>
+          </li>
+          <li class="vj-beat" data-beat="3">
+            <button type="button" class="vj-beat-btn" aria-expanded="false" aria-controls="beat-3">
+              <span class="vj-beat-n" aria-hidden="true">3</span>
+              <span class="vj-beat-t">"El resultado: la infraestructura desapareció."</span>
+              <span class="vj-beat-mas" aria-hidden="true">▾</span>
+            </button>
+            <div class="vj-beat-p" id="beat-3" hidden>
+              <p>España llegó a tener decenas de lavaderos de lana. Hoy quedan 3 o 4, e hilaturas ha pasado lo mismo. No cerraron por falta de lana: cerraron porque transformarla aquí dejó de ser rentable.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="vj-cita vj-cita--ramon vj-rev">
+          <blockquote>"El cuello de botella no es el lavadero: es que no es rentable tener un lavadero en Europa. Los que quedan trabajan para mantener la maquinaria encendida — muchas veces perdiendo dinero."</blockquote>
+          <p class="vj-firma">— Ramón Cobo · Wooldreamers</p>
+        </div>
+
+        <p class="vj-ramon-remate vj-rev">Por eso este viaje no va de villanos con logo. Va de un sistema donde <strong>el precio nunca cuenta la verdad</strong> — ni el del lujo, ni el del sintético "barato". Sigue: el test te da los números.</p>
       </div>
     </section>
 
@@ -847,7 +932,9 @@ body{background:#fbf9f8}
       fn(el, inmediato === true);
     }
     if (visible(el, opts.margen)) { disparar(true); return; }
-    pendientes.push({el:el, margen:opts.margen || 0, run:disparar});
+    // sinPlazo: lo que mide (no lo que pinta) nunca debe dispararlo el
+    // temporizador de seguridad — solo el haber estado de verdad en pantalla.
+    pendientes.push({el:el, margen:opts.margen || 0, run:disparar, sinPlazo:!!opts.sinPlazo});
     if ('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(es){
         if (es[0].isIntersecting){ io.disconnect(); disparar(false); }
@@ -855,24 +942,33 @@ body{background:#fbf9f8}
       io.observe(el);
     }
   }
-  var repasando = false;
   function repasar(){
-    repasando = false;
     pendientes = pendientes.filter(function(p){
       if (!visible(p.el, p.margen)) return true;
       p.run(false);
       return false;
     });
   }
+  // Estrangulado por reloj, no por requestAnimationFrame: con rAF, si el
+  // callback no llegaba a ejecutarse (pestaña en segundo plano), el guardián
+  // se quedaba pegado y la red de seguridad moría para el resto de la sesión.
+  var ultimoRepaso = 0;
   window.addEventListener('scroll', function(){
-    if (repasando || !pendientes.length) return;
-    repasando = true;
-    requestAnimationFrame(repasar);
+    if (!pendientes.length) return;
+    var ahora = +new Date();
+    if (ahora - ultimoRepaso < 100) return;
+    ultimoRepaso = ahora;
+    repasar();
   }, {passive:true});
   window.addEventListener('resize', repasar, {passive:true});
-  // Último recurso: a los 6 s no queda nada oculto, se vea o no.
+  // Último recurso: a los 6 s no queda nada oculto, se vea o no. Lo marcado
+  // como `sinPlazo` (medición) se queda esperando a verse de verdad.
   setTimeout(function(){
-    pendientes.splice(0).forEach(function(p){ p.run(false); });
+    pendientes = pendientes.filter(function(p){
+      if (p.sinPlazo) return true;
+      p.run(false);
+      return false;
+    });
   }, 6000);
 
   /* ---------- Estado ---------- */
@@ -1094,6 +1190,27 @@ body{background:#fbf9f8}
         if (!item.dataset.visto){
           item.dataset.visto = '1';
           track('viaje_cascada_paso', {viaje:'lana', paso:+item.dataset.paso});
+        }
+      }
+      btn.setAttribute('aria-expanded', abierto ? 'false' : 'true');
+    });
+  });
+
+  /* ---------- Bloque "¿Y por qué no se hace aquí?" (Ramón) ---------- */
+  var ramon = document.getElementById('por-que-no-aqui');
+  if (ramon) cuandoSeVea(ramon, function(){ track('viaje_bloque_ramon', {viaje:'lana'}); }, {sinPlazo:true});
+  document.querySelectorAll('.vj-beat').forEach(function(beat){
+    var btn = beat.querySelector('.vj-beat-btn');
+    var pan = beat.querySelector('.vj-beat-p');
+    btn.addEventListener('click', function(){
+      var abierto = beat.hasAttribute('data-abierto');
+      if (abierto){ beat.removeAttribute('data-abierto'); pan.hidden = true; }
+      else {
+        beat.setAttribute('data-abierto','');
+        pan.hidden = false;
+        if (!beat.dataset.visto){
+          beat.dataset.visto = '1';
+          track('viaje_ramon_beat', {viaje:'lana', beat:+beat.dataset.beat});
         }
       }
       btn.setAttribute('aria-expanded', abierto ? 'false' : 'true');
