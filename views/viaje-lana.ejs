@@ -1,0 +1,790 @@
+<%
+/* ===================================================================
+   EL VIAJE DE LA LANA — página-hub de la experiencia guiada (/viaje/lana)
+   Copys aprobados: Redes/Instagram/Carruseles/2026-08_viaje-de-la-lana/
+                    guion_viaje-de-la-lana_v01.md
+   Patrón visual: views/conecta-lana.ejs (foto a sangre + degradado teñido)
+                  views/club.ejs (reveals al scroll)
+   =================================================================== */
+
+// URL del post de Instagram del viaje. PENDIENTE: pegarla aquí al publicar.
+// Mientras esté vacía, el CTA "Vuelve al post" no se renderiza.
+const POST_URL = '';
+%>
+<%- include('partials/head-meta', {
+    title: 'El Viaje de la Lana | Oficios Circulares',
+    description: 'Una experiencia guiada de 15 minutos: de la mejor lana de Europa pagada a céntimos al jersey de lujo de 1.500 €. Descubre qué pasa por el camino.',
+    canonical: '/viaje/lana',
+    ogImage: 'https://www.oficioscirculares.com/assets/images/conecta-cover.jpg',
+    ogImageAlt: 'Rebaño de ovejas en una dehesa española al atardecer — El Viaje de la Lana'
+}) %>
+
+<style>
+/* ===================================================================
+   EL VIAJE DE LA LANA — página inmersiva standalone.
+   CSS 100% scoped bajo .vj para aislarlo del CSS global del sitio.
+   Mobile-first: ~95% del tráfico llega desde el link de la bio de IG.
+   =================================================================== */
+
+/* position:sticky se rompe si un ancestro es contenedor de scroll. El body
+   global usa overflow-x:hidden; clip recorta el desbordamiento horizontal
+   SIN crear contenedor de scroll (mismo fix que en conecta-lana.ejs). */
+html,body{overflow-x:clip}
+body{background:#fbf9f8}
+
+.vj{
+  --primary:#023429;--primary-2:#1F4B3F;--verde-hoja:#3E7C59;
+  --secondary:#934a1c;--marron:#7d573c;--marron-2:#9a5530;--oro:#f6c98a;
+  --crema:#fbf6ec;--arena:#E8D5B7;--surface:#fbf9f8;
+  --on:#1b1c1c;--on-var:#414845;
+  --f-head:'Newsreader',Georgia,serif;--f-body:'Manrope',sans-serif;--f-ui:'Nunito',sans-serif;
+  --bar:56px;
+  font-family:var(--f-body);color:var(--on);line-height:1.62;-webkit-font-smoothing:antialiased;background:var(--surface)
+}
+.vj h1,.vj h2,.vj h3,.vj h4,.vj p{margin:0}
+/* Los enlaces sin clase heredan color; los que llevan clase mandan sobre su
+   propio color (si no, `.vj a` gana por especificidad y los deja ilegibles). */
+.vj a{text-decoration:none}
+.vj a:not([class]){color:inherit}
+.vj img{display:block}
+.vj :focus-visible{outline:3px solid var(--oro);outline-offset:3px;border-radius:6px}
+
+/* Ancho de lectura editorial */
+.vj-w{max-width:68ch;margin:0 auto}
+
+/* ============ CABECERA STICKY (chrome mínimo + progreso) ============ */
+.vj-bar{position:sticky;top:0;z-index:60;background:#03231b;border-bottom:1px solid rgba(246,201,138,.2)}
+.vj-bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--bar);padding:0 14px;max-width:1100px;margin:0 auto}
+.vj-brand{display:flex;align-items:center;gap:9px;min-width:0}
+.vj-brand img{height:26px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+.vj-brand b{font-family:var(--f-ui);font-weight:800;font-size:.8rem;color:var(--crema);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vj-bar-est{font-family:var(--f-ui);font-weight:800;font-size:.72rem;letter-spacing:.04em;color:var(--oro);white-space:nowrap}
+.vj-track{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(246,201,138,.16)}
+.vj-fill{height:100%;width:0;background:linear-gradient(90deg,#3E7C59,#f6c98a);transition:width .55s cubic-bezier(.4,0,.2,1)}
+@media(max-width:359px){.vj-brand b{display:none}}
+@media(min-width:640px){
+  .vj-bar-in{padding:0 24px}
+  .vj-brand img{height:32px}.vj-brand b{font-size:.94rem}
+  .vj-bar-est{font-size:.84rem}
+}
+
+/* ===================== INTRO (above the fold) ===================== */
+.vj-intro{position:relative;min-height:calc(100svh - var(--bar));display:flex;align-items:flex-end;overflow:hidden;padding:96px 22px 42px}
+.vj-intro-media{position:absolute;inset:0;z-index:0}
+.vj-intro-media img{width:100%;height:100%;object-fit:cover;object-position:center}
+.vj-intro-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,40,31,.42) 0%,rgba(2,40,31,.24) 34%,rgba(2,40,31,.82) 76%,rgba(2,40,31,.95) 100%)}
+.vj-intro-in{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto}
+.vj-kicker{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 7px;border-radius:100px;background:rgba(255,255,255,.13);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.2);margin-bottom:20px}
+.vj-kicker img{height:22px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
+.vj-kicker span{color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase}
+.vj-intro h1{font-family:var(--f-head);font-size:clamp(2.9rem,13vw,4.6rem);font-weight:700;color:#fff;line-height:.98;letter-spacing:-.025em;text-shadow:0 3px 30px rgba(0,0,0,.45)}
+.vj-intro h1 em{font-style:italic;font-weight:600;color:var(--oro)}
+.vj-intro .vj-hook{margin-top:16px;font-family:var(--f-ui);font-weight:800;font-size:clamp(1.06rem,4.6vw,1.34rem);line-height:1.35;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.vj-intro .vj-sub{margin-top:14px;color:rgba(255,255,255,.93);font-size:1.02rem;line-height:1.6;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.vj-tip{display:inline-flex;align-items:flex-start;gap:9px;margin-top:18px;padding:11px 16px;border-radius:14px;background:rgba(2,40,31,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(246,201,138,.34);color:var(--crema);font-size:.92rem;line-height:1.45}
+.vj-tip b{color:var(--oro)}
+.vj-start{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:16px 28px;border-radius:100px;background:linear-gradient(135deg,#f6c98a,#e0a965);color:#023429;font-family:var(--f-ui);font-weight:800;font-size:1.06rem;box-shadow:0 14px 34px rgba(0,0,0,.34);transition:transform .22s ease,filter .22s ease}
+.vj-start:hover{transform:translateY(-2px);filter:brightness(1.05)}
+
+/* ======================= EL CAMINO (ruta) ======================= */
+.vj-camino{position:relative;height:clamp(132px,20vh,186px);background:var(--surface)}
+.vj-linea{position:absolute;inset:0;width:100%;height:100%}
+.vj-linea path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.vj-linea-base{stroke:rgba(2,52,41,.22);stroke-width:2.4;stroke-dasharray:1.6 6}
+/* dasharray/dashoffset los fija el JS con la altura real del tramo: con
+   vector-effect:non-scaling-stroke el patrón se mide en píxeles de pantalla,
+   no en unidades del viewBox. Sin JS, la línea sale dibujada del todo. */
+.vj-linea-draw{stroke:var(--verde-hoja);stroke-width:2.6;transition:stroke-dashoffset 1.15s cubic-bezier(.4,0,.2,1),stroke .6s ease}
+.vj-hito{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--surface);border:2px solid rgba(2,52,41,.24);display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-style:italic;font-size:1.34rem;font-weight:600;color:var(--primary-2);box-shadow:0 4px 16px rgba(2,52,41,.1);transition:background .45s ease,color .45s ease,border-color .45s ease,box-shadow .45s ease}
+.vj-hito.vj-done{background:var(--primary);border-color:var(--primary);color:var(--oro);box-shadow:0 8px 24px rgba(2,52,41,.32);animation:vj-pop .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes vj-pop{0%{transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(1.22)}100%{transform:translate(-50%,-50%) scale(1)}}
+/* Microcelebración: al completar las 4, toda la ruta se ilumina en oro */
+.vj.vj-fin .vj-linea-draw{stroke:var(--oro);stroke-width:3}
+.vj.vj-fin .vj-hito.vj-done{background:linear-gradient(140deg,#3E7C59,#023429);border-color:var(--oro);box-shadow:0 0 0 5px rgba(246,201,138,.28),0 8px 26px rgba(2,52,41,.3)}
+
+/* ======================== ESTACIONES ======================== */
+.vj-est{scroll-margin-top:calc(var(--bar) + 6px)}
+.vj-est-hero{position:relative;min-height:47vh;display:flex;align-items:flex-end;overflow:hidden;padding:78px 22px 26px}
+.vj-est-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
+.vj-est-hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(2,40,31,.3) 0%,rgba(2,40,31,.18) 30%,rgba(2,40,31,.86) 82%,rgba(2,40,31,.96) 100%)}
+.vj-est--ocre .vj-est-hero::after{background:linear-gradient(180deg,rgba(58,30,12,.34) 0%,rgba(58,30,12,.2) 30%,rgba(74,38,15,.86) 82%,rgba(74,38,15,.96) 100%)}
+.vj-est-hero-in{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto}
+.vj-ey{display:block;font-family:var(--f-ui);font-weight:800;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oro);margin-bottom:10px}
+.vj-est-hero h2{font-family:var(--f-head);font-size:clamp(2.3rem,10vw,3.7rem);font-weight:700;color:#fff;line-height:1;letter-spacing:-.02em;text-shadow:0 3px 26px rgba(0,0,0,.45)}
+.vj-est-hero h2 em{font-style:italic;color:var(--oro)}
+.vj-est-body{padding:34px 22px 0;background:var(--surface)}
+.vj-est-body p{font-size:1.06rem;color:var(--on-var);line-height:1.68}
+.vj-est-body p+p{margin-top:16px}
+.vj-est-body .vj-lead{font-size:1.14rem;color:var(--on);line-height:1.6}
+.vj-est-body .vj-lead em{font-style:italic;color:var(--secondary);font-weight:600}
+.vj-est-body h3{font-family:var(--f-ui);font-weight:800;font-size:1.16rem;color:var(--primary);margin:30px 0 12px}
+
+/* Botón "siguiente estación" (cierra cada bloque) */
+.vj-next-wrap{padding:38px 22px clamp(58px,9vh,86px);text-align:center;background:var(--surface)}
+.vj-next{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:0;cursor:pointer;border-radius:100px;background:var(--primary);color:#f6ecd9;font-family:var(--f-ui);font-weight:800;font-size:1.04rem;box-shadow:0 12px 30px rgba(2,52,41,.24);transition:transform .22s ease,box-shadow .22s ease,background .3s ease}
+.vj-next:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(2,52,41,.3)}
+.vj-next.vj-hecho{background:linear-gradient(135deg,#3E7C59,#1F4B3F)}
+.vj-next--oro{background:linear-gradient(135deg,#f6c98a,#e0a965);color:#023429;box-shadow:0 14px 34px rgba(224,169,101,.4)}
+.vj-next--oro.vj-hecho{background:linear-gradient(135deg,#f6c98a,#e0a965)}
+
+/* ---------- Estación 1: vídeos ---------- */
+.vj-media{margin:24px auto 0;max-width:540px}
+.vj-ig{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 18px 44px rgba(2,52,41,.22)}
+/* embed.js sustituye el blockquote por un iframe conservando la clase: el
+   selector cubre los dos estados para que nunca desborde en 375 px. */
+.vj-ig .instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important;width:100%!important;border-radius:20px!important}
+.vj-ig-fallback{padding:34px 24px;text-align:center;color:var(--crema);background:linear-gradient(160deg,#0a2a21,#03201a);border-radius:20px}
+.vj-ig-fallback p{color:rgba(251,246,236,.86)!important;font-size:1rem!important;margin-bottom:18px}
+.vj .vj-ig-fallback a{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:100px;background:linear-gradient(135deg,#f6c98a,#e0a965);color:#023429;font-family:var(--f-ui);font-weight:800;font-size:.98rem}
+.vj-nota{margin:20px auto 0;max-width:540px;padding:16px 20px;border-left:3px solid var(--oro);background:rgba(246,201,138,.14);border-radius:0 14px 14px 0;font-size:.96rem;line-height:1.55;color:var(--on-var)}
+.vj-det{margin:26px auto 0;max-width:540px;border:1px solid rgba(2,52,41,.14);border-radius:16px;background:#fff;overflow:hidden}
+.vj-det summary{cursor:pointer;list-style:none;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--f-ui);font-weight:800;font-size:.98rem;color:var(--primary)}
+.vj-det summary::-webkit-details-marker{display:none}
+.vj-det summary::after{content:"↓";color:var(--secondary);font-size:1.1rem;transition:transform .25s ease}
+.vj-det[open] summary::after{transform:rotate(180deg)}
+.vj-det-in{padding:0 16px 18px}
+.vj-yt{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d0d0d}
+.vj-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vj-det-in p{font-size:.94rem!important;color:var(--on-var);margin-top:14px!important;line-height:1.55}
+
+/* ---------- Estación 2: paseo detective ---------- */
+.vj-marcas{display:flex;flex-direction:column;gap:12px;margin:24px auto 0;max-width:540px}
+.vj-marca{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 22px;border-radius:16px;background:linear-gradient(150deg,#0a2a21,#03201a);color:var(--crema);font-family:var(--f-ui);font-weight:800;font-size:1.04rem;box-shadow:0 12px 30px rgba(2,52,41,.2);transition:transform .22s ease,box-shadow .22s ease}
+.vj-marca:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(2,52,41,.28)}
+.vj-marca span{color:var(--oro);font-size:.9rem;font-weight:700;white-space:nowrap}
+.vj-check{margin:26px auto 0;max-width:540px;padding:20px 20px 8px;border-radius:18px;background:#fff;border:1px solid rgba(2,52,41,.1);box-shadow:0 12px 30px rgba(2,52,41,.06)}
+.vj-check-t{font-family:var(--f-ui);font-weight:800;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
+.vj-check label{display:flex;align-items:flex-start;gap:13px;padding:12px 0;border-top:1px solid rgba(2,52,41,.08);cursor:pointer;font-size:1rem;line-height:1.45;color:var(--on)}
+.vj-check label:first-of-type{border-top:0}
+.vj-check input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:24px;height:24px;margin-top:1px;border:2px solid rgba(2,52,41,.3);border-radius:7px;background:#fff;cursor:pointer;position:relative;transition:background .2s ease,border-color .2s ease}
+.vj-check input:checked{background:var(--primary);border-color:var(--primary)}
+.vj-check input:checked::after{content:"";position:absolute;left:7px;top:2.5px;width:5px;height:11px;border:solid var(--oro);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.vj-check input:checked+span{color:var(--on-var);text-decoration:line-through;text-decoration-color:rgba(2,52,41,.35)}
+.vj-cierre{margin:28px auto 0;max-width:540px;font-family:var(--f-head);font-size:1.42rem;font-style:italic;line-height:1.35;color:var(--primary);text-align:center}
+
+/* ---------- Estación 3: el test ---------- */
+.vj-q{margin:24px auto 0;max-width:540px;padding:22px 20px;border-radius:18px;background:#fff;border:1px solid rgba(2,52,41,.1);box-shadow:0 12px 30px rgba(2,52,41,.06)}
+.vj-q-n{font-family:var(--f-ui);font-weight:800;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary)}
+.vj-q-t{margin:8px 0 16px!important;font-family:var(--f-ui);font-weight:800;font-size:1.08rem!important;line-height:1.4;color:var(--primary)!important}
+.vj-opts{display:flex;flex-direction:column;gap:9px}
+.vj-opt{width:100%;text-align:left;padding:15px 18px;border:2px solid rgba(2,52,41,.14);border-radius:14px;background:#fdfbf6;cursor:pointer;font-family:var(--f-body);font-weight:600;font-size:1rem;color:var(--on);transition:border-color .2s ease,background .2s ease,transform .15s ease}
+.vj-opt:hover:not(:disabled){border-color:var(--verde-hoja);transform:translateX(3px)}
+.vj-opt:disabled{cursor:default}
+.vj-opt.vj-ok{border-color:var(--verde-hoja);background:rgba(62,124,89,.12)}
+.vj-opt.vj-ko{border-color:rgba(154,85,48,.45);background:rgba(154,85,48,.08);opacity:.75}
+.vj-opt .vj-mark{float:right;font-weight:800;color:var(--verde-hoja)}
+.vj-r{margin-top:18px;padding:18px 18px 16px;border-radius:14px;background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema)}
+.vj-r-badge{display:inline-block;padding:5px 13px;border-radius:100px;background:rgba(246,201,138,.18);border:1px solid rgba(246,201,138,.4);color:var(--oro);font-family:var(--f-ui);font-weight:800;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.vj-r p{color:rgba(251,246,236,.92)!important;font-size:1.02rem!important;line-height:1.55}
+.vj-r p strong{color:var(--oro)}
+.vj-fuente{display:block;margin-top:12px;font-size:.8rem;color:rgba(251,246,236,.6)}
+.vj-uso{margin:32px auto 0;max-width:540px;padding:26px 22px;border-radius:20px;background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.16)}
+.vj-uso .vj-uso-k{font-family:var(--f-ui);font-weight:800;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);margin-bottom:10px}
+.vj-uso .vj-uso-big{font-family:var(--f-head);font-size:clamp(2.2rem,9vw,3rem);font-weight:600;line-height:1.02;color:var(--primary);letter-spacing:-.02em}
+.vj-uso p{margin-top:12px!important;color:#5d5746!important;font-size:1.02rem!important}
+
+/* ---------- Estación 4: final ---------- */
+.vj-doble{display:flex;flex-direction:column;gap:16px;margin:24px auto 0;max-width:540px}
+.vj-concl{padding:24px 22px;border-radius:20px;position:relative;overflow:hidden}
+.vj-concl--consumidor{background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema);box-shadow:0 16px 40px rgba(2,52,41,.24)}
+.vj-concl--artesano{background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.18)}
+.vj-concl-k{display:block;font-family:var(--f-ui);font-weight:800;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+.vj-concl--consumidor .vj-concl-k{color:var(--oro)}
+.vj-concl--artesano .vj-concl-k{color:var(--secondary)}
+.vj-concl--consumidor p{color:rgba(251,246,236,.92)!important;font-size:1.04rem!important}
+.vj-concl--artesano p{color:#4a4335!important;font-size:1.04rem!important}
+.vj-concl--artesano p strong{color:var(--primary)}
+.vj-cita{margin:32px auto 0;max-width:560px;text-align:center;padding:0 4px}
+.vj-cita blockquote{font-family:var(--f-head);font-style:italic;font-weight:500;font-size:clamp(1.3rem,5.6vw,1.7rem);line-height:1.32;color:var(--primary);margin:0}
+.vj-cita .vj-firma{margin-top:16px!important;font-size:.92rem!important;color:var(--on-var)!important}
+.vj .vj-cita .vj-firma a{color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- Bloque final de CTAs ---------- */
+.vj-final{padding:clamp(58px,10vh,96px) 22px;background:linear-gradient(168deg,#06241c 0%,#023429 62%,#06281f 100%);text-align:center}
+.vj-final img.vj-sello{height:52px;width:auto;margin:0 auto 18px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
+.vj-final h2{font-family:var(--f-head);font-size:clamp(1.9rem,7.6vw,2.7rem);font-weight:700;color:var(--crema);line-height:1.12;margin-bottom:14px}
+.vj-final h2 em{font-style:italic;color:var(--oro)}
+.vj-final p{color:rgba(251,246,236,.8);font-size:1.04rem;max-width:520px;margin:0 auto}
+.vj-ctas{display:flex;flex-direction:column;align-items:stretch;gap:12px;max-width:400px;margin:30px auto 0}
+.vj-cta{display:flex;align-items:center;justify-content:center;gap:9px;padding:18px 26px;border-radius:100px;font-family:var(--f-ui);font-weight:800;font-size:1.06rem;transition:transform .22s ease,filter .22s ease,box-shadow .22s ease}
+.vj-cta--1{background:linear-gradient(135deg,#f6c98a,#e0a965);color:#023429;box-shadow:0 16px 38px rgba(0,0,0,.34)}
+.vj-cta--2{background:rgba(251,246,236,.07);border:1px solid rgba(246,201,138,.42);color:var(--crema)}
+.vj-cta--3{background:transparent;color:rgba(251,246,236,.82);font-size:.96rem;padding:12px}
+.vj-cta--3 span{text-decoration:underline;text-underline-offset:4px}
+.vj-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
+
+/* ======================= FOOTER LIGERO ======================= */
+.vj-foot{padding:34px 22px 40px;background:#03231b;text-align:center}
+.vj-foot img{height:38px;width:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 9px rgba(0,0,0,.5))}
+.vj-foot p{color:rgba(251,246,236,.6);font-size:.84rem;line-height:1.6}
+.vj .vj-foot a{color:rgba(251,246,236,.82);text-decoration:underline;text-underline-offset:3px}
+.vj-foot .vj-foot-links{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;font-size:.84rem}
+
+/* ======================= REVEALS / MOTION ======================= */
+.vj-rev{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.vj-rev.vj-in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .vj-rev{opacity:1;transform:none;transition:none}
+  .vj-linea-draw{transition:none;stroke-dashoffset:0}
+  .vj-hito.vj-done{animation:none}
+  .vj-fill{transition:none}
+}
+
+/* ======================= ESCRITORIO ======================= */
+@media(min-width:760px){
+  .vj-intro{padding:120px 46px 64px}
+  .vj-est-hero{min-height:56vh;padding:110px 46px 40px}
+  .vj-est-body{padding:48px 46px 0}
+  .vj-next-wrap{padding:48px 46px clamp(80px,12vh,130px)}
+  .vj-camino{height:clamp(160px,16vh,210px)}
+  .vj-final{padding:110px 46px}
+  .vj-est-body p{font-size:1.1rem}
+  .vj-ctas{flex-direction:row;flex-wrap:wrap;justify-content:center;max-width:none}
+  .vj-cta{flex:0 1 auto}
+  .vj-cta--3{flex:1 0 100%}
+  .vj-doble{flex-direction:row;max-width:900px}
+  .vj-concl{flex:1}
+  .vj-media,.vj-nota,.vj-det,.vj-marcas,.vj-check,.vj-q,.vj-uso,.vj-cierre{max-width:600px}
+}
+</style>
+
+<div class="vj" id="vj">
+
+  <!-- ============ CABECERA STICKY: chrome mínimo + progreso ============ -->
+  <header class="vj-bar">
+    <div class="vj-bar-in">
+      <%# Sin aria-label: el nombre accesible sale del alt del logo + el texto
+          visible. Un aria-label que no contenga el texto visible rompe la
+          regla "label-content-name-mismatch". %>
+      <a class="vj-brand" href="/">
+        <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares — inicio">
+        <b>🧭 El Viaje de la Lana</b>
+      </a>
+      <div class="vj-bar-est" id="vjEst">Estación 1 de 4</div>
+    </div>
+    <div class="vj-track" role="progressbar" aria-label="Progreso del viaje" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="vjProg">
+      <div class="vj-fill" id="vjFill"></div>
+    </div>
+  </header>
+
+  <main id="maincontent">
+
+    <!-- ========================= INTRO ========================= -->
+    <section class="vj-intro">
+      <%# LCP de la página: el póster (1280px, 79 KB) pesa un tercio que
+          conecta-cover.jpg y es la misma dehesa. La cover se reserva para el OG. %>
+      <div class="vj-intro-media" aria-hidden="true">
+        <img src="/assets/images/conecta-lana-poster.jpg" alt="" fetchpriority="high" width="1280" height="720">
+      </div>
+      <div class="vj-intro-in">
+        <span class="vj-kicker">
+          <img src="/assets/images/logodegraoscuro.png" alt="">
+          <span>Un viaje de Oficios Circulares</span>
+        </span>
+        <h1>El Viaje de <em>la&nbsp;Lana</em></h1>
+        <p class="vj-hook">De la mejor lana de Europa, pagada a 5 céntimos el kilo, al jersey de 1.500 €.</p>
+        <p class="vj-sub">Bienvenido al viaje. 4 estaciones, unos 15 minutos. Al final, no volverás a mirar igual un jersey.</p>
+        <p class="vj-tip"><span aria-hidden="true">🎧</span> <span><b>Consejo:</b> ponte auriculares. La primera estación se escucha.</span></p>
+        <div><a class="vj-start" href="#estacion-1">Empezar el viaje →</a></div>
+      </div>
+    </section>
+
+    <!-- ===================== CAMINO → HITO 1 ===================== -->
+    <div class="vj-camino" aria-hidden="true">
+      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
+        <path class="vj-linea-base" d="M3 0 V100"/>
+        <path class="vj-linea-draw" d="M3 0 V100"/>
+      </svg>
+      <div class="vj-hito" data-hito="1">1</div>
+    </div>
+
+    <!-- ============ ESTACIÓN 1 — De la oveja al ovillo ============ -->
+    <section class="vj-est" id="estacion-1" data-est="1" aria-labelledby="t-est-1">
+      <div class="vj-est-hero">
+        <img src="/assets/images/conecta-lana/vellon-crudo.jpg" alt="Vellón de lana cruda recién esquilada" loading="lazy">
+        <div class="vj-est-hero-in">
+          <span class="vj-ey">Estación 1 de 4 · El proceso real</span>
+          <h2 id="t-est-1">De la oveja <em>al ovillo</em></h2>
+        </div>
+      </div>
+      <div class="vj-est-body">
+        <div class="vj-w vj-rev">
+          <p class="vj-lead">Antes de hablar de precios, mira lo que cuesta <em>hacer</em>. Sube el volumen, dale al play y déjate llevar. Aquí no hay prisa.</p>
+        </div>
+
+        <!-- Pieza principal: reel de Wooldreamers (embed oficial de IG) -->
+        <div class="vj-media vj-rev">
+          <div class="vj-ig" id="vjIg">
+            <blockquote class="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/reel/DYCsLK1Mr_P/?utm_source=ig_embed&amp;utm_campaign=loading"
+              data-instgrm-version="14"
+              style="background:#FFF;border:0;border-radius:20px;margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+            </blockquote>
+            <!-- Fallback: se muestra si el embed de Instagram no llega a renderizar -->
+            <div class="vj-ig-fallback" id="vjIgFallback" hidden>
+              <p><strong>El sonido detrás de nuestros ovillos.</strong> Un día en la hilatura, paso a paso — con el sonido de protagonista.</p>
+              <a href="https://www.instagram.com/reel/DYCsLK1Mr_P/" target="_blank" rel="noopener">▶ Ábrelo en Instagram — y vuelve, te esperamos aquí</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="vj-nota vj-rev">La hilatura del vídeo lleva más de un siglo lavando e hilando lana española, con maquinaria centenaria y manos que saben lo que hacen. Esto no es una fábrica cualquiera: es un oficio vivo.</p>
+
+        <!-- Pieza secundaria (opcional): Monesma, la memoria del oficio -->
+        <details class="vj-det vj-rev" id="vjMonesma">
+          <summary>¿Quieres ver cómo se hacía todo a mano?</summary>
+          <div class="vj-det-in">
+            <div class="vj-yt" data-yt="NF50q4RXCGk" data-start="0"></div>
+            <p>Grabado por Eugenio Monesma. Calidad de otra época, sí — porque es memoria, no marketing. Con 3-4 minutos te haces una idea.</p>
+          </div>
+        </details>
+      </div>
+      <div class="vj-next-wrap">
+        <button type="button" class="vj-next" data-next="1" data-goto="#estacion-2">Siguiente estación →</button>
+      </div>
+    </section>
+
+    <!-- ===================== CAMINO → HITO 2 ===================== -->
+    <div class="vj-camino" aria-hidden="true">
+      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
+        <path class="vj-linea-base" d="M3 0 V100"/>
+        <path class="vj-linea-draw" d="M3 0 V100"/>
+      </svg>
+      <div class="vj-hito" data-hito="2">2</div>
+    </div>
+
+    <!-- ============ ESTACIÓN 2 — El paseo detective ============ -->
+    <section class="vj-est vj-est--ocre" id="estacion-2" data-est="2" aria-labelledby="t-est-2">
+      <div class="vj-est-hero">
+        <img src="/assets/images/blog/donde-comprar-lana-espanola/madeja-lana-detalle.jpg" alt="Detalle de una madeja de lana hilada" loading="lazy">
+        <div class="vj-est-hero-in">
+          <span class="vj-ey">Estación 2 de 4 · Las webs del lujo</span>
+          <h2 id="t-est-2">El paseo <em>detective</em></h2>
+        </div>
+      </div>
+      <div class="vj-est-body">
+        <div class="vj-w vj-rev">
+          <p class="vj-lead">Ahora, al otro extremo. Abre estas webs (en pestaña nueva) y vuelve con las respuestas. Tu misión:</p>
+        </div>
+
+        <div class="vj-marcas vj-rev">
+          <a class="vj-marca" href="https://www.loropiana.com" target="_blank" rel="noopener nofollow" data-lujo="loro_piana">Loro Piana <span>abrir ↗</span></a>
+          <a class="vj-marca" href="https://www.brunellocucinelli.com" target="_blank" rel="noopener nofollow" data-lujo="brunello_cucinelli">Brunello Cucinelli <span>abrir ↗</span></a>
+        </div>
+
+        <div class="vj-check vj-rev">
+          <div class="vj-check-t">Tu misión — marca lo que vayas comprobando</div>
+          <label><input type="checkbox" data-check="1"><span>¿Cuánto cuesta el jersey más barato que encuentres?</span></label>
+          <label><input type="checkbox" data-check="2"><span>¿Cuántas veces leen "artesanal", "savoir-faire" o "excelencia"?</span></label>
+          <label><input type="checkbox" data-check="3"><span>¿Encuentras en la ficha QUIÉN lo fabrica y DÓNDE?</span></label>
+          <label><input type="checkbox" data-check="4"><span>¿Dice algo del ganadero o del precio de la fibra en origen?</span></label>
+        </div>
+
+        <p class="vj-cierre vj-rev">¿Mucho relato y pocos datos? No es casualidad. Siguiente estación.</p>
+      </div>
+      <div class="vj-next-wrap">
+        <button type="button" class="vj-next" data-next="2" data-goto="#estacion-3">Siguiente estación →</button>
+      </div>
+    </section>
+
+    <!-- ===================== CAMINO → HITO 3 ===================== -->
+    <div class="vj-camino" aria-hidden="true">
+      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
+        <path class="vj-linea-base" d="M3 0 V100"/>
+        <path class="vj-linea-draw" d="M3 0 V100"/>
+      </svg>
+      <div class="vj-hito" data-hito="3">3</div>
+    </div>
+
+    <!-- ================== ESTACIÓN 3 — El test ================== -->
+    <section class="vj-est" id="estacion-3" data-est="3" aria-labelledby="t-est-3">
+      <div class="vj-est-hero">
+        <img src="/assets/images/blog/donde-comprar-lana-espanola/manos-lana-artesanal.jpg" alt="Manos trabajando lana artesanal" loading="lazy">
+        <div class="vj-est-hero-in">
+          <span class="vj-ey">Estación 3 de 4 · Tres datos</span>
+          <h2 id="t-est-3">El <em>test</em></h2>
+        </div>
+      </div>
+      <div class="vj-est-body">
+        <div class="vj-w vj-rev">
+          <p class="vj-lead">Tres preguntas. No hay nota, no hay examen: hay datos que no te esperas. Elige y mira qué pasa.</p>
+        </div>
+
+        <div class="vj-q vj-rev" data-q="1" data-ok="c">
+          <div class="vj-q-n">Pregunta 1 de 3</div>
+          <p class="vj-q-t">¿Cuánto cobra un ganadero español por TODA la lana de una oveja en un año?</p>
+          <div class="vj-opts">
+            <button type="button" class="vj-opt" data-o="a">Unos 3 €</button>
+            <button type="button" class="vj-opt" data-o="b">Alrededor de 1 €</button>
+            <button type="button" class="vj-opt" data-o="c">Menos de 12 céntimos</button>
+          </div>
+          <div class="vj-r" role="status" aria-live="polite" hidden>
+            <span class="vj-r-badge"></span>
+            <p><strong>Menos de 12 céntimos.</strong> Por la lana más común el ganadero recibe unos 5 céntimos el kilo. Y esquilar cuesta bastante más que eso: cada esquileo es a pérdidas — aunque esquilar sea obligatorio por el bienestar del animal.</p>
+            <span class="vj-fuente">Fuente: AVICON</span>
+          </div>
+        </div>
+
+        <div class="vj-q vj-rev" data-q="2" data-ok="c">
+          <div class="vj-q-n">Pregunta 2 de 3</div>
+          <p class="vj-q-t">¿Cuánto costó ensamblar un bolso de lujo que se vende a 2.600 €?</p>
+          <div class="vj-opts">
+            <button type="button" class="vj-opt" data-o="a">Unos 1.300 €</button>
+            <button type="button" class="vj-opt" data-o="b">Unos 530 €</button>
+            <button type="button" class="vj-opt" data-o="c">Unos 53 €</button>
+          </div>
+          <div class="vj-r" role="status" aria-live="polite" hidden>
+            <span class="vj-r-badge"></span>
+            <p><strong>53 €.</strong> Es lo que se pagó al taller por ensamblarlo, según la investigación de la fiscalía de Milán sobre el caso Dior. No es el coste total del bolso — pero sí dice mucho de dónde va tu dinero cuando pagas 2.600 €.</p>
+            <span class="vj-fuente">Fuente: Fiscalía de Milán vía Reuters, 2024</span>
+          </div>
+        </div>
+
+        <div class="vj-q vj-rev" data-q="3" data-ok="b">
+          <div class="vj-q-n">Pregunta 3 de 3</div>
+          <p class="vj-q-t">¿Cuánto más está dispuesta a pagar la gente por algo hecho a mano?</p>
+          <div class="vj-opts">
+            <button type="button" class="vj-opt" data-o="a">Nada, el precio manda</button>
+            <button type="button" class="vj-opt" data-o="b">Un 17% más</button>
+            <button type="button" class="vj-opt" data-o="c">Un 50% más</button>
+          </div>
+          <div class="vj-r" role="status" aria-live="polite" hidden>
+            <span class="vj-r-badge"></span>
+            <p><strong>Un 17% más.</strong> Lo midió un estudio publicado en el <em>Journal of Marketing</em>. La artesanía no necesita inventarse el relato: el suyo es verdad, y la gente lo nota.</p>
+            <span class="vj-fuente">Fuente: Fuchs et al., Journal of Marketing, 2015</span>
+          </div>
+        </div>
+
+        <div class="vj-uso vj-rev">
+          <div class="vj-uso-k">El remate</div>
+          <div class="vj-uso-big">El precio de etiqueta no es el coste real.</div>
+          <p>Mira el <strong>coste por uso</strong>: unos calcetines de lana bien hechos a 150 € duran décadas y se reparan. Los otros duran una temporada — y los compras otra vez, y otra.</p>
+        </div>
+      </div>
+      <div class="vj-next-wrap">
+        <button type="button" class="vj-next" data-next="3" data-goto="#estacion-4">Siguiente estación →</button>
+      </div>
+    </section>
+
+    <!-- ===================== CAMINO → HITO 4 ===================== -->
+    <div class="vj-camino" aria-hidden="true">
+      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
+        <path class="vj-linea-base" d="M3 0 V100"/>
+        <path class="vj-linea-draw" d="M3 0 V100"/>
+      </svg>
+      <div class="vj-hito" data-hito="4">4</div>
+    </div>
+
+    <!-- ============== ESTACIÓN 4 — Final del viaje ============== -->
+    <section class="vj-est vj-est--ocre" id="estacion-4" data-est="4" aria-labelledby="t-est-4">
+      <div class="vj-est-hero">
+        <img src="/assets/images/blog/donde-comprar-lana-espanola/hero-ovejas-dehesa.jpg" alt="Ovejas pastando en una dehesa española" loading="lazy">
+        <div class="vj-est-hero-in">
+          <span class="vj-ey">Estación 4 de 4 · La conclusión</span>
+          <h2 id="t-est-4">Final <em>del viaje</em></h2>
+        </div>
+      </div>
+      <div class="vj-est-body">
+        <div class="vj-doble vj-rev">
+          <div class="vj-concl vj-concl--consumidor">
+            <span class="vj-concl-k">Si compras</span>
+            <p>El problema no es que el lujo sea caro. Es que su precio no cuenta la verdad. Mientras tanto, la mejor lana de Europa se tira o se malvende a céntimos. Cuando compras a quien trabaja la fibra de verdad, cada euro va al producto: materiales, tiempo y manos.</p>
+          </div>
+          <div class="vj-concl vj-concl--artesano">
+            <span class="vj-concl-k">Si tejes, hilas o fieltras</span>
+            <p>Acabas de ver lo que cobra el lujo por un relato que el tuyo cuenta de verdad. <strong>Tu precio no es caro. Es justo.</strong> Y este argumento es tuyo: úsalo con tus clientes.</p>
+          </div>
+        </div>
+
+        <div class="vj-cita vj-rev">
+          <blockquote>"Nos dicen que esto tendría que ser un museo. Pero un museo es para lo que ya ha desaparecido. Lo nuestro sigue oliendo, sigue manchando las manos, sigue funcionando cada mañana."</blockquote>
+          <p class="vj-firma">— Wooldreamers · <a href="https://www.instagram.com/reel/DZqGx8Ms4xe/" target="_blank" rel="noopener">ver el reel</a></p>
+        </div>
+      </div>
+      <div class="vj-next-wrap">
+        <button type="button" class="vj-next vj-next--oro" data-next="4" data-goto="#final">Completar el viaje 🧭</button>
+      </div>
+    </section>
+
+    <!-- ======================= CTAs FINALES ======================= -->
+    <section class="vj-final" id="final">
+      <img class="vj-sello" src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <h2>¿Quieres que la lana española <em>deje de tirarse?</em></h2>
+      <p>Pásate por Conecta Lana: el punto de encuentro de ganaderos, transformadores y artesanos de la lana.</p>
+      <div class="vj-ctas">
+        <a class="vj-cta vj-cta--1" href="/conecta-lana" data-cta="conecta_lana">Conoce Conecta Lana →</a>
+        <a class="vj-cta vj-cta--2" href="/conecta-lana/directorio" data-cta="directorio">Ver el directorio de la lana →</a>
+        <% if (POST_URL) { %>
+        <a class="vj-cta vj-cta--3" href="<%= POST_URL %>" target="_blank" rel="noopener" data-cta="volver_post"><span>Vuelve al post y deja tu conclusión en comentarios</span></a>
+        <% } %>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================= FOOTER LIGERO ======================= -->
+  <footer class="vj-foot">
+    <a href="/" aria-label="Oficios Circulares — Inicio"><img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares"></a>
+    <p>&copy; 2026 Oficios Circulares — Donde la tradición abraza el futuro</p>
+    <div class="vj-foot-links">
+      <a href="/privacidad/">Política de Privacidad</a>
+      <a href="/conecta-lana">Conecta Lana</a>
+      <a href="/">Inicio</a>
+    </div>
+  </footer>
+
+</div>
+
+<%- include('partials/cookie-banner') %>
+
+<script>
+/* ===================================================================
+   EL VIAJE DE LA LANA — lógica de la experiencia. Vanilla, sin librerías.
+   Estado (progreso + checklist + test) en sessionStorage: sobrevive a un
+   refresh pero no convierte el viaje en algo eterno.
+   =================================================================== */
+(function(){
+  'use strict';
+
+  var KEY = 'vjLana';
+  var TOTAL = 4;
+  var root = document.getElementById('vj');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Estado ---------- */
+  function load(){
+    try{ return JSON.parse(sessionStorage.getItem(KEY)) || {}; }catch(e){ return {}; }
+  }
+  function save(s){
+    try{ sessionStorage.setItem(KEY, JSON.stringify(s)); }catch(e){}
+  }
+  var state = load();
+  state.done  = Array.isArray(state.done) ? state.done : [];
+  state.check = state.check || {};
+  state.test  = state.test  || {};
+
+  /* ---------- Medición (GTM/GA4). El sitio empuja a dataLayer; gtag solo
+       existe si el contenedor lo define, así que se cubren ambos. ---------- */
+  function track(name, params){
+    params = params || {};
+    try{ if (typeof gtag === 'function') gtag('event', name, params); }catch(e){}
+    try{
+      if (window.dataLayer){
+        var p = {event:name};
+        for (var k in params){ if (Object.prototype.hasOwnProperty.call(params,k)) p[k] = params[k]; }
+        window.dataLayer.push(p);
+      }
+    }catch(e){}
+  }
+
+  /* ---------- Progreso ---------- */
+  var fill   = document.getElementById('vjFill');
+  var progEl = document.getElementById('vjProg');
+  var estEl  = document.getElementById('vjEst');
+  var hitos  = [].slice.call(document.querySelectorAll('.vj-hito'));
+
+  function pintarProgreso(){
+    var n = state.done.length;
+    fill.style.width = (n / TOTAL * 100) + '%';
+    progEl.setAttribute('aria-valuenow', n);
+    hitos.forEach(function(h){
+      h.classList.toggle('vj-done', state.done.indexOf(+h.dataset.hito) !== -1);
+    });
+    document.querySelectorAll('.vj-next').forEach(function(b){
+      var hecho = state.done.indexOf(+b.dataset.next) !== -1;
+      b.classList.toggle('vj-hecho', hecho);
+      if (hecho && !b.dataset.txtOriginal){
+        b.dataset.txtOriginal = b.textContent;
+        b.textContent = '✓ ' + b.textContent;
+      }
+    });
+    if (n >= TOTAL) root.classList.add('vj-fin');
+  }
+
+  function completar(n, ir){
+    if (state.done.indexOf(n) === -1){
+      state.done.push(n);
+      save(state);
+      track('viaje_estacion_completada', {viaje:'lana', estacion:n});
+      if (state.done.length >= TOTAL) track('viaje_completado', {viaje:'lana'});
+    }
+    pintarProgreso();
+    var destino = ir && document.querySelector(ir);
+    if (destino) destino.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+  }
+
+  document.querySelectorAll('.vj-next').forEach(function(b){
+    b.addEventListener('click', function(){ completar(+b.dataset.next, b.dataset.goto); });
+  });
+
+  /* Etiqueta "Estación X de 4": sigue a dónde está el lector, no a lo hecho. */
+  var secciones = [].slice.call(document.querySelectorAll('.vj-est'));
+  if (secciones.length && 'IntersectionObserver' in window){
+    var ioEst = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) estEl.textContent = 'Estación ' + e.target.dataset.est + ' de ' + TOTAL;
+      });
+    }, {rootMargin:'-40% 0px -40% 0px'});
+    secciones.forEach(function(s){ ioEst.observe(s); });
+  }
+
+  /* ---------- El camino: la línea se dibuja al entrar en viewport ----------
+     El trazo usa vector-effect:non-scaling-stroke, así que el patrón de
+     guiones se mide en píxeles de pantalla: la longitud del tramo es la
+     altura real del bloque, no las unidades del viewBox. */
+  var caminos = [].slice.call(document.querySelectorAll('.vj-camino'));
+  function medir(c){
+    var p = c.querySelector('.vj-linea-draw');
+    var h = Math.round(c.getBoundingClientRect().height);
+    p.style.strokeDasharray = h + 'px';
+    p.style.strokeDashoffset = (c.classList.contains('vj-drawn') ? 0 : h) + 'px';
+  }
+  function dibujar(c){
+    c.classList.add('vj-drawn');
+    c.querySelector('.vj-linea-draw').style.strokeDashoffset = '0px';
+  }
+  caminos.forEach(medir);
+  if (!reduce && 'IntersectionObserver' in window){
+    var ioCam = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting){ dibujar(e.target); ioCam.unobserve(e.target); }
+      });
+    }, {threshold:0.35});
+    caminos.forEach(function(c){ ioCam.observe(c); });
+  } else {
+    caminos.forEach(dibujar);
+  }
+  var reMedir;
+  window.addEventListener('resize', function(){
+    clearTimeout(reMedir);
+    reMedir = setTimeout(function(){ caminos.forEach(medir); }, 180);
+  });
+
+  /* ---------- Reveals (patrón de club.ejs) ---------- */
+  if ('IntersectionObserver' in window){
+    var ioRev = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('vj-in'); ioRev.unobserve(e.target); }
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.vj-rev').forEach(function(el){ ioRev.observe(el); });
+  } else {
+    document.querySelectorAll('.vj-rev').forEach(function(el){ el.classList.add('vj-in'); });
+  }
+
+  /* ---------- Estación 1: embed de Instagram (perezoso) + fallback ---------- */
+  var igWrap = document.getElementById('vjIg');
+  var igFb   = document.getElementById('vjIgFallback');
+  function cargarIG(){
+    if (igWrap.dataset.cargado) return;
+    igWrap.dataset.cargado = '1';
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.instagram.com/embed.js';
+    s.onerror = mostrarFallback;
+    document.body.appendChild(s);
+    // Si a los 4,5 s el embed no ha renderizado su iframe, damos la salida manual.
+    setTimeout(function(){
+      if (!igWrap.querySelector('iframe')) mostrarFallback();
+    }, 4500);
+  }
+  function mostrarFallback(){
+    if (!igFb || !igFb.hidden) return;
+    igFb.hidden = false;
+    // Si el embed acaba llegando (red lenta), se queda él y se retira la
+    // salida manual: nunca deben verse los dos a la vez.
+    if ('MutationObserver' in window){
+      var mo = new MutationObserver(function(){
+        if (igWrap.querySelector('iframe')){ igFb.hidden = true; mo.disconnect(); }
+      });
+      mo.observe(igWrap, {childList:true, subtree:true});
+    }
+  }
+  if (igWrap){
+    if ('IntersectionObserver' in window){
+      var ioIg = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if (e.isIntersecting){ cargarIG(); ioIg.disconnect(); } });
+      }, {rootMargin:'400px 0px'});
+      ioIg.observe(igWrap);
+    } else { cargarIG(); }
+  }
+
+  /* ---------- Estación 1: YouTube (Monesma) solo al desplegar ---------- */
+  var det = document.getElementById('vjMonesma');
+  if (det){
+    det.addEventListener('toggle', function(){
+      var caja = det.querySelector('.vj-yt');
+      if (!det.open || !caja || caja.dataset.cargado) return;
+      caja.dataset.cargado = '1';
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + caja.dataset.yt + '?start=' + caja.dataset.start + '&rel=0';
+      f.title = 'Hilanderas de alta montaña. Así tejen calcetines con lana — Eugenio Monesma';
+      f.loading = 'lazy';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true;
+      caja.appendChild(f);
+    });
+  }
+
+  /* ---------- Estación 2: enlaces a las marcas de lujo ---------- */
+  document.querySelectorAll('[data-lujo]').forEach(function(a){
+    a.addEventListener('click', function(){
+      track('viaje_click_lujo', {viaje:'lana', marca:a.dataset.lujo});
+    });
+  });
+
+  /* ---------- Estación 2: checklist persistente ---------- */
+  document.querySelectorAll('[data-check]').forEach(function(c){
+    if (state.check[c.dataset.check]) c.checked = true;
+    c.addEventListener('change', function(){
+      state.check[c.dataset.check] = c.checked;
+      save(state);
+    });
+  });
+
+  /* ---------- Estación 3: el test ---------- */
+  var ELOGIO = 'Lo clavaste';
+  var SORPRESA = 'Ahí está la sorpresa';
+
+  function resolver(q, elegida, nueva){
+    var ok = q.dataset.ok;
+    var acertado = elegida === ok;
+    q.querySelectorAll('.vj-opt').forEach(function(o){
+      o.disabled = true;
+      if (o.dataset.o === ok){
+        o.classList.add('vj-ok');
+        o.insertAdjacentHTML('beforeend', '<span class="vj-mark" aria-hidden="true">✓</span>');
+      } else if (o.dataset.o === elegida){
+        o.classList.add('vj-ko');
+      }
+      if (o.dataset.o === elegida) o.setAttribute('aria-pressed','true');
+    });
+    var r = q.querySelector('.vj-r');
+    r.querySelector('.vj-r-badge').textContent = acertado ? ELOGIO : SORPRESA;
+    r.hidden = false;
+    if (nueva){
+      state.test[q.dataset.q] = elegida;
+      save(state);
+      track('viaje_test_respuesta', {viaje:'lana', pregunta:+q.dataset.q, acierto:acertado});
+    }
+  }
+
+  document.querySelectorAll('.vj-q').forEach(function(q){
+    q.querySelectorAll('.vj-opt').forEach(function(o){
+      o.addEventListener('click', function(){ resolver(q, o.dataset.o, true); });
+    });
+    if (state.test[q.dataset.q]) resolver(q, state.test[q.dataset.q], false);
+  });
+
+  /* ---------- CTAs finales ---------- */
+  document.querySelectorAll('[data-cta]').forEach(function(a){
+    a.addEventListener('click', function(){
+      track('viaje_cta_' + a.dataset.cta, {viaje:'lana'});
+    });
+  });
+
+  pintarProgreso();
+})();
+</script>
+</body>
+</html>

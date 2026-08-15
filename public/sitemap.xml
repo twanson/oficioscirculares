@@ -378,6 +378,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.oficioscirculares.com/viaje/lana</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- TODO (lanzamiento del Club): descomentar y quitar el noindex de views/club.ejs
        cuando existan los Payment Links de Stripe y se confirmen los permisos de testimonios.
   <url>
