@@ -122,7 +122,7 @@ body{background:#fbf9f8}
 .vj-e1-sub{margin:18px auto 0!important;max-width:38ch;font-size:1.15rem;line-height:1.55;color:rgba(255,255,255,.93);text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .vj-e1-titulo .vj-tip{margin-top:18px}
 .vj-e1-titulo .vj-start{margin-top:24px}
-.vj-e1-hilo{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(390px,80vw);height:200px;z-index:1;pointer-events:none}
+.vj-e1-hilo{position:absolute;left:6px;bottom:8px;width:min(300px,54vw);height:34vh;z-index:1;pointer-events:none;opacity:.85}
 .vj-e1-hilo .vj-hilo-draw{stroke:var(--secondary-claro);stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(224,136,90,.35))}
 /* estático: las frases fluyen una bajo otra con aire */
 .vj-e1-t + .vj-e1-t{margin-top:26px}
@@ -135,7 +135,7 @@ body{background:#fbf9f8}
 .vj-gsap .vj-e1-textos>*{grid-area:1/1;margin:0 auto}
 /* estados iniciales sin destello: el CSS deja la escena como GSAP la va a
    encontrar; cuando el motor arranca, sus estilos inline toman el relevo */
-.vj-gsap .vj-e1-foto{opacity:0;transform:scale(1.15)}
+.vj-gsap .vj-e1-foto{opacity:.18;transform:scale(1.12)}
 .vj-gsap .vj-e1-t[data-e1="2"],.vj-gsap .vj-e1-t[data-e1="3"],.vj-gsap .vj-e1-titulo{opacity:0;visibility:hidden}
 .vj-gsap .vj-e2-cinewrap{opacity:0;visibility:hidden}
 .vj-gsap .vj-e2-nota{opacity:0;visibility:hidden}
@@ -170,7 +170,7 @@ body{background:#fbf9f8}
   .vj-e2-nota .vj-nota{font-size:1.18rem;line-height:1.7;padding:24px 28px}
 }
 /* ── E3 · Profundiza ── */
-.vj-e3{background:var(--surface);padding:clamp(56px,9vh,88px) 22px}
+.vj-e3{background:var(--surface);padding:clamp(40px,7vh,64px) 22px clamp(48px,14vh,96px)}
 .vj-e3 .vj-est-body{padding:0}
 
 /* ═══════════════ ESCENAS E4-E9 ═══════════════
@@ -183,8 +183,10 @@ body{background:#fbf9f8}
 .vj-tr-fondo--a{background:var(--crema)}
 .vj-tr--seva .vj-tr-fondo--b{background:linear-gradient(180deg,#0a1c33,#050f1f)}
 .vj-tr--regreso .vj-tr-fondo--b{background:linear-gradient(180deg,#3a1c0a,#241105)}
-.vj-tr-hilo{position:absolute;left:50%;top:0;transform:translateX(-50%);height:100%;width:min(300px,60vw);pointer-events:none}
+.vj-tr-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.3;z-index:1}
 .vj-hilo-draw{stroke:var(--secondary-claro);stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(224,136,90,.3))}
+.vj-tr-foto{position:absolute;inset:0}
+.vj-tr-foto img{width:100%;height:100%;object-fit:cover}
 .vj-tr-frase{position:relative;z-index:2;max-width:17ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
 .vj-tr-frase em{font-style:italic;color:var(--secondary-claro)}
 
@@ -200,7 +202,8 @@ body{background:#fbf9f8}
 /* E6 · Ramón */
 .vj-e6{background:#050e1c}
 .vj-e6-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:76px 24px}
-.vj-e6-bg{position:absolute;inset:0;opacity:.18}
+.vj-e6-bg{position:absolute;inset:0;opacity:.26}
+.vj-e6-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 20%,rgba(5,14,28,0),rgba(5,14,28,.85))}
 .vj-e6-bg img{width:100%;height:100%;object-fit:cover}
 .vj-e6-in{position:relative;z-index:2;width:100%;max-width:640px;margin:0 auto;text-align:center}
 .vj-e6-in>*+*{margin-top:38px}
@@ -222,18 +225,22 @@ body{background:#fbf9f8}
 .vj-e6-remate .vj-ramon-remate strong{color:#fff}
 
 /* E7 · la escalera, parte 1 */
-.vj-e7{background:var(--surface)}
+.vj-e7{position:relative;background:var(--surface)}
+.vj-e7::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 20% 15%,rgba(147,74,28,.07),transparent 60%),radial-gradient(80% 60% at 85% 85%,rgba(2,52,41,.06),transparent 60%);pointer-events:none}
+.vj-e7-textura{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.04;pointer-events:none}
 .vj-e7-pin{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:80px 24px}
 .vj-e7-cab{text-align:center;margin-bottom:8px}
 .vj-e7-peldanos{position:relative;z-index:2;display:flex;flex-direction:column;gap:18px;max-width:1000px;margin:18px auto 0;width:100%}
-.vj-e7-peldano{background:#fff;border:1px solid rgba(2,52,41,.08);border-left:4px solid var(--secondary);border-radius:var(--r-card);box-shadow:var(--sombra-card);padding:26px 24px;max-width:520px}
+.vj-e7-peldanos{position:relative}
+.vj-e7-peldano{position:relative;z-index:2;background:#fff;border:1px solid rgba(2,52,41,.08);border-left:4px solid var(--secondary);border-radius:var(--r-card);box-shadow:var(--sombra-card);padding:26px 24px;max-width:520px}
 .vj-e7-peldano[data-paso="2"]{align-self:flex-end}
 .vj-e7-cifra{display:block;font-family:var(--f-head);font-weight:600;font-size:clamp(2.2rem,8vw,3.4rem);color:var(--secondary);line-height:1;margin-bottom:6px}
 .vj-e7-cifra small{font-size:.42em;opacity:.85}
 .vj-e7-cifra--txt{font-style:italic;font-size:clamp(1.8rem,6vw,2.6rem)}
 .vj-e7-peldano h3{font-family:var(--f-ui);font-weight:800;font-size:1.2rem;color:var(--primary);margin:0 0 10px}
 .vj-e7-peldano p{color:var(--on-var);font-size:1.1rem;line-height:1.6;margin:0}
-.vj-e7-hilo{position:absolute;right:8%;top:10%;height:80%;width:min(120px,18vw);pointer-events:none;z-index:1}
+.vj-e7-peldano .vj-fuente{color:#8a8070;margin-top:10px;display:block}
+.vj-e7-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.4}
 @media(min-width:900px){
   .vj-e7-peldano[data-paso="2"]{margin-top:-56px;margin-right:4%}
   .vj-e7-peldano[data-paso="1"]{margin-left:4%}
@@ -261,9 +268,6 @@ body{background:#fbf9f8}
 .vj-e9-peldano h3{font-family:var(--f-ui);font-weight:800;font-size:1.06rem;color:var(--primary);margin:6px 0 8px}
 .vj-e9-peldano p{font-size:.98rem;color:var(--on-var);line-height:1.52;margin:0}
 @media(max-width:600px){.vj-e9-peldano p{font-size:.92rem}.vj-e9-peldano{padding:14px 16px}}
-
-/* E2 · segmento de hilo que cose la costura con E1 */
-.vj-e2-hilo{position:absolute;left:50%;top:0;transform:translateX(-50%);width:60px;height:clamp(110px,16vh,150px);z-index:1;pointer-events:none}
 
 /* ============= EL MARCADOR DEL KILO (píldora flotante) =============
    Fuera la segunda barra: robaba altura y aplanaba la cabecera. Ahora es una
@@ -493,6 +497,16 @@ body{background:#fbf9f8}
 .vj-cta--3 span{text-decoration:underline;text-underline-offset:4px}
 .vj-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
 
+/* ============= LIGHTBOX DEL REEL ============= */
+.vj-lb{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;background:rgba(2,10,8,.93)}
+.vj-lb[hidden]{display:none}
+.vj-lb-caja{position:relative;width:min(400px,94vw);max-height:88vh;overflow:auto;border-radius:20px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.6);padding:6px}
+.vj-lb-cerrar{position:absolute;top:8px;right:8px;z-index:5;width:38px;height:38px;border:0;border-radius:50%;background:rgba(2,32,25,.85);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vj-lb-link{display:block;padding:12px;text-align:center;font-family:var(--f-ui);font-weight:700;font-size:.92rem;color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
+.vj-lb-abierta{overflow:hidden}
+.vj-ig-card{cursor:pointer}
+.vj-ig-play{border:0;cursor:pointer;font-family:inherit}
+
 /* ======================= FOOTER LIGERO ======================= */
 .vj-foot{padding:34px 22px 40px;background:#03231b;text-align:center}
 .vj-foot img{height:38px;width:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 9px rgba(0,0,0,.5))}
@@ -716,8 +730,10 @@ body{background:#fbf9f8}
           </div>
         </div>
         <%# El hilo de lana: nace del vellón y se dibuja con el scroll %>
-        <svg class="vj-e1-hilo" viewBox="0 0 390 260" fill="none" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M195 8 C 150 60, 260 90, 210 140 S 140 210, 195 260" stroke-linecap="round"/>
+        <%# El hilo: nace en el vellón de la foto y termina en la píldora del
+            kilo (abajo-izquierda). Una sola curva, sin garabatos. %>
+        <svg class="vj-e1-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path class="vj-hilo-draw" d="M92 4 C 55 30, 22 52, 8 90" stroke-linecap="round"/>
         </svg>
       </div>
     </section>
@@ -728,9 +744,6 @@ body{background:#fbf9f8}
         escritorio, panel inferior en móvil). Módulos intactos (vjIg). %>
     <section class="vj-e2 vj-est" id="nave" data-est="1" data-lugar="La nave" aria-label="Parada 1 · La nave">
       <div class="vj-e2-pin">
-        <svg class="vj-e2-hilo" viewBox="0 0 60 140" fill="none" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M30 0 C 18 40, 44 95, 30 140" stroke-linecap="round"/>
-        </svg>
         <div class="vj-e2-bg" aria-hidden="true">
           <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
           <div class="vj-e2-grad"></div>
@@ -741,22 +754,16 @@ body{background:#fbf9f8}
             <span class="vj-cine-badge" id="vjBadge">🎧 Sube el volumen</span>
             <div class="vj-media">
               <div class="vj-ig" id="vjIg">
-                <%# El cartel es el estado por defecto. El embed se superpone
-                    invisible y solo toma el sitio cuando ha pintado de verdad. %>
+                <%# La tarjeta-cine es SIEMPRE la cara visible: el embed de IG,
+                    con su chrome blanco, rompía la escena. Al pulsar play se
+                    abre en un lightbox por encima. %>
                 <div class="vj-ig-card" id="vjIgCard">
                   <img src="/assets/images/viaje-lana/interludio-textura-900.webp" alt="" loading="lazy">
-                  <span class="vj-ig-play" aria-hidden="true">▶</span>
+                  <button type="button" class="vj-ig-play" aria-label="Ver el reel">▶</button>
                   <b>El sonido detrás de nuestros ovillos</b>
                   <small>Un día en la hilatura, paso a paso — con el sonido de protagonista.</small>
                   <a href="https://www.instagram.com/reel/DYCsLK1Mr_P/" target="_blank" rel="noopener">▶ Ábrelo en Instagram</a>
                   <small>Y vuelve — te esperamos aquí.</small>
-                </div>
-                <div class="vj-ig-embed" id="vjIgEmbed">
-                  <blockquote class="instagram-media"
-                    data-instgrm-permalink="https://www.instagram.com/reel/DYCsLK1Mr_P/?utm_source=ig_embed&amp;utm_campaign=loading"
-                    data-instgrm-version="14"
-                    style="background:#FFF;border:0;border-radius:22px;margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-                  </blockquote>
                 </div>
               </div>
             </div>
@@ -789,8 +796,11 @@ body{background:#fbf9f8}
       <div class="vj-tr-pin">
         <div class="vj-tr-fondo vj-tr-fondo--a"></div>
         <div class="vj-tr-fondo vj-tr-fondo--b"></div>
-        <svg class="vj-tr-hilo" viewBox="0 0 300 800" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M150 0 C 120 160, 190 300, 150 420 S 110 660, 150 800" stroke-linecap="round"/>
+        <div class="vj-tr-foto" aria-hidden="true">
+          <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+        </div>
+        <svg class="vj-tr-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path class="vj-hilo-draw" d="M50 0 C 58 32, 78 58, 96 98" stroke-linecap="round"/>
         </svg>
         <p class="vj-tr-frase">Ya sabes lo que cuesta hacerlo. Este kilo, casi seguro, <em>no se queda en España</em>.</p>
       </div>
@@ -854,6 +864,7 @@ body{background:#fbf9f8}
     <%# ═══════════ E7 · LA ESCALERA, PARTE 1 (pin, los peldaños se construyen) ═══════════ %>
     <section class="vj-e7" id="escalera-1" aria-label="La escalera del precio, primera parte">
       <div class="vj-e7-pin">
+        <div class="vj-e7-textura" aria-hidden="true"></div>
         <div class="vj-e7-cab"><span class="vj-ey">La escalera del precio</span></div>
         <div class="vj-e7-peldanos">
           <article class="vj-e7-peldano" data-paso="1">
@@ -867,10 +878,10 @@ body{background:#fbf9f8}
             <h3>Lavado, cardado, hilado</h3>
             <p>Aquí la lana se convierte en algo que ya se puede trabajar. Cada transformación multiplica el valor — y casi ninguna se hace ya en España.</p>
           </article>
+          <svg class="vj-e7-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path class="vj-hilo-draw" d="M10 94 C 34 78, 62 40, 92 8" stroke-linecap="round"/>
+          </svg>
         </div>
-        <svg class="vj-e7-hilo" viewBox="0 0 120 500" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M30 500 C 10 400, 90 360, 70 260 S 30 90, 90 0" stroke-linecap="round"/>
-        </svg>
       </div>
     </section>
 
@@ -880,8 +891,11 @@ body{background:#fbf9f8}
       <div class="vj-tr-pin">
         <div class="vj-tr-fondo vj-tr-fondo--a"></div>
         <div class="vj-tr-fondo vj-tr-fondo--b"></div>
-        <svg class="vj-tr-hilo" viewBox="0 0 300 800" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M150 0 C 190 160, 110 300, 150 420 S 200 660, 150 800" stroke-linecap="round"/>
+        <div class="vj-tr-foto" aria-hidden="true">
+          <img src="/assets/images/viaje-lana/interludio-textura-900.webp" srcset="/assets/images/viaje-lana/interludio-textura-900.webp 900w, /assets/images/viaje-lana/interludio-textura-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+        </div>
+        <svg class="vj-tr-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path class="vj-hilo-draw" d="M50 0 C 42 32, 22 58, 4 98" stroke-linecap="round"/>
         </svg>
         <p class="vj-tr-frase">Tu kilo volverá. Pero <em>no volverá como lana</em>.</p>
       </div>
@@ -1198,6 +1212,18 @@ body{background:#fbf9f8}
 
   </main>
 
+  <%# Lightbox del reel: el embed vive aquí, no dentro de la escena %>
+  <div class="vj-lb" id="vjLightbox" hidden role="dialog" aria-modal="true" aria-label="Reel de Wooldreamers: el sonido detrás de nuestros ovillos">
+    <div class="vj-lb-caja">
+      <button type="button" class="vj-lb-cerrar" aria-label="Cerrar">×</button>
+      <blockquote class="instagram-media"
+        data-instgrm-permalink="https://www.instagram.com/reel/DYCsLK1Mr_P/?utm_source=ig_embed&amp;utm_campaign=loading"
+        data-instgrm-version="14"
+        style="background:#FFF;border:0;border-radius:18px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
+      <a class="vj-lb-link" href="https://www.instagram.com/reel/DYCsLK1Mr_P/" target="_blank" rel="noopener">Ábrelo en Instagram ↗</a>
+    </div>
+  </div>
+
   <!-- ======================= FOOTER LIGERO ======================= -->
   <footer class="vj-foot">
     <a href="/" aria-label="Oficios Circulares — Inicio"><img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares"></a>
@@ -1482,78 +1508,43 @@ body{background:#fbf9f8}
     });
   });
 
-  /* ---------- Estación 1: embed de Instagram ----------
-     El cartel del reel es el ESTADO NORMAL. El embed solo le quita el sitio
-     si cumple las dos condiciones: su iframe ha disparado `load` Y mide de
-     verdad. Que el iframe exista, o que tenga alto reservado, no basta:
-     Instagram fija la altura antes de pintar nada, y en localhost el embed
-     falla casi siempre — con eso se veía una caja oscura vacía.
-     Después del cambio se sigue vigilando: si el iframe se cae o se queda
-     sin altura, vuelve el cartel. Nunca debe verse un hueco. */
-  var igWrap  = document.getElementById('vjIg');
-  var igEmbed = document.getElementById('vjIgEmbed');
-  var ALTO_MINIMO = 200;
-
-  function altoReal(){
-    var f = igEmbed && igEmbed.querySelector('iframe');
-    return f ? f.getBoundingClientRect().height : 0;
-  }
-  var ro = null;
-  function mostrarEmbed(){
-    if (igWrap.classList.contains('vj-ig-ok')) return;
-    if (altoReal() <= ALTO_MINIMO) return;
-    igWrap.classList.add('vj-ig-ok');
-    vigilar();
-  }
-  function volverAlCartel(){
-    igWrap.classList.remove('vj-ig-ok');
-  }
-  // Vigilancia permanente, no un sondeo con caducidad: si el embed se queda
-  // sin altura o desaparece en cualquier momento, vuelve el cartel.
-  function vigilar(){
-    var f = igEmbed.querySelector('iframe');
-    if (!f || !('ResizeObserver' in window)) return;
-    if (ro) ro.disconnect();
-    ro = new ResizeObserver(function(){
-      if (igWrap.classList.contains('vj-ig-ok') && altoReal() <= ALTO_MINIMO) volverAlCartel();
+  /* ---------- El reel: tarjeta-cine siempre visible, embed en lightbox ----------
+     El embed de Instagram (chrome blanco incluido) rompía la escena. Ahora la
+     cara visible es nuestra tarjeta y el embed se abre encima al pulsar play.
+     Sin JS, el enlace de la tarjeta sigue llevando a Instagram. */
+  var igCard = document.getElementById('vjIgCard');
+  var lbReel = document.getElementById('vjLightbox');
+  if (igCard && lbReel){
+    var embedPedido = false;
+    function abrirReel(){
+      lbReel.hidden = false;
+      document.documentElement.classList.add('vj-lb-abierta');
+      if (!embedPedido){
+        embedPedido = true;
+        var sc = document.createElement('script');
+        sc.async = true;
+        sc.src = 'https://www.instagram.com/embed.js';
+        document.body.appendChild(sc);
+      }
+      try{ if (window.instgrm) instgrm.Embeds.process(); }catch(e){}
+      track('viaje_reel_abierto', {viaje:'lana'});
+    }
+    function cerrarReel(){
+      lbReel.hidden = true;
+      document.documentElement.classList.remove('vj-lb-abierta');
+    }
+    igCard.addEventListener('click', function(ev){
+      if (ev.target.closest('a')) return;   // el enlace explícito sigue a Instagram
+      ev.preventDefault();
+      abrirReel();
     });
-    ro.observe(f);
+    lbReel.addEventListener('click', function(ev){
+      if (ev.target === lbReel || ev.target.closest('.vj-lb-cerrar')) cerrarReel();
+    });
+    window.addEventListener('keydown', function(ev){
+      if (ev.key === 'Escape' && !lbReel.hidden) cerrarReel();
+    });
   }
-
-  function cargarIG(){
-    if (!igWrap || igWrap.dataset.cargado) return;
-    igWrap.dataset.cargado = '1';
-
-    // El iframe lo inserta embed.js: se engancha su `load` en cuanto aparece.
-    function engancharIframe(f){
-      if (!f || f.dataset.enganchado) return;
-      f.dataset.enganchado = '1';
-      f.addEventListener('load', function(){
-        // El alto definitivo llega por postMessage justo después del load.
-        setTimeout(mostrarEmbed, 400);
-        setTimeout(mostrarEmbed, 1200);
-      });
-    }
-    if ('MutationObserver' in window){
-      // Observador permanente y sin desconectar al primer iframe: embed.js
-      // puede reemplazarlo (el sustituto necesita su propio `load`) o
-      // retirarlo (entonces hay que recuperar el cartel al vuelo).
-      var mo = new MutationObserver(function(){
-        var f = igEmbed.querySelector('iframe');
-        if (f){ engancharIframe(f); vigilar(); }
-        else if (igWrap.classList.contains('vj-ig-ok')) volverAlCartel();
-      });
-      mo.observe(igEmbed, {childList:true, subtree:true});
-      // Si el iframe ya estuviera puesto antes de observar.
-      engancharIframe(igEmbed.querySelector('iframe'));
-    }
-
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.instagram.com/embed.js';
-    document.body.appendChild(s);
-  }
-  if (igWrap) cuandoSeVea(igWrap, cargarIG, {margen:400});
 
   /* ---------- Estación 1: el documental, solo al desplegar ----------
      YouTube no se toca hasta que el lector abre el bloque. */
@@ -1760,7 +1751,11 @@ body{background:#fbf9f8}
     var hilo = q1('.vj-hilo-draw');
     var hiloL = hilo.getTotalLength();
     gsap.set(hilo, {strokeDasharray: hiloL, strokeDashoffset: hiloL});
-    gsap.set(q1('.vj-e1-foto'), {opacity: 0, scale: 1.15});
+    gsap.set(q1('.vj-e1-foto'), {opacity: .18, scale: 1.12});
+    // Drift lento e independiente del scroll: la escena respira aunque el
+    // lector aún no haya movido el dedo. Sobre el wrapper, no sobre la foto,
+    // para no pelearse con el scrub.
+    gsap.to(q1('.vj-e1-media'), {scale: 1.045, yPercent: 1.6, duration: 16, ease: 'sine.inOut', yoyo: true, repeat: -1});
     gsap.set([q1('[data-e1="2"]'), q1('[data-e1="3"]'), q1('.vj-e1-titulo')], {autoAlpha: 0, y: 28});
 
     var tl1 = gsap.timeline({
@@ -1822,15 +1817,16 @@ body{background:#fbf9f8}
       gsap.set(q('.vj-tr-fondo--b'), {opacity: 0});
       gsap.set(q('.vj-tr-frase'), {autoAlpha: 0, y: 30});
       var hecho = false;
+      gsap.set(q('.vj-tr-foto'), {opacity: 0});
       gsap.timeline({defaults: {ease: 'none'},
-        scrollTrigger: {trigger: el, start: 'top top', end: '+=120%', pin: true, scrub: true,
+        scrollTrigger: {trigger: el, start: 'top top', end: '+=90%', pin: true, scrub: true,
           onUpdate: function(st){
             if (st.progress > 0.9 && !hecho){ hecho = true; completar(tramoAlAcabar); }
           }}})
-        .to(hiloT, {strokeDashoffset: 0, duration: 45}, 0)
-        .to(q('.vj-tr-hilo'), {rotation: id === 'se-va' ? 13 : -13, xPercent: id === 'se-va' ? 15 : -15, transformOrigin: '50% 0%', duration: 60}, 15)
-        .to(q('.vj-tr-fondo--b'), {opacity: 1, duration: 40}, 8)
-        .to(q('.vj-tr-frase'), {autoAlpha: 1, y: 0, duration: 22}, 42);
+        .to(q('.vj-tr-fondo--b'), {opacity: 1, duration: 26}, 0)
+        .to(q('.vj-tr-foto'), {opacity: .38, duration: 34}, 4)
+        .to(q('.vj-tr-frase'), {autoAlpha: 1, y: 0, duration: 14}, 16)
+        .to(hiloT, {strokeDashoffset: 0, duration: 55}, 16);
     }
     transicion('se-va', 1);
     transicion('regreso', 2);
