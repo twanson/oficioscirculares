@@ -103,6 +103,76 @@ body{background:#fbf9f8}
 }
 @media(max-width:600px){.vj-heroline{font-size:.98rem}}
 
+/* ═══════════════ ESCENAS SCROLL-DRIVEN (E1-E3) ═══════════════
+   Doble contrato: SIN .vj-gsap (sin JS, sin GSAP o reduced-motion) las
+   escenas son columnas estáticas, todo visible. CON .vj-gsap, GSAP toma el
+   mando: pin + scrub, y los estados iniciales los fija el propio motor. */
+
+/* ── E1 · Apertura ── */
+.vj-e1{position:relative;background:#04130f;color:var(--crema)}
+.vj-e1-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.vj-e1-media{position:absolute;inset:0}
+.vj-e1-foto{width:100%;height:100%;object-fit:cover}
+.vj-e1-velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,19,15,.55),rgba(4,19,15,.68) 60%,rgba(4,19,15,.86))}
+.vj-e1-textos{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto;padding:96px 26px 72px;text-align:center}
+.vj-e1-t{font-family:var(--f-head);font-weight:600;font-size:clamp(1.7rem,6.4vw,2.9rem);line-height:1.22;letter-spacing:-.015em;color:#fff;text-shadow:0 3px 30px rgba(0,0,0,.5);max-width:19ch;margin:0 auto}
+.vj-e1-t em{font-style:italic;color:var(--secondary-claro)}
+.vj-e1-titulo h1{font-family:var(--f-head);font-size:clamp(3.2rem,13vw,5.6rem);font-weight:700;color:#fff;line-height:.96;letter-spacing:-.025em;text-shadow:0 3px 30px rgba(0,0,0,.45);margin:18px 0 0}
+.vj-e1-titulo h1 em{font-style:italic;font-weight:600;color:var(--secondary-claro)}
+.vj-e1-sub{margin:18px auto 0!important;max-width:38ch;font-size:1.15rem;line-height:1.55;color:rgba(255,255,255,.93);text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.vj-e1-titulo .vj-tip{margin-top:18px}
+.vj-e1-titulo .vj-start{margin-top:24px}
+.vj-e1-hilo{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(390px,80vw);height:200px;z-index:1;pointer-events:none}
+.vj-e1-hilo .vj-hilo-draw{stroke:var(--secondary-claro);stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(224,136,90,.35))}
+/* estático: las frases fluyen una bajo otra con aire */
+.vj-e1-t + .vj-e1-t{margin-top:26px}
+.vj-e1-titulo{margin-top:34px}
+/* modo escena: todas apiladas en el mismo sitio, GSAP las turna */
+/* En modo escena, cada pin mide EXACTAMENTE un viewport: si el contenido es
+   más alto (el embed real del reel), se recorta — nunca estira la escena. */
+.vj-gsap .vj-e1-pin,.vj-gsap .vj-e2-pin{height:100svh;min-height:0;overflow:hidden}
+.vj-gsap .vj-e1-textos{display:grid;place-items:center;min-height:100svh;padding:56px 26px}
+.vj-gsap .vj-e1-textos>*{grid-area:1/1;margin:0 auto}
+/* estados iniciales sin destello: el CSS deja la escena como GSAP la va a
+   encontrar; cuando el motor arranca, sus estilos inline toman el relevo */
+.vj-gsap .vj-e1-foto{opacity:0;transform:scale(1.15)}
+.vj-gsap .vj-e1-t[data-e1="2"],.vj-gsap .vj-e1-t[data-e1="3"],.vj-gsap .vj-e1-titulo{opacity:0;visibility:hidden}
+.vj-gsap .vj-e2-cinewrap{opacity:0;visibility:hidden}
+.vj-gsap .vj-e2-nota{opacity:0;visibility:hidden}
+
+/* ── E2 · La nave ── */
+.vj-e2{position:relative;background:#062018}
+.vj-e2-pin{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center}
+.vj-e2-bg{position:absolute;inset:-6% 0}
+.vj-e2-bg img{width:100%;height:100%;object-fit:cover}
+.vj-e2-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,32,25,.62),rgba(2,32,25,.78) 55%,rgba(2,25,19,.92))}
+.vj-e2-in{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:88px 22px 56px;display:flex;flex-direction:column;align-items:center;gap:26px}
+.vj-e2-cinewrap{text-align:center;max-width:540px}
+.vj-e2-cinewrap .vj-cine-lead{margin-bottom:22px!important}
+.vj-e2-cinewrap .vj-cine-badge{margin-bottom:20px}
+.vj-e2-nota{max-width:420px}
+.vj-e2-nota .vj-nota{margin:0;background:rgba(246,201,138,.12);color:rgba(251,246,236,.9);border-left-color:var(--oro)}
+@media(max-width:1023.98px){
+  .vj-e2 .vj-media{max-width:min(320px,38vh)}
+  .vj-e2-cinewrap .vj-cine-lead{font-size:clamp(1.15rem,4vw,1.3rem)}
+  /* en modo escena la nota es un panel inferior sólido que entra al final.
+     El contenedor interior deja de ser containing block: el panel ancla a la
+     ESCENA (100svh), no al contenido, que es más alto que el viewport. */
+  .vj-gsap .vj-e2-in{position:static}
+  .vj-gsap .vj-e2-cinewrap{position:relative;z-index:2}
+  .vj-gsap .vj-e2-nota{position:absolute;left:0;right:0;bottom:0;max-width:none;padding:30px 22px 84px;background:linear-gradient(180deg,rgba(2,25,19,0),rgba(2,25,19,.96) 16%);z-index:3}
+  .vj-gsap .vj-e2-nota .vj-nota{max-width:540px;margin:0 auto;font-size:.99rem}
+}
+@media(min-width:1024px){
+  .vj-e2-in{flex-direction:row;justify-content:center;align-items:center;gap:56px}
+  .vj-e2-cinewrap{flex:0 0 auto}
+  .vj-e2-nota{flex:0 1 34rem}
+  .vj-e2-nota .vj-nota{font-size:1.18rem;line-height:1.7;padding:24px 28px}
+}
+/* ── E3 · Profundiza ── */
+.vj-e3{background:var(--surface);padding:clamp(56px,9vh,88px) 22px}
+.vj-e3 .vj-est-body{padding:0}
+
 /* ============= EL MARCADOR DEL KILO (píldora flotante) =============
    Fuera la segunda barra: robaba altura y aplanaba la cabecera. Ahora es una
    píldora discreta abajo-izquierda, con el mismo cristal que la home. */
@@ -528,83 +598,84 @@ body{background:#fbf9f8}
 
   <main class="vj-main" id="maincontent">
 
-    <!-- ========================= INTRO ========================= -->
-    <section class="vj-intro">
-      <%# Foto propia del viaje: esquila a tijera en la nave, luz cálida.
-          Es el LCP y la que da la cara en el OG. %>
-      <div class="vj-intro-media" aria-hidden="true">
-        <img src="/assets/images/viaje-lana/intro-esquila-900.webp" srcset="/assets/images/viaje-lana/intro-esquila-900.webp 900w, /assets/images/viaje-lana/intro-esquila-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" width="900" height="1350">
-      </div>
-      <div class="vj-intro-in">
-        <span class="vj-kicker">
-          <img src="/assets/images/logodegraoscuro.png" alt="">
-          <span>Un viaje de Oficios Circulares</span>
-        </span>
-        <h1>Esto es un kilo de <em>lana&nbsp;española.</em></h1>
-        <p class="vj-sub">Lo acaban de esquilar. Por él, el ganadero ha cobrado unos céntimos.</p>
-        <p class="vj-hook">Dentro de unos meses, alguien pagará 1.500 € por un jersey hecho con lana como esta.</p>
-        <p class="vj-sub">Este viaje sigue al kilo para averiguar qué pasa por el camino. 4 paradas, 15-20 minutos.</p>
-        <p class="vj-tip"><span aria-hidden="true">🎧</span> <span>Ponte auriculares: la primera parada se escucha.</span></p>
-        <div><a class="vj-start" href="#nave">Seguir al kilo →</a></div>
+    <%# ═══════════ E1 · APERTURA (pin ~2.5 viewports, scrub) ═══════════
+        Negro → la esquila se revela → tres frases en secuencia → título.
+        Sin GSAP (o con reduced-motion) el CSS la sirve como columna estática:
+        todo legible, nada oculto. Los copys son los de la intro anterior. %>
+    <section class="vj-e1" id="apertura" aria-label="Apertura del viaje">
+      <div class="vj-e1-pin">
+        <div class="vj-e1-media" aria-hidden="true">
+          <img class="vj-e1-foto" src="/assets/images/viaje-lana/intro-esquila-900.webp" srcset="/assets/images/viaje-lana/intro-esquila-900.webp 900w, /assets/images/viaje-lana/intro-esquila-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" width="900" height="1350">
+          <div class="vj-e1-velo"></div>
+        </div>
+        <div class="vj-e1-textos">
+          <p class="vj-e1-t" data-e1="1">Esto es un kilo de <em>lana&nbsp;española</em>.</p>
+          <p class="vj-e1-t" data-e1="2">Lo acaban de esquilar. Por él, el ganadero ha cobrado unos céntimos.</p>
+          <p class="vj-e1-t" data-e1="3">Dentro de unos meses, alguien pagará <em>1.500&nbsp;€</em> por un jersey hecho con lana como esta.</p>
+          <div class="vj-e1-titulo" data-e1="4">
+            <span class="vj-kicker">
+              <img src="/assets/images/logodegraoscuro.png" alt="">
+              <span>Un viaje de Oficios Circulares</span>
+            </span>
+            <h1>El Viaje <em>de la Lana</em></h1>
+            <p class="vj-e1-sub">Este viaje sigue al kilo para averiguar qué pasa por el camino. 4 paradas, 15-20 minutos.</p>
+            <p class="vj-tip"><span aria-hidden="true">🎧</span> <span>Ponte auriculares: la primera parada se escucha.</span></p>
+            <div><a class="vj-start" href="#nave">Seguir al kilo →</a></div>
+          </div>
+        </div>
+        <%# El hilo de lana: nace del vellón y se dibuja con el scroll %>
+        <svg class="vj-e1-hilo" viewBox="0 0 390 260" fill="none" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+          <path class="vj-hilo-draw" d="M195 8 C 150 60, 260 90, 210 140 S 140 210, 195 252" stroke-linecap="round"/>
+        </svg>
       </div>
     </section>
 
-    <!-- ================= RUTA → PARADA 1: La nave ================= -->
-    <div class="vj-camino" aria-hidden="true">
-      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
-        <path class="vj-linea-base" d="M3 0 V100"/>
-        <path class="vj-linea-draw" d="M3 0 V100"/>
-      </svg>
-      <div class="vj-hito" data-hito="1" title="La nave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 4l9 6.5"/><path d="M5 10v9h14v-9"/><path d="M9 19v-5h6v5"/></svg></div>
-    </div>
-
-    <!-- ============ PARADA 1 — La nave ============ -->
-    <section class="vj-est vj-est--verde" id="nave" data-est="1" data-lugar="La nave" aria-labelledby="t-nave">
-      <div class="vj-est-hero vj-est-hero--izq">
-        <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="Vellones recién esquilados amontonados en el suelo de una nave"  loading="lazy" decoding="async">
-        <div class="vj-est-hero-in">
-          <div class="vj-herocard">
-            <span class="vj-ey">Parada 1 de 4</span>
-            <h2 id="t-nave">La <em>nave</em></h2>
-            <p class="vj-heroline">Lo que cuesta hacer</p>
-            <span class="vj-herochip"><span aria-hidden="true">🧶</span> Tu kilo aquí: <b>0,05 €</b></span>
-          </div>
+    <%# ═══════════ E2 · LA NAVE (pin, scrub) ═══════════
+        Vellones con parallax de fondo; la tarjeta-cine del reel entra desde
+        abajo; después la nota de Mota del Cuervo entra lateral (5/7 en
+        escritorio, panel inferior en móvil). Módulos intactos (vjIg). %>
+    <section class="vj-e2 vj-est" id="nave" data-est="1" data-lugar="La nave" aria-label="Parada 1 · La nave">
+      <div class="vj-e2-pin">
+        <div class="vj-e2-bg" aria-hidden="true">
+          <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+          <div class="vj-e2-grad"></div>
         </div>
-      </div>
-      <%# La sala de cine arranca justo debajo del hero: el párrafo de entrada
-          vive DENTRO de la banda oscura. Antes iba en una franja blanca
-          estrecha entre el hero y el cine, sin aire y pegada a los bordes. %>
-      <div class="vj-cine">
-        <p class="vj-cine-lead vj-rev">Antes de hablar de dinero, mira lo que ese kilo lleva dentro: el año de la oveja, la esquila, el oficio.</p>
-        <span class="vj-cine-badge vj-rev">🎧 Sube el volumen</span>
-
-        <div class="vj-media vj-rev">
-          <div class="vj-ig" id="vjIg">
-            <%# El cartel es el estado por defecto. El embed se superpone
-                invisible y solo toma el sitio cuando ha pintado de verdad. %>
-            <div class="vj-ig-card" id="vjIgCard">
-              <img src="/assets/images/viaje-lana/interludio-textura-900.webp" alt="" loading="lazy">
-              <span class="vj-ig-play" aria-hidden="true">▶</span>
-              <b>El sonido detrás de nuestros ovillos</b>
-              <small>Un día en la hilatura, paso a paso — con el sonido de protagonista.</small>
-              <a href="https://www.instagram.com/reel/DYCsLK1Mr_P/" target="_blank" rel="noopener">▶ Ábrelo en Instagram</a>
-              <small>Y vuelve — te esperamos aquí.</small>
-            </div>
-            <div class="vj-ig-embed" id="vjIgEmbed">
-              <blockquote class="instagram-media"
-                data-instgrm-permalink="https://www.instagram.com/reel/DYCsLK1Mr_P/?utm_source=ig_embed&amp;utm_campaign=loading"
-                data-instgrm-version="14"
-                style="background:#FFF;border:0;border-radius:22px;margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-              </blockquote>
+        <div class="vj-e2-in">
+          <div class="vj-e2-cinewrap">
+            <p class="vj-cine-lead">Antes de hablar de dinero, mira lo que ese kilo lleva dentro: el año de la oveja, la esquila, el oficio.</p>
+            <span class="vj-cine-badge" id="vjBadge">🎧 Sube el volumen</span>
+            <div class="vj-media">
+              <div class="vj-ig" id="vjIg">
+                <%# El cartel es el estado por defecto. El embed se superpone
+                    invisible y solo toma el sitio cuando ha pintado de verdad. %>
+                <div class="vj-ig-card" id="vjIgCard">
+                  <img src="/assets/images/viaje-lana/interludio-textura-900.webp" alt="" loading="lazy">
+                  <span class="vj-ig-play" aria-hidden="true">▶</span>
+                  <b>El sonido detrás de nuestros ovillos</b>
+                  <small>Un día en la hilatura, paso a paso — con el sonido de protagonista.</small>
+                  <a href="https://www.instagram.com/reel/DYCsLK1Mr_P/" target="_blank" rel="noopener">▶ Ábrelo en Instagram</a>
+                  <small>Y vuelve — te esperamos aquí.</small>
+                </div>
+                <div class="vj-ig-embed" id="vjIgEmbed">
+                  <blockquote class="instagram-media"
+                    data-instgrm-permalink="https://www.instagram.com/reel/DYCsLK1Mr_P/?utm_source=ig_embed&amp;utm_campaign=loading"
+                    data-instgrm-version="14"
+                    style="background:#FFF;border:0;border-radius:22px;margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+                  </blockquote>
+                </div>
+              </div>
             </div>
           </div>
+          <aside class="vj-e2-nota">
+            <p class="vj-nota">En Mota del Cuervo se lleva más de un siglo lavando e hilando lana — y en esta hilatura el oficio sigue vivo: maquinaria centenaria y manos que saben lo que hacen.</p>
+          </aside>
         </div>
-
-        <p class="vj-nota vj-rev">En Mota del Cuervo se lleva más de un siglo lavando e hilando lana — y en esta hilatura el oficio sigue vivo: maquinaria centenaria y manos que saben lo que hacen.</p>
       </div>
+    </section>
+
+    <%# ═══════════ E3 · PROFUNDIZA (sección normal, descanso visual) ═══════════ %>
+    <section class="vj-e3" id="profundiza" aria-label="Profundiza">
       <div class="vj-est-body">
-        <%# Pieza secundaria (opcional): el documental largo de la hilatura.
-            YouTube solo se carga al desplegar, y en dominio nocookie. %>
         <details class="vj-det vj-rev" id="vjDoc">
           <summary>¿Quieres ver el proceso completo? Te lo enseña Ramón</summary>
           <div class="vj-det-in">
@@ -1597,6 +1668,98 @@ body{background:#fbf9f8}
       track('viaje_cta_' + a.dataset.cta, {viaje:'lana'});
     });
   });
+
+  /* ═══════════ ESCENAS E1-E3: GSAP + ScrollTrigger ═══════════
+     Progresivo de verdad: la página nace estática y legible; solo cuando GSAP
+     ha cargado se añade .vj-gsap y las escenas toman el mando. Si el CDN no
+     llega, no pasa nada: columna estática. reduced-motion: ni se intenta. */
+  var escenasListas = false;
+  function initScenes(){
+    if (escenasListas || !window.gsap || !window.ScrollTrigger) return;
+    escenasListas = true;
+    gsap.registerPlugin(ScrollTrigger);
+    root.classList.add('vj-gsap');
+
+    /* ── E1 · Apertura ── */
+    var e1 = document.getElementById('apertura');
+    var q1 = function(sel){ return e1.querySelector(sel); };
+    var hilo = q1('.vj-hilo-draw');
+    var hiloL = hilo.getTotalLength();
+    gsap.set(hilo, {strokeDasharray: hiloL, strokeDashoffset: hiloL});
+    gsap.set(q1('.vj-e1-foto'), {opacity: 0, scale: 1.15});
+    gsap.set([q1('[data-e1="2"]'), q1('[data-e1="3"]'), q1('.vj-e1-titulo')], {autoAlpha: 0, y: 28});
+
+    var tl1 = gsap.timeline({
+      defaults: {ease: 'none'},
+      scrollTrigger: {
+        trigger: e1, start: 'top top', end: '+=250%', pin: true, scrub: true,
+        onUpdate: function(st){
+          // la píldora del kilo nace con el título, una sola vez
+          if (st.progress > 0.72 && !e1.dataset.pill){ e1.dataset.pill = '1'; pintarKilo(1); }
+        }
+      }
+    });
+    tl1.to(q1('.vj-e1-foto'), {opacity: 1, scale: 1, duration: 38}, 0)
+       .to(q1('[data-e1="1"]'), {autoAlpha: 0, y: -26, duration: 7}, 16)
+       .to(q1('[data-e1="2"]'), {autoAlpha: 1, y: 0, duration: 7}, 22)
+       .to(q1('[data-e1="2"]'), {autoAlpha: 0, y: -26, duration: 7}, 40)
+       .to(q1('[data-e1="3"]'), {autoAlpha: 1, y: 0, duration: 7}, 46)
+       .to(q1('[data-e1="3"]'), {autoAlpha: 0, y: -26, duration: 7}, 64)
+       .to(q1('.vj-e1-titulo'), {autoAlpha: 1, y: 0, duration: 10}, 71)
+       .to(hilo, {strokeDashoffset: 0, duration: 22}, 76);
+
+    /* ── E2 · La nave ── */
+    var e2 = document.getElementById('nave');
+    var mm = gsap.matchMedia();
+    mm.add({escritorio: '(min-width: 1024px)', movil: '(max-width: 1023.98px)'}, function(ctx){
+      var desk = ctx.conditions.escritorio;
+      var q2 = function(sel){ return e2.querySelector(sel); };
+      gsap.set(q2('.vj-e2-cinewrap'), {autoAlpha: 0, y: '14vh'});
+      gsap.set(q2('.vj-e2-nota'), desk ? {autoAlpha: 0, x: 70} : {autoAlpha: 0, y: 46});
+      gsap.set(q2('.vj-e2-bg img'), {yPercent: -6, scale: 1.06});
+
+      var tl2 = gsap.timeline({
+        defaults: {ease: 'none'},
+        scrollTrigger: {trigger: e2, start: 'top top', end: '+=170%', pin: true, scrub: true}
+      });
+      tl2.to(q2('.vj-e2-bg img'), {yPercent: 6, duration: 100}, 0)          // parallax lento
+         .to(q2('.vj-e2-cinewrap'), {autoAlpha: 1, y: 0, duration: 22}, 4)  // el cine sube
+         .to(q2('#vjBadge'), {scale: 1.12, duration: 5}, 30)                // el rótulo late una vez
+         .to(q2('#vjBadge'), {scale: 1, duration: 5}, 35);
+      if (desk){
+        tl2.to(q2('.vj-e2-cinewrap'), {xPercent: -14, scale: .95, duration: 18}, 58)
+           .to(q2('.vj-e2-nota'), {autoAlpha: 1, x: 0, duration: 16}, 62);
+      } else {
+        tl2.to(q2('.vj-cine-lead'), {autoAlpha: 0, y: -20, duration: 10}, 56)
+           .to(q2('.vj-e2-cinewrap'), {y: '-9vh', scale: .97, duration: 18}, 58)
+           .to(q2('.vj-e2-nota'), {autoAlpha: 1, y: 0, duration: 16}, 64);
+      }
+      return function(){ tl2.scrollTrigger && tl2.scrollTrigger.kill(); tl2.kill(); };
+    });
+
+    ScrollTrigger.refresh();
+    // Las medidas se recalculan cuando llegan las fuentes y tras un respiro:
+    // si los starts quedan viejos, los pins actúan en el sitio equivocado.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
+    setTimeout(function(){ ScrollTrigger.refresh(); }, 1200);
+  }
+
+  if (!reduce){
+    (function(){
+      // Optimista: la escena se viste ya (sin destello estático→escena) y si
+      // GSAP no ha llegado en 3,5 s se desviste — vuelta a la columna legible.
+      root.classList.add('vj-gsap');
+      setTimeout(function(){ if (!escenasListas) root.classList.remove('vj-gsap'); }, 3500);
+      function carga(src, cb){
+        var sc = document.createElement('script');
+        sc.src = src; sc.async = true; sc.onload = cb;
+        document.head.appendChild(sc);
+      }
+      carga('https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', function(){
+        carga('https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', initScenes);
+      });
+    })();
+  }
 
   pintarProgreso();
 })();
