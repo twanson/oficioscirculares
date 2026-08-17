@@ -130,7 +130,7 @@ body{background:#fbf9f8}
 /* modo escena: todas apiladas en el mismo sitio, GSAP las turna */
 /* En modo escena, cada pin mide EXACTAMENTE un viewport: si el contenido es
    más alto (el embed real del reel), se recorta — nunca estira la escena. */
-.vj-gsap .vj-e1-pin,.vj-gsap .vj-e2-pin,.vj-gsap .vj-tr-pin,.vj-gsap .vj-e5-pin,.vj-gsap .vj-e6-pin,.vj-gsap .vj-e7-pin,.vj-gsap .vj-e9-pin{height:100svh;min-height:0;overflow:hidden}
+.vj-gsap .vj-e1-pin,.vj-gsap .vj-e2-pin,.vj-gsap .vj-tr-pin,.vj-gsap .vj-e5-pin,.vj-gsap .vj-e6-pin,.vj-gsap .vj-e7-pin,.vj-gsap .vj-e9-pin,.vj-gsap .vj-e14-pin,.vj-gsap .vj-e16-pin{height:100svh;min-height:0;overflow:hidden}
 .vj-gsap .vj-e1-textos{display:grid;place-items:center;min-height:100svh;padding:56px 26px}
 .vj-gsap .vj-e1-textos>*{grid-area:1/1;margin:0 auto}
 /* estados iniciales sin destello: el CSS deja la escena como GSAP la va a
@@ -197,7 +197,7 @@ body{background:#fbf9f8}
 .vj-tr-fondo--a{background:var(--crema)}
 .vj-tr--seva .vj-tr-fondo--b{background:linear-gradient(180deg,#0a1c33,#050f1f)}
 .vj-tr--regreso .vj-tr-fondo--b{background:linear-gradient(180deg,#3a1c0a,#241105)}
-.vj-tr-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.6;z-index:1}
+.vj-tr-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.72;z-index:1}
 
 .vj-tr-foto{position:absolute;inset:0}
 .vj-tr-foto img{width:100%;height:100%;object-fit:cover}
@@ -255,6 +255,7 @@ body{background:#fbf9f8}
 .vj-e7-peldano p{color:var(--on-var);font-size:1.1rem;line-height:1.6;margin:0}
 .vj-e7-peldano .vj-fuente{color:#8a8070;margin-top:10px;display:block}
 .vj-e7-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.55}
+@media(max-width:899.98px){.vj-e7-hilo{display:none}}
 @media(min-width:900px){
   .vj-e7-peldano[data-paso="2"]{margin-top:-56px;margin-right:4%}
   .vj-e7-peldano[data-paso="1"]{margin-left:4%}
@@ -526,6 +527,8 @@ body{background:#fbf9f8}
 .vj-sub-mano svg{position:absolute;left:-3%;bottom:-.14em;width:106%;height:.32em;overflow:visible;pointer-events:none}
 .vj-sub-mano svg path{fill:none;stroke:var(--secondary-claro);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
 
+.vj-hilo-brilla{filter:drop-shadow(0 0 10px rgba(232,167,106,.9)) brightness(1.3);transition:filter .18s ease}
+
 /* ============= GRANO GLOBAL ============= */
 .vj-grano{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:128px}
 @media(prefers-reduced-motion:reduce){.vj-grano{display:none}}
@@ -659,6 +662,132 @@ body{background:#fbf9f8}
 .vj-copiar{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:11px 15px;border:0;cursor:pointer;border-radius:100px;background:rgba(2,52,41,.08);color:var(--primary);font-family:var(--f-ui);font-weight:800;font-size:.86rem;transition:background .2s ease,color .2s ease}
 .vj-copiar:hover{background:rgba(2,52,41,.16)}
 .vj-copiar.vj-copiado{background:var(--primary);color:var(--oro)}
+
+/* ═══════════════ ESCENAS E10-E16 ═══════════════ */
+/* E10 · los dos escaparates: banda ámbar clara con papel */
+.vj-e10{position:relative;background:linear-gradient(178deg,#f7efe3,#f2e7d6);padding:clamp(48px,8vh,80px) 0}
+.vj-e10::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none}
+
+/* E11 · la misión: tarjeta grande estilo home con foto integrada */
+.vj-e11{background:linear-gradient(178deg,#f2e7d6,#0b2a20 78%);padding:clamp(48px,8vh,88px) 22px}
+.vj-e11-card{position:relative;max-width:1060px;margin:0 auto;border-radius:var(--r-card);overflow:hidden;background:linear-gradient(155deg,#06291f,#032018);box-shadow:var(--sombra-card);display:flex;flex-direction:column}
+.vj-e11-contenido{padding:30px 24px 34px;order:2}
+.vj-e11-foto{order:1;position:relative;min-height:190px}
+.vj-e11-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vj-e11-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,41,31,.14),rgba(6,41,31,.9))}
+.vj-e11 .vj-lead{color:rgba(251,246,236,.94);margin-top:14px}
+.vj-e11 .vj-lead em{color:var(--secondary-claro)}
+.vj-e11 .vj-marcas{margin-top:22px}
+.vj-e11 .vj-marca{background:var(--secondary);box-shadow:0 6px 20px rgba(147,74,28,.4)}
+.vj-e11 .vj-marca+.vj-marca{background:rgba(251,249,248,.12);border:1px solid rgba(251,249,248,.3)}
+.vj-e11 .vj-check{background:rgba(251,249,248,.96)}
+@media(min-width:1024px){
+  .vj-e11-card{flex-direction:row;align-items:stretch}
+  .vj-e11-contenido{order:1;flex:1 1 58%;padding:46px 44px}
+  .vj-e11-foto{order:2;flex:1 1 42%;min-height:0}
+  .vj-e11-foto::after{background:linear-gradient(90deg,rgba(6,41,31,.92),rgba(6,41,31,.12) 55%)}
+}
+
+/* E12 · el test como stepper */
+.vj-e12{position:relative;background:var(--surface);padding:clamp(48px,8vh,84px) 22px}
+.vj-e12-cab{text-align:center;max-width:640px;margin:0 auto 8px}
+.vj-e12-cab h3{font-family:var(--f-head);font-size:clamp(1.7rem,6vw,2.4rem);font-weight:700;color:var(--primary);line-height:1.12;margin:10px 0 18px}
+.vj-e12-prog{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px}
+.vj-e12-hilo{width:min(240px,52vw);height:18px;overflow:visible}
+.vj-e12-prog b{font-family:var(--f-head);font-size:1.15rem;color:var(--secondary);font-feature-settings:"tnum"}
+.vj-e12-stage{position:relative;max-width:600px;margin:0 auto}
+.vj-js .vj-e12 .vj-q{display:none}
+.vj-js .vj-e12 .vj-q.vj-q--activa{display:block;animation:vj-q-entra .35s cubic-bezier(.22,1,.36,1)}
+@keyframes vj-q-entra{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.vj-e12-nav{display:flex;justify-content:center;gap:12px;margin-top:16px}
+.vj-e12-flecha{width:44px;height:44px;border-radius:50%;border:1px solid rgba(2,52,41,.2);background:#fff;color:var(--primary);font-size:1.1rem;cursor:pointer;box-shadow:0 6px 16px rgba(2,52,41,.08);transition:transform .2s ease}
+.vj-e12-flecha:hover{transform:translateY(-2px)}
+.vj-e12-flecha:disabled{opacity:.35;cursor:default;transform:none}
+@media(prefers-reduced-motion:reduce){.vj-js .vj-e12 .vj-q.vj-q--activa{animation:none}}
+
+/* E13 · calculadora + historia */
+.vj-e13{background:linear-gradient(178deg,var(--surface),#f3ede2);padding:clamp(44px,7vh,72px) 22px 0}
+.vj-e13b{background:#f3ede2;padding:clamp(44px,7vh,72px) 22px}
+.vj-e13b-grid{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.vj-e13b-foto{position:relative;margin:0;border-radius:var(--r-card);overflow:hidden;min-height:220px;box-shadow:var(--sombra-card)}
+.vj-e13b-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.vj-e13b .vj-historia{margin:0;max-width:none}
+@media(min-width:900px){
+  .vj-e13b-grid{flex-direction:row;align-items:stretch}
+  .vj-e13b-foto{flex:1 1 44%;min-height:0}
+  .vj-e13b .vj-historia{flex:1 1 56%}
+}
+.vj-hist-cifra--merc b{position:relative}
+.vj-hist-cifra--merc b::after{content:"";position:absolute;left:-4%;right:104%;top:52%;height:3px;background:var(--secondary);transform:rotate(-4deg);border-radius:2px;transition:right .5s cubic-bezier(.4,0,.2,1) .3s}
+.vj-hist-cifra--merc.vj-tachado b::after{right:-4%}
+
+/* E14 · la bifurcación */
+.vj-e14{background:linear-gradient(178deg,#f3ede2 0%,#12200f 34%)}
+.vj-e14-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:64px 22px;text-align:center}
+.vj-e14-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.85}
+.vj-e14-frase{position:relative;z-index:2;max-width:16ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
+.vj-e14-frase em{font-style:italic;color:var(--secondary-claro)}
+
+/* E15 · el taller, narrativa */
+.vj-e15{position:relative;min-height:92svh;display:flex;align-items:flex-end}
+.vj-e15-bg{position:absolute;inset:0;overflow:hidden}
+.vj-e15-bg img{width:100%;height:100%;object-fit:cover}
+.vj-e15-luz{--tinte:rgba(18,32,15,.66);--tinte-suave:rgba(18,32,15,.42);--pie:rgba(10,20,8,.92);--fx:50%;--fy:40%}
+.vj-e15-in{position:relative;z-index:2;width:100%;max-width:720px;margin:0 auto;padding:96px 26px clamp(56px,10vh,96px);text-align:center}
+.vj-e15-texto{margin-top:16px;font-family:var(--f-head);font-weight:600;font-size:clamp(1.3rem,4.6vw,1.9rem);line-height:1.38;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.55)}
+
+/* E16 · dos destinos + cierre */
+.vj-e16{background:#0d1a0b}
+.vj-e16-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:76px 22px;text-align:center}
+.vj-e16-bg{position:absolute;inset:0}
+.vj-e16-bg img{width:100%;height:100%;object-fit:cover}
+.vj-e16-luz{--tinte:rgba(13,26,11,.7);--tinte-suave:rgba(13,26,11,.48);--pie:rgba(8,16,7,.94);--fx:50%;--fy:42%}
+.vj-e16-in{position:relative;z-index:2;max-width:760px}
+.vj-e16-titulo{font-family:var(--f-head);font-size:clamp(2.3rem,9vw,4rem);font-weight:700;color:#fff;line-height:1.04;letter-spacing:-.02em;text-shadow:0 3px 30px rgba(0,0,0,.5);margin:0 0 26px}
+.vj-e16-titulo em{font-style:italic;color:var(--secondary-claro)}
+.vj-e16-destinos{display:flex;align-items:center;justify-content:center;gap:6px}
+.vj-e16-destino b{display:block;font-family:var(--f-head);font-weight:600;font-size:clamp(2rem,8.5vw,3.4rem);line-height:1;font-feature-settings:"tnum";letter-spacing:-.01em}
+.vj-e16-destino span{display:block;margin-top:8px;font-family:var(--f-ui);font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase}
+.vj-e16-destino--gris b{color:#9a9a90}
+.vj-e16-destino--gris span{color:rgba(154,154,144,.85)}
+.vj-e16-destino--vivo b{color:var(--secondary-claro)}
+.vj-e16-destino--vivo span{color:rgba(224,136,90,.9)}
+.vj-e16-hilo{width:clamp(90px,22vw,190px);height:110px;overflow:visible;flex:0 0 auto}
+.vj-e16-remate{margin:30px auto 0;max-width:24ch;font-family:var(--f-head);font-style:italic;font-size:clamp(1.3rem,5vw,1.9rem);line-height:1.3;color:rgba(251,246,236,.94)}
+.vj-e16-remate em{color:var(--secondary-claro)}
+.vj-e16-resto{position:relative;background:linear-gradient(180deg,#0d1a0b,#0a1509);padding:clamp(48px,8vh,80px) 22px}
+/* conclusión doble en glass sobre el cierre oscuro */
+.vj-e16 .vj-doble{max-width:900px}
+.vj-e16 .vj-concl--consumidor,.vj-e16 .vj-concl--artesano{background:rgba(251,249,248,.94);border:1px solid rgba(255,255,255,.25);box-shadow:var(--sombra-card)}
+.vj-e16 .vj-concl--consumidor .vj-concl-k{color:var(--secondary)}
+.vj-e16 .vj-concl--consumidor p{color:var(--on-var)!important}
+.vj-e16 .vj-concl--artesano p{color:var(--on-var)!important}
+@media(min-width:760px){.vj-e16 .vj-concl--consumidor,.vj-e16 .vj-concl--artesano{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:var(--glass)}}
+.vj-e16 .vj-frases-k,.vj-e16 .vj-frases h3{color:#fff!important}
+.vj-e16 .vj-frases-k{color:var(--secondary-claro)!important}
+/* la cita del museo, a tipografía desnuda */
+.vj-cita--desnuda{max-width:640px;margin:56px auto 0;text-align:center;padding:0}
+.vj-cita--desnuda blockquote{color:#fff;font-size:clamp(1.5rem,5.6vw,2.2rem)}
+.vj-cita--desnuda .vj-firma{color:rgba(251,246,236,.7)!important}
+.vj-e16-completar{background:transparent;padding-top:44px}
+/* tarjeta rica del CTA final */
+.vj-e16-ctazona{max-width:1000px;margin:24px auto 0}
+.vj-ctacard{display:flex;flex-direction:column;border-radius:var(--r-card);overflow:hidden;background:linear-gradient(155deg,#fbf9f8,#f0e9dc);box-shadow:var(--sombra-card)}
+.vj-ctacard-img{position:relative;min-height:200px}
+.vj-ctacard-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vj-ctacard-in{padding:30px 24px 34px}
+.vj-ctacard-in h2{font-family:var(--f-head);font-size:clamp(1.8rem,6.6vw,2.6rem);font-weight:700;color:var(--primary);line-height:1.1;margin:10px 0 14px}
+.vj-ctacard-in h2 em{font-style:italic;color:var(--secondary)}
+.vj-ctacard-in p{color:var(--on-var);font-size:1.12rem;line-height:1.6}
+.vj-ctacard .vj-ctas{align-items:flex-start;margin-top:24px;max-width:none}
+.vj-ctacard .vj-cta--2{background:rgba(2,52,41,.06);border:1px solid rgba(2,52,41,.2);color:var(--primary)}
+.vj-ctacard .vj-cta--3{color:var(--on-var)}
+@media(min-width:900px){
+  .vj-ctacard{flex-direction:row}
+  .vj-ctacard-in{flex:1 1 58%;padding:46px 44px}
+  .vj-ctacard-img{flex:1 1 42%;min-height:0}
+}
+.vj-e16-ultima{margin:34px auto 0;text-align:center;font-family:var(--f-head);font-style:italic;font-size:1.1rem;color:rgba(251,246,236,.66)}
 
 /* ======================= REVEALS / MOTION =======================
    Corto (250 ms) y de recorrido mínimo: el texto tiene que estar legible en
@@ -963,33 +1092,8 @@ body{background:#fbf9f8}
 
     <div class="vj-cap" style="--de:#241105" aria-hidden="true"></div>
 
-    <!-- ============ PARADA 3 — El escaparate ============ -->
-    <section class="vj-est vj-est--ocre" id="escaparate" data-est="3" data-lugar="El escaparate" aria-labelledby="t-escaparate">
-      <div class="vj-est-body">
-        <div class="vj-w vj-rev">
-          <p class="vj-lead">Aquí está tu kilo otra vez: hilado, tejido y con etiqueta nueva. Ahora se llama <em>savoir-faire</em> y cuesta 1.500 €. Compruébalo tú mismo — abre estas webs con una misión.</p>
-        </div>
-      </div>
-      <div class="vj-est-body">
-
-        <div class="vj-marcas vj-rev">
-          <a class="vj-marca" href="https://www.loropiana.com" target="_blank" rel="noopener nofollow" data-lujo="loro_piana">Loro Piana <span>abrir ↗</span></a>
-          <a class="vj-marca" href="https://www.brunellocucinelli.com" target="_blank" rel="noopener nofollow" data-lujo="brunello_cucinelli">Brunello Cucinelli <span>abrir ↗</span></a>
-        </div>
-
-        <div class="vj-check vj-rev">
-          <div class="vj-check-t">Tu misión — marca lo que vayas comprobando</div>
-          <label><input type="checkbox" data-check="1"><span>¿Cuánto cuesta el jersey más barato que encuentres?</span></label>
-          <label><input type="checkbox" data-check="2"><span>¿Cuántas veces leen "artesanal", "savoir-faire" o "excelencia"?</span></label>
-          <label><input type="checkbox" data-check="3"><span>¿Encuentras en la ficha QUIÉN lo fabrica y DÓNDE?</span></label>
-          <label><input type="checkbox" data-check="4"><span>¿Dice algo del ganadero o del precio de la fibra en origen?</span></label>
-          <%# El cierre vive dentro de la carta: fuera se alineaba con el borde
-              de la página en vez de con la columna de contenido. %>
-          <p class="vj-cierre">¿Mucho relato y pocos datos? No es casualidad. Siguiente parada.</p>
-        </div>
-      </div>
-      <%# "Los dos escaparates": el lujo y el low cost como la misma jugada.
-          Dos tarjetas al patrón de la home — una oscura, una clara. %>
+    <%# ═══════════ E10 · LOS DOS ESCAPARATES (escena normal) ═══════════ %>
+    <section class="vj-e10 vj-est" id="dos-escaparates" data-est="3" data-lugar="El escaparate" aria-label="Los dos escaparates">
       <div class="vj-est-body">
         <div class="vj-dos" id="vjDosEscaparates">
           <div class="vj-w vj-rev">
@@ -1009,35 +1113,48 @@ body{background:#fbf9f8}
           <p class="vj-dos-remate vj-rev">Fibra anónima, transformada lejos, precio que no cuenta la verdad. Uno la esconde con marca; el otro, con descuento. ¿Recuerdas la raíz que contaba Ramón? Los sintéticos aprietan — y todo lo demás se ordena alrededor de ese precio que miente.</p>
         </div>
       </div>
+    </section>
 
-      <div class="vj-est-body">
-        <ol class="vj-esc vj-rev">
-          <li class="vj-esc-item" style="--i:3" data-paso="3">
-            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-3">
-              <span class="vj-esc-n" aria-hidden="true">3</span>
-              <span class="vj-esc-t">El ovillo</span>
-              <span class="vj-esc-c">10-14 €<small>/100 g</small></span>
-              <span class="vj-esc-mas" aria-hidden="true">▾</span>
-            </button>
-            <div class="vj-esc-p" id="esc-3" hidden>
-              <p>Un ovillo de 100 g de lana española de calidad ronda los 10-14 € en tienda. Del vellón al ovillo, el valor se ha multiplicado por cientos.</p>
-            </div>
-          </li>
-          <li class="vj-esc-item" style="--i:4" data-paso="4">
-            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-4">
-              <span class="vj-esc-n" aria-hidden="true">4</span>
-              <span class="vj-esc-t">El jersey de lujo</span>
-              <span class="vj-esc-c">1.500 €</span>
-              <span class="vj-esc-mas" aria-hidden="true">▾</span>
-            </button>
-            <div class="vj-esc-p" id="esc-4" hidden>
-              <p>Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</p>
-            </div>
-          </li>
-        </ol>
-        <div class="vj-w vj-rev">
-          <h3>Las cinco cosas que el escaparate no te cuenta</h3>
+    <%# ═══════════ E11 · LA MISIÓN DETECTIVE (interactiva, sin scrub) ═══════════
+        Tarjeta grande al patrón de la home: contenido a la izquierda, la foto
+        del punto integrada a la derecha. %>
+    <section class="vj-e11" id="mision" aria-label="La misión detective">
+      <div class="vj-e11-card">
+        <div class="vj-e11-contenido">
+          <span class="vj-ey vj-ey--luz">Tu misión</span>
+          <p class="vj-lead">Aquí está tu kilo otra vez: hilado, tejido y con etiqueta nueva. Ahora se llama <em>savoir-faire</em> y cuesta 1.500 €. Compruébalo tú mismo — abre estas webs con una misión.</p>
+          <div class="vj-marcas vj-rev">
+          <a class="vj-marca" href="https://www.loropiana.com" target="_blank" rel="noopener nofollow" data-lujo="loro_piana">Loro Piana <span>abrir ↗</span></a>
+          <a class="vj-marca" href="https://www.brunellocucinelli.com" target="_blank" rel="noopener nofollow" data-lujo="brunello_cucinelli">Brunello Cucinelli <span>abrir ↗</span></a>
         </div>
+          <div class="vj-check vj-rev">
+          <div class="vj-check-t">Tu misión — marca lo que vayas comprobando</div>
+          <label><input type="checkbox" data-check="1"><span>¿Cuánto cuesta el jersey más barato que encuentres?</span></label>
+          <label><input type="checkbox" data-check="2"><span>¿Cuántas veces leen "artesanal", "savoir-faire" o "excelencia"?</span></label>
+          <label><input type="checkbox" data-check="3"><span>¿Encuentras en la ficha QUIÉN lo fabrica y DÓNDE?</span></label>
+          <label><input type="checkbox" data-check="4"><span>¿Dice algo del ganadero o del precio de la fibra en origen?</span></label>
+          <%# El cierre vive dentro de la carta: fuera se alineaba con el borde
+              de la página en vez de con la columna de contenido. %>
+          <p class="vj-cierre">¿Mucho relato y pocos datos? No es casualidad. Siguiente parada.</p>
+        </div>
+        </div>
+        <div class="vj-e11-foto" aria-hidden="true">
+          <img src="/assets/images/viaje-lana/escaparate-punto-900.webp" srcset="/assets/images/viaje-lana/escaparate-punto-900.webp 900w, /assets/images/viaje-lana/escaparate-punto-1600.webp 1600w" sizes="(min-width:1024px) 40vw, 100vw" alt="" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <%# ═══════════ E12 · EL TEST COMO STEPPER (una pregunta a la vista) ═══════════ %>
+    <section class="vj-e12" id="test" aria-label="El test">
+      <div class="vj-e12-cab">
+        <span class="vj-ey">El test</span>
+        <h3>Las cinco cosas que el escaparate no te cuenta</h3>
+        <div class="vj-e12-prog" aria-hidden="true">
+          <svg class="vj-e12-hilo" id="vjTestHilo"></svg>
+          <b id="vjTestProg">1/5</b>
+        </div>
+      </div>
+      <div class="vj-e12-stage" id="vjStage">
         <div class="vj-q vj-rev" data-q="1" data-ok="c">
           <div class="vj-q-n">Pregunta 1 de 5</div>
           <p class="vj-q-t">¿Cuánto cobra un ganadero español por TODA la lana de una oveja en un año?</p>
@@ -1112,51 +1229,21 @@ body{background:#fbf9f8}
             <span class="vj-fuente">Fuente: McKinsey / Ellen MacArthur Foundation</span>
           </div>
         </div>
-
-        <div class="vj-uso vj-rev">
+      </div>
+      <div class="vj-e12-nav" id="vjTestNav" hidden>
+        <button type="button" class="vj-e12-flecha" id="vjTestPrev" aria-label="Pregunta anterior">←</button>
+        <button type="button" class="vj-e12-flecha" id="vjTestNext" aria-label="Pregunta siguiente">→</button>
+      </div>
+      <div class="vj-uso vj-rev">
           <div class="vj-uso-k">El remate</div>
           <div class="vj-uso-big">El precio de etiqueta no es el coste real.</div>
           <p>Mira el <strong>coste por uso</strong>: unos calcetines de lana bien hechos duran décadas y se reparan. Los otros duran una temporada — y los compras otra vez, y otra.</p>
-        </div>
       </div>
     </section>
 
-    <!-- ============== INTERLUDIO 3 → taller ============== -->
-    <section class="vj-inter vj-inter--ocre">
-      <img src="/assets/images/viaje-lana/taller-tejiendo-900.webp" srcset="/assets/images/viaje-lana/taller-tejiendo-900.webp 900w, /assets/images/viaje-lana/taller-tejiendo-1600.webp 1600w" sizes="100vw" alt="Unas manos tejiendo con lana de tonos naturales"  loading="lazy" decoding="async">
-      <div class="vj-inter-in">
-        <p class="vj-inter-frase vj-rev">Todo esto le pasó al kilo que se fue. <em>¿Y si se hubiera quedado?</em></p>
-        <button type="button" class="vj-next vj-inter-btn" data-next="3" data-goto="#taller">Seguir al kilo →</button>
-      </div>
-    </section>
-
-    <!-- ================= RUTA → PARADA 4: El taller ================= -->
-    <div class="vj-camino" aria-hidden="true">
-      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
-        <path class="vj-linea-base" d="M3 0 V100"/>
-        <path class="vj-linea-draw" d="M3 0 V100"/>
-      </svg>
-      <div class="vj-hito" data-hito="4" title="El taller"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M6.2 6.5c2.8 2.3 7.4 7.3 9.6 11.2"/><path d="M4.4 11.2c2.6 1.4 8.2 5.7 9.2 8.4"/><path d="M8 4.4c2.1 1.2 6.7 5 8.6 7.4"/></svg></div>
-    </div>
-
-    <!-- ============ PARADA 4 — El taller ============ -->
-    <section class="vj-est vj-est--ocre" id="taller" data-est="4" data-lugar="El taller" aria-labelledby="t-taller">
-      <div class="vj-est-hero vj-est-hero--dcha">
-        <img src="/assets/images/viaje-lana/taller-ovillo-900.webp" srcset="/assets/images/viaje-lana/taller-ovillo-900.webp 900w, /assets/images/viaje-lana/taller-ovillo-1600.webp 1600w" sizes="100vw" alt="Unas manos sostienen un ovillo de lana cruda"  loading="lazy" decoding="async">
-        <div class="vj-est-hero-in">
-          <div class="vj-herocard">
-            <span class="vj-ey">Parada 4 de 4</span>
-            <h2 id="t-taller">El <em>taller</em></h2>
-            <p class="vj-heroline">El kilo que se quedó</p>
-            <span class="vj-herochip"><span aria-hidden="true">🧶</span> Tu kilo aquí: <b>149 €</b></span>
-          </div>
-        </div>
-      </div>
+    <%# ═══════════ E13 · CALCULADORA + HISTORIA (dos escenas enlazadas) ═══════════ %>
+    <section class="vj-e13" id="coste-por-uso" aria-label="El coste por uso">
       <div class="vj-est-body">
-        <div class="vj-w vj-rev">
-          <p class="vj-lead">Hay kilos que no embarcan. Se lavan en Mota del Cuervo, se hilan con máquinas centenarias (los viste en la primera parada) y acaban en un ovillo de 12 € o en unos calcetines de 149 € que duran décadas. Mismo kilo, otro destino: aquí el valor se queda en cada mano que lo toca.</p>
-        </div>
-        <!-- Calculadora de coste por uso: se juega con ella, no se lee -->
         <div class="vj-calc vj-rev" id="vjCalc">
           <h3>¿Y si lo miras por uso?</h3>
           <p class="vj-calc-sub">Mueve los dos controles y mira qué pasa con el precio de verdad.</p>
@@ -1177,18 +1264,67 @@ body{background:#fbf9f8}
           <p class="vj-calc-comp">Una prenda de 20 € que te dura un año sale a <b>0,40 €/uso</b>. Casi el doble.</p>
           <p class="vj-calc-pie">La cara sale más barata. Bienvenido al coste por uso.</p>
         </div>
-        <!-- Historia humana: el precio justo, contado con un caso real -->
+      </div>
+    </section>
+    <section class="vj-e13b" id="historia" aria-label="Una historia de verdad">
+      <div class="vj-e13b-grid">
+        <figure class="vj-e13b-foto" aria-hidden="true">
+          <img src="/assets/images/viaje-lana/taller-tejiendo-900.webp" srcset="/assets/images/viaje-lana/taller-tejiendo-900.webp 900w, /assets/images/viaje-lana/taller-tejiendo-1600.webp 1600w" sizes="(min-width:900px) 44vw, 100vw" alt="" loading="lazy" decoding="async">
+        </figure>
         <div class="vj-historia vj-rev">
           <div class="vj-hist-k">Una historia de verdad</div>
           <p>Unos calcetines tejidos a mano con buena lana se venden en el mercadillo por 20-30 €, "porque es lo que la gente paga".</p>
           <div class="vj-hist-cifras" aria-hidden="true">
-            <div class="vj-hist-cifra vj-hist-cifra--merc"><b>25 €</b><span>en el mercadillo</span></div>
+            <div class="vj-hist-cifra vj-hist-cifra--merc"><b id="vjHist25">25 €</b><span>en el mercadillo</span></div>
             <div class="vj-hist-flecha">→</div>
-            <div class="vj-hist-cifra vj-hist-cifra--real"><b>149 €</b><span>el precio real</span></div>
+            <div class="vj-hist-cifra vj-hist-cifra--real"><b id="vjHist149">149 €</b><span>el precio real</span></div>
           </div>
           <p>Calculados de verdad — material, horas, gastos, impuestos y un margen digno — salen por <strong>149 €</strong>. La diferencia no es avaricia: es todo lo que el precio de mercadillo no cuenta.</p>
           <span class="vj-fuente" style="color:#6b6354">Caso real: Espai Micra</span>
         </div>
+      </div>
+    </section>
+
+    <%# ═══════════ E14 · LA BIFURCACIÓN (pin, scrub) ═══════════
+        El hilo se parte: el ramal gris se va y muere deshilachado; el vivo
+        se queda. Al pasarla se completa el tramo 3. %>
+    <section class="vj-e14" id="bifurcacion" aria-label="La bifurcación">
+      <div class="vj-e14-pin">
+        <svg class="vj-e14-hilo" aria-hidden="true"></svg>
+        <p class="vj-e14-frase">¿Y si tu kilo <em>nunca se hubiera ido</em>?</p>
+      </div>
+    </section>
+
+    <%# ═══════════ E15 · EL TALLER (escena narrativa) ═══════════ %>
+    <section class="vj-e15 vj-est" id="taller" data-est="4" data-lugar="El taller" aria-label="Parada 4 · El taller">
+      <div class="vj-e15-bg" aria-hidden="true">
+        <img src="/assets/images/viaje-lana/taller-ovillo-900.webp" srcset="/assets/images/viaje-lana/taller-ovillo-900.webp 900w, /assets/images/viaje-lana/taller-ovillo-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+        <div class="vj-e15-luz vj-luz vj-luz--pie"></div>
+      </div>
+      <div class="vj-e15-in">
+        <span class="vj-ey vj-ey--luz">Parada 4 de 4 · El taller</span>
+        <p class="vj-e15-texto">Hay kilos que no embarcan. Se lavan en Mota del Cuervo, se hilan con máquinas centenarias (los viste en la primera parada) y acaban en un ovillo de 12 € o en unos calcetines de 149 € que duran décadas. Mismo kilo, otro destino: aquí el valor se queda en cada mano que lo toca.</p>
+      </div>
+    </section>
+
+    <%# ═══════════ E16 · EL MISMO KILO, DOS DESTINOS + CIERRE ═══════════ %>
+    <section class="vj-e16 vj-est" id="final" data-est="4" data-lugar="El taller" aria-label="El mismo kilo, dos destinos">
+      <div class="vj-e16-pin">
+        <div class="vj-e16-bg" aria-hidden="true">
+          <img src="/assets/images/viaje-lana/cierre-rebano-900.webp" srcset="/assets/images/viaje-lana/cierre-rebano-900.webp 900w, /assets/images/viaje-lana/cierre-rebano-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+          <div class="vj-e16-luz vj-luz vj-luz--pie"></div>
+        </div>
+        <div class="vj-e16-in">
+          <h2 class="vj-e16-titulo">El mismo kilo. <em>Dos destinos.</em></h2>
+          <div class="vj-e16-destinos">
+            <div class="vj-e16-destino vj-e16-destino--gris"><b>0,05 <span class="vj-eur">€</span></b><span>si se va</span></div>
+            <svg class="vj-e16-hilo" aria-hidden="true"></svg>
+            <div class="vj-e16-destino vj-e16-destino--vivo"><b>149 <span class="vj-eur">€</span></b><span>si se queda</span></div>
+          </div>
+          <p class="vj-e16-remate">La lana no vale poco. Vale poco <em>donde está el ganadero</em>.</p>
+        </div>
+      </div>
+      <div class="vj-e16-resto">
         <div class="vj-doble">
           <div class="vj-concl vj-concl--consumidor vj-rev">
             <span class="vj-concl-k">Si compras</span>
@@ -1199,7 +1335,6 @@ body{background:#fbf9f8}
             <p>Acabas de ver lo que cobra el lujo por un relato que el tuyo cuenta de verdad. <strong>Tu precio no es caro. Es justo.</strong> Y este argumento es tuyo: úsalo con tus clientes.</p>
           </div>
         </div>
-        <!-- Munición para el artesano: se copia y se usa tal cual -->
         <div class="vj-frases vj-rev">
           <div class="vj-frases-k">Si eres artesano</div>
           <h3>Tres frases que puedes usar tal cual</h3>
@@ -1216,28 +1351,33 @@ body{background:#fbf9f8}
             <button type="button" class="vj-copiar" data-frase="3">Copiar</button>
           </div>
         </div>
-        <div class="vj-cita vj-rev">
+        <div class="vj-cita vj-cita--desnuda vj-rev">
           <blockquote>"Nos dicen que esto tendría que ser un museo. Pero un museo es para lo que ya ha desaparecido. Lo nuestro sigue oliendo, sigue manchando las manos, sigue funcionando cada mañana."</blockquote>
           <p class="vj-firma">— Wooldreamers · <a href="https://www.instagram.com/reel/DZqGx8Ms4xe/" target="_blank" rel="noopener">ver el reel</a></p>
         </div>
-        <p class="vj-casc-remate vj-rev">La lana no vale poco. Vale poco <em>donde está el ganadero</em>.</p>
-      </div>
-      <div class="vj-next-wrap">
-        <button type="button" class="vj-next vj-next--oro" data-next="4" data-goto="#final">Completar el viaje 🧭</button>
-      </div>
-    </section>
-
-    <section class="vj-final" id="final">
-      <img src="/assets/images/viaje-lana/cierre-rebano-900.webp" srcset="/assets/images/viaje-lana/cierre-rebano-900.webp 900w, /assets/images/viaje-lana/cierre-rebano-1600.webp 1600w" sizes="100vw" alt="" class="vj-final-foto" aria-hidden="true" loading="lazy" decoding="async">
-      <img class="vj-sello" src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
-      <h2>¿Quieres que la lana española <em>deje de tirarse?</em></h2>
-      <p>¿Quieres que más kilos se queden? Eso es exactamente Conecta Lana: el punto de encuentro de ganaderos, transformadores y artesanos de la lana.</p>
-      <div class="vj-ctas">
+        <div class="vj-next-wrap vj-e16-completar">
+          <button type="button" class="vj-next vj-next--oro" data-next="4" data-goto="#cierre-cta">Completar el viaje 🧭</button>
+        </div>
+        <div class="vj-e16-ctazona" id="cierre-cta">
+          <div class="vj-ctacard vj-rev">
+            <div class="vj-ctacard-img" aria-hidden="true">
+              <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="(min-width:900px) 42vw, 100vw" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="vj-ctacard-in">
+              <span class="vj-ey">Conecta Lana</span>
+              <h2>¿Quieres que la lana española <em>deje de tirarse?</em></h2>
+              <p>¿Quieres que más kilos se queden? Eso es exactamente Conecta Lana: el punto de encuentro de ganaderos, transformadores y artesanos de la lana.</p>
+              <div class="vj-ctas">
         <a class="vj-cta vj-cta--1" href="/conecta-lana" data-cta="conecta_lana">Conoce Conecta Lana →</a>
         <a class="vj-cta vj-cta--2" href="/conecta-lana/directorio" data-cta="directorio">Ver el directorio de la lana →</a>
         <% if (POST_URL) { %>
         <a class="vj-cta vj-cta--3" href="<%= POST_URL %>" target="_blank" rel="noopener" data-cta="volver_post"><span>Vuelve al post y deja tu conclusión en comentarios</span></a>
         <% } %>
+      </div>
+            </div>
+          </div>
+          <p class="vj-e16-ultima">La próxima vez que tengas un jersey entre las manos, pregúntale por su kilo.</p>
+        </div>
       </div>
     </section>
 
@@ -1410,7 +1550,10 @@ body{background:#fbf9f8}
   }
 
   document.querySelectorAll('.vj-next').forEach(function(b){
-    b.addEventListener('click', function(){ completar(+b.dataset.next, b.dataset.goto); });
+    b.addEventListener('click', function(){
+      if (+b.dataset.next === 4 && window.__vjOnda) window.__vjOnda();
+      completar(+b.dataset.next, b.dataset.goto);
+    });
   });
 
   /* ---------- La barra dice el LUGAR, y el marcador dice lo que vale ----------
@@ -1423,7 +1566,7 @@ body{background:#fbf9f8}
     1: {v:'0,05 €', n:''},
     2: {v:'0,05 €', n:'sale valiendo lo mismo'},
     3: {v:'1.500 €', n:'', salto:true},
-    4: {v:'0,05 € si se va · 149 € si se queda', n:'el mismo kilo, dos destinos'}
+    4: {v:'149 €', n:'el kilo que se quedó'}
   };
   var saltoHecho = false;
 
@@ -1643,7 +1786,8 @@ body{background:#fbf9f8}
     var r = q.querySelector('.vj-r');
     r.querySelector('.vj-r-badge').textContent = acertado ? ELOGIO : SORPRESA;
     r.hidden = false;
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ r.classList.add('vj-r-on'); }); });
+    // setTimeout y no rAF: con la pestaña en segundo plano el rAF se congela
+    setTimeout(function(){ r.classList.add('vj-r-on'); }, 30);
     if (nueva){
       state.test[q.dataset.q] = elegida;
       save(state);
@@ -1653,7 +1797,7 @@ body{background:#fbf9f8}
 
   document.querySelectorAll('.vj-q').forEach(function(q){
     q.querySelectorAll('.vj-opt').forEach(function(o){
-      o.addEventListener('click', function(){ resolver(q, o.dataset.o, true); });
+      o.addEventListener('click', function(){ resolver(q, o.dataset.o, true); if (window.__vjAlResponder) window.__vjAlResponder(q); });
     });
     if (state.test[q.dataset.q]) resolver(q, state.test[q.dataset.q], false);
   });
@@ -1772,6 +1916,78 @@ body{background:#fbf9f8}
     });
   });
 
+  /* ---------- E12 · el test como stepper ---------- */
+  var stage = document.getElementById('vjStage');
+  var pasoActivo = 0;
+  if (stage){
+    var preguntas = [].slice.call(stage.querySelectorAll('.vj-q'));
+    var progTxt = document.getElementById('vjTestProg');
+    var navTest = document.getElementById('vjTestNav');
+    var btnPrev = document.getElementById('vjTestPrev');
+    var btnSig  = document.getElementById('vjTestNext');
+    if (navTest) navTest.hidden = false;
+    window.__vjIrPregunta = function(i){
+      pasoActivo = Math.max(0, Math.min(preguntas.length - 1, i));
+      preguntas.forEach(function(qq, k){ qq.classList.toggle('vj-q--activa', k === pasoActivo); });
+      if (progTxt) progTxt.textContent = (pasoActivo + 1) + '/5';
+      if (btnPrev) btnPrev.disabled = pasoActivo === 0;
+      if (btnSig)  btnSig.disabled  = pasoActivo === preguntas.length - 1;
+      pintarHiloTest();
+    };
+    function contestadas(){
+      return preguntas.filter(function(qq){ return state.test[qq.dataset.q]; }).length;
+    }
+    // la barra de progreso es un hilo que se va dibujando (1/5 → 5/5)
+    var hiloTest = null;
+    function pintarHiloTest(){
+      if (!hiloTest || !hiloTest.hebras) return;
+      var frac = contestadas() / preguntas.length;
+      hiloTest.hebras.forEach(function(h){
+        var lh = h.getTotalLength();
+        h.style.strokeDasharray = lh;
+        h.style.strokeDashoffset = lh * (1 - frac);
+        h.style.transition = 'stroke-dashoffset .5s cubic-bezier(.4,0,.2,1)';
+      });
+      hiloTest.fibras.forEach(function(f){
+        f.setAttribute('opacity', parseFloat(f.dataset.en) < frac ? .4 : 0);
+      });
+    }
+    window.__vjMontarHiloTest = function(montar){
+      hiloTest = montar(document.getElementById('vjTestHilo'), function(W, H){
+        return 'M2,' + (H * .6) + ' C ' + (W * .3) + ',' + (H * .2) + ' ' + (W * .7) + ',' + (H * .9) + ' ' + (W - 2) + ',' + (H * .4);
+      }, {fibras: .4, vueltas: 14});
+      pintarHiloTest();
+    };
+    window.__vjAlResponder = function(qq){
+      pintarHiloTest();
+      var idx = preguntas.indexOf(qq);
+      if (idx === pasoActivo && idx < preguntas.length - 1){
+        setTimeout(function(){ if (pasoActivo === idx) window.__vjIrPregunta(idx + 1); }, 2100);
+      }
+    };
+    if (btnPrev) btnPrev.addEventListener('click', function(){ window.__vjIrPregunta(pasoActivo - 1); });
+    if (btnSig)  btnSig.addEventListener('click', function(){ window.__vjIrPregunta(pasoActivo + 1); });
+    // arranca en la primera sin contestar (persistencia del estado)
+    var primera = -1;
+    preguntas.some(function(qq, k){ if (!state.test[qq.dataset.q]){ primera = k; return true; } return false; });
+    window.__vjIrPregunta(primera < 0 ? preguntas.length - 1 : primera);
+  }
+
+  /* ---------- E13b · la historia: 25 € tachado y 149 € contando ---------- */
+  var hist149 = document.getElementById('vjHist149');
+  var hist25c = document.querySelector('.vj-hist-cifra--merc');
+  if (hist149 && hist25c){
+    cuandoSeVea(document.getElementById('historia'), function(){
+      hist25c.classList.add('vj-tachado');
+      if (window.gsap && !reduce){
+        var obj = {v: 25};
+        gsap.to(obj, {v: 149, duration: 1.1, ease: 'power2.out', delay: .25,
+          onUpdate: function(){ hist149.textContent = Math.round(obj.v) + ' €'; },
+          onComplete: function(){ hist149.textContent = '149 €'; }});
+      }
+    });
+  }
+
   /* ---------- CTAs finales ---------- */
   document.querySelectorAll('[data-cta]').forEach(function(a){
     a.addEventListener('click', function(){
@@ -1795,7 +2011,7 @@ body{background:#fbf9f8}
     var q1 = function(sel){ return e1.querySelector(sel); };
     var hilo1 = montarHilo(q1('.vj-e1-hilo'), function(W, H){
       return 'M' + (.92*W) + ',' + (.04*H) + ' C ' + (.55*W) + ',' + (.30*H) + ' ' + (.22*W) + ',' + (.52*H) + ' ' + (.08*W) + ',' + (.90*H);
-    }, {nudoFin: true, fibras: .6});
+    }, {nudoFin: true, fibras: .6, color: '#c96f2e', colorClaro: '#e8a76a'});
     gsap.set(q1('.vj-e1-foto'), {opacity: .36, scale: 1.12});
     // Drift lento e independiente del scroll: la escena respira aunque el
     // lector aún no haya movido el dedo. Sobre el wrapper, no sobre la foto,
@@ -1967,13 +2183,17 @@ body{background:#fbf9f8}
        ya dibujado, remates al llegar al final. */
     function dibujarHiloEnTimeline(tl, hilo, desde, dur){
       if (!hilo) return;
-      hilo.hebras.forEach(function(h, i){
+      // Las dos hebras avanzan JUNTAS (sin stagger): desincronizadas, la
+      // punta se leía como hilo roto a trozos.
+      hilo.hebras.forEach(function(h){
         var lh = h.getTotalLength();
         gsap.set(h, {strokeDasharray: lh, strokeDashoffset: lh});
-        tl.to(h, {strokeDashoffset: 0, duration: dur, ease: 'none'}, desde + i * dur * 0.06);
+        tl.to(h, {strokeDashoffset: 0, duration: dur, ease: 'none'}, desde);
       });
+      // Las fibrillas asoman DESPUÉS de que el trazo pase por su tramo,
+      // nunca por delante de la punta.
       hilo.fibras.forEach(function(f){
-        tl.to(f, {opacity: .4, duration: 3, ease: 'none'}, desde + parseFloat(f.dataset.en) * dur);
+        tl.to(f, {opacity: .4, duration: 3, ease: 'none'}, desde + parseFloat(f.dataset.en) * dur + 2);
       });
       hilo.remates.forEach(function(rm, i){
         tl.to(rm, {opacity: .9, duration: 4, ease: 'power2.out'}, desde + dur - 2 + i * .5);
@@ -1988,7 +2208,7 @@ body{background:#fbf9f8}
       var hiloT = montarHilo(q('.vj-tr-hilo'), id === 'se-va'
         ? function(W, H){ return 'M' + (.50*W) + ',0 C ' + (.58*W) + ',' + (.32*H) + ' ' + (.78*W) + ',' + (.58*H) + ' ' + (.96*W) + ',' + (.98*H); }
         : function(W, H){ return 'M' + (.50*W) + ',0 C ' + (.42*W) + ',' + (.32*H) + ' ' + (.22*W) + ',' + (.58*H) + ' ' + (.04*W) + ',' + (.98*H); },
-        {fibras: .5});
+        {fibras: .5, color: '#c96f2e', colorClaro: '#e8a76a'});
       // La escena entra ya teñida: sin este arranque, el tramo pre-pin
       // mostraba crema plano — el único frame vacío del barrido.
       gsap.set(q('.vj-tr-fondo--b'), {opacity: .22});
@@ -2152,6 +2372,76 @@ body{background:#fbf9f8}
         im.src = '/assets/images/viaje-lana/' + nombre + sufijo + '.webp';
       });
     }, 900);
+
+    /* ── hilo-progreso del test (lo pinta el stepper con el estado) ── */
+    if (window.__vjMontarHiloTest) window.__vjMontarHiloTest(montarHilo);
+
+    /* ── E14 · la bifurcación: el hilo se parte en dos destinos ── */
+    var e14 = document.getElementById('bifurcacion');
+    if (e14){
+      var svg14 = e14.querySelector('.vj-e14-hilo');
+      var r14 = svg14.getBoundingClientRect();
+      var W14 = Math.max(300, Math.round(r14.width)), H14 = Math.max(400, Math.round(r14.height));
+      svg14.setAttribute('viewBox', '0 0 ' + W14 + ' ' + H14);
+      svg14.setAttribute('preserveAspectRatio', 'none');
+      var tronco = hiloDeLana(svg14, 'M' + (.5*W14) + ',0 C ' + (.52*W14) + ',' + (.16*H14) + ' ' + (.48*W14) + ',' + (.3*H14) + ' ' + (.5*W14) + ',' + (.4*H14), {fibras: .4, color: '#c96f2e', colorClaro: '#e8a76a'});
+      var gris = hiloDeLana(svg14, 'M' + (.5*W14) + ',' + (.4*H14) + ' C ' + (.62*W14) + ',' + (.56*H14) + ' ' + (.76*W14) + ',' + (.68*H14) + ' ' + (.86*W14) + ',' + (.84*H14), {deshilachado: true, color: '#8a8a80', colorClaro: '#b0b0a6', fibras: .3});
+      var vivo = hiloDeLana(svg14, 'M' + (.5*W14) + ',' + (.4*H14) + ' C ' + (.38*W14) + ',' + (.56*H14) + ' ' + (.26*W14) + ',' + (.72*H14) + ' ' + (.18*W14) + ',' + (.9*H14), {nudoFin: true, fibras: .5, color: '#c96f2e', colorClaro: '#e8a76a'});
+      var hecho14 = false;
+      var tl14 = gsap.timeline({defaults: {ease: 'none'},
+        scrollTrigger: {trigger: e14, start: 'top top', end: '+=110%', pin: true, scrub: true,
+          onUpdate: function(st){
+            if (st.progress > 0.9 && !hecho14){ hecho14 = true; completar(3); }
+          }}});
+      gsap.set(e14.querySelector('.vj-e14-frase'), {autoAlpha: 0, y: 14});
+      dibujarHiloEnTimeline(tl14, tronco, 2, 26);
+      dibujarHiloEnTimeline(tl14, gris, 30, 34);
+      dibujarHiloEnTimeline(tl14, vivo, 30, 34);
+      // el ramal gris pierde fuelle: se va apagando
+      gris.hebras.forEach(function(h){ tl14.to(h, {opacity: .3, duration: 18}, 70); });
+      tl14.to(e14.querySelector('.vj-e14-frase'), {autoAlpha: 1, y: 0, duration: 12, ease: 'power2.out'}, 46);
+    }
+
+    /* ── E16 · el mismo kilo, dos destinos ── */
+    var e16 = document.getElementById('final');
+    if (e16){
+      var q16 = function(sel){ return e16.querySelector(sel); };
+      var svg16 = q16('.vj-e16-hilo');
+      var r16 = svg16.getBoundingClientRect();
+      var W16 = Math.max(90, Math.round(r16.width)), H16 = Math.max(90, Math.round(r16.height));
+      svg16.setAttribute('viewBox', '0 0 ' + W16 + ' ' + H16);
+      svg16.setAttribute('preserveAspectRatio', 'none');
+      var biTronco = hiloDeLana(svg16, 'M' + (.5*W16) + ',2 C ' + (.5*W16) + ',' + (.2*H16) + ' ' + (.5*W16) + ',' + (.3*H16) + ' ' + (.5*W16) + ',' + (.42*H16), {fibras: 0, vueltas: 8, color: '#c96f2e', colorClaro: '#e8a76a'});
+      var biGris = hiloDeLana(svg16, 'M' + (.5*W16) + ',' + (.42*H16) + ' C ' + (.32*W16) + ',' + (.6*H16) + ' ' + (.16*W16) + ',' + (.72*H16) + ' ' + (.06*W16) + ',' + (.86*H16), {deshilachado: true, color: '#8a8a80', colorClaro: '#b0b0a6', fibras: 0, vueltas: 8, grosor: 2.2});
+      var biVivo = hiloDeLana(svg16, 'M' + (.5*W16) + ',' + (.42*H16) + ' C ' + (.68*W16) + ',' + (.6*H16) + ' ' + (.84*W16) + ',' + (.72*H16) + ' ' + (.94*W16) + ',' + (.86*H16), {nudoFin: true, fibras: 0, vueltas: 8, color: '#c96f2e', colorClaro: '#e8a76a'});
+      var tl16 = gsap.timeline({defaults: {ease: 'none'},
+        scrollTrigger: {trigger: e16, start: 'top top', end: '+=150%', pin: '.vj-e16-pin', scrub: true}});
+      gsap.set(q16('.vj-e16-titulo'), {autoAlpha: 0, y: 14});
+      gsap.set(q16('.vj-e16-destinos'), {autoAlpha: 0, y: 14});
+      gsap.set(q16('.vj-e16-remate'), {autoAlpha: 0, y: 12});
+      tl16.to(q16('.vj-e16-bg img'), {scale: 1.06, duration: 100}, 0)
+          .to(q16('.vj-e16-titulo'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 4)
+          .to(q16('.vj-e16-destinos'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 16);
+      dibujarHiloEnTimeline(tl16, biTronco, 22, 10);
+      dibujarHiloEnTimeline(tl16, biGris, 34, 20);
+      dibujarHiloEnTimeline(tl16, biVivo, 34, 20);
+      tl16.to(q16('.vj-e16-remate'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 62);
+      gsap.set(q16('.vj-e16-bg img'), {scale: 1.0});
+    }
+
+    /* ── la onda final: el hilo entero se ilumina de abajo arriba ──
+       Temporizadores puros, nada de rAF: debe funcionar hasta en pestaña
+       de fondo. Es el fuego artificial del cierre. */
+    window.__vjOnda = function(){
+      var svgs = [].slice.call(document.querySelectorAll('.vj-e16-hilo, .vj-e14-hilo, .vj-e12-hilo, .vj-e7-hilo, .vj-tr-hilo, .vj-e1-hilo'));
+      svgs.forEach(function(sv, i){
+        setTimeout(function(){
+          sv.classList.add('vj-hilo-brilla');
+          setTimeout(function(){ sv.classList.remove('vj-hilo-brilla'); }, 480);
+        }, i * 130);
+      });
+      latido();
+    };
 
     ScrollTrigger.sort();
     ScrollTrigger.refresh();
