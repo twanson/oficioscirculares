@@ -188,7 +188,10 @@ body{background:#fbf9f8}
 .vj-det-in{padding:0 16px 18px}
 .vj-yt{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d0d0d}
 .vj-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.vj-det-in p{font-size:.94rem!important;color:var(--on-var);margin-top:14px!important;line-height:1.55}
+.vj-det-in p{font-size:1.05rem!important;color:var(--on-var);margin-top:16px!important;line-height:1.6}
+/* Especificidad de 2 clases para ganar a `.vj a{text-decoration:none}` */
+.vj .vj-det-link{display:inline-block;margin-top:14px;font-family:var(--f-ui);font-weight:700;font-size:.98rem;line-height:1.45;color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
+.vj .vj-det-link:hover{color:var(--marron-2)}
 
 /* ---------- Estación 2: paseo detective ---------- */
 .vj-marcas{display:flex;flex-direction:column;gap:12px;margin:24px auto 0;max-width:540px}
@@ -494,12 +497,14 @@ body{background:#fbf9f8}
       </div>
 
       <div class="vj-est-body">
-        <!-- Pieza secundaria (opcional): Monesma, la memoria del oficio -->
-        <details class="vj-det vj-rev" id="vjMonesma">
-          <summary>¿Quieres ver cómo se hacía todo a mano?</summary>
+        <%# Pieza secundaria (opcional): el documental largo de la hilatura.
+            YouTube solo se carga al desplegar, y en dominio nocookie. %>
+        <details class="vj-det vj-rev" id="vjDoc">
+          <summary>¿Quieres ver el proceso completo? Te lo enseña Ramón</summary>
           <div class="vj-det-in">
-            <div class="vj-yt" data-yt="NF50q4RXCGk" data-start="0"></div>
-            <p>Grabado por Eugenio Monesma. Calidad de otra época, sí — porque es memoria, no marketing. Con 3-4 minutos te haces una idea.</p>
+            <div class="vj-yt" data-yt="i1SRpq1HmIg" data-titulo="Cómo se hace la ropa de lana en fábricas antiguas — Todos Somos Reciclaje"></div>
+            <p>Un documental de 55 minutos recorriendo la hilatura por dentro, de la esquila al ovillo. No hace falta verlo ahora: guárdate esta página y vuelve con calma. Es del canal Todos Somos Reciclaje.</p>
+            <a class="vj-det-link" id="vjMonesma" href="https://www.youtube.com/watch?v=NF50q4RXCGk" target="_blank" rel="noopener">Y si quieres viajar más atrás: así se hilaba a mano en los años 90 →</a>
           </div>
         </details>
       </div>
@@ -1163,22 +1168,28 @@ body{background:#fbf9f8}
   }
   if (igWrap) cuandoSeVea(igWrap, cargarIG, {margen:400});
 
-  /* ---------- Estación 1: YouTube (Monesma) solo al desplegar ---------- */
-  var det = document.getElementById('vjMonesma');
+  /* ---------- Estación 1: el documental, solo al desplegar ----------
+     YouTube no se toca hasta que el lector abre el bloque. */
+  var det = document.getElementById('vjDoc');
   if (det){
     det.addEventListener('toggle', function(){
       var caja = det.querySelector('.vj-yt');
       if (!det.open || !caja || caja.dataset.cargado) return;
       caja.dataset.cargado = '1';
       var f = document.createElement('iframe');
-      f.src = 'https://www.youtube-nocookie.com/embed/' + caja.dataset.yt + '?start=' + caja.dataset.start + '&rel=0';
-      f.title = 'Hilanderas de alta montaña. Así tejen calcetines con lana — Eugenio Monesma';
+      f.src = 'https://www.youtube-nocookie.com/embed/' + caja.dataset.yt + '?rel=0';
+      f.title = caja.dataset.titulo;
       f.loading = 'lazy';
       f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
       f.allowFullscreen = true;
       caja.appendChild(f);
+      track('viaje_documental_abierto', {viaje:'lana', video:caja.dataset.yt});
     });
   }
+  var monesma = document.getElementById('vjMonesma');
+  if (monesma) monesma.addEventListener('click', function(){
+    track('viaje_click_monesma', {viaje:'lana'});
+  });
 
   /* ---------- Estación 2: enlaces a las marcas de lujo ---------- */
   document.querySelectorAll('[data-lujo]').forEach(function(a){
