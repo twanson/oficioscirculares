@@ -13,7 +13,7 @@ const POST_URL = '';
 %>
 <%- include('partials/head-meta', {
     title: 'El Viaje de la Lana | Oficios Circulares',
-    description: 'Una experiencia guiada de 15-20 minutos: de la mejor lana de Europa pagada a céntimos al jersey de lujo de 1.500 €. Descubre qué pasa por el camino.',
+    description: 'Una experiencia guiada de 15-20 minutos: de la mejor lana de Europa malvendida a céntimos al jersey de lujo de 1.500 €. Descubre qué pasa por el camino.',
     canonical: '/viaje/lana',
     ogImage: 'https://www.oficioscirculares.com/assets/images/viaje-lana/og-viaje-lana.jpg',
     ogImageAlt: 'Esquila a tijera de una oveja — El Viaje de la Lana, Oficios Circulares'
@@ -113,7 +113,7 @@ body{background:#fbf9f8}
 .vj-e1-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .vj-e1-media{position:absolute;inset:0}
 .vj-e1-foto{width:100%;height:100%;object-fit:cover}
-.vj-e1-velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,19,15,.55),rgba(4,19,15,.68) 60%,rgba(4,19,15,.86))}
+.vj-e1-velo{--tinte:rgba(6,36,28,.62);--tinte-suave:rgba(6,36,28,.42);--pie:rgba(4,19,15,.88);--fx:68%;--fy:32%}
 .vj-e1-textos{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto;padding:96px 26px 72px;text-align:center}
 .vj-e1-t{font-family:var(--f-head);font-weight:600;font-size:clamp(1.7rem,6.4vw,2.9rem);line-height:1.22;letter-spacing:-.015em;color:#fff;text-shadow:0 3px 30px rgba(0,0,0,.5);max-width:19ch;margin:0 auto}
 .vj-e1-t em{font-style:italic;color:var(--secondary-claro)}
@@ -123,7 +123,7 @@ body{background:#fbf9f8}
 .vj-e1-titulo .vj-tip{margin-top:18px}
 .vj-e1-titulo .vj-start{margin-top:24px}
 .vj-e1-hilo{position:absolute;left:6px;bottom:8px;width:min(300px,54vw);height:34vh;z-index:1;pointer-events:none;opacity:.85}
-.vj-e1-hilo .vj-hilo-draw{stroke:var(--secondary-claro);stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(224,136,90,.35))}
+.vj-e1-hilo{filter:drop-shadow(0 0 5px rgba(224,136,90,.28))}
 /* estático: las frases fluyen una bajo otra con aire */
 .vj-e1-t + .vj-e1-t{margin-top:26px}
 .vj-e1-titulo{margin-top:34px}
@@ -135,7 +135,7 @@ body{background:#fbf9f8}
 .vj-gsap .vj-e1-textos>*{grid-area:1/1;margin:0 auto}
 /* estados iniciales sin destello: el CSS deja la escena como GSAP la va a
    encontrar; cuando el motor arranca, sus estilos inline toman el relevo */
-.vj-gsap .vj-e1-foto{opacity:.18;transform:scale(1.12)}
+.vj-gsap .vj-e1-foto{opacity:.36;transform:scale(1.12)}
 .vj-gsap .vj-e1-t[data-e1="2"],.vj-gsap .vj-e1-t[data-e1="3"],.vj-gsap .vj-e1-titulo{opacity:0;visibility:hidden}
 .vj-gsap .vj-e2-cinewrap{opacity:0;visibility:hidden}
 .vj-gsap .vj-e2-nota{opacity:0;visibility:hidden}
@@ -145,7 +145,7 @@ body{background:#fbf9f8}
 .vj-e2-pin{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center}
 .vj-e2-bg{position:absolute;inset:-6% 0}
 .vj-e2-bg img{width:100%;height:100%;object-fit:cover}
-.vj-e2-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,32,25,.62),rgba(2,32,25,.78) 55%,rgba(2,25,19,.92))}
+.vj-e2-grad{--tinte:rgba(6,36,28,.68);--tinte-suave:rgba(6,36,28,.5);--pie:rgba(2,25,19,.92);--fx:50%;--fy:58%}
 .vj-e2-in{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:88px 22px 56px;display:flex;flex-direction:column;align-items:center;gap:26px}
 .vj-e2-cinewrap{text-align:center;max-width:540px}
 .vj-e2-cinewrap .vj-cine-lead{margin-bottom:22px!important}
@@ -170,8 +170,22 @@ body{background:#fbf9f8}
   .vj-e2-nota .vj-nota{font-size:1.18rem;line-height:1.7;padding:24px 28px}
 }
 /* ── E3 · Profundiza ── */
-.vj-e3{background:var(--surface);padding:clamp(40px,7vh,64px) 22px clamp(48px,14vh,96px)}
+.vj-e3{position:relative;background:var(--surface);padding:clamp(40px,7vh,64px) 22px clamp(48px,14vh,96px)}
+.vj-e3::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none}
 .vj-e3 .vj-est-body{padding:0}
+
+/* ═══ SISTEMA DE LUZ (v8·2): cada foto lleva tinte + foco + viñeta.
+   El foco (transparente sobre el punto de interés, definido a mano por
+   escena con --fx/--fy) dirige la mirada; la viñeta asienta los bordes. ═══ */
+.vj-luz{position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
+  radial-gradient(95% 75% at var(--fx,50%) var(--fy,45%), rgba(0,0,0,0) 0%, var(--tinte) 74%),
+  linear-gradient(165deg, var(--tinte-suave), var(--tinte))}
+.vj-luz--pie{background:
+  linear-gradient(180deg, rgba(0,0,0,0) 55%, var(--pie) 100%),
+  radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
+  radial-gradient(95% 75% at var(--fx,50%) var(--fy,45%), rgba(0,0,0,0) 0%, var(--tinte) 74%),
+  linear-gradient(165deg, var(--tinte-suave), var(--tinte))}
 
 /* ═══════════════ ESCENAS E4-E9 ═══════════════
    Mismo contrato: sin .vj-gsap todo es columna estática legible. */
@@ -183,8 +197,8 @@ body{background:#fbf9f8}
 .vj-tr-fondo--a{background:var(--crema)}
 .vj-tr--seva .vj-tr-fondo--b{background:linear-gradient(180deg,#0a1c33,#050f1f)}
 .vj-tr--regreso .vj-tr-fondo--b{background:linear-gradient(180deg,#3a1c0a,#241105)}
-.vj-tr-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.3;z-index:1}
-.vj-hilo-draw{stroke:var(--secondary-claro);stroke-width:2.5;filter:drop-shadow(0 0 6px rgba(224,136,90,.3))}
+.vj-tr-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.6;z-index:1}
+
 .vj-tr-foto{position:absolute;inset:0}
 .vj-tr-foto img{width:100%;height:100%;object-fit:cover}
 .vj-tr-frase{position:relative;z-index:2;max-width:17ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
@@ -195,7 +209,7 @@ body{background:#fbf9f8}
 .vj-e5-pin{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
 .vj-e5-bg{position:absolute;inset:0}
 .vj-e5-bg img{width:106%;height:100%;object-fit:cover}
-.vj-e5-velo{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,12,26,.3),rgba(5,12,26,.44) 55%,rgba(4,10,22,.88))}
+.vj-e5-velo{--tinte:rgba(11,22,38,.66);--tinte-suave:rgba(11,22,38,.44);--pie:rgba(4,10,22,.9);--fx:40%;--fy:44%}
 .vj-e5-in{position:relative;z-index:2;width:100%;max-width:720px;margin:0 auto;padding:0 26px clamp(56px,10vh,96px);text-align:center}
 .vj-e5-texto{margin-top:16px!important;font-family:var(--f-head);font-weight:600;font-size:clamp(1.35rem,4.8vw,2rem);line-height:1.36;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.55)}
 
@@ -203,7 +217,7 @@ body{background:#fbf9f8}
 .vj-e6{background:#050e1c}
 .vj-e6-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:76px 24px}
 .vj-e6-bg{position:absolute;inset:0;opacity:.26}
-.vj-e6-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 20%,rgba(5,14,28,0),rgba(5,14,28,.85))}
+.vj-e6-bg::after{content:"";position:absolute;inset:0;--tinte:rgba(5,14,28,.78);--tinte-suave:rgba(5,14,28,.45);--fx:50%;--fy:42%;background:radial-gradient(140% 120% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.28) 100%),radial-gradient(95% 75% at var(--fx) var(--fy),rgba(0,0,0,0) 0%,var(--tinte) 74%),linear-gradient(165deg,var(--tinte-suave),var(--tinte))}
 .vj-e6-bg img{width:100%;height:100%;object-fit:cover}
 .vj-e6-in{position:relative;z-index:2;width:100%;max-width:640px;margin:0 auto;text-align:center}
 .vj-e6-in>*+*{margin-top:38px}
@@ -240,7 +254,7 @@ body{background:#fbf9f8}
 .vj-e7-peldano h3{font-family:var(--f-ui);font-weight:800;font-size:1.2rem;color:var(--primary);margin:0 0 10px}
 .vj-e7-peldano p{color:var(--on-var);font-size:1.1rem;line-height:1.6;margin:0}
 .vj-e7-peldano .vj-fuente{color:#8a8070;margin-top:10px;display:block}
-.vj-e7-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.4}
+.vj-e7-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.55}
 @media(min-width:900px){
   .vj-e7-peldano[data-paso="2"]{margin-top:-56px;margin-right:4%}
   .vj-e7-peldano[data-paso="1"]{margin-left:4%}
@@ -251,7 +265,7 @@ body{background:#fbf9f8}
 .vj-e9-pin{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:76px 22px 40px;text-align:center}
 .vj-e9-bg{position:absolute;inset:0}
 .vj-e9-bg img{width:100%;height:100%;object-fit:cover}
-.vj-e9-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,20,8,.62),rgba(30,15,6,.72) 55%,rgba(24,12,5,.9))}
+.vj-e9-bg::after{content:"";position:absolute;inset:0;--tinte:rgba(26,20,16,.74);--tinte-suave:rgba(26,20,16,.5);--fx:50%;--fy:52%;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(24,12,5,.9) 100%),radial-gradient(140% 120% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.25) 100%),radial-gradient(95% 75% at var(--fx) var(--fy),rgba(0,0,0,0) 0%,var(--tinte) 74%),linear-gradient(165deg,var(--tinte-suave),var(--tinte))}
 .vj-e9-puerta{position:absolute;top:0;bottom:0;width:51%;z-index:2;background:linear-gradient(180deg,#2c1407,#1c0c04)}
 .vj-e9-puerta--izq{left:0;box-shadow:inset -40px 0 60px rgba(0,0,0,.4)}
 .vj-e9-puerta--dcha{right:0;box-shadow:inset 40px 0 60px rgba(0,0,0,.4)}
@@ -284,7 +298,7 @@ body{background:#fbf9f8}
 @media(min-width:760px){
   .vj-kilo{left:24px;bottom:24px;padding:12px 20px 12px 16px}
   .vj-kilo-v{font-size:1.2rem}
-  .vj-kilo-n{display:block;max-width:22ch;font-size:.72rem;line-height:1.35;color:rgba(251,246,236,.55);white-space:normal}
+  .vj-kilo-n{display:block;max-width:20ch;font-size:.72rem;line-height:1.3;color:rgba(251,246,236,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .vj-kilo-n:empty{display:none}
 }
 @media(prefers-reduced-motion:reduce){.vj-kilo,.vj-kilo-v{transition:none}}
@@ -356,7 +370,7 @@ body{background:#fbf9f8}
 .vj-est--final .vj-est-hero img{filter:saturate(1.12) contrast(1.06)}
 .vj-est--final .vj-est-hero::after{background:linear-gradient(180deg,rgba(96,44,12,.5) 0%,rgba(112,54,16,.42) 26%,rgba(66,30,10,.9) 76%,rgba(48,21,7,.98) 100%)}
 .vj-est-hero-in{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto}
-.vj-ey{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(147,74,28,.14);font-family:var(--f-ui);font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
+.vj-ey{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(147,74,28,.14);font-family:var(--f-ui);font-weight:700;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
 .vj-est-hero h2{font-family:var(--f-head);font-size:clamp(2.8rem,11vw,4.8rem);font-weight:700;color:#fff;line-height:.98;letter-spacing:-.02em;text-shadow:0 3px 26px rgba(0,0,0,.45)}
 .vj-est-hero h2 em{font-style:italic;color:var(--secondary-claro)}
 .vj-est-body{padding:34px 22px 0;background:var(--surface)}
@@ -440,7 +454,10 @@ body{background:#fbf9f8}
 .vj-check input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:24px;height:24px;margin-top:1px;border:2px solid rgba(2,52,41,.3);border-radius:7px;background:#fff;cursor:pointer;position:relative;transition:background .2s ease,border-color .2s ease}
 .vj-check input:checked{background:var(--primary);border-color:var(--primary)}
 .vj-check input:checked::after{content:"";position:absolute;left:7px;top:2.5px;width:5px;height:11px;border:solid var(--oro);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
-.vj-check input:checked+span{color:var(--on-var);text-decoration:line-through;text-decoration-color:rgba(2,52,41,.35)}
+.vj-check label span{position:relative}
+.vj-check label span::after{content:"";position:absolute;left:0;right:100%;top:56%;height:2.5px;border-radius:2px;background:var(--secondary);transform:rotate(-.5deg);transition:right .4s cubic-bezier(.4,0,.2,1)}
+.vj-check input:checked+span{color:var(--on-var)}
+.vj-check input:checked+span::after{right:-2%}
 .vj-cierre{margin:4px 0 0;padding:22px 0 14px;border-top:1px solid rgba(2,52,41,.08);font-family:var(--f-head);font-size:1.5rem;font-style:italic;line-height:1.35;color:var(--primary);text-align:center}
 
 /* ---------- Estación 3: el test ---------- */
@@ -455,6 +472,8 @@ body{background:#fbf9f8}
 .vj-opt.vj-ko{border-color:rgba(154,85,48,.45);background:rgba(154,85,48,.08);opacity:.75}
 .vj-opt .vj-mark{float:right;font-weight:800;color:var(--verde-hoja)}
 .vj-r{margin-top:18px;padding:18px 18px 16px;border-radius:14px;background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema)}
+.vj-js .vj-r{opacity:0;transform:perspective(600px) rotateX(8deg);transform-origin:50% 0}
+.vj-js .vj-r.vj-r-on{opacity:1;transform:none;transition:opacity .3s ease,transform .45s cubic-bezier(.22,1,.36,1)}
 .vj-r-badge{display:inline-block;padding:5px 13px;border-radius:100px;background:rgba(246,201,138,.18);border:1px solid rgba(246,201,138,.4);color:var(--oro);font-family:var(--f-ui);font-weight:800;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
 .vj-r p{color:rgba(251,246,236,.92)!important;font-size:1.12rem!important;line-height:1.55}
 .vj-r p strong{color:var(--oro)}
@@ -496,6 +515,20 @@ body{background:#fbf9f8}
 .vj-cta--3{background:transparent;color:rgba(251,246,236,.82);font-size:.96rem;padding:12px}
 .vj-cta--3 span{text-decoration:underline;text-underline-offset:4px}
 .vj-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
+
+/* Fundidos de costura (v7·5): las tres costuras oscuro→claro llevan banda
+   de solape; las demás cruzan por el tinte del tramo y no la necesitan. */
+.vj-cap{height:38vh;background:linear-gradient(180deg,var(--de),var(--surface))}
+/* ═══ TIPOGRAFÍA (v8·4): cifras tnum, € al 60%, subrayado a mano ═══ */
+.vj-e9-contador b,.vj-kilo-v,.vj-e7-cifra,.vj-e9-peldano b,.vj-herochip b{font-feature-settings:"tnum";letter-spacing:-.01em}
+.vj-eur{font-size:.6em;vertical-align:top;margin-left:.05em;letter-spacing:0}
+.vj-sub-mano{position:relative;white-space:nowrap}
+.vj-sub-mano svg{position:absolute;left:-3%;bottom:-.14em;width:106%;height:.32em;overflow:visible;pointer-events:none}
+.vj-sub-mano svg path{fill:none;stroke:var(--secondary-claro);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+
+/* ============= GRANO GLOBAL ============= */
+.vj-grano{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:128px}
+@media(prefers-reduced-motion:reduce){.vj-grano{display:none}}
 
 /* ============= LIGHTBOX DEL REEL ============= */
 .vj-lb{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;background:rgba(2,10,8,.93)}
@@ -591,11 +624,11 @@ body{background:#fbf9f8}
 .vj-calc-campo{margin-bottom:20px}
 .vj-calc-campo label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--f-ui);font-weight:800;font-size:.94rem;color:rgba(251,246,236,.84);margin-bottom:10px}
 .vj-calc-campo label b{color:var(--oro);font-size:1.24rem;font-family:var(--f-head);font-weight:600}
-.vj-calc input[type=range]{width:100%;height:26px;background:transparent;appearance:none;-webkit-appearance:none;cursor:pointer}
-.vj-calc input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:rgba(251,246,236,.18)}
-.vj-calc input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:rgba(251,246,236,.18)}
-.vj-calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;background:linear-gradient(135deg,#f6c98a,#e0a965);border:0;box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.vj-calc input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#f6c98a,#e0a965);border:0}
+.vj-calc input[type=range]{width:100%;height:6px;margin:10px 0;background:rgba(251,246,236,.18);appearance:none;-webkit-appearance:none;cursor:pointer;border-radius:100px}
+.vj-calc input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:transparent}
+.vj-calc input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:transparent}
+.vj-calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M4.5 9c5-3.4 12-3.6 17 .4'/%3E%3Cpath d='M3.8 14c5.5-2.6 13-2.4 18.4 1'/%3E%3Cpath d='M6 19.4c4.6-2.2 10-2 14 .6'/%3E%3Cpath d='M9 3.6c2.8 4.8 3.4 12.4 1.6 18.8'/%3E%3Cpath d='M16.4 3.9c2 5.2 2 12-.4 18'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.vj-calc input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M4.5 9c5-3.4 12-3.6 17 .4'/%3E%3Cpath d='M3.8 14c5.5-2.6 13-2.4 18.4 1'/%3E%3Cpath d='M6 19.4c4.6-2.2 10-2 14 .6'/%3E%3Cpath d='M9 3.6c2.8 4.8 3.4 12.4 1.6 18.8'/%3E%3Cpath d='M16.4 3.9c2 5.2 2 12-.4 18'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0}
 .vj-calc-res{margin-top:24px;padding:22px 18px;border-radius:16px;background:rgba(246,201,138,.12);border:1px solid rgba(246,201,138,.34);text-align:center}
 .vj-calc-big{font-family:var(--f-head);font-size:clamp(2.8rem,12vw,4rem);font-weight:600;color:var(--oro);line-height:1}
 .vj-calc-big .vj-calc-un{display:block;margin-top:8px;font-size:.26em;font-family:var(--f-ui);font-weight:800;color:rgba(251,246,236,.78);letter-spacing:.08em;text-transform:uppercase}
@@ -712,12 +745,12 @@ body{background:#fbf9f8}
       <div class="vj-e1-pin">
         <div class="vj-e1-media" aria-hidden="true">
           <img class="vj-e1-foto" src="/assets/images/viaje-lana/intro-esquila-900.webp" srcset="/assets/images/viaje-lana/intro-esquila-900.webp 900w, /assets/images/viaje-lana/intro-esquila-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" width="900" height="1350">
-          <div class="vj-e1-velo"></div>
+          <div class="vj-e1-velo vj-luz vj-luz--pie"></div>
         </div>
         <div class="vj-e1-textos">
           <p class="vj-e1-t" data-e1="1">Esto es un kilo de <em>lana&nbsp;española</em>.</p>
-          <p class="vj-e1-t" data-e1="2">Lo acaban de esquilar. Por él, el ganadero ha cobrado unos céntimos.</p>
-          <p class="vj-e1-t" data-e1="3">Dentro de unos meses, alguien pagará <em>1.500&nbsp;€</em> por un jersey hecho con lana como esta.</p>
+          <p class="vj-e1-t" data-e1="2">Lo acaban de esquilar.<br>Por él, el ganadero ha cobrado unos <span class="vj-sub-mano">céntimos<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span>.</p>
+          <p class="vj-e1-t" data-e1="3">Dentro de unos meses, alguien pagará <em>1.500&nbsp;€</em><br>por un jersey hecho con lana como esta.</p>
           <div class="vj-e1-titulo" data-e1="4">
             <span class="vj-kicker">
               <img src="/assets/images/logodegraoscuro.png" alt="">
@@ -732,9 +765,7 @@ body{background:#fbf9f8}
         <%# El hilo de lana: nace del vellón y se dibuja con el scroll %>
         <%# El hilo: nace en el vellón de la foto y termina en la píldora del
             kilo (abajo-izquierda). Una sola curva, sin garabatos. %>
-        <svg class="vj-e1-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M92 4 C 55 30, 22 52, 8 90" stroke-linecap="round"/>
-        </svg>
+        <svg class="vj-e1-hilo" aria-hidden="true"></svg>
       </div>
     </section>
 
@@ -746,7 +777,7 @@ body{background:#fbf9f8}
       <div class="vj-e2-pin">
         <div class="vj-e2-bg" aria-hidden="true">
           <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-          <div class="vj-e2-grad"></div>
+          <div class="vj-e2-grad vj-luz vj-luz--pie"></div>
         </div>
         <div class="vj-e2-in">
           <div class="vj-e2-cinewrap">
@@ -775,6 +806,8 @@ body{background:#fbf9f8}
       </div>
     </section>
 
+    <div class="vj-cap" style="--de:#052018" aria-hidden="true"></div>
+
     <%# ═══════════ E3 · PROFUNDIZA (sección normal, descanso visual) ═══════════ %>
     <section class="vj-e3" id="profundiza" aria-label="Profundiza">
       <div class="vj-est-body">
@@ -799,10 +832,8 @@ body{background:#fbf9f8}
         <div class="vj-tr-foto" aria-hidden="true">
           <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
         </div>
-        <svg class="vj-tr-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M50 0 C 58 32, 78 58, 96 98" stroke-linecap="round"/>
-        </svg>
-        <p class="vj-tr-frase">Ya sabes lo que cuesta hacerlo. Este kilo, casi seguro, <em>no se queda en España</em>.</p>
+        <svg class="vj-tr-hilo" aria-hidden="true"></svg>
+        <p class="vj-tr-frase">Ya sabes lo que cuesta hacerlo.<br>Este kilo, casi seguro, <em>no <span class="vj-sub-mano">se queda<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> en España</em>.</p>
       </div>
     </section>
 
@@ -812,7 +843,7 @@ body{background:#fbf9f8}
         <div class="vj-e5-bg" aria-hidden="true">
           <img src="/assets/images/viaje-lana/puerto-contenedores-900.webp" srcset="/assets/images/viaje-lana/puerto-contenedores-900.webp 900w, /assets/images/viaje-lana/puerto-contenedores-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
         </div>
-        <div class="vj-e5-velo"></div>
+        <div class="vj-e5-velo vj-luz vj-luz--pie"></div>
         <div class="vj-e5-in">
           <span class="vj-ey vj-ey--luz">Parada 2 de 4 · El puerto</span>
           <p class="vj-e5-texto">Tu kilo viaja en un contenedor rumbo a Shanghái, clasificado y en bruto. No es una anécdota: es la norma. ¿Por qué España regala el primer paso y no se queda ninguno de los demás? Se lo preguntamos a quien lo vive por dentro.</p>
@@ -861,6 +892,8 @@ body{background:#fbf9f8}
       </div>
     </section>
 
+    <div class="vj-cap" style="--de:#050e1c" aria-hidden="true"></div>
+
     <%# ═══════════ E7 · LA ESCALERA, PARTE 1 (pin, los peldaños se construyen) ═══════════ %>
     <section class="vj-e7" id="escalera-1" aria-label="La escalera del precio, primera parte">
       <div class="vj-e7-pin">
@@ -868,7 +901,7 @@ body{background:#fbf9f8}
         <div class="vj-e7-cab"><span class="vj-ey">La escalera del precio</span></div>
         <div class="vj-e7-peldanos">
           <article class="vj-e7-peldano" data-paso="1">
-            <b class="vj-e7-cifra">0,05 €<small>/kg</small></b>
+            <b class="vj-e7-cifra">0,05 <span class="vj-eur">€</span><small>/kg</small></b>
             <h3>El vellón</h3>
             <p>0,05 €/kg. Es lo que recibe el ganadero por la lana más común. Esquilar le cuesta más: cada esquileo es a pérdidas.</p>
             <span class="vj-fuente">Fuente: AVICON</span>
@@ -878,9 +911,7 @@ body{background:#fbf9f8}
             <h3>Lavado, cardado, hilado</h3>
             <p>Aquí la lana se convierte en algo que ya se puede trabajar. Cada transformación multiplica el valor — y casi ninguna se hace ya en España.</p>
           </article>
-          <svg class="vj-e7-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M10 94 C 34 78, 62 40, 92 8" stroke-linecap="round"/>
-          </svg>
+          <svg class="vj-e7-hilo" aria-hidden="true"></svg>
         </div>
       </div>
     </section>
@@ -894,10 +925,8 @@ body{background:#fbf9f8}
         <div class="vj-tr-foto" aria-hidden="true">
           <img src="/assets/images/viaje-lana/interludio-textura-900.webp" srcset="/assets/images/viaje-lana/interludio-textura-900.webp 900w, /assets/images/viaje-lana/interludio-textura-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
         </div>
-        <svg class="vj-tr-hilo" viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden="true">
-          <path class="vj-hilo-draw" d="M50 0 C 42 32, 22 58, 4 98" stroke-linecap="round"/>
-        </svg>
-        <p class="vj-tr-frase">Tu kilo volverá. Pero <em>no volverá como lana</em>.</p>
+        <svg class="vj-tr-hilo" aria-hidden="true"></svg>
+        <p class="vj-tr-frase">Tu kilo volverá.<br>Pero <em><span class="vj-sub-mano">no volverá<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> como lana</em>.</p>
       </div>
     </section>
 
@@ -919,18 +948,20 @@ body{background:#fbf9f8}
         </div>
         <div class="vj-e9-peldanos">
           <article class="vj-e9-peldano" data-paso="3">
-            <b>10-14 €<small>/100 g</small></b>
+            <b>10-14 <span class="vj-eur">€</span><small>/100 g</small></b>
             <h3>El ovillo</h3>
             <p>Un ovillo de 100 g de lana española de calidad ronda los 10-14 € en tienda. Del vellón al ovillo, el valor se ha multiplicado por cientos.</p>
           </article>
           <article class="vj-e9-peldano" data-paso="4">
-            <b>1.500 €</b>
+            <b>1.500 <span class="vj-eur">€</span></b>
             <h3>El jersey de lujo</h3>
             <p>Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</p>
           </article>
         </div>
       </div>
     </section>
+
+    <div class="vj-cap" style="--de:#241105" aria-hidden="true"></div>
 
     <!-- ============ PARADA 3 — El escaparate ============ -->
     <section class="vj-est vj-est--ocre" id="escaparate" data-est="3" data-lugar="El escaparate" aria-labelledby="t-escaparate">
@@ -954,7 +985,7 @@ body{background:#fbf9f8}
           <label><input type="checkbox" data-check="4"><span>¿Dice algo del ganadero o del precio de la fibra en origen?</span></label>
           <%# El cierre vive dentro de la carta: fuera se alineaba con el borde
               de la página en vez de con la columna de contenido. %>
-          <p class="vj-cierre">¿Mucho relato y pocos datos? No es casualidad. Siguiente estación.</p>
+          <p class="vj-cierre">¿Mucho relato y pocos datos? No es casualidad. Siguiente parada.</p>
         </div>
       </div>
       <%# "Los dos escaparates": el lujo y el low cost como la misma jugada.
@@ -1212,6 +1243,9 @@ body{background:#fbf9f8}
 
   </main>
 
+  <%# Grano global (v8·3): une las fotos como si fueran de la misma sesión %>
+  <div class="vj-grano" aria-hidden="true"></div>
+
   <%# Lightbox del reel: el embed vive aquí, no dentro de la escena %>
   <div class="vj-lb" id="vjLightbox" hidden role="dialog" aria-modal="true" aria-label="Reel de Wooldreamers: el sonido detrás de nuestros ovillos">
     <div class="vj-lb-caja">
@@ -1387,7 +1421,7 @@ body{background:#fbf9f8}
   var kiloBox = document.getElementById('vjKilo');
   var VALOR = {
     1: {v:'0,05 €', n:''},
-    2: {v:'0,05 €', n:'sale de España valiendo lo mismo'},
+    2: {v:'0,05 €', n:'sale valiendo lo mismo'},
     3: {v:'1.500 €', n:'', salto:true},
     4: {v:'0,05 € si se va · 149 € si se queda', n:'el mismo kilo, dos destinos'}
   };
@@ -1398,6 +1432,10 @@ body{background:#fbf9f8}
   function eurKilo(v){
     if (v < 1) return v.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
     return Math.round(v).toLocaleString('es-ES') + ' €';
+  }
+  // Pinta una cifra con el € al 60% (v8·4). Solo recibe strings propios.
+  function pintarEuro(el, txt){
+    el.innerHTML = txt.replace(/€/g, '<span class="vj-eur">€</span>');
   }
 
   function mostrarPildora(){
@@ -1605,6 +1643,7 @@ body{background:#fbf9f8}
     var r = q.querySelector('.vj-r');
     r.querySelector('.vj-r-badge').textContent = acertado ? ELOGIO : SORPRESA;
     r.hidden = false;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ r.classList.add('vj-r-on'); }); });
     if (nueva){
       state.test[q.dataset.q] = elegida;
       save(state);
@@ -1676,12 +1715,18 @@ body{background:#fbf9f8}
     var cDetalle = document.getElementById('vjCalcDetalle');
     var medido   = false;
     function eur(n){ return n.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €'; }
+    function pintaTrack(c){
+      var pc = (c.value - c.min) / (c.max - c.min) * 100;
+      c.style.background = 'linear-gradient(90deg, #b45817 ' + pc + '%, rgba(251,246,236,.18) ' + pc + '%)';
+    }
     function calcular(){
       var precio = +cPrecio.value, anos = +cAnos.value, usos = anos * USOS_ANO;
       cPrecioV.textContent = precio + ' €';
       cAnosV.textContent   = anos + (anos === 1 ? ' año' : ' años');
       cRes.textContent     = eur(precio / usos);
       cDetalle.textContent = precio + ' € entre ' + usos + ' usos (unos ' + USOS_ANO + ' al año durante ' + anos + (anos === 1 ? ' año).' : ' años).');
+      pintaTrack(cPrecio); pintaTrack(cAnos);
+      if (window.gsap) gsap.fromTo(cRes, {scale: 1.05}, {scale: 1, duration: .18, ease: 'power2.out'});
     }
     function medir(){
       if (medido) return;
@@ -1748,15 +1793,15 @@ body{background:#fbf9f8}
     /* ── E1 · Apertura ── */
     var e1 = document.getElementById('apertura');
     var q1 = function(sel){ return e1.querySelector(sel); };
-    var hilo = q1('.vj-hilo-draw');
-    var hiloL = hilo.getTotalLength();
-    gsap.set(hilo, {strokeDasharray: hiloL, strokeDashoffset: hiloL});
-    gsap.set(q1('.vj-e1-foto'), {opacity: .18, scale: 1.12});
+    var hilo1 = montarHilo(q1('.vj-e1-hilo'), function(W, H){
+      return 'M' + (.92*W) + ',' + (.04*H) + ' C ' + (.55*W) + ',' + (.30*H) + ' ' + (.22*W) + ',' + (.52*H) + ' ' + (.08*W) + ',' + (.90*H);
+    }, {nudoFin: true, fibras: .6});
+    gsap.set(q1('.vj-e1-foto'), {opacity: .36, scale: 1.12});
     // Drift lento e independiente del scroll: la escena respira aunque el
     // lector aún no haya movido el dedo. Sobre el wrapper, no sobre la foto,
     // para no pelearse con el scrub.
     gsap.to(q1('.vj-e1-media'), {scale: 1.045, yPercent: 1.6, duration: 16, ease: 'sine.inOut', yoyo: true, repeat: -1});
-    gsap.set([q1('[data-e1="2"]'), q1('[data-e1="3"]'), q1('.vj-e1-titulo')], {autoAlpha: 0, y: 28});
+    gsap.set([q1('[data-e1="2"]'), q1('[data-e1="3"]'), q1('.vj-e1-titulo')], {autoAlpha: 0, y: 14});
 
     var tl1 = gsap.timeline({
       defaults: {ease: 'none'},
@@ -1769,13 +1814,21 @@ body{background:#fbf9f8}
       }
     });
     tl1.to(q1('.vj-e1-foto'), {opacity: 1, scale: 1, duration: 38}, 0)
-       .to(q1('[data-e1="1"]'), {autoAlpha: 0, y: -26, duration: 7}, 16)
-       .to(q1('[data-e1="2"]'), {autoAlpha: 1, y: 0, duration: 7}, 22)
-       .to(q1('[data-e1="2"]'), {autoAlpha: 0, y: -26, duration: 7}, 40)
-       .to(q1('[data-e1="3"]'), {autoAlpha: 1, y: 0, duration: 7}, 46)
-       .to(q1('[data-e1="3"]'), {autoAlpha: 0, y: -26, duration: 7}, 64)
-       .to(q1('.vj-e1-titulo'), {autoAlpha: 1, y: 0, duration: 10}, 71)
-       .to(hilo, {strokeDashoffset: 0, duration: 22}, 76);
+       .to(q1('[data-e1="1"]'), {autoAlpha: 0, y: -14, duration: 6, ease: 'power2.in'}, 16)
+       .to(q1('[data-e1="2"]'), {autoAlpha: 1, y: 0, duration: 6, ease: 'power2.out'}, 22)
+       .to(q1('[data-e1="2"]'), {autoAlpha: 0, y: -14, duration: 6, ease: 'power2.in'}, 40)
+       .to(q1('[data-e1="3"]'), {autoAlpha: 1, y: 0, duration: 6, ease: 'power2.out'}, 46)
+       .to(q1('[data-e1="3"]'), {autoAlpha: 0, y: -14, duration: 6, ease: 'power2.in'}, 64)
+       .to(q1('.vj-e1-titulo'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 71)
+;
+    dibujarHiloEnTimeline(tl1, hilo1, 76, 22);
+    // subrayado a mano de "céntimos", dibujado cuando la frase 2 está en meseta
+    var sub1 = q1('.vj-sub-trazo');
+    if (sub1){
+      var sl1 = sub1.getTotalLength();
+      gsap.set(sub1, {strokeDasharray: sl1, strokeDashoffset: sl1});
+      tl1.to(sub1, {strokeDashoffset: 0, duration: 6, ease: 'none'}, 30);
+    }
 
     /* ── E2 · La nave ── */
     var e2 = document.getElementById('nave');
@@ -1783,7 +1836,7 @@ body{background:#fbf9f8}
     mm.add({escritorio: '(min-width: 1024px)', movil: '(max-width: 1023.98px)'}, function(ctx){
       var desk = ctx.conditions.escritorio;
       var q2 = function(sel){ return e2.querySelector(sel); };
-      gsap.set(q2('.vj-e2-cinewrap'), {autoAlpha: 0, y: '14vh'});
+      gsap.set(q2('.vj-e2-cinewrap'), {autoAlpha: 0, y: '9vh'});
       gsap.set(q2('.vj-e2-nota'), desk ? {autoAlpha: 0, x: 70} : {autoAlpha: 0, y: 46});
       gsap.set(q2('.vj-e2-bg img'), {yPercent: -6, scale: 1.06});
 
@@ -1806,41 +1859,171 @@ body{background:#fbf9f8}
       return function(){ tl2.scrollTrigger && tl2.scrollTrigger.kill(); tl2.kill(); };
     });
 
+    /* ══ hiloDeLana — PORTADO de public/hilo-demo.html ══
+       Dos hebras retorcidas en fase, fibrillas sueltas, nudo de hito y cabo
+       deshilachado. Igual que la demo salvo el driver: aquí el draw-on lo
+       lleva el scrub de ScrollTrigger, no una transición CSS. */
+    function hiloDeLana(svg, spineD, opts){
+      var o = Object.assign({
+        color: '#b45817', colorClaro: '#d98a4f', grosor: 2.6,
+        vueltas: 26, fibras: 0.5, nudoFin: false, deshilachado: false
+      }, opts || {});
+      var NS = 'http://www.w3.org/2000/svg';
+      var spine = document.createElementNS(NS, 'path');
+      spine.setAttribute('d', spineD);
+      svg.appendChild(spine);
+      var L = spine.getTotalLength();
+      var paso = 3;
+      var g = document.createElementNS(NS, 'g');
+      var hebras = [[], []];
+      for (var l = 0; l <= L; l += paso){
+        var pt = spine.getPointAtLength(l);
+        var pt2 = spine.getPointAtLength(Math.min(l + 1, L));
+        var tx = pt2.x - pt.x, ty = pt2.y - pt.y;
+        var n = Math.hypot(tx, ty) || 1;
+        var nx = -ty / n, ny = tx / n;
+        var fase = (l / L) * o.vueltas * Math.PI * 2;
+        var amp = o.grosor * 0.85;
+        var damp = Math.min(1, l / 40, (L - l) / 40);
+        var off = Math.sin(fase) * amp * damp;
+        hebras[0].push([pt.x + nx * off, pt.y + ny * off]);
+        hebras[1].push([pt.x - nx * off, pt.y - ny * off]);
+      }
+      var hebrasEl = [];
+      [[hebras[0], o.color], [hebras[1], o.colorClaro]].forEach(function(par){
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', 'M' + par[0].map(function(q){ return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' L'));
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', par[1]);
+        path.setAttribute('stroke-width', o.grosor);
+        path.setAttribute('stroke-linecap', 'round');
+        path.setAttribute('vector-effect', 'non-scaling-stroke');
+        g.appendChild(path);
+        hebrasEl.push(path);
+      });
+      var fibrasEl = [];
+      var nF = Math.floor(o.vueltas * o.fibras);
+      for (var i = 0; i < nF; i++){
+        var lf = 30 + Math.random() * (L - 60);
+        var pf = spine.getPointAtLength(lf);
+        var pf2 = spine.getPointAtLength(lf + 1);
+        var ftx = pf2.x - pf.x, fty = pf2.y - pf.y;
+        var fn = Math.hypot(ftx, fty) || 1;
+        var fnx = -fty / fn, fny = ftx / fn;
+        var lado = Math.random() > .5 ? 1 : -1;
+        var len = 5 + Math.random() * 8;
+        var curl = (Math.random() - .5) * 6;
+        var f = document.createElementNS(NS, 'path');
+        f.setAttribute('d', 'M' + pf.x + ',' + pf.y + ' q' + (fnx*lado*len*.6 + ftx/fn*2) + ',' + (fny*lado*len*.6 + fty/fn*2) + ' ' + (fnx*lado*len + curl) + ',' + (fny*lado*len + curl));
+        f.setAttribute('fill', 'none');
+        f.setAttribute('stroke', o.color);
+        f.setAttribute('stroke-width', .9);
+        f.setAttribute('stroke-linecap', 'round');
+        f.setAttribute('opacity', 0);
+        f.dataset.en = (lf / L).toFixed(3);
+        g.appendChild(f);
+        fibrasEl.push(f);
+      }
+      var fin = spine.getPointAtLength(L);
+      var remates = [];
+      if (o.nudoFin){
+        var k = document.createElementNS(NS, 'path');
+        k.setAttribute('d', 'M' + (fin.x-6) + ',' + fin.y + ' a6,5 0 1,0 12,0 a6,5 0 1,0 -12,0 M' + (fin.x-3) + ',' + (fin.y-4) + ' a4,4 0 1,1 6,8');
+        k.setAttribute('fill', 'none'); k.setAttribute('stroke', o.color);
+        k.setAttribute('stroke-width', o.grosor); k.setAttribute('stroke-linecap', 'round');
+        k.setAttribute('vector-effect', 'non-scaling-stroke');
+        k.setAttribute('opacity', 0);
+        g.appendChild(k); remates.push(k);
+      }
+      if (o.deshilachado){
+        for (var j = 0; j < 4; j++){
+          var a2 = -0.6 + j * 0.4, len2 = 12 + Math.random() * 10;
+          var fd = document.createElementNS(NS, 'path');
+          fd.setAttribute('d', 'M' + fin.x + ',' + fin.y + ' q' + (len2*.5) + ',' + (a2*len2*.4) + ' ' + len2 + ',' + (a2*len2));
+          fd.setAttribute('fill', 'none'); fd.setAttribute('stroke', j % 2 ? o.colorClaro : o.color);
+          fd.setAttribute('stroke-width', 1.1); fd.setAttribute('stroke-linecap', 'round');
+          fd.setAttribute('opacity', 0);
+          g.appendChild(fd); remates.push(fd);
+        }
+      }
+      spine.remove();
+      svg.appendChild(g);
+      return {hebras: hebrasEl, fibras: fibrasEl, remates: remates};
+    }
+
+    /* Monta un hilo en su caja: viewBox 1:1 con los píxeles reales (sin
+       distorsión del retorcido) y espina definida en fracciones de la caja. */
+    function montarHilo(svg, espina, opts){
+      if (!svg) return null;
+      var r = svg.getBoundingClientRect();
+      var W = Math.max(60, Math.round(r.width)), H = Math.max(60, Math.round(r.height));
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.setAttribute('preserveAspectRatio', 'none');
+      svg.innerHTML = '';
+      return hiloDeLana(svg, espina(W, H), opts);
+    }
+
+    /* Cablea el draw-on al scrub: hebras por dashoffset, fibrillas por tramo
+       ya dibujado, remates al llegar al final. */
+    function dibujarHiloEnTimeline(tl, hilo, desde, dur){
+      if (!hilo) return;
+      hilo.hebras.forEach(function(h, i){
+        var lh = h.getTotalLength();
+        gsap.set(h, {strokeDasharray: lh, strokeDashoffset: lh});
+        tl.to(h, {strokeDashoffset: 0, duration: dur, ease: 'none'}, desde + i * dur * 0.06);
+      });
+      hilo.fibras.forEach(function(f){
+        tl.to(f, {opacity: .4, duration: 3, ease: 'none'}, desde + parseFloat(f.dataset.en) * dur);
+      });
+      hilo.remates.forEach(function(rm, i){
+        tl.to(rm, {opacity: .9, duration: 4, ease: 'power2.out'}, desde + dur - 2 + i * .5);
+      });
+    }
+
     /* ── E4/E8 · transiciones (mismo motor, distinto rumbo del hilo) ── */
     function transicion(id, tramoAlAcabar){
       var el = document.getElementById(id);
       if (!el) return;
       var q = function(sel){ return el.querySelector(sel); };
-      var hiloT = q('.vj-hilo-draw');
-      var LT = hiloT.getTotalLength();
-      gsap.set(hiloT, {strokeDasharray: LT, strokeDashoffset: LT});
-      gsap.set(q('.vj-tr-fondo--b'), {opacity: 0});
+      var hiloT = montarHilo(q('.vj-tr-hilo'), id === 'se-va'
+        ? function(W, H){ return 'M' + (.50*W) + ',0 C ' + (.58*W) + ',' + (.32*H) + ' ' + (.78*W) + ',' + (.58*H) + ' ' + (.96*W) + ',' + (.98*H); }
+        : function(W, H){ return 'M' + (.50*W) + ',0 C ' + (.42*W) + ',' + (.32*H) + ' ' + (.22*W) + ',' + (.58*H) + ' ' + (.04*W) + ',' + (.98*H); },
+        {fibras: .5});
+      // La escena entra ya teñida: sin este arranque, el tramo pre-pin
+      // mostraba crema plano — el único frame vacío del barrido.
+      gsap.set(q('.vj-tr-fondo--b'), {opacity: .22});
       gsap.set(q('.vj-tr-frase'), {autoAlpha: 0, y: 30});
       var hecho = false;
-      gsap.set(q('.vj-tr-foto'), {opacity: 0});
-      gsap.timeline({defaults: {ease: 'none'},
+      gsap.set(q('.vj-tr-foto'), {opacity: .14});
+      var tlT = gsap.timeline({defaults: {ease: 'none'},
         scrollTrigger: {trigger: el, start: 'top top', end: '+=90%', pin: true, scrub: true,
           onUpdate: function(st){
             if (st.progress > 0.9 && !hecho){ hecho = true; completar(tramoAlAcabar); }
-          }}})
-        .to(q('.vj-tr-fondo--b'), {opacity: 1, duration: 26}, 0)
-        .to(q('.vj-tr-foto'), {opacity: .38, duration: 34}, 4)
-        .to(q('.vj-tr-frase'), {autoAlpha: 1, y: 0, duration: 14}, 16)
-        .to(hiloT, {strokeDashoffset: 0, duration: 55}, 16);
+          }}});
+      tlT.to(q('.vj-tr-fondo--b'), {opacity: 1, duration: 26}, 0)
+         .to(q('.vj-tr-foto'), {opacity: .38, duration: 34}, 4)
+         .fromTo(q('.vj-tr-foto img'), {yPercent: -4}, {yPercent: 4, duration: 100, ease: 'none'}, 0)
+         .to(q('.vj-tr-frase'), {autoAlpha: 1, y: 0, duration: 14, ease: 'power2.out'}, 16);
+      dibujarHiloEnTimeline(tlT, hiloT, 16, 55);
+      var subT = q('.vj-sub-trazo');
+      if (subT){
+        var slT = subT.getTotalLength();
+        gsap.set(subT, {strokeDasharray: slT, strokeDashoffset: slT});
+        tlT.to(subT, {strokeDashoffset: 0, duration: 8, ease: 'none'}, 34);
+      }
     }
     transicion('se-va', 1);
-    transicion('regreso', 2);
 
     /* ── E5 · el puerto: pan lateral lento ── */
     var e5 = document.getElementById('puerto');
     if (e5){
       var q5 = function(sel){ return e5.querySelector(sel); };
-      gsap.set(q5('.vj-e5-bg img'), {scale: 1.16, xPercent: 6});
-      gsap.set(q5('.vj-e5-in'), {autoAlpha: 0, y: 26});
+      gsap.set(q5('.vj-e5-bg img'), {scale: 1.3, xPercent: 10});
+      gsap.set(q5('.vj-e5-in'), {autoAlpha: 0, y: 14});
       gsap.timeline({defaults: {ease: 'none'},
         scrollTrigger: {trigger: e5, start: 'top top', end: '+=160%', pin: true, scrub: true}})
-        .to(q5('.vj-e5-bg img'), {xPercent: -6, duration: 100}, 0)
-        .to(q5('.vj-e5-in'), {autoAlpha: 1, y: 0, duration: 20}, 8);
+        .to(q5('.vj-e5-bg img'), {xPercent: -10, duration: 100}, 0)
+        .to(q5('.vj-e5-in'), {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 8);
     }
 
     /* ── E6 · Ramón por pasos: beats de uno en uno, la cita queda ── */
@@ -1848,25 +2031,30 @@ body{background:#fbf9f8}
     if (e6){
       var q6 = function(sel){ return e6.querySelector(sel); };
       var pasos6 = [q6('.vj-e6-cabecera'), q6('[data-beat="1"]'), q6('[data-beat="2"]'), q6('[data-beat="3"]'), q6('.vj-e6-cita')];
-      pasos6.forEach(function(paso, i){ gsap.set(paso, {autoAlpha: i ? 0 : 1, y: i ? 26 : 0}); });
-      var marcas = [0, 26, 44, 62, 82];
+      pasos6.forEach(function(paso, i){ gsap.set(paso, {autoAlpha: i ? 0 : 1, y: i ? 14 : 0}); });
+      /* Ventanas prietas: fundidos de 4, meseta de 12. En cada frame del pin
+         hay SIEMPRE un paso legible — también recorriéndolo hacia arriba. */
+      var marcas = [0, 20, 38, 56, 76];
       var beatsVistos = {};
-      var tl6 = gsap.timeline({defaults: {ease: 'none'},
+      gsap.set(q6('.vj-e6-bg img'), {yPercent: -4});
+      var tl6 = gsap.timeline({defaults: {ease: 'power2.out'},
         scrollTrigger: {trigger: e6, start: 'top top', end: '+=260%', pin: true, scrub: true,
           onUpdate: function(st){
             [1, 2, 3].forEach(function(bt){
-              if (st.progress > (marcas[bt] + 4) / 100 && !beatsVistos[bt]){
+              if (st.progress > (marcas[bt] + 3) / 100 && !beatsVistos[bt]){
                 beatsVistos[bt] = 1;
                 track('viaje_ramon_beat', {viaje: 'lana', beat: bt});
               }
             });
           }}});
-      tl6.to(pasos6[0], {autoAlpha: 0, y: -26, duration: 6}, 20);
+      tl6.to(q6('.vj-e6-bg img'), {yPercent: 4, duration: 100, ease: 'none'}, 0);
+      tl6.to(pasos6[0], {autoAlpha: 0, y: -14, duration: 4, ease: 'power2.in'}, 17);
       [1, 2, 3].forEach(function(i){
-        tl6.to(pasos6[i], {autoAlpha: 1, y: 0, duration: 7}, marcas[i]);
-        tl6.to(pasos6[i], {autoAlpha: 0, y: -26, duration: 6}, marcas[i] + 16);
+        tl6.to(pasos6[i], {autoAlpha: 1, y: 0, duration: 4}, marcas[i]);
+        tl6.to(pasos6[i], {autoAlpha: 0, y: -14, duration: 4, ease: 'power2.in'}, marcas[i] + 15);
       });
-      tl6.to(pasos6[4], {autoAlpha: 1, y: 0, duration: 10}, marcas[4]);
+      tl6.to(pasos6[4], {autoAlpha: 1, y: 0, duration: 6}, marcas[4]);
+      tl6.set({}, {}, 100); // la cita se queda en meseta hasta el final del pin
     }
 
     /* ── E7 · la escalera se construye; el hilo trepa ── */
@@ -1874,21 +2062,26 @@ body{background:#fbf9f8}
     if (e7){
       var q7 = function(sel){ return e7.querySelector(sel); };
       var pel1 = q7('[data-paso="1"]'), pel2 = q7('[data-paso="2"]');
-      var hilo7 = q7('.vj-hilo-draw');
-      var L7 = hilo7.getTotalLength();
-      gsap.set([pel1, pel2], {autoAlpha: 0, y: 120});
-      gsap.set(hilo7, {strokeDasharray: L7, strokeDashoffset: L7});
+      var hilo7 = montarHilo(q7('.vj-e7-hilo'), function(W, H){
+        return 'M' + (.10*W) + ',' + (.94*H) + ' C ' + (.34*W) + ',' + (.78*H) + ' ' + (.62*W) + ',' + (.40*H) + ' ' + (.92*W) + ',' + (.08*H);
+      }, {nudoFin: true, fibras: .7});
+      gsap.set([pel1, pel2], {autoAlpha: 0, y: 64});
       var pasosVistos7 = {};
-      gsap.timeline({defaults: {ease: 'none'},
+      var tl7 = gsap.timeline({defaults: {ease: 'none'},
         scrollTrigger: {trigger: e7, start: 'top top', end: '+=170%', pin: true, scrub: true,
           onUpdate: function(st){
             if (st.progress > 0.25 && !pasosVistos7[1]){ pasosVistos7[1] = 1; track('viaje_cascada_paso', {viaje: 'lana', paso: 1}); }
             if (st.progress > 0.55 && !pasosVistos7[2]){ pasosVistos7[2] = 1; track('viaje_cascada_paso', {viaje: 'lana', paso: 2}); }
-          }}})
-        .to(pel1, {autoAlpha: 1, y: 0, duration: 20}, 5)
-        .to(pel2, {autoAlpha: 1, y: 0, duration: 20}, 32)
-        .to(hilo7, {strokeDashoffset: 0, duration: 32}, 55);
+          }}});
+      tl7.to(pel1, {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 5)
+         .to(pel2, {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 32);
+      dibujarHiloEnTimeline(tl7, hilo7, 55, 32);
     }
+
+    /* ── E8 se crea AQUÍ, en orden del documento: crearla antes que E5-E7
+       dejaba su pin calculado con las posiciones viejas y se disparaba DENTRO
+       del rango de E6, tapando el testimonio entero con sus capas crema. ── */
+    transicion('regreso', 2);
 
     /* ── E9 · la vitrina se abre y el contador salta bajo el pulgar ── */
     var e9 = document.getElementById('vitrina');
@@ -1899,10 +2092,10 @@ body{background:#fbf9f8}
         var q9 = function(sel){ return e9.querySelector(sel); };
         var pel3 = q9('[data-paso="3"]'), pel4 = q9('[data-paso="4"]');
         gsap.set(q9('.vj-e9-bg img'), {scale: 1.22});
-        gsap.set(q9('.vj-e9-in'), {autoAlpha: 0, y: 20});
-        gsap.set([q9('.vj-salto-q'), q9('.vj-salto-n')], {autoAlpha: 0, y: 16});
-        gsap.set([pel3, pel4], {autoAlpha: 0, y: 110});
-        contador.textContent = '0,05 €';
+        gsap.set(q9('.vj-e9-in'), {autoAlpha: 0, y: 14});
+        gsap.set([q9('.vj-salto-q'), q9('.vj-salto-n')], {autoAlpha: 0, y: 12});
+        gsap.set([pel3, pel4], {autoAlpha: 0, y: 64});
+        pintarEuro(contador, '0,05 €');
 
         var A = 0.26, B = 0.60, saltoScrubHecho = false, pasosVistos9 = {};
         var tl9 = gsap.timeline({defaults: {ease: 'none'},
@@ -1910,18 +2103,23 @@ body{background:#fbf9f8}
             onUpdate: function(st){
               var pr = st.progress;
               if (pr <= A){
-                contador.textContent = '0,05 €'; kiloV.textContent = '0,05 €';
+                pintarEuro(contador, '0,05 €'); pintarEuro(kiloV, '0,05 €');
               } else if (pr < B){
                 var k = (pr - A) / (B - A);
-                var v = 0.05 + (1500 - 0.05) * Math.pow(k, 3.2);
+                // Rodillo de odómetro: barrido exponencial entre magnitudes con
+                // frenada suave (smoothstep) — acelera a mitad, frena al final.
+                var ss = k * k * (3 - 2 * k);
+                var v = 0.05 * Math.pow(1500 / 0.05, ss);
                 var txt = eurKilo(v);
-                contador.textContent = txt; kiloV.textContent = txt;
+                pintarEuro(contador, txt); pintarEuro(kiloV, txt);
                 saltoHecho = true; // el auto-salto estático queda anulado
               } else {
-                contador.textContent = '1.500 €'; kiloV.textContent = '1.500 €';
+                pintarEuro(contador, '1.500 €'); pintarEuro(kiloV, '1.500 €');
                 if (!saltoScrubHecho){
                   saltoScrubHecho = true;
                   latido();
+                  // el golpe: la cifra aterriza con peso
+                  gsap.fromTo(contador, {scale: 1.06}, {scale: 1, duration: .12, ease: 'power2.out'});
                   track('viaje_marcador_salto', {viaje: 'lana'});
                   track('viaje_salto_scrub', {viaje: 'lana'});
                 }
@@ -1955,6 +2153,7 @@ body{background:#fbf9f8}
       });
     }, 900);
 
+    ScrollTrigger.sort();
     ScrollTrigger.refresh();
     // Las medidas se recalculan cuando llegan las fuentes y tras un respiro:
     // si los starts quedan viejos, los pins actúan en el sitio equivocado.
