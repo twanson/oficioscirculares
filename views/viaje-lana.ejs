@@ -15,8 +15,8 @@ const POST_URL = '';
     title: 'El Viaje de la Lana | Oficios Circulares',
     description: 'Una experiencia guiada de 15-20 minutos: de la mejor lana de Europa pagada a céntimos al jersey de lujo de 1.500 €. Descubre qué pasa por el camino.',
     canonical: '/viaje/lana',
-    ogImage: 'https://www.oficioscirculares.com/assets/images/conecta-cover.jpg',
-    ogImageAlt: 'Rebaño de ovejas en una dehesa española al atardecer — El Viaje de la Lana'
+    ogImage: 'https://www.oficioscirculares.com/assets/images/viaje-lana/og-viaje-lana.jpg',
+    ogImageAlt: 'Esquila a tijera de una oveja — El Viaje de la Lana, Oficios Circulares'
 }) %>
 
 <style>
@@ -38,7 +38,7 @@ body{background:#fbf9f8}
   --crema:#fbf6ec;--arena:#E8D5B7;--surface:#fbf9f8;
   --on:#1b1c1c;--on-var:#414845;
   --f-head:'Newsreader',Georgia,serif;--f-body:'Manrope',sans-serif;--f-ui:'Nunito',sans-serif;
-  --bar:56px;
+  --bar:56px;--chip:40px;--cab:96px;
   font-family:var(--f-body);color:var(--on);line-height:1.62;-webkit-font-smoothing:antialiased;background:var(--surface)
 }
 /* :where() deja el reset con especificidad 0 en la parte del tipo, así que
@@ -76,8 +76,36 @@ body{background:#fbf9f8}
   .vj-bar-est{font-size:.84rem}
 }
 
+/* ============= EL MARCADOR DEL KILO (chip sticky) =============
+   La capa que se acumula: acompaña al lector desde la nave hasta el taller. */
+.vj-kilo{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 10px;padding:7px 14px 8px;background:#02201a;border-top:1px solid rgba(246,201,138,.16);font-family:var(--f-ui);line-height:1.25;text-align:center}
+.vj-kilo-k{font-weight:800;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,246,236,.6)}
+.vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:1.12rem;color:var(--oro);font-variant-numeric:tabular-nums;transition:color .4s ease}
+.vj-kilo.vj-kilo--salto .vj-kilo-v{color:#ffd9a0;text-shadow:0 0 22px rgba(246,201,138,.55)}
+.vj-kilo-n{flex:1 0 100%;font-size:.72rem;font-weight:600;color:rgba(251,246,236,.5)}
+.vj-kilo-n:empty{display:none}
+@media(min-width:640px){.vj-kilo-k{font-size:.68rem}.vj-kilo-v{font-size:1.24rem}.vj-kilo-n{flex:0 0 auto}}
+
+/* ============= INTERLUDIOS (foto a sangre + una frase) ============= */
+.vj-inter{position:relative;min-height:74svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(64px,10vh,96px) 22px;text-align:center}
+.vj-inter>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.vj-inter::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(2,32,25,.72),rgba(2,32,25,.82))}
+.vj-inter--noche::after{background:linear-gradient(180deg,rgba(8,24,44,.74),rgba(6,18,36,.86))}
+.vj-inter--ocre::after{background:linear-gradient(180deg,rgba(58,28,10,.7),rgba(44,20,7,.86))}
+.vj-inter-in{position:relative;z-index:2}
+.vj-inter-frase{max-width:min(100%,17ch);margin:0 auto!important;font-family:var(--f-head);font-size:clamp(1.7rem,6vw,2.8rem);font-weight:600;line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.5)}
+.vj-inter-frase em{font-style:italic;color:var(--oro)}
+.vj-inter-btn{margin-top:34px;white-space:nowrap;background:rgba(251,246,236,.1);border:1px solid rgba(246,201,138,.5);color:var(--crema);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.vj-inter-btn:hover{background:rgba(251,246,236,.18)}
+.vj-inter-btn.vj-hecho{background:linear-gradient(135deg,#3E7C59,#1F4B3F);border-color:transparent}
+
+/* Foto de apoyo dentro de un tramo */
+.vj-figura{margin:26px auto 0;max-width:540px}
+.vj-figura img{width:100%;height:auto;border-radius:20px;box-shadow:0 18px 44px rgba(2,52,41,.2)}
+.vj-figura figcaption{margin-top:12px;font-size:.98rem;line-height:1.5;color:var(--on-var);text-align:center}
+
 /* ===================== INTRO (above the fold) ===================== */
-.vj-intro{position:relative;min-height:calc(100svh - var(--bar));display:flex;align-items:flex-end;overflow:hidden;padding:96px 22px 42px}
+.vj-intro{position:relative;min-height:calc(100svh - var(--cab));display:flex;align-items:flex-end;overflow:hidden;padding:72px 22px 36px}
 .vj-intro-media{position:absolute;inset:0;z-index:0}
 .vj-intro-media img{width:100%;height:100%;object-fit:cover;object-position:center}
 .vj-intro-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,40,31,.42) 0%,rgba(2,40,31,.24) 34%,rgba(2,40,31,.82) 76%,rgba(2,40,31,.95) 100%)}
@@ -103,7 +131,8 @@ body{background:#fbf9f8}
    vector-effect:non-scaling-stroke el patrón se mide en píxeles de pantalla,
    no en unidades del viewBox. Sin JS, la línea sale dibujada del todo. */
 .vj-linea-draw{stroke:var(--verde-hoja);stroke-width:2.6;transition:stroke-dashoffset 1.15s cubic-bezier(.4,0,.2,1),stroke .6s ease}
-.vj-hito{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:var(--surface);border:2px solid rgba(2,52,41,.24);display:flex;align-items:center;justify-content:center;font-family:var(--f-head);font-style:italic;font-size:1.34rem;font-weight:600;color:var(--primary-2);box-shadow:0 4px 16px rgba(2,52,41,.1);transition:background .45s ease,color .45s ease,border-color .45s ease,box-shadow .45s ease}
+.vj-hito{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:var(--surface);border:2px solid rgba(2,52,41,.24);display:flex;align-items:center;justify-content:center;color:var(--primary-2);box-shadow:0 4px 16px rgba(2,52,41,.1);transition:background .45s ease,color .45s ease,border-color .45s ease,box-shadow .45s ease}
+.vj-hito svg{width:26px;height:26px;display:block}
 .vj-hito.vj-done{background:var(--primary);border-color:var(--primary);color:var(--oro);box-shadow:0 8px 24px rgba(2,52,41,.32);animation:vj-pop .45s cubic-bezier(.34,1.56,.64,1)}
 @keyframes vj-pop{0%{transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(1.22)}100%{transform:translate(-50%,-50%) scale(1)}}
 /* Microcelebración: al completar las 4, toda la ruta se ilumina en oro */
@@ -111,10 +140,12 @@ body{background:#fbf9f8}
 .vj.vj-fin .vj-hito.vj-done{background:linear-gradient(140deg,#3E7C59,#023429);border-color:var(--oro);box-shadow:0 0 0 5px rgba(246,201,138,.28),0 8px 26px rgba(2,52,41,.3)}
 
 /* ======================== ESTACIONES ======================== */
-.vj-est{scroll-margin-top:calc(var(--bar) + 6px)}
+.vj-est,.vj-inter,.vj-final{scroll-margin-top:calc(var(--cab) + 6px)}
 .vj-est-hero{position:relative;min-height:47vh;display:flex;align-items:flex-end;overflow:hidden;padding:78px 22px 26px}
 .vj-est-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
 .vj-est-hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(2,40,31,.3) 0%,rgba(2,40,31,.18) 30%,rgba(2,40,31,.86) 82%,rgba(2,40,31,.96) 100%)}
+.vj-est--verde .vj-est-hero::after{background:linear-gradient(180deg,rgba(2,40,31,.32) 0%,rgba(2,40,31,.2) 30%,rgba(2,40,31,.86) 82%,rgba(2,40,31,.96) 100%)}
+.vj-est--noche .vj-est-hero::after{background:linear-gradient(180deg,rgba(8,24,44,.42) 0%,rgba(8,24,44,.3) 28%,rgba(5,16,32,.88) 80%,rgba(4,12,26,.97) 100%)}
 .vj-est--ocre .vj-est-hero::after{background:linear-gradient(180deg,rgba(58,30,12,.34) 0%,rgba(58,30,12,.2) 30%,rgba(74,38,15,.86) 82%,rgba(74,38,15,.96) 100%)}
 /* Estación 4: teñido más denso y cálido. La foto de atardecer llega lavada y
    el final tiene que sentirse distinto del principio, no una repetición. */
@@ -246,7 +277,10 @@ body{background:#fbf9f8}
 .vj .vj-cita .vj-firma a{color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- Bloque final de CTAs ---------- */
-.vj-final{padding:clamp(58px,10vh,96px) 22px;background:linear-gradient(168deg,#06241c 0%,#023429 62%,#06281f 100%);text-align:center}
+.vj-final{position:relative;overflow:hidden;padding:clamp(64px,11vh,110px) 22px;background:#06241c;text-align:center}
+.vj-final-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.vj-final::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(168deg,rgba(6,36,28,.88) 0%,rgba(2,52,41,.9) 55%,rgba(6,40,31,.95) 100%)}
+.vj-final>*:not(.vj-final-foto){position:relative;z-index:2}
 .vj-final img.vj-sello{height:52px;width:auto;margin:0 auto 18px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
 .vj-final h2{font-family:var(--f-head);font-size:clamp(2.4rem,8vw,3.6rem);font-weight:700;color:var(--crema);line-height:1.12;margin-bottom:14px}
 .vj-final h2 em{font-style:italic;color:var(--oro)}
@@ -266,32 +300,22 @@ body{background:#fbf9f8}
 .vj .vj-foot a{color:rgba(251,246,236,.82);text-decoration:underline;text-underline-offset:3px}
 .vj-foot .vj-foot-links{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;font-size:.84rem}
 
-/* ============= INTERLUDIO: LA CASCADA DEL PRECIO =============
-   Escalera ascendente entre la estación 2 y el test. Cada peldaño se abre
-   al tocarlo; la altura y el sangrado crecientes son ornamento, no un
-   gráfico: las cifras van en texto porque la escala real es logarítmica. */
-.vj-cascada{background:linear-gradient(170deg,#06241c 0%,#023429 58%,#06281f 100%);padding:clamp(56px,9vh,88px) 22px}
-.vj-casc-in{max-width:660px;margin:0 auto}
-.vj-casc-head{text-align:center;margin-bottom:32px}
-.vj-casc-head h2{font-family:var(--f-head);font-size:clamp(2.4rem,9vw,3.6rem);font-weight:700;color:var(--crema);line-height:1.02;letter-spacing:-.02em}
-.vj-casc-head h2 em{font-style:italic;color:var(--oro)}
-.vj-casc-head p{margin-top:14px!important;color:rgba(251,246,236,.74);font-size:1.12rem}
-.vj-esc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.vj-esc{list-style:none;margin:26px auto 0;max-width:540px;padding:0;display:flex;flex-direction:column;gap:12px}
 .vj-esc-item{position:relative;padding-left:calc((var(--i) - 1) * 9px)}
-.vj-esc-btn{width:100%;display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;padding:18px 18px;border:1px solid rgba(246,201,138,.26);border-left:4px solid var(--oro);border-radius:14px;background:rgba(251,246,236,.05);color:var(--crema);font-family:inherit;transition:background .2s ease,border-color .2s ease}
-.vj-esc-btn:hover{background:rgba(251,246,236,.1)}
-.vj-esc-item[data-abierto] .vj-esc-btn{background:rgba(246,201,138,.13);border-color:rgba(246,201,138,.5);border-radius:14px 14px 0 0}
-.vj-esc-n{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:rgba(246,201,138,.16);border:1px solid rgba(246,201,138,.42);color:var(--oro);font-family:var(--f-head);font-style:italic;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
-.vj-esc-t{flex:1 1 auto;font-family:var(--f-ui);font-weight:800;font-size:1.12rem;line-height:1.25}
-.vj-esc-c{flex:0 0 auto;font-family:var(--f-head);font-size:clamp(1.5rem,6vw,2.1rem);font-weight:600;color:var(--oro);line-height:1;white-space:nowrap}
+.vj-esc-btn{width:100%;display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;padding:18px 18px;border:1px solid rgba(2,52,41,.12);border-left:4px solid var(--secondary);border-radius:16px;background:#fff;color:var(--on);font-family:inherit;box-shadow:0 10px 26px rgba(2,52,41,.06);transition:background .2s ease,box-shadow .2s ease}
+.vj-esc-btn:hover{background:#fffdf8;box-shadow:0 14px 32px rgba(2,52,41,.1)}
+.vj-esc-item[data-abierto] .vj-esc-btn{background:#fffdf8;border-radius:16px 16px 0 0;box-shadow:none}
+.vj-esc-n{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:rgba(147,74,28,.1);border:1px solid rgba(147,74,28,.28);color:var(--secondary);font-family:var(--f-head);font-style:italic;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
+.vj-esc-t{flex:1 1 auto;font-family:var(--f-ui);font-weight:800;font-size:1.12rem;line-height:1.25;color:var(--primary)}
+.vj-esc-c{flex:0 0 auto;font-family:var(--f-head);font-size:clamp(1.5rem,6vw,2.1rem);font-weight:600;color:var(--secondary);line-height:1;white-space:nowrap}
 .vj-esc-c small{font-size:.5em;font-weight:400;opacity:.8}
 .vj-esc-c--txt{font-style:italic;font-size:1.25rem}
-.vj-esc-mas{flex:0 0 auto;color:rgba(246,201,138,.7);font-size:1rem;transition:transform .25s ease}
+.vj-esc-mas{flex:0 0 auto;color:var(--secondary);font-size:1rem;transition:transform .25s ease}
 .vj-esc-item[data-abierto] .vj-esc-mas{transform:rotate(180deg)}
-.vj-esc-p{margin-top:-6px;padding:22px 18px 16px;border:1px solid rgba(246,201,138,.26);border-top:0;border-left:4px solid var(--oro);border-radius:0 0 14px 14px;background:rgba(246,201,138,.07)}
-.vj-esc-p p{color:rgba(251,246,236,.88)!important;font-size:1.1rem!important;line-height:1.6}
-.vj-casc-remate{margin-top:36px!important;padding-top:30px;border-top:1px solid rgba(246,201,138,.24);font-family:var(--f-head);font-style:italic;font-size:clamp(1.5rem,5.6vw,2.1rem);line-height:1.3;color:var(--crema);text-align:center}
-.vj-casc-remate em{color:var(--oro);font-style:italic}
+.vj-esc-p{margin-top:-6px;padding:4px 18px 20px;border:1px solid rgba(2,52,41,.12);border-top:0;border-left:4px solid var(--secondary);border-radius:0 0 16px 16px;background:#fffdf8}
+.vj-esc-p p{color:var(--on-var)!important;font-size:1.14rem!important;line-height:1.65}
+.vj-casc-remate{max-width:560px;margin:36px auto 0!important;padding-top:30px;border-top:1px solid rgba(147,74,28,.22);font-family:var(--f-head);font-style:italic;font-size:clamp(1.6rem,6vw,2.2rem);line-height:1.28;color:var(--primary);text-align:center}
+.vj-casc-remate em{color:var(--secondary);font-style:italic}
 
 /* ============= BLOQUE "¿Y POR QUÉ NO SE HACE AQUÍ?" =============
    Testimonio de Ramón Cobo (Wooldreamers). Va sobre crema para respirar
@@ -318,6 +342,11 @@ body{background:#fbf9f8}
 .vj-cita--ramon{margin-top:34px!important;padding-top:30px;border-top:1px solid rgba(147,74,28,.22)}
 .vj-ramon-remate{margin-top:32px!important;font-size:1.19rem!important;line-height:1.7;color:var(--on-var)!important}
 .vj-ramon-remate strong{color:var(--primary)}
+
+.vj-salto{margin:24px auto 0;max-width:540px;padding:20px 22px;border-radius:18px;background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.18)}
+.vj-salto-q{font-family:var(--f-head);font-style:italic;font-size:1.34rem!important;line-height:1.35;color:var(--primary)!important}
+.vj-salto-q em{color:var(--secondary)}
+.vj-salto-n{margin-top:12px!important;font-size:.94rem!important;line-height:1.5;color:#6b6354!important}
 
 /* ============= CALCULADORA DE COSTE POR USO ============= */
 .vj-calc{margin:26px auto 0;max-width:540px;padding:26px 22px;border-radius:20px;background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema)}
@@ -394,9 +423,11 @@ body{background:#fbf9f8}
   .vj-doble{flex-direction:row;max-width:900px}
   .vj-concl{flex:1}
   .vj-media{max-width:min(460px,46vh)}
-  .vj-nota,.vj-det,.vj-marcas,.vj-check,.vj-q,.vj-uso,.vj-calc,.vj-historia{max-width:600px}
+  .vj-nota,.vj-det,.vj-marcas,.vj-check,.vj-q,.vj-uso,.vj-calc,.vj-historia,.vj-salto,.vj-esc{max-width:600px}
   .vj-cine .vj-nota{max-width:520px}
-  .vj-cascada,.vj-ramon{padding:clamp(80px,11vh,120px) 46px}
+  .vj-ramon{padding:clamp(80px,11vh,120px) 46px}
+  .vj-inter-frase{max-width:20ch}
+  .vj-figura{max-width:600px}
   .vj-beat-t{font-size:1.5rem}
   .vj-esc-item{padding-left:calc((var(--i) - 1) * 18px)}
   .vj-esc-btn{padding:22px 24px}
@@ -416,10 +447,16 @@ body{background:#fbf9f8}
         <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares — inicio">
         <b>🧭 El Viaje de la Lana</b>
       </a>
-      <div class="vj-bar-est" id="vjEst">Estación 1 de 4</div>
+      <div class="vj-bar-est" id="vjEst">La nave</div>
     </div>
     <div class="vj-track" role="progressbar" aria-label="Progreso del viaje" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="vjProg">
       <div class="vj-fill" id="vjFill"></div>
+    </div>
+    <%# El marcador del kilo: la capa que se acumula durante todo el recorrido %>
+    <div class="vj-kilo" id="vjKilo">
+      <span class="vj-kilo-k">Tu kilo vale</span>
+      <b class="vj-kilo-v" id="vjKiloV" aria-live="polite">0,05 €</b>
+      <span class="vj-kilo-n" id="vjKiloN"></span>
     </div>
   </header>
 
@@ -427,48 +464,48 @@ body{background:#fbf9f8}
 
     <!-- ========================= INTRO ========================= -->
     <section class="vj-intro">
-      <%# Imagen propia del viaje (no la dehesa de Conecta Lana): vellón crudo
-          contra la chapa, textura potente que aguanta el degradado verde.
-          Derivada optimizada de conecta-lana/vellon-crudo.jpg — es el LCP. %>
+      <%# Foto propia del viaje: esquila a tijera en la nave, luz cálida.
+          Es el LCP y la que da la cara en el OG. %>
       <div class="vj-intro-media" aria-hidden="true">
-        <img src="/assets/images/viaje-lana/intro-vellon.jpg" alt="" fetchpriority="high" width="733" height="1100">
+        <img src="/assets/images/viaje-lana/intro-esquila-900.webp" srcset="/assets/images/viaje-lana/intro-esquila-900.webp 900w, /assets/images/viaje-lana/intro-esquila-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" width="900" height="1350">
       </div>
       <div class="vj-intro-in">
         <span class="vj-kicker">
           <img src="/assets/images/logodegraoscuro.png" alt="">
           <span>Un viaje de Oficios Circulares</span>
         </span>
-        <h1>El Viaje de <em>la&nbsp;Lana</em></h1>
-        <p class="vj-hook">De la mejor lana de Europa, malvendida a céntimos el kilo, al jersey de 1.500 €.</p>
-        <p class="vj-sub">Bienvenido al viaje. 4 estaciones, 15-20 minutos. Al final, no volverás a mirar igual un jersey.</p>
-        <p class="vj-tip"><span aria-hidden="true">🎧</span> <span><b>Consejo:</b> ponte auriculares. La primera estación se escucha.</span></p>
-        <div><a class="vj-start" href="#estacion-1">Empezar el viaje →</a></div>
+        <h1>Esto es un kilo de <em>lana&nbsp;española.</em></h1>
+        <p class="vj-sub">Lo acaban de esquilar. Por él, el ganadero ha cobrado unos céntimos.</p>
+        <p class="vj-hook">Dentro de unos meses, alguien pagará 1.500 € por un jersey hecho con lana como esta.</p>
+        <p class="vj-sub">Este viaje sigue al kilo para averiguar qué pasa por el camino. 4 paradas, 15-20 minutos.</p>
+        <p class="vj-tip"><span aria-hidden="true">🎧</span> <span>Ponte auriculares: la primera parada se escucha.</span></p>
+        <div><a class="vj-start" href="#nave">Seguir al kilo →</a></div>
       </div>
     </section>
 
-    <!-- ===================== CAMINO → HITO 1 ===================== -->
+    <!-- ================= RUTA → PARADA 1: La nave ================= -->
     <div class="vj-camino" aria-hidden="true">
       <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
         <path class="vj-linea-base" d="M3 0 V100"/>
         <path class="vj-linea-draw" d="M3 0 V100"/>
       </svg>
-      <div class="vj-hito" data-hito="1">1</div>
+      <div class="vj-hito" data-hito="1" title="La nave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 4l9 6.5"/><path d="M5 10v9h14v-9"/><path d="M9 19v-5h6v5"/></svg></div>
     </div>
 
-    <!-- ============ ESTACIÓN 1 — De la oveja al ovillo ============ -->
-    <section class="vj-est" id="estacion-1" data-est="1" aria-labelledby="t-est-1">
+    <!-- ============ PARADA 1 — La nave ============ -->
+    <section class="vj-est vj-est--verde" id="nave" data-est="1" data-lugar="La nave" aria-labelledby="t-nave">
       <div class="vj-est-hero">
-        <img src="/assets/images/blog/que-hacer-con-la-lana-de-oveja/lana-amontonada-nave.jpg" alt="Vellones de lana recién esquilada amontonados en el suelo de una nave" loading="lazy">
+        <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="Vellones recién esquilados amontonados en el suelo de una nave" >
         <div class="vj-est-hero-in">
-          <span class="vj-ey">Estación 1 de 4 · El proceso real</span>
-          <h2 id="t-est-1">De la oveja <em>al ovillo</em></h2>
+          <span class="vj-ey">Parada 1 de 4 · Lo que cuesta hacer</span>
+          <h2 id="t-nave">La <em>nave</em></h2>
         </div>
       </div>
       <%# La sala de cine arranca justo debajo del hero: el párrafo de entrada
           vive DENTRO de la banda oscura. Antes iba en una franja blanca
           estrecha entre el hero y el cine, sin aire y pegada a los bordes. %>
       <div class="vj-cine">
-        <p class="vj-cine-lead vj-rev">Antes de hablar de precios, mira lo que cuesta <em>hacer</em>. Sube el volumen, dale al play y déjate llevar. Aquí no hay prisa.</p>
+        <p class="vj-cine-lead vj-rev">Antes de hablar de dinero, mira lo que ese kilo lleva dentro: el año de la oveja, la esquila, el oficio.</p>
         <span class="vj-cine-badge vj-rev">🎧 Sube el volumen</span>
 
         <div class="vj-media vj-rev">
@@ -476,7 +513,7 @@ body{background:#fbf9f8}
             <%# El cartel es el estado por defecto. El embed se superpone
                 invisible y solo toma el sitio cuando ha pintado de verdad. %>
             <div class="vj-ig-card" id="vjIgCard">
-              <img src="/assets/images/blog/donde-comprar-lana-espanola/madeja-lana-detalle.jpg" alt="" loading="lazy">
+              <img src="/assets/images/viaje-lana/interludio-textura-900.webp" alt="" loading="lazy">
               <span class="vj-ig-play" aria-hidden="true">▶</span>
               <b>El sonido detrás de nuestros ovillos</b>
               <small>Un día en la hilatura, paso a paso — con el sonido de protagonista.</small>
@@ -495,7 +532,6 @@ body{background:#fbf9f8}
 
         <p class="vj-nota vj-rev">En Mota del Cuervo se lleva más de un siglo lavando e hilando lana — y en esta hilatura el oficio sigue vivo: maquinaria centenaria y manos que saben lo que hacen.</p>
       </div>
-
       <div class="vj-est-body">
         <%# Pieza secundaria (opcional): el documental largo de la hilatura.
             YouTube solo se carga al desplegar, y en dominio nocookie. %>
@@ -508,125 +544,51 @@ body{background:#fbf9f8}
           </div>
         </details>
       </div>
-      <div class="vj-next-wrap">
-        <button type="button" class="vj-next" data-next="1" data-goto="#estacion-2">Siguiente estación →</button>
+    </section>
+
+    <!-- ============== INTERLUDIO 1 → puerto ============== -->
+    <section class="vj-inter vj-inter--noche">
+      <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="100vw" alt="Vista cenital de un rebaño apretado" >
+      <div class="vj-inter-in">
+        <p class="vj-inter-frase vj-rev">Ya sabes lo que cuesta hacerlo. Ahora la mala noticia: este kilo, casi seguro, <em>no se queda en España</em>. ¿A dónde va?</p>
+        <button type="button" class="vj-next vj-inter-btn" data-next="1" data-goto="#puerto">Seguir al kilo →</button>
       </div>
     </section>
 
-    <!-- ===================== CAMINO → HITO 2 ===================== -->
+    <!-- ================= RUTA → PARADA 2: El puerto ================= -->
     <div class="vj-camino" aria-hidden="true">
       <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
         <path class="vj-linea-base" d="M3 0 V100"/>
         <path class="vj-linea-draw" d="M3 0 V100"/>
       </svg>
-      <div class="vj-hito" data-hito="2">2</div>
+      <div class="vj-hito" data-hito="2" title="El puerto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="7" rx="1"/><path d="M7 10v7M11 10v7M15 10v7"/><path d="M2 20h20"/><path d="M6 10V7h6v3"/></svg></div>
     </div>
 
-    <!-- ============ ESTACIÓN 2 — El paseo detective ============ -->
-    <section class="vj-est vj-est--ocre" id="estacion-2" data-est="2" aria-labelledby="t-est-2">
+    <!-- ============ PARADA 2 — El puerto ============ -->
+    <section class="vj-est vj-est--noche" id="puerto" data-est="2" data-lugar="El puerto" aria-labelledby="t-puerto">
       <div class="vj-est-hero">
-        <%# Punto de lana en tonos camel: es el momento "lujo del punto", así
-            que la imagen tiene que ser prenda/tejido, no otro oficio. %>
-        <img src="/assets/images/viaje-lana/punto-lana-camel.jpg" alt="Detalle de un tejido de punto y un ovillo de lana en tonos camel" loading="lazy">
+        <img src="/assets/images/viaje-lana/puerto-contenedores-900.webp" srcset="/assets/images/viaje-lana/puerto-contenedores-900.webp 900w, /assets/images/viaje-lana/puerto-contenedores-1600.webp 1600w" sizes="100vw" alt="Terminal de contenedores al anochecer, con un buque atracado" >
         <div class="vj-est-hero-in">
-          <span class="vj-ey">Estación 2 de 4 · Las webs del lujo</span>
-          <h2 id="t-est-2">El paseo <em>detective</em></h2>
+          <span class="vj-ey">Parada 2 de 4 · Por qué tu kilo se va</span>
+          <h2 id="t-puerto">El <em>puerto</em></h2>
         </div>
       </div>
       <div class="vj-est-body">
         <div class="vj-w vj-rev">
-          <p class="vj-lead">Ahora, al otro extremo. Abre estas webs (en pestaña nueva) y vuelve con las respuestas. Tu misión:</p>
+          <p class="vj-lead">Tu kilo viaja en un contenedor rumbo a Shanghái, clasificado y en bruto. No es una anécdota: es la norma. ¿Por qué España regala el primer paso y no se queda ninguno de los demás? Se lo preguntamos a quien lo vive por dentro.</p>
         </div>
-
-        <div class="vj-marcas vj-rev">
-          <a class="vj-marca" href="https://www.loropiana.com" target="_blank" rel="noopener nofollow" data-lujo="loro_piana">Loro Piana <span>abrir ↗</span></a>
-          <a class="vj-marca" href="https://www.brunellocucinelli.com" target="_blank" rel="noopener nofollow" data-lujo="brunello_cucinelli">Brunello Cucinelli <span>abrir ↗</span></a>
-        </div>
-
-        <div class="vj-check vj-rev">
-          <div class="vj-check-t">Tu misión — marca lo que vayas comprobando</div>
-          <label><input type="checkbox" data-check="1"><span>¿Cuánto cuesta el jersey más barato que encuentres?</span></label>
-          <label><input type="checkbox" data-check="2"><span>¿Cuántas veces leen "artesanal", "savoir-faire" o "excelencia"?</span></label>
-          <label><input type="checkbox" data-check="3"><span>¿Encuentras en la ficha QUIÉN lo fabrica y DÓNDE?</span></label>
-          <label><input type="checkbox" data-check="4"><span>¿Dice algo del ganadero o del precio de la fibra en origen?</span></label>
-          <%# El cierre vive dentro de la carta: fuera se alineaba con el borde
-              de la página en vez de con la columna de contenido. %>
-          <p class="vj-cierre">¿Mucho relato y pocos datos? No es casualidad. Siguiente estación.</p>
-        </div>
+        <figure class="vj-figura vj-rev">
+          <img src="/assets/images/viaje-lana/puerto-bobinas-900.webp" srcset="/assets/images/viaje-lana/puerto-bobinas-900.webp 900w, /assets/images/viaje-lana/puerto-bobinas-1600.webp 1600w" sizes="100vw" alt="Hilera de bobinas de hilo en una fábrica textil" >
+          <figcaption>Lavar, peinar, teñir, hilar, tejer: los oficios del valor añadido, lejos de aquí.</figcaption>
+        </figure>
       </div>
-      <div class="vj-next-wrap">
-        <button type="button" class="vj-next" data-next="2" data-goto="#estacion-3">Siguiente estación →</button>
-      </div>
-    </section>
-
-    <!-- ============ INTERLUDIO: LA CASCADA DEL PRECIO ============ -->
-    <section class="vj-cascada" aria-labelledby="t-cascada">
-      <div class="vj-casc-in">
-        <div class="vj-casc-head vj-rev">
-          <span class="vj-ey">El camino del precio</span>
-          <h2 id="t-cascada">La cascada <em>del precio</em></h2>
-          <p>Del vellón al escaparate, paso a paso. Toca cada escalón.</p>
-        </div>
-
-        <ol class="vj-esc vj-rev">
-          <li class="vj-esc-item" style="--i:1" data-paso="1">
-            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-1">
-              <span class="vj-esc-n" aria-hidden="true">1</span>
-              <span class="vj-esc-t">El vellón</span>
-              <span class="vj-esc-c">0,05 €<small>/kg</small></span>
-              <span class="vj-esc-mas" aria-hidden="true">▾</span>
-            </button>
-            <div class="vj-esc-p" id="esc-1" hidden>
-              <p>0,05 €/kg. Es lo que recibe el ganadero por la lana más común. Esquilar le cuesta más: cada esquileo es a pérdidas.</p>
-              <span class="vj-fuente">Fuente: AVICON</span>
-            </div>
-          </li>
-          <li class="vj-esc-item" style="--i:2" data-paso="2">
-            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-2">
-              <span class="vj-esc-n" aria-hidden="true">2</span>
-              <span class="vj-esc-t">Lavado, cardado, hilado</span>
-              <span class="vj-esc-c vj-esc-c--txt">el salto</span>
-              <span class="vj-esc-mas" aria-hidden="true">▾</span>
-            </button>
-            <div class="vj-esc-p" id="esc-2" hidden>
-              <p>Aquí la lana se convierte en algo que ya se puede trabajar. Cada transformación multiplica el valor — y casi ninguna se hace ya en España.</p>
-            </div>
-          </li>
-          <li class="vj-esc-item" style="--i:3" data-paso="3">
-            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-3">
-              <span class="vj-esc-n" aria-hidden="true">3</span>
-              <span class="vj-esc-t">El ovillo</span>
-              <span class="vj-esc-c">10-14 €<small>/100 g</small></span>
-              <span class="vj-esc-mas" aria-hidden="true">▾</span>
-            </button>
-            <div class="vj-esc-p" id="esc-3" hidden>
-              <p>Un ovillo de 100 g de lana española de calidad ronda los 10-14 € en tienda. Del vellón al ovillo, el valor se ha multiplicado por cientos.</p>
-            </div>
-          </li>
-          <li class="vj-esc-item" style="--i:4" data-paso="4">
-            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-4">
-              <span class="vj-esc-n" aria-hidden="true">4</span>
-              <span class="vj-esc-t">El jersey de lujo</span>
-              <span class="vj-esc-c">1.500 €</span>
-              <span class="vj-esc-mas" aria-hidden="true">▾</span>
-            </button>
-            <div class="vj-esc-p" id="esc-4" hidden>
-              <p>Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</p>
-            </div>
-          </li>
-        </ol>
-
-        <p class="vj-casc-remate vj-rev">La lana no vale poco. Vale poco <em>donde está el ganadero</em>. Cada paso del oficio multiplica el valor — la pregunta del viaje es quién se queda cada tramo.</p>
-      </div>
-    </section>
-
     <%# ===================================================================
         BLOQUE "¿Y POR QUÉ NO SE HACE AQUÍ?"
         Testimonio directo de Ramón Cobo (Wooldreamers), conversación con
         Jose, ago-2026. PENDIENTE DEL OK DE RAMÓN A LAS CITAS: no debe pasar
         a main hasta que Jose lo confirme.
         =================================================================== %>
-    <section class="vj-ramon" id="por-que-no-aqui" aria-labelledby="t-ramon">
+    <section class="vj-ramon vj-ramon--dentro" id="por-que-no-aqui" aria-labelledby="t-ramon">
       <div class="vj-ramon-in">
         <div class="vj-rev">
           <span class="vj-ey">La pregunta incómoda</span>
@@ -677,30 +639,119 @@ body{background:#fbf9f8}
         <p class="vj-ramon-remate vj-rev">Por eso este viaje no va de villanos con logo. Va de un sistema donde <strong>el precio nunca cuenta la verdad</strong> — ni el del lujo, ni el del sintético "barato". Sigue: el test te da los números.</p>
       </div>
     </section>
+      <div class="vj-est-body">
+        <ol class="vj-esc vj-rev">
+          <li class="vj-esc-item" style="--i:1" data-paso="1">
+            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-1">
+              <span class="vj-esc-n" aria-hidden="true">1</span>
+              <span class="vj-esc-t">El vellón</span>
+              <span class="vj-esc-c">0,05 €<small>/kg</small></span>
+              <span class="vj-esc-mas" aria-hidden="true">▾</span>
+            </button>
+            <div class="vj-esc-p" id="esc-1" hidden>
+              <p>0,05 €/kg. Es lo que recibe el ganadero por la lana más común. Esquilar le cuesta más: cada esquileo es a pérdidas.</p>
+              <span class="vj-fuente">Fuente: AVICON</span>
+            </div>
+          </li>
+          <li class="vj-esc-item" style="--i:2" data-paso="2">
+            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-2">
+              <span class="vj-esc-n" aria-hidden="true">2</span>
+              <span class="vj-esc-t">Lavado, cardado, hilado</span>
+              <span class="vj-esc-c vj-esc-c--txt">el salto</span>
+              <span class="vj-esc-mas" aria-hidden="true">▾</span>
+            </button>
+            <div class="vj-esc-p" id="esc-2" hidden>
+              <p>Aquí la lana se convierte en algo que ya se puede trabajar. Cada transformación multiplica el valor — y casi ninguna se hace ya en España.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-    <!-- ===================== CAMINO → HITO 3 ===================== -->
+    <!-- ============== INTERLUDIO 2 → escaparate ============== -->
+    <section class="vj-inter vj-inter--ocre">
+      <img src="/assets/images/viaje-lana/interludio-textura-900.webp" srcset="/assets/images/viaje-lana/interludio-textura-900.webp 900w, /assets/images/viaje-lana/interludio-textura-1600.webp 1600w" sizes="100vw" alt="Macro de un vellón de lana" >
+      <div class="vj-inter-in">
+        <p class="vj-inter-frase vj-rev">Tu kilo volverá. Pero <em>no volverá como lana</em>.</p>
+        <button type="button" class="vj-next vj-inter-btn" data-next="2" data-goto="#escaparate">Seguir al kilo →</button>
+      </div>
+    </section>
+
+    <!-- ================= RUTA → PARADA 3: El escaparate ================= -->
     <div class="vj-camino" aria-hidden="true">
       <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
         <path class="vj-linea-base" d="M3 0 V100"/>
         <path class="vj-linea-draw" d="M3 0 V100"/>
       </svg>
-      <div class="vj-hito" data-hito="3">3</div>
+      <div class="vj-hito" data-hito="3" title="El escaparate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5a1.6 1.6 0 1 1 1.6 1.6H12z"/><path d="M12 7.1 4 12.4c-.9.6-.5 2 .6 2h14.8c1.1 0 1.5-1.4.6-2L12 7.1z"/><path d="M4 18h16"/></svg></div>
     </div>
 
-    <!-- ================== ESTACIÓN 3 — El test ================== -->
-    <section class="vj-est" id="estacion-3" data-est="3" aria-labelledby="t-est-3">
+    <!-- ============ PARADA 3 — El escaparate ============ -->
+    <section class="vj-est vj-est--ocre" id="escaparate" data-est="3" data-lugar="El escaparate" aria-labelledby="t-escaparate">
       <div class="vj-est-hero">
-        <img src="/assets/images/viaje-lana/telar-artesano.jpg" alt="Artesano tejiendo en un telar de madera con urdimbre de lana cruda" loading="lazy">
+        <img src="/assets/images/viaje-lana/escaparate-punto-900.webp" srcset="/assets/images/viaje-lana/escaparate-punto-900.webp 900w, /assets/images/viaje-lana/escaparate-punto-1600.webp 1600w" sizes="100vw" alt="Pila de jerséis de punto en tonos crema y camel" >
         <div class="vj-est-hero-in">
-          <span class="vj-ey">Estación 3 de 4 · Cinco datos</span>
-          <h2 id="t-est-3">El <em>test</em></h2>
+          <span class="vj-ey">Parada 3 de 4 · El regreso con otro nombre</span>
+          <h2 id="t-escaparate">El <em>escaparate</em></h2>
         </div>
       </div>
       <div class="vj-est-body">
         <div class="vj-w vj-rev">
-          <p class="vj-lead">Cinco preguntas. No hay nota, no hay examen: hay datos que no te esperas. Elige y mira qué pasa.</p>
+          <p class="vj-lead">Aquí está tu kilo otra vez: hilado, tejido y con etiqueta nueva. Ahora se llama <em>savoir-faire</em> y cuesta 1.500 €. Compruébalo tú mismo — abre estas webs con una misión.</p>
+        </div>
+        <%# El salto del marcador ocurre aquí. El matiz va pegado a él y en
+            letra pequeña, no escondido: sin él la cifra engaña. %>
+        <div class="vj-salto vj-rev">
+          <p class="vj-salto-q">¿En qué punto del mapa pasó esto? <em>Pista: no fue en la nave.</em></p>
+          <p class="vj-salto-n">Ojo a la comparación: un jersey lleva unos 300-400 g de hilo, no un kilo de vellón. Aun así, echa cuentas.</p>
+        </div>
+      </div>
+      <div class="vj-est-body">
+
+        <div class="vj-marcas vj-rev">
+          <a class="vj-marca" href="https://www.loropiana.com" target="_blank" rel="noopener nofollow" data-lujo="loro_piana">Loro Piana <span>abrir ↗</span></a>
+          <a class="vj-marca" href="https://www.brunellocucinelli.com" target="_blank" rel="noopener nofollow" data-lujo="brunello_cucinelli">Brunello Cucinelli <span>abrir ↗</span></a>
         </div>
 
+        <div class="vj-check vj-rev">
+          <div class="vj-check-t">Tu misión — marca lo que vayas comprobando</div>
+          <label><input type="checkbox" data-check="1"><span>¿Cuánto cuesta el jersey más barato que encuentres?</span></label>
+          <label><input type="checkbox" data-check="2"><span>¿Cuántas veces leen "artesanal", "savoir-faire" o "excelencia"?</span></label>
+          <label><input type="checkbox" data-check="3"><span>¿Encuentras en la ficha QUIÉN lo fabrica y DÓNDE?</span></label>
+          <label><input type="checkbox" data-check="4"><span>¿Dice algo del ganadero o del precio de la fibra en origen?</span></label>
+          <%# El cierre vive dentro de la carta: fuera se alineaba con el borde
+              de la página en vez de con la columna de contenido. %>
+          <p class="vj-cierre">¿Mucho relato y pocos datos? No es casualidad. Siguiente estación.</p>
+        </div>
+      </div>
+      <div class="vj-est-body">
+        <ol class="vj-esc vj-rev">
+          <li class="vj-esc-item" style="--i:3" data-paso="3">
+            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-3">
+              <span class="vj-esc-n" aria-hidden="true">3</span>
+              <span class="vj-esc-t">El ovillo</span>
+              <span class="vj-esc-c">10-14 €<small>/100 g</small></span>
+              <span class="vj-esc-mas" aria-hidden="true">▾</span>
+            </button>
+            <div class="vj-esc-p" id="esc-3" hidden>
+              <p>Un ovillo de 100 g de lana española de calidad ronda los 10-14 € en tienda. Del vellón al ovillo, el valor se ha multiplicado por cientos.</p>
+            </div>
+          </li>
+          <li class="vj-esc-item" style="--i:4" data-paso="4">
+            <button type="button" class="vj-esc-btn" aria-expanded="false" aria-controls="esc-4">
+              <span class="vj-esc-n" aria-hidden="true">4</span>
+              <span class="vj-esc-t">El jersey de lujo</span>
+              <span class="vj-esc-c">1.500 €</span>
+              <span class="vj-esc-mas" aria-hidden="true">▾</span>
+            </button>
+            <div class="vj-esc-p" id="esc-4" hidden>
+              <p>Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</p>
+            </div>
+          </li>
+        </ol>
+        <div class="vj-w vj-rev">
+          <h3>Las cinco cosas que el escaparate no te cuenta</h3>
+        </div>
         <div class="vj-q vj-rev" data-q="1" data-ok="c">
           <div class="vj-q-n">Pregunta 1 de 5</div>
           <p class="vj-q-t">¿Cuánto cobra un ganadero español por TODA la lana de una oveja en un año?</p>
@@ -781,7 +832,40 @@ body{background:#fbf9f8}
           <div class="vj-uso-big">El precio de etiqueta no es el coste real.</div>
           <p>Mira el <strong>coste por uso</strong>: unos calcetines de lana bien hechos duran décadas y se reparan. Los otros duran una temporada — y los compras otra vez, y otra.</p>
         </div>
+      </div>
+    </section>
 
+    <!-- ============== INTERLUDIO 3 → taller ============== -->
+    <section class="vj-inter vj-inter--ocre">
+      <img src="/assets/images/viaje-lana/taller-tejiendo-900.webp" srcset="/assets/images/viaje-lana/taller-tejiendo-900.webp 900w, /assets/images/viaje-lana/taller-tejiendo-1600.webp 1600w" sizes="100vw" alt="Unas manos tejiendo con lana de tonos naturales" >
+      <div class="vj-inter-in">
+        <p class="vj-inter-frase vj-rev">Todo esto le pasó al kilo que se fue. <em>¿Y si se hubiera quedado?</em></p>
+        <button type="button" class="vj-next vj-inter-btn" data-next="3" data-goto="#taller">Seguir al kilo →</button>
+      </div>
+    </section>
+
+    <!-- ================= RUTA → PARADA 4: El taller ================= -->
+    <div class="vj-camino" aria-hidden="true">
+      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
+        <path class="vj-linea-base" d="M3 0 V100"/>
+        <path class="vj-linea-draw" d="M3 0 V100"/>
+      </svg>
+      <div class="vj-hito" data-hito="4" title="El taller"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M6.2 6.5c2.8 2.3 7.4 7.3 9.6 11.2"/><path d="M4.4 11.2c2.6 1.4 8.2 5.7 9.2 8.4"/><path d="M8 4.4c2.1 1.2 6.7 5 8.6 7.4"/></svg></div>
+    </div>
+
+    <!-- ============ PARADA 4 — El taller ============ -->
+    <section class="vj-est vj-est--ocre" id="taller" data-est="4" data-lugar="El taller" aria-labelledby="t-taller">
+      <div class="vj-est-hero">
+        <img src="/assets/images/viaje-lana/taller-ovillo-900.webp" srcset="/assets/images/viaje-lana/taller-ovillo-900.webp 900w, /assets/images/viaje-lana/taller-ovillo-1600.webp 1600w" sizes="100vw" alt="Unas manos sostienen un ovillo de lana cruda" >
+        <div class="vj-est-hero-in">
+          <span class="vj-ey">Parada 4 de 4 · El kilo que se quedó</span>
+          <h2 id="t-taller">El <em>taller</em></h2>
+        </div>
+      </div>
+      <div class="vj-est-body">
+        <div class="vj-w vj-rev">
+          <p class="vj-lead">Hay kilos que no embarcan. Se lavan en Mota del Cuervo, se hilan con máquinas centenarias (los viste en la primera parada) y acaban en un ovillo de 12 € o en unos calcetines de 149 € que duran décadas. Mismo kilo, otro destino: aquí el valor se queda en cada mano que lo toca.</p>
+        </div>
         <!-- Calculadora de coste por uso: se juega con ella, no se lee -->
         <div class="vj-calc vj-rev" id="vjCalc">
           <h3>¿Y si lo miras por uso?</h3>
@@ -803,7 +887,6 @@ body{background:#fbf9f8}
           <p class="vj-calc-comp">Una prenda de 20 € que te dura un año sale a <b>0,40 €/uso</b>. Casi el doble.</p>
           <p class="vj-calc-pie">La cara sale más barata. Bienvenido al coste por uso.</p>
         </div>
-
         <!-- Historia humana: el precio justo, contado con un caso real -->
         <div class="vj-historia vj-rev">
           <div class="vj-hist-k">Una historia de verdad</div>
@@ -816,31 +899,6 @@ body{background:#fbf9f8}
           <p>Calculados de verdad — material, horas, gastos, impuestos y un margen digno — salen por <strong>149 €</strong>. La diferencia no es avaricia: es todo lo que el precio de mercadillo no cuenta.</p>
           <span class="vj-fuente" style="color:#6b6354">Caso real: Espai Micra</span>
         </div>
-      </div>
-      <div class="vj-next-wrap">
-        <button type="button" class="vj-next" data-next="3" data-goto="#estacion-4">Siguiente estación →</button>
-      </div>
-    </section>
-
-    <!-- ===================== CAMINO → HITO 4 ===================== -->
-    <div class="vj-camino" aria-hidden="true">
-      <svg class="vj-linea" viewBox="0 0 6 100" preserveAspectRatio="none" focusable="false">
-        <path class="vj-linea-base" d="M3 0 V100"/>
-        <path class="vj-linea-draw" d="M3 0 V100"/>
-      </svg>
-      <div class="vj-hito" data-hito="4">4</div>
-    </div>
-
-    <!-- ============== ESTACIÓN 4 — Final del viaje ============== -->
-    <section class="vj-est vj-est--final" id="estacion-4" data-est="4" aria-labelledby="t-est-4">
-      <div class="vj-est-hero">
-        <img src="/assets/images/blog/que-hacer-con-la-lana-de-oveja/cierre-rebano-atardecer.jpg" alt="Rebaño descansando en la ladera a contraluz, al atardecer" loading="lazy">
-        <div class="vj-est-hero-in">
-          <span class="vj-ey">Estación 4 de 4 · La conclusión</span>
-          <h2 id="t-est-4">Final <em>del viaje</em></h2>
-        </div>
-      </div>
-      <div class="vj-est-body">
         <div class="vj-doble">
           <div class="vj-concl vj-concl--consumidor vj-rev">
             <span class="vj-concl-k">Si compras</span>
@@ -851,7 +909,6 @@ body{background:#fbf9f8}
             <p>Acabas de ver lo que cobra el lujo por un relato que el tuyo cuenta de verdad. <strong>Tu precio no es caro. Es justo.</strong> Y este argumento es tuyo: úsalo con tus clientes.</p>
           </div>
         </div>
-
         <!-- Munición para el artesano: se copia y se usa tal cual -->
         <div class="vj-frases vj-rev">
           <div class="vj-frases-k">Si eres artesano</div>
@@ -869,22 +926,22 @@ body{background:#fbf9f8}
             <button type="button" class="vj-copiar" data-frase="3">Copiar</button>
           </div>
         </div>
-
         <div class="vj-cita vj-rev">
           <blockquote>"Nos dicen que esto tendría que ser un museo. Pero un museo es para lo que ya ha desaparecido. Lo nuestro sigue oliendo, sigue manchando las manos, sigue funcionando cada mañana."</blockquote>
           <p class="vj-firma">— Wooldreamers · <a href="https://www.instagram.com/reel/DZqGx8Ms4xe/" target="_blank" rel="noopener">ver el reel</a></p>
         </div>
+        <p class="vj-casc-remate vj-rev">La lana no vale poco. Vale poco <em>donde está el ganadero</em>.</p>
       </div>
       <div class="vj-next-wrap">
         <button type="button" class="vj-next vj-next--oro" data-next="4" data-goto="#final">Completar el viaje 🧭</button>
       </div>
     </section>
 
-    <!-- ======================= CTAs FINALES ======================= -->
     <section class="vj-final" id="final">
+      <img src="/assets/images/viaje-lana/cierre-rebano-900.webp" srcset="/assets/images/viaje-lana/cierre-rebano-900.webp 900w, /assets/images/viaje-lana/cierre-rebano-1600.webp 1600w" sizes="100vw" alt="" class="vj-final-foto" aria-hidden="true">
       <img class="vj-sello" src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
       <h2>¿Quieres que la lana española <em>deje de tirarse?</em></h2>
-      <p>Pásate por Conecta Lana: el punto de encuentro de ganaderos, transformadores y artesanos de la lana.</p>
+      <p>¿Quieres que más kilos se queden? Eso es exactamente Conecta Lana: el punto de encuentro de ganaderos, transformadores y artesanos de la lana.</p>
       <div class="vj-ctas">
         <a class="vj-cta vj-cta--1" href="/conecta-lana" data-cta="conecta_lana">Conoce Conecta Lana →</a>
         <a class="vj-cta vj-cta--2" href="/conecta-lana/directorio" data-cta="directorio">Ver el directorio de la lana →</a>
@@ -1051,16 +1108,81 @@ body{background:#fbf9f8}
     b.addEventListener('click', function(){ completar(+b.dataset.next, b.dataset.goto); });
   });
 
-  /* Etiqueta "Estación X de 4": sigue a dónde está el lector, no a lo hecho. */
-  var secciones = [].slice.call(document.querySelectorAll('.vj-est'));
-  if (secciones.length && 'IntersectionObserver' in window){
-    var ioEst = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (e.isIntersecting) estEl.textContent = 'Estación ' + e.target.dataset.est + ' de ' + TOTAL;
-      });
-    }, {rootMargin:'-40% 0px -40% 0px'});
-    secciones.forEach(function(s){ ioEst.observe(s); });
+  /* ---------- La barra dice el LUGAR, y el marcador dice lo que vale ----------
+     Un solo observador alimenta las dos cosas: dónde está el lector y cuánto
+     vale su kilo en ese punto del mapa. */
+  var kiloV = document.getElementById('vjKiloV');
+  var kiloN = document.getElementById('vjKiloN');
+  var kiloBox = document.getElementById('vjKilo');
+  var VALOR = {
+    1: {v:'0,05 €', n:''},
+    2: {v:'0,05 €', n:'sale de España valiendo lo mismo'},
+    3: {v:'1.500 €', n:'', salto:true},
+    4: {v:'0,05 € si se va · 149 € si se queda', n:'el mismo kilo, dos destinos'}
+  };
+  var saltoHecho = false;
+
+  function pintarKilo(n){
+    var d = VALOR[n];
+    if (!d) return;
+    kiloN.textContent = d.n;
+    if (d.salto && !saltoHecho){ saltoHecho = true; animarSalto(); return; }
+    if (!d.salto) kiloBox.classList.remove('vj-kilo--salto');
+    kiloV.textContent = d.v;
   }
+
+  /* El salto 0,05 € → 1.500 € ocurre ante los ojos del lector, una sola vez. */
+  function animarSalto(){
+    kiloBox.classList.add('vj-kilo--salto');
+    track('viaje_marcador_salto', {viaje:'lana'});
+    if (reduce){ kiloV.textContent = '1.500 €'; return; }
+    // Red de seguridad: si el rAF no llega a correr (pestaña de fondo), el
+    // marcador aterriza igual en su valor final. Nunca se queda a medias.
+    setTimeout(function(){ kiloV.textContent = '1.500 €'; }, 1800);
+    var t0 = null, DUR = 1400;
+    function paso(ts){
+      if (t0 === null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / DUR);
+      // arranque lento y disparada final: se siente el salto, no una rampa
+      var v = 0.05 + (1500 - 0.05) * Math.pow(k, 3.2);
+      kiloV.textContent = k < 1
+        ? Math.round(v).toLocaleString('es-ES') + ' €'
+        : '1.500 €';
+      if (k < 1) requestAnimationFrame(paso);
+    }
+    requestAnimationFrame(paso);
+  }
+
+  /* El tramo activo se calcula del scroll, no de un IntersectionObserver: el
+     marcador es la pieza central del viaje y no puede quedarse congelada si el
+     callback del observer no llega (pestaña en segundo plano). */
+  var secciones = [].slice.call(document.querySelectorAll('.vj-est'));
+  var tramoActual = 0;
+  function repasarTramo(){
+    if (!secciones.length) return;
+    var medio = window.innerHeight * 0.42, activo = null;
+    for (var i = 0; i < secciones.length; i++){
+      var r = secciones[i].getBoundingClientRect();
+      if (r.top <= medio && r.bottom > medio){ activo = secciones[i]; break; }
+      if (r.top > medio) break;          // aún no ha llegado: se queda el anterior
+      activo = secciones[i];             // ya pasó del todo
+    }
+    if (!activo) return;
+    var n = +activo.dataset.est;
+    if (n === tramoActual) return;
+    tramoActual = n;
+    estEl.textContent = activo.dataset.lugar || '';
+    pintarKilo(n);
+  }
+  var ultimoTramo = 0;
+  window.addEventListener('scroll', function(){
+    var ahora = +new Date();
+    if (ahora - ultimoTramo < 120) return;
+    ultimoTramo = ahora;
+    repasarTramo();
+  }, {passive:true});
+  window.addEventListener('resize', repasarTramo, {passive:true});
+  repasarTramo();
 
   /* ---------- El camino: la línea se dibuja al entrar en viewport ----------
      El trazo usa vector-effect:non-scaling-stroke, así que el patrón de
