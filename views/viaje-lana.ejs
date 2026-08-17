@@ -122,8 +122,6 @@ body{background:#fbf9f8}
 .vj-e1-sub{margin:18px auto 0!important;max-width:38ch;font-size:1.15rem;line-height:1.55;color:rgba(255,255,255,.93);text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .vj-e1-titulo .vj-tip{margin-top:18px}
 .vj-e1-titulo .vj-start{margin-top:24px}
-.vj-e1-hilo{position:absolute;left:6px;bottom:8px;width:min(300px,54vw);height:34vh;z-index:1;pointer-events:none;opacity:.85}
-.vj-e1-hilo{filter:drop-shadow(0 0 5px rgba(224,136,90,.28))}
 /* estático: las frases fluyen una bajo otra con aire */
 .vj-e1-t + .vj-e1-t{margin-top:26px}
 .vj-e1-titulo{margin-top:34px}
@@ -194,13 +192,13 @@ body{background:#fbf9f8}
 /* E4/E8 · transiciones */
 .vj-tr-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:64px 22px;text-align:center}
 .vj-tr-fondo{position:absolute;inset:0}
-.vj-tr-fondo--a{background:var(--crema)}
+.vj-tr--seva .vj-tr-fondo--a{background:#06241c}
+.vj-tr--regreso .vj-tr-fondo--a{background:#241105}
 .vj-tr--seva .vj-tr-fondo--b{background:linear-gradient(180deg,#0a1c33,#050f1f)}
 .vj-tr--regreso .vj-tr-fondo--b{background:linear-gradient(180deg,#3a1c0a,#241105)}
-.vj-tr-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.72;z-index:1}
 
 .vj-tr-foto{position:absolute;inset:0}
-.vj-tr-foto img{width:100%;height:100%;object-fit:cover}
+.vj-tr-foto img{width:100%;height:100%;object-fit:cover;filter:contrast(1.18) brightness(.92)}
 .vj-tr-frase{position:relative;z-index:2;max-width:17ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
 .vj-tr-frase em{font-style:italic;color:var(--secondary-claro)}
 
@@ -254,8 +252,6 @@ body{background:#fbf9f8}
 .vj-e7-peldano h3{font-family:var(--f-ui);font-weight:800;font-size:1.2rem;color:var(--primary);margin:0 0 10px}
 .vj-e7-peldano p{color:var(--on-var);font-size:1.1rem;line-height:1.6;margin:0}
 .vj-e7-peldano .vj-fuente{color:#8a8070;margin-top:10px;display:block}
-.vj-e7-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.55}
-@media(max-width:899.98px){.vj-e7-hilo{display:none}}
 @media(min-width:900px){
   .vj-e7-peldano[data-paso="2"]{margin-top:-56px;margin-right:4%}
   .vj-e7-peldano[data-paso="1"]{margin-left:4%}
@@ -519,7 +515,7 @@ body{background:#fbf9f8}
 
 /* Fundidos de costura (v7·5): las tres costuras oscuro→claro llevan banda
    de solape; las demás cruzan por el tinte del tramo y no la necesitan. */
-.vj-cap{height:38vh;background:linear-gradient(180deg,var(--de),var(--surface))}
+.vj-cap{height:28vh;background:linear-gradient(180deg,var(--de),var(--surface))}
 /* ═══ TIPOGRAFÍA (v8·4): cifras tnum, € al 60%, subrayado a mano ═══ */
 .vj-e9-contador b,.vj-kilo-v,.vj-e7-cifra,.vj-e9-peldano b,.vj-herochip b{font-feature-settings:"tnum";letter-spacing:-.01em}
 .vj-eur{font-size:.6em;vertical-align:top;margin-left:.05em;letter-spacing:0}
@@ -528,6 +524,22 @@ body{background:#fbf9f8}
 .vj-sub-mano svg path{fill:none;stroke:var(--secondary-claro);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
 
 .vj-hilo-brilla{filter:drop-shadow(0 0 10px rgba(232,167,106,.9)) brightness(1.3);transition:filter .18s ease}
+
+/* Nudo-hito (v9·1.2): la marca de cada parada, pequeña y siempre igual */
+.vj-parada{display:inline-flex;align-items:center;gap:10px}
+.vj-nudo{width:38px;height:34px;flex:0 0 auto}
+.vj-nudo path{fill:none;stroke:#c96f2e;stroke-width:2.4}
+.vj-js .vj-nudo path{stroke-dasharray:130;stroke-dashoffset:130;transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1) .15s}
+.vj-js .vj-nudo.vj-on path{stroke-dashoffset:0}
+
+/* Indicador de scroll (v9·3) */
+.vj-desliza{position:absolute;left:50%;bottom:5vh;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:9px;transition:opacity .4s ease}
+.vj-desliza i{display:block;width:1.5px;height:28px;background:rgba(251,246,236,.7);border-radius:2px;animation:vj-pulso 1.8s ease-in-out infinite}
+.vj-desliza span{font-family:var(--f-body);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,246,236,.7)}
+.vj-desliza--mini{bottom:3.5vh}
+.vj-desliza.vj-oculto{opacity:0;pointer-events:none}
+@keyframes vj-pulso{0%,100%{opacity:.5;transform:translateY(0)}50%{opacity:1;transform:translateY(6px)}}
+@media(prefers-reduced-motion:reduce){.vj-desliza i{animation:none}}
 
 /* ============= GRANO GLOBAL ============= */
 .vj-grano{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:128px}
@@ -724,7 +736,8 @@ body{background:#fbf9f8}
 /* E14 · la bifurcación */
 .vj-e14{background:linear-gradient(178deg,#f3ede2 0%,#12200f 34%)}
 .vj-e14-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:64px 22px;text-align:center}
-.vj-e14-hilo{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.85}
+.vj-e14-pin{flex-direction:column;gap:26px}
+.vj-e14-hilo{position:relative;width:min(700px,92vw);height:min(420px,52svh);pointer-events:none;opacity:.9;flex:0 0 auto}
 .vj-e14-frase{position:relative;z-index:2;max-width:16ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
 .vj-e14-frase em{font-style:italic;color:var(--secondary-claro)}
 
@@ -892,9 +905,7 @@ body{background:#fbf9f8}
           </div>
         </div>
         <%# El hilo de lana: nace del vellón y se dibuja con el scroll %>
-        <%# El hilo: nace en el vellón de la foto y termina en la píldora del
-            kilo (abajo-izquierda). Una sola curva, sin garabatos. %>
-        <svg class="vj-e1-hilo" aria-hidden="true"></svg>
+        <div class="vj-desliza" id="vjDesliza" aria-hidden="true"><i></i><span>Desliza</span></div>
       </div>
     </section>
 
@@ -910,6 +921,7 @@ body{background:#fbf9f8}
         </div>
         <div class="vj-e2-in">
           <div class="vj-e2-cinewrap">
+            <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 1 de 4 · La nave</span></span>
             <p class="vj-cine-lead">Antes de hablar de dinero, mira lo que ese kilo lleva dentro: el año de la oveja, la esquila, el oficio.</p>
             <span class="vj-cine-badge" id="vjBadge">🎧 Sube el volumen</span>
             <div class="vj-media">
@@ -954,6 +966,8 @@ body{background:#fbf9f8}
     <%# ═══════════ E4 · TRANSICIÓN: SE VA (pin corto, scrub) ═══════════
         Crema → azul noche mientras el hilo se tensa hacia la derecha.
         Al pasarla se completa el tramo 1 (mismo evento GA4 de siempre). %>
+    <div class="vj-cap" style="--de:var(--surface);background:linear-gradient(180deg,var(--surface),#06241c)" aria-hidden="true"></div>
+
     <section class="vj-tr vj-tr--seva" id="se-va" aria-label="Transición: el kilo se va">
       <div class="vj-tr-pin">
         <div class="vj-tr-fondo vj-tr-fondo--a"></div>
@@ -961,7 +975,6 @@ body{background:#fbf9f8}
         <div class="vj-tr-foto" aria-hidden="true">
           <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
         </div>
-        <svg class="vj-tr-hilo" aria-hidden="true"></svg>
         <p class="vj-tr-frase">Ya sabes lo que cuesta hacerlo.<br>Este kilo, casi seguro, <em>no <span class="vj-sub-mano">se queda<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> en España</em>.</p>
       </div>
     </section>
@@ -974,7 +987,7 @@ body{background:#fbf9f8}
         </div>
         <div class="vj-e5-velo vj-luz vj-luz--pie"></div>
         <div class="vj-e5-in">
-          <span class="vj-ey vj-ey--luz">Parada 2 de 4 · El puerto</span>
+          <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 2 de 4 · El puerto</span></span>
           <p class="vj-e5-texto">Tu kilo viaja en un contenedor rumbo a Shanghái, clasificado y en bruto. No es una anécdota: es la norma. ¿Por qué España regala el primer paso y no se queda ninguno de los demás? Se lo preguntamos a quien lo vive por dentro.</p>
         </div>
       </div>
@@ -1015,6 +1028,7 @@ body{background:#fbf9f8}
             <p class="vj-firma">— Ramón Cobo · Wooldreamers</p>
           </div>
         </div>
+        <div class="vj-desliza vj-desliza--mini" aria-hidden="true"><i></i></div>
       </div>
       <div class="vj-e6-remate">
         <p class="vj-ramon-remate">Por eso este viaje no va de villanos con logo. Va de un sistema donde <strong>el precio nunca cuenta la verdad</strong> — ni el del lujo, ni el del sintético "barato". Sigue: el test te da los números.</p>
@@ -1040,13 +1054,14 @@ body{background:#fbf9f8}
             <h3>Lavado, cardado, hilado</h3>
             <p>Aquí la lana se convierte en algo que ya se puede trabajar. Cada transformación multiplica el valor — y casi ninguna se hace ya en España.</p>
           </article>
-          <svg class="vj-e7-hilo" aria-hidden="true"></svg>
         </div>
       </div>
     </section>
 
     <%# ═══════════ E8 · TRANSICIÓN: EL REGRESO (pin corto) ═══════════
         Al pasarla se completa el tramo 2. %>
+    <div class="vj-cap" style="--de:var(--surface);background:linear-gradient(180deg,var(--surface),#241105)" aria-hidden="true"></div>
+
     <section class="vj-tr vj-tr--regreso" id="regreso" aria-label="Transición: el regreso">
       <div class="vj-tr-pin">
         <div class="vj-tr-fondo vj-tr-fondo--a"></div>
@@ -1054,7 +1069,6 @@ body{background:#fbf9f8}
         <div class="vj-tr-foto" aria-hidden="true">
           <img src="/assets/images/viaje-lana/interludio-textura-900.webp" srcset="/assets/images/viaje-lana/interludio-textura-900.webp 900w, /assets/images/viaje-lana/interludio-textura-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
         </div>
-        <svg class="vj-tr-hilo" aria-hidden="true"></svg>
         <p class="vj-tr-frase">Tu kilo volverá.<br>Pero <em><span class="vj-sub-mano">no volverá<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> como lana</em>.</p>
       </div>
     </section>
@@ -1070,7 +1084,7 @@ body{background:#fbf9f8}
         <div class="vj-e9-puerta vj-e9-puerta--izq" aria-hidden="true"></div>
         <div class="vj-e9-puerta vj-e9-puerta--dcha" aria-hidden="true"></div>
         <div class="vj-e9-in">
-          <span class="vj-ey vj-ey--luz">Parada 3 de 4 · El escaparate</span>
+          <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 3 de 4 · El escaparate</span></span>
           <div class="vj-e9-contador"><b id="vjContador">0,05 € → 1.500 €</b></div>
           <p class="vj-salto-q">¿En qué punto del mapa pasó esto? <em>Pista: no fue en la nave.</em></p>
           <p class="vj-salto-n">Ojo a la comparación: un jersey lleva unos 300-400 g de hilo, no un kilo de vellón. Aun así, echa cuentas.</p>
@@ -1087,6 +1101,7 @@ body{background:#fbf9f8}
             <p>Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</p>
           </article>
         </div>
+        <div class="vj-desliza vj-desliza--mini" aria-hidden="true"><i></i></div>
       </div>
     </section>
 
@@ -1290,8 +1305,8 @@ body{background:#fbf9f8}
         se queda. Al pasarla se completa el tramo 3. %>
     <section class="vj-e14" id="bifurcacion" aria-label="La bifurcación">
       <div class="vj-e14-pin">
-        <svg class="vj-e14-hilo" aria-hidden="true"></svg>
         <p class="vj-e14-frase">¿Y si tu kilo <em>nunca se hubiera ido</em>?</p>
+        <svg class="vj-e14-hilo" aria-hidden="true"></svg>
       </div>
     </section>
 
@@ -1302,7 +1317,7 @@ body{background:#fbf9f8}
         <div class="vj-e15-luz vj-luz vj-luz--pie"></div>
       </div>
       <div class="vj-e15-in">
-        <span class="vj-ey vj-ey--luz">Parada 4 de 4 · El taller</span>
+        <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 4 de 4 · El taller</span></span>
         <p class="vj-e15-texto">Hay kilos que no embarcan. Se lavan en Mota del Cuervo, se hilan con máquinas centenarias (los viste en la primera parada) y acaban en un ovillo de 12 € o en unos calcetines de 149 € que duran décadas. Mismo kilo, otro destino: aquí el valor se queda en cada mano que lo toca.</p>
       </div>
     </section>
@@ -1596,14 +1611,24 @@ body{background:#fbf9f8}
     var d = VALOR[n];
     if (!d) return;
     mostrarPildora();
-    kiloN.textContent = d.n;
+    if (kiloN.textContent !== d.n) kiloN.textContent = d.n;
     if (d.salto){
-      // En modo escena el salto pertenece al scrub de E9: aquí no se anima.
-      if (escenasListas) return;
+      if (escenasListas){
+        // El scrub de E9 es el dueño del salto — pero si el lector ATERRIZA
+        // aquí (anchor, back/forward), el valor sale de la posición real.
+        var stE9 = window.ScrollTrigger && ScrollTrigger.getAll().find(function(t){ return t.trigger.id === 'vitrina'; });
+        if (stE9){
+          if (window.scrollY >= stE9.end - 10){ saltoHecho = true; pintarEuro(kiloV, '1.500 €'); }
+          else if (window.scrollY <= stE9.start + 10 && kiloV.textContent.indexOf('0,05') < 0) pintarEuro(kiloV, '0,05 €');
+        }
+        return;
+      }
       if (!saltoHecho){ saltoHecho = true; animarSalto(); return; }
     }
-    kiloV.textContent = d.v;
-    latido();
+    if (kiloV.textContent !== d.v){
+      pintarEuro(kiloV, d.v);
+      latido();
+    }
   }
 
   /* El salto 0,05 € → 1.500 € ocurre ante los ojos del lector, una sola vez. */
@@ -1639,22 +1664,46 @@ body{background:#fbf9f8}
       if (r.top > medio) break;          // aún no ha llegado: se queda el anterior
       activo = secciones[i];             // ya pasó del todo
     }
-    if (!activo) return;
+    if (!activo){
+      // Por encima de la primera parada: estado de arranque. Solo si la
+      // píldora ya nació (su nacimiento narrativo es del título de E1).
+      if (!kiloBox.hidden && kiloV.textContent.indexOf('0,05') < 0){
+        pintarEuro(kiloV, '0,05 €');
+        kiloN.textContent = '';
+        estEl.textContent = 'La nave';
+      }
+      return;
+    }
     var n = +activo.dataset.est;
-    if (n === tramoActual) return;
     tramoActual = n;
-    estEl.textContent = activo.dataset.lugar || '';
+    if (estEl.textContent !== (activo.dataset.lugar || '')) estEl.textContent = activo.dataset.lugar || '';
     pintarKilo(n);
   }
-  var ultimoTramo = 0;
+  var ultimoTramo = 0, colaTramo = null;
   window.addEventListener('scroll', function(){
     var ahora = +new Date();
-    if (ahora - ultimoTramo < 120) return;
-    ultimoTramo = ahora;
-    repasarTramo();
+    if (ahora - ultimoTramo >= 120){ ultimoTramo = ahora; repasarTramo(); }
+    // pasada de scroll-end (v9·4): con anchors o saltos bruscos, el estado
+    // final se recoge siempre
+    clearTimeout(colaTramo);
+    colaTramo = setTimeout(repasarTramo, 180);
   }, {passive:true});
   window.addEventListener('resize', repasarTramo, {passive:true});
   repasarTramo();
+
+  /* ── Indicador "Desliza" (v9·3): fuera al primer scroll; vuelve tras 5 s
+     quietos, solo mientras el lector siga en E1-E2. ── */
+  var desliza = document.getElementById('vjDesliza');
+  if (desliza){
+    var quietoT = null;
+    window.addEventListener('scroll', function(){
+      desliza.classList.add('vj-oculto');
+      clearTimeout(quietoT);
+      quietoT = setTimeout(function(){
+        if (window.scrollY < window.innerHeight * 5) desliza.classList.remove('vj-oculto');
+      }, 5000);
+    }, {passive:true});
+  }
 
   /* ---------- El camino: la línea se dibuja al entrar en viewport ----------
      El trazo usa vector-effect:non-scaling-stroke, así que el patrón de
@@ -1988,6 +2037,11 @@ body{background:#fbf9f8}
     });
   }
 
+  /* ---------- Nudos-hito: draw-on corto al entrar cada parada ---------- */
+  document.querySelectorAll('.vj-nudo').forEach(function(nu){
+    cuandoSeVea(nu, function(){ nu.classList.add('vj-on'); });
+  });
+
   /* ---------- CTAs finales ---------- */
   document.querySelectorAll('[data-cta]').forEach(function(a){
     a.addEventListener('click', function(){
@@ -2009,9 +2063,6 @@ body{background:#fbf9f8}
     /* ── E1 · Apertura ── */
     var e1 = document.getElementById('apertura');
     var q1 = function(sel){ return e1.querySelector(sel); };
-    var hilo1 = montarHilo(q1('.vj-e1-hilo'), function(W, H){
-      return 'M' + (.92*W) + ',' + (.04*H) + ' C ' + (.55*W) + ',' + (.30*H) + ' ' + (.22*W) + ',' + (.52*H) + ' ' + (.08*W) + ',' + (.90*H);
-    }, {nudoFin: true, fibras: .6, color: '#c96f2e', colorClaro: '#e8a76a'});
     gsap.set(q1('.vj-e1-foto'), {opacity: .36, scale: 1.12});
     // Drift lento e independiente del scroll: la escena respira aunque el
     // lector aún no haya movido el dedo. Sobre el wrapper, no sobre la foto,
@@ -2037,7 +2088,6 @@ body{background:#fbf9f8}
        .to(q1('[data-e1="3"]'), {autoAlpha: 0, y: -14, duration: 6, ease: 'power2.in'}, 64)
        .to(q1('.vj-e1-titulo'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 71)
 ;
-    dibujarHiloEnTimeline(tl1, hilo1, 76, 22);
     // subrayado a mano de "céntimos", dibujado cuando la frase 2 está en meseta
     var sub1 = q1('.vj-sub-trazo');
     if (sub1){
@@ -2205,26 +2255,21 @@ body{background:#fbf9f8}
       var el = document.getElementById(id);
       if (!el) return;
       var q = function(sel){ return el.querySelector(sel); };
-      var hiloT = montarHilo(q('.vj-tr-hilo'), id === 'se-va'
-        ? function(W, H){ return 'M' + (.50*W) + ',0 C ' + (.58*W) + ',' + (.32*H) + ' ' + (.78*W) + ',' + (.58*H) + ' ' + (.96*W) + ',' + (.98*H); }
-        : function(W, H){ return 'M' + (.50*W) + ',0 C ' + (.42*W) + ',' + (.32*H) + ' ' + (.22*W) + ',' + (.58*H) + ' ' + (.04*W) + ',' + (.98*H); },
-        {fibras: .5, color: '#c96f2e', colorClaro: '#e8a76a'});
       // La escena entra ya teñida: sin este arranque, el tramo pre-pin
       // mostraba crema plano — el único frame vacío del barrido.
-      gsap.set(q('.vj-tr-fondo--b'), {opacity: .22});
+      gsap.set(q('.vj-tr-fondo--b'), {opacity: 0});
       gsap.set(q('.vj-tr-frase'), {autoAlpha: 0, y: 30});
       var hecho = false;
-      gsap.set(q('.vj-tr-foto'), {opacity: .14});
+      gsap.set(q('.vj-tr-foto'), {opacity: .42});
       var tlT = gsap.timeline({defaults: {ease: 'none'},
         scrollTrigger: {trigger: el, start: 'top top', end: '+=90%', pin: true, scrub: true,
           onUpdate: function(st){
             if (st.progress > 0.9 && !hecho){ hecho = true; completar(tramoAlAcabar); }
           }}});
       tlT.to(q('.vj-tr-fondo--b'), {opacity: 1, duration: 26}, 0)
-         .to(q('.vj-tr-foto'), {opacity: .38, duration: 34}, 4)
+         .to(q('.vj-tr-foto'), {opacity: .5, duration: 34}, 4)
          .fromTo(q('.vj-tr-foto img'), {yPercent: -4}, {yPercent: 4, duration: 100, ease: 'none'}, 0)
          .to(q('.vj-tr-frase'), {autoAlpha: 1, y: 0, duration: 14, ease: 'power2.out'}, 16);
-      dibujarHiloEnTimeline(tlT, hiloT, 16, 55);
       var subT = q('.vj-sub-trazo');
       if (subT){
         var slT = subT.getTotalLength();
@@ -2282,9 +2327,6 @@ body{background:#fbf9f8}
     if (e7){
       var q7 = function(sel){ return e7.querySelector(sel); };
       var pel1 = q7('[data-paso="1"]'), pel2 = q7('[data-paso="2"]');
-      var hilo7 = montarHilo(q7('.vj-e7-hilo'), function(W, H){
-        return 'M' + (.10*W) + ',' + (.94*H) + ' C ' + (.34*W) + ',' + (.78*H) + ' ' + (.62*W) + ',' + (.40*H) + ' ' + (.92*W) + ',' + (.08*H);
-      }, {nudoFin: true, fibras: .7});
       gsap.set([pel1, pel2], {autoAlpha: 0, y: 64});
       var pasosVistos7 = {};
       var tl7 = gsap.timeline({defaults: {ease: 'none'},
@@ -2295,7 +2337,6 @@ body{background:#fbf9f8}
           }}});
       tl7.to(pel1, {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 5)
          .to(pel2, {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 32);
-      dibujarHiloEnTimeline(tl7, hilo7, 55, 32);
     }
 
     /* ── E8 se crea AQUÍ, en orden del documento: crearla antes que E5-E7
@@ -2433,7 +2474,7 @@ body{background:#fbf9f8}
        Temporizadores puros, nada de rAF: debe funcionar hasta en pestaña
        de fondo. Es el fuego artificial del cierre. */
     window.__vjOnda = function(){
-      var svgs = [].slice.call(document.querySelectorAll('.vj-e16-hilo, .vj-e14-hilo, .vj-e12-hilo, .vj-e7-hilo, .vj-tr-hilo, .vj-e1-hilo'));
+      var svgs = [].slice.call(document.querySelectorAll('.vj-e16-hilo, .vj-e14-hilo, .vj-e12-hilo, .vj-nudo, .vj-kilo'));
       svgs.forEach(function(sv, i){
         setTimeout(function(){
           sv.classList.add('vj-hilo-brilla');
