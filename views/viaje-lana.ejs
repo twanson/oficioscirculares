@@ -21,14 +21,10 @@ const POST_URL = '';
 
 <style>
 /* ===================================================================
-   EL VIAJE DE LA LANA — página inmersiva standalone.
-   CSS 100% scoped bajo .vj para aislarlo del CSS global del sitio.
-   Mobile-first: ~95% del tráfico llega desde el link de la bio de IG.
+   EL VIAJE DE LA LANA — página editorial de una sola capa (v10).
+   La vara de medir es conecta-lana.ejs: mismos tokens, radios, sombras
+   y reveals. Sin motor de escenas: el scroll es scroll.
    =================================================================== */
-
-/* position:sticky se rompe si un ancestro es contenedor de scroll. El body
-   global usa overflow-x:hidden; clip recorta el desbordamiento horizontal
-   SIN crear contenedor de scroll (mismo fix que en conecta-lana.ejs). */
 html,body{overflow-x:clip}
 body{background:#fbf9f8}
 
@@ -38,31 +34,19 @@ body{background:#fbf9f8}
   --crema:#fbf6ec;--arena:#E8D5B7;--surface:#fbf9f8;
   --on:#1b1c1c;--on-var:#414845;
   --f-head:'Newsreader',Georgia,serif;--f-body:'Manrope',sans-serif;--f-ui:'Nunito',sans-serif;
-  --bar:56px;--cab:56px;
-  /* Tokens calcados de home-v2.css para que el viaje y la home sean el mismo sistema */
-  --glass:rgba(251,249,248,.88);--r-card:16px;--r-quote:14px;
-  --sombra-card:0 24px 64px rgba(0,0,0,.12);--sombra-quote:0 12px 32px rgba(0,0,0,.2);
+  --bar:56px;
+  --glass:rgba(251,249,248,.88);--r-card:16px;
+  --sombra-card:0 24px 64px rgba(0,0,0,.12);--sombra-osc:0 18px 40px rgba(0,0,0,.3);
   font-family:var(--f-body);color:var(--on);line-height:1.62;-webkit-font-smoothing:antialiased;background:var(--surface)
 }
-/* :where() deja el reset con especificidad 0 en la parte del tipo, así que
-   cualquier regla de una sola clase (.vj-cierre, .vj-nota…) puede recuperar
-   sus márgenes. Con `.vj p{margin:0}` ganaba el reset y los bloques perdían
-   el `margin:auto` — se pegaban al margen izquierdo. */
 .vj :where(h1,h2,h3,h4,p){margin:0}
-/* Los enlaces sin clase heredan color; los que llevan clase mandan sobre su
-   propio color (si no, `.vj a` gana por especificidad y los deja ilegibles). */
 .vj a{text-decoration:none}
 .vj a:not([class]){color:inherit}
 .vj img{display:block}
 .vj :focus-visible{outline:3px solid var(--oro);outline-offset:3px;border-radius:6px}
-
-/* Ancho de lectura editorial */
 .vj-w{max-width:68ch;margin:0 auto}
 
-/* ============ CABECERA STICKY (chrome mínimo + progreso) ============ */
-/* La barra va por encima de TODO el contenido: además del z-index alto,
-   `main` abre su propio contexto de apilamiento (z-index:0), así que ningún
-   z-index ni transform de dentro puede escalar por encima de ella. */
+/* ── barra sticky + progreso ── */
 .vj-bar{position:sticky;top:0;z-index:100;background:#03231b;border-bottom:1px solid rgba(246,201,138,.2);box-shadow:0 6px 22px rgba(2,32,25,.34)}
 .vj-main{position:relative;z-index:0}
 .vj-bar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--bar);padding:0 14px;max-width:1100px;margin:0 auto}
@@ -73,360 +57,109 @@ body{background:#fbf9f8}
 .vj-track{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(246,201,138,.16)}
 .vj-fill{height:100%;width:0;background:linear-gradient(90deg,#3E7C59,#f6c98a);transition:width .55s cubic-bezier(.4,0,.2,1)}
 @media(max-width:359px){.vj-brand b{display:none}}
-@media(min-width:640px){
-  .vj-bar-in{padding:0 24px}
-  .vj-brand img{height:32px}.vj-brand b{font-size:.94rem}
-  .vj-bar-est{font-size:.84rem}
-}
+@media(min-width:640px){.vj-bar-in{padding:0 24px}.vj-brand img{height:32px}.vj-brand b{font-size:.94rem}.vj-bar-est{font-size:.84rem}}
 
-
-/* ── Heros al patrón de la home: foto a sangre + tarjeta glass. El lado
-      alterna por parada (izq-dcha-izq-dcha): asimetría y sensación de camino. ── */
-.vj-est-hero-in{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;display:flex}
-.vj-est-hero--izq .vj-est-hero-in{justify-content:flex-start}
-.vj-est-hero--dcha .vj-est-hero-in{justify-content:flex-end}
-.vj-herocard{position:relative;max-width:30rem;padding:30px 28px;border-radius:var(--r-card);background:rgba(251,249,248,.95);border:1px solid rgba(255,255,255,.2);box-shadow:var(--sombra-card)}
-.vj-heroline{margin-top:12px!important;font-family:var(--f-ui);font-weight:700;font-size:1.02rem;letter-spacing:.01em;color:var(--on-var)}
-.vj-herochip{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:8px 16px;border-radius:100px;background:rgba(2,52,41,.07);font-family:var(--f-ui);font-weight:700;font-size:.86rem;color:var(--primary)}
-.vj-herochip b{font-family:var(--f-head);font-weight:600;font-size:1.06rem;color:var(--secondary)}
-/* Sobre cristal claro el titular va en verde, no en blanco */
-.vj-est-hero .vj-herocard h2{color:var(--primary);text-shadow:none;font-size:clamp(2.4rem,9vw,3.8rem)}
-.vj-est-hero .vj-herocard h2 em{color:var(--secondary)}
-/* El degradado se suaviza: ya no hace de fondo del texto, solo asienta la foto */
-.vj-est-hero::after{background:linear-gradient(180deg,rgba(2,40,31,.18) 0%,rgba(2,40,31,.1) 45%,rgba(2,40,31,.42) 100%)!important}
-.vj-est--noche .vj-est-hero::after{background:linear-gradient(180deg,rgba(8,24,44,.28) 0%,rgba(8,24,44,.16) 45%,rgba(5,16,32,.5) 100%)!important}
-.vj-est--ocre .vj-est-hero::after,.vj-est--final .vj-est-hero::after{background:linear-gradient(180deg,rgba(58,28,10,.22) 0%,rgba(58,28,10,.12) 45%,rgba(52,24,8,.48) 100%)!important}
-/* El blur de verdad, solo donde compensa: pantallas grandes */
-@media(min-width:760px){
-  .vj-herocard{padding:44px 46px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-  .vj-kilo{background:rgba(2,32,25,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-}
-@media(max-width:600px){.vj-heroline{font-size:.98rem}}
-
-/* ═══════════════ ESCENAS SCROLL-DRIVEN (E1-E3) ═══════════════
-   Doble contrato: SIN .vj-gsap (sin JS, sin GSAP o reduced-motion) las
-   escenas son columnas estáticas, todo visible. CON .vj-gsap, GSAP toma el
-   mando: pin + scrub, y los estados iniciales los fija el propio motor. */
-
-/* ── E1 · Apertura ── */
-.vj-e1{position:relative;background:#04130f;color:var(--crema)}
-.vj-e1-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.vj-e1-media{position:absolute;inset:0}
-.vj-e1-foto{width:100%;height:100%;object-fit:cover}
-.vj-e1-velo{--tinte:rgba(6,36,28,.62);--tinte-suave:rgba(6,36,28,.42);--pie:rgba(4,19,15,.88);--fx:68%;--fy:32%}
-.vj-e1-textos{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto;padding:96px 26px 72px;text-align:center}
-.vj-e1-t{font-family:var(--f-head);font-weight:600;font-size:clamp(1.7rem,6.4vw,2.9rem);line-height:1.22;letter-spacing:-.015em;color:#fff;text-shadow:0 3px 30px rgba(0,0,0,.5);max-width:19ch;margin:0 auto}
-.vj-e1-t em{font-style:italic;color:var(--secondary-claro)}
-.vj-e1-titulo h1{font-family:var(--f-head);font-size:clamp(3.2rem,13vw,5.6rem);font-weight:700;color:#fff;line-height:.96;letter-spacing:-.025em;text-shadow:0 3px 30px rgba(0,0,0,.45);margin:18px 0 0}
-.vj-e1-titulo h1 em{font-style:italic;font-weight:600;color:var(--secondary-claro)}
-.vj-e1-sub{margin:18px auto 0!important;max-width:38ch;font-size:1.15rem;line-height:1.55;color:rgba(255,255,255,.93);text-shadow:0 2px 14px rgba(0,0,0,.5)}
-.vj-e1-titulo .vj-tip{margin-top:18px}
-.vj-e1-titulo .vj-start{margin-top:24px}
-/* estático: las frases fluyen una bajo otra con aire */
-.vj-e1-t + .vj-e1-t{margin-top:26px}
-.vj-e1-titulo{margin-top:34px}
-/* modo escena: todas apiladas en el mismo sitio, GSAP las turna */
-/* En modo escena, cada pin mide EXACTAMENTE un viewport: si el contenido es
-   más alto (el embed real del reel), se recorta — nunca estira la escena. */
-.vj-gsap .vj-e1-pin,.vj-gsap .vj-e2-pin,.vj-gsap .vj-tr-pin,.vj-gsap .vj-e5-pin,.vj-gsap .vj-e6-pin,.vj-gsap .vj-e7-pin,.vj-gsap .vj-e9-pin,.vj-gsap .vj-e14-pin,.vj-gsap .vj-e16-pin{height:100svh;min-height:0;overflow:hidden}
-.vj-gsap .vj-e1-textos{display:grid;place-items:center;min-height:100svh;padding:56px 26px}
-.vj-gsap .vj-e1-textos>*{grid-area:1/1;margin:0 auto}
-/* estados iniciales sin destello: el CSS deja la escena como GSAP la va a
-   encontrar; cuando el motor arranca, sus estilos inline toman el relevo */
-.vj-gsap .vj-e1-foto{opacity:.36;transform:scale(1.12)}
-.vj-gsap .vj-e1-t[data-e1="2"],.vj-gsap .vj-e1-t[data-e1="3"],.vj-gsap .vj-e1-titulo{opacity:0;visibility:hidden}
-.vj-gsap .vj-e2-cinewrap{opacity:0;visibility:hidden}
-.vj-gsap .vj-e2-nota{opacity:0;visibility:hidden}
-
-/* ── E2 · La nave ── */
-.vj-e2{position:relative;background:#062018}
-.vj-e2-pin{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center}
-.vj-e2-bg{position:absolute;inset:-6% 0}
-.vj-e2-bg img{width:100%;height:100%;object-fit:cover}
-.vj-e2-grad{--tinte:rgba(6,36,28,.68);--tinte-suave:rgba(6,36,28,.5);--pie:rgba(2,25,19,.92);--fx:50%;--fy:58%}
-.vj-e2-in{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:88px 22px 56px;display:flex;flex-direction:column;align-items:center;gap:26px}
-.vj-e2-cinewrap{text-align:center;max-width:540px}
-.vj-e2-cinewrap .vj-cine-lead{margin-bottom:22px!important}
-.vj-e2-cinewrap .vj-cine-badge{margin-bottom:20px}
-.vj-e2-nota{max-width:420px}
-.vj-e2-nota .vj-nota{margin:0;background:rgba(246,201,138,.12);color:rgba(251,246,236,.9);border-left-color:var(--oro)}
-@media(max-width:1023.98px){
-  .vj-e2 .vj-media{max-width:min(320px,38vh)}
-  .vj-e2-cinewrap .vj-cine-lead{font-size:clamp(1.15rem,4vw,1.3rem)}
-  /* en modo escena la nota es un panel inferior sólido que entra al final.
-     El contenedor interior deja de ser containing block: el panel ancla a la
-     ESCENA (100svh), no al contenido, que es más alto que el viewport. */
-  .vj-gsap .vj-e2-in{position:static}
-  .vj-gsap .vj-e2-cinewrap{position:relative;z-index:2}
-  .vj-gsap .vj-e2-nota{position:absolute;left:0;right:0;bottom:0;max-width:none;padding:30px 22px 84px;background:linear-gradient(180deg,rgba(2,25,19,0),rgba(2,25,19,.96) 16%);z-index:3}
-  .vj-gsap .vj-e2-nota .vj-nota{max-width:540px;margin:0 auto;font-size:.99rem}
-}
-@media(min-width:1024px){
-  .vj-e2-in{flex-direction:row;justify-content:center;align-items:center;gap:56px}
-  .vj-e2-cinewrap{flex:0 0 auto}
-  .vj-e2-nota{flex:0 1 34rem}
-  .vj-e2-nota .vj-nota{font-size:1.18rem;line-height:1.7;padding:24px 28px}
-}
-/* ── E3 · Profundiza ── */
-.vj-e3{position:relative;background:var(--surface);padding:clamp(40px,7vh,64px) 22px clamp(48px,14vh,96px)}
-.vj-e3::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none}
-.vj-e3 .vj-est-body{padding:0}
-
-/* ═══ SISTEMA DE LUZ (v8·2): cada foto lleva tinte + foco + viñeta.
-   El foco (transparente sobre el punto de interés, definido a mano por
-   escena con --fx/--fy) dirige la mirada; la viñeta asienta los bordes. ═══ */
-.vj-luz{position:absolute;inset:0;pointer-events:none;background:
-  radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
-  radial-gradient(95% 75% at var(--fx,50%) var(--fy,45%), rgba(0,0,0,0) 0%, var(--tinte) 74%),
-  linear-gradient(165deg, var(--tinte-suave), var(--tinte))}
-.vj-luz--pie{background:
-  linear-gradient(180deg, rgba(0,0,0,0) 55%, var(--pie) 100%),
-  radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
-  radial-gradient(95% 75% at var(--fx,50%) var(--fy,45%), rgba(0,0,0,0) 0%, var(--tinte) 74%),
-  linear-gradient(165deg, var(--tinte-suave), var(--tinte))}
-
-/* ═══════════════ ESCENAS E4-E9 ═══════════════
-   Mismo contrato: sin .vj-gsap todo es columna estática legible. */
-.vj-ey--luz{background:rgba(251,246,236,.14);color:var(--crema)}
-
-/* E4/E8 · transiciones */
-.vj-tr-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:64px 22px;text-align:center}
-.vj-tr-fondo{position:absolute;inset:0}
-.vj-tr--seva .vj-tr-fondo--a{background:#06241c}
-.vj-tr--regreso .vj-tr-fondo--a{background:#241105}
-.vj-tr--seva .vj-tr-fondo--b{background:linear-gradient(180deg,#0a1c33,#050f1f)}
-.vj-tr--regreso .vj-tr-fondo--b{background:linear-gradient(180deg,#3a1c0a,#241105)}
-
-.vj-tr-foto{position:absolute;inset:0}
-.vj-tr-foto img{width:100%;height:100%;object-fit:cover;filter:contrast(1.18) brightness(.92)}
-.vj-tr-frase{position:relative;z-index:2;max-width:17ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
-.vj-tr-frase em{font-style:italic;color:var(--secondary-claro)}
-
-/* E5 · el puerto */
-.vj-e5{background:#050f1f}
-.vj-e5-pin{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
-.vj-e5-bg{position:absolute;inset:0}
-.vj-e5-bg img{width:106%;height:100%;object-fit:cover}
-.vj-e5-velo{--tinte:rgba(11,22,38,.66);--tinte-suave:rgba(11,22,38,.44);--pie:rgba(4,10,22,.9);--fx:40%;--fy:44%}
-.vj-e5-in{position:relative;z-index:2;width:100%;max-width:720px;margin:0 auto;padding:0 26px clamp(56px,10vh,96px);text-align:center}
-.vj-e5-texto{margin-top:16px!important;font-family:var(--f-head);font-weight:600;font-size:clamp(1.35rem,4.8vw,2rem);line-height:1.36;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.55)}
-
-/* E6 · Ramón */
-.vj-e6{background:#050e1c}
-.vj-e6-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:76px 24px}
-.vj-e6-bg{position:absolute;inset:0;opacity:.26}
-.vj-e6-bg::after{content:"";position:absolute;inset:0;--tinte:rgba(5,14,28,.78);--tinte-suave:rgba(5,14,28,.45);--fx:50%;--fy:42%;background:radial-gradient(140% 120% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.28) 100%),radial-gradient(95% 75% at var(--fx) var(--fy),rgba(0,0,0,0) 0%,var(--tinte) 74%),linear-gradient(165deg,var(--tinte-suave),var(--tinte))}
-.vj-e6-bg img{width:100%;height:100%;object-fit:cover}
-.vj-e6-in{position:relative;z-index:2;width:100%;max-width:640px;margin:0 auto;text-align:center}
-.vj-e6-in>*+*{margin-top:38px}
-.vj-gsap .vj-e6-in{display:grid;place-items:center}
-.vj-gsap .vj-e6-in>*{grid-area:1/1;margin:0}
-.vj-e6-cabecera h2{font-family:var(--f-head);font-size:clamp(2.2rem,8.4vw,3.6rem);color:#fff;font-weight:700;line-height:1.02;margin:10px 0 14px}
-.vj-e6-cabecera h2 em{font-style:italic;color:var(--secondary-claro)}
-.vj-e6-byline{color:rgba(251,246,236,.8);font-size:1.08rem;line-height:1.5;max-width:44ch;margin:0 auto 18px!important}
-.vj-e6 .vj-ramon-fuente{background:rgba(246,201,138,.1);border-color:rgba(246,201,138,.3);color:rgba(251,246,236,.85)!important;max-width:46ch;margin-left:auto!important;margin-right:auto!important}
-.vj-e6 .vj-ramon-fuente b{color:var(--oro)}
-.vj-e6-beat{max-width:560px;margin-left:auto;margin-right:auto}
-.vj-e6-n{display:inline-flex;width:40px;height:40px;border-radius:50%;background:rgba(224,136,90,.16);border:1px solid rgba(224,136,90,.45);color:var(--secondary-claro);font-family:var(--f-head);font-style:italic;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:16px}
-.vj-e6-beat h3{font-family:var(--f-head);font-style:italic;font-size:clamp(1.5rem,5.8vw,2.2rem);color:#fff;font-weight:600;line-height:1.22;margin:0 0 14px}
-.vj-e6-beat p{color:rgba(251,246,236,.86);font-size:1.14rem;line-height:1.62}
-.vj-e6-cita blockquote{font-family:var(--f-head);font-style:italic;font-weight:500;font-size:clamp(1.55rem,6vw,2.5rem);line-height:1.28;color:#fff;margin:0}
-.vj-e6-cita .vj-firma{margin-top:18px!important;color:rgba(251,246,236,.72)!important}
-.vj-e6-remate{background:#050e1c;padding:0 24px clamp(48px,8vh,72px);text-align:center}
-.vj-e6-remate .vj-ramon-remate{max-width:56ch;margin:0 auto!important;color:rgba(251,246,236,.93)!important}
-.vj-e6-remate .vj-ramon-remate strong{color:#fff}
-
-/* E7 · la escalera, parte 1 */
-.vj-e7{position:relative;background:var(--surface)}
-.vj-e7::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 20% 15%,rgba(147,74,28,.07),transparent 60%),radial-gradient(80% 60% at 85% 85%,rgba(2,52,41,.06),transparent 60%);pointer-events:none}
-.vj-e7-textura{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.04;pointer-events:none}
-.vj-e7-pin{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:80px 24px}
-.vj-e7-cab{text-align:center;margin-bottom:8px}
-.vj-e7-peldanos{position:relative;z-index:2;display:flex;flex-direction:column;gap:18px;max-width:1000px;margin:18px auto 0;width:100%}
-.vj-e7-peldanos{position:relative}
-.vj-e7-peldano{position:relative;z-index:2;background:#fff;border:1px solid rgba(2,52,41,.08);border-left:4px solid var(--secondary);border-radius:var(--r-card);box-shadow:var(--sombra-card);padding:26px 24px;max-width:520px}
-.vj-e7-peldano[data-paso="2"]{align-self:flex-end}
-.vj-e7-cifra{display:block;font-family:var(--f-head);font-weight:600;font-size:clamp(2.2rem,8vw,3.4rem);color:var(--secondary);line-height:1;margin-bottom:6px}
-.vj-e7-cifra small{font-size:.42em;opacity:.85}
-.vj-e7-cifra--txt{font-style:italic;font-size:clamp(1.8rem,6vw,2.6rem)}
-.vj-e7-peldano h3{font-family:var(--f-ui);font-weight:800;font-size:1.2rem;color:var(--primary);margin:0 0 10px}
-.vj-e7-peldano p{color:var(--on-var);font-size:1.1rem;line-height:1.6;margin:0}
-.vj-e7-peldano .vj-fuente{color:#8a8070;margin-top:10px;display:block}
-@media(min-width:900px){
-  .vj-e7-peldano[data-paso="2"]{margin-top:-56px;margin-right:4%}
-  .vj-e7-peldano[data-paso="1"]{margin-left:4%}
-}
-
-/* E9 · el escaparate, la vitrina */
-.vj-e9{background:#241105}
-.vj-e9-pin{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:76px 22px 40px;text-align:center}
-.vj-e9-bg{position:absolute;inset:0}
-.vj-e9-bg img{width:100%;height:100%;object-fit:cover}
-.vj-e9-bg::after{content:"";position:absolute;inset:0;--tinte:rgba(26,20,16,.74);--tinte-suave:rgba(26,20,16,.5);--fx:50%;--fy:52%;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(24,12,5,.9) 100%),radial-gradient(140% 120% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.25) 100%),radial-gradient(95% 75% at var(--fx) var(--fy),rgba(0,0,0,0) 0%,var(--tinte) 74%),linear-gradient(165deg,var(--tinte-suave),var(--tinte))}
-.vj-e9-puerta{position:absolute;top:0;bottom:0;width:51%;z-index:2;background:linear-gradient(180deg,#2c1407,#1c0c04)}
-.vj-e9-puerta--izq{left:0;box-shadow:inset -40px 0 60px rgba(0,0,0,.4)}
-.vj-e9-puerta--dcha{right:0;box-shadow:inset 40px 0 60px rgba(0,0,0,.4)}
-.vj-e9-in{position:relative;z-index:3;max-width:680px;padding:26px 24px;border-radius:24px;background:radial-gradient(90% 100% at 50% 50%,rgba(24,12,5,.5),rgba(24,12,5,0))}
-.vj-e9-contador{margin:16px 0 20px}
-.vj-e9-contador b{font-family:var(--f-head);font-weight:700;font-size:clamp(3rem,14vw,6.4rem);color:#fff;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;text-shadow:0 4px 40px rgba(0,0,0,.55)}
-.vj-e9 .vj-salto-q{color:#fff!important;font-size:clamp(1.2rem,4.4vw,1.5rem)!important;text-shadow:0 2px 14px rgba(0,0,0,.5)}
-.vj-e9 .vj-salto-q em{color:var(--secondary-claro)}
-.vj-e9 .vj-salto-n{color:rgba(251,246,236,.78)!important;max-width:46ch;margin:12px auto 0!important;text-shadow:0 1px 10px rgba(0,0,0,.5)}
-.vj-e9-peldanos{position:relative;z-index:3;display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;justify-content:center}
-.vj-e9-peldano{background:rgba(251,249,248,.96);border-radius:var(--r-card);box-shadow:var(--sombra-card);padding:18px 20px;max-width:310px;text-align:left;border-left:4px solid var(--secondary)}
-.vj-e9-peldano b{font-family:var(--f-head);font-weight:600;font-size:1.7rem;color:var(--secondary);line-height:1}
-.vj-e9-peldano b small{font-size:.55em;opacity:.85}
-.vj-e9-peldano h3{font-family:var(--f-ui);font-weight:800;font-size:1.06rem;color:var(--primary);margin:6px 0 8px}
-.vj-e9-peldano p{font-size:.98rem;color:var(--on-var);line-height:1.52;margin:0}
-@media(max-width:600px){.vj-e9-peldano p{font-size:.92rem}.vj-e9-peldano{padding:14px 16px}}
-
-/* ============= EL MARCADOR DEL KILO (píldora flotante) =============
-   Fuera la segunda barra: robaba altura y aplanaba la cabecera. Ahora es una
-   píldora discreta abajo-izquierda, con el mismo cristal que la home. */
+/* ── la píldora del kilo ── */
 .vj-kilo{position:fixed;left:16px;bottom:16px;z-index:80;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 13px;border-radius:100px;background:rgba(2,32,25,.94);border:1px solid rgba(246,201,138,.3);box-shadow:0 12px 32px rgba(0,0,0,.28);font-family:var(--f-ui);opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease}
 .vj-kilo.vj-kilo--on{opacity:1;transform:none}
 .vj-kilo[hidden]{display:none}
 .vj-kilo-ic{font-size:1.05rem;line-height:1}
 .vj-kilo-txt{display:flex;align-items:baseline;gap:7px;white-space:nowrap}
 .vj-kilo-k{font-weight:800;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(251,246,236,.6)}
-.vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:1.06rem;color:var(--oro);font-variant-numeric:tabular-nums;transition:transform .3s ease}
-.vj-kilo--late .vj-kilo-v{transform:scale(1.14)}
+.vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:1.06rem;color:var(--oro);font-feature-settings:"tnum";letter-spacing:-.01em;transition:opacity .2s ease}
+.vj-kilo-v.vj-fundido{opacity:0}
+.vj-kilo-v.vj-kilo-v--larga{font-size:.86rem}
 .vj-kilo-n{display:none}
+.vj-eur{font-size:.6em;vertical-align:top;margin-left:.05em;letter-spacing:0}
 @media(min-width:760px){
-  .vj-kilo{left:24px;bottom:24px;padding:12px 20px 12px 16px}
+  .vj-kilo{left:24px;bottom:24px;padding:12px 20px 12px 16px;background:rgba(2,32,25,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
   .vj-kilo-v{font-size:1.2rem}
   .vj-kilo-n{display:block;max-width:20ch;font-size:.72rem;line-height:1.3;color:rgba(251,246,236,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .vj-kilo-n:empty{display:none}
 }
-@media(prefers-reduced-motion:reduce){.vj-kilo,.vj-kilo-v{transition:none}}
 
-/* ============= INTERLUDIOS (foto a sangre + una frase) ============= */
-.vj-inter{position:relative;min-height:74svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(64px,10vh,96px) 22px;text-align:center}
-.vj-inter>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.vj-inter::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(2,32,25,.72),rgba(2,32,25,.82))}
-.vj-inter--noche::after{background:linear-gradient(180deg,rgba(8,24,44,.74),rgba(6,18,36,.86))}
-.vj-inter--ocre::after{background:linear-gradient(180deg,rgba(58,28,10,.7),rgba(44,20,7,.86))}
-.vj-inter-in{position:relative;z-index:2}
-.vj-inter-frase{max-width:min(100%,17ch);margin:0 auto!important;font-family:var(--f-head);font-size:clamp(1.7rem,6vw,2.8rem);font-weight:600;line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.5)}
-.vj-inter-frase em{font-style:italic;color:var(--secondary-claro)}
-.vj-inter-btn{margin-top:34px;white-space:nowrap;background:rgba(251,246,236,.14);border:1px solid rgba(246,201,138,.5);color:var(--crema)}
-.vj-inter-btn:hover{background:rgba(251,246,236,.18)}
-.vj-inter-btn.vj-hecho{background:linear-gradient(135deg,#3E7C59,#1F4B3F);border-color:transparent}
+/* ── luz simple: tinte 165° + viñeta (sin foco dinámico) ── */
+.vj-luz2{position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
+  linear-gradient(165deg, var(--ta), var(--tb))}
+.vj-luz2--pie{background:
+  linear-gradient(180deg, rgba(0,0,0,0) 50%, var(--tb) 100%),
+  radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
+  linear-gradient(165deg, var(--ta), var(--tb))}
 
-/* Foto de apoyo dentro de un tramo */
-.vj-figura{margin:26px auto 0;max-width:540px}
-.vj-figura img{width:100%;height:auto;border-radius:20px;box-shadow:0 18px 44px rgba(2,52,41,.2)}
-.vj-figura figcaption{margin-top:12px;font-size:.98rem;line-height:1.5;color:var(--on-var);text-align:center}
-
-/* ===================== INTRO (above the fold) ===================== */
-.vj-intro{position:relative;min-height:calc(100svh - var(--cab));display:flex;align-items:flex-end;overflow:hidden;padding:72px 22px 36px}
-.vj-intro-media{position:absolute;inset:0;z-index:0}
-.vj-intro-media img{width:100%;height:100%;object-fit:cover;object-position:center}
-.vj-intro-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,40,31,.42) 0%,rgba(2,40,31,.24) 34%,rgba(2,40,31,.82) 76%,rgba(2,40,31,.95) 100%)}
-.vj-intro-in{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto}
+/* ── hero ── */
+.vj-hero{position:relative;min-height:calc(100svh - var(--bar));display:flex;align-items:flex-end;overflow:hidden;padding:84px 24px 60px}
+.vj-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vj-hero-in{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto}
 .vj-kicker{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 7px;border-radius:100px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.2);margin-bottom:20px}
 .vj-kicker img{height:22px;width:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
-.vj-kicker span{color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase}
-.vj-intro h1{font-family:var(--f-head);font-size:clamp(3.4rem,14vw,6rem);font-weight:700;color:#fff;line-height:.94;letter-spacing:-.025em;text-shadow:0 3px 30px rgba(0,0,0,.45)}
-.vj-intro h1 em{font-style:italic;font-weight:600;color:var(--secondary-claro)}
-.vj-intro .vj-hook{margin-top:16px;font-family:var(--f-ui);font-weight:800;font-size:clamp(1.25rem,5vw,1.7rem);line-height:1.3;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.5)}
-.vj-intro .vj-sub{margin-top:16px;color:rgba(255,255,255,.93);font-size:1.15rem;line-height:1.55;text-shadow:0 2px 14px rgba(0,0,0,.5)}
-.vj-tip{display:inline-flex;align-items:flex-start;gap:9px;margin-top:18px;padding:11px 16px;border-radius:14px;background:rgba(2,40,31,.72);border:1px solid rgba(246,201,138,.34);color:var(--crema);font-size:.92rem;line-height:1.45}
+.vj-kicker span{color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase}
+.vj-hero h1{font-family:var(--f-head);font-size:clamp(3.4rem,14vw,6rem);font-weight:700;color:#fff;line-height:.94;letter-spacing:-.025em;text-shadow:0 3px 30px rgba(0,0,0,.45);margin-bottom:22px}
+.vj-hero h1 em{font-style:italic;font-weight:600;color:var(--secondary-claro)}
+.vj-e1-t{font-family:var(--f-head);font-weight:600;font-size:clamp(1.3rem,4.8vw,1.7rem);line-height:1.34;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.vj-e1-t+.vj-e1-t{margin-top:12px}
+.vj-e1-t em{font-style:italic;color:var(--secondary-claro)}
+.vj-e1-sub{margin-top:18px!important;font-size:1.15rem;line-height:1.55;color:rgba(255,255,255,.93);text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.vj-tip{display:inline-flex;align-items:flex-start;gap:9px;margin-top:16px;padding:11px 16px;border-radius:14px;background:rgba(2,40,31,.72);border:1px solid rgba(246,201,138,.34);color:var(--crema);font-size:.92rem;line-height:1.45}
 .vj-tip b{color:var(--oro)}
-.vj-start{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:16px 28px;border-radius:100px;background:var(--secondary);color:#fff;box-shadow:0 6px 20px rgba(147,74,28,.4);font-family:var(--f-ui);font-weight:800;font-size:1.06rem;box-shadow:0 14px 34px rgba(0,0,0,.34);transition:transform .22s ease,filter .22s ease}
-.vj-start:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.vj-start{display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:16px 28px;border-radius:100px;background:var(--secondary);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:1.06rem;box-shadow:0 6px 20px rgba(147,74,28,.4);transition:transform .22s ease,filter .22s ease}
+.vj-start:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.vj-sub-mano{position:relative;white-space:nowrap}
+.vj-sub-mano svg{position:absolute;left:-3%;bottom:-.14em;width:106%;height:.32em;overflow:visible;pointer-events:none}
+.vj-sub-mano svg path{fill:none;stroke:var(--secondary-claro);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.vj-desliza{position:absolute;left:50%;bottom:3.5vh;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:9px}
+.vj-desliza i{display:block;width:1.5px;height:28px;background:rgba(251,246,236,.7);border-radius:2px;animation:vj-pulso 1.8s ease-in-out infinite}
+.vj-desliza span{font-family:var(--f-body);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,246,236,.7)}
+@keyframes vj-pulso{0%,100%{opacity:.5;transform:translateY(0)}50%{opacity:1;transform:translateY(6px)}}
+@media(prefers-reduced-motion:reduce){.vj-desliza i{animation:none}}
 
-/* ======================= EL CAMINO (ruta) ======================= */
-.vj-camino{position:relative;height:clamp(84px,11vh,116px);background:var(--surface)}
-.vj-linea{position:absolute;inset:0;width:100%;height:100%}
-.vj-linea path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.vj-linea-base{stroke:rgba(2,52,41,.22);stroke-width:2.4;stroke-dasharray:1.6 6}
-/* dasharray/dashoffset los fija el JS con la altura real del tramo: con
-   vector-effect:non-scaling-stroke el patrón se mide en píxeles de pantalla,
-   no en unidades del viewBox. Sin JS, la línea sale dibujada del todo. */
-.vj-linea-draw{stroke:var(--verde-hoja);stroke-width:2.6;transition:stroke-dashoffset 1.15s cubic-bezier(.4,0,.2,1),stroke .6s ease}
-.vj-hito{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:var(--surface);border:2px solid rgba(2,52,41,.24);display:flex;align-items:center;justify-content:center;color:var(--primary-2);box-shadow:0 4px 16px rgba(2,52,41,.1);transition:background .45s ease,color .45s ease,border-color .45s ease,box-shadow .45s ease}
-.vj-hito svg{width:26px;height:26px;display:block}
-.vj-hito.vj-done{background:var(--primary);border-color:var(--primary);color:var(--oro);box-shadow:0 8px 24px rgba(2,52,41,.32);animation:vj-pop .45s cubic-bezier(.34,1.56,.64,1)}
-@keyframes vj-pop{0%{transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(1.22)}100%{transform:translate(-50%,-50%) scale(1)}}
-/* Microcelebración: al completar las 4, toda la ruta se ilumina en oro */
-.vj.vj-fin .vj-linea-draw{stroke:var(--oro);stroke-width:3}
-.vj.vj-fin .vj-hito.vj-done{background:linear-gradient(140deg,#3E7C59,#023429);border-color:var(--oro);box-shadow:0 0 0 5px rgba(246,201,138,.28),0 8px 26px rgba(2,52,41,.3)}
+/* ── heros de parada: foto a sangre + tarjeta glass, lado alterno ── */
+.vj-phero{position:relative;min-height:56vh;display:flex;align-items:flex-end;overflow:hidden;padding:96px 22px 34px}
+.vj-phero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vj-phero-in{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;display:flex}
+.vj-phero--izq .vj-phero-in{justify-content:flex-start}
+.vj-phero--dcha .vj-phero-in{justify-content:flex-end}
+.vj-herocard{position:relative;max-width:30rem;padding:30px 28px;border-radius:var(--r-card);background:rgba(251,249,248,.95);border:1px solid rgba(255,255,255,.2);box-shadow:var(--sombra-card)}
+.vj-herocard h2{font-family:var(--f-head);font-size:clamp(2.4rem,9vw,3.8rem);font-weight:700;color:var(--primary);line-height:1;letter-spacing:-.02em;margin:8px 0 0}
+.vj-herocard h2 em{font-style:italic;color:var(--secondary)}
+.vj-heroline{margin-top:12px!important;font-family:var(--f-ui);font-weight:700;font-size:1.02rem;color:var(--on-var)}
+@media(min-width:760px){.vj-phero{min-height:62vh;padding:120px 46px 44px}.vj-herocard{padding:44px 46px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}}
 
-/* ======================== ESTACIONES ======================== */
-.vj-est,.vj-inter,.vj-final{scroll-margin-top:calc(var(--cab) + 18px)}
-.vj-camino{scroll-margin-top:calc(var(--cab) + 18px)}
-.vj-est-hero{position:relative;min-height:47vh;display:flex;align-items:flex-end;overflow:hidden;padding:78px 22px 26px}
-.vj-est-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
-.vj-est-hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(2,40,31,.3) 0%,rgba(2,40,31,.18) 30%,rgba(2,40,31,.86) 82%,rgba(2,40,31,.96) 100%)}
-.vj-est--verde .vj-est-hero::after{background:linear-gradient(180deg,rgba(2,40,31,.32) 0%,rgba(2,40,31,.2) 30%,rgba(2,40,31,.86) 82%,rgba(2,40,31,.96) 100%)}
-.vj-est--noche .vj-est-hero::after{background:linear-gradient(180deg,rgba(8,24,44,.42) 0%,rgba(8,24,44,.3) 28%,rgba(5,16,32,.88) 80%,rgba(4,12,26,.97) 100%)}
-.vj-est--ocre .vj-est-hero::after{background:linear-gradient(180deg,rgba(58,30,12,.34) 0%,rgba(58,30,12,.2) 30%,rgba(74,38,15,.86) 82%,rgba(74,38,15,.96) 100%)}
-/* Estación 4: teñido más denso y cálido. La foto de atardecer llega lavada y
-   el final tiene que sentirse distinto del principio, no una repetición. */
-.vj-est--final .vj-est-hero img{filter:saturate(1.12) contrast(1.06)}
-.vj-est--final .vj-est-hero::after{background:linear-gradient(180deg,rgba(96,44,12,.5) 0%,rgba(112,54,16,.42) 26%,rgba(66,30,10,.9) 76%,rgba(48,21,7,.98) 100%)}
-.vj-est-hero-in{position:relative;z-index:2;width:100%;max-width:660px;margin:0 auto}
-.vj-ey{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(147,74,28,.14);font-family:var(--f-ui);font-weight:700;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
-.vj-est-hero h2{font-family:var(--f-head);font-size:clamp(2.8rem,11vw,4.8rem);font-weight:700;color:#fff;line-height:.98;letter-spacing:-.02em;text-shadow:0 3px 26px rgba(0,0,0,.45)}
-.vj-est-hero h2 em{font-style:italic;color:var(--secondary-claro)}
-.vj-est-body{padding:34px 22px 0;background:var(--surface)}
-.vj-est-body p{font-size:1.19rem;color:var(--on-var);line-height:1.7}
-.vj-est-body p+p{margin-top:16px}
-.vj-est-body .vj-lead{font-size:clamp(1.3rem,4.5vw,1.5rem);color:var(--on);line-height:1.5}
-.vj-est-body .vj-lead em{font-style:italic;color:var(--secondary);font-weight:600}
-.vj-est-body h3{font-family:var(--f-ui);font-weight:800;font-size:1.35rem;color:var(--primary);margin:30px 0 12px}
+/* kickers: uno claro y uno de luz, interletrado .18em */
+.vj-ey{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(147,74,28,.14);font-family:var(--f-ui);font-weight:700;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary)}
+.vj-ey--luz{background:rgba(251,246,236,.14);color:var(--crema)}
+.vj-parada{display:inline-flex;align-items:center;gap:10px}
+.vj-nudo{width:38px;height:34px;flex:0 0 auto}
+.vj-nudo path{fill:none;stroke:#c96f2e;stroke-width:2.4}
 
-/* Botón "siguiente estación" (cierra cada bloque) */
-.vj-next-wrap{padding:32px 22px 34px;text-align:center;background:var(--surface)}
-.vj-next{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:0;cursor:pointer;border-radius:100px;background:var(--primary);color:#f6ecd9;font-family:var(--f-ui);font-weight:800;font-size:1.04rem;box-shadow:0 12px 30px rgba(2,52,41,.24);transition:transform .22s ease,box-shadow .22s ease,background .3s ease}
-.vj-next:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(2,52,41,.3)}
-.vj-next.vj-hecho{background:linear-gradient(135deg,#3E7C59,#1F4B3F)}
-.vj-next--oro{background:var(--secondary);color:#fff;box-shadow:0 6px 20px rgba(147,74,28,.4)}
-.vj-next--oro.vj-hecho{background:var(--secondary)}
+/* ── cuerpos y ritmo ── */
+.vj-tramo{scroll-margin-top:calc(var(--bar) + 12px)}
+.vj-cuerpo{padding:clamp(40px,7vh,64px) 22px 0;background:var(--surface)}
+.vj-cuerpo:last-child,.vj-tramo>.vj-cuerpo:last-of-type{padding-bottom:clamp(48px,8vh,80px)}
+.vj-cuerpo--ambar{background:linear-gradient(178deg,#f7efe3,#f2e7d6);padding-bottom:clamp(40px,7vh,64px)}
+.vj-lead{font-size:clamp(1.3rem,4.5vw,1.5rem);color:var(--on);line-height:1.5}
+.vj-lead em{font-style:italic;color:var(--secondary);font-weight:600}
 
-/* ---------- Estación 1: la sala de cine ----------
-   Banda oscura a todo el ancho: el reel es el momento cumbre del viaje y
-   necesita escenario, no una tarjeta suelta sobre fondo claro. */
+/* ── el cine del reel ── */
 .vj-cine{background:radial-gradient(120% 80% at 50% 0%,#0a3327 0%,#052018 62%,#03150f 100%);padding:clamp(40px,6vh,60px) 22px 44px;text-align:center}
-.vj-cine-lead{max-width:34ch;margin:0 auto 30px!important;font-size:clamp(1.3rem,4.5vw,1.5rem);line-height:1.5;color:var(--crema)}
+.vj-cine-lead{max-width:34ch;margin:0 auto 26px!important;font-size:clamp(1.3rem,4.5vw,1.5rem);line-height:1.5;color:var(--crema)}
 .vj-cine-lead em{font-style:italic;color:var(--oro);font-weight:600}
-.vj-cine-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(246,201,138,.14);border:1px solid rgba(246,201,138,.42);color:var(--oro);font-family:var(--f-ui);font-weight:800;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px}
-/* El tope en vh evita que el cartel 9:16 (o el propio reel) se coma la
-   pantalla en viewports bajos — y mantiene el cartel del mismo tamaño que su
-   contenedor, sin marco vacío alrededor. */
+.vj-cine-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(246,201,138,.14);border:1px solid rgba(246,201,138,.42);color:var(--oro);font-family:var(--f-ui);font-weight:800;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px}
 .vj-media{margin:0 auto;max-width:min(420px,44vh)}
-/* Rejilla de una sola celda: el cartel y el embed se apilan ahí. La altura de
-   la fila es siempre la del más alto, así que el contenedor NUNCA puede quedar
-   más bajo que el cartel. Esta es la garantía de que no se ve una caja vacía:
-   está en el layout, no en un callback de JS que pueda congelarse. */
 .vj-ig{position:relative;display:grid;border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 1px rgba(246,201,138,.16)}
-/* embed.js sustituye el blockquote por un iframe conservando la clase: el
-   selector cubre los dos estados para que nunca desborde en 375 px. */
-.vj-ig .instagram-media{margin:0 auto!important;max-width:100%!important;min-width:0!important;width:100%!important;border-radius:22px!important}
-/* El embed vive superpuesto e invisible hasta que PINTA de verdad: así tiene
-   ancho real para medirse, pero nunca deja un hueco blanco en la página. */
-/* Mientras no manda, el embed va fuera de flujo: así no estira la caja antes
-   de tiempo. Al ceder el sitio entra en la celda y la fila crece con él. */
-.vj-ig-embed{position:absolute;inset:0;opacity:0;pointer-events:none;overflow:hidden;border-radius:22px;transition:opacity .3s ease}
-.vj-ig.vj-ig-ok .vj-ig-embed{position:relative;grid-area:1/1;z-index:1;opacity:1;pointer-events:auto;overflow:visible}
-/* El cartel NUNCA se borra: se queda debajo, marcando el alto mínimo y
-   tapando cualquier hueco si el iframe pintara transparente o se cayera.
-   Solo se retira su enlace, para no dejar foco atrapado tras el embed. */
-.vj-ig-card{grid-area:1/1;z-index:0}
-.vj-ig.vj-ig-ok .vj-ig-card a{display:none}
-/* Cartel del reel: es el estado por defecto, no un plan B feo. */
-.vj-ig-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;aspect-ratio:9/16;padding:28px 22px;border-radius:22px;overflow:hidden;background:#06251c}
+.vj-ig-card{grid-area:1/1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;aspect-ratio:9/16;padding:28px 22px;border-radius:22px;overflow:hidden;background:#06251c;cursor:pointer}
 .vj-ig-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
 .vj-ig-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,25,19,.6),rgba(3,25,19,.9))}
 .vj-ig-card>*{position:relative;z-index:2}
-.vj-ig-play{flex:0 0 auto;width:72px;height:72px;border-radius:50%;background:var(--secondary);color:#fff!important;display:flex;align-items:center;justify-content:center;color:#023429;font-size:1.6rem;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.vj-ig-play{flex:0 0 auto;width:72px;height:72px;border-radius:50%;background:var(--secondary);color:#fff!important;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 14px 34px rgba(0,0,0,.45);border:0;cursor:pointer;font-family:inherit}
 .vj-ig-card b{font-family:var(--f-head);font-size:clamp(1.15rem,4.4vw,1.5rem);font-weight:600;color:#fff;line-height:1.2;max-width:16ch}
 .vj-ig-card small{color:rgba(251,246,236,.76);font-size:.9rem;line-height:1.45;max-width:26ch}
 .vj .vj-ig-card a{display:inline-flex;align-items:center;gap:8px;margin-top:2px;padding:13px 22px;border-radius:100px;background:var(--secondary);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:.95rem;white-space:nowrap}
-.vj-cine .vj-nota{margin-top:24px;border-left-color:var(--oro);background:rgba(246,201,138,.1);color:rgba(251,246,236,.86);text-align:left;max-width:460px}
+.vj-cine .vj-nota{margin-top:24px;background:rgba(246,201,138,.1);color:rgba(251,246,236,.86);text-align:left;max-width:460px}
 .vj-nota{margin:20px auto 0;max-width:540px;padding:18px 22px;border-left:3px solid var(--oro);background:rgba(246,201,138,.14);border-radius:0 14px 14px 0;font-size:1.05rem;line-height:1.6;color:var(--on-var)}
-.vj-det{margin:26px auto 0;max-width:540px;border:1px solid rgba(2,52,41,.14);border-radius:16px;background:#fff;overflow:hidden}
+
+/* documental */
+.vj-det{margin:0 auto;max-width:600px;border:1px solid rgba(2,52,41,.14);border-radius:var(--r-card);background:#fff;overflow:hidden;box-shadow:var(--sombra-card)}
 .vj-det summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--f-ui);font-weight:800;font-size:1.1rem;color:var(--primary)}
 .vj-det summary::-webkit-details-marker{display:none}
 .vj-det summary::after{content:"↓";color:var(--secondary);font-size:1.1rem;transition:transform .25s ease}
@@ -435,17 +168,54 @@ body{background:#fbf9f8}
 .vj-yt{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0d0d0d}
 .vj-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vj-det-in p{font-size:1.05rem!important;color:var(--on-var);margin-top:16px!important;line-height:1.6}
-/* Especificidad de 2 clases para ganar a `.vj a{text-decoration:none}` */
 .vj .vj-det-link{display:inline-block;margin-top:14px;font-family:var(--f-ui);font-weight:700;font-size:.98rem;line-height:1.45;color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
 .vj .vj-det-link:hover{color:var(--marron-2)}
 
-/* ---------- Estación 2: paseo detective ---------- */
-.vj-marcas{display:flex;flex-direction:column;gap:12px;margin:24px auto 0;max-width:540px}
-.vj-marca{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:19px 24px;border-radius:16px;background:linear-gradient(150deg,#0a2a21,#03201a);color:var(--crema);font-family:var(--f-ui);font-weight:800;font-size:1.16rem;box-shadow:0 12px 30px rgba(2,52,41,.2);transition:transform .22s ease,box-shadow .22s ease}
-.vj-marca:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(2,52,41,.28)}
+/* ── interludios: sección normal, frase grande ── */
+.vj-inter{position:relative;min-height:66vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(64px,10vh,96px) 22px;text-align:center}
+.vj-inter>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.12)}
+.vj-inter-in{position:relative;z-index:2}
+.vj-tr-frase{max-width:17ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
+.vj-tr-frase em{font-style:italic;color:var(--secondary-claro)}
+
+/* ── figura ── */
+.vj-figura{margin:26px auto 0;max-width:600px}
+.vj-figura img{width:100%;height:auto;border-radius:var(--r-card);box-shadow:var(--sombra-card)}
+.vj-figura figcaption{margin-top:12px;font-size:.98rem;line-height:1.5;color:var(--on-var);text-align:center}
+
+/* ── el bloque de Ramón ── */
+.vj-ramon{margin-top:clamp(40px,7vh,64px);background:#050e1c;padding:clamp(48px,8vh,80px) 24px}
+.vj-ramon-in{max-width:640px;margin:0 auto;text-align:center}
+.vj-ramon-in>div+div{margin-top:38px}
+.vj-e6-cabecera h2{font-family:var(--f-head);font-size:clamp(2.2rem,8.4vw,3.6rem);color:#fff;font-weight:700;line-height:1.02;margin:10px 0 14px}
+.vj-e6-cabecera h2 em{font-style:italic;color:var(--secondary-claro)}
+.vj-e6-byline{color:rgba(251,246,236,.8);font-size:1.08rem;line-height:1.5;max-width:44ch;margin:0 auto 18px!important}
+.vj-ramon-fuente{padding:13px 18px;border-radius:12px;background:rgba(246,201,138,.1);border:1px solid rgba(246,201,138,.3);font-size:1rem!important;line-height:1.5;color:rgba(251,246,236,.85)!important;max-width:46ch;margin:0 auto!important}
+.vj-ramon-fuente b{color:var(--oro)}
+.vj-e6-beat{max-width:560px;margin:0 auto}
+.vj-e6-n{display:inline-flex;width:40px;height:40px;border-radius:50%;background:rgba(224,136,90,.16);border:1px solid rgba(224,136,90,.45);color:var(--secondary-claro);font-family:var(--f-head);font-style:italic;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:16px}
+.vj-e6-beat h3{font-family:var(--f-head);font-style:italic;font-size:clamp(1.5rem,5.8vw,2.2rem);color:#fff;font-weight:600;line-height:1.22;margin:0 0 14px}
+.vj-e6-beat p{color:rgba(251,246,236,.86);font-size:1.14rem;line-height:1.62}
+.vj-e6-cita blockquote{font-family:var(--f-head);font-style:italic;font-weight:500;font-size:clamp(1.55rem,6vw,2.5rem);line-height:1.28;color:#fff;margin:0}
+.vj-e6-cita .vj-firma{margin-top:18px!important;color:rgba(251,246,236,.72)!important;font-size:.92rem}
+.vj-ramon-remate{max-width:56ch;margin:0 auto!important;color:rgba(251,246,236,.93)!important;font-size:1.19rem;line-height:1.7}
+.vj-ramon-remate strong{color:#fff}
+
+/* ── misión (tarjeta grande estilo home) ── */
+.vj-e11-card{position:relative;max-width:1060px;margin:0 auto;border-radius:var(--r-card);overflow:hidden;background:linear-gradient(155deg,#06291f,#032018);box-shadow:var(--sombra-osc);display:flex;flex-direction:column}
+.vj-e11-contenido{padding:30px 24px 34px;order:2}
+.vj-e11-foto{order:1;position:relative;min-height:190px}
+.vj-e11-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vj-e11-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,41,31,.14),rgba(6,41,31,.9))}
+.vj-e11 .vj-lead,.vj-e11-card .vj-lead{color:rgba(251,246,236,.94);margin-top:14px}
+.vj-e11-card .vj-lead em{color:var(--secondary-claro)}
+.vj-marcas{display:flex;flex-direction:column;gap:12px;margin:22px auto 0;max-width:540px}
+.vj-marca{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:19px 24px;border-radius:var(--r-card);background:var(--secondary);color:var(--crema);font-family:var(--f-ui);font-weight:800;font-size:1.16rem;box-shadow:0 6px 20px rgba(147,74,28,.4);transition:transform .22s ease,box-shadow .22s ease}
+.vj-marca+.vj-marca{background:rgba(251,249,248,.12);border:1px solid rgba(251,249,248,.3);box-shadow:none}
+.vj-marca:hover{transform:translateY(-2px)}
 .vj-marca span{color:var(--oro);font-size:.9rem;font-weight:700;white-space:nowrap}
-.vj-check{margin:26px auto 0;max-width:540px;padding:22px 22px 10px;border-radius:var(--r-card);background:#fff;border:1px solid rgba(2,52,41,.08);box-shadow:var(--sombra-card)}
-.vj-check-t{font-family:var(--f-ui);font-weight:800;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
+.vj-check{margin:26px auto 0;max-width:540px;padding:22px 22px 10px;border-radius:var(--r-card);background:rgba(251,249,248,.96);border:1px solid rgba(2,52,41,.08);box-shadow:var(--sombra-card)}
+.vj-check-t{font-family:var(--f-ui);font-weight:800;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
 .vj-check label{display:flex;align-items:flex-start;gap:13px;padding:14px 0;border-top:1px solid rgba(2,52,41,.08);cursor:pointer;font-size:1.1rem;line-height:1.45;color:var(--on)}
 .vj-check label:first-of-type{border-top:0}
 .vj-check input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:24px;height:24px;margin-top:1px;border:2px solid rgba(2,52,41,.3);border-radius:7px;background:#fff;cursor:pointer;position:relative;transition:background .2s ease,border-color .2s ease}
@@ -455,9 +225,64 @@ body{background:#fbf9f8}
 .vj-check label span::after{content:"";position:absolute;left:0;right:100%;top:56%;height:2.5px;border-radius:2px;background:var(--secondary);transform:rotate(-.5deg);transition:right .4s cubic-bezier(.4,0,.2,1)}
 .vj-check input:checked+span{color:var(--on-var)}
 .vj-check input:checked+span::after{right:-2%}
-.vj-cierre{margin:4px 0 0;padding:22px 0 14px;border-top:1px solid rgba(2,52,41,.08);font-family:var(--f-head);font-size:1.5rem;font-style:italic;line-height:1.35;color:var(--primary);text-align:center}
+.vj-cierre-mision{margin:4px 0 0;padding:22px 0 14px;border-top:1px solid rgba(2,52,41,.08);font-family:var(--f-head);font-size:1.5rem;font-style:italic;line-height:1.35;color:var(--primary);text-align:center}
+.vj-cierre,.vj-check .vj-cierre{margin:4px 0 0;padding:22px 0 14px;border-top:1px solid rgba(2,52,41,.08);font-family:var(--f-head);font-size:1.5rem;font-style:italic;line-height:1.35;color:var(--primary);text-align:center}
+@media(min-width:1024px){
+  .vj-e11-card{flex-direction:row;align-items:stretch}
+  .vj-e11-contenido{order:1;flex:1 1 58%;padding:46px 44px}
+  .vj-e11-foto{order:2;flex:1 1 42%;min-height:0}
+  .vj-e11-foto::after{background:linear-gradient(90deg,rgba(6,41,31,.92),rgba(6,41,31,.12) 55%)}
+}
 
-/* ---------- Estación 3: el test ---------- */
+/* ── los dos escaparates ── */
+.vj-dos{max-width:1000px;margin:0 auto}
+.vj-dos-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
+.vj-dos-card{position:relative;padding:28px 26px;border-radius:var(--r-card);overflow:hidden}
+.vj-dos-card h3{font-family:var(--f-head)!important;font-size:1.7rem!important;font-weight:600;line-height:1.15;margin:0 0 14px!important}
+.vj-dos-card p{font-size:1.12rem!important;line-height:1.62}
+.vj-dos-card--lujo{background:linear-gradient(155deg,#06291f,#03201a);box-shadow:var(--sombra-osc)}
+.vj-dos-card--lujo h3{color:#fff!important}
+.vj-dos-card--lujo p{color:rgba(251,246,236,.88)!important}
+.vj-dos-card--lujo em{color:var(--oro);font-style:italic}
+.vj-dos-card--low{background:#fff;border:1px solid rgba(2,52,41,.08);box-shadow:var(--sombra-card)}
+.vj-dos-card--low h3{color:var(--primary)!important}
+.vj-dos-card--low p{color:var(--on-var)!important}
+.vj-dos-remate{max-width:68ch;margin:26px auto 0!important;font-size:1.14rem!important;line-height:1.68;color:var(--on-var)!important}
+@media(min-width:760px){.vj-dos-grid{grid-template-columns:1fr 1fr;gap:22px}.vj-dos-card{padding:34px 32px}.vj-dos-remate{text-align:center}}
+
+/* ── la escalera del precio (estática, ascendente) ── */
+.vj-casc-cab{text-align:center;margin-bottom:18px}
+.vj-peldanos{display:flex;flex-direction:column;gap:18px;max-width:1000px;margin:0 auto}
+.vj-peldanos>div:nth-child(even){align-self:flex-end}
+.vj-e7-peldano,.vj-e9-peldano{background:#fff;border:1px solid rgba(2,52,41,.08);border-left:4px solid var(--secondary);border-radius:var(--r-card);box-shadow:var(--sombra-card);padding:26px 24px;max-width:520px;text-align:left}
+.vj-e7-cifra,.vj-e9-peldano b{display:block;font-family:var(--f-head);font-weight:600;font-size:clamp(2rem,7.4vw,3rem);color:var(--secondary);line-height:1;margin-bottom:6px;font-feature-settings:"tnum";letter-spacing:-.01em}
+.vj-e7-cifra small,.vj-e9-peldano b small{font-size:.42em;opacity:.85}
+.vj-e7-cifra--txt{font-style:italic;font-size:clamp(1.7rem,5.6vw,2.4rem)}
+.vj-e7-peldano h3,.vj-e9-peldano h3{font-family:var(--f-ui);font-weight:800;font-size:1.2rem;color:var(--primary);margin:0 0 10px}
+.vj-e7-peldano p,.vj-e9-peldano p{color:var(--on-var);font-size:1.1rem;line-height:1.6;margin:0}
+.vj-e7-peldano .vj-fuente{color:#8a8070;margin-top:10px;display:block;font-size:.8rem}
+@media(min-width:900px){.vj-peldanos>div:nth-child(even){margin-right:4%}.vj-peldanos>div:nth-child(odd){margin-left:4%}}
+.vj-salto{margin:26px auto 0;max-width:600px;padding:20px 22px;border-radius:var(--r-card);background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.18)}
+.vj-salto-q{font-family:var(--f-head);font-style:italic;font-size:1.34rem!important;line-height:1.35;color:var(--primary)!important}
+.vj-salto-q em{color:var(--secondary)}
+.vj-salto-n{margin-top:12px!important;font-size:.94rem!important;line-height:1.5;color:#6b6354!important}
+
+/* ── el test como stepper ── */
+.vj-e12-cab{text-align:center;max-width:640px;margin:clamp(36px,6vh,56px) auto 8px}
+.vj-e12-cab h3{font-family:var(--f-head);font-size:clamp(1.7rem,6vw,2.4rem);font-weight:700;color:var(--primary);line-height:1.12;margin:10px 0 18px}
+.vj-e12-prog{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px}
+.vj-e12-barra{width:min(240px,52vw);height:5px;border-radius:100px;background:rgba(2,52,41,.1);overflow:hidden}
+.vj-e12-barra i{display:block;height:100%;width:0;border-radius:100px;background:var(--secondary);transition:width .5s cubic-bezier(.4,0,.2,1)}
+.vj-e12-prog b{font-family:var(--f-head);font-size:1.15rem;color:var(--secondary);font-feature-settings:"tnum"}
+.vj-e12-stage{position:relative;max-width:600px;margin:0 auto}
+.vj-js .vj-e12-stage .vj-q{display:none}
+.vj-js .vj-e12-stage .vj-q.vj-q--activa{display:block;animation:vj-q-entra .35s cubic-bezier(.22,1,.36,1)}
+@keyframes vj-q-entra{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.vj-e12-nav{display:flex;justify-content:center;gap:12px;margin-top:16px}
+.vj-e12-flecha{width:44px;height:44px;border-radius:50%;border:1px solid rgba(2,52,41,.2);background:#fff;color:var(--primary);font-size:1.1rem;cursor:pointer;box-shadow:0 6px 16px rgba(2,52,41,.08);transition:transform .2s ease}
+.vj-e12-flecha:hover{transform:translateY(-2px)}
+.vj-e12-flecha:disabled{opacity:.35;cursor:default;transform:none}
+@media(prefers-reduced-motion:reduce){.vj-js .vj-e12-stage .vj-q.vj-q--activa{animation:none}}
 .vj-q{margin:24px auto 0;max-width:540px;padding:24px 22px;border-radius:var(--r-card);background:#fff;border:1px solid rgba(2,52,41,.08);box-shadow:var(--sombra-card)}
 .vj-q-n{font-family:var(--f-ui);font-weight:800;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary)}
 .vj-q-t{margin:8px 0 16px!important;font-family:var(--f-ui);font-weight:800;font-size:1.3rem!important;line-height:1.32;color:var(--primary)!important}
@@ -475,165 +300,13 @@ body{background:#fbf9f8}
 .vj-r p{color:rgba(251,246,236,.92)!important;font-size:1.12rem!important;line-height:1.55}
 .vj-r p strong{color:var(--oro)}
 .vj-fuente{display:block;margin-top:12px;font-size:.8rem;color:rgba(251,246,236,.6)}
-.vj-uso{margin:32px auto 0;max-width:540px;padding:26px 22px;border-radius:20px;background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.16)}
-.vj-uso .vj-uso-k{font-family:var(--f-ui);font-weight:800;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);margin-bottom:10px}
+.vj-uso{margin:32px auto 0;max-width:600px;padding:26px 22px;border-radius:var(--r-card);background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.16)}
+.vj-uso .vj-uso-k{font-family:var(--f-ui);font-weight:800;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary);margin-bottom:10px}
 .vj-uso .vj-uso-big{font-family:var(--f-head);font-size:clamp(2.4rem,9.5vw,3.4rem);font-weight:600;line-height:1.02;color:var(--primary);letter-spacing:-.02em}
 .vj-uso p{margin-top:14px!important;color:#5d5746!important;font-size:1.14rem!important;line-height:1.6}
 
-/* ---------- Estación 4: final ---------- */
-.vj-doble{display:flex;flex-direction:column;gap:16px;margin:24px auto 0;max-width:540px}
-.vj-concl{padding:24px 22px;border-radius:20px;position:relative;overflow:hidden}
-.vj-concl--consumidor{background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema);box-shadow:0 16px 40px rgba(2,52,41,.24)}
-.vj-concl--artesano{background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.18)}
-.vj-concl-k{display:block;font-family:var(--f-ui);font-weight:800;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
-.vj-concl--consumidor .vj-concl-k{color:var(--oro)}
-.vj-concl--artesano .vj-concl-k{color:var(--secondary)}
-.vj-concl--consumidor p{color:rgba(251,246,236,.92)!important;font-size:1.14rem!important;line-height:1.6}
-.vj-concl--artesano p{color:#4a4335!important;font-size:1.14rem!important;line-height:1.6}
-.vj-concl--artesano p strong{color:var(--primary)}
-.vj-cita{margin:32px auto 0;max-width:560px;text-align:center;padding:0 4px}
-.vj-cita blockquote{font-family:var(--f-head);font-style:italic;font-weight:500;font-size:clamp(1.6rem,6vw,2.3rem);line-height:1.28;color:var(--primary);margin:0}
-.vj-cita .vj-firma{margin-top:16px!important;font-size:.92rem!important;color:var(--on-var)!important}
-.vj .vj-cita .vj-firma a{color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
-
-/* ---------- Bloque final de CTAs ---------- */
-.vj-final{position:relative;overflow:hidden;padding:clamp(64px,11vh,110px) 22px;background:#06241c;text-align:center}
-.vj-final-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.vj-final::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(168deg,rgba(6,36,28,.88) 0%,rgba(2,52,41,.9) 55%,rgba(6,40,31,.95) 100%)}
-.vj-final>*:not(.vj-final-foto){position:relative;z-index:2}
-.vj-final img.vj-sello{height:52px;width:auto;margin:0 auto 18px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
-.vj-final h2{font-family:var(--f-head);font-size:clamp(2.4rem,8vw,3.6rem);font-weight:700;color:var(--crema);line-height:1.12;margin-bottom:14px}
-.vj-final h2 em{font-style:italic;color:var(--secondary-claro)}
-.vj-final p{color:rgba(251,246,236,.8);font-size:1.15rem;max-width:520px;margin:0 auto}
-.vj-ctas{display:flex;flex-direction:column;align-items:stretch;gap:12px;max-width:400px;margin:30px auto 0}
-.vj-cta{display:flex;align-items:center;justify-content:center;gap:9px;padding:18px 26px;border-radius:100px;font-family:var(--f-ui);font-weight:800;font-size:1.06rem;transition:transform .22s ease,filter .22s ease,box-shadow .22s ease}
-.vj-cta--1{background:var(--secondary);color:#fff;box-shadow:0 6px 20px rgba(147,74,28,.4)}
-.vj-cta--2{background:rgba(251,246,236,.07);border:1px solid rgba(246,201,138,.42);color:var(--crema)}
-.vj-cta--3{background:transparent;color:rgba(251,246,236,.82);font-size:.96rem;padding:12px}
-.vj-cta--3 span{text-decoration:underline;text-underline-offset:4px}
-.vj-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
-
-/* Fundidos de costura (v7·5): las tres costuras oscuro→claro llevan banda
-   de solape; las demás cruzan por el tinte del tramo y no la necesitan. */
-.vj-cap{height:28vh;background:linear-gradient(180deg,var(--de),var(--surface))}
-/* ═══ TIPOGRAFÍA (v8·4): cifras tnum, € al 60%, subrayado a mano ═══ */
-.vj-e9-contador b,.vj-kilo-v,.vj-e7-cifra,.vj-e9-peldano b,.vj-herochip b{font-feature-settings:"tnum";letter-spacing:-.01em}
-.vj-eur{font-size:.6em;vertical-align:top;margin-left:.05em;letter-spacing:0}
-.vj-sub-mano{position:relative;white-space:nowrap}
-.vj-sub-mano svg{position:absolute;left:-3%;bottom:-.14em;width:106%;height:.32em;overflow:visible;pointer-events:none}
-.vj-sub-mano svg path{fill:none;stroke:var(--secondary-claro);stroke-width:3.5;stroke-linecap:round;vector-effect:non-scaling-stroke}
-
-.vj-hilo-brilla{filter:drop-shadow(0 0 10px rgba(232,167,106,.9)) brightness(1.3);transition:filter .18s ease}
-
-/* Nudo-hito (v9·1.2): la marca de cada parada, pequeña y siempre igual */
-.vj-parada{display:inline-flex;align-items:center;gap:10px}
-.vj-nudo{width:38px;height:34px;flex:0 0 auto}
-.vj-nudo path{fill:none;stroke:#c96f2e;stroke-width:2.4}
-.vj-js .vj-nudo path{stroke-dasharray:130;stroke-dashoffset:130;transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1) .15s}
-.vj-js .vj-nudo.vj-on path{stroke-dashoffset:0}
-
-/* Indicador de scroll (v9·3) */
-.vj-desliza{position:absolute;left:50%;bottom:5vh;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:9px;transition:opacity .4s ease}
-.vj-desliza i{display:block;width:1.5px;height:28px;background:rgba(251,246,236,.7);border-radius:2px;animation:vj-pulso 1.8s ease-in-out infinite}
-.vj-desliza span{font-family:var(--f-body);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,246,236,.7)}
-.vj-desliza--mini{bottom:3.5vh}
-.vj-desliza.vj-oculto{opacity:0;pointer-events:none}
-@keyframes vj-pulso{0%,100%{opacity:.5;transform:translateY(0)}50%{opacity:1;transform:translateY(6px)}}
-@media(prefers-reduced-motion:reduce){.vj-desliza i{animation:none}}
-
-/* ============= GRANO GLOBAL ============= */
-.vj-grano{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:128px}
-@media(prefers-reduced-motion:reduce){.vj-grano{display:none}}
-
-/* ============= LIGHTBOX DEL REEL ============= */
-.vj-lb{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;background:rgba(2,10,8,.93)}
-.vj-lb[hidden]{display:none}
-.vj-lb-caja{position:relative;width:min(400px,94vw);max-height:88vh;overflow:auto;border-radius:20px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.6);padding:6px}
-.vj-lb-cerrar{position:absolute;top:8px;right:8px;z-index:5;width:38px;height:38px;border:0;border-radius:50%;background:rgba(2,32,25,.85);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.vj-lb-link{display:block;padding:12px;text-align:center;font-family:var(--f-ui);font-weight:700;font-size:.92rem;color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
-.vj-lb-abierta{overflow:hidden}
-.vj-ig-card{cursor:pointer}
-.vj-ig-play{border:0;cursor:pointer;font-family:inherit}
-
-/* ======================= FOOTER LIGERO ======================= */
-.vj-foot{padding:34px 22px 40px;background:#03231b;text-align:center}
-.vj-foot img{height:38px;width:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 9px rgba(0,0,0,.5))}
-.vj-foot p{color:rgba(251,246,236,.6);font-size:.84rem;line-height:1.6}
-.vj .vj-foot a{color:rgba(251,246,236,.82);text-decoration:underline;text-underline-offset:3px}
-.vj-foot .vj-foot-links{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;font-size:.84rem}
-
-.vj-esc{list-style:none;margin:26px auto 0;max-width:540px;padding:0;display:flex;flex-direction:column;gap:12px}
-.vj-esc-item{position:relative;padding-left:calc((var(--i) - 1) * 9px)}
-.vj-esc-btn{width:100%;display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;padding:18px 18px;border:1px solid rgba(2,52,41,.12);border-left:4px solid var(--secondary);border-radius:16px;background:#fff;color:var(--on);font-family:inherit;box-shadow:0 10px 26px rgba(2,52,41,.06);transition:background .2s ease,box-shadow .2s ease}
-.vj-esc-btn:hover{background:#fffdf8;box-shadow:0 14px 32px rgba(2,52,41,.1)}
-.vj-esc-item[data-abierto] .vj-esc-btn{background:#fffdf8;border-radius:16px 16px 0 0;box-shadow:none}
-.vj-esc-n{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:rgba(147,74,28,.1);border:1px solid rgba(147,74,28,.28);color:var(--secondary);font-family:var(--f-head);font-style:italic;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
-.vj-esc-t{flex:1 1 auto;font-family:var(--f-ui);font-weight:800;font-size:1.12rem;line-height:1.25;color:var(--primary)}
-.vj-esc-c{flex:0 0 auto;font-family:var(--f-head);font-size:clamp(1.5rem,6vw,2.1rem);font-weight:600;color:var(--secondary);line-height:1;white-space:nowrap}
-.vj-esc-c small{font-size:.5em;font-weight:400;opacity:.8}
-.vj-esc-c--txt{font-style:italic;font-size:1.25rem}
-.vj-esc-mas{flex:0 0 auto;color:var(--secondary);font-size:1rem;transition:transform .25s ease}
-.vj-esc-item[data-abierto] .vj-esc-mas{transform:rotate(180deg)}
-.vj-esc-p{margin-top:-6px;padding:4px 18px 20px;border:1px solid rgba(2,52,41,.12);border-top:0;border-left:4px solid var(--secondary);border-radius:0 0 16px 16px;background:#fffdf8}
-.vj-esc-p p{color:var(--on-var)!important;font-size:1.14rem!important;line-height:1.65}
-.vj-casc-remate{max-width:560px;margin:36px auto 0!important;padding-top:30px;border-top:1px solid rgba(147,74,28,.22);font-family:var(--f-head);font-style:italic;font-size:clamp(1.6rem,6vw,2.2rem);line-height:1.28;color:var(--primary);text-align:center}
-.vj-casc-remate em{color:var(--secondary);font-style:italic}
-
-/* ============= BLOQUE "¿Y POR QUÉ NO SE HACE AQUÍ?" =============
-   Testimonio de Ramón Cobo (Wooldreamers). Va sobre crema para respirar
-   después de la cascada oscura, y sin foto nueva: manda el titular.
-   Los beats van en Newsreader cursiva porque son SUS palabras, no datos. */
-.vj-ramon{background:linear-gradient(178deg,var(--crema) 0%,#f5efe2 100%);padding:clamp(56px,9vh,88px) 22px}
-.vj-ramon-in{max-width:660px;margin:0 auto}
-.vj-ramon .vj-ey{color:var(--secondary)}
-.vj-ramon h2{font-family:var(--f-head);font-size:clamp(2.8rem,11vw,4.4rem);font-weight:700;color:var(--primary);line-height:.98;letter-spacing:-.02em}
-.vj-ramon h2 em{font-style:italic;color:var(--secondary)}
-.vj-ramon-lead{margin-top:20px!important;font-size:clamp(1.3rem,4.5vw,1.5rem);line-height:1.5;color:var(--on)}
-.vj-ramon-fuente{margin-top:26px!important;padding:13px 18px;border-radius:12px;background:rgba(147,74,28,.09);border:1px solid rgba(147,74,28,.2);font-size:1rem!important;line-height:1.5;color:#5d5746!important}
-.vj-ramon-fuente b{color:var(--secondary)}
-.vj-beats{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
-.vj-beat-btn{width:100%;display:flex;align-items:flex-start;gap:14px;text-align:left;cursor:pointer;padding:20px 20px;border:1px solid rgba(2,52,41,.12);border-left:4px solid var(--secondary);border-radius:16px;background:#fff;font-family:inherit;box-shadow:0 10px 26px rgba(2,52,41,.06);transition:background .2s ease,box-shadow .2s ease}
-.vj-beat-btn:hover{background:#fffdf8;box-shadow:0 14px 32px rgba(2,52,41,.1)}
-.vj-beat[data-abierto] .vj-beat-btn{border-radius:16px 16px 0 0;background:#fffdf8;padding-bottom:14px;box-shadow:none}
-.vj-beat-n{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:rgba(147,74,28,.1);border:1px solid rgba(147,74,28,.28);color:var(--secondary);font-family:var(--f-head);font-style:italic;font-size:1.1rem;display:flex;align-items:center;justify-content:center}
-.vj-beat-t{flex:1 1 auto;font-family:var(--f-head);font-style:italic;font-size:1.34rem;font-weight:600;line-height:1.28;color:var(--primary)}
-.vj-beat-mas{flex:0 0 auto;margin-top:6px;color:var(--secondary);font-size:1rem;transition:transform .25s ease}
-.vj-beat[data-abierto] .vj-beat-mas{transform:rotate(180deg)}
-.vj-beat-p{margin-top:-6px;padding:2px 20px 20px 20px;border:1px solid rgba(2,52,41,.12);border-top:0;border-left:4px solid var(--secondary);border-radius:0 0 16px 16px;background:#fffdf8}
-.vj-beat-p p{font-size:1.14rem!important;line-height:1.65;color:var(--on-var)!important}
-.vj-cita--ramon{margin-top:34px!important;padding-top:30px;border-top:1px solid rgba(147,74,28,.22)}
-.vj-ramon-remate{margin-top:32px!important;font-size:1.19rem!important;line-height:1.7;color:var(--on-var)!important}
-.vj-ramon-remate strong{color:var(--primary)}
-
-.vj-salto{margin:24px auto 0;max-width:540px;padding:20px 22px;border-radius:18px;background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.18)}
-.vj-salto-q{font-family:var(--f-head);font-style:italic;font-size:1.34rem!important;line-height:1.35;color:var(--primary)!important}
-.vj-salto-q em{color:var(--secondary)}
-.vj-salto-n{margin-top:12px!important;font-size:.94rem!important;line-height:1.5;color:#6b6354!important}
-
-/* ============= LOS DOS ESCAPARATES (parada 3) =============
-   Dos tarjetas al patrón de la home: una oscura (lujo), una clara (low cost).
-   Lado a lado en escritorio, apiladas en móvil. */
-.vj-dos{max-width:1000px;margin:0 auto}
-.vj-dos-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
-.vj-dos-card{position:relative;padding:28px 26px;border-radius:var(--r-card);overflow:hidden}
-.vj-dos-card h3{font-family:var(--f-head)!important;font-size:1.7rem!important;font-weight:600;line-height:1.15;margin:0 0 14px!important}
-.vj-dos-card p{font-size:1.12rem!important;line-height:1.62}
-.vj-dos-card--lujo{background:linear-gradient(155deg,#06291f,#03201a);box-shadow:var(--sombra-card)}
-.vj-dos-card--lujo h3{color:#fff!important}
-.vj-dos-card--lujo p{color:rgba(251,246,236,.88)!important}
-.vj-dos-card--lujo em{color:var(--oro);font-style:italic}
-.vj-dos-card--low{background:#fff;border:1px solid rgba(2,52,41,.08);box-shadow:var(--sombra-card)}
-.vj-dos-card--low h3{color:var(--primary)!important}
-.vj-dos-card--low p{color:var(--on-var)!important}
-.vj-dos-remate{max-width:68ch;margin:26px auto 0!important;font-size:1.14rem!important;line-height:1.68;color:var(--on-var)!important}
-@media(min-width:760px){
-  .vj-dos-grid{grid-template-columns:1fr 1fr;gap:22px}
-  .vj-dos-card{padding:34px 32px}
-  .vj-dos-remate{text-align:center}
-}
-
-/* ============= CALCULADORA DE COSTE POR USO ============= */
-.vj-calc{margin:26px auto 0;max-width:540px;padding:26px 22px;border-radius:20px;background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema)}
+/* ── calculadora ── */
+.vj-calc{margin:26px auto 0;max-width:600px;padding:26px 22px;border-radius:20px;background:linear-gradient(155deg,#06291f,#03201a);color:var(--crema);box-shadow:var(--sombra-osc)}
 .vj-calc h3{font-family:var(--f-head)!important;font-size:1.7rem!important;font-weight:600;color:var(--crema)!important;margin:0 0 6px!important}
 .vj-calc .vj-calc-sub{color:rgba(251,246,236,.7)!important;font-size:1rem!important;margin-bottom:22px}
 .vj-calc-campo{margin-bottom:20px}
@@ -644,118 +317,38 @@ body{background:#fbf9f8}
 .vj-calc input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:transparent}
 .vj-calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M4.5 9c5-3.4 12-3.6 17 .4'/%3E%3Cpath d='M3.8 14c5.5-2.6 13-2.4 18.4 1'/%3E%3Cpath d='M6 19.4c4.6-2.2 10-2 14 .6'/%3E%3Cpath d='M9 3.6c2.8 4.8 3.4 12.4 1.6 18.8'/%3E%3Cpath d='M16.4 3.9c2 5.2 2 12-.4 18'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0;box-shadow:0 4px 12px rgba(0,0,0,.4)}
 .vj-calc input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M4.5 9c5-3.4 12-3.6 17 .4'/%3E%3Cpath d='M3.8 14c5.5-2.6 13-2.4 18.4 1'/%3E%3Cpath d='M6 19.4c4.6-2.2 10-2 14 .6'/%3E%3Cpath d='M9 3.6c2.8 4.8 3.4 12.4 1.6 18.8'/%3E%3Cpath d='M16.4 3.9c2 5.2 2 12-.4 18'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0}
-.vj-calc-res{margin-top:24px;padding:22px 18px;border-radius:16px;background:rgba(246,201,138,.12);border:1px solid rgba(246,201,138,.34);text-align:center}
-.vj-calc-big{font-family:var(--f-head);font-size:clamp(2.8rem,12vw,4rem);font-weight:600;color:var(--oro);line-height:1}
+.vj-calc-res{margin-top:24px;padding:22px 18px;border-radius:var(--r-card);background:rgba(246,201,138,.12);border:1px solid rgba(246,201,138,.34);text-align:center}
+.vj-calc-big{font-family:var(--f-head);font-size:clamp(2.8rem,12vw,4rem);font-weight:600;color:var(--oro);line-height:1;font-feature-settings:"tnum"}
 .vj-calc-big .vj-calc-un{display:block;margin-top:8px;font-size:.26em;font-family:var(--f-ui);font-weight:800;color:rgba(251,246,236,.78);letter-spacing:.08em;text-transform:uppercase}
+.vj-calc-big #vjCalcRes{transition:transform .18s ease;display:inline-block}
+.vj-calc-big #vjCalcRes.vj-pop{transform:scale(1.05)}
 .vj-calc-res p{color:rgba(251,246,236,.82)!important;font-size:1.02rem!important;margin-top:12px!important}
 .vj-calc-comp{margin-top:16px!important;font-size:.96rem!important;color:rgba(251,246,236,.62)!important;text-align:center}
 .vj-calc-pie{margin-top:18px!important;font-family:var(--f-head);font-style:italic;font-size:1.3rem!important;color:var(--crema)!important;text-align:center}
 
-/* ============= HISTORIA HUMANA (cierre estación 3) ============= */
-.vj-historia{margin:26px auto 0;max-width:540px;padding:26px 24px;border-radius:20px;background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.18)}
-.vj-historia .vj-hist-k{font-family:var(--f-ui);font-weight:800;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
+/* ── la historia (foto B/N + tarjeta) ── */
+.vj-e13b-grid{max-width:1000px;margin:clamp(36px,6vh,56px) auto 0;display:flex;flex-direction:column;gap:22px}
+.vj-e13b-foto{position:relative;margin:0;border-radius:var(--r-card);overflow:hidden;min-height:220px;box-shadow:var(--sombra-card)}
+.vj-e13b-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.vj-historia{margin:0;max-width:none;padding:26px 24px;border-radius:20px;background:linear-gradient(150deg,#fbf6ec,#f0e4cf);border:1px solid rgba(147,74,28,.18)}
+.vj-hist-k{font-family:var(--f-ui);font-weight:800;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px}
 .vj-historia p{color:#4a4335!important;font-size:1.14rem!important;line-height:1.62}
 .vj-historia p+p{margin-top:14px!important}
 .vj-hist-cifras{display:flex;align-items:center;justify-content:center;gap:18px;margin:20px 0}
 .vj-hist-cifra{text-align:center}
-.vj-hist-cifra b{display:block;font-family:var(--f-head);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:600;line-height:1}
-.vj-hist-cifra--merc b{color:#8a8070}
+.vj-hist-cifra b{display:block;font-family:var(--f-head);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:600;line-height:1;font-feature-settings:"tnum"}
+.vj-hist-cifra--merc b{color:#8a8070;position:relative}
+.vj-hist-cifra--merc b::after{content:"";position:absolute;left:-4%;right:104%;top:52%;height:3px;background:var(--secondary);transform:rotate(-4deg);border-radius:2px;transition:right .5s cubic-bezier(.4,0,.2,1) .3s}
+.vj-hist-cifra--merc.vj-tachado b::after{right:-4%}
 .vj-hist-cifra--real b{color:var(--primary)}
 .vj-hist-cifra span{display:block;margin-top:6px;font-size:.86rem;color:#6b6354;font-weight:600}
 .vj-hist-flecha{color:var(--secondary);font-size:1.5rem;flex:0 0 auto}
+@media(min-width:900px){.vj-e13b-grid{flex-direction:row;align-items:stretch}.vj-e13b-foto{flex:1 1 44%;min-height:0}.vj-historia{flex:1 1 56%}}
 
-/* ============= FRASES PARA COPIAR (estación 4) ============= */
-.vj-frases{margin:30px auto 0;max-width:560px}
-.vj-frases-k{font-family:var(--f-ui);font-weight:800;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);text-align:center;margin-bottom:8px}
-.vj-frases h3{text-align:center;font-family:var(--f-head)!important;font-size:1.9rem!important;color:var(--primary)!important;font-weight:700;margin:0 0 20px!important}
-.vj-frase{display:flex;align-items:flex-start;gap:14px;padding:20px;border-radius:var(--r-card);background:#fff;border:1px solid rgba(2,52,41,.08);box-shadow:var(--sombra-card)}
-.vj-frase+.vj-frase{margin-top:12px}
-.vj-frase q{flex:1 1 auto;font-family:var(--f-head);font-style:italic;font-size:1.24rem;line-height:1.4;color:var(--primary);quotes:'"' '"'}
-.vj-copiar{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:11px 15px;border:0;cursor:pointer;border-radius:100px;background:rgba(2,52,41,.08);color:var(--primary);font-family:var(--f-ui);font-weight:800;font-size:.86rem;transition:background .2s ease,color .2s ease}
-.vj-copiar:hover{background:rgba(2,52,41,.16)}
-.vj-copiar.vj-copiado{background:var(--primary);color:var(--oro)}
-
-/* ═══════════════ ESCENAS E10-E16 ═══════════════ */
-/* E10 · los dos escaparates: banda ámbar clara con papel */
-.vj-e10{position:relative;background:linear-gradient(178deg,#f7efe3,#f2e7d6);padding:clamp(48px,8vh,80px) 0}
-.vj-e10::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.03;pointer-events:none}
-
-/* E11 · la misión: tarjeta grande estilo home con foto integrada */
-.vj-e11{background:linear-gradient(178deg,#f2e7d6,#0b2a20 78%);padding:clamp(48px,8vh,88px) 22px}
-.vj-e11-card{position:relative;max-width:1060px;margin:0 auto;border-radius:var(--r-card);overflow:hidden;background:linear-gradient(155deg,#06291f,#032018);box-shadow:var(--sombra-card);display:flex;flex-direction:column}
-.vj-e11-contenido{padding:30px 24px 34px;order:2}
-.vj-e11-foto{order:1;position:relative;min-height:190px}
-.vj-e11-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vj-e11-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,41,31,.14),rgba(6,41,31,.9))}
-.vj-e11 .vj-lead{color:rgba(251,246,236,.94);margin-top:14px}
-.vj-e11 .vj-lead em{color:var(--secondary-claro)}
-.vj-e11 .vj-marcas{margin-top:22px}
-.vj-e11 .vj-marca{background:var(--secondary);box-shadow:0 6px 20px rgba(147,74,28,.4)}
-.vj-e11 .vj-marca+.vj-marca{background:rgba(251,249,248,.12);border:1px solid rgba(251,249,248,.3)}
-.vj-e11 .vj-check{background:rgba(251,249,248,.96)}
-@media(min-width:1024px){
-  .vj-e11-card{flex-direction:row;align-items:stretch}
-  .vj-e11-contenido{order:1;flex:1 1 58%;padding:46px 44px}
-  .vj-e11-foto{order:2;flex:1 1 42%;min-height:0}
-  .vj-e11-foto::after{background:linear-gradient(90deg,rgba(6,41,31,.92),rgba(6,41,31,.12) 55%)}
-}
-
-/* E12 · el test como stepper */
-.vj-e12{position:relative;background:var(--surface);padding:clamp(48px,8vh,84px) 22px}
-.vj-e12-cab{text-align:center;max-width:640px;margin:0 auto 8px}
-.vj-e12-cab h3{font-family:var(--f-head);font-size:clamp(1.7rem,6vw,2.4rem);font-weight:700;color:var(--primary);line-height:1.12;margin:10px 0 18px}
-.vj-e12-prog{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px}
-.vj-e12-hilo{width:min(240px,52vw);height:18px;overflow:visible}
-.vj-e12-prog b{font-family:var(--f-head);font-size:1.15rem;color:var(--secondary);font-feature-settings:"tnum"}
-.vj-e12-stage{position:relative;max-width:600px;margin:0 auto}
-.vj-js .vj-e12 .vj-q{display:none}
-.vj-js .vj-e12 .vj-q.vj-q--activa{display:block;animation:vj-q-entra .35s cubic-bezier(.22,1,.36,1)}
-@keyframes vj-q-entra{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.vj-e12-nav{display:flex;justify-content:center;gap:12px;margin-top:16px}
-.vj-e12-flecha{width:44px;height:44px;border-radius:50%;border:1px solid rgba(2,52,41,.2);background:#fff;color:var(--primary);font-size:1.1rem;cursor:pointer;box-shadow:0 6px 16px rgba(2,52,41,.08);transition:transform .2s ease}
-.vj-e12-flecha:hover{transform:translateY(-2px)}
-.vj-e12-flecha:disabled{opacity:.35;cursor:default;transform:none}
-@media(prefers-reduced-motion:reduce){.vj-js .vj-e12 .vj-q.vj-q--activa{animation:none}}
-
-/* E13 · calculadora + historia */
-.vj-e13{background:linear-gradient(178deg,var(--surface),#f3ede2);padding:clamp(44px,7vh,72px) 22px 0}
-.vj-e13b{background:#f3ede2;padding:clamp(44px,7vh,72px) 22px}
-.vj-e13b-grid{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
-.vj-e13b-foto{position:relative;margin:0;border-radius:var(--r-card);overflow:hidden;min-height:220px;box-shadow:var(--sombra-card)}
-.vj-e13b-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
-.vj-e13b .vj-historia{margin:0;max-width:none}
-@media(min-width:900px){
-  .vj-e13b-grid{flex-direction:row;align-items:stretch}
-  .vj-e13b-foto{flex:1 1 44%;min-height:0}
-  .vj-e13b .vj-historia{flex:1 1 56%}
-}
-.vj-hist-cifra--merc b{position:relative}
-.vj-hist-cifra--merc b::after{content:"";position:absolute;left:-4%;right:104%;top:52%;height:3px;background:var(--secondary);transform:rotate(-4deg);border-radius:2px;transition:right .5s cubic-bezier(.4,0,.2,1) .3s}
-.vj-hist-cifra--merc.vj-tachado b::after{right:-4%}
-
-/* E14 · la bifurcación */
-.vj-e14{background:linear-gradient(178deg,#f3ede2 0%,#12200f 34%)}
-.vj-e14-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:64px 22px;text-align:center}
-.vj-e14-pin{flex-direction:column;gap:26px}
-.vj-e14-hilo{position:relative;width:min(700px,92vw);height:min(420px,52svh);pointer-events:none;opacity:.9;flex:0 0 auto}
-.vj-e14-frase{position:relative;z-index:2;max-width:16ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
-.vj-e14-frase em{font-style:italic;color:var(--secondary-claro)}
-
-/* E15 · el taller, narrativa */
-.vj-e15{position:relative;min-height:92svh;display:flex;align-items:flex-end}
-.vj-e15-bg{position:absolute;inset:0;overflow:hidden}
-.vj-e15-bg img{width:100%;height:100%;object-fit:cover}
-.vj-e15-luz{--tinte:rgba(18,32,15,.66);--tinte-suave:rgba(18,32,15,.42);--pie:rgba(10,20,8,.92);--fx:50%;--fy:40%}
-.vj-e15-in{position:relative;z-index:2;width:100%;max-width:720px;margin:0 auto;padding:96px 26px clamp(56px,10vh,96px);text-align:center}
-.vj-e15-texto{margin-top:16px;font-family:var(--f-head);font-weight:600;font-size:clamp(1.3rem,4.6vw,1.9rem);line-height:1.38;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.55)}
-
-/* E16 · dos destinos + cierre */
-.vj-e16{background:#0d1a0b}
-.vj-e16-pin{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:76px 22px;text-align:center}
-.vj-e16-bg{position:absolute;inset:0}
-.vj-e16-bg img{width:100%;height:100%;object-fit:cover}
-.vj-e16-luz{--tinte:rgba(13,26,11,.7);--tinte-suave:rgba(13,26,11,.48);--pie:rgba(8,16,7,.94);--fx:50%;--fy:42%}
-.vj-e16-in{position:relative;z-index:2;max-width:760px}
+/* ── el cierre ── */
+.vj-cierre{position:relative;overflow:hidden;padding:clamp(64px,10vh,110px) 22px clamp(48px,8vh,80px)}
+.vj-cierre>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vj-cierre-in{position:relative;z-index:2;max-width:1000px;margin:0 auto;text-align:center}
 .vj-e16-titulo{font-family:var(--f-head);font-size:clamp(2.3rem,9vw,4rem);font-weight:700;color:#fff;line-height:1.04;letter-spacing:-.02em;text-shadow:0 3px 30px rgba(0,0,0,.5);margin:0 0 26px}
 .vj-e16-titulo em{font-style:italic;color:var(--secondary-claro)}
 .vj-e16-destinos{display:flex;align-items:center;justify-content:center;gap:6px}
@@ -765,97 +358,85 @@ body{background:#fbf9f8}
 .vj-e16-destino--gris span{color:rgba(154,154,144,.85)}
 .vj-e16-destino--vivo b{color:var(--secondary-claro)}
 .vj-e16-destino--vivo span{color:rgba(224,136,90,.9)}
-.vj-e16-hilo{width:clamp(90px,22vw,190px);height:110px;overflow:visible;flex:0 0 auto}
+.vj-fork{width:clamp(90px,22vw,170px);height:auto;flex:0 0 auto}
+.vj-fork path{fill:none;stroke-width:2.6}
+.vj-fork-t,.vj-fork-v{stroke:#c96f2e}
+.vj-fork-g{stroke:#8a8a80;opacity:.75}
 .vj-e16-remate{margin:30px auto 0;max-width:24ch;font-family:var(--f-head);font-style:italic;font-size:clamp(1.3rem,5vw,1.9rem);line-height:1.3;color:rgba(251,246,236,.94)}
 .vj-e16-remate em{color:var(--secondary-claro)}
-.vj-e16-resto{position:relative;background:linear-gradient(180deg,#0d1a0b,#0a1509);padding:clamp(48px,8vh,80px) 22px}
-/* conclusión doble en glass sobre el cierre oscuro */
-.vj-e16 .vj-doble{max-width:900px}
-.vj-e16 .vj-concl--consumidor,.vj-e16 .vj-concl--artesano{background:rgba(251,249,248,.94);border:1px solid rgba(255,255,255,.25);box-shadow:var(--sombra-card)}
-.vj-e16 .vj-concl--consumidor .vj-concl-k{color:var(--secondary)}
-.vj-e16 .vj-concl--consumidor p{color:var(--on-var)!important}
-.vj-e16 .vj-concl--artesano p{color:var(--on-var)!important}
-@media(min-width:760px){.vj-e16 .vj-concl--consumidor,.vj-e16 .vj-concl--artesano{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:var(--glass)}}
-.vj-e16 .vj-frases-k,.vj-e16 .vj-frases h3{color:#fff!important}
-.vj-e16 .vj-frases-k{color:var(--secondary-claro)!important}
-/* la cita del museo, a tipografía desnuda */
+.vj-doble{display:flex;flex-direction:column;gap:16px;margin:clamp(40px,7vh,60px) auto 0;max-width:900px}
+.vj-concl{padding:24px 22px;border-radius:20px;text-align:left;background:rgba(251,249,248,.94);border:1px solid rgba(255,255,255,.25);box-shadow:var(--sombra-card)}
+.vj-concl-k{display:block;font-family:var(--f-ui);font-weight:800;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px;color:var(--secondary)}
+.vj-concl p{color:var(--on-var)!important;font-size:1.14rem!important;line-height:1.6}
+.vj-concl p strong{color:var(--primary)}
+@media(min-width:760px){.vj-doble{flex-direction:row}.vj-concl{flex:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:var(--glass)}}
+.vj-frases{margin:44px auto 0;max-width:560px}
+.vj-frases-k{font-family:var(--f-ui);font-weight:800;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--secondary-claro);text-align:center;margin-bottom:8px}
+.vj-frases h3{text-align:center;font-family:var(--f-head)!important;font-size:1.9rem!important;color:#fff!important;font-weight:700;margin:0 0 20px!important}
+.vj-frase{display:flex;align-items:flex-start;gap:14px;padding:20px;border-radius:var(--r-card);background:#fff;border:1px solid rgba(2,52,41,.08);box-shadow:var(--sombra-card);text-align:left}
+.vj-frase+.vj-frase{margin-top:12px}
+.vj-frase q{flex:1 1 auto;font-family:var(--f-head);font-style:italic;font-size:1.24rem;line-height:1.4;color:var(--primary);quotes:'"' '"'}
+.vj-copiar{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:11px 15px;border:0;cursor:pointer;border-radius:100px;background:rgba(2,52,41,.08);color:var(--primary);font-family:var(--f-ui);font-weight:800;font-size:.86rem;transition:background .2s ease,color .2s ease}
+.vj-copiar:hover{background:rgba(2,52,41,.16)}
+.vj-copiar.vj-copiado{background:var(--primary);color:var(--oro)}
 .vj-cita--desnuda{max-width:640px;margin:56px auto 0;text-align:center;padding:0}
-.vj-cita--desnuda blockquote{color:#fff;font-size:clamp(1.5rem,5.6vw,2.2rem)}
-.vj-cita--desnuda .vj-firma{color:rgba(251,246,236,.7)!important}
-.vj-e16-completar{background:transparent;padding-top:44px}
-/* tarjeta rica del CTA final */
+.vj-cita--desnuda blockquote{font-family:var(--f-head);font-style:italic;font-weight:500;font-size:clamp(1.5rem,5.6vw,2.2rem);line-height:1.28;color:#fff;margin:0}
+.vj-cita--desnuda .vj-firma{margin-top:16px!important;font-size:.92rem!important;color:rgba(251,246,236,.7)!important}
+.vj .vj-cita--desnuda .vj-firma a{color:var(--secondary-claro);text-decoration:underline;text-underline-offset:3px}
+.vj-next-wrap{padding:44px 0 0;text-align:center}
+.vj-next{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:0;cursor:pointer;border-radius:100px;background:var(--secondary);color:#fff;font-family:var(--f-ui);font-weight:800;font-size:1.04rem;box-shadow:0 6px 20px rgba(147,74,28,.4);transition:transform .22s ease,box-shadow .22s ease}
+.vj-next:hover{transform:translateY(-2px)}
+.vj-next.vj-hecho{background:linear-gradient(135deg,#3E7C59,#1F4B3F)}
 .vj-e16-ctazona{max-width:1000px;margin:24px auto 0}
-.vj-ctacard{display:flex;flex-direction:column;border-radius:var(--r-card);overflow:hidden;background:linear-gradient(155deg,#fbf9f8,#f0e9dc);box-shadow:var(--sombra-card)}
+.vj-ctacard{display:flex;flex-direction:column;border-radius:var(--r-card);overflow:hidden;background:linear-gradient(155deg,#fbf9f8,#f0e9dc);box-shadow:var(--sombra-card);text-align:left}
 .vj-ctacard-img{position:relative;min-height:200px}
 .vj-ctacard-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .vj-ctacard-in{padding:30px 24px 34px}
 .vj-ctacard-in h2{font-family:var(--f-head);font-size:clamp(1.8rem,6.6vw,2.6rem);font-weight:700;color:var(--primary);line-height:1.1;margin:10px 0 14px}
 .vj-ctacard-in h2 em{font-style:italic;color:var(--secondary)}
 .vj-ctacard-in p{color:var(--on-var);font-size:1.12rem;line-height:1.6}
-.vj-ctacard .vj-ctas{align-items:flex-start;margin-top:24px;max-width:none}
-.vj-ctacard .vj-cta--2{background:rgba(2,52,41,.06);border:1px solid rgba(2,52,41,.2);color:var(--primary)}
-.vj-ctacard .vj-cta--3{color:var(--on-var)}
-@media(min-width:900px){
-  .vj-ctacard{flex-direction:row}
-  .vj-ctacard-in{flex:1 1 58%;padding:46px 44px}
-  .vj-ctacard-img{flex:1 1 42%;min-height:0}
-}
+.vj-ctas{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:24px}
+.vj-cta{display:flex;align-items:center;justify-content:center;gap:9px;padding:16px 26px;border-radius:100px;font-family:var(--f-ui);font-weight:800;font-size:1.02rem;transition:transform .22s ease,filter .22s ease}
+.vj-cta--1{background:var(--secondary);color:#fff;box-shadow:0 6px 20px rgba(147,74,28,.4)}
+.vj-cta--2{background:rgba(2,52,41,.06);border:1px solid rgba(2,52,41,.2);color:var(--primary)}
+.vj-cta--3{background:transparent;color:var(--on-var);font-size:.96rem;padding:10px 0}
+.vj-cta--3 span{text-decoration:underline;text-underline-offset:4px}
+.vj-cta:hover{transform:translateY(-2px)}
+@media(min-width:900px){.vj-ctacard{flex-direction:row}.vj-ctacard-in{flex:1 1 58%;padding:46px 44px}.vj-ctacard-img{flex:1 1 42%;min-height:0}}
 .vj-e16-ultima{margin:34px auto 0;text-align:center;font-family:var(--f-head);font-style:italic;font-size:1.1rem;color:rgba(251,246,236,.66)}
 
-/* ======================= REVEALS / MOTION =======================
-   Corto (250 ms) y de recorrido mínimo: el texto tiene que estar legible en
-   cuanto entra en pantalla, no "aparecer" durante medio segundo.
-   El estado oculto SOLO existe bajo .vj-js, que pone el propio script: si el
-   JS no llega a ejecutarse, todo se ve — nunca un bloque fantasma. */
-.vj-js .vj-rev{opacity:0;transform:translateY(14px);transition:opacity .25s ease-out,transform .25s ease-out}
-.vj-js .vj-rev.vj-in{opacity:1;transform:none}
-/* Lo que ya está en pantalla al cargar entra sin animación ninguna. */
-.vj-js .vj-rev.vj-in--now{transition:none}
-@media(prefers-reduced-motion:reduce){
-  .vj-js .vj-rev{opacity:1;transform:none;transition:none}
-  .vj-linea-draw{transition:none;stroke-dashoffset:0}
-  .vj-hito.vj-done{animation:none}
-  .vj-fill{transition:none}
-}
+/* ── grano global ── */
+.vj-grano{position:fixed;inset:0;z-index:70;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");background-size:128px}
+@media(prefers-reduced-motion:reduce){.vj-grano{display:none}}
 
-/* ======================= ESCRITORIO ======================= */
-@media(min-width:760px){
-  .vj-intro{padding:120px 46px 64px}
-  .vj-est-hero{min-height:56vh;padding:110px 46px 40px}
-  .vj-est-body{padding:44px 46px 0}
-  .vj-next-wrap{padding:38px 46px 44px}
-  .vj-camino{height:clamp(96px,10vh,132px)}
-  .vj-cine{padding:clamp(56px,8vh,80px) 46px 60px}
-  .vj-final{padding:110px 46px}
-  .vj-est-body p{font-size:1.22rem}
-  .vj-ctas{flex-direction:row;flex-wrap:wrap;justify-content:center;max-width:none}
-  .vj-cta{flex:0 1 auto}
-  .vj-cta--3{flex:1 0 100%}
-  .vj-doble{flex-direction:row;max-width:900px}
-  .vj-concl{flex:1}
-  .vj-media{max-width:min(460px,46vh)}
-  .vj-nota,.vj-det,.vj-marcas,.vj-check,.vj-q,.vj-uso,.vj-calc,.vj-historia,.vj-salto,.vj-esc{max-width:600px}
-  .vj-cine .vj-nota{max-width:520px}
-  .vj-ramon{padding:clamp(80px,11vh,120px) 46px}
-  .vj-inter-frase{max-width:20ch}
-  .vj-figura{max-width:600px}
-  .vj-beat-t{font-size:1.5rem}
-  .vj-esc-item{padding-left:calc((var(--i) - 1) * 18px)}
-  .vj-esc-btn{padding:22px 24px}
-  .vj-esc-t{font-size:1.24rem}
-}
+/* ── lightbox del reel ── */
+.vj-lb{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:20px;background:rgba(2,10,8,.93)}
+.vj-lb[hidden]{display:none}
+.vj-lb-caja{position:relative;width:min(400px,94vw);max-height:88vh;overflow:auto;border-radius:20px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.6);padding:6px}
+.vj-lb-cerrar{position:absolute;top:8px;right:8px;z-index:5;width:38px;height:38px;border:0;border-radius:50%;background:rgba(2,32,25,.85);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vj-lb-link{display:block;padding:12px;text-align:center;font-family:var(--f-ui);font-weight:700;font-size:.92rem;color:var(--secondary);text-decoration:underline;text-underline-offset:3px}
+.vj-lb-abierta{overflow:hidden}
+
+/* ── footer ── */
+.vj-foot{padding:34px 22px 40px;background:#03231b;text-align:center}
+.vj-foot img{height:38px;width:auto;margin:0 auto 14px;filter:drop-shadow(0 2px 9px rgba(0,0,0,.5))}
+.vj-foot p{color:rgba(251,246,236,.6);font-size:.84rem;line-height:1.6}
+.vj .vj-foot a{color:rgba(251,246,236,.82);text-decoration:underline;text-underline-offset:3px}
+.vj-foot .vj-foot-links{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;font-size:.84rem}
+
+/* ── reveals: el patrón de conecta-lana ── */
+.vj-js .vj-rev{opacity:0;transform:translateY(14px);transition:opacity .3s ease-out,transform .3s ease-out}
+.vj-js .vj-rev.vj-in{opacity:1;transform:none}
+.vj-js .vj-rev.vj-in--now{transition:none}
+@media(prefers-reduced-motion:reduce){.vj-js .vj-rev{opacity:1;transform:none;transition:none}}
 </style>
 
 <div class="vj" id="vj">
 
-  <!-- ============ CABECERA STICKY: chrome mínimo + progreso ============ -->
   <header class="vj-bar">
     <div class="vj-bar-in">
-      <%# Sin aria-label: el nombre accesible sale del alt del logo + el texto
-          visible. Un aria-label que no contenga el texto visible rompe la
-          regla "label-content-name-mismatch". %>
       <a class="vj-brand" href="/">
-        <img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares — inicio">
+        <img src="/assets/images/viaje-lana/logo-oc-96.png" alt="Oficios Circulares — inicio">
         <b>🧭 El Viaje de la Lana</b>
       </a>
       <div class="vj-bar-est" id="vjEst">La nave</div>
@@ -863,11 +444,8 @@ body{background:#fbf9f8}
     <div class="vj-track" role="progressbar" aria-label="Progreso del viaje" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="vjProg">
       <div class="vj-fill" id="vjFill"></div>
     </div>
-
   </header>
 
-  <%# El marcador del kilo: píldora flotante, no una segunda barra. Acompaña
-      sin robar altura, como la tarjeta-popup de la home. %>
   <div class="vj-kilo" id="vjKilo" hidden>
     <span class="vj-kilo-ic" aria-hidden="true">🧶</span>
     <span class="vj-kilo-txt">
@@ -879,53 +457,44 @@ body{background:#fbf9f8}
 
   <main class="vj-main" id="maincontent">
 
-    <%# ═══════════ E1 · APERTURA (pin ~2.5 viewports, scrub) ═══════════
-        Negro → la esquila se revela → tres frases en secuencia → título.
-        Sin GSAP (o con reduced-motion) el CSS la sirve como columna estática:
-        todo legible, nada oculto. Los copys son los de la intro anterior. %>
-    <section class="vj-e1" id="apertura" aria-label="Apertura del viaje">
-      <div class="vj-e1-pin">
-        <div class="vj-e1-media" aria-hidden="true">
-          <img class="vj-e1-foto" src="/assets/images/viaje-lana/intro-esquila-900.webp" srcset="/assets/images/viaje-lana/intro-esquila-900.webp 900w, /assets/images/viaje-lana/intro-esquila-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" width="900" height="1350">
-          <div class="vj-e1-velo vj-luz vj-luz--pie"></div>
-        </div>
-        <div class="vj-e1-textos">
-          <p class="vj-e1-t" data-e1="1">Esto es un kilo de <em>lana&nbsp;española</em>.</p>
-          <p class="vj-e1-t" data-e1="2">Lo acaban de esquilar.<br>Por él, el ganadero ha cobrado unos <span class="vj-sub-mano">céntimos<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span>.</p>
-          <p class="vj-e1-t" data-e1="3">Dentro de unos meses, alguien pagará <em>1.500&nbsp;€</em><br>por un jersey hecho con lana como esta.</p>
-          <div class="vj-e1-titulo" data-e1="4">
-            <span class="vj-kicker">
-              <img src="/assets/images/logodegraoscuro.png" alt="">
+    <%# ══ HERO ══ %>
+    <section class="vj-hero">
+      <img src="/assets/images/viaje-lana/intro-esquila-900.webp" srcset="/assets/images/viaje-lana/intro-esquila-900.webp 900w, /assets/images/viaje-lana/intro-esquila-1600.webp 1600w" sizes="100vw" alt="" fetchpriority="high" width="900" height="1350">
+      <div class="vj-luz2 vj-luz2--pie" style="--ta:rgba(6,36,28,.5);--tb:rgba(6,36,28,.66)"></div>
+      <div class="vj-hero-in">
+        <span class="vj-kicker">
+              <img src="/assets/images/viaje-lana/logo-oc-96.png" alt="">
               <span>Un viaje de Oficios Circulares</span>
             </span>
-            <h1>El Viaje <em>de la Lana</em></h1>
-            <p class="vj-e1-sub">Este viaje sigue al kilo para averiguar qué pasa por el camino. 4 paradas, 15-20 minutos.</p>
-            <p class="vj-tip"><span aria-hidden="true">🎧</span> <span>Ponte auriculares: la primera parada se escucha.</span></p>
-            <div><a class="vj-start" href="#nave">Seguir al kilo →</a></div>
-          </div>
-        </div>
-        <%# El hilo de lana: nace del vellón y se dibuja con el scroll %>
-        <div class="vj-desliza" id="vjDesliza" aria-hidden="true"><i></i><span>Desliza</span></div>
+        <h1>El Viaje <em>de la Lana</em></h1>
+        <p class="vj-e1-t" data-e1="1">Esto es un kilo de <em>lana&nbsp;española</em>.</p>
+        <p class="vj-e1-t" data-e1="2">Lo acaban de esquilar.<br>Por él, el ganadero ha cobrado unos <span class="vj-sub-mano">céntimos<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span>.</p>
+        <p class="vj-e1-t" data-e1="3">Dentro de unos meses, alguien pagará <em>1.500&nbsp;€</em><br>por un jersey hecho con lana como esta.</p>
+        <p class="vj-e1-sub">Este viaje sigue al kilo para averiguar qué pasa por el camino. 4 paradas, 15-20 minutos.</p>
+        <p class="vj-tip"><span aria-hidden="true">🎧</span> <span>Ponte auriculares: la primera parada se escucha.</span></p>
+        <div><a class="vj-start" href="#nave">Seguir al kilo →</a></div>
       </div>
+      <div class="vj-desliza" aria-hidden="true"><i></i><span>Desliza</span></div>
     </section>
 
-    <%# ═══════════ E2 · LA NAVE (pin, scrub) ═══════════
-        Vellones con parallax de fondo; la tarjeta-cine del reel entra desde
-        abajo; después la nota de Mota del Cuervo entra lateral (5/7 en
-        escritorio, panel inferior en móvil). Módulos intactos (vjIg). %>
-    <section class="vj-e2 vj-est" id="nave" data-est="1" data-lugar="La nave" aria-label="Parada 1 · La nave">
-      <div class="vj-e2-pin">
-        <div class="vj-e2-bg" aria-hidden="true">
-          <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-          <div class="vj-e2-grad vj-luz vj-luz--pie"></div>
+    <%# ══ ① LA NAVE ══ %>
+    <section class="vj-tramo" id="nave" data-est="1" data-lugar="La nave">
+      <div class="vj-phero vj-phero--izq">
+        <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="Vellones recién esquilados amontonados en el suelo de una nave" loading="lazy" decoding="async">
+        <div class="vj-luz2" style="--ta:rgba(6,36,28,.44);--tb:rgba(6,36,28,.72)"></div>
+        <div class="vj-phero-in">
+          <div class="vj-herocard vj-rev">
+            <div class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey">Parada 1 de 4</span></div>
+            <h2>La <em>nave</em></h2>
+            <p class="vj-heroline">Lo que cuesta hacer</p>
+          </div>
         </div>
-        <div class="vj-e2-in">
-          <div class="vj-e2-cinewrap">
-            <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 1 de 4 · La nave</span></span>
-            <p class="vj-cine-lead">Antes de hablar de dinero, mira lo que ese kilo lleva dentro: el año de la oveja, la esquila, el oficio.</p>
-            <span class="vj-cine-badge" id="vjBadge">🎧 Sube el volumen</span>
-            <div class="vj-media">
-              <div class="vj-ig" id="vjIg">
+      </div>
+      <div class="vj-cine">
+        <p class="vj-cine-lead vj-rev">Antes de hablar de dinero, mira lo que ese kilo lleva dentro: el año de la oveja, la esquila, el oficio.</p>
+        <span class="vj-cine-badge vj-rev" id="vjBadge">🎧 Sube el volumen</span>
+        <div class="vj-media vj-rev">
+          <div class="vj-ig" id="vjIg">
                 <%# La tarjeta-cine es SIEMPRE la cara visible: el embed de IG,
                     con su chrome blanco, rompía la escena. Al pulsar play se
                     abre en un lightbox por encima. %>
@@ -938,20 +507,10 @@ body{background:#fbf9f8}
                   <small>Y vuelve — te esperamos aquí.</small>
                 </div>
               </div>
-            </div>
-          </div>
-          <aside class="vj-e2-nota">
-            <p class="vj-nota">En Mota del Cuervo se lleva más de un siglo lavando e hilando lana — y en esta hilatura el oficio sigue vivo: maquinaria centenaria y manos que saben lo que hacen.</p>
-          </aside>
         </div>
+        <p class="vj-nota vj-rev">En Mota del Cuervo se lleva más de un siglo lavando e hilando lana — y en esta hilatura el oficio sigue vivo: maquinaria centenaria y manos que saben lo que hacen.</p>
       </div>
-    </section>
-
-    <div class="vj-cap" style="--de:#052018" aria-hidden="true"></div>
-
-    <%# ═══════════ E3 · PROFUNDIZA (sección normal, descanso visual) ═══════════ %>
-    <section class="vj-e3" id="profundiza" aria-label="Profundiza">
-      <div class="vj-est-body">
+      <div class="vj-cuerpo">
         <details class="vj-det vj-rev" id="vjDoc">
           <summary>¿Quieres ver el proceso completo? Te lo enseña Ramón</summary>
           <div class="vj-det-in">
@@ -963,178 +522,91 @@ body{background:#fbf9f8}
       </div>
     </section>
 
-    <%# ═══════════ E4 · TRANSICIÓN: SE VA (pin corto, scrub) ═══════════
-        Crema → azul noche mientras el hilo se tensa hacia la derecha.
-        Al pasarla se completa el tramo 1 (mismo evento GA4 de siempre). %>
-    <div class="vj-cap" style="--de:var(--surface);background:linear-gradient(180deg,var(--surface),#06241c)" aria-hidden="true"></div>
-
-    <section class="vj-tr vj-tr--seva" id="se-va" aria-label="Transición: el kilo se va">
-      <div class="vj-tr-pin">
-        <div class="vj-tr-fondo vj-tr-fondo--a"></div>
-        <div class="vj-tr-fondo vj-tr-fondo--b"></div>
-        <div class="vj-tr-foto" aria-hidden="true">
-          <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-        </div>
+    <section class="vj-inter">
+      <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="100vw" alt="Vista cenital de un rebaño apretado" loading="lazy" decoding="async">
+      <div class="vj-luz2" style="--ta:rgba(6,36,28,.55);--tb:rgba(6,36,28,.8)"></div>
+      <div class="vj-inter-in vj-rev">
         <p class="vj-tr-frase">Ya sabes lo que cuesta hacerlo.<br>Este kilo, casi seguro, <em>no <span class="vj-sub-mano">se queda<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> en España</em>.</p>
       </div>
     </section>
 
-    <%# ═══════════ E5 · EL PUERTO (pin, pan lateral) ═══════════ %>
-    <section class="vj-e5 vj-est" id="puerto" data-est="2" data-lugar="El puerto" aria-label="Parada 2 · El puerto">
-      <div class="vj-e5-pin">
-        <div class="vj-e5-bg" aria-hidden="true">
-          <img src="/assets/images/viaje-lana/puerto-contenedores-900.webp" srcset="/assets/images/viaje-lana/puerto-contenedores-900.webp 900w, /assets/images/viaje-lana/puerto-contenedores-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-        </div>
-        <div class="vj-e5-velo vj-luz vj-luz--pie"></div>
-        <div class="vj-e5-in">
-          <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 2 de 4 · El puerto</span></span>
-          <p class="vj-e5-texto">Tu kilo viaja en un contenedor rumbo a Shanghái, clasificado y en bruto. No es una anécdota: es la norma. ¿Por qué España regala el primer paso y no se queda ninguno de los demás? Se lo preguntamos a quien lo vive por dentro.</p>
+    <%# ══ ② EL PUERTO ══ %>
+    <section class="vj-tramo" id="puerto" data-est="2" data-lugar="El puerto">
+      <div class="vj-phero vj-phero--dcha">
+        <img src="/assets/images/viaje-lana/puerto-contenedores-900.webp" srcset="/assets/images/viaje-lana/puerto-contenedores-900.webp 900w, /assets/images/viaje-lana/puerto-contenedores-1600.webp 1600w" sizes="100vw" alt="Terminal de contenedores al anochecer, con un buque atracado" loading="lazy" decoding="async">
+        <div class="vj-luz2" style="--ta:rgba(11,22,38,.44);--tb:rgba(11,22,38,.74)"></div>
+        <div class="vj-phero-in">
+          <div class="vj-herocard vj-rev">
+            <div class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey">Parada 2 de 4</span></div>
+            <h2>El <em>puerto</em></h2>
+            <p class="vj-heroline">Por qué tu kilo se va</p>
+          </div>
         </div>
       </div>
-    </section>
-
-    <%# ═══════════ E6 · RAMÓN — LA PREGUNTA INCÓMODA (pin, pasos) ═══════════
-        Testimonio de Ramón Cobo (Wooldreamers). PENDIENTE DE SU OK PARA MAIN.
-        Los 3 beats entran de uno en uno; al final queda la cita sola. %>
-    <section class="vj-e6" id="por-que-no-aqui" aria-label="La pregunta incómoda">
-      <div class="vj-e6-pin">
-        <div class="vj-e6-bg" aria-hidden="true">
-          <img src="/assets/images/viaje-lana/puerto-bobinas-900.webp" srcset="/assets/images/viaje-lana/puerto-bobinas-900.webp 900w, /assets/images/viaje-lana/puerto-bobinas-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="vj-cuerpo">
+        <div class="vj-w vj-rev">
+          <p class="vj-lead">Tu kilo viaja en un contenedor rumbo a Shanghái, clasificado y en bruto. No es una anécdota: es la norma. ¿Por qué España regala el primer paso y no se queda ninguno de los demás? Se lo preguntamos a quien lo vive por dentro.</p>
         </div>
-        <div class="vj-e6-in">
-          <div class="vj-e6-cabecera">
+        <figure class="vj-figura vj-rev">
+          <img src="/assets/images/viaje-lana/puerto-bobinas-900.webp" srcset="/assets/images/viaje-lana/puerto-bobinas-900.webp 900w, /assets/images/viaje-lana/puerto-bobinas-1600.webp 1600w" sizes="100vw" alt="Hilera de bobinas de hilo en una fábrica textil" loading="lazy" decoding="async">
+          <figcaption>Lavar, peinar, teñir, hilar, tejer: los oficios del valor añadido, lejos de aquí.</figcaption>
+        </figure>
+      </div>
+      <div class="vj-ramon" id="por-que-no-aqui">
+        <div class="vj-ramon-in">
+          <div class="vj-rev"><div class="vj-e6-cabecera">
             <span class="vj-ey vj-ey--luz">La pregunta incómoda</span>
             <h2>¿Y por qué no se hace <em>aquí</em>?</h2>
             <p class="vj-e6-byline">Responde Ramón Cobo, de Wooldreamers — la hilatura del vídeo que viste en la primera parada.</p>
             <p class="vj-ramon-fuente"><b>Ojo al tipo de dato:</b> lo que sigue no sale de un informe. Es lo que cuenta Ramón desde dentro del oficio.</p>
-          </div>
-          <div class="vj-e6-beat" data-beat="1">
+          </div></div>
+          <div class="vj-rev"><div class="vj-e6-beat" data-beat="1">
             <span class="vj-e6-n" aria-hidden="true">1</span>
             <h3>"Los sintéticos juegan con precios que mienten."</h3>
             <p>El poliéster es barato en la etiqueta y carísimo para la sociedad y el medio ambiente. Con esos precios como vara de medir, la fibra natural solo puede competir en una cosa: coste.</p>
-          </div>
-          <div class="vj-e6-beat" data-beat="2">
+          </div></div>
+          <div class="vj-rev"><div class="vj-e6-beat" data-beat="2">
             <span class="vj-e6-n" aria-hidden="true">2</span>
             <h3>"Y compitiendo en coste, Europa pierde siempre."</h3>
             <p>La industria europea cumple normas, paga sueldos, respeta requisitos. Por eso China puede pagar más que nadie por la lana sucia: se la lleva en bruto y se queda todos los oficios del valor añadido — lavar, peinar, teñir, hilar, tejer. Aquí solo queda clasificarla.</p>
-          </div>
-          <div class="vj-e6-beat" data-beat="3">
+          </div></div>
+          <div class="vj-rev"><div class="vj-e6-beat" data-beat="3">
             <span class="vj-e6-n" aria-hidden="true">3</span>
             <h3>"El resultado: la infraestructura desapareció."</h3>
             <p>España llegó a tener decenas de lavaderos de lana. Hoy quedan 3 o 4, e hilaturas ha pasado lo mismo. No cerraron por falta de lana: cerraron porque transformarla aquí dejó de ser rentable.</p>
-          </div>
-          <div class="vj-e6-cita">
+          </div></div>
+          <div class="vj-rev"><div class="vj-e6-cita">
             <blockquote>"El cuello de botella no es el lavadero: es que no es rentable tener un lavadero en Europa. Los que quedan trabajan para mantener la maquinaria encendida — muchas veces perdiendo dinero."</blockquote>
             <p class="vj-firma">— Ramón Cobo · Wooldreamers</p>
-          </div>
-        </div>
-        <div class="vj-desliza vj-desliza--mini" aria-hidden="true"><i></i></div>
-      </div>
-      <div class="vj-e6-remate">
-        <p class="vj-ramon-remate">Por eso este viaje no va de villanos con logo. Va de un sistema donde <strong>el precio nunca cuenta la verdad</strong> — ni el del lujo, ni el del sintético "barato". Sigue: el test te da los números.</p>
-      </div>
-    </section>
-
-    <div class="vj-cap" style="--de:#050e1c" aria-hidden="true"></div>
-
-    <%# ═══════════ E7 · LA ESCALERA, PARTE 1 (pin, los peldaños se construyen) ═══════════ %>
-    <section class="vj-e7" id="escalera-1" aria-label="La escalera del precio, primera parte">
-      <div class="vj-e7-pin">
-        <div class="vj-e7-textura" aria-hidden="true"></div>
-        <div class="vj-e7-cab"><span class="vj-ey">La escalera del precio</span></div>
-        <div class="vj-e7-peldanos">
-          <article class="vj-e7-peldano" data-paso="1">
-            <b class="vj-e7-cifra">0,05 <span class="vj-eur">€</span><small>/kg</small></b>
-            <h3>El vellón</h3>
-            <p>0,05 €/kg. Es lo que recibe el ganadero por la lana más común. Esquilar le cuesta más: cada esquileo es a pérdidas.</p>
-            <span class="vj-fuente">Fuente: AVICON</span>
-          </article>
-          <article class="vj-e7-peldano" data-paso="2">
-            <b class="vj-e7-cifra vj-e7-cifra--txt">el salto</b>
-            <h3>Lavado, cardado, hilado</h3>
-            <p>Aquí la lana se convierte en algo que ya se puede trabajar. Cada transformación multiplica el valor — y casi ninguna se hace ya en España.</p>
-          </article>
+          </div></div>
+          <div class="vj-rev"><p class="vj-ramon-remate">Por eso este viaje no va de villanos con logo. Va de un sistema donde <strong>el precio nunca cuenta la verdad</strong> — ni el del lujo, ni el del sintético "barato". Sigue: el test te da los números.</p></div>
         </div>
       </div>
     </section>
 
-    <%# ═══════════ E8 · TRANSICIÓN: EL REGRESO (pin corto) ═══════════
-        Al pasarla se completa el tramo 2. %>
-    <div class="vj-cap" style="--de:var(--surface);background:linear-gradient(180deg,var(--surface),#241105)" aria-hidden="true"></div>
-
-    <section class="vj-tr vj-tr--regreso" id="regreso" aria-label="Transición: el regreso">
-      <div class="vj-tr-pin">
-        <div class="vj-tr-fondo vj-tr-fondo--a"></div>
-        <div class="vj-tr-fondo vj-tr-fondo--b"></div>
-        <div class="vj-tr-foto" aria-hidden="true">
-          <img src="/assets/images/viaje-lana/interludio-textura-900.webp" srcset="/assets/images/viaje-lana/interludio-textura-900.webp 900w, /assets/images/viaje-lana/interludio-textura-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-        </div>
+    <section class="vj-inter">
+      <img src="/assets/images/viaje-lana/interludio-textura-900.webp" srcset="/assets/images/viaje-lana/interludio-textura-900.webp 900w, /assets/images/viaje-lana/interludio-textura-1600.webp 1600w" sizes="100vw" alt="Macro de un vellón de lana" loading="lazy" decoding="async">
+      <div class="vj-luz2" style="--ta:rgba(38,20,8,.5);--tb:rgba(38,20,8,.78)"></div>
+      <div class="vj-inter-in vj-rev">
         <p class="vj-tr-frase">Tu kilo volverá.<br>Pero <em><span class="vj-sub-mano">no volverá<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path class="vj-sub-trazo" d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> como lana</em>.</p>
       </div>
     </section>
 
-    <%# ═══════════ E9 · EL ESCAPARATE — EL SALTO (pin largo, scrub) ⭐ ═══════════
-        La vitrina se abre y el contador salta 0,05 € → 1.500 € bajo el pulgar
-        del lector: ligado al scroll, no a un timer. %>
-    <section class="vj-e9 vj-est" id="vitrina" data-est="3" data-lugar="El escaparate" aria-label="Parada 3 · El escaparate">
-      <div class="vj-e9-pin">
-        <div class="vj-e9-bg" aria-hidden="true">
-          <img src="/assets/images/viaje-lana/escaparate-punto-900.webp" srcset="/assets/images/viaje-lana/escaparate-punto-900.webp 900w, /assets/images/viaje-lana/escaparate-punto-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-        </div>
-        <div class="vj-e9-puerta vj-e9-puerta--izq" aria-hidden="true"></div>
-        <div class="vj-e9-puerta vj-e9-puerta--dcha" aria-hidden="true"></div>
-        <div class="vj-e9-in">
-          <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 3 de 4 · El escaparate</span></span>
-          <div class="vj-e9-contador"><b id="vjContador">0,05 € → 1.500 €</b></div>
-          <p class="vj-salto-q">¿En qué punto del mapa pasó esto? <em>Pista: no fue en la nave.</em></p>
-          <p class="vj-salto-n">Ojo a la comparación: un jersey lleva unos 300-400 g de hilo, no un kilo de vellón. Aun así, echa cuentas.</p>
-        </div>
-        <div class="vj-e9-peldanos">
-          <article class="vj-e9-peldano" data-paso="3">
-            <b>10-14 <span class="vj-eur">€</span><small>/100 g</small></b>
-            <h3>El ovillo</h3>
-            <p>Un ovillo de 100 g de lana española de calidad ronda los 10-14 € en tienda. Del vellón al ovillo, el valor se ha multiplicado por cientos.</p>
-          </article>
-          <article class="vj-e9-peldano" data-paso="4">
-            <b>1.500 <span class="vj-eur">€</span></b>
-            <h3>El jersey de lujo</h3>
-            <p>Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</p>
-          </article>
-        </div>
-        <div class="vj-desliza vj-desliza--mini" aria-hidden="true"><i></i></div>
-      </div>
-    </section>
-
-    <div class="vj-cap" style="--de:#241105" aria-hidden="true"></div>
-
-    <%# ═══════════ E10 · LOS DOS ESCAPARATES (escena normal) ═══════════ %>
-    <section class="vj-e10 vj-est" id="dos-escaparates" data-est="3" data-lugar="El escaparate" aria-label="Los dos escaparates">
-      <div class="vj-est-body">
-        <div class="vj-dos" id="vjDosEscaparates">
-          <div class="vj-w vj-rev">
-            <span class="vj-ey">El otro escaparate</span>
-            <p class="vj-lead">El kilo que se fue tiene dos vitrinas. Parecen opuestas. Son el mismo viaje.</p>
+    <%# ══ ③ EL ESCAPARATE ══ %>
+    <section class="vj-tramo" id="escaparate" data-est="3" data-lugar="El escaparate">
+      <div class="vj-phero vj-phero--izq">
+        <img src="/assets/images/viaje-lana/escaparate-punto-900.webp" srcset="/assets/images/viaje-lana/escaparate-punto-900.webp 900w, /assets/images/viaje-lana/escaparate-punto-1600.webp 1600w" sizes="100vw" alt="Pila de jerséis de punto en tonos crema y camel" loading="lazy" decoding="async">
+        <div class="vj-luz2" style="--ta:rgba(38,20,8,.42);--tb:rgba(38,20,8,.72)"></div>
+        <div class="vj-phero-in">
+          <div class="vj-herocard vj-rev">
+            <div class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey">Parada 3 de 4</span></div>
+            <h2>El <em>escaparate</em></h2>
+            <p class="vj-heroline">El regreso con otro nombre</p>
           </div>
-          <div class="vj-dos-grid">
-            <article class="vj-dos-card vj-dos-card--lujo vj-rev">
-              <h3>El jersey de 1.500 €</h3>
-              <p>"Fibras nobles", relato de <em>savoir-faire</em>. Dura años — pero fabricarlo fue el 5-15% del precio: el resto es marca. La verdad, tapada con relato.</p>
-            </article>
-            <article class="vj-dos-card vj-dos-card--low vj-rev">
-              <h3>El jersey de 19,99 €</h3>
-              <p>"Lana" mezclada con acrílico, cosido donde nadie mira, sin historia que contar. Pierde la forma en una temporada — y a 0,40 €/uso, el barato sale caro. La verdad, tapada con descuento.</p>
-            </article>
-          </div>
-          <p class="vj-dos-remate vj-rev">Fibra anónima, transformada lejos, precio que no cuenta la verdad. Uno la esconde con marca; el otro, con descuento. ¿Recuerdas la raíz que contaba Ramón? Los sintéticos aprietan — y todo lo demás se ordena alrededor de ese precio que miente.</p>
         </div>
       </div>
-    </section>
-
-    <%# ═══════════ E11 · LA MISIÓN DETECTIVE (interactiva, sin scrub) ═══════════
-        Tarjeta grande al patrón de la home: contenido a la izquierda, la foto
-        del punto integrada a la derecha. %>
-    <section class="vj-e11" id="mision" aria-label="La misión detective">
-      <div class="vj-e11-card">
+      <div class="vj-cuerpo">
+        <div class="vj-e11-card">
         <div class="vj-e11-contenido">
           <span class="vj-ey vj-ey--luz">Tu misión</span>
           <p class="vj-lead">Aquí está tu kilo otra vez: hilado, tejido y con etiqueta nueva. Ahora se llama <em>savoir-faire</em> y cuesta 1.500 €. Compruébalo tú mismo — abre estas webs con una misión.</p>
@@ -1157,19 +629,66 @@ body{background:#fbf9f8}
           <img src="/assets/images/viaje-lana/escaparate-punto-900.webp" srcset="/assets/images/viaje-lana/escaparate-punto-900.webp 900w, /assets/images/viaje-lana/escaparate-punto-1600.webp 1600w" sizes="(min-width:1024px) 40vw, 100vw" alt="" loading="lazy" decoding="async">
         </div>
       </div>
-    </section>
-
-    <%# ═══════════ E12 · EL TEST COMO STEPPER (una pregunta a la vista) ═══════════ %>
-    <section class="vj-e12" id="test" aria-label="El test">
-      <div class="vj-e12-cab">
-        <span class="vj-ey">El test</span>
-        <h3>Las cinco cosas que el escaparate no te cuenta</h3>
-        <div class="vj-e12-prog" aria-hidden="true">
-          <svg class="vj-e12-hilo" id="vjTestHilo"></svg>
-          <b id="vjTestProg">1/5</b>
+      </div>
+      <div class="vj-cuerpo vj-cuerpo--ambar">
+        <div class="vj-dos" id="vjDosEscaparates">
+          <div class="vj-w vj-rev">
+            <span class="vj-ey">El otro escaparate</span>
+            <p class="vj-lead">El kilo que se fue tiene dos vitrinas. Parecen opuestas. Son el mismo viaje.</p>
+          </div>
+          <div class="vj-dos-grid">
+            <article class="vj-dos-card vj-dos-card--lujo vj-rev">
+              <h3>El jersey de 1.500 €</h3>
+              <p>"Fibras nobles", relato de <em>savoir-faire</em>. Dura años — pero fabricarlo fue el 5-15% del precio: el resto es marca. La verdad, tapada con relato.</p>
+            </article>
+            <article class="vj-dos-card vj-dos-card--low vj-rev">
+              <h3>El jersey de 19,99 €</h3>
+              <p>"Lana" mezclada con acrílico, cosido donde nadie mira, sin historia que contar. Pierde la forma en una temporada — y a 0,40 €/uso, el barato sale caro. La verdad, tapada con descuento.</p>
+            </article>
+          </div>
+          <p class="vj-dos-remate vj-rev">Fibra anónima, transformada lejos, precio que no cuenta la verdad. Uno la esconde con marca; el otro, con descuento. ¿Recuerdas la raíz que contaba Ramón? Los sintéticos aprietan — y todo lo demás se ordena alrededor de ese precio que miente.</p>
         </div>
       </div>
-      <div class="vj-e12-stage" id="vjStage">
+      <div class="vj-cuerpo">
+        <div class="vj-casc-cab vj-rev"><span class="vj-ey">La escalera del precio</span></div>
+        <div class="vj-peldanos">
+          <div class="vj-rev"><article class="vj-e7-peldano" data-paso="1">
+            <b class="vj-e7-cifra">0,05 <span class="vj-eur">€</span><small>/kg</small></b>
+            <h3>El vellón</h3>
+            <p>0,05 €/kg. Es lo que recibe el ganadero por la lana más común. Esquilar le cuesta más: cada esquileo es a pérdidas.</p>
+            <span class="vj-fuente">Fuente: AVICON</span>
+          </article></div>
+          <div class="vj-rev"><article class="vj-e7-peldano" data-paso="2">
+            <b class="vj-e7-cifra vj-e7-cifra--txt">el salto</b>
+            <h3>Lavado, cardado, hilado</h3>
+            <p>Aquí la lana se convierte en algo que ya se puede trabajar. Cada transformación multiplica el valor — y casi ninguna se hace ya en España.</p>
+          </article></div>
+          <div class="vj-rev"><article class="vj-e9-peldano" data-paso="3">
+            <b>10-14 <span class="vj-eur">€</span><small>/100 g</small></b>
+            <h3>El ovillo</h3>
+            <p>Un ovillo de 100 g de lana española de calidad ronda los 10-14 € en tienda. Del vellón al ovillo, el valor se ha multiplicado por cientos.</p>
+          </article></div>
+          <div class="vj-rev"><article class="vj-e9-peldano" data-paso="4">
+            <b>1.500 <span class="vj-eur">€</span></b>
+            <h3>El jersey de lujo</h3>
+            <p>Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</p>
+          </article></div>
+        </div>
+        <div class="vj-salto vj-rev">
+          <p class="vj-salto-q">¿En qué punto del mapa pasó esto? <em>Pista: no fue en la nave.</em></p>
+          <p class="vj-salto-n">Ojo a la comparación: un jersey lleva unos 300-400 g de hilo, no un kilo de vellón. Aun así, echa cuentas.</p>
+        </div>
+      </div>
+      <div class="vj-cuerpo">
+        <div class="vj-e12-cab vj-rev">
+          <span class="vj-ey">El test</span>
+          <h3>Las cinco cosas que el escaparate no te cuenta</h3>
+          <div class="vj-e12-prog" aria-hidden="true">
+            <div class="vj-e12-barra"><i id="vjTestBarra"></i></div>
+            <b id="vjTestProg">1/5</b>
+          </div>
+        </div>
+        <div class="vj-e12-stage" id="vjStage">
         <div class="vj-q vj-rev" data-q="1" data-ok="c">
           <div class="vj-q-n">Pregunta 1 de 5</div>
           <p class="vj-q-t">¿Cuánto cobra un ganadero español por TODA la lana de una oveja en un año?</p>
@@ -1245,20 +764,43 @@ body{background:#fbf9f8}
           </div>
         </div>
       </div>
-      <div class="vj-e12-nav" id="vjTestNav" hidden>
-        <button type="button" class="vj-e12-flecha" id="vjTestPrev" aria-label="Pregunta anterior">←</button>
-        <button type="button" class="vj-e12-flecha" id="vjTestNext" aria-label="Pregunta siguiente">→</button>
-      </div>
-      <div class="vj-uso vj-rev">
+        <div class="vj-e12-nav" id="vjTestNav" hidden>
+          <button type="button" class="vj-e12-flecha" id="vjTestPrev" aria-label="Pregunta anterior">←</button>
+          <button type="button" class="vj-e12-flecha" id="vjTestNext" aria-label="Pregunta siguiente">→</button>
+        </div>
+        <div class="vj-uso vj-rev">
           <div class="vj-uso-k">El remate</div>
           <div class="vj-uso-big">El precio de etiqueta no es el coste real.</div>
           <p>Mira el <strong>coste por uso</strong>: unos calcetines de lana bien hechos duran décadas y se reparan. Los otros duran una temporada — y los compras otra vez, y otra.</p>
       </div>
+      </div>
     </section>
 
-    <%# ═══════════ E13 · CALCULADORA + HISTORIA (dos escenas enlazadas) ═══════════ %>
-    <section class="vj-e13" id="coste-por-uso" aria-label="El coste por uso">
-      <div class="vj-est-body">
+    <section class="vj-inter">
+      <img src="/assets/images/viaje-lana/taller-tejiendo-900.webp" srcset="/assets/images/viaje-lana/taller-tejiendo-900.webp 900w, /assets/images/viaje-lana/taller-tejiendo-1600.webp 1600w" sizes="100vw" alt="Unas manos tejiendo con lana de tonos naturales" loading="lazy" decoding="async">
+      <div class="vj-luz2" style="--ta:rgba(18,32,15,.5);--tb:rgba(18,32,15,.78)"></div>
+      <div class="vj-inter-in vj-rev">
+        <p class="vj-tr-frase">¿Y si tu kilo <em>nunca se hubiera ido</em>?</p>
+      </div>
+    </section>
+
+    <%# ══ ④ EL TALLER ══ %>
+    <section class="vj-tramo" id="taller" data-est="4" data-lugar="El taller">
+      <div class="vj-phero vj-phero--dcha">
+        <img src="/assets/images/viaje-lana/taller-ovillo-900.webp" srcset="/assets/images/viaje-lana/taller-ovillo-900.webp 900w, /assets/images/viaje-lana/taller-ovillo-1600.webp 1600w" sizes="100vw" alt="Unas manos sostienen un ovillo de lana cruda" loading="lazy" decoding="async">
+        <div class="vj-luz2" style="--ta:rgba(18,32,15,.46);--tb:rgba(18,32,15,.74)"></div>
+        <div class="vj-phero-in">
+          <div class="vj-herocard vj-rev">
+            <div class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey">Parada 4 de 4</span></div>
+            <h2>El <em>taller</em></h2>
+            <p class="vj-heroline">El kilo que se quedó</p>
+          </div>
+        </div>
+      </div>
+      <div class="vj-cuerpo">
+        <div class="vj-w vj-rev">
+          <p class="vj-lead">Hay kilos que no embarcan. Se lavan en Mota del Cuervo, se hilan con máquinas centenarias (los viste en la primera parada) y acaban en un ovillo de 12 € o en unos calcetines de 149 € que duran décadas. Mismo kilo, otro destino: aquí el valor se queda en cada mano que lo toca.</p>
+        </div>
         <div class="vj-calc vj-rev" id="vjCalc">
           <h3>¿Y si lo miras por uso?</h3>
           <p class="vj-calc-sub">Mueve los dos controles y mira qué pasa con el precio de verdad.</p>
@@ -1279,10 +821,7 @@ body{background:#fbf9f8}
           <p class="vj-calc-comp">Una prenda de 20 € que te dura un año sale a <b>0,40 €/uso</b>. Casi el doble.</p>
           <p class="vj-calc-pie">La cara sale más barata. Bienvenido al coste por uso.</p>
         </div>
-      </div>
-    </section>
-    <section class="vj-e13b" id="historia" aria-label="Una historia de verdad">
-      <div class="vj-e13b-grid">
+        <div class="vj-e13b-grid">
         <figure class="vj-e13b-foto" aria-hidden="true">
           <img src="/assets/images/viaje-lana/taller-tejiendo-900.webp" srcset="/assets/images/viaje-lana/taller-tejiendo-900.webp 900w, /assets/images/viaje-lana/taller-tejiendo-1600.webp 1600w" sizes="(min-width:900px) 44vw, 100vw" alt="" loading="lazy" decoding="async">
         </figure>
@@ -1298,48 +837,29 @@ body{background:#fbf9f8}
           <span class="vj-fuente" style="color:#6b6354">Caso real: Espai Micra</span>
         </div>
       </div>
-    </section>
-
-    <%# ═══════════ E14 · LA BIFURCACIÓN (pin, scrub) ═══════════
-        El hilo se parte: el ramal gris se va y muere deshilachado; el vivo
-        se queda. Al pasarla se completa el tramo 3. %>
-    <section class="vj-e14" id="bifurcacion" aria-label="La bifurcación">
-      <div class="vj-e14-pin">
-        <p class="vj-e14-frase">¿Y si tu kilo <em>nunca se hubiera ido</em>?</p>
-        <svg class="vj-e14-hilo" aria-hidden="true"></svg>
       </div>
     </section>
 
-    <%# ═══════════ E15 · EL TALLER (escena narrativa) ═══════════ %>
-    <section class="vj-e15 vj-est" id="taller" data-est="4" data-lugar="El taller" aria-label="Parada 4 · El taller">
-      <div class="vj-e15-bg" aria-hidden="true">
-        <img src="/assets/images/viaje-lana/taller-ovillo-900.webp" srcset="/assets/images/viaje-lana/taller-ovillo-900.webp 900w, /assets/images/viaje-lana/taller-ovillo-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-        <div class="vj-e15-luz vj-luz vj-luz--pie"></div>
-      </div>
-      <div class="vj-e15-in">
-        <span class="vj-parada"><svg class="vj-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg><span class="vj-ey vj-ey--luz">Parada 4 de 4 · El taller</span></span>
-        <p class="vj-e15-texto">Hay kilos que no embarcan. Se lavan en Mota del Cuervo, se hilan con máquinas centenarias (los viste en la primera parada) y acaban en un ovillo de 12 € o en unos calcetines de 149 € que duran décadas. Mismo kilo, otro destino: aquí el valor se queda en cada mano que lo toca.</p>
-      </div>
-    </section>
-
-    <%# ═══════════ E16 · EL MISMO KILO, DOS DESTINOS + CIERRE ═══════════ %>
-    <section class="vj-e16 vj-est" id="final" data-est="4" data-lugar="El taller" aria-label="El mismo kilo, dos destinos">
-      <div class="vj-e16-pin">
-        <div class="vj-e16-bg" aria-hidden="true">
-          <img src="/assets/images/viaje-lana/cierre-rebano-900.webp" srcset="/assets/images/viaje-lana/cierre-rebano-900.webp 900w, /assets/images/viaje-lana/cierre-rebano-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
-          <div class="vj-e16-luz vj-luz vj-luz--pie"></div>
-        </div>
-        <div class="vj-e16-in">
+    <%# ══ CIERRE: EL MISMO KILO, DOS DESTINOS ══ %>
+    <section class="vj-cierre" id="final" data-est="4" data-lugar="El taller">
+      <img src="/assets/images/viaje-lana/cierre-rebano-900.webp" srcset="/assets/images/viaje-lana/cierre-rebano-900.webp 900w, /assets/images/viaje-lana/cierre-rebano-1600.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+      <div class="vj-luz2 vj-luz2--pie" style="--ta:rgba(13,26,11,.6);--tb:rgba(13,26,11,.86)"></div>
+      <div class="vj-cierre-in">
+        <div class="vj-rev">
           <h2 class="vj-e16-titulo">El mismo kilo. <em>Dos destinos.</em></h2>
           <div class="vj-e16-destinos">
             <div class="vj-e16-destino vj-e16-destino--gris"><b>0,05 <span class="vj-eur">€</span></b><span>si se va</span></div>
-            <svg class="vj-e16-hilo" aria-hidden="true"></svg>
+            <svg class="vj-fork" viewBox="0 0 120 110" aria-hidden="true">
+              <path class="vj-fork-t" d="M60,4 C 60,18 60,30 60,44" stroke-linecap="round"/>
+              <path class="vj-fork-g" d="M60,44 C 44,60 26,72 10,88" stroke-linecap="round"/>
+              <path class="vj-fork-g" d="M10,88 q-6,3 -9,8 M10,88 q-2,6 -6,9 M10,88 q3,5 1,11" stroke-linecap="round"/>
+              <path class="vj-fork-v" d="M60,44 C 76,60 94,72 108,86" stroke-linecap="round"/>
+              <path class="vj-fork-v" d="M104,82 a7,6 0 1,0 10,8 a7,6 0 1,0 -10,-8" stroke-linecap="round"/>
+            </svg>
             <div class="vj-e16-destino vj-e16-destino--vivo"><b>149 <span class="vj-eur">€</span></b><span>si se queda</span></div>
           </div>
           <p class="vj-e16-remate">La lana no vale poco. Vale poco <em>donde está el ganadero</em>.</p>
         </div>
-      </div>
-      <div class="vj-e16-resto">
         <div class="vj-doble">
           <div class="vj-concl vj-concl--consumidor vj-rev">
             <span class="vj-concl-k">Si compras</span>
@@ -1370,7 +890,7 @@ body{background:#fbf9f8}
           <blockquote>"Nos dicen que esto tendría que ser un museo. Pero un museo es para lo que ya ha desaparecido. Lo nuestro sigue oliendo, sigue manchando las manos, sigue funcionando cada mañana."</blockquote>
           <p class="vj-firma">— Wooldreamers · <a href="https://www.instagram.com/reel/DZqGx8Ms4xe/" target="_blank" rel="noopener">ver el reel</a></p>
         </div>
-        <div class="vj-next-wrap vj-e16-completar">
+        <div class="vj-next-wrap vj-rev">
           <button type="button" class="vj-next vj-next--oro" data-next="4" data-goto="#cierre-cta">Completar el viaje 🧭</button>
         </div>
         <div class="vj-e16-ctazona" id="cierre-cta">
@@ -1398,10 +918,8 @@ body{background:#fbf9f8}
 
   </main>
 
-  <%# Grano global (v8·3): une las fotos como si fueran de la misma sesión %>
   <div class="vj-grano" aria-hidden="true"></div>
 
-  <%# Lightbox del reel: el embed vive aquí, no dentro de la escena %>
   <div class="vj-lb" id="vjLightbox" hidden role="dialog" aria-modal="true" aria-label="Reel de Wooldreamers: el sonido detrás de nuestros ovillos">
     <div class="vj-lb-caja">
       <button type="button" class="vj-lb-cerrar" aria-label="Cerrar">×</button>
@@ -1413,9 +931,8 @@ body{background:#fbf9f8}
     </div>
   </div>
 
-  <!-- ======================= FOOTER LIGERO ======================= -->
   <footer class="vj-foot">
-    <a href="/" aria-label="Oficios Circulares — Inicio"><img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares"></a>
+    <a href="/" aria-label="Oficios Circulares — Inicio"><img src="/assets/images/viaje-lana/logo-oc-96.png" alt="Oficios Circulares"></a>
     <p>&copy; 2026 Oficios Circulares — Donde la tradición abraza el futuro</p>
     <div class="vj-foot-links">
       <a href="/privacidad/">Política de Privacidad</a>
@@ -1430,9 +947,8 @@ body{background:#fbf9f8}
 
 <script>
 /* ===================================================================
-   EL VIAJE DE LA LANA — lógica de la experiencia. Vanilla, sin librerías.
-   Estado (progreso + checklist + test) en sessionStorage: sobrevive a un
-   refresh pero no convierte el viaje en algo eterno.
+   EL VIAJE DE LA LANA — lógica de la página (v10, sin motor de escenas).
+   Estado en sessionStorage; eventos GA4 a dataLayer/gtag.
    =================================================================== */
 (function(){
   'use strict';
@@ -1441,20 +957,39 @@ body{background:#fbf9f8}
   var TOTAL = 4;
   var root = document.getElementById('vj');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Activa los estados ocultos de los reveals. Sin esta clase todo se ve:
-  // si el script fallara, nadie se queda con bloques a medio pintar.
   root.classList.add('vj-js');
 
+  /* ---------- Estado ---------- */
+  function load(){ try{ return JSON.parse(sessionStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+  function save(s){ try{ sessionStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+  var state = load();
+  state.done  = Array.isArray(state.done) ? state.done : [];
+  state.check = state.check || {};
+  state.test  = state.test  || {};
+
+  /* ---------- Medición ---------- */
+  function track(name, params){
+    params = params || {};
+    try{ if (typeof gtag === 'function') gtag('event', name, params); }catch(e){}
+    try{
+      if (window.dataLayer){
+        var p = {event: name};
+        for (var k in params){ if (Object.prototype.hasOwnProperty.call(params, k)) p[k] = params[k]; }
+        window.dataLayer.push(p);
+      }
+    }catch(e){}
+  }
+
   /* ---------- "Cuando esto se vea, haz aquello" ----------
-     IntersectionObserver como vía principal, pero con dos redes debajo: un
-     repaso en cada scroll (pasivo, con rAF) y un plazo máximo. Depender solo
-     del observer dejaba bloques semitransparentes si el callback no llegaba. */
+     IntersectionObserver + repaso en scroll + plazo máximo, salvo lo que
+     mide (sinPlazo), que solo cuenta si estuvo de verdad en pantalla. */
   var pendientes = [];
   function visible(el, margen){
     var r = el.getBoundingClientRect();
     return r.top < window.innerHeight + (margen || 0) && r.bottom > -(margen || 0);
   }
   function cuandoSeVea(el, fn, opts){
+    if (!el) return;
     opts = opts || {};
     var hecho = false;
     function disparar(inmediato){
@@ -1463,13 +998,11 @@ body{background:#fbf9f8}
       fn(el, inmediato === true);
     }
     if (visible(el, opts.margen)) { disparar(true); return; }
-    // sinPlazo: lo que mide (no lo que pinta) nunca debe dispararlo el
-    // temporizador de seguridad — solo el haber estado de verdad en pantalla.
-    pendientes.push({el:el, margen:opts.margen || 0, run:disparar, sinPlazo:!!opts.sinPlazo});
+    pendientes.push({el: el, margen: opts.margen || 0, run: disparar, sinPlazo: !!opts.sinPlazo});
     if ('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(es){
         if (es[0].isIntersecting){ io.disconnect(); disparar(false); }
-      }, {threshold:0, rootMargin:(opts.margen || 0) ? opts.margen+'px 0px' : '0px 0px -6% 0px'});
+      }, {threshold: 0, rootMargin: (opts.margen || 0) ? opts.margen + 'px 0px' : '0px 0px -6% 0px'});
       io.observe(el);
     }
   }
@@ -1480,9 +1013,6 @@ body{background:#fbf9f8}
       return false;
     });
   }
-  // Estrangulado por reloj, no por requestAnimationFrame: con rAF, si el
-  // callback no llegaba a ejecutarse (pestaña en segundo plano), el guardián
-  // se quedaba pegado y la red de seguridad moría para el resto de la sesión.
   var ultimoRepaso = 0;
   window.addEventListener('scroll', function(){
     if (!pendientes.length) return;
@@ -1490,10 +1020,8 @@ body{background:#fbf9f8}
     if (ahora - ultimoRepaso < 100) return;
     ultimoRepaso = ahora;
     repasar();
-  }, {passive:true});
-  window.addEventListener('resize', repasar, {passive:true});
-  // Último recurso: a los 6 s no queda nada oculto, se vea o no. Lo marcado
-  // como `sinPlazo` (medición) se queda esperando a verse de verdad.
+  }, {passive: true});
+  window.addEventListener('resize', repasar, {passive: true});
   setTimeout(function(){
     pendientes = pendientes.filter(function(p){
       if (p.sinPlazo) return true;
@@ -1502,246 +1030,112 @@ body{background:#fbf9f8}
     });
   }, 6000);
 
-  /* ---------- Estado ---------- */
-  function load(){
-    try{ return JSON.parse(sessionStorage.getItem(KEY)) || {}; }catch(e){ return {}; }
-  }
-  function save(s){
-    try{ sessionStorage.setItem(KEY, JSON.stringify(s)); }catch(e){}
-  }
-  var state = load();
-  state.done  = Array.isArray(state.done) ? state.done : [];
-  state.check = state.check || {};
-  state.test  = state.test  || {};
+  /* ---------- Reveals ---------- */
+  document.querySelectorAll('.vj-rev').forEach(function(el){
+    cuandoSeVea(el, function(e, inmediato){
+      e.classList.add('vj-in');
+      if (inmediato) e.classList.add('vj-in--now');
+    });
+  });
 
-  /* ---------- Medición (GTM/GA4). El sitio empuja a dataLayer; gtag solo
-       existe si el contenedor lo define, así que se cubren ambos. ---------- */
-  function track(name, params){
-    params = params || {};
-    try{ if (typeof gtag === 'function') gtag('event', name, params); }catch(e){}
-    try{
-      if (window.dataLayer){
-        var p = {event:name};
-        for (var k in params){ if (Object.prototype.hasOwnProperty.call(params,k)) p[k] = params[k]; }
-        window.dataLayer.push(p);
-      }
-    }catch(e){}
-  }
-
-  /* ---------- Progreso ---------- */
+  /* ---------- Progreso (barra superior) ---------- */
   var fill   = document.getElementById('vjFill');
   var progEl = document.getElementById('vjProg');
   var estEl  = document.getElementById('vjEst');
-  var hitos  = [].slice.call(document.querySelectorAll('.vj-hito'));
 
   function pintarProgreso(){
     var n = state.done.length;
     fill.style.width = (n / TOTAL * 100) + '%';
     progEl.setAttribute('aria-valuenow', n);
-    hitos.forEach(function(h){
-      h.classList.toggle('vj-done', state.done.indexOf(+h.dataset.hito) !== -1);
-    });
-    document.querySelectorAll('.vj-next').forEach(function(b){
-      var hecho = state.done.indexOf(+b.dataset.next) !== -1;
-      b.classList.toggle('vj-hecho', hecho);
-      if (hecho && !b.dataset.txtOriginal){
-        b.dataset.txtOriginal = b.textContent;
-        b.textContent = '✓ ' + b.textContent;
-      }
-    });
-    if (n >= TOTAL) root.classList.add('vj-fin');
   }
-
-  function completar(n, ir){
+  function completar(n){
     if (state.done.indexOf(n) === -1){
       state.done.push(n);
       save(state);
-      track('viaje_estacion_completada', {viaje:'lana', estacion:n});
-      if (state.done.length >= TOTAL) track('viaje_completado', {viaje:'lana'});
+      track('viaje_estacion_completada', {viaje: 'lana', estacion: n});
+      if (state.done.length >= TOTAL) track('viaje_completado', {viaje: 'lana'});
     }
     pintarProgreso();
-    var destino = ir && document.querySelector(ir);
-    if (destino) destino.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
   }
-
   document.querySelectorAll('.vj-next').forEach(function(b){
     b.addEventListener('click', function(){
-      if (+b.dataset.next === 4 && window.__vjOnda) window.__vjOnda();
-      completar(+b.dataset.next, b.dataset.goto);
+      completar(+b.dataset.next);
+      b.classList.add('vj-hecho');
+      var destino = b.dataset.goto && document.querySelector(b.dataset.goto);
+      if (destino) destino.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
     });
   });
 
-  /* ---------- La barra dice el LUGAR, y el marcador dice lo que vale ----------
-     Un solo observador alimenta las dos cosas: dónde está el lector y cuánto
-     vale su kilo en ese punto del mapa. */
+  /* ---------- La píldora del kilo ----------
+     El tramo se deriva SIEMPRE de la posición real; el valor cambia con un
+     fundido de 200 ms. Sin contadores. */
+  var kiloBox = document.getElementById('vjKilo');
   var kiloV = document.getElementById('vjKiloV');
   var kiloN = document.getElementById('vjKiloN');
-  var kiloBox = document.getElementById('vjKilo');
   var VALOR = {
-    1: {v:'0,05 €', n:''},
-    2: {v:'0,05 €', n:'sale valiendo lo mismo'},
-    3: {v:'1.500 €', n:'', salto:true},
-    4: {v:'149 €', n:'el kilo que se quedó'}
+    1: {v: '0,05 €', n: ''},
+    2: {v: '0,05 €', n: 'sale valiendo lo mismo'},
+    3: {v: '1.500 €', n: ''},
+    4: {v: '0,05 € si se va · 149 € si se queda', n: 'el mismo kilo, dos destinos'}
   };
-  var saltoHecho = false;
-
-  /* Formato del contador: por debajo de 1 € se mantienen los dos decimales.
-     Con Math.round() el arranque se veía como "0 €" — el kilo nunca vale 0. */
-  function eurKilo(v){
-    if (v < 1) return v.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €';
-    return Math.round(v).toLocaleString('es-ES') + ' €';
-  }
-  // Pinta una cifra con el € al 60% (v8·4). Solo recibe strings propios.
+  var saltoAvisado = false;
   function pintarEuro(el, txt){
     el.innerHTML = txt.replace(/€/g, '<span class="vj-eur">€</span>');
   }
-
+  function ponerValor(txt, nota){
+    if (kiloN.textContent !== nota) kiloN.textContent = nota;
+    if (kiloV.dataset.txt === txt) return;
+    kiloV.dataset.txt = txt;
+    kiloV.classList.toggle('vj-kilo-v--larga', txt.length > 12);
+    kiloV.classList.add('vj-fundido');
+    setTimeout(function(){
+      pintarEuro(kiloV, txt);
+      kiloV.classList.remove('vj-fundido');
+    }, 200);
+  }
   function mostrarPildora(){
     if (!kiloBox.hidden) return;
     kiloBox.hidden = false;
-    requestAnimationFrame(function(){ kiloBox.classList.add('vj-kilo--on'); });
-    setTimeout(function(){ kiloBox.classList.add('vj-kilo--on'); }, 60);
-  }
-  function latido(){
-    kiloBox.classList.add('vj-kilo--late');
-    setTimeout(function(){ kiloBox.classList.remove('vj-kilo--late'); }, 320);
+    setTimeout(function(){ kiloBox.classList.add('vj-kilo--on'); }, 40);
   }
 
-  function pintarKilo(n){
-    var d = VALOR[n];
-    if (!d) return;
-    mostrarPildora();
-    if (kiloN.textContent !== d.n) kiloN.textContent = d.n;
-    if (d.salto){
-      if (escenasListas){
-        // El scrub de E9 es el dueño del salto — pero si el lector ATERRIZA
-        // aquí (anchor, back/forward), el valor sale de la posición real.
-        var stE9 = window.ScrollTrigger && ScrollTrigger.getAll().find(function(t){ return t.trigger.id === 'vitrina'; });
-        if (stE9){
-          if (window.scrollY >= stE9.end - 10){ saltoHecho = true; pintarEuro(kiloV, '1.500 €'); }
-          else if (window.scrollY <= stE9.start + 10 && kiloV.textContent.indexOf('0,05') < 0) pintarEuro(kiloV, '0,05 €');
-        }
-        return;
-      }
-      if (!saltoHecho){ saltoHecho = true; animarSalto(); return; }
-    }
-    if (kiloV.textContent !== d.v){
-      pintarEuro(kiloV, d.v);
-      latido();
-    }
-  }
-
-  /* El salto 0,05 € → 1.500 € ocurre ante los ojos del lector, una sola vez. */
-  function animarSalto(){
-    track('viaje_marcador_salto', {viaje:'lana'});
-    if (reduce){ kiloV.textContent = '1.500 €'; latido(); return; }
-    // Red de seguridad: si el rAF no llega a correr (pestaña de fondo), el
-    // marcador aterriza igual en su valor final. Nunca se queda a medias.
-    setTimeout(function(){ kiloV.textContent = '1.500 €'; }, 1800);
-    var t0 = null, DUR = 1400;
-    function paso(ts){
-      if (t0 === null) t0 = ts;
-      var k = Math.min(1, (ts - t0) / DUR);
-      // arranque lento y disparada final: se siente el salto, no una rampa
-      var v = 0.05 + (1500 - 0.05) * Math.pow(k, 3.2);
-      kiloV.textContent = k < 1 ? eurKilo(v) : '1.500 €';
-      if (k < 1) requestAnimationFrame(paso); else latido();
-    }
-    requestAnimationFrame(paso);
-  }
-
-  /* El tramo activo se calcula del scroll, no de un IntersectionObserver: el
-     marcador es la pieza central del viaje y no puede quedarse congelada si el
-     callback del observer no llega (pestaña en segundo plano). */
-  var secciones = [].slice.call(document.querySelectorAll('.vj-est'));
-  var tramoActual = 0;
+  var secciones = [].slice.call(document.querySelectorAll('[data-est]'));
   function repasarTramo(){
     if (!secciones.length) return;
     var medio = window.innerHeight * 0.42, activo = null;
     for (var i = 0; i < secciones.length; i++){
       var r = secciones[i].getBoundingClientRect();
       if (r.top <= medio && r.bottom > medio){ activo = secciones[i]; break; }
-      if (r.top > medio) break;          // aún no ha llegado: se queda el anterior
-      activo = secciones[i];             // ya pasó del todo
+      if (r.top > medio) break;
+      activo = secciones[i];
     }
     if (!activo){
-      // Por encima de la primera parada: estado de arranque. Solo si la
-      // píldora ya nació (su nacimiento narrativo es del título de E1).
-      if (!kiloBox.hidden && kiloV.textContent.indexOf('0,05') < 0){
-        pintarEuro(kiloV, '0,05 €');
-        kiloN.textContent = '';
-        estEl.textContent = 'La nave';
-      }
+      // por encima de la primera parada: estado de arranque
+      if (!kiloBox.hidden) ponerValor('0,05 €', '');
+      if (estEl.textContent !== 'La nave') estEl.textContent = 'La nave';
       return;
     }
     var n = +activo.dataset.est;
-    tramoActual = n;
-    if (estEl.textContent !== (activo.dataset.lugar || '')) estEl.textContent = activo.dataset.lugar || '';
-    pintarKilo(n);
+    mostrarPildora();
+    if (estEl.textContent !== activo.dataset.lugar) estEl.textContent = activo.dataset.lugar;
+    var d = VALOR[n];
+    ponerValor(d.v, d.n);
+    if (n === 3 && !saltoAvisado){ saltoAvisado = true; track('viaje_marcador_salto', {viaje: 'lana'}); }
+    // entrar en un tramo completa los anteriores
+    for (var m = 1; m < n; m++) completar(m);
   }
   var ultimoTramo = 0, colaTramo = null;
   window.addEventListener('scroll', function(){
     var ahora = +new Date();
     if (ahora - ultimoTramo >= 120){ ultimoTramo = ahora; repasarTramo(); }
-    // pasada de scroll-end (v9·4): con anchors o saltos bruscos, el estado
-    // final se recoge siempre
     clearTimeout(colaTramo);
     colaTramo = setTimeout(repasarTramo, 180);
-  }, {passive:true});
-  window.addEventListener('resize', repasarTramo, {passive:true});
+  }, {passive: true});
+  window.addEventListener('resize', repasarTramo, {passive: true});
   repasarTramo();
+  pintarProgreso();
 
-  /* ── Indicador "Desliza" (v9·3): fuera al primer scroll; vuelve tras 5 s
-     quietos, solo mientras el lector siga en E1-E2. ── */
-  var desliza = document.getElementById('vjDesliza');
-  if (desliza){
-    var quietoT = null;
-    window.addEventListener('scroll', function(){
-      desliza.classList.add('vj-oculto');
-      clearTimeout(quietoT);
-      quietoT = setTimeout(function(){
-        if (window.scrollY < window.innerHeight * 5) desliza.classList.remove('vj-oculto');
-      }, 5000);
-    }, {passive:true});
-  }
-
-  /* ---------- El camino: la línea se dibuja al entrar en viewport ----------
-     El trazo usa vector-effect:non-scaling-stroke, así que el patrón de
-     guiones se mide en píxeles de pantalla: la longitud del tramo es la
-     altura real del bloque, no las unidades del viewBox. */
-  var caminos = [].slice.call(document.querySelectorAll('.vj-camino'));
-  function medir(c){
-    var p = c.querySelector('.vj-linea-draw');
-    var h = Math.round(c.getBoundingClientRect().height);
-    p.style.strokeDasharray = h + 'px';
-    p.style.strokeDashoffset = (c.classList.contains('vj-drawn') ? 0 : h) + 'px';
-  }
-  function dibujar(c){
-    c.classList.add('vj-drawn');
-    c.querySelector('.vj-linea-draw').style.strokeDashoffset = '0px';
-  }
-  caminos.forEach(medir);
-  if (reduce) caminos.forEach(dibujar);
-  else caminos.forEach(function(c){ cuandoSeVea(c, dibujar); });
-  var reMedir;
-  window.addEventListener('resize', function(){
-    clearTimeout(reMedir);
-    reMedir = setTimeout(function(){ caminos.forEach(medir); }, 180);
-  });
-
-  /* ---------- Reveals: en cuanto asoma el bloque, legible ---------- */
-  document.querySelectorAll('.vj-rev').forEach(function(el){
-    cuandoSeVea(el, function(e, inmediato){
-      // Lo que ya se ve al cargar entra directo, sin fundido de entrada.
-      e.classList.add('vj-in');
-      if (inmediato) e.classList.add('vj-in--now');
-    });
-  });
-
-  /* ---------- El reel: tarjeta-cine siempre visible, embed en lightbox ----------
-     El embed de Instagram (chrome blanco incluido) rompía la escena. Ahora la
-     cara visible es nuestra tarjeta y el embed se abre encima al pulsar play.
-     Sin JS, el enlace de la tarjeta sigue llevando a Instagram. */
+  /* ---------- El reel: tarjeta-cine + lightbox ---------- */
   var igCard = document.getElementById('vjIgCard');
   var lbReel = document.getElementById('vjLightbox');
   if (igCard && lbReel){
@@ -1757,14 +1151,14 @@ body{background:#fbf9f8}
         document.body.appendChild(sc);
       }
       try{ if (window.instgrm) instgrm.Embeds.process(); }catch(e){}
-      track('viaje_reel_abierto', {viaje:'lana'});
+      track('viaje_reel_abierto', {viaje: 'lana'});
     }
     function cerrarReel(){
       lbReel.hidden = true;
       document.documentElement.classList.remove('vj-lb-abierta');
     }
     igCard.addEventListener('click', function(ev){
-      if (ev.target.closest('a')) return;   // el enlace explícito sigue a Instagram
+      if (ev.target.closest('a')) return;
       ev.preventDefault();
       abrirReel();
     });
@@ -1776,8 +1170,7 @@ body{background:#fbf9f8}
     });
   }
 
-  /* ---------- Estación 1: el documental, solo al desplegar ----------
-     YouTube no se toca hasta que el lector abre el bloque. */
+  /* ---------- El documental, solo al desplegar ---------- */
   var det = document.getElementById('vjDoc');
   if (det){
     det.addEventListener('toggle', function(){
@@ -1791,22 +1184,20 @@ body{background:#fbf9f8}
       f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
       f.allowFullscreen = true;
       caja.appendChild(f);
-      track('viaje_documental_abierto', {viaje:'lana', video:caja.dataset.yt});
+      track('viaje_documental_abierto', {viaje: 'lana', video: caja.dataset.yt});
     });
   }
   var monesma = document.getElementById('vjMonesma');
   if (monesma) monesma.addEventListener('click', function(){
-    track('viaje_click_monesma', {viaje:'lana'});
+    track('viaje_click_monesma', {viaje: 'lana'});
   });
 
-  /* ---------- Estación 2: enlaces a las marcas de lujo ---------- */
+  /* ---------- La misión ---------- */
   document.querySelectorAll('[data-lujo]').forEach(function(a){
     a.addEventListener('click', function(){
-      track('viaje_click_lujo', {viaje:'lana', marca:a.dataset.lujo});
+      track('viaje_click_lujo', {viaje: 'lana', marca: a.dataset.lujo});
     });
   });
-
-  /* ---------- Estación 2: checklist persistente ---------- */
   document.querySelectorAll('[data-check]').forEach(function(c){
     if (state.check[c.dataset.check]) c.checked = true;
     c.addEventListener('change', function(){
@@ -1815,10 +1206,9 @@ body{background:#fbf9f8}
     });
   });
 
-  /* ---------- Estación 3: el test ---------- */
+  /* ---------- El test como stepper ---------- */
   var ELOGIO = 'Lo clavaste';
   var SORPRESA = 'Ahí está la sorpresa';
-
   function resolver(q, elegida, nueva){
     var ok = q.dataset.ok;
     var acertado = elegida === ok;
@@ -1830,74 +1220,63 @@ body{background:#fbf9f8}
       } else if (o.dataset.o === elegida){
         o.classList.add('vj-ko');
       }
-      if (o.dataset.o === elegida) o.setAttribute('aria-pressed','true');
+      if (o.dataset.o === elegida) o.setAttribute('aria-pressed', 'true');
     });
     var r = q.querySelector('.vj-r');
     r.querySelector('.vj-r-badge').textContent = acertado ? ELOGIO : SORPRESA;
     r.hidden = false;
-    // setTimeout y no rAF: con la pestaña en segundo plano el rAF se congela
     setTimeout(function(){ r.classList.add('vj-r-on'); }, 30);
     if (nueva){
       state.test[q.dataset.q] = elegida;
       save(state);
-      track('viaje_test_respuesta', {viaje:'lana', pregunta:+q.dataset.q, acierto:acertado});
+      track('viaje_test_respuesta', {viaje: 'lana', pregunta: +q.dataset.q, acierto: acertado});
     }
   }
-
-  document.querySelectorAll('.vj-q').forEach(function(q){
-    q.querySelectorAll('.vj-opt').forEach(function(o){
-      o.addEventListener('click', function(){ resolver(q, o.dataset.o, true); if (window.__vjAlResponder) window.__vjAlResponder(q); });
+  var stage = document.getElementById('vjStage');
+  var pasoActivo = 0;
+  var preguntas = stage ? [].slice.call(stage.querySelectorAll('.vj-q')) : [];
+  var progTxt = document.getElementById('vjTestProg');
+  var barraTest = document.getElementById('vjTestBarra');
+  var btnPrev = document.getElementById('vjTestPrev');
+  var btnSig  = document.getElementById('vjTestNext');
+  function contestadas(){
+    return preguntas.filter(function(q){ return state.test[q.dataset.q]; }).length;
+  }
+  function pintarBarraTest(){
+    if (barraTest) barraTest.style.width = (contestadas() / preguntas.length * 100) + '%';
+  }
+  function irA(i){
+    pasoActivo = Math.max(0, Math.min(preguntas.length - 1, i));
+    preguntas.forEach(function(q, k){ q.classList.toggle('vj-q--activa', k === pasoActivo); });
+    if (progTxt) progTxt.textContent = (pasoActivo + 1) + '/5';
+    if (btnPrev) btnPrev.disabled = pasoActivo === 0;
+    if (btnSig)  btnSig.disabled  = pasoActivo === preguntas.length - 1;
+    pintarBarraTest();
+  }
+  if (preguntas.length){
+    var navTest = document.getElementById('vjTestNav');
+    if (navTest) navTest.hidden = false;
+    preguntas.forEach(function(q){
+      q.querySelectorAll('.vj-opt').forEach(function(o){
+        o.addEventListener('click', function(){
+          resolver(q, o.dataset.o, true);
+          pintarBarraTest();
+          var idx = preguntas.indexOf(q);
+          if (idx === pasoActivo && idx < preguntas.length - 1){
+            setTimeout(function(){ if (pasoActivo === idx) irA(idx + 1); }, 2100);
+          }
+        });
+      });
+      if (state.test[q.dataset.q]) resolver(q, state.test[q.dataset.q], false);
     });
-    if (state.test[q.dataset.q]) resolver(q, state.test[q.dataset.q], false);
-  });
+    if (btnPrev) btnPrev.addEventListener('click', function(){ irA(pasoActivo - 1); });
+    if (btnSig)  btnSig.addEventListener('click', function(){ irA(pasoActivo + 1); });
+    var primera = -1;
+    preguntas.some(function(q, k){ if (!state.test[q.dataset.q]){ primera = k; return true; } return false; });
+    irA(primera < 0 ? preguntas.length - 1 : primera);
+  }
 
-  /* ---------- Interludio: la cascada del precio ---------- */
-  document.querySelectorAll('.vj-esc-item').forEach(function(item){
-    var btn = item.querySelector('.vj-esc-btn');
-    var pan = item.querySelector('.vj-esc-p');
-    btn.addEventListener('click', function(){
-      var abierto = item.hasAttribute('data-abierto');
-      if (abierto){ item.removeAttribute('data-abierto'); pan.hidden = true; }
-      else {
-        item.setAttribute('data-abierto','');
-        pan.hidden = false;
-        // Solo se mide la primera apertura de cada escalón.
-        if (!item.dataset.visto){
-          item.dataset.visto = '1';
-          track('viaje_cascada_paso', {viaje:'lana', paso:+item.dataset.paso});
-        }
-      }
-      btn.setAttribute('aria-expanded', abierto ? 'false' : 'true');
-    });
-  });
-
-  /* ---------- Bloque "¿Y por qué no se hace aquí?" (Ramón) ---------- */
-  var dosEsc = document.getElementById('vjDosEscaparates');
-  if (dosEsc) cuandoSeVea(dosEsc, function(){ track('viaje_dos_escaparates', {viaje:'lana'}); }, {sinPlazo:true});
-
-  var ramon = document.getElementById('por-que-no-aqui');
-  if (ramon) cuandoSeVea(ramon, function(){ track('viaje_bloque_ramon', {viaje:'lana'}); }, {sinPlazo:true});
-  document.querySelectorAll('.vj-beat').forEach(function(beat){
-    var btn = beat.querySelector('.vj-beat-btn');
-    var pan = beat.querySelector('.vj-beat-p');
-    btn.addEventListener('click', function(){
-      var abierto = beat.hasAttribute('data-abierto');
-      if (abierto){ beat.removeAttribute('data-abierto'); pan.hidden = true; }
-      else {
-        beat.setAttribute('data-abierto','');
-        pan.hidden = false;
-        if (!beat.dataset.visto){
-          beat.dataset.visto = '1';
-          track('viaje_ramon_beat', {viaje:'lana', beat:+beat.dataset.beat});
-        }
-      }
-      btn.setAttribute('aria-expanded', abierto ? 'false' : 'true');
-    });
-  });
-
-  /* ---------- Calculadora de coste por uso ----------
-     Supuesto declarado: ~50 usos al año. Con 50 € y 4 años → 0,25 €/uso;
-     con 20 € y 1 año → 0,40 €/uso. */
+  /* ---------- La calculadora ---------- */
   var USOS_ANO = 50;
   var cPrecio = document.getElementById('vjCalcPrecio');
   var cAnos   = document.getElementById('vjCalcAnos');
@@ -1907,7 +1286,7 @@ body{background:#fbf9f8}
     var cRes     = document.getElementById('vjCalcRes');
     var cDetalle = document.getElementById('vjCalcDetalle');
     var medido   = false;
-    function eur(n){ return n.toLocaleString('es-ES', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €'; }
+    function eur(n){ return n.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' €'; }
     function pintaTrack(c){
       var pc = (c.value - c.min) / (c.max - c.min) * 100;
       c.style.background = 'linear-gradient(90deg, #b45817 ' + pc + '%, rgba(251,246,236,.18) ' + pc + '%)';
@@ -1919,12 +1298,13 @@ body{background:#fbf9f8}
       cRes.textContent     = eur(precio / usos);
       cDetalle.textContent = precio + ' € entre ' + usos + ' usos (unos ' + USOS_ANO + ' al año durante ' + anos + (anos === 1 ? ' año).' : ' años).');
       pintaTrack(cPrecio); pintaTrack(cAnos);
-      if (window.gsap) gsap.fromTo(cRes, {scale: 1.05}, {scale: 1, duration: .18, ease: 'power2.out'});
+      cRes.classList.add('vj-pop');
+      setTimeout(function(){ cRes.classList.remove('vj-pop'); }, 180);
     }
     function medir(){
       if (medido) return;
       medido = true;
-      track('viaje_calculadora_uso', {viaje:'lana'});
+      track('viaje_calculadora_uso', {viaje: 'lana'});
     }
     [cPrecio, cAnos].forEach(function(c){
       c.addEventListener('input', calcular);
@@ -1933,7 +1313,11 @@ body{background:#fbf9f8}
     calcular();
   }
 
-  /* ---------- Frases copiables (estación 4) ---------- */
+  /* ---------- La historia: el 25 se tacha al entrar ---------- */
+  var hist25 = document.querySelector('.vj-hist-cifra--merc');
+  if (hist25) cuandoSeVea(hist25, function(){ hist25.classList.add('vj-tachado'); });
+
+  /* ---------- Frases copiables ---------- */
   document.querySelectorAll('.vj-copiar').forEach(function(b){
     b.addEventListener('click', function(){
       var texto = b.parentElement.querySelector('q').textContent.trim();
@@ -1941,575 +1325,39 @@ body{background:#fbf9f8}
         b.textContent = '¡Copiada!';
         b.classList.add('vj-copiado');
         setTimeout(function(){ b.textContent = 'Copiar'; b.classList.remove('vj-copiado'); }, 2200);
-        track('viaje_frase_copiada', {viaje:'lana', frase:+b.dataset.frase});
+        track('viaje_frase_copiada', {viaje: 'lana', frase: +b.dataset.frase});
       }
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(texto).then(ok, copiaManual);
-      } else copiaManual();
-      // Navegadores sin Clipboard API (o sin permiso): textarea + execCommand.
       function copiaManual(){
         try{
           var t = document.createElement('textarea');
           t.value = texto;
-          t.setAttribute('readonly','');
+          t.setAttribute('readonly', '');
           t.style.cssText = 'position:absolute;left:-9999px';
           document.body.appendChild(t);
           t.select();
           document.execCommand('copy');
           document.body.removeChild(t);
           ok();
-        }catch(e){
-          b.textContent = 'Selecciónala';
-        }
+        }catch(e){ b.textContent = 'Selecciónala'; }
       }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texto).then(ok, copiaManual);
+      } else copiaManual();
     });
   });
 
-  /* ---------- E12 · el test como stepper ---------- */
-  var stage = document.getElementById('vjStage');
-  var pasoActivo = 0;
-  if (stage){
-    var preguntas = [].slice.call(stage.querySelectorAll('.vj-q'));
-    var progTxt = document.getElementById('vjTestProg');
-    var navTest = document.getElementById('vjTestNav');
-    var btnPrev = document.getElementById('vjTestPrev');
-    var btnSig  = document.getElementById('vjTestNext');
-    if (navTest) navTest.hidden = false;
-    window.__vjIrPregunta = function(i){
-      pasoActivo = Math.max(0, Math.min(preguntas.length - 1, i));
-      preguntas.forEach(function(qq, k){ qq.classList.toggle('vj-q--activa', k === pasoActivo); });
-      if (progTxt) progTxt.textContent = (pasoActivo + 1) + '/5';
-      if (btnPrev) btnPrev.disabled = pasoActivo === 0;
-      if (btnSig)  btnSig.disabled  = pasoActivo === preguntas.length - 1;
-      pintarHiloTest();
-    };
-    function contestadas(){
-      return preguntas.filter(function(qq){ return state.test[qq.dataset.q]; }).length;
-    }
-    // la barra de progreso es un hilo que se va dibujando (1/5 → 5/5)
-    var hiloTest = null;
-    function pintarHiloTest(){
-      if (!hiloTest || !hiloTest.hebras) return;
-      var frac = contestadas() / preguntas.length;
-      hiloTest.hebras.forEach(function(h){
-        var lh = h.getTotalLength();
-        h.style.strokeDasharray = lh;
-        h.style.strokeDashoffset = lh * (1 - frac);
-        h.style.transition = 'stroke-dashoffset .5s cubic-bezier(.4,0,.2,1)';
-      });
-      hiloTest.fibras.forEach(function(f){
-        f.setAttribute('opacity', parseFloat(f.dataset.en) < frac ? .4 : 0);
-      });
-    }
-    window.__vjMontarHiloTest = function(montar){
-      hiloTest = montar(document.getElementById('vjTestHilo'), function(W, H){
-        return 'M2,' + (H * .6) + ' C ' + (W * .3) + ',' + (H * .2) + ' ' + (W * .7) + ',' + (H * .9) + ' ' + (W - 2) + ',' + (H * .4);
-      }, {fibras: .4, vueltas: 14});
-      pintarHiloTest();
-    };
-    window.__vjAlResponder = function(qq){
-      pintarHiloTest();
-      var idx = preguntas.indexOf(qq);
-      if (idx === pasoActivo && idx < preguntas.length - 1){
-        setTimeout(function(){ if (pasoActivo === idx) window.__vjIrPregunta(idx + 1); }, 2100);
-      }
-    };
-    if (btnPrev) btnPrev.addEventListener('click', function(){ window.__vjIrPregunta(pasoActivo - 1); });
-    if (btnSig)  btnSig.addEventListener('click', function(){ window.__vjIrPregunta(pasoActivo + 1); });
-    // arranca en la primera sin contestar (persistencia del estado)
-    var primera = -1;
-    preguntas.some(function(qq, k){ if (!state.test[qq.dataset.q]){ primera = k; return true; } return false; });
-    window.__vjIrPregunta(primera < 0 ? preguntas.length - 1 : primera);
-  }
-
-  /* ---------- E13b · la historia: 25 € tachado y 149 € contando ---------- */
-  var hist149 = document.getElementById('vjHist149');
-  var hist25c = document.querySelector('.vj-hist-cifra--merc');
-  if (hist149 && hist25c){
-    cuandoSeVea(document.getElementById('historia'), function(){
-      hist25c.classList.add('vj-tachado');
-      if (window.gsap && !reduce){
-        var obj = {v: 25};
-        gsap.to(obj, {v: 149, duration: 1.1, ease: 'power2.out', delay: .25,
-          onUpdate: function(){ hist149.textContent = Math.round(obj.v) + ' €'; },
-          onComplete: function(){ hist149.textContent = '149 €'; }});
-      }
-    });
-  }
-
-  /* ---------- Nudos-hito: draw-on corto al entrar cada parada ---------- */
-  document.querySelectorAll('.vj-nudo').forEach(function(nu){
-    cuandoSeVea(nu, function(){ nu.classList.add('vj-on'); });
-  });
-
-  /* ---------- CTAs finales ---------- */
+  /* ---------- CTAs y eventos de visibilidad ---------- */
   document.querySelectorAll('[data-cta]').forEach(function(a){
     a.addEventListener('click', function(){
-      track('viaje_cta_' + a.dataset.cta, {viaje:'lana'});
+      track('viaje_cta_' + a.dataset.cta, {viaje: 'lana'});
     });
   });
-
-  /* ═══════════ ESCENAS E1-E3: GSAP + ScrollTrigger ═══════════
-     Progresivo de verdad: la página nace estática y legible; solo cuando GSAP
-     ha cargado se añade .vj-gsap y las escenas toman el mando. Si el CDN no
-     llega, no pasa nada: columna estática. reduced-motion: ni se intenta. */
-  var escenasListas = false;
-  function initScenes(){
-    if (escenasListas || !window.gsap || !window.ScrollTrigger) return;
-    escenasListas = true;
-    gsap.registerPlugin(ScrollTrigger);
-    root.classList.add('vj-gsap');
-
-    /* ── E1 · Apertura ── */
-    var e1 = document.getElementById('apertura');
-    var q1 = function(sel){ return e1.querySelector(sel); };
-    gsap.set(q1('.vj-e1-foto'), {opacity: .36, scale: 1.12});
-    // Drift lento e independiente del scroll: la escena respira aunque el
-    // lector aún no haya movido el dedo. Sobre el wrapper, no sobre la foto,
-    // para no pelearse con el scrub.
-    gsap.to(q1('.vj-e1-media'), {scale: 1.045, yPercent: 1.6, duration: 16, ease: 'sine.inOut', yoyo: true, repeat: -1});
-    gsap.set([q1('[data-e1="2"]'), q1('[data-e1="3"]'), q1('.vj-e1-titulo')], {autoAlpha: 0, y: 14});
-
-    var tl1 = gsap.timeline({
-      defaults: {ease: 'none'},
-      scrollTrigger: {
-        trigger: e1, start: 'top top', end: '+=250%', pin: true, scrub: true,
-        onUpdate: function(st){
-          // la píldora del kilo nace con el título, una sola vez
-          if (st.progress > 0.72 && !e1.dataset.pill){ e1.dataset.pill = '1'; pintarKilo(1); }
-        }
-      }
-    });
-    tl1.to(q1('.vj-e1-foto'), {opacity: 1, scale: 1, duration: 38}, 0)
-       .to(q1('[data-e1="1"]'), {autoAlpha: 0, y: -14, duration: 6, ease: 'power2.in'}, 16)
-       .to(q1('[data-e1="2"]'), {autoAlpha: 1, y: 0, duration: 6, ease: 'power2.out'}, 22)
-       .to(q1('[data-e1="2"]'), {autoAlpha: 0, y: -14, duration: 6, ease: 'power2.in'}, 40)
-       .to(q1('[data-e1="3"]'), {autoAlpha: 1, y: 0, duration: 6, ease: 'power2.out'}, 46)
-       .to(q1('[data-e1="3"]'), {autoAlpha: 0, y: -14, duration: 6, ease: 'power2.in'}, 64)
-       .to(q1('.vj-e1-titulo'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 71)
-;
-    // subrayado a mano de "céntimos", dibujado cuando la frase 2 está en meseta
-    var sub1 = q1('.vj-sub-trazo');
-    if (sub1){
-      var sl1 = sub1.getTotalLength();
-      gsap.set(sub1, {strokeDasharray: sl1, strokeDashoffset: sl1});
-      tl1.to(sub1, {strokeDashoffset: 0, duration: 6, ease: 'none'}, 30);
-    }
-
-    /* ── E2 · La nave ── */
-    var e2 = document.getElementById('nave');
-    var mm = gsap.matchMedia();
-    mm.add({escritorio: '(min-width: 1024px)', movil: '(max-width: 1023.98px)'}, function(ctx){
-      var desk = ctx.conditions.escritorio;
-      var q2 = function(sel){ return e2.querySelector(sel); };
-      gsap.set(q2('.vj-e2-cinewrap'), {autoAlpha: 0, y: '9vh'});
-      gsap.set(q2('.vj-e2-nota'), desk ? {autoAlpha: 0, x: 70} : {autoAlpha: 0, y: 46});
-      gsap.set(q2('.vj-e2-bg img'), {yPercent: -6, scale: 1.06});
-
-      var tl2 = gsap.timeline({
-        defaults: {ease: 'none'},
-        scrollTrigger: {trigger: e2, start: 'top top', end: '+=170%', pin: true, scrub: true}
-      });
-      tl2.to(q2('.vj-e2-bg img'), {yPercent: 6, duration: 100}, 0)          // parallax lento
-         .to(q2('.vj-e2-cinewrap'), {autoAlpha: 1, y: 0, duration: 22}, 4)  // el cine sube
-         .to(q2('#vjBadge'), {scale: 1.12, duration: 5}, 30)                // el rótulo late una vez
-         .to(q2('#vjBadge'), {scale: 1, duration: 5}, 35);
-      if (desk){
-        tl2.to(q2('.vj-e2-cinewrap'), {xPercent: -14, scale: .95, duration: 18}, 58)
-           .to(q2('.vj-e2-nota'), {autoAlpha: 1, x: 0, duration: 16}, 62);
-      } else {
-        tl2.to(q2('.vj-cine-lead'), {autoAlpha: 0, y: -20, duration: 10}, 56)
-           .to(q2('.vj-e2-cinewrap'), {y: '-9vh', scale: .97, duration: 18}, 58)
-           .to(q2('.vj-e2-nota'), {autoAlpha: 1, y: 0, duration: 16}, 64);
-      }
-      return function(){ tl2.scrollTrigger && tl2.scrollTrigger.kill(); tl2.kill(); };
-    });
-
-    /* ══ hiloDeLana — PORTADO de public/hilo-demo.html ══
-       Dos hebras retorcidas en fase, fibrillas sueltas, nudo de hito y cabo
-       deshilachado. Igual que la demo salvo el driver: aquí el draw-on lo
-       lleva el scrub de ScrollTrigger, no una transición CSS. */
-    function hiloDeLana(svg, spineD, opts){
-      var o = Object.assign({
-        color: '#b45817', colorClaro: '#d98a4f', grosor: 2.6,
-        vueltas: 26, fibras: 0.5, nudoFin: false, deshilachado: false
-      }, opts || {});
-      var NS = 'http://www.w3.org/2000/svg';
-      var spine = document.createElementNS(NS, 'path');
-      spine.setAttribute('d', spineD);
-      svg.appendChild(spine);
-      var L = spine.getTotalLength();
-      var paso = 3;
-      var g = document.createElementNS(NS, 'g');
-      var hebras = [[], []];
-      for (var l = 0; l <= L; l += paso){
-        var pt = spine.getPointAtLength(l);
-        var pt2 = spine.getPointAtLength(Math.min(l + 1, L));
-        var tx = pt2.x - pt.x, ty = pt2.y - pt.y;
-        var n = Math.hypot(tx, ty) || 1;
-        var nx = -ty / n, ny = tx / n;
-        var fase = (l / L) * o.vueltas * Math.PI * 2;
-        var amp = o.grosor * 0.85;
-        var damp = Math.min(1, l / 40, (L - l) / 40);
-        var off = Math.sin(fase) * amp * damp;
-        hebras[0].push([pt.x + nx * off, pt.y + ny * off]);
-        hebras[1].push([pt.x - nx * off, pt.y - ny * off]);
-      }
-      var hebrasEl = [];
-      [[hebras[0], o.color], [hebras[1], o.colorClaro]].forEach(function(par){
-        var path = document.createElementNS(NS, 'path');
-        path.setAttribute('d', 'M' + par[0].map(function(q){ return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' L'));
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', par[1]);
-        path.setAttribute('stroke-width', o.grosor);
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('vector-effect', 'non-scaling-stroke');
-        g.appendChild(path);
-        hebrasEl.push(path);
-      });
-      var fibrasEl = [];
-      var nF = Math.floor(o.vueltas * o.fibras);
-      for (var i = 0; i < nF; i++){
-        var lf = 30 + Math.random() * (L - 60);
-        var pf = spine.getPointAtLength(lf);
-        var pf2 = spine.getPointAtLength(lf + 1);
-        var ftx = pf2.x - pf.x, fty = pf2.y - pf.y;
-        var fn = Math.hypot(ftx, fty) || 1;
-        var fnx = -fty / fn, fny = ftx / fn;
-        var lado = Math.random() > .5 ? 1 : -1;
-        var len = 5 + Math.random() * 8;
-        var curl = (Math.random() - .5) * 6;
-        var f = document.createElementNS(NS, 'path');
-        f.setAttribute('d', 'M' + pf.x + ',' + pf.y + ' q' + (fnx*lado*len*.6 + ftx/fn*2) + ',' + (fny*lado*len*.6 + fty/fn*2) + ' ' + (fnx*lado*len + curl) + ',' + (fny*lado*len + curl));
-        f.setAttribute('fill', 'none');
-        f.setAttribute('stroke', o.color);
-        f.setAttribute('stroke-width', .9);
-        f.setAttribute('stroke-linecap', 'round');
-        f.setAttribute('opacity', 0);
-        f.dataset.en = (lf / L).toFixed(3);
-        g.appendChild(f);
-        fibrasEl.push(f);
-      }
-      var fin = spine.getPointAtLength(L);
-      var remates = [];
-      if (o.nudoFin){
-        var k = document.createElementNS(NS, 'path');
-        k.setAttribute('d', 'M' + (fin.x-6) + ',' + fin.y + ' a6,5 0 1,0 12,0 a6,5 0 1,0 -12,0 M' + (fin.x-3) + ',' + (fin.y-4) + ' a4,4 0 1,1 6,8');
-        k.setAttribute('fill', 'none'); k.setAttribute('stroke', o.color);
-        k.setAttribute('stroke-width', o.grosor); k.setAttribute('stroke-linecap', 'round');
-        k.setAttribute('vector-effect', 'non-scaling-stroke');
-        k.setAttribute('opacity', 0);
-        g.appendChild(k); remates.push(k);
-      }
-      if (o.deshilachado){
-        for (var j = 0; j < 4; j++){
-          var a2 = -0.6 + j * 0.4, len2 = 12 + Math.random() * 10;
-          var fd = document.createElementNS(NS, 'path');
-          fd.setAttribute('d', 'M' + fin.x + ',' + fin.y + ' q' + (len2*.5) + ',' + (a2*len2*.4) + ' ' + len2 + ',' + (a2*len2));
-          fd.setAttribute('fill', 'none'); fd.setAttribute('stroke', j % 2 ? o.colorClaro : o.color);
-          fd.setAttribute('stroke-width', 1.1); fd.setAttribute('stroke-linecap', 'round');
-          fd.setAttribute('opacity', 0);
-          g.appendChild(fd); remates.push(fd);
-        }
-      }
-      spine.remove();
-      svg.appendChild(g);
-      return {hebras: hebrasEl, fibras: fibrasEl, remates: remates};
-    }
-
-    /* Monta un hilo en su caja: viewBox 1:1 con los píxeles reales (sin
-       distorsión del retorcido) y espina definida en fracciones de la caja. */
-    function montarHilo(svg, espina, opts){
-      if (!svg) return null;
-      var r = svg.getBoundingClientRect();
-      var W = Math.max(60, Math.round(r.width)), H = Math.max(60, Math.round(r.height));
-      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      svg.setAttribute('preserveAspectRatio', 'none');
-      svg.innerHTML = '';
-      return hiloDeLana(svg, espina(W, H), opts);
-    }
-
-    /* Cablea el draw-on al scrub: hebras por dashoffset, fibrillas por tramo
-       ya dibujado, remates al llegar al final. */
-    function dibujarHiloEnTimeline(tl, hilo, desde, dur){
-      if (!hilo) return;
-      // Las dos hebras avanzan JUNTAS (sin stagger): desincronizadas, la
-      // punta se leía como hilo roto a trozos.
-      hilo.hebras.forEach(function(h){
-        var lh = h.getTotalLength();
-        gsap.set(h, {strokeDasharray: lh, strokeDashoffset: lh});
-        tl.to(h, {strokeDashoffset: 0, duration: dur, ease: 'none'}, desde);
-      });
-      // Las fibrillas asoman DESPUÉS de que el trazo pase por su tramo,
-      // nunca por delante de la punta.
-      hilo.fibras.forEach(function(f){
-        tl.to(f, {opacity: .4, duration: 3, ease: 'none'}, desde + parseFloat(f.dataset.en) * dur + 2);
-      });
-      hilo.remates.forEach(function(rm, i){
-        tl.to(rm, {opacity: .9, duration: 4, ease: 'power2.out'}, desde + dur - 2 + i * .5);
-      });
-    }
-
-    /* ── E4/E8 · transiciones (mismo motor, distinto rumbo del hilo) ── */
-    function transicion(id, tramoAlAcabar){
-      var el = document.getElementById(id);
-      if (!el) return;
-      var q = function(sel){ return el.querySelector(sel); };
-      // La escena entra ya teñida: sin este arranque, el tramo pre-pin
-      // mostraba crema plano — el único frame vacío del barrido.
-      gsap.set(q('.vj-tr-fondo--b'), {opacity: 0});
-      gsap.set(q('.vj-tr-frase'), {autoAlpha: 0, y: 30});
-      var hecho = false;
-      gsap.set(q('.vj-tr-foto'), {opacity: .42});
-      var tlT = gsap.timeline({defaults: {ease: 'none'},
-        scrollTrigger: {trigger: el, start: 'top top', end: '+=90%', pin: true, scrub: true,
-          onUpdate: function(st){
-            if (st.progress > 0.9 && !hecho){ hecho = true; completar(tramoAlAcabar); }
-          }}});
-      tlT.to(q('.vj-tr-fondo--b'), {opacity: 1, duration: 26}, 0)
-         .to(q('.vj-tr-foto'), {opacity: .5, duration: 34}, 4)
-         .fromTo(q('.vj-tr-foto img'), {yPercent: -4}, {yPercent: 4, duration: 100, ease: 'none'}, 0)
-         .to(q('.vj-tr-frase'), {autoAlpha: 1, y: 0, duration: 14, ease: 'power2.out'}, 16);
-      var subT = q('.vj-sub-trazo');
-      if (subT){
-        var slT = subT.getTotalLength();
-        gsap.set(subT, {strokeDasharray: slT, strokeDashoffset: slT});
-        tlT.to(subT, {strokeDashoffset: 0, duration: 8, ease: 'none'}, 34);
-      }
-    }
-    transicion('se-va', 1);
-
-    /* ── E5 · el puerto: pan lateral lento ── */
-    var e5 = document.getElementById('puerto');
-    if (e5){
-      var q5 = function(sel){ return e5.querySelector(sel); };
-      gsap.set(q5('.vj-e5-bg img'), {scale: 1.3, xPercent: 10});
-      gsap.set(q5('.vj-e5-in'), {autoAlpha: 0, y: 14});
-      gsap.timeline({defaults: {ease: 'none'},
-        scrollTrigger: {trigger: e5, start: 'top top', end: '+=160%', pin: true, scrub: true}})
-        .to(q5('.vj-e5-bg img'), {xPercent: -10, duration: 100}, 0)
-        .to(q5('.vj-e5-in'), {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 8);
-    }
-
-    /* ── E6 · Ramón por pasos: beats de uno en uno, la cita queda ── */
-    var e6 = document.getElementById('por-que-no-aqui');
-    if (e6){
-      var q6 = function(sel){ return e6.querySelector(sel); };
-      var pasos6 = [q6('.vj-e6-cabecera'), q6('[data-beat="1"]'), q6('[data-beat="2"]'), q6('[data-beat="3"]'), q6('.vj-e6-cita')];
-      pasos6.forEach(function(paso, i){ gsap.set(paso, {autoAlpha: i ? 0 : 1, y: i ? 14 : 0}); });
-      /* Ventanas prietas: fundidos de 4, meseta de 12. En cada frame del pin
-         hay SIEMPRE un paso legible — también recorriéndolo hacia arriba. */
-      var marcas = [0, 20, 38, 56, 76];
-      var beatsVistos = {};
-      gsap.set(q6('.vj-e6-bg img'), {yPercent: -4});
-      var tl6 = gsap.timeline({defaults: {ease: 'power2.out'},
-        scrollTrigger: {trigger: e6, start: 'top top', end: '+=260%', pin: true, scrub: true,
-          onUpdate: function(st){
-            [1, 2, 3].forEach(function(bt){
-              if (st.progress > (marcas[bt] + 3) / 100 && !beatsVistos[bt]){
-                beatsVistos[bt] = 1;
-                track('viaje_ramon_beat', {viaje: 'lana', beat: bt});
-              }
-            });
-          }}});
-      tl6.to(q6('.vj-e6-bg img'), {yPercent: 4, duration: 100, ease: 'none'}, 0);
-      tl6.to(pasos6[0], {autoAlpha: 0, y: -14, duration: 4, ease: 'power2.in'}, 17);
-      [1, 2, 3].forEach(function(i){
-        tl6.to(pasos6[i], {autoAlpha: 1, y: 0, duration: 4}, marcas[i]);
-        tl6.to(pasos6[i], {autoAlpha: 0, y: -14, duration: 4, ease: 'power2.in'}, marcas[i] + 15);
-      });
-      tl6.to(pasos6[4], {autoAlpha: 1, y: 0, duration: 6}, marcas[4]);
-      tl6.set({}, {}, 100); // la cita se queda en meseta hasta el final del pin
-    }
-
-    /* ── E7 · la escalera se construye; el hilo trepa ── */
-    var e7 = document.getElementById('escalera-1');
-    if (e7){
-      var q7 = function(sel){ return e7.querySelector(sel); };
-      var pel1 = q7('[data-paso="1"]'), pel2 = q7('[data-paso="2"]');
-      gsap.set([pel1, pel2], {autoAlpha: 0, y: 64});
-      var pasosVistos7 = {};
-      var tl7 = gsap.timeline({defaults: {ease: 'none'},
-        scrollTrigger: {trigger: e7, start: 'top top', end: '+=170%', pin: true, scrub: true,
-          onUpdate: function(st){
-            if (st.progress > 0.25 && !pasosVistos7[1]){ pasosVistos7[1] = 1; track('viaje_cascada_paso', {viaje: 'lana', paso: 1}); }
-            if (st.progress > 0.55 && !pasosVistos7[2]){ pasosVistos7[2] = 1; track('viaje_cascada_paso', {viaje: 'lana', paso: 2}); }
-          }}});
-      tl7.to(pel1, {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 5)
-         .to(pel2, {autoAlpha: 1, y: 0, duration: 20, ease: 'power2.out'}, 32);
-    }
-
-    /* ── E8 se crea AQUÍ, en orden del documento: crearla antes que E5-E7
-       dejaba su pin calculado con las posiciones viejas y se disparaba DENTRO
-       del rango de E6, tapando el testimonio entero con sus capas crema. ── */
-    transicion('regreso', 2);
-
-    /* ── E9 · la vitrina se abre y el contador salta bajo el pulgar ── */
-    var e9 = document.getElementById('vitrina');
-    var contador = document.getElementById('vjContador');
-    if (e9 && contador){
-      mm.add({escritorio9: '(min-width: 900px)', movil9: '(max-width: 899.98px)'}, function(ctx){
-        var desk = ctx.conditions.escritorio9;
-        var q9 = function(sel){ return e9.querySelector(sel); };
-        var pel3 = q9('[data-paso="3"]'), pel4 = q9('[data-paso="4"]');
-        gsap.set(q9('.vj-e9-bg img'), {scale: 1.22});
-        gsap.set(q9('.vj-e9-in'), {autoAlpha: 0, y: 14});
-        gsap.set([q9('.vj-salto-q'), q9('.vj-salto-n')], {autoAlpha: 0, y: 12});
-        gsap.set([pel3, pel4], {autoAlpha: 0, y: 64});
-        pintarEuro(contador, '0,05 €');
-
-        var A = 0.26, B = 0.60, saltoScrubHecho = false, pasosVistos9 = {};
-        var tl9 = gsap.timeline({defaults: {ease: 'none'},
-          scrollTrigger: {trigger: e9, start: 'top top', end: '+=280%', pin: true, scrub: true,
-            onUpdate: function(st){
-              var pr = st.progress;
-              if (pr <= A){
-                pintarEuro(contador, '0,05 €'); pintarEuro(kiloV, '0,05 €');
-              } else if (pr < B){
-                var k = (pr - A) / (B - A);
-                // Rodillo de odómetro: barrido exponencial entre magnitudes con
-                // frenada suave (smoothstep) — acelera a mitad, frena al final.
-                var ss = k * k * (3 - 2 * k);
-                var v = 0.05 * Math.pow(1500 / 0.05, ss);
-                var txt = eurKilo(v);
-                pintarEuro(contador, txt); pintarEuro(kiloV, txt);
-                saltoHecho = true; // el auto-salto estático queda anulado
-              } else {
-                pintarEuro(contador, '1.500 €'); pintarEuro(kiloV, '1.500 €');
-                if (!saltoScrubHecho){
-                  saltoScrubHecho = true;
-                  latido();
-                  // el golpe: la cifra aterriza con peso
-                  gsap.fromTo(contador, {scale: 1.06}, {scale: 1, duration: .12, ease: 'power2.out'});
-                  track('viaje_marcador_salto', {viaje: 'lana'});
-                  track('viaje_salto_scrub', {viaje: 'lana'});
-                }
-              }
-              if (pr > 0.76 && !pasosVistos9[3]){ pasosVistos9[3] = 1; track('viaje_cascada_paso', {viaje: 'lana', paso: 3}); }
-              if (pr > 0.9 && !pasosVistos9[4]){ pasosVistos9[4] = 1; track('viaje_cascada_paso', {viaje: 'lana', paso: 4}); }
-            }}});
-        tl9.to(q9('.vj-e9-puerta--izq'), {xPercent: -101, duration: 20}, 2)
-           .to(q9('.vj-e9-puerta--dcha'), {xPercent: 101, duration: 20}, 2)
-           .to(q9('.vj-e9-bg img'), {scale: 1.04, duration: 70}, 2)
-           .to(q9('.vj-e9-in'), {autoAlpha: 1, y: 0, duration: 10}, 14)
-           .to(q9('.vj-salto-q'), {autoAlpha: 1, y: 0, duration: 8}, 61)
-           .to(q9('.vj-salto-n'), {autoAlpha: 1, y: 0, duration: 8}, 65)
-           .to(pel3, {autoAlpha: 1, y: 0, duration: 11}, 74)
-           .to(pel4, {autoAlpha: 1, y: 0, duration: 11}, 85);
-        if (!desk){
-          // en móvil el matiz cede el sitio a los peldaños
-          tl9.to([q9('.vj-salto-q'), q9('.vj-salto-n')], {autoAlpha: 0, y: -14, duration: 8}, 72)
-             .to(q9('.vj-e9-contador'), {scale: .8, y: -10, duration: 10}, 72);
-        }
-        return function(){ tl9.scrollTrigger && tl9.scrollTrigger.kill(); tl9.kill(); };
-      });
-    }
-
-    /* ── Precarga por escena: las fotos llegan antes que el lector ── */
-    setTimeout(function(){
-      var sufijo = window.innerWidth > 900 ? '-1600' : '-900';
-      ['nave-vellones', 'puerto-contenedores', 'puerto-bobinas', 'interludio-textura', 'escaparate-punto', 'taller-tejiendo', 'cierre-rebano'].forEach(function(nombre){
-        var im = new Image();
-        im.src = '/assets/images/viaje-lana/' + nombre + sufijo + '.webp';
-      });
-    }, 900);
-
-    /* ── hilo-progreso del test (lo pinta el stepper con el estado) ── */
-    if (window.__vjMontarHiloTest) window.__vjMontarHiloTest(montarHilo);
-
-    /* ── E14 · la bifurcación: el hilo se parte en dos destinos ── */
-    var e14 = document.getElementById('bifurcacion');
-    if (e14){
-      var svg14 = e14.querySelector('.vj-e14-hilo');
-      var r14 = svg14.getBoundingClientRect();
-      var W14 = Math.max(300, Math.round(r14.width)), H14 = Math.max(400, Math.round(r14.height));
-      svg14.setAttribute('viewBox', '0 0 ' + W14 + ' ' + H14);
-      svg14.setAttribute('preserveAspectRatio', 'none');
-      var tronco = hiloDeLana(svg14, 'M' + (.5*W14) + ',0 C ' + (.52*W14) + ',' + (.16*H14) + ' ' + (.48*W14) + ',' + (.3*H14) + ' ' + (.5*W14) + ',' + (.4*H14), {fibras: .4, color: '#c96f2e', colorClaro: '#e8a76a'});
-      var gris = hiloDeLana(svg14, 'M' + (.5*W14) + ',' + (.4*H14) + ' C ' + (.62*W14) + ',' + (.56*H14) + ' ' + (.76*W14) + ',' + (.68*H14) + ' ' + (.86*W14) + ',' + (.84*H14), {deshilachado: true, color: '#8a8a80', colorClaro: '#b0b0a6', fibras: .3});
-      var vivo = hiloDeLana(svg14, 'M' + (.5*W14) + ',' + (.4*H14) + ' C ' + (.38*W14) + ',' + (.56*H14) + ' ' + (.26*W14) + ',' + (.72*H14) + ' ' + (.18*W14) + ',' + (.9*H14), {nudoFin: true, fibras: .5, color: '#c96f2e', colorClaro: '#e8a76a'});
-      var hecho14 = false;
-      var tl14 = gsap.timeline({defaults: {ease: 'none'},
-        scrollTrigger: {trigger: e14, start: 'top top', end: '+=110%', pin: true, scrub: true,
-          onUpdate: function(st){
-            if (st.progress > 0.9 && !hecho14){ hecho14 = true; completar(3); }
-          }}});
-      gsap.set(e14.querySelector('.vj-e14-frase'), {autoAlpha: 0, y: 14});
-      dibujarHiloEnTimeline(tl14, tronco, 2, 26);
-      dibujarHiloEnTimeline(tl14, gris, 30, 34);
-      dibujarHiloEnTimeline(tl14, vivo, 30, 34);
-      // el ramal gris pierde fuelle: se va apagando
-      gris.hebras.forEach(function(h){ tl14.to(h, {opacity: .3, duration: 18}, 70); });
-      tl14.to(e14.querySelector('.vj-e14-frase'), {autoAlpha: 1, y: 0, duration: 12, ease: 'power2.out'}, 46);
-    }
-
-    /* ── E16 · el mismo kilo, dos destinos ── */
-    var e16 = document.getElementById('final');
-    if (e16){
-      var q16 = function(sel){ return e16.querySelector(sel); };
-      var svg16 = q16('.vj-e16-hilo');
-      var r16 = svg16.getBoundingClientRect();
-      var W16 = Math.max(90, Math.round(r16.width)), H16 = Math.max(90, Math.round(r16.height));
-      svg16.setAttribute('viewBox', '0 0 ' + W16 + ' ' + H16);
-      svg16.setAttribute('preserveAspectRatio', 'none');
-      var biTronco = hiloDeLana(svg16, 'M' + (.5*W16) + ',2 C ' + (.5*W16) + ',' + (.2*H16) + ' ' + (.5*W16) + ',' + (.3*H16) + ' ' + (.5*W16) + ',' + (.42*H16), {fibras: 0, vueltas: 8, color: '#c96f2e', colorClaro: '#e8a76a'});
-      var biGris = hiloDeLana(svg16, 'M' + (.5*W16) + ',' + (.42*H16) + ' C ' + (.32*W16) + ',' + (.6*H16) + ' ' + (.16*W16) + ',' + (.72*H16) + ' ' + (.06*W16) + ',' + (.86*H16), {deshilachado: true, color: '#8a8a80', colorClaro: '#b0b0a6', fibras: 0, vueltas: 8, grosor: 2.2});
-      var biVivo = hiloDeLana(svg16, 'M' + (.5*W16) + ',' + (.42*H16) + ' C ' + (.68*W16) + ',' + (.6*H16) + ' ' + (.84*W16) + ',' + (.72*H16) + ' ' + (.94*W16) + ',' + (.86*H16), {nudoFin: true, fibras: 0, vueltas: 8, color: '#c96f2e', colorClaro: '#e8a76a'});
-      var tl16 = gsap.timeline({defaults: {ease: 'none'},
-        scrollTrigger: {trigger: e16, start: 'top top', end: '+=150%', pin: '.vj-e16-pin', scrub: true}});
-      gsap.set(q16('.vj-e16-titulo'), {autoAlpha: 0, y: 14});
-      gsap.set(q16('.vj-e16-destinos'), {autoAlpha: 0, y: 14});
-      gsap.set(q16('.vj-e16-remate'), {autoAlpha: 0, y: 12});
-      tl16.to(q16('.vj-e16-bg img'), {scale: 1.06, duration: 100}, 0)
-          .to(q16('.vj-e16-titulo'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 4)
-          .to(q16('.vj-e16-destinos'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 16);
-      dibujarHiloEnTimeline(tl16, biTronco, 22, 10);
-      dibujarHiloEnTimeline(tl16, biGris, 34, 20);
-      dibujarHiloEnTimeline(tl16, biVivo, 34, 20);
-      tl16.to(q16('.vj-e16-remate'), {autoAlpha: 1, y: 0, duration: 10, ease: 'power2.out'}, 62);
-      gsap.set(q16('.vj-e16-bg img'), {scale: 1.0});
-    }
-
-    /* ── la onda final: el hilo entero se ilumina de abajo arriba ──
-       Temporizadores puros, nada de rAF: debe funcionar hasta en pestaña
-       de fondo. Es el fuego artificial del cierre. */
-    window.__vjOnda = function(){
-      var svgs = [].slice.call(document.querySelectorAll('.vj-e16-hilo, .vj-e14-hilo, .vj-e12-hilo, .vj-nudo, .vj-kilo'));
-      svgs.forEach(function(sv, i){
-        setTimeout(function(){
-          sv.classList.add('vj-hilo-brilla');
-          setTimeout(function(){ sv.classList.remove('vj-hilo-brilla'); }, 480);
-        }, i * 130);
-      });
-      latido();
-    };
-
-    ScrollTrigger.sort();
-    ScrollTrigger.refresh();
-    // Las medidas se recalculan cuando llegan las fuentes y tras un respiro:
-    // si los starts quedan viejos, los pins actúan en el sitio equivocado.
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
-    setTimeout(function(){ ScrollTrigger.refresh(); }, 1200);
-  }
-
-  if (!reduce){
-    (function(){
-      // Optimista: la escena se viste ya (sin destello estático→escena) y si
-      // GSAP no ha llegado en 3,5 s se desviste — vuelta a la columna legible.
-      root.classList.add('vj-gsap');
-      setTimeout(function(){ if (!escenasListas) root.classList.remove('vj-gsap'); }, 3500);
-      function carga(src, cb){
-        var sc = document.createElement('script');
-        sc.src = src; sc.async = true; sc.onload = cb;
-        document.head.appendChild(sc);
-      }
-      carga('https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', function(){
-        carga('https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', initScenes);
-      });
-    })();
-  }
-
-  pintarProgreso();
+  cuandoSeVea(document.getElementById('por-que-no-aqui'), function(){
+    track('viaje_bloque_ramon', {viaje: 'lana'});
+  }, {sinPlazo: true});
+  cuandoSeVea(document.getElementById('vjDosEscaparates'), function(){
+    track('viaje_dos_escaparates', {viaje: 'lana'});
+  }, {sinPlazo: true});
 })();
 </script>
 </body>
