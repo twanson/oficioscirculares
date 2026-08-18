@@ -10,6 +10,11 @@
 // URL del post de Instagram del viaje. PENDIENTE: pegarla aquí al publicar.
 // Mientras esté vacía, el CTA "Vuelve al post" no se renderiza.
 const POST_URL = '';
+
+// Newsletter "La Carta Circular". El sitio no tiene todavía página propia de
+// suscripción: apuntamos al formulario de alta que ya usan la home y las
+// verticales. Si La Carta Circular estrena formulario propio, se cambia aquí.
+const CARTA_URL = 'https://tally.so/r/mOyV98?utm_source=viaje-lana&utm_medium=web&utm_content=carta-circular';
 %>
 <%- include('partials/head-meta', {
     title: 'El Viaje de la Lana | Oficios Circulares',
@@ -71,20 +76,38 @@ body{background:#fbf6ec}
 @media(max-width:359px){.vj-brand b{display:none}}
 @media(min-width:640px){.vj-bar-in{padding:0 24px}.vj-brand img{height:32px}.vj-brand b{font-size:.94rem}.vj-bar-est{font-size:.84rem}}
 
-/* ── la píldora del kilo (estilo del board 1) ── */
-.vj-kilo{position:fixed;left:16px;bottom:16px;z-index:80;display:flex;align-items:baseline;gap:10px;padding:10px 18px;border-radius:100px;background:rgba(2,30,23,.92);border:1px solid rgba(246,201,138,.25);box-shadow:0 12px 32px rgba(0,0,0,.28);opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease}
+/* ── la píldora del kilo (estilo del board 1, +15% en v13) ──
+   Al cambiar de valor se expande ~2,2s mostrando el salto viejo → nuevo y
+   luego se recoge. Anclada abajo-izquierda: al crecer sube, nunca tapa. ── */
+.vj-kilo{position:fixed;left:16px;bottom:16px;z-index:80;display:flex;align-items:baseline;gap:11px;padding:12px 21px;border-radius:100px;background:rgba(2,30,23,.94);border:1px solid rgba(246,201,138,.45);box-shadow:0 12px 32px rgba(0,0,0,.28);opacity:0;transform:translateY(10px);transform-origin:left bottom;transition:opacity .35s ease,transform .35s ease;max-width:calc(100vw - 32px)}
 .vj-kilo.vj-kilo--on{opacity:1;transform:none}
 .vj-kilo[hidden]{display:none}
-.vj-kilo-txt{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
-.vj-kilo-k{font-weight:800;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(251,246,236,.75)}
-.vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:18px;color:var(--oro);font-feature-settings:"tnum";letter-spacing:-.01em;transition:opacity .2s ease}
+.vj-kilo-txt{display:flex;align-items:baseline;gap:11px;white-space:nowrap;min-height:34px}
+.vj-kilo-k{font-weight:800;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(251,246,236,.75);flex:0 0 auto}
+.vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:21px;color:var(--oro);font-feature-settings:"tnum";letter-spacing:-.01em;transition:opacity .2s ease}
 .vj-kilo-v.vj-fundido{opacity:0}
-.vj-kilo-v.vj-kilo-v--larga{font-size:14px}
+.vj-kilo-v.vj-kilo-v--larga{font-size:16px}
 .vj-kilo-n{display:none}
+/* el salto: solo visible mientras la píldora está expandida */
+.vj-kilo-salto{display:none;align-items:baseline;gap:9px;font-family:var(--f-head);font-weight:600;font-size:19px;line-height:1.25;color:rgba(251,246,236,.62);font-feature-settings:"tnum"}
+.vj-kilo-salto b{color:var(--oro);font-weight:600}
+.vj-kilo-salto i{font-style:normal;opacity:.7;font-size:.86em}
+.vj-kilo-salto u{text-decoration:none;font-family:var(--f-body);font-weight:700;font-size:.62em;letter-spacing:.02em;color:rgba(251,246,236,.7)}
+.vj-kilo--salto .vj-kilo-v{display:none}
+.vj-kilo--salto .vj-kilo-salto{display:flex;flex-wrap:wrap;animation:vj-kilo-entra .3s ease-out}
+@keyframes vj-kilo-entra{from{opacity:0}to{opacity:1}}
+.vj-kilo.vj-kilo--pulso{animation:vj-kilo-pulso .55s cubic-bezier(.22,1,.36,1)}
+@keyframes vj-kilo-pulso{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){
+  .vj-kilo.vj-kilo--pulso{animation:none}
+  .vj-kilo--salto .vj-kilo-salto{animation:none}
+}
 @media(min-width:980px){
-  .vj-kilo{left:40px;bottom:36px;padding:12px 22px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-  .vj-kilo-v{font-size:22px}
-  .vj-kilo-v.vj-kilo-v--larga{font-size:16px}
+  .vj-kilo{left:40px;bottom:36px;padding:14px 25px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);max-width:none}
+  .vj-kilo-txt{min-height:41px}
+  .vj-kilo-v{font-size:25px}
+  .vj-kilo-v.vj-kilo-v--larga{font-size:18px}
+  .vj-kilo-salto{font-size:22px;flex-wrap:nowrap;white-space:nowrap}
 }
 
 /* ══ BOARD 1 · APERTURA ══ */
@@ -177,9 +200,12 @@ body{background:#fbf6ec}
 .vj .vj-det-link{display:inline-block;margin-top:12px;font-weight:700;font-size:.94rem;line-height:1.45;color:var(--terra);text-decoration:underline;text-underline-offset:3px}
 .vj .vj-det-link:hover{color:var(--primary)}
 
-/* ── interludios: como están, con el velo del tramo ── */
-.vj-inter{position:relative;min-height:52vh;max-height:640px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:clamp(64px,10vh,96px) 22px;text-align:center}
-.vj-inter>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.12)}
+/* ── interludios: banda sólida con el tinte del tramo al que se entra.
+   Sin foto: ninguna imagen debe tocar a otra imagen. ── */
+.vj-inter{position:relative;min-height:46vh;display:flex;align-items:center;justify-content:center;padding:clamp(56px,9vh,88px) 22px;text-align:center;background:var(--fondo)}
+.vj-inter-nudo{width:24px;height:auto;margin:0 auto 22px;display:block;overflow:visible}
+/* a 24px el trazo escalado se quedaba en 1,3px y el nudo era un borrón */
+.vj-inter-nudo path{fill:none;stroke:var(--terra-claro);stroke-width:1.7;vector-effect:non-scaling-stroke;stroke-linejoin:round}
 .vj-luz2{position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
   linear-gradient(165deg, var(--ta), var(--tb))}
@@ -188,7 +214,7 @@ body{background:#fbf6ec}
   radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
   linear-gradient(165deg, var(--ta), var(--tb))}
 .vj-inter-in{position:relative;z-index:2}
-.vj-tr-frase{max-width:17ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em;text-shadow:0 3px 30px rgba(0,0,0,.55)}
+.vj-tr-frase{max-width:17ch;margin:0 auto;font-family:var(--f-head);font-weight:600;font-size:clamp(1.9rem,7vw,3rem);line-height:1.2;color:#fff;letter-spacing:-.015em}
 .vj-tr-frase em{font-style:italic;color:var(--terra-claro)}
 
 /* ══ BOARD 3 · RAMÓN ══ */
@@ -402,6 +428,10 @@ body{background:#fbf6ec}
 .vj-concl-k{display:block;font-weight:800;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;color:var(--terra)}
 .vj-concl p{color:var(--tinta-2)!important;font-size:15.5px!important;line-height:1.62}
 .vj-concl p strong{color:var(--primary)}
+.vj-acciones{list-style:none;margin:20px 0 0;padding:0}
+.vj-acciones li{margin:0;padding:14px 0 0;border-top:1px solid var(--hair);font-size:14.5px;line-height:1.55;color:var(--tinta-2)}
+.vj-acciones li+li{margin-top:14px}
+.vj-acciones li b{color:var(--primary);font-weight:800}
 @media(min-width:980px){.vj-doble{grid-template-columns:1fr 1fr;gap:32px}.vj-concl{padding:38px 42px}}
 .vj-frases{margin:56px auto 0;max-width:1000px}
 .vj-frases-k{font-weight:800;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-claro);text-align:center;margin-bottom:8px}
@@ -425,14 +455,37 @@ body{background:#fbf6ec}
 .vj-next:hover{transform:translateY(-2px)}
 .vj-next.vj-hecho{background:linear-gradient(135deg,#3E7C59,#1F4B3F)}
 .vj-e16-ctazona{max-width:1000px;margin:24px auto 0}
-.vj-ctacard{display:flex;flex-direction:column;border-radius:22px;overflow:hidden;background:linear-gradient(155deg,#fbf9f8,#f0e9dc);box-shadow:0 24px 60px rgba(0,0,0,.35);text-align:left}
-.vj-ctacard-img{position:relative;min-height:200px}
-.vj-ctacard-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vj-ctacard-in{padding:30px 24px 34px}
-.vj-ctacard-in .vj-kick{color:var(--terra)}
-.vj-ctacard-in h2{font-family:var(--f-head);font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:600;color:var(--primary);line-height:1.1;margin:12px 0 14px}
-.vj-ctacard-in h2 em{font-style:italic;color:var(--terra)}
-.vj-ctacard-in p{color:var(--tinta-2);font-size:16px;line-height:1.6}
+/* los dos caminos del cierre: patrón vitrinas, claro y oscuro */
+.vj-caminos{display:grid;grid-template-columns:1fr;gap:18px;text-align:left}
+.vj-camino{border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35);display:flex;flex-direction:column}
+.vj-camino-ft{position:relative;height:180px;flex:0 0 auto}
+.vj-camino-ft img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vj-camino-tx{padding:28px 24px 32px;flex:1;display:flex;flex-direction:column}
+.vj-camino-et{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;margin-bottom:12px}
+.vj-camino h2{font-family:var(--f-head);font-size:clamp(1.7rem,2.4vw,2.3rem);font-weight:600;line-height:1.1;margin:0 0 14px}
+.vj-camino h2 em{font-style:italic}
+.vj-camino-tx>p{font-size:16px;line-height:1.6}
+.vj-camino .vj-ctas{margin-top:auto;padding-top:24px}
+.vj-camino--pro{background:linear-gradient(155deg,#fbf9f8,#f0e9dc)}
+.vj-camino--pro .vj-camino-et{color:var(--terra)}
+.vj-camino--pro h2{color:var(--primary)}
+.vj-camino--pro h2 em{color:var(--terra)}
+.vj-camino--pro .vj-camino-tx>p{color:var(--tinta-2)}
+.vj-camino--gen{background:#0d1a15}
+/* sin banda de foto, el contenido se centra: si no, el botón se iba al fondo
+   y dejaba un hueco muerto al estirarse contra la tarjeta clara */
+.vj-camino--gen .vj-camino-tx{padding-top:38px;justify-content:center}
+.vj-camino--gen .vj-ctas{margin-top:28px;padding-top:0}
+.vj-camino--gen .vj-camino-et{color:var(--oro)}
+.vj-camino--gen h2{color:#fff}
+.vj-camino--gen h2 em{color:var(--terra-claro)}
+.vj-camino--gen .vj-camino-tx>p{color:rgba(251,246,236,.84)}
+@media(min-width:980px){
+  .vj-caminos{grid-template-columns:1fr 1fr;gap:32px;align-items:stretch}
+  .vj-camino-ft{height:210px}
+  .vj-camino-tx{padding:34px 36px 38px}
+  .vj-camino--gen .vj-camino-tx{padding-top:48px}
+}
 .vj-ctas{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:24px}
 .vj-cta{display:flex;align-items:center;justify-content:center;gap:9px;padding:16px 26px;border-radius:100px;font-family:var(--f-body);font-weight:800;font-size:15.5px;transition:transform .22s ease,filter .22s ease}
 .vj-cta--1{background:var(--terra);color:#fff;box-shadow:0 10px 26px rgba(180,88,23,.35)}
@@ -440,7 +493,6 @@ body{background:#fbf6ec}
 .vj-cta--3{background:transparent;color:var(--tinta-2);font-size:.94rem;padding:10px 0}
 .vj-cta--3 span{text-decoration:underline;text-underline-offset:4px}
 .vj-cta:hover{transform:translateY(-2px)}
-@media(min-width:900px){.vj-ctacard{flex-direction:row}.vj-ctacard-in{flex:1 1 58%;padding:46px 44px}.vj-ctacard-img{flex:1 1 42%;min-height:0}}
 .vj-e16-ultima{margin:34px auto 0;text-align:center;font-family:var(--f-head);font-style:italic;font-size:1.1rem;color:rgba(251,246,236,.66)}
 
 /* ── grano global ── */
@@ -489,6 +541,7 @@ body{background:#fbf6ec}
     <span class="vj-kilo-txt">
       <span class="vj-kilo-k">Tu kilo</span>
       <b class="vj-kilo-v" id="vjKiloV" aria-live="polite">0,05 €</b>
+      <span class="vj-kilo-salto" id="vjKiloSalto" aria-hidden="true"></span>
     </span>
     <span class="vj-kilo-n" id="vjKiloN"></span>
   </div>
@@ -506,6 +559,7 @@ body{background:#fbf6ec}
           <p>Esto es un kilo de lana española. Lo acaban de esquilar.</p>
           <p>Por él, el ganadero ha cobrado <b><span class="vj-sub-mano">unos céntimos<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2,5 C 26,2.5 52,6.5 74,3.5 S 95,5.5 98,4"/></svg></span></b>.</p>
           <p>Dentro de unos meses, alguien pagará <b>1.500&nbsp;€</b> por un jersey hecho con lana como esta.</p>
+          <p>Síguelo. Durante los próximos 15 minutos, este será <b>tu</b> kilo.</p>
         </div>
       </div>
       <div class="vj-desliza" aria-hidden="true">Desliza</div>
@@ -562,10 +616,9 @@ body{background:#fbf6ec}
       </div>
     </section>
 
-    <section class="vj-inter">
-      <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="100vw" alt="Vista cenital de un rebaño apretado" loading="lazy" decoding="async">
-      <div class="vj-luz2" style="--ta:rgba(6,36,28,.55);--tb:rgba(6,36,28,.8)"></div>
+    <section class="vj-inter" style="--fondo:#0b1626">
       <div class="vj-inter-in vj-rev">
+        <svg class="vj-inter-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg>
         <p class="vj-tr-frase">Ya sabes lo que cuesta hacerlo.<br>Este kilo, casi seguro, <em>no <span class="vj-sub-mano">se queda<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> en España</em>.</p>
       </div>
     </section>
@@ -639,10 +692,9 @@ body{background:#fbf6ec}
       </div>
     </section>
 
-    <section class="vj-inter">
-      <img src="/assets/images/viaje-lana/interludio-textura-900.webp" srcset="/assets/images/viaje-lana/interludio-textura-900.webp 900w, /assets/images/viaje-lana/interludio-textura-1600.webp 1600w" sizes="100vw" alt="Macro de un vellón de lana" loading="lazy" decoding="async">
-      <div class="vj-luz2" style="--ta:rgba(38,20,8,.5);--tb:rgba(38,20,8,.78)"></div>
+    <section class="vj-inter" style="--fondo:#1a1410">
       <div class="vj-inter-in vj-rev">
+        <svg class="vj-inter-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg>
         <p class="vj-tr-frase">Tu kilo volverá.<br>Pero <em><span class="vj-sub-mano">no volverá<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> como lana</em>.</p>
       </div>
     </section>
@@ -822,10 +874,9 @@ body{background:#fbf6ec}
       </div>
     </section>
 
-    <section class="vj-inter">
-      <img src="/assets/images/viaje-lana/taller-tejiendo-900.webp" srcset="/assets/images/viaje-lana/taller-tejiendo-900.webp 900w, /assets/images/viaje-lana/taller-tejiendo-1600.webp 1600w" sizes="100vw" alt="Unas manos tejiendo con lana de tonos naturales" loading="lazy" decoding="async">
-      <div class="vj-luz2" style="--ta:rgba(18,32,15,.5);--tb:rgba(18,32,15,.78)"></div>
+    <section class="vj-inter" style="--fondo:#12200f">
       <div class="vj-inter-in vj-rev">
+        <svg class="vj-inter-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg>
         <p class="vj-tr-frase">¿Y si tu kilo <em>nunca se hubiera ido</em>?</p>
       </div>
     </section>
@@ -911,6 +962,11 @@ body{background:#fbf6ec}
           <div class="vj-concl vj-concl--consumidor vj-rev">
             <span class="vj-concl-k">Si compras</span>
             <p>El problema no es que el lujo sea caro. Es que su precio no cuenta la verdad. Mientras tanto, la mejor lana de Europa se tira o se malvende a céntimos. Cuando compras a quien trabaja la fibra de verdad, cada euro va al producto: materiales, tiempo y manos.</p>
+            <ul class="vj-acciones">
+              <li><b>Mira la composición.</b> "Lana" a secas puede ser 20% lana y 80% acrílico. La etiqueta lo dice — y si el origen no aparece por ningún lado, eso también te está diciendo algo.</li>
+              <li><b>Piensa en coste por uso, no en precio de etiqueta.</b> Ya sabes hacerlo: lo has practicado en este viaje.</li>
+              <li><b>Compra a quien pone nombre a su fibra.</b> Artesanos y marcas que te dicen de qué rebaño y de qué hilatura viene su lana. Existen, y no son más caros de lo que cuesta lo que dura.</li>
+            </ul>
           </div>
           <div class="vj-concl vj-concl--artesano vj-rev">
             <span class="vj-concl-k">Si tejes, hilas o fieltras</span>
@@ -947,22 +1003,34 @@ body{background:#fbf6ec}
           <button type="button" class="vj-next vj-next--oro" data-next="4" data-goto="#cierre-cta">Completar el viaje 🧭</button>
         </div>
         <div class="vj-e16-ctazona" id="cierre-cta">
-          <div class="vj-ctacard vj-rev">
-            <div class="vj-ctacard-img" aria-hidden="true">
-              <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="(min-width:900px) 42vw, 100vw" alt="" loading="lazy" decoding="async">
-            </div>
-            <div class="vj-ctacard-in">
-              <span class="vj-kick">Conecta Lana</span>
-              <h2>¿Quieres que la lana española <em>deje de tirarse?</em></h2>
-              <p>¿Quieres que más kilos se queden? Eso es exactamente Conecta Lana: el punto de encuentro de ganaderos, transformadores y artesanos de la lana.</p>
-              <div class="vj-ctas">
-                <a class="vj-cta vj-cta--1" href="/conecta-lana" data-cta="conecta_lana">Conoce Conecta Lana →</a>
-                <a class="vj-cta vj-cta--2" href="/conecta-lana/directorio" data-cta="directorio">Ver el directorio de la lana →</a>
-                <% if (POST_URL) { %>
-                <a class="vj-cta vj-cta--3" href="<%= POST_URL %>" target="_blank" rel="noopener" data-cta="volver_post"><span>Vuelve al post y deja tu conclusión en comentarios</span></a>
-                <% } %>
+          <div class="vj-caminos">
+            <article class="vj-camino vj-camino--pro vj-rev">
+              <div class="vj-camino-ft">
+                <img src="/assets/images/viaje-lana/interludio-rebano-900.webp" srcset="/assets/images/viaje-lana/interludio-rebano-900.webp 900w, /assets/images/viaje-lana/interludio-rebano-1600.webp 1600w" sizes="(min-width:980px) 46vw, 100vw" alt="" loading="lazy" decoding="async">
               </div>
-            </div>
+              <div class="vj-camino-tx">
+                <p class="vj-camino-et">Si vives del circuito de la lana</p>
+                <h2>¿Quieres que la lana española <em>deje de tirarse?</em></h2>
+                <p>¿Quieres que más kilos se queden? Eso es exactamente Conecta Lana: el punto de encuentro de ganaderos, transformadores y artesanos de la lana.</p>
+                <div class="vj-ctas">
+                  <a class="vj-cta vj-cta--1" href="/conecta-lana" data-cta="conecta_lana">Conoce Conecta Lana →</a>
+                  <a class="vj-cta vj-cta--2" href="/conecta-lana/directorio" data-cta="directorio">Ver el directorio de la lana →</a>
+                  <% if (POST_URL) { %>
+                  <a class="vj-cta vj-cta--3" href="<%= POST_URL %>" target="_blank" rel="noopener" data-cta="volver_post"><span>Vuelve al post y deja tu conclusión en comentarios</span></a>
+                  <% } %>
+                </div>
+              </div>
+            </article>
+            <article class="vj-camino vj-camino--gen vj-rev">
+              <div class="vj-camino-tx">
+                <p class="vj-camino-et">Si simplemente te importa</p>
+                <h2>La Carta <em>Circular</em></h2>
+                <p>Una carta al mes sobre oficios, materiales y las historias que hay detrás de lo que usas. Sin humo.</p>
+                <div class="vj-ctas">
+                  <a class="vj-cta vj-cta--1" href="<%= CARTA_URL %>" target="_blank" rel="noopener" data-cta="newsletter">Suscribirme a La Carta Circular →</a>
+                </div>
+              </div>
+            </article>
           </div>
           <p class="vj-e16-ultima">La próxima vez que tengas un jersey entre las manos, pregúntale por su kilo.</p>
         </div>
@@ -1125,6 +1193,7 @@ body{background:#fbf6ec}
   var kiloBox = document.getElementById('vjKilo');
   var kiloV = document.getElementById('vjKiloV');
   var kiloN = document.getElementById('vjKiloN');
+  var kiloSalto = document.getElementById('vjKiloSalto');
   var VALOR = {
     1: {v: '0,05 €', n: ''},
     2: {v: '0,05 €', n: 'sale valiendo lo mismo'},
@@ -1135,16 +1204,49 @@ body{background:#fbf6ec}
   function pintarEuro(el, txt){
     el.innerHTML = txt.replace(/€/g, '<span class="vj-eur">€</span>');
   }
-  function ponerValor(txt, nota){
-    if (kiloN.textContent !== nota) kiloN.textContent = nota;
-    if (kiloV.dataset.txt === txt) return;
-    kiloV.dataset.txt = txt;
+  var saltoTimer = null;
+  function asentar(txt){
+    kiloBox.classList.remove('vj-kilo--salto', 'vj-kilo--pulso');
     kiloV.classList.toggle('vj-kilo-v--larga', txt.length > 12);
-    kiloV.classList.add('vj-fundido');
-    setTimeout(function(){
-      pintarEuro(kiloV, txt);
-      kiloV.classList.remove('vj-fundido');
-    }, 200);
+    pintarEuro(kiloV, txt);
+  }
+  function trozo(tag, txt){
+    var el = document.createElement(tag);
+    if (txt) pintarEuro(el, txt);
+    return el;
+  }
+  function ponerValor(txt, nota){
+    var mismaCifra = kiloV.dataset.txt === txt;
+    var mismaNota = kiloN.textContent === nota;
+    if (mismaCifra && mismaNota) return;
+    kiloN.textContent = nota;
+    var anterior = kiloV.dataset.txt;
+    kiloV.dataset.txt = txt;
+    clearTimeout(saltoTimer);
+    // primera pintada, movimiento reducido, o nada que enseñar: cambio directo
+    if (!anterior || reduce || (mismaCifra && !nota)){
+      asentar(txt);
+      return;
+    }
+    // el momento del cambio: la píldora se expande y enseña el salto.
+    // Si la cifra no se mueve —el kilo cruza medio mundo y sale valiendo lo
+    // mismo— el salto es la nota del tramo, que es justo el titular.
+    kiloSalto.innerHTML = '';
+    if (mismaCifra){
+      var mismo = trozo('b', txt), sep = trozo('i'), n = trozo('u');
+      sep.textContent = '·';
+      n.textContent = nota;
+      kiloSalto.appendChild(mismo); kiloSalto.appendChild(sep); kiloSalto.appendChild(n);
+    } else {
+      var de = trozo('span', anterior), fl = trozo('i'), a = trozo('b', txt);
+      fl.textContent = '→';
+      kiloSalto.appendChild(de); kiloSalto.appendChild(fl); kiloSalto.appendChild(a);
+    }
+    kiloBox.classList.add('vj-kilo--salto');
+    kiloBox.classList.remove('vj-kilo--pulso');
+    void kiloBox.offsetWidth;
+    kiloBox.classList.add('vj-kilo--pulso');
+    saltoTimer = setTimeout(function(){ asentar(txt); }, 2200);
   }
   function mostrarPildora(){
     if (!kiloBox.hidden) return;
