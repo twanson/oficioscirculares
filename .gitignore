@@ -38,3 +38,5 @@ build/
 # Temporary
 tmp/
 temp/ 
+# Config local de Claude Code (previsualización)
+.claude/launch.json
