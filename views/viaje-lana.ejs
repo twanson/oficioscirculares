@@ -55,6 +55,7 @@ body{background:#fbf6ec}
 /* kicker de línea (el del mockup: guion + versalitas) */
 .vj-kick{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-body);font-weight:800;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
 .vj-kick::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6;flex:0 0 auto}
+.vj-kick--ov::before{display:none}
 
 /* subrayado a mano */
 .vj-sub-mano{position:relative;white-space:nowrap}
@@ -76,25 +77,24 @@ body{background:#fbf6ec}
 @media(max-width:359px){.vj-brand b{display:none}}
 @media(min-width:640px){.vj-bar-in{padding:0 24px}.vj-brand img{height:32px}.vj-brand b{font-size:.94rem}.vj-bar-est{font-size:.84rem}}
 
-/* ── la píldora del kilo (estilo del board 1, +15% en v13) ──
-   Al cambiar de valor se expande ~2,2s mostrando el salto viejo → nuevo y
-   luego se recoge. Anclada abajo-izquierda: al crecer sube, nunca tapa. ── */
-.vj-kilo{position:fixed;left:16px;bottom:16px;z-index:80;display:flex;align-items:baseline;gap:11px;padding:12px 21px;border-radius:100px;background:rgba(2,30,23,.94);border:1px solid rgba(246,201,138,.45);box-shadow:0 12px 32px rgba(0,0,0,.28);opacity:0;transform:translateY(10px);transform-origin:left bottom;transition:opacity .35s ease,transform .35s ease;max-width:calc(100vw - 32px)}
-.vj-kilo.vj-kilo--on{opacity:1;transform:none}
+/* ── el kilo, dentro de la barra (v14: deja de flotar y de tapar tarjetas) ──
+   Al cambiar de valor el grupo pulsa y enseña el salto 2,2s. ── */
+.vj-bar-dcha{display:flex;align-items:baseline;gap:8px;min-width:0}
+.vj-kilo{display:flex;align-items:baseline;gap:7px;white-space:nowrap;opacity:0;transition:opacity .35s ease;transform-origin:right center}
+.vj-kilo.vj-kilo--on{opacity:1}
 .vj-kilo[hidden]{display:none}
-.vj-kilo-txt{display:flex;align-items:baseline;gap:11px;white-space:nowrap;min-height:34px}
-.vj-kilo-k{font-weight:800;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(251,246,236,.75);flex:0 0 auto}
-.vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:21px;color:var(--oro);font-feature-settings:"tnum";letter-spacing:-.01em;transition:opacity .2s ease}
-.vj-kilo-v.vj-fundido{opacity:0}
-.vj-kilo-v.vj-kilo-v--larga{font-size:16px}
+.vj-bar-sep{color:rgba(246,201,138,.45);font-size:.8rem}
+.vj-ovillo--bar{width:14px;color:var(--oro);align-self:center}
+.vj-kilo-k{font-family:var(--f-ui);font-weight:800;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,246,236,.6)}
+.vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:17px;color:var(--oro);font-feature-settings:"tnum";letter-spacing:-.01em}
 .vj-kilo-n{display:none}
-/* el salto: solo visible mientras la píldora está expandida */
-.vj-kilo-salto{display:none;align-items:baseline;gap:9px;font-family:var(--f-head);font-weight:600;font-size:19px;line-height:1.25;color:rgba(251,246,236,.62);font-feature-settings:"tnum"}
+.vj-kilo-salto{display:none;align-items:baseline;gap:7px;font-family:var(--f-head);font-weight:600;font-size:16px;color:rgba(251,246,236,.62);font-feature-settings:"tnum"}
 .vj-kilo-salto b{color:var(--oro);font-weight:600}
 .vj-kilo-salto i{font-style:normal;opacity:.7;font-size:.86em}
-.vj-kilo-salto u{text-decoration:none;font-family:var(--f-body);font-weight:700;font-size:.62em;letter-spacing:.02em;color:rgba(251,246,236,.7)}
+.vj-kilo-salto u{text-decoration:none;font-family:var(--f-ui);font-weight:700;font-size:.66em;letter-spacing:.02em;color:rgba(251,246,236,.7)}
+.vj-kilo--salto .vj-kilo-k{display:none}
 .vj-kilo--salto .vj-kilo-v{display:none}
-.vj-kilo--salto .vj-kilo-salto{display:flex;flex-wrap:wrap;animation:vj-kilo-entra .3s ease-out}
+.vj-kilo--salto .vj-kilo-salto{display:flex;animation:vj-kilo-entra .3s ease-out}
 @keyframes vj-kilo-entra{from{opacity:0}to{opacity:1}}
 .vj-kilo.vj-kilo--pulso{animation:vj-kilo-pulso .55s cubic-bezier(.22,1,.36,1)}
 @keyframes vj-kilo-pulso{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
@@ -102,12 +102,14 @@ body{background:#fbf6ec}
   .vj-kilo.vj-kilo--pulso{animation:none}
   .vj-kilo--salto .vj-kilo-salto{animation:none}
 }
-@media(min-width:980px){
-  .vj-kilo{left:40px;bottom:36px;padding:14px 25px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);max-width:none}
-  .vj-kilo-txt{min-height:41px}
-  .vj-kilo-v{font-size:25px}
-  .vj-kilo-v.vj-kilo-v--larga{font-size:18px}
-  .vj-kilo-salto{font-size:22px;flex-wrap:nowrap;white-space:nowrap}
+/* en móvil, solo ovillo + valor */
+@media(max-width:639px){
+  .vj-kilo-k{display:none}
+  .vj-bar-dcha.vj-bar--salto .vj-bar-est,
+  .vj-bar-dcha.vj-bar--salto .vj-bar-sep{display:none}
+  .vj-kilo-v{font-size:15px}
+  .vj-kilo-salto{font-size:13.5px;gap:5px}
+  .vj-bar-dcha{gap:6px}
 }
 
 /* ══ BOARD 1 · APERTURA ══ */
@@ -203,9 +205,11 @@ body{background:#fbf6ec}
 /* ── interludios: banda sólida con el tinte del tramo al que se entra.
    Sin foto: ninguna imagen debe tocar a otra imagen. ── */
 .vj-inter{position:relative;min-height:46vh;display:flex;align-items:center;justify-content:center;padding:clamp(56px,9vh,88px) 22px;text-align:center;background:var(--fondo)}
-.vj-inter-nudo{width:24px;height:auto;margin:0 auto 22px;display:block;overflow:visible}
-/* a 24px el trazo escalado se quedaba en 1,3px y el nudo era un borrón */
-.vj-inter-nudo path{fill:none;stroke:var(--terra-claro);stroke-width:1.7;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+/* el ovillo geométrico: a estos tamaños un nudo dibujado no se leía */
+.vj-ovillo{height:auto;flex:0 0 auto;overflow:visible}
+.vj-ovillo circle,.vj-ovillo path{vector-effect:non-scaling-stroke}
+.vj-ovillo--inter{width:22px;display:block;margin:0 auto 22px;color:rgba(246,201,138,.8)}
+.vj-ovillo--parada{width:18px;color:var(--terra)}
 .vj-luz2{position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(140% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,.25) 100%),
   linear-gradient(165deg, var(--ta), var(--tb))}
@@ -350,10 +354,13 @@ body{background:#fbf6ec}
 .vj-r p{color:rgba(251,246,236,.92)!important;font-size:1.06rem!important;line-height:1.55}
 .vj-r p strong{color:var(--oro)}
 .vj-fuente{display:block;margin-top:12px;font-size:.8rem;color:rgba(251,246,236,.6)}
-.vj-e12-nav{display:flex;justify-content:center;gap:12px;margin-top:16px}
-.vj-e12-flecha{width:44px;height:44px;border-radius:50%;border:1px solid rgba(2,52,41,.2);background:#fff;color:var(--primary);font-size:1.1rem;cursor:pointer;box-shadow:0 6px 16px rgba(2,52,41,.08);transition:transform .2s ease}
-.vj-e12-flecha:hover{transform:translateY(-2px)}
-.vj-e12-flecha:disabled{opacity:.35;cursor:default;transform:none}
+/* la navegación vive dentro de la tarjeta, en un pie con hairline */
+.vj-qpie{display:flex;align-items:center;gap:14px;margin-top:26px;padding-top:18px;border-top:1px solid var(--hair)}
+.vj-qpie[hidden]{display:none}
+.vj-qnav{border:0;background:none;padding:0;cursor:pointer;font-family:var(--f-body);font-size:14px;font-weight:700;color:var(--tinta-2);transition:color .2s ease}
+.vj-qnav:hover{color:var(--terra)}
+.vj-qnav[hidden]{display:none}
+.vj-qnav[data-nav="next"]{margin-left:auto}
 .vj-uso2{margin-top:44px;border-top:1px solid var(--hair);padding-top:32px;text-align:center}
 .vj-uso2 .vj-kick{color:var(--terra)}
 .vj-uso2 .vj-uso-big{margin-top:14px;font-family:var(--f-head);font-size:clamp(24px,2.4vw,34px);font-weight:600;line-height:1.15;color:var(--primary);letter-spacing:-.01em}
@@ -377,8 +384,8 @@ body{background:#fbf6ec}
 .vj-calc input[type=range]{width:100%;height:6px;margin:10px 0;background:rgba(251,246,236,.18);appearance:none;-webkit-appearance:none;cursor:pointer;border-radius:100px}
 .vj-calc input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:100px;background:transparent}
 .vj-calc input[type=range]::-moz-range-track{height:6px;border-radius:100px;background:transparent}
-.vj-calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M4.5 9c5-3.4 12-3.6 17 .4'/%3E%3Cpath d='M3.8 14c5.5-2.6 13-2.4 18.4 1'/%3E%3Cpath d='M6 19.4c4.6-2.2 10-2 14 .6'/%3E%3Cpath d='M9 3.6c2.8 4.8 3.4 12.4 1.6 18.8'/%3E%3Cpath d='M16.4 3.9c2 5.2 2 12-.4 18'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0;box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.vj-calc input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='11' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M4.5 9c5-3.4 12-3.6 17 .4'/%3E%3Cpath d='M3.8 14c5.5-2.6 13-2.4 18.4 1'/%3E%3Cpath d='M6 19.4c4.6-2.2 10-2 14 .6'/%3E%3Cpath d='M9 3.6c2.8 4.8 3.4 12.4 1.6 18.8'/%3E%3Cpath d='M16.4 3.9c2 5.2 2 12-.4 18'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0}
+.vj-calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11.5' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.3' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8.6'/%3E%3Cpath d='M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8'/%3E%3Cpath d='M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6'/%3E%3Cpath d='M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1'/%3E%3Cpath d='M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.vj-calc input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11.5' fill='%23b45817'/%3E%3Cg fill='none' stroke='%23e8b98a' stroke-width='1.3' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8.6'/%3E%3Cpath d='M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8'/%3E%3Cpath d='M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6'/%3E%3Cpath d='M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1'/%3E%3Cpath d='M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;border:0}
 .vj-calc-res{margin-top:24px;padding:22px 18px;border-radius:16px;background:rgba(246,201,138,.12);border:1px solid rgba(246,201,138,.34);text-align:center}
 .vj-calc-big{font-family:var(--f-head);font-size:clamp(2.6rem,3.3vw,3.4rem);font-weight:600;color:var(--oro);line-height:1;font-feature-settings:"tnum"}
 .vj-calc-big .vj-calc-un{display:block;margin-top:8px;font-size:.28em;font-family:var(--f-body);font-weight:800;color:rgba(251,246,236,.78);letter-spacing:.08em;text-transform:uppercase}
@@ -412,15 +419,17 @@ body{background:#fbf6ec}
 .vj-e16-titulo em{font-style:italic;color:var(--terra-claro)}
 .vj-e16-destinos{display:flex;align-items:center;justify-content:center;gap:6px}
 .vj-e16-destino b{display:block;font-family:var(--f-head);font-weight:600;font-size:clamp(2rem,3.4vw,3.4rem);line-height:1;font-feature-settings:"tnum";letter-spacing:-.01em}
-.vj-e16-destino span{display:block;margin-top:8px;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.vj-e16-destino>span{display:block;margin-top:8px;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
 .vj-e16-destino--gris b{color:#9a9a90}
 .vj-e16-destino--gris span{color:rgba(154,154,144,.85)}
 .vj-e16-destino--vivo b{color:var(--terra-claro)}
 .vj-e16-destino--vivo span{color:rgba(217,138,79,.9)}
-.vj-fork{width:clamp(90px,12vw,170px);height:auto;flex:0 0 auto}
-.vj-fork path{fill:none;stroke-width:2.6}
-.vj-fork-t,.vj-fork-v{stroke:#c96f2e}
-.vj-fork-g{stroke:#8a8a80;opacity:.75}
+.vj-fork{width:clamp(132px,17vw,240px);height:auto;flex:0 0 auto;overflow:visible}
+.vj-fork path,.vj-fork circle{fill:none;stroke-width:2.5;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.vj-fork-tronco{stroke:rgba(251,246,236,.65)}
+.vj-fork circle.vj-fork-nodo{fill:rgba(251,246,236,.8);stroke:none}
+.vj-fork-gris{stroke:url(#vjForkFade)}
+.vj-fork-viva,.vj-fork circle.vj-fork-anillo{stroke:var(--terra-claro)}
 .vj-e16-remate{margin:30px auto 0;max-width:24ch;font-family:var(--f-head);font-style:italic;font-size:clamp(1.3rem,2vw,1.9rem);line-height:1.3;color:rgba(251,246,236,.94)}
 .vj-e16-remate em{color:var(--terra-claro)}
 .vj-doble{display:grid;grid-template-columns:1fr;gap:18px;margin:clamp(40px,7vh,60px) auto 0;max-width:1000px}
@@ -530,21 +539,22 @@ body{background:#fbf6ec}
         <img src="/assets/images/viaje-lana/logo-oc-96.png" alt="Oficios Circulares — inicio">
         <b>🧭 El Viaje de la Lana</b>
       </a>
-      <div class="vj-bar-est" id="vjEst">La nave</div>
+      <div class="vj-bar-dcha">
+        <span class="vj-bar-est" id="vjEst">La nave</span>
+        <span class="vj-kilo" id="vjKilo" hidden>
+          <span class="vj-bar-sep" aria-hidden="true">·</span>
+          <svg class="vj-ovillo vj-ovillo--bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>
+          <span class="vj-kilo-k">Tu kilo</span>
+          <b class="vj-kilo-v" id="vjKiloV" aria-live="polite">0,05 €</b>
+          <span class="vj-kilo-salto" id="vjKiloSalto" aria-hidden="true"></span>
+          <span class="vj-kilo-n" id="vjKiloN"></span>
+        </span>
+      </div>
     </div>
     <div class="vj-track" role="progressbar" aria-label="Progreso del viaje" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="vjProg">
       <div class="vj-fill" id="vjFill"></div>
     </div>
   </header>
-
-  <div class="vj-kilo" id="vjKilo" hidden>
-    <span class="vj-kilo-txt">
-      <span class="vj-kilo-k">Tu kilo</span>
-      <b class="vj-kilo-v" id="vjKiloV" aria-live="polite">0,05 €</b>
-      <span class="vj-kilo-salto" id="vjKiloSalto" aria-hidden="true"></span>
-    </span>
-    <span class="vj-kilo-n" id="vjKiloN"></span>
-  </div>
 
   <main class="vj-main" id="maincontent">
 
@@ -575,7 +585,7 @@ body{background:#fbf6ec}
         <img src="/assets/images/viaje-lana/nave-vellones-900.webp" srcset="/assets/images/viaje-lana/nave-vellones-900.webp 900w, /assets/images/viaje-lana/nave-vellones-1600.webp 1600w" sizes="100vw" alt="Vellones recién esquilados amontonados en el suelo de una nave" loading="lazy" decoding="async">
         <div class="vj-velo" style="--va:rgba(6,36,28,.88);--vb:rgba(6,36,28,.4);--vc:rgba(6,36,28,.12)" aria-hidden="true"></div>
         <div class="vj-pcard vj-rev">
-          <span class="vj-kick">Parada 1 de 4</span>
+          <span class="vj-kick vj-kick--ov"><svg class="vj-ovillo vj-ovillo--parada" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>Parada 1 de 4</span>
           <h2>La <em>nave</em></h2>
           <p>Lo que cuesta hacer</p>
         </div>
@@ -618,7 +628,7 @@ body{background:#fbf6ec}
 
     <section class="vj-inter" style="--fondo:#0b1626">
       <div class="vj-inter-in vj-rev">
-        <svg class="vj-inter-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg>
+        <svg class="vj-ovillo vj-ovillo--inter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>
         <p class="vj-tr-frase">Ya sabes lo que cuesta hacerlo.<br>Este kilo, casi seguro, <em>no <span class="vj-sub-mano">se queda<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> en España</em>.</p>
       </div>
     </section>
@@ -629,7 +639,7 @@ body{background:#fbf6ec}
         <img src="/assets/images/viaje-lana/puerto-contenedores-900.webp" srcset="/assets/images/viaje-lana/puerto-contenedores-900.webp 900w, /assets/images/viaje-lana/puerto-contenedores-1600.webp 1600w" sizes="100vw" alt="Terminal de contenedores al anochecer, con un buque atracado" loading="lazy" decoding="async" style="object-position:50% 62%">
         <div class="vj-velo" style="--va:rgba(7,14,26,.88);--vb:rgba(7,14,26,.4);--vc:rgba(7,14,26,.12)" aria-hidden="true"></div>
         <div class="vj-pcard vj-rev">
-          <span class="vj-kick">Parada 2 de 4</span>
+          <span class="vj-kick vj-kick--ov"><svg class="vj-ovillo vj-ovillo--parada" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>Parada 2 de 4</span>
           <h2>El <em>puerto</em></h2>
           <p>Por qué tu kilo se va</p>
         </div>
@@ -694,7 +704,7 @@ body{background:#fbf6ec}
 
     <section class="vj-inter" style="--fondo:#1a1410">
       <div class="vj-inter-in vj-rev">
-        <svg class="vj-inter-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg>
+        <svg class="vj-ovillo vj-ovillo--inter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>
         <p class="vj-tr-frase">Tu kilo volverá.<br>Pero <em><span class="vj-sub-mano">no volverá<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2,5 C 22,2.5 46,6.5 68,3.5 S 94,5.5 98,4"/></svg></span> como lana</em>.</p>
       </div>
     </section>
@@ -705,7 +715,7 @@ body{background:#fbf6ec}
         <img src="/assets/images/viaje-lana/escaparate-punto-900.webp" srcset="/assets/images/viaje-lana/escaparate-punto-900.webp 900w, /assets/images/viaje-lana/escaparate-punto-1600.webp 1600w" sizes="100vw" alt="Pila de jerséis de punto en tonos crema y camel" loading="lazy" decoding="async">
         <div class="vj-velo" style="--va:rgba(38,20,8,.88);--vb:rgba(38,20,8,.4);--vc:rgba(38,20,8,.12)" aria-hidden="true"></div>
         <div class="vj-pcard vj-rev">
-          <span class="vj-kick">Parada 3 de 4</span>
+          <span class="vj-kick vj-kick--ov"><svg class="vj-ovillo vj-ovillo--parada" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>Parada 3 de 4</span>
           <h2>El <em>escaparate</em></h2>
           <p>El regreso con otro nombre</p>
         </div>
@@ -802,6 +812,10 @@ body{background:#fbf6ec}
                   <p><strong>Menos de 12 céntimos.</strong> Por la lana más común el ganadero recibe unos 5 céntimos el kilo. Y esquilar cuesta bastante más que eso: cada esquileo es a pérdidas — aunque esquilar sea obligatorio por el bienestar del animal.</p>
                   <span class="vj-fuente">Fuente: AVICON</span>
                 </div>
+          <div class="vj-qpie" hidden>
+            <button type="button" class="vj-qnav" data-nav="prev" hidden>← Anterior</button>
+            <button type="button" class="vj-qnav" data-nav="next" hidden>Siguiente →</button>
+          </div>
               </div>
               <div class="vj-q vj-rev" data-q="2" data-ok="c">
                 <div class="vj-q-n">Pregunta 2 de 5</div>
@@ -816,6 +830,10 @@ body{background:#fbf6ec}
                   <p><strong>53 €.</strong> Es lo que se pagó al taller por ensamblarlo, según la investigación de la fiscalía de Milán sobre el caso Dior. No es el coste total del bolso — pero sí dice mucho de dónde va tu dinero cuando pagas 2.600 €.</p>
                   <span class="vj-fuente">Fuente: Fiscalía de Milán vía Reuters, 2024</span>
                 </div>
+          <div class="vj-qpie" hidden>
+            <button type="button" class="vj-qnav" data-nav="prev" hidden>← Anterior</button>
+            <button type="button" class="vj-qnav" data-nav="next" hidden>Siguiente →</button>
+          </div>
               </div>
               <div class="vj-q vj-rev" data-q="3" data-ok="b">
                 <div class="vj-q-n">Pregunta 3 de 5</div>
@@ -830,6 +848,10 @@ body{background:#fbf6ec}
                   <p><strong>Un 17% más.</strong> Lo midió un estudio publicado en el <em>Journal of Marketing</em>. La artesanía no necesita inventarse el relato: el suyo es verdad, y la gente lo nota.</p>
                   <span class="vj-fuente">Fuente: Fuchs et al., Journal of Marketing, 2015</span>
                 </div>
+          <div class="vj-qpie" hidden>
+            <button type="button" class="vj-qnav" data-nav="prev" hidden>← Anterior</button>
+            <button type="button" class="vj-qnav" data-nav="next" hidden>Siguiente →</button>
+          </div>
               </div>
               <div class="vj-q vj-rev" data-q="4" data-ok="c">
                 <div class="vj-q-n">Pregunta 4 de 5</div>
@@ -844,6 +866,10 @@ body{background:#fbf6ec}
                   <p><strong>4 €/hora, con jornadas de hasta 90 horas semanales.</strong> El relato era "quiet luxury". La realidad, talleres a 4 €/hora.</p>
                   <span class="vj-fuente">Fuente: Tribunal de Milán, vía Reuters</span>
                 </div>
+          <div class="vj-qpie" hidden>
+            <button type="button" class="vj-qnav" data-nav="prev" hidden>← Anterior</button>
+            <button type="button" class="vj-qnav" data-nav="next" hidden>Siguiente →</button>
+          </div>
               </div>
               <div class="vj-q vj-rev" data-q="5" data-ok="c">
                 <div class="vj-q-n">Pregunta 5 de 5</div>
@@ -858,11 +884,11 @@ body{background:#fbf6ec}
                   <p><strong>Un 36% menos.</strong> Compramos más y usamos menos. La prenda que dura — y se usa — es la revolución silenciosa.</p>
                   <span class="vj-fuente">Fuente: McKinsey / Ellen MacArthur Foundation</span>
                 </div>
+          <div class="vj-qpie" hidden>
+            <button type="button" class="vj-qnav" data-nav="prev" hidden>← Anterior</button>
+            <button type="button" class="vj-qnav" data-nav="next" hidden>Siguiente →</button>
+          </div>
               </div>
-            </div>
-            <div class="vj-e12-nav" id="vjTestNav" hidden>
-              <button type="button" class="vj-e12-flecha" id="vjTestPrev" aria-label="Pregunta anterior">←</button>
-              <button type="button" class="vj-e12-flecha" id="vjTestNext" aria-label="Pregunta siguiente">→</button>
             </div>
           </div>
           <div class="vj-uso2 vj-rev">
@@ -876,7 +902,7 @@ body{background:#fbf6ec}
 
     <section class="vj-inter" style="--fondo:#12200f">
       <div class="vj-inter-in vj-rev">
-        <svg class="vj-inter-nudo" viewBox="0 0 44 40" aria-hidden="true"><path d="M7,23 C 12,11 27,10 31,19 a7,6 0 1,1 -11,7 C 17,32 31,34 38,27" stroke-linecap="round"/><path d="M10,17 q-4,-3 -5,-7" stroke-linecap="round"/><path d="M33,31 q3,4 7,5" stroke-linecap="round"/></svg>
+        <svg class="vj-ovillo vj-ovillo--inter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>
         <p class="vj-tr-frase">¿Y si tu kilo <em>nunca se hubiera ido</em>?</p>
       </div>
     </section>
@@ -887,7 +913,7 @@ body{background:#fbf6ec}
         <img src="/assets/images/viaje-lana/taller-ovillo-900.webp" srcset="/assets/images/viaje-lana/taller-ovillo-900.webp 900w, /assets/images/viaje-lana/taller-ovillo-1600.webp 1600w" sizes="100vw" alt="Unas manos sostienen un ovillo de lana cruda" loading="lazy" decoding="async">
         <div class="vj-velo" style="--va:rgba(18,32,15,.88);--vb:rgba(18,32,15,.4);--vc:rgba(18,32,15,.12)" aria-hidden="true"></div>
         <div class="vj-pcard vj-rev">
-          <span class="vj-kick">Parada 4 de 4</span>
+          <span class="vj-kick vj-kick--ov"><svg class="vj-ovillo vj-ovillo--parada" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>Parada 4 de 4</span>
           <h2>El <em>taller</em></h2>
           <p>El kilo que se quedó</p>
         </div>
@@ -947,12 +973,19 @@ body{background:#fbf6ec}
           <h2 class="vj-e16-titulo">El mismo kilo. <em>Dos destinos.</em></h2>
           <div class="vj-e16-destinos">
             <div class="vj-e16-destino vj-e16-destino--gris"><b>0,05 <span class="vj-eur">€</span></b><span>si se va</span></div>
-            <svg class="vj-fork" viewBox="0 0 120 110" aria-hidden="true">
-              <path class="vj-fork-t" d="M60,4 C 60,18 60,30 60,44" stroke-linecap="round"/>
-              <path class="vj-fork-g" d="M60,44 C 44,60 26,72 10,88" stroke-linecap="round"/>
-              <path class="vj-fork-g" d="M10,88 q-6,3 -9,8 M10,88 q-2,6 -6,9 M10,88 q3,5 1,11" stroke-linecap="round"/>
-              <path class="vj-fork-v" d="M60,44 C 76,60 94,72 108,86" stroke-linecap="round"/>
-              <path class="vj-fork-v" d="M104,82 a7,6 0 1,0 10,8 a7,6 0 1,0 -10,-8" stroke-linecap="round"/>
+            <svg class="vj-fork" viewBox="0 0 240 210" aria-hidden="true">
+              <defs>
+                <linearGradient id="vjForkFade" gradientUnits="userSpaceOnUse" x1="120" y1="96" x2="24" y2="193.5">
+                  <stop offset="0" stop-color="#8a8a80" stop-opacity=".8"/>
+                  <stop offset=".64" stop-color="#8a8a80" stop-opacity=".8"/>
+                  <stop offset="1" stop-color="#8a8a80" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path class="vj-fork-tronco" d="M120,6 L120,96"/>
+              <circle class="vj-fork-nodo" cx="120" cy="96" r="2"/>
+              <path class="vj-fork-gris" d="M120,96 Q58,140 24,193.5"/>
+              <path class="vj-fork-viva" d="M120,96 Q182,140 216,193.5"/>
+              <circle class="vj-fork-anillo" cx="222" cy="196" r="5"/>
             </svg>
             <div class="vj-e16-destino vj-e16-destino--vivo"><b>149 <span class="vj-eur">€</span></b><span>si se queda</span></div>
           </div>
@@ -1198,7 +1231,7 @@ body{background:#fbf6ec}
     1: {v: '0,05 €', n: ''},
     2: {v: '0,05 €', n: 'sale valiendo lo mismo'},
     3: {v: '1.500 €', n: ''},
-    4: {v: '0,05 € si se va · 149 € si se queda', n: 'el mismo kilo, dos destinos'}
+    4: {v: '0,05 · 149 €', n: 'el mismo kilo, dos destinos'}
   };
   var saltoAvisado = false;
   function pintarEuro(el, txt){
@@ -1207,6 +1240,7 @@ body{background:#fbf6ec}
   var saltoTimer = null;
   function asentar(txt){
     kiloBox.classList.remove('vj-kilo--salto', 'vj-kilo--pulso');
+    kiloBox.parentElement.classList.remove('vj-bar--salto');
     kiloV.classList.toggle('vj-kilo-v--larga', txt.length > 12);
     pintarEuro(kiloV, txt);
   }
@@ -1243,6 +1277,7 @@ body{background:#fbf6ec}
       kiloSalto.appendChild(de); kiloSalto.appendChild(fl); kiloSalto.appendChild(a);
     }
     kiloBox.classList.add('vj-kilo--salto');
+    kiloBox.parentElement.classList.add('vj-bar--salto');
     kiloBox.classList.remove('vj-kilo--pulso');
     void kiloBox.offsetWidth;
     kiloBox.classList.add('vj-kilo--pulso');
@@ -1391,41 +1426,46 @@ body{background:#fbf6ec}
   var pasoActivo = 0;
   var preguntas = stage ? [].slice.call(stage.querySelectorAll('.vj-q')) : [];
   var progTxt = document.getElementById('vjTestProg');
-  var barraTest = document.getElementById('vjTestBarra');
-  var btnPrev = document.getElementById('vjTestPrev');
-  var btnSig  = document.getElementById('vjTestNext');
-  function contestadas(){
-    return preguntas.filter(function(q){ return state.test[q.dataset.q]; }).length;
-  }
-  function pintarBarraTest(){
-    if (barraTest) barraTest.style.width = (contestadas() / preguntas.length * 100) + '%';
+  // el pie de la tarjeta: "Anterior" desde la 2ª; "Siguiente" solo si ya
+  // contestaste (el auto-avance sigue siendo el camino principal)
+  function pintarPie(){
+    var q = preguntas[pasoActivo];
+    if (!q) return;
+    var pie = q.querySelector('.vj-qpie');
+    var prev = q.querySelector('[data-nav="prev"]');
+    var sig = q.querySelector('[data-nav="next"]');
+    if (!pie) return;
+    var hayPrev = pasoActivo > 0;
+    var haySig = pasoActivo < preguntas.length - 1 && !!state.test[q.dataset.q];
+    prev.hidden = !hayPrev;
+    sig.hidden = !haySig;
+    pie.hidden = !hayPrev && !haySig;
   }
   function irA(i){
     pasoActivo = Math.max(0, Math.min(preguntas.length - 1, i));
     preguntas.forEach(function(q, k){ q.classList.toggle('vj-q--activa', k === pasoActivo); });
     if (progTxt) progTxt.textContent = 'Pregunta ' + (pasoActivo + 1) + ' · 5';
-    if (btnPrev) btnPrev.disabled = pasoActivo === 0;
-    if (btnSig)  btnSig.disabled  = pasoActivo === preguntas.length - 1;
-    pintarBarraTest();
+    pintarPie();
   }
   if (preguntas.length){
-    var navTest = document.getElementById('vjTestNav');
-    if (navTest) navTest.hidden = false;
     preguntas.forEach(function(q){
       q.querySelectorAll('.vj-opt').forEach(function(o){
         o.addEventListener('click', function(){
           resolver(q, o.dataset.o, true);
-          pintarBarraTest();
+          pintarPie();
           var idx = preguntas.indexOf(q);
           if (idx === pasoActivo && idx < preguntas.length - 1){
             setTimeout(function(){ if (pasoActivo === idx) irA(idx + 1); }, 2100);
           }
         });
       });
+      q.querySelectorAll('.vj-qnav').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          irA(pasoActivo + (btn.dataset.nav === 'prev' ? -1 : 1));
+        });
+      });
       if (state.test[q.dataset.q]) resolver(q, state.test[q.dataset.q], false);
     });
-    if (btnPrev) btnPrev.addEventListener('click', function(){ irA(pasoActivo - 1); });
-    if (btnSig)  btnSig.addEventListener('click', function(){ irA(pasoActivo + 1); });
     var primera = -1;
     preguntas.some(function(q, k){ if (!state.test[q.dataset.q]){ primera = k; return true; } return false; });
     irA(primera < 0 ? preguntas.length - 1 : primera);
