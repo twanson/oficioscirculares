@@ -18,7 +18,7 @@ const CARTA_URL = 'https://tally.so/r/mOyV98?utm_source=viaje-lana&utm_medium=we
 %>
 <%- include('partials/head-meta', {
     title: 'El Viaje de la Lana | Oficios Circulares',
-    description: 'Una experiencia guiada de 15-20 minutos: de la mejor lana de Europa malvendida a céntimos al jersey de lujo de 1.500 €. Descubre qué pasa por el camino.',
+    description: 'Una experiencia guiada de 15-20 minutos: de la mejor lana de Europa malvendida a céntimos al jersey de lujo que puede costar 1.500 €. Descubre qué pasa por el camino.',
     canonical: '/viaje/lana',
     ogImage: 'https://www.oficioscirculares.com/assets/images/viaje-lana/og-viaje-lana.jpg',
     ogImageAlt: 'Esquila a tijera de una oveja — El Viaje de la Lana, Oficios Circulares'
@@ -88,6 +88,8 @@ body{background:#fbf6ec}
 .vj-kilo-k{font-family:var(--f-ui);font-weight:800;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,246,236,.6)}
 .vj-kilo-v{font-family:var(--f-head);font-weight:600;font-size:17px;color:var(--oro);font-feature-settings:"tnum";letter-spacing:-.01em}
 .vj-kilo-n{display:none}
+.vj-kilo-m{font-family:var(--f-ui);font-weight:700;font-size:10.5px;letter-spacing:.02em;color:rgba(251,246,236,.55);white-space:nowrap}
+.vj-kilo-m:empty,.vj-kilo--salto .vj-kilo-m{display:none}
 .vj-kilo-salto{display:none;align-items:baseline;gap:7px;font-family:var(--f-head);font-weight:600;font-size:16px;color:rgba(251,246,236,.62);font-feature-settings:"tnum"}
 .vj-kilo-salto b{color:var(--oro);font-weight:600}
 .vj-kilo-salto i{font-style:normal;opacity:.7;font-size:.86em}
@@ -107,6 +109,8 @@ body{background:#fbf6ec}
   .vj-kilo-k{display:none}
   .vj-bar-dcha.vj-bar--salto .vj-bar-est,
   .vj-bar-dcha.vj-bar--salto .vj-bar-sep{display:none}
+  .vj-bar-in.vj-bar--matiz .vj-brand b{display:none}
+  .vj-kilo-m{font-size:9.5px}
   .vj-kilo-v{font-size:15px}
   .vj-kilo-salto{font-size:13.5px;gap:5px}
   .vj-bar-dcha{gap:6px}
@@ -298,11 +302,15 @@ body{background:#fbf6ec}
 .vj-vit-ft .vj-precio{font-size:64px;opacity:.9}
 .vj-vit-et{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;opacity:.65;margin-bottom:8px}
 .vj-vit-tx>p{margin-top:12px;font-size:15.5px;line-height:1.6;opacity:.86}
+.vj-vit-tx>p.vj-precio-nota{margin-top:5px;font-size:12px;line-height:1.4;letter-spacing:.03em;font-weight:600;opacity:.6}
 .vj-vit-v{font-family:var(--f-head);font-style:italic;font-size:19px;margin-top:16px!important;opacity:1!important}
 .vj-vit--a .vj-vit-v{color:var(--terra-claro)}
 .vj-vit--b .vj-vit-v{color:var(--terra)}
 .vj-esc-remate{margin-top:34px;text-align:center;font-family:var(--f-head);font-size:clamp(20px,1.81vw,26px);line-height:1.4;color:var(--tinta);font-weight:500}
 .vj-esc-remate em{font-style:italic;color:var(--terra)}
+.vj-esc-remate--coda{margin-top:18px;font-size:clamp(17px,1.42vw,20.5px);color:var(--tinta-2)}
+/* "hasta" no compite con la cifra */
+.vj-hasta{font-size:.5em;font-style:italic;opacity:.72;letter-spacing:0}
 @media(min-width:980px){
   .vj-esc{padding:88px 0 96px}
   .vj-esc-cab{grid-column:1/9}
@@ -441,6 +449,9 @@ body{background:#fbf6ec}
 .vj-acciones li{margin:0;padding:14px 0 0;border-top:1px solid var(--hair);font-size:14.5px;line-height:1.55;color:var(--tinta-2)}
 .vj-acciones li+li{margin-top:14px}
 .vj-acciones li b{color:var(--primary);font-weight:800}
+.vj-concl .vj-guias{margin-top:20px!important;padding-top:16px;border-top:1px solid var(--hair);font-size:13.5px!important;line-height:1.7;color:var(--tinta-2)!important}
+.vj .vj-guias a{color:var(--terra);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.vj .vj-guias a:hover{color:var(--primary)}
 @media(min-width:980px){.vj-doble{grid-template-columns:1fr 1fr;gap:32px}.vj-concl{padding:38px 42px}}
 .vj-frases{margin:56px auto 0;max-width:1000px}
 .vj-frases-k{font-weight:800;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-claro);text-align:center;margin-bottom:8px}
@@ -546,6 +557,7 @@ body{background:#fbf6ec}
           <svg class="vj-ovillo vj-ovillo--bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M4.6 8.8 C 9.5,7.2 14.5,7.2 19.4 8.8"/><path d="M3.6 13.6 C 9,12.2 15,12.2 20.4 13.6"/><path d="M8.2 19.9 C 10.5,15 10.5,9 8.2 4.1"/><path d="M15.8 19.9 C 13.5,15 13.5,9 15.8 4.1"/></svg>
           <span class="vj-kilo-k">Tu kilo</span>
           <b class="vj-kilo-v" id="vjKiloV" aria-live="polite">0,05 €</b>
+          <span class="vj-kilo-m" id="vjKiloM"></span>
           <span class="vj-kilo-salto" id="vjKiloSalto" aria-hidden="true"></span>
           <span class="vj-kilo-n" id="vjKiloN"></span>
         </span>
@@ -568,7 +580,7 @@ body{background:#fbf6ec}
         <div class="vj-hero-hist">
           <p>Esto es un kilo de lana española. Lo acaban de esquilar.</p>
           <p>Por él, el ganadero ha cobrado <b><span class="vj-sub-mano">unos céntimos<svg viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M2,5 C 26,2.5 52,6.5 74,3.5 S 95,5.5 98,4"/></svg></span></b>.</p>
-          <p>Dentro de unos meses, alguien pagará <b>1.500&nbsp;€</b> por un jersey hecho con lana como esta.</p>
+          <p>Dentro de unos meses, alguien pagará <b>más de 1.000&nbsp;€</b> por un jersey hecho con lana como esta.</p>
           <p>Síguelo. Durante los próximos 15 minutos, este será <b>tu</b> kilo.</p>
         </div>
       </div>
@@ -724,7 +736,7 @@ body{background:#fbf6ec}
         <div class="vj-grid">
           <div class="vj-mision vj-rev">
             <span class="vj-kick">Tu misión</span>
-            <p class="vj-lead2">Aquí está tu kilo otra vez: hilado, tejido y con etiqueta nueva. Ahora se llama <em>savoir-faire</em> y cuesta 1.500 €. Compruébalo tú mismo — abre estas webs con una misión.</p>
+            <p class="vj-lead2">Aquí está tu kilo otra vez: hilado, tejido y con etiqueta nueva. Ahora se llama <em>savoir-faire</em> y puede costar hasta 1.500 €. Compruébalo tú mismo — abre estas webs con una misión.</p>
             <div class="vj-marcas">
               <a class="vj-marca" href="https://www.loropiana.com" target="_blank" rel="noopener nofollow" data-lujo="loro_piana">Loro Piana <span>abrir ↗</span></a>
               <a class="vj-marca" href="https://www.brunellocucinelli.com" target="_blank" rel="noopener nofollow" data-lujo="brunello_cucinelli">Brunello Cucinelli <span>abrir ↗</span></a>
@@ -752,7 +764,8 @@ body{background:#fbf6ec}
               <div class="vj-vit-ft"><img src="/assets/images/viaje-lana/escaparate-punto-900.webp" srcset="/assets/images/viaje-lana/escaparate-punto-900.webp 900w, /assets/images/viaje-lana/escaparate-punto-1600.webp 1600w" sizes="(min-width:980px) 42vw, 100vw" alt="" loading="lazy" decoding="async"></div>
               <div class="vj-vit-tx">
                 <p class="vj-vit-et">Vitrina uno</p>
-                <p class="vj-precio">1.500 €</p>
+                <p class="vj-precio">hasta 1.500 €</p>
+                <p class="vj-precio-nota">en las marcas de lujo del punto</p>
                 <p>"Fibras nobles", relato de <i>savoir-faire</i>. Dura años — pero fabricarlo fue el 5-15% del precio: el resto es marca.</p>
                 <p class="vj-vit-v">La verdad, tapada con relato.</p>
               </div>
@@ -768,6 +781,7 @@ body{background:#fbf6ec}
             </article>
           </div>
           <p class="vj-esc-remate vj-rev">Fibra anónima, transformada lejos, precio que no cuenta la verdad. Uno la esconde <em>con marca</em>; el otro, <em>con descuento</em>.</p>
+          <p class="vj-esc-remate vj-esc-remate--coda vj-rev">¿Y la tercera vía? No está en ninguna de estas dos vitrinas: cuesta una fracción del lujo y ni de lejos lo que parece — porque ahí el dinero va al producto, no a la etiqueta. <em>Esa es la parada 4.</em></p>
           <div class="vj-casc vj-rev">
             <span class="vj-kick">La escalera del precio</span>
             <div class="vj-casc-grid">
@@ -784,8 +798,8 @@ body{background:#fbf6ec}
                 <span><strong>El ovillo.</strong> Un ovillo de 100 g de lana española de calidad ronda los 10-14 € en tienda. Del vellón al ovillo, el valor se ha multiplicado por cientos.</span>
               </div>
               <div class="vj-dato" data-paso="4">
-                <b>1.500 <span class="vj-eur">€</span></b>
-                <span><strong>El jersey de lujo.</strong> Con 300-400 g de hilo, un jersey de "fibras nobles" llega a la tienda a 1.500 €. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</span>
+                <b><span class="vj-hasta">hasta</span> 1.500 <span class="vj-eur">€</span></b>
+                <span><strong>El jersey de lujo.</strong> Un jersey de "fibras nobles" se mueve entre 1.000 y 3.000 € según la marca. En el lujo, fabricar suele ser el 5-15% del precio: el resto es marca.</span>
               </div>
             </div>
             <div class="vj-salto2">
@@ -1004,6 +1018,12 @@ body{background:#fbf6ec}
           <div class="vj-concl vj-concl--artesano vj-rev">
             <span class="vj-concl-k">Si tejes, hilas o fieltras</span>
             <p>Acabas de ver lo que cobra el lujo por un relato que el tuyo cuenta de verdad. <strong>Tu precio no es caro. Es justo.</strong> Y este argumento es tuyo: úsalo con tus clientes.</p>
+            <ul class="vj-acciones">
+              <li><b>Cuenta el proceso, no solo el producto.</b> Las horas, la fibra, de qué rebaño viene. La gente paga hasta un 17% más por lo hecho a mano cuando sabe lo que hay detrás — pero solo si se lo cuentas.</li>
+              <li><b>Revisa lo que no estás cobrando.</b> Diseño, pruebas fallidas, fotos, ferias, el tiempo de vender… y el 21% de IVA que sale de tu margen. Casi ningún precio artesano los incluye.</li>
+              <li><b>Si tu precio justo no cabe en tu canal, cambia el canal — no el precio.</b> Competir en un mercadillo con producto industrial al lado no es tu escaparate. Bajar el precio ahí no es vender: es pagar por trabajar.</li>
+            </ul>
+            <p class="vj-guias">Dos guías gratuitas: <a href="/recursos/calcula-tu-precio" data-cta="recursos">Calcula tu precio</a> · <a href="/recursos/defiende-tu-precio" data-cta="recursos">Defiende tu precio sin pedir perdón</a></p>
           </div>
         </div>
         <div class="vj-frases vj-rev">
@@ -1227,10 +1247,12 @@ body{background:#fbf6ec}
   var kiloV = document.getElementById('vjKiloV');
   var kiloN = document.getElementById('vjKiloN');
   var kiloSalto = document.getElementById('vjKiloSalto');
+  var kiloM = document.getElementById('vjKiloM');
+  var matizActual = '';
   var VALOR = {
     1: {v: '0,05 €', n: ''},
     2: {v: '0,05 €', n: 'sale valiendo lo mismo'},
-    3: {v: '1.500 €', n: ''},
+    3: {v: '1.500 €', n: '', matiz: 'hasta, en el lujo'},
     4: {v: '0,05 · 149 €', n: 'el mismo kilo, dos destinos'}
   };
   var saltoAvisado = false;
@@ -1243,16 +1265,24 @@ body{background:#fbf6ec}
     kiloBox.parentElement.classList.remove('vj-bar--salto');
     kiloV.classList.toggle('vj-kilo-v--larga', txt.length > 12);
     pintarEuro(kiloV, txt);
+    kiloM.textContent = matizActual;
+    var barra = kiloBox.closest('.vj-bar-in');
+    if (barra) barra.classList.toggle('vj-bar--matiz', !!matizActual);
   }
   function trozo(tag, txt){
     var el = document.createElement(tag);
     if (txt) pintarEuro(el, txt);
     return el;
   }
-  function ponerValor(txt, nota){
+  function ponerValor(txt, nota, matiz){
+    matiz = matiz || '';
     var mismaCifra = kiloV.dataset.txt === txt;
     var mismaNota = kiloN.textContent === nota;
-    if (mismaCifra && mismaNota) return;
+    if (mismaCifra && mismaNota && matizActual === matiz) return;
+    matizActual = matiz;
+    kiloM.textContent = '';
+    var barraIn = kiloBox.closest('.vj-bar-in');
+    if (barraIn) barraIn.classList.remove('vj-bar--matiz');
     kiloN.textContent = nota;
     var anterior = kiloV.dataset.txt;
     kiloV.dataset.txt = txt;
@@ -1309,7 +1339,7 @@ body{background:#fbf6ec}
     mostrarPildora();
     if (estEl.textContent !== activo.dataset.lugar) estEl.textContent = activo.dataset.lugar;
     var d = VALOR[n];
-    ponerValor(d.v, d.n);
+    ponerValor(d.v, d.n, d.matiz);
     if (n === 3 && !saltoAvisado){ saltoAvisado = true; track('viaje_marcador_salto', {viaje: 'lana'}); }
     // entrar en un tramo completa los anteriores
     for (var m = 1; m < n; m++) completar(m);
