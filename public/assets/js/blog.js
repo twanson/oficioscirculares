@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const allPosts = [
     {
+      slug: './aislamiento-lana-de-oveja-huella-carbono/',
+      title: 'Aislamiento de lana de oveja: la medición que falla',
+      excerpt: 'La lana aísla bien, ya existe y se tira. Pero la huella de carbono la penaliza. Los 5 fallos de la calculadora y qué está cambiando en 2026.',
+      date: '2026-08-24',
+      readingMinutes: 11,
+      cover: ASSETS_BASE + '/images/blog/aislamiento-lana-de-oveja-huella-carbono/vellones-lana-1440.jpg',
+      tags: ['circularidad', 'estrategia', 'casos'],
+      publishAt: '2026-08-24T08:00:00+02:00'
+    },
+    {
       slug: './reciclar-tapones-de-corcho/',
       title: '¿De verdad se recicla el corcho? La respuesta honesta, con datos',
       excerpt: 'Solo el 3 % de los tapones de corcho se recicla en España. Qué es verdad, qué es mito y qué hacer con los tuyos.',

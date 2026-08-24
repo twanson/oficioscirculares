@@ -1,269 +1,354 @@
 [
     {
-          "slug": "guia-corcho",
-          "title": "Guía del corcho: qué hacer con tus tapones usados",
-          "type": "guia",
-          "summary": "De un puñado y una cuchilla a montar un circuito de recogida. Recetas con proporciones y equipo, seguridad y directorio por comunidad — según cuánto corcho tengas. Con fuentes.",
-          "tags": ["corcho", "residuos", "biomateriales", "circularidad", "upcycling"],
-          "cover": "/img/recursos/covers/guia-corcho-cover.jpg",
-          "pdf": "/downloads/Guia_Corcho_OC_2026.pdf",
-          "form_tally_id": "2EzPeV",
-          "cta": "Descargar la guía gratis",
-          "updated_at": "2026-08-06",
-          "listed": true,
-          "publish_at": "2026-08-06T08:00:00+02:00",
-          "related_post": {
-                  "slug": "reciclar-tapones-de-corcho",
-                  "url": "/blog/reciclar-tapones-de-corcho/",
-                  "cta_title": "¿Y por qué apenas se recicla el corcho?",
-                  "cta_text": "Lo contamos entero en el blog: los datos, los mitos y qué hacer con tus tapones. Con fuentes.",
-                  "cta_title_pending": "El reportaje del corcho, muy pronto en el blog",
-                  "cta_text_pending": "Estamos rematando el artículo —los datos, los mitos y el sistema del corcho, con fuentes—. Mientras, tienes toda la práctica en la guía de arriba."
-          }
+        "slug": "lana-vs-sinteticos",
+        "title": "Lana vs. sintéticos: los datos",
+        "type": "guia",
+        "summary": "El argumentario de 6 páginas para defender el aislamiento de lana de oveja ante un cliente o una certificadora: las cifras, la tabla comparativa, las cinco frases exactas y el checklist de prescripción en cuatro semanas. Con fuentes.",
+        "tags": [
+            "lana",
+            "materiales",
+            "construccion",
+            "circularidad",
+            "datos"
+        ],
+        "cover": "/img/recursos/covers/lana-vs-sinteticos-cover.jpg",
+        "pdf": "/downloads/lana-vs-sinteticos-los-datos.pdf",
+        "cta": "Descargar el argumentario gratis",
+        "updated_at": "2026-08-24",
+        "listed": true,
+        "publish_at": "2026-08-24T08:00:00+02:00",
+        "related": [
+            "directorio-lana-espanola"
+        ],
+        "related_post": {
+            "slug": "aislamiento-lana-de-oveja-huella-carbono",
+            "url": "/blog/aislamiento-lana-de-oveja-huella-carbono/",
+            "cta_title": "¿Por qué la lana puntúa mal si aísla bien?",
+            "cta_text": "Lo contamos entero en el blog: los 5 fallos de la calculadora, el diagrama del ciclo del carbono y quién fabrica ya en la península. Con fuentes.",
+            "cta_title_pending": "El artículo completo, muy pronto en el blog",
+            "cta_text_pending": "Estamos rematando el reportaje —los 5 fallos de la calculadora, el ciclo del carbono y los fabricantes ibéricos—. Mientras, tienes todo el argumentario en el PDF de arriba."
+        }
     },
     {
-          "slug": "calcula-tu-precio",
-          "title": "Calcula tu precio: la estructura completa",
-          "type": "guia",
-          "summary": "La guía de trabajo para construir el precio de tus piezas paso a paso: tu hora, materiales, amortización, taller, costes invisibles, impuestos y el margen con criterios. Con el ejemplo desglosado y hoja de cálculo rellenable.",
-          "tags": ["estrategia", "pricing", "precios", "margen"],
-          "cover": "/img/recursos/covers/calcula-tu-precio-cover.jpg",
-          "pdf": "/downloads/OC_Calcula_Tu_Precio.pdf",
-          "form_tally_id": "D4y52R",
-          "cta": "Descargar la guía gratis",
-          "updated_at": "2026-07-06",
-          "listed": true,
-          "related": ["defiende-tu-precio"],
-          "related_post": { "slug": "como-poner-precio-artesania", "url": "/blog/como-poner-precio-artesania/" }
+        "slug": "guia-corcho",
+        "title": "Guía del corcho: qué hacer con tus tapones usados",
+        "type": "guia",
+        "summary": "De un puñado y una cuchilla a montar un circuito de recogida. Recetas con proporciones y equipo, seguridad y directorio por comunidad — según cuánto corcho tengas. Con fuentes.",
+        "tags": [
+            "corcho",
+            "residuos",
+            "biomateriales",
+            "circularidad",
+            "upcycling"
+        ],
+        "cover": "/img/recursos/covers/guia-corcho-cover.jpg",
+        "pdf": "/downloads/Guia_Corcho_OC_2026.pdf",
+        "form_tally_id": "2EzPeV",
+        "cta": "Descargar la guía gratis",
+        "updated_at": "2026-08-06",
+        "listed": true,
+        "publish_at": "2026-08-06T08:00:00+02:00",
+        "related_post": {
+            "slug": "reciclar-tapones-de-corcho",
+            "url": "/blog/reciclar-tapones-de-corcho/",
+            "cta_title": "¿Y por qué apenas se recicla el corcho?",
+            "cta_text": "Lo contamos entero en el blog: los datos, los mitos y qué hacer con tus tapones. Con fuentes.",
+            "cta_title_pending": "El reportaje del corcho, muy pronto en el blog",
+            "cta_text_pending": "Estamos rematando el artículo —los datos, los mitos y el sistema del corcho, con fuentes—. Mientras, tienes toda la práctica en la guía de arriba."
+        }
     },
     {
-          "slug": "guia-materiales",
-          "title": "Guía de Materiales · Completa",
-          "type": "guia",
-          "summary": "Para artesanos y pequeñas marcas. Criterios claros de qué preferir/evitar por oficio, fichas de materiales, checklist de compra, marco legal exprés y acceso al Directorio vivo de proveedores.",
-          "tags": [
-                  "materiales",
-                  "textil",
-                  "ceramica",
-                  "madera",
-                  "joyeria"
-          ],
-          "cover": "/img/recursos/covers/guia-materiales-cover-larga.webp",
-          "pdf": "/downloads/OC_Guia_Materiales_Completa_2025.pdf",
-          "form_tally_id": "wgloqM",
-          "cta": "Descargar Guía Completa",
-          "updated_at": "2025-08-22"
+        "slug": "calcula-tu-precio",
+        "title": "Calcula tu precio: la estructura completa",
+        "type": "guia",
+        "summary": "La guía de trabajo para construir el precio de tus piezas paso a paso: tu hora, materiales, amortización, taller, costes invisibles, impuestos y el margen con criterios. Con el ejemplo desglosado y hoja de cálculo rellenable.",
+        "tags": [
+            "estrategia",
+            "pricing",
+            "precios",
+            "margen"
+        ],
+        "cover": "/img/recursos/covers/calcula-tu-precio-cover.jpg",
+        "pdf": "/downloads/OC_Calcula_Tu_Precio.pdf",
+        "form_tally_id": "D4y52R",
+        "cta": "Descargar la guía gratis",
+        "updated_at": "2026-07-06",
+        "listed": true,
+        "related": [
+            "defiende-tu-precio"
+        ],
+        "related_post": {
+            "slug": "como-poner-precio-artesania",
+            "url": "/blog/como-poner-precio-artesania/"
+        }
     },
     {
-          "slug": "circular-express",
-          "title": "Circular Express",
-          "type": "test",
-          "summary": "Auto-diagnóstico en 10–15 min para saber qué prácticas circulares ya aplicas y qué mejorar. Incluye checklist, puntuación rápida y mini-plan con próximos pasos.",
-          "tags": [
-                  "diagnostico",
-                  "evaluacion"
-          ],
-          "cover": "/img/recursos/covers/circular-express-cover.webp",
-          "pdf": "/downloads/Circular_Express_Oficios_Circulares_2025.pdf",
-          "form_tally_id": "mVeedv",
-          "cta": "Descargar",
-          "updated_at": "2025-08-22"
+        "slug": "guia-materiales",
+        "title": "Guía de Materiales · Completa",
+        "type": "guia",
+        "summary": "Para artesanos y pequeñas marcas. Criterios claros de qué preferir/evitar por oficio, fichas de materiales, checklist de compra, marco legal exprés y acceso al Directorio vivo de proveedores.",
+        "tags": [
+            "materiales",
+            "textil",
+            "ceramica",
+            "madera",
+            "joyeria"
+        ],
+        "cover": "/img/recursos/covers/guia-materiales-cover-larga.webp",
+        "pdf": "/downloads/OC_Guia_Materiales_Completa_2025.pdf",
+        "form_tally_id": "wgloqM",
+        "cta": "Descargar Guía Completa",
+        "updated_at": "2025-08-22"
     },
     {
-          "slug": "guia-materiales-corta",
-          "title": "Guía de Materiales · Corta (Resumen)",
-          "type": "guia",
-          "summary": "Lo esencial para elegir materiales y comprar mejor. Incluye QR a la guía completa.",
-          "tags": [
-                  "materiales",
-                  "intro"
-          ],
-          "cover": "/img/recursos/covers/guia-materiales-cover-corta.webp",
-          "pdf": "/downloads/OC_Guia_Materiales_Corta_2025.pdf",
-          "form_tally_id": "npEE2y",
-          "cta": "Descargar Guía Corta",
-          "listed": false,
-          "updated_at": "2025-08-23"
+        "slug": "circular-express",
+        "title": "Circular Express",
+        "type": "test",
+        "summary": "Auto-diagnóstico en 10–15 min para saber qué prácticas circulares ya aplicas y qué mejorar. Incluye checklist, puntuación rápida y mini-plan con próximos pasos.",
+        "tags": [
+            "diagnostico",
+            "evaluacion"
+        ],
+        "cover": "/img/recursos/covers/circular-express-cover.webp",
+        "pdf": "/downloads/Circular_Express_Oficios_Circulares_2025.pdf",
+        "form_tally_id": "mVeedv",
+        "cta": "Descargar",
+        "updated_at": "2025-08-22"
     },
     {
-          "slug": "guia-upcycling-artistas",
-          "title": "Guía Artistas Upcycling + Toolkit Práctico",
-          "type": "guia",
-          "summary": "La guía definitiva de artistas upcycling para marcas con propósito. 50 páginas de casos reales, técnicas aplicables y plantillas visuales.",
-          "tags": [
-                  "upcycling",
-                  "artistas",
-                  "guia",
-                  "circularidad"
-          ],
-          "cover": "/img/recursos/covers/guia-upcycling-cover.png",
-          "pdf": "/downloads/Guia_Upcycling_Artistas_25.zip",
-          "form_tally_id": "rjjZzp",
-          "cta": "Descargar Guía Gratis",
-          "updated_at": "2025-11-23"
+        "slug": "guia-materiales-corta",
+        "title": "Guía de Materiales · Corta (Resumen)",
+        "type": "guia",
+        "summary": "Lo esencial para elegir materiales y comprar mejor. Incluye QR a la guía completa.",
+        "tags": [
+            "materiales",
+            "intro"
+        ],
+        "cover": "/img/recursos/covers/guia-materiales-cover-corta.webp",
+        "pdf": "/downloads/OC_Guia_Materiales_Corta_2025.pdf",
+        "form_tally_id": "npEE2y",
+        "cta": "Descargar Guía Corta",
+        "listed": false,
+        "updated_at": "2025-08-23"
     },
     {
-          "slug": "5-filtros-residuo-material",
-          "title": "5 Filtros: de residuo local a material",
-          "type": "guia",
-          "summary": "Método práctico para evaluar si un residuo agrícola o industrial cercano puede convertirse en material para tu taller. 5 filtros, tabla de puntuación y decisión GO / PILOTO / NO AHORA.",
-          "tags": [
-                  "residuos",
-                  "materiales",
-                  "circularidad",
-                  "diagnostico"
-          ],
-          "cover": "/img/recursos/covers/5-filtros-residuo-cover.webp",
-          "pdf": "/downloads/Guia_5_Filtros_Residuo_Material_2026.pdf",
-          "form_tally_id": "GxrzeO",
-          "cta": "Descargar Guía Gratis",
-          "updated_at": "2026-02-26"
+        "slug": "guia-upcycling-artistas",
+        "title": "Guía Artistas Upcycling + Toolkit Práctico",
+        "type": "guia",
+        "summary": "La guía definitiva de artistas upcycling para marcas con propósito. 50 páginas de casos reales, técnicas aplicables y plantillas visuales.",
+        "tags": [
+            "upcycling",
+            "artistas",
+            "guia",
+            "circularidad"
+        ],
+        "cover": "/img/recursos/covers/guia-upcycling-cover.png",
+        "pdf": "/downloads/Guia_Upcycling_Artistas_25.zip",
+        "form_tally_id": "rjjZzp",
+        "cta": "Descargar Guía Gratis",
+        "updated_at": "2025-11-23"
     },
     {
-          "slug": "plantilla-dpp",
-          "title": "Plantilla Base DPP + Checklist 30 días",
-          "type": "plantilla",
-          "summary": "Todo lo que necesitas para documentar la trazabilidad de tus productos: plantilla DPP completa, checklist de implementación en 4 semanas, estructura de carpetas y guía anti-greenwashing.",
-          "tags": [
-                  "dpp",
-                  "trazabilidad",
-                  "circularidad",
-                  "normativa"
-          ],
-          "cover": "/img/recursos/covers/plantilla-dpp-cover.webp",
-          "pdf": "/downloads/Plantilla_DPP_Checklist_30dias.pdf",
-          "form_tally_id": "0QE28B",
-          "cta": "Descargar Plantilla Gratis",
-          "updated_at": "2026-03-05"
+        "slug": "5-filtros-residuo-material",
+        "title": "5 Filtros: de residuo local a material",
+        "type": "guia",
+        "summary": "Método práctico para evaluar si un residuo agrícola o industrial cercano puede convertirse en material para tu taller. 5 filtros, tabla de puntuación y decisión GO / PILOTO / NO AHORA.",
+        "tags": [
+            "residuos",
+            "materiales",
+            "circularidad",
+            "diagnostico"
+        ],
+        "cover": "/img/recursos/covers/5-filtros-residuo-cover.webp",
+        "pdf": "/downloads/Guia_5_Filtros_Residuo_Material_2026.pdf",
+        "form_tally_id": "GxrzeO",
+        "cta": "Descargar Guía Gratis",
+        "updated_at": "2026-02-26"
     },
     {
-          "slug": "test-relevo-generacional",
-          "title": "Test de Autodiagnóstico: Relevo Generacional",
-          "type": "test",
-          "summary": "8 preguntas clave para saber si tu taller está preparado para el relevo generacional. Sistema de puntuación con resultado tipo semáforo y recomendaciones personalizadas. 2 minutos.",
-          "tags": [
-                  "relevo",
-                  "diagnostico",
-                  "estrategia",
-                  "circularidad"
-          ],
-          "cover": "/img/recursos/covers/test-relevo-cover.png",
-          "pdf": "/downloads/Test-Autodiagnostico-Relevo-Generacional-OC.pdf",
-          "form_tally_id": "9qlRa5",
-          "cta": "Descargar Test Gratis",
-          "updated_at": "2026-03-18"
+        "slug": "plantilla-dpp",
+        "title": "Plantilla Base DPP + Checklist 30 días",
+        "type": "plantilla",
+        "summary": "Todo lo que necesitas para documentar la trazabilidad de tus productos: plantilla DPP completa, checklist de implementación en 4 semanas, estructura de carpetas y guía anti-greenwashing.",
+        "tags": [
+            "dpp",
+            "trazabilidad",
+            "circularidad",
+            "normativa"
+        ],
+        "cover": "/img/recursos/covers/plantilla-dpp-cover.webp",
+        "pdf": "/downloads/Plantilla_DPP_Checklist_30dias.pdf",
+        "form_tally_id": "0QE28B",
+        "cta": "Descargar Plantilla Gratis",
+        "updated_at": "2026-03-05"
     },
     {
-          "slug": "kit-ia-taller-artesano",
-          "title": "Kit de arranque IA para tu taller artesano",
-          "type": "guia",
-          "summary": "5 herramientas de inteligencia artificial que puedes usar hoy mismo en tu taller — sin experiencia técnica. Guía paso a paso, ejemplos reales y plan de 4 semanas.",
-          "tags": [
-                  "inteligencia-artificial",
-                  "herramientas",
-                  "productividad",
-                  "tecnologia"
-          ],
-          "cover": "/img/recursos/covers/kit-ia-taller-artesano-cover.png",
-          "pdf": "/downloads/Kit-IA-Taller-Artesano-OC.pdf",
-          "form_tally_id": "pbGaWb",
-          "cta": "Descargar Kit Gratis",
-          "updated_at": "2026-03-30"
+        "slug": "test-relevo-generacional",
+        "title": "Test de Autodiagnóstico: Relevo Generacional",
+        "type": "test",
+        "summary": "8 preguntas clave para saber si tu taller está preparado para el relevo generacional. Sistema de puntuación con resultado tipo semáforo y recomendaciones personalizadas. 2 minutos.",
+        "tags": [
+            "relevo",
+            "diagnostico",
+            "estrategia",
+            "circularidad"
+        ],
+        "cover": "/img/recursos/covers/test-relevo-cover.png",
+        "pdf": "/downloads/Test-Autodiagnostico-Relevo-Generacional-OC.pdf",
+        "form_tally_id": "9qlRa5",
+        "cta": "Descargar Test Gratis",
+        "updated_at": "2026-03-18"
     },
     {
-          "slug": "checklist-eventos-artesania",
-          "title": "Checklist Exprés: Eventos y Ferias de Artesanía",
-          "type": "checklist",
-          "summary": "Checklist práctico para preparar cualquier evento o feria artesanal paso a paso: definición de actividad, logística, comunicación, difusión, captación de contactos y cierre comercial. 2 páginas, listo para imprimir.",
-          "tags": [
-                  "eventos",
-                  "ferias",
-                  "ventas",
-                  "comunicacion",
-                  "checklist"
-          ],
-          "cover": "/img/recursos/covers/checklist-eventos-artesania-cover.png",
-          "pdf": "/downloads/Checklist-Eventos-Artesania-OC.pdf",
-          "form_tally_id": "PdYORB",
-          "cta": "Descargar Checklist Gratis",
-          "updated_at": "2026-04-01"
+        "slug": "kit-ia-taller-artesano",
+        "title": "Kit de arranque IA para tu taller artesano",
+        "type": "guia",
+        "summary": "5 herramientas de inteligencia artificial que puedes usar hoy mismo en tu taller — sin experiencia técnica. Guía paso a paso, ejemplos reales y plan de 4 semanas.",
+        "tags": [
+            "inteligencia-artificial",
+            "herramientas",
+            "productividad",
+            "tecnologia"
+        ],
+        "cover": "/img/recursos/covers/kit-ia-taller-artesano-cover.png",
+        "pdf": "/downloads/Kit-IA-Taller-Artesano-OC.pdf",
+        "form_tally_id": "pbGaWb",
+        "cta": "Descargar Kit Gratis",
+        "updated_at": "2026-03-30"
     },
     {
-          "slug": "guia-artesania-lujo",
-          "title": "Guía: Posiciona tu artesanía como producto de lujo",
-          "type": "guia",
-          "summary": "7 palancas estratégicas para transformar la percepción de tu trabajo artesanal. Aprende a comunicar el valor real de lo que creas y atraer a clientes que buscan exclusividad, autenticidad y maestría.",
-          "tags": ["estrategia", "posicionamiento", "lujo", "marca", "pricing"],
-          "cover": "/img/recursos/covers/guia-artesania-lujo-cover.svg",
-          "pdf": "/downloads/Guia_Posicionar_Artesania_Lujo_OC_2026.pdf",
-          "form_tally_id": "Y5YlAN",
-          "cta": "Descargar Guía Gratuita",
-          "updated_at": "2026-04-06",
-          "listed": true
+        "slug": "checklist-eventos-artesania",
+        "title": "Checklist Exprés: Eventos y Ferias de Artesanía",
+        "type": "checklist",
+        "summary": "Checklist práctico para preparar cualquier evento o feria artesanal paso a paso: definición de actividad, logística, comunicación, difusión, captación de contactos y cierre comercial. 2 páginas, listo para imprimir.",
+        "tags": [
+            "eventos",
+            "ferias",
+            "ventas",
+            "comunicacion",
+            "checklist"
+        ],
+        "cover": "/img/recursos/covers/checklist-eventos-artesania-cover.png",
+        "pdf": "/downloads/Checklist-Eventos-Artesania-OC.pdf",
+        "form_tally_id": "PdYORB",
+        "cta": "Descargar Checklist Gratis",
+        "updated_at": "2026-04-01"
     },
     {
-          "slug": "defiende-tu-precio",
-          "title": "Defiende tu precio sin pedir perdón",
-          "type": "guia",
-          "summary": "Kit para artesanos y marcas artesanas: calcula tu precio justo, responde a cualquier «es muy caro» y comunica tu valor en cada canal. Incluye las 8 objeciones más comunes con su respuesta literal, el guion del coste por uso y tu munición de datos.",
-          "tags": ["estrategia", "pricing", "ventas", "comunicacion", "objeciones"],
-          "cover": "/img/recursos/covers/defiende-tu-precio-cover.jpg?v=2",
-          "pdf": "/downloads/OC_Defiende_Tu_Precio.pdf",
-          "form_tally_id": "obpov5",
-          "cta": "Descargar el kit gratis",
-          "updated_at": "2026-06-28",
-          "listed": true,
-          "related": ["calcula-tu-precio"]
+        "slug": "guia-artesania-lujo",
+        "title": "Guía: Posiciona tu artesanía como producto de lujo",
+        "type": "guia",
+        "summary": "7 palancas estratégicas para transformar la percepción de tu trabajo artesanal. Aprende a comunicar el valor real de lo que creas y atraer a clientes que buscan exclusividad, autenticidad y maestría.",
+        "tags": [
+            "estrategia",
+            "posicionamiento",
+            "lujo",
+            "marca",
+            "pricing"
+        ],
+        "cover": "/img/recursos/covers/guia-artesania-lujo-cover.svg",
+        "pdf": "/downloads/Guia_Posicionar_Artesania_Lujo_OC_2026.pdf",
+        "form_tally_id": "Y5YlAN",
+        "cta": "Descargar Guía Gratuita",
+        "updated_at": "2026-04-06",
+        "listed": true
     },
     {
-          "slug": "guia-citricos",
-          "title": "Guía Cítricos: tintes, aceites y biomateriales paso a paso",
-          "type": "guia",
-          "summary": "Convierte la cáscara que sobra en color, aroma y biomaterial. 14 recetas verificadas para artesanos y pequeños talleres: tintes naturales con mordentado, aceites infusionados, extracto de limoneno, pectina casera y bioplásticos flexibles. Desde tu cocina o taller, sin laboratorio.",
-          "tags": ["circularidad", "biomateriales", "tintes-naturales", "residuos", "experimentacion"],
-          "cover": "/img/recursos/covers/guia-citricos-cover.webp",
-          "pdf": "/downloads/Guia_Citricos_OC_2026.pdf",
-          "form_tally_id": "Mer6EX",
-          "cta": "Descargar Guía Gratis",
-          "updated_at": "2026-04-26",
-          "listed": true
+        "slug": "defiende-tu-precio",
+        "title": "Defiende tu precio sin pedir perdón",
+        "type": "guia",
+        "summary": "Kit para artesanos y marcas artesanas: calcula tu precio justo, responde a cualquier «es muy caro» y comunica tu valor en cada canal. Incluye las 8 objeciones más comunes con su respuesta literal, el guion del coste por uso y tu munición de datos.",
+        "tags": [
+            "estrategia",
+            "pricing",
+            "ventas",
+            "comunicacion",
+            "objeciones"
+        ],
+        "cover": "/img/recursos/covers/defiende-tu-precio-cover.jpg?v=2",
+        "pdf": "/downloads/OC_Defiende_Tu_Precio.pdf",
+        "form_tally_id": "obpov5",
+        "cta": "Descargar el kit gratis",
+        "updated_at": "2026-06-28",
+        "listed": true,
+        "related": [
+            "calcula-tu-precio"
+        ]
     },
     {
-          "slug": "marca-artesana-sin-marketinizar",
-          "title": "Marca artesana sin marketinizar (¿y qué quiere decir eso?)",
-          "type": "guia",
-          "summary": "Una guía corta para encontrar la identidad de tu marca artesana sin disfrazar tu oficio. Tres ejercicios accionables al final: la entrevista a tu oficio, el \"no soy\" de tu marca y la pieza ancla. 15 minutos de lectura.",
-          "tags": ["marca", "identidad", "comunicacion", "estrategia", "narrativa"],
-          "cover": "/img/recursos/covers/marca-artesana-sin-marketinizar-cover.png",
-          "pdf": "/downloads/Marca_Artesana_Sin_Marketinizar_OC_2026.pdf",
-          "cta": "Descargar la guía",
-          "updated_at": "2026-04-27",
-          "listed": false
+        "slug": "guia-citricos",
+        "title": "Guía Cítricos: tintes, aceites y biomateriales paso a paso",
+        "type": "guia",
+        "summary": "Convierte la cáscara que sobra en color, aroma y biomaterial. 14 recetas verificadas para artesanos y pequeños talleres: tintes naturales con mordentado, aceites infusionados, extracto de limoneno, pectina casera y bioplásticos flexibles. Desde tu cocina o taller, sin laboratorio.",
+        "tags": [
+            "circularidad",
+            "biomateriales",
+            "tintes-naturales",
+            "residuos",
+            "experimentacion"
+        ],
+        "cover": "/img/recursos/covers/guia-citricos-cover.webp",
+        "pdf": "/downloads/Guia_Citricos_OC_2026.pdf",
+        "form_tally_id": "Mer6EX",
+        "cta": "Descargar Guía Gratis",
+        "updated_at": "2026-04-26",
+        "listed": true
     },
     {
-          "slug": "directorio-lana-espanola",
-          "title": "Directorio de Lana Española",
-          "type": "directorio",
-          "summary": "13 iniciativas reales de lana española con nombre de ganadero, territorio y modelo de negocio. Incluye fichas detalladas, mapa de España, cascada de valor del sector (de 0,65 €/kg a hilo artesanal), datos del MAPA y contexto regulatorio SANDACH para comprar con criterio.",
-          "tags": ["lana", "fibra", "materiales", "directorio", "trazabilidad", "circularidad"],
-          "cover": "/img/recursos/covers/directorio-lana-espanola-cover.jpg",
-          "pdf": "/downloads/Directorio_Lana_Espanola_OC_2026.pdf",
-          "form_tally_id": "BzADx4",
-          "cta": "Descargar el directorio",
-          "updated_at": "2026-05-10",
-          "listed": true
+        "slug": "marca-artesana-sin-marketinizar",
+        "title": "Marca artesana sin marketinizar (¿y qué quiere decir eso?)",
+        "type": "guia",
+        "summary": "Una guía corta para encontrar la identidad de tu marca artesana sin disfrazar tu oficio. Tres ejercicios accionables al final: la entrevista a tu oficio, el \"no soy\" de tu marca y la pieza ancla. 15 minutos de lectura.",
+        "tags": [
+            "marca",
+            "identidad",
+            "comunicacion",
+            "estrategia",
+            "narrativa"
+        ],
+        "cover": "/img/recursos/covers/marca-artesana-sin-marketinizar-cover.png",
+        "pdf": "/downloads/Marca_Artesana_Sin_Marketinizar_OC_2026.pdf",
+        "cta": "Descargar la guía",
+        "updated_at": "2026-04-27",
+        "listed": false
     },
     {
-          "slug": "encargar-letterpress",
-          "title": "Cómo encargar letterpress sin equivocarte",
-          "type": "guia",
-          "summary": "La guía para que tu primera pieza de imprenta artesanal salga perfecta —y al precio justo. Qué pedir, cómo preparar tu archivo, cómo se calcula el presupuesto, los 5 errores que disparan el precio, un mini-directorio de talleres por zona y un glosario para hablar el idioma del oficio.",
-          "tags": ["letterpress", "imprenta-artesanal", "papeleria", "diseno", "circularidad"],
-          "cover": "/img/recursos/covers/encargar-letterpress-cover.jpg",
-          "pdf": "/downloads/encargar-letterpress.pdf",
-          "form_tally_id": "RGgKRP",
-          "cta": "Descargar la guía",
-          "updated_at": "2026-06-25",
-          "listed": true
+        "slug": "directorio-lana-espanola",
+        "title": "Directorio de Lana Española",
+        "type": "directorio",
+        "summary": "13 iniciativas reales de lana española con nombre de ganadero, territorio y modelo de negocio. Incluye fichas detalladas, mapa de España, cascada de valor del sector (de 0,65 €/kg a hilo artesanal), datos del MAPA y contexto regulatorio SANDACH para comprar con criterio.",
+        "tags": [
+            "lana",
+            "fibra",
+            "materiales",
+            "directorio",
+            "trazabilidad",
+            "circularidad"
+        ],
+        "cover": "/img/recursos/covers/directorio-lana-espanola-cover.jpg",
+        "pdf": "/downloads/Directorio_Lana_Espanola_OC_2026.pdf",
+        "form_tally_id": "BzADx4",
+        "cta": "Descargar el directorio",
+        "updated_at": "2026-05-10",
+        "listed": true
+    },
+    {
+        "slug": "encargar-letterpress",
+        "title": "Cómo encargar letterpress sin equivocarte",
+        "type": "guia",
+        "summary": "La guía para que tu primera pieza de imprenta artesanal salga perfecta —y al precio justo. Qué pedir, cómo preparar tu archivo, cómo se calcula el presupuesto, los 5 errores que disparan el precio, un mini-directorio de talleres por zona y un glosario para hablar el idioma del oficio.",
+        "tags": [
+            "letterpress",
+            "imprenta-artesanal",
+            "papeleria",
+            "diseno",
+            "circularidad"
+        ],
+        "cover": "/img/recursos/covers/encargar-letterpress-cover.jpg",
+        "pdf": "/downloads/encargar-letterpress.pdf",
+        "form_tally_id": "RGgKRP",
+        "cta": "Descargar la guía",
+        "updated_at": "2026-06-25",
+        "listed": true
     }
 ]
