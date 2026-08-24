@@ -821,6 +821,13 @@
                                                             if (iframe) {
                                                                 var src = iframe.getAttribute('data-tally-src');
                                                                 src += '&page_url=' + encodeURIComponent(window.location.href);
+                                                                // UTMs de la URL de la página -> hidden fields del formulario.
+                                                                // El iframe no hereda la query string del padre: hay que pasarlas a mano.
+                                                                var qs = new URLSearchParams(window.location.search);
+                                                                ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+                                                                    var v = qs.get(k);
+                                                                    if (v) { src += '&' + k + '=' + encodeURIComponent(v); }
+                                                                });
                                                                 iframe.setAttribute('data-tally-src', src);
                                                             }
 
