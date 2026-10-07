@@ -4771,6 +4771,7 @@ iframe[src*="tally.so"] {
 }
 .oc-sello--tinta { mix-blend-mode: multiply; }
 .oc-sello--claro { opacity: .9; }
+.oc-sello--movil { display: none; }
 .oc-sello--estampa { animation: oc-sello-estampa .55s cubic-bezier(.2,.9,.3,1.2) .9s both; }
 @keyframes oc-sello-estampa {
     0%   { opacity: 0; transform: rotate(var(--sello-rot, -12deg)) scale(1.35); }
@@ -4782,7 +4783,7 @@ iframe[src*="tally.so"] {
     0%   { opacity: 0; transform: rotate(var(--sello-rot, -10deg)) scale(1.4); }
     14%  { opacity: .95; transform: rotate(var(--sello-rot, -10deg)) scale(1); }
     55%  { opacity: .95; transform: rotate(var(--sello-rot, -10deg)) scale(1); }
-    100% { opacity: .62; transform: rotate(var(--sello-rot, -10deg)) scale(1); }
+    100% { opacity: .8; transform: rotate(var(--sello-rot, -10deg)) scale(1); }
 }
 @media (prefers-reduced-motion: reduce) { .oc-sello--estampa { animation: none !important; } }
 
@@ -4801,8 +4802,11 @@ iframe[src*="tally.so"] {
     .about-content .content-section--sello .oc-sello { right: 0; top: -70px; --sello-w: 104px; }
 }
 @media (max-width: 768px) {
-    .hero-v2-content .oc-sello { --sello-w: 78px; --sello-rot: -10deg; top: 12px; right: 12px; bottom: auto; }
-    .hero-v2-content .oc-sello--estampa { animation: oc-sello-estampa-movil 3.2s cubic-bezier(.2,.9,.3,1.2) .9s both; }
+    /* En móvil el sello pasa a la derecha de la última línea del titular («crees»), que queda corta */
+    .hero-v2-content .oc-sello { display: none; }
+    .hero-v2-content h1 { position: relative; }
+    .hero-v2-content .oc-sello.oc-sello--movil { display: block; --sello-w: 86px; --sello-rot: -10deg; right: -12px; bottom: -48px; top: auto; }
+    .hero-v2-content .oc-sello--movil.oc-sello--estampa { animation: oc-sello-estampa-movil 3.2s cubic-bezier(.2,.9,.3,1.2) .9s both; }
     .diag3d .hero-media .oc-sello { --sello-w: 96px; left: -14px; bottom: -30px; }
     .about-content .content-section--sello .oc-sello { --sello-w: 80px; top: -18px; right: 0; }
 }
