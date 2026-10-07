@@ -380,7 +380,7 @@ async function requireMember(req, res, next) {
 const _clubPieceCache = new Map();
 function injectClubBar(html) {
   const bar = '<div style="position:sticky;top:0;z-index:2147483000;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:#023429;color:#FBF7EF;font-family:\'Manrope\',system-ui,-apple-system,sans-serif;font-size:14px;box-shadow:0 2px 12px rgba(0,0,0,.25)">'
-    + '<a href="/club/dentro" style="display:inline-flex;align-items:center;gap:8px;color:#FBF7EF;text-decoration:none;font-weight:600"><img src="/assets/images/logodegraoscuro.png" alt="Oficios Circulares" style="width:24px;height:24px;display:inline-block"> El Club</a>'
+    + '<a href="/club/dentro" style="display:inline-flex;align-items:center;gap:8px;color:#FBF7EF;text-decoration:none;font-weight:600"><img src="/assets/images/brand/oc-logo-2026-cuadrado.png" alt="Oficios Circulares" style="width:24px;height:24px;display:inline-block"> El Club</a>'
     + '<a href="/club/salir" style="color:#E8D5B7;text-decoration:none;font-weight:700">Salir</a></div>';
   if (/<body[^>]*>/i.test(html)) return html.replace(/(<body[^>]*>)/i, '$1\n' + bar + '\n');
   return bar + html;
