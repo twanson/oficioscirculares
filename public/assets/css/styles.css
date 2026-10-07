@@ -4811,22 +4811,3 @@ iframe[src*="tally.so"] {
     .about-content .content-section--sello .oc-sello { --sello-w: 80px; top: -18px; right: 0; }
 }
 
-/* ==========================================================================
-   Nombre junto al logo 2026 — Recursive Mono Casual (OFL), sustituto libre
-   de Documan (la tipografía del logo): monolineal, terminales redondeados,
-   remates tipo máquina de escribir. Instancia fija MONO 1 · CASL 1 · wght 450.
-   ========================================================================== */
-@font-face {
-    font-family: 'OC Wordmark';
-    src: url('/assets/fonts/oc-wordmark.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-.nav-logo .logo-text,
-.footer-logo .logo-text {
-    font-family: 'OC Wordmark', 'Courier New', monospace !important;
-    font-weight: 400 !important;
-    font-size: 1.22rem !important;
-    letter-spacing: -0.02em;
-}
