@@ -4780,7 +4780,7 @@ iframe[src*="tally.so"] {
 @media (prefers-reduced-motion: reduce) { .oc-sello--estampa { animation: none; } }
 
 /* Home: esquina superior derecha de la tarjeta del hero */
-.hero-v2-content .oc-sello { --sello-w: 140px; --sello-rot: -12deg; top: -38px; right: 22px; }
+.hero-v2-content .oc-sello { --sello-w: 136px; --sello-rot: -12deg; bottom: 28px; right: 34px; z-index: 12; }
 /* Sobre nosotros: margen derecho de "Qué hacemos" */
 .about-content .content-section--sello { position: relative; }
 .about-content .content-section--sello .oc-sello { --sello-w: 140px; --sello-rot: 9deg; top: -36px; right: -170px; }
@@ -4794,7 +4794,7 @@ iframe[src*="tally.so"] {
     .about-content .content-section--sello .oc-sello { right: 0; top: -70px; --sello-w: 104px; }
 }
 @media (max-width: 768px) {
-    .hero-v2-content .oc-sello { --sello-w: 84px; top: -30px; right: 12px; }
+    .hero-v2-content .oc-sello { display: none; }
     .diag3d .hero-media .oc-sello { --sello-w: 96px; left: -14px; bottom: -30px; }
     .about-content .content-section--sello .oc-sello { --sello-w: 80px; top: -18px; right: 0; }
 }
