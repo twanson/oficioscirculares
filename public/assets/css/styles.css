@@ -4777,7 +4777,14 @@ iframe[src*="tally.so"] {
     60%  { opacity: .95; }
     100% { opacity: .92; transform: rotate(var(--sello-rot, -12deg)) scale(1); }
 }
-@media (prefers-reduced-motion: reduce) { .oc-sello--estampa { animation: none; } }
+/* Móvil: se estampa y luego se queda en segundo plano (más tenue) para no competir con el texto */
+@keyframes oc-sello-estampa-movil {
+    0%   { opacity: 0; transform: rotate(var(--sello-rot, -10deg)) scale(1.4); }
+    14%  { opacity: .95; transform: rotate(var(--sello-rot, -10deg)) scale(1); }
+    55%  { opacity: .95; transform: rotate(var(--sello-rot, -10deg)) scale(1); }
+    100% { opacity: .62; transform: rotate(var(--sello-rot, -10deg)) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .oc-sello--estampa { animation: none !important; } }
 
 /* Home: esquina superior derecha de la tarjeta del hero */
 .hero-v2-content .oc-sello { --sello-w: 136px; --sello-rot: -12deg; bottom: 28px; right: 34px; z-index: 12; }
@@ -4794,7 +4801,8 @@ iframe[src*="tally.so"] {
     .about-content .content-section--sello .oc-sello { right: 0; top: -70px; --sello-w: 104px; }
 }
 @media (max-width: 768px) {
-    .hero-v2-content .oc-sello { display: none; }
+    .hero-v2-content .oc-sello { --sello-w: 78px; --sello-rot: -10deg; top: 12px; right: 12px; bottom: auto; }
+    .hero-v2-content .oc-sello--estampa { animation: oc-sello-estampa-movil 3.2s cubic-bezier(.2,.9,.3,1.2) .9s both; }
     .diag3d .hero-media .oc-sello { --sello-w: 96px; left: -14px; bottom: -30px; }
     .about-content .content-section--sello .oc-sello { --sello-w: 80px; top: -18px; right: 0; }
 }
