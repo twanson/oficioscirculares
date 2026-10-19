@@ -1,0 +1,180 @@
+name: Actualizar sitemap
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'        # UTC. GitHub puede retrasar el disparo unos minutos.
+  workflow_dispatch:         # permite lanzarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4
+
+      - name: Mantener sitemap (añade nuevas URLs, quita 404, conserva el resto)
+        run: |
+          python3 - "public/sitemap.xml" "https://www.oficioscirculares.com" "www.oficioscirculares.com" <<'PY'
+          #!/usr/bin/env python3
+          """
+          Incremental sitemap maintainer (GitHub Action version).
+          Reads the repo's existing sitemap file, crawls the live site, and:
+            - ADDS newly-discovered, indexable, self-canonical pages (default priority/changefreq, lastmod=today)
+            - REMOVES pages that now return 404/410
+            - leaves every other <url> block byte-for-byte untouched (preserves hand-tuned priority/lastmod)
+          Writes the file back only if the URL set changed. Prints a summary.
+
+          Usage:  python3 maintain_full.py <sitemap_file> <base_url> <canonical_host>
+          """
+          import sys, re, time, datetime
+          import xml.etree.ElementTree as ET
+          from urllib.parse import urljoin, urlparse, urldefrag
+          import requests
+          from bs4 import BeautifulSoup
+
+          UA = "sitemap-maintainer/1.0 (+github-actions)"
+          SM_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
+          TODAY = datetime.date.today().isoformat()
+
+          def norm_key(path):
+              p = path.rstrip('/'); return p if p else '/'
+
+          def is_page_url(u):
+              bad = ('.svg','.png','.jpg','.jpeg','.gif','.webp','.ico','.css','.js','.xml',
+                     '.json','.pdf','.txt','.zip','.mp4','.webm','.woff','.woff2')
+              return not u.lower().endswith(bad)
+
+          def get(url, timeout=20):
+              return requests.get(url, headers={"User-Agent": UA}, timeout=timeout, allow_redirects=True)
+
+          def collect_links(html, page_url, host):
+              out = set()
+              for a in BeautifulSoup(html, "html.parser").find_all("a", href=True):
+                  href = a["href"].strip()
+                  if not href or href.startswith(('mailto:','tel:','javascript:')): continue
+                  absu, _ = urldefrag(urljoin(page_url, href))
+                  pr = urlparse(absu)
+                  if pr.scheme not in ('http','https'): continue
+                  if pr.netloc.lower() != host: continue
+                  if pr.query: absu = f"https://{host}{pr.path}"
+                  if is_page_url(absu): out.add(absu)
+              return out
+
+          def has_noindex(html):
+              for m in BeautifulSoup(html,"html.parser").find_all("meta"):
+                  if m.get("name","").lower()=="robots" and "noindex" in m.get("content","").lower():
+                      return True
+              return False
+
+          def canonical_is_self(html, url):
+              for l in BeautifulSoup(html,"html.parser").find_all("link"):
+                  if "canonical" in [x.lower() for x in (l.get("rel") or [])]:
+                      href=(l.get("href") or "").strip()
+                      if not href: return True
+                      return norm_key(urlparse(href).path)==norm_key(urlparse(url).path)
+              return True
+
+          def default_meta(path):
+              # only used for NEW pages (rare). Existing entries are never touched.
+              p = path.rstrip('/')
+              if re.search(r'/blog/.+', p):       return ("0.6","monthly")
+              if re.search(r'/newsletter/.+', p): return ("0.6","monthly")
+              if re.search(r'/recursos/.+', p):   return ("0.6","monthly")
+              if p.count('/')==1:                 return ("0.8","monthly")   # top-level section
+              return ("0.7","monthly")
+
+          def load_locs(text):
+              root=ET.fromstring(text); out=[]
+              for u in root.findall(f"{{{SM_NS}}}url"):
+                  loc=u.find(f"{{{SM_NS}}}loc")
+                  if loc is not None and loc.text: out.append(loc.text.strip())
+              return out
+
+          def crawl(base, host):
+              discovered=set()
+              r=get(base+"/"); home=collect_links(r.text, r.url, host)
+              discovered|=home; discovered.add(f"https://{host}/")
+              for u in sorted(home):
+                  try:
+                      rr=get(u)
+                      if rr.status_code==200 and 'text/html' in rr.headers.get('content-type',''):
+                          discovered|=collect_links(rr.text, rr.url, host)
+                      time.sleep(0.2)
+                  except Exception: pass
+              return {norm_key(urlparse(u).path): u for u in discovered}
+
+          def main():
+              smfile, base, host = sys.argv[1], sys.argv[2], sys.argv[3]
+              text=open(smfile,encoding="utf-8").read()
+              existing=load_locs(text)
+              ekeys={norm_key(urlparse(u).path) for u in existing}
+              dkeys=crawl(base, host)
+
+              # additions
+              add=[]
+              for k,u in sorted(dkeys.items()):
+                  if k in ekeys: continue
+                  try:
+                      rr=get(u)
+                      if rr.status_code!=200: continue
+                      if 'text/html' not in rr.headers.get('content-type',''): continue
+                      if has_noindex(rr.text): continue
+                      if not canonical_is_self(rr.text,u): continue
+                  except Exception: continue
+                  add.append(u)
+              # removals (confirmed 404/410 only)
+              rem=[]
+              for u in existing:
+                  try:
+                      if get(u).status_code in (404,410): rem.append(u)
+                  except Exception: pass
+
+              if not add and not rem:
+                  print("No URL changes. Sitemap left untouched."); return 0
+
+              new_text=text
+              # remove dead <url> blocks (text-level, keeps the rest intact)
+              for u in rem:
+                  pat=re.compile(r'[ \t]*<url>\s*<loc>\s*'+re.escape(u)+r'\s*</loc>.*?</url>\n?', re.S)
+                  new_text=pat.sub('', new_text, count=1)
+              # insert new <url> blocks right before </urlset>
+              if add:
+                  blocks=""
+                  for u in add:
+                      pr,cf=default_meta(urlparse(u).path)
+                      blocks+=(f"  <url>\n    <loc>{u}</loc>\n    <lastmod>{TODAY}</lastmod>\n"
+                               f"    <changefreq>{cf}</changefreq>\n    <priority>{pr}</priority>\n  </url>\n")
+                  new_text=re.sub(r'(</urlset>\s*)$', blocks+r'\1', new_text, count=1)
+
+              # sanity: must still parse
+              ET.fromstring(new_text)
+              open(smfile,"w",encoding="utf-8").write(new_text)
+              print(f"ADDED ({len(add)}): "+", ".join(add) if add else "ADDED (0)")
+              print(f"REMOVED ({len(rem)}): "+", ".join(rem) if rem else "REMOVED (0)")
+              return 0
+
+          if __name__=="__main__":
+              sys.exit(main())
+          PY
+
+      - name: Commit si hubo cambios
+        run: |
+          if [ -n "$(git status --porcelain public/sitemap.xml)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/sitemap.xml
+            git commit -m "chore: update sitemap.xml [automated]"
+            git push
+            echo "Sitemap actualizado y pusheado."
+          else
+            echo "Sin cambios en el sitemap."
+          fi
