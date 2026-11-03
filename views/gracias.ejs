@@ -46,6 +46,26 @@
       </main>
       <% } else if (typeof isServicios3D !=='undefined' && isServicios3D) { %>
         <main class="main-content">
+          <!-- Conversión principal: generate_lead (contexto guardado por /contacto; un envío por lead) -->
+          <script>
+            (function () {
+              var ctx = {};
+              try {
+                var last = +sessionStorage.getItem('oc_lead_sent') || 0;
+                if (Date.now() - last < 600000) return;
+                ctx = JSON.parse(sessionStorage.getItem('oc_lead_ctx') || '{}');
+                sessionStorage.setItem('oc_lead_sent', String(Date.now()));
+              } catch (e) {}
+              var p = new URLSearchParams(window.location.search);
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: 'generate_lead',
+                lead_service: ctx.lead_service || p.get('service') || '',
+                lead_sector: ctx.lead_sector || '',
+                lead_origin: ctx.lead_origin || p.get('source') || ''
+              });
+            })();
+          </script>
           <section class="gracias-section">
             <div class="container">
               <div class="gracias-content" style="max-width: 960px; margin: 0 auto;">

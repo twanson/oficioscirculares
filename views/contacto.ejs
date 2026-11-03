@@ -247,22 +247,18 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📝 Tally form loaded with params:', Object.fromEntries(tallyParams));
 });
 
-// Conversión principal: envío del formulario de contacto (Tally avisa por postMessage).
+// Conversión principal: generate_lead.
+// Tally redirige a /gracias?source=servicios-3d al enviar, y la página cambia antes
+// de que salga un evento lanzado aquí. Por eso aquí solo se guarda el contexto
+// y el evento lo envía la página de gracias (views/gracias.ejs).
 (function() {
-    var sent = false;
-    window.addEventListener('message', function(e) {
-        if (sent || typeof e.data !== 'string' || e.data.indexOf('Tally.FormSubmitted') === -1) return;
-        if (!/^https:\/\/tally\.so$/.test(e.origin)) return;
-        sent = true;
-        var p = new URLSearchParams(window.location.search);
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'generate_lead',
-            lead_service: p.get('service') || '',
-            lead_sector: p.get('sector') || '',
-            lead_origin: p.get('page_path') || p.get('oc_campaign') || p.get('utm_campaign') || ''
-        });
-    });
+    var p = new URLSearchParams(window.location.search);
+    var ctx = {
+        lead_service: p.get('service') || '',
+        lead_sector: p.get('sector') || '',
+        lead_origin: p.get('page_path') || p.get('oc_campaign') || p.get('utm_campaign') || ''
+    };
+    try { sessionStorage.setItem('oc_lead_ctx', JSON.stringify(ctx)); } catch (e) {}
 })();
 </script>
 
