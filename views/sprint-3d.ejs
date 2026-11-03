@@ -22,8 +22,8 @@
                         <li>Caso de éxito documentado para diferenciarte siempre</li>
                     </ul>
                     <div class="hero-ctas">
-                        <a id="cta-hero" href="/contacto?service=sprint-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=hero&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar Sprint 3D" data-event="click_cta" data-label="sprint3d-hero">Quiero poner mi mejora en marcha</a>
-                        <a id="cta-hero-case" href="/downloads/mini-caso-sprint-3d.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=hero" class="btn btn-secondary" aria-label="Ver mini-caso" data-event="file_download" data-label="sprint3d-hero-caso">Ver mini-caso</a>
+                        <a id="cta-hero" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=hero&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar Sprint 3D" data-event="click_cta" data-label="sprint3d-hero">Quiero poner mi mejora en marcha</a>
+                        <a id="cta-hero-case" href="/downloads/mini-caso-sprint-3d.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=hero" class="btn btn-secondary" aria-label="Ver mini-caso" data-event="file_download" data-label="sprint3d-hero-caso">Ver mini-caso</a>
                     </div>
                 </div>
                 <div class="hero-media" aria-hidden="true">
@@ -97,7 +97,7 @@
                 <li><strong>Semana 4 — Lanzamos</strong><br>Publicamos todo · Lanzamos la comunicación · Te enseñamos a usar los materiales · Te entregamos el sistema completo funcionando</li>
             </ol>
             <div class="inline-cta">
-                <a id="cta-flow" href="/contacto?service=sprint-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=flow&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar desde metodología" data-event="click_cta" data-label="sprint3d-flow">Quiero poner mi mejora en marcha</a>
+                <a id="cta-flow" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=flow&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar desde metodología" data-event="click_cta" data-label="sprint3d-flow">Quiero poner mi mejora en marcha</a>
             </div>
         </div>
     </section>
@@ -187,7 +187,7 @@
             <h2 id="cta-final-title" class="section-title enhanced" data-label="Siguiente paso">¿Damos el paso?</h2>
             <p>En 4 semanas tendrás tu mejora funcionando, datos reales y todo preparado para contarlo.</p>
             <div class="hero-ctas">
-                <a id="cta-footer" href="/contacto?service=sprint-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=footer&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar Sprint 3D" data-event="click_cta" data-label="sprint3d-footer">Quiero poner mi mejora en marcha</a>
+                <a id="cta-footer" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=footer&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar Sprint 3D" data-event="click_cta" data-label="sprint3d-footer">Quiero poner mi mejora en marcha</a>
                 <a id="cta-footer-question" href="https://tally.so/r/nPxWM0?utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=footer-question&page_path=/servicios/sprint-3d" class="btn btn-secondary" aria-label="Consultar Sprint 3D" data-event="click_cta" data-label="sprint3d-footer-consulta" target="_blank" rel="noopener">Tengo una pregunta</a>
             </div>
         </div>
@@ -229,11 +229,13 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       const u = new URL(href, window.location.origin);
       const page = new URLSearchParams(window.location.search);
-      for (const [k,v] of page) if (k.startsWith('utm_')) u.searchParams.set(k,v);
-      u.searchParams.set('utm_source','site');
-      u.searchParams.set('utm_medium','organic');
-      u.searchParams.set('utm_campaign','oc-sprint-3d');
-      u.searchParams.set('utm_content',content);
+      // Enlaces internos: parámetros oc_* (los utm_* internos rompían la atribución de GA4).
+      const p = u.origin === window.location.origin ? 'oc_' : 'utm_';
+      for (const [k,v] of page) if (k.startsWith('utm_') || k.startsWith('oc_')) u.searchParams.set(p + k.replace(/^(utm|oc)_/,''), v);
+      u.searchParams.set(p+'source','site');
+      u.searchParams.set(p+'medium','organic');
+      u.searchParams.set(p+'campaign','oc-sprint-3d');
+      u.searchParams.set(p+'content',content);
       el.setAttribute('href', u.toString());
     }
     el.addEventListener('click', function(){
@@ -253,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Sticky CTA móvil -->
 <div class="sticky-cta-mobile" aria-hidden="true">
-  <a id="cta-sticky-primary" class="btn btn-primary" href="/contacto?service=sprint-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=sticky&page_path=/servicios/sprint-3d" data-event="click_cta" data-label="sprint3d-sticky">Reservar</a>
+  <a id="cta-sticky-primary" class="btn btn-primary" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=sticky&page_path=/servicios/sprint-3d" data-event="click_cta" data-label="sprint3d-sticky">Reservar</a>
   <a id="cta-sticky-secondary" class="btn btn-secondary" href="mailto:hola@oficioscirculares.com?subject=Sprint%203D" data-event="click_cta" data-label="sprint3d-sticky-secondary">Escribir primero</a>
 </div>
 

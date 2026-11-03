@@ -9,14 +9,15 @@ class TrafficSourceDetector {
     }
 
     init() {
-        // Detectar fuente de tráfico cuando la página carga
+        // Una sola vez por sesión: antes se enviaba en cada página vista
+        // (~5 eventos por usuario) y solo la primera aporta el origen real.
+        let already = null;
+        try { already = sessionStorage.getItem('oc_traffic_source'); } catch (e) {}
+        if (already) return;
+
         const trafficData = this.detectTrafficSource();
-        
-        // Enviar a GTM/GA4
         this.sendToAnalytics(trafficData);
-        
-        // Opcional: Guardar en sessionStorage para usar en otras páginas
-        sessionStorage.setItem('oc_traffic_source', JSON.stringify(trafficData));
+        try { sessionStorage.setItem('oc_traffic_source', JSON.stringify(trafficData)); } catch (e) {}
     }
 
     detectTrafficSource() {
@@ -171,6 +172,39 @@ class TrafficSourceDetector {
 }
 
 // Auto-inicializar cuando el DOM esté listo
+// ── Tráfico interno (Jose) ──
+// Visitar cualquier página con ?oc_interno=1 marca este navegador como interno
+// durante 2 años (cookie oc_internal=1); ?oc_interno=0 lo desmarca.
+// GTM lee la cookie y envía traffic_type=internal a GA4, que lo filtra.
+(function () {
+    try {
+        var v = new URLSearchParams(window.location.search).get('oc_interno');
+        if (v === '1') document.cookie = 'oc_internal=1; path=/; max-age=63072000; SameSite=Lax; Secure';
+        if (v === '0') document.cookie = 'oc_internal=; path=/; max-age=0; SameSite=Lax; Secure';
+    } catch (e) {}
+})();
+
+// ── Clics en enlaces internos con parámetros oc_* (sustituyen a los UTM internos) ──
+// Envía a GTM el evento cta_click con destino, ubicación y campaña del enlace.
+document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), window.location.href); } catch (err) { return; }
+    if (u.origin !== window.location.origin) return;
+    var p = u.searchParams;
+    if (!p.get('oc_source') && !p.get('oc_medium')) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        event: 'cta_click',
+        link_url: u.pathname,
+        link_location: [p.get('oc_source'), p.get('oc_medium')].filter(Boolean).join(' / '),
+        link_campaign: p.get('oc_campaign') || '',
+        link_content: p.get('oc_content') || '',
+        link_text: (a.textContent || '').trim().slice(0, 80)
+    });
+}, true);
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         new TrafficSourceDetector();

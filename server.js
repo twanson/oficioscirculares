@@ -179,6 +179,25 @@ function redirectWithQuery(target, req, res) {
   res.redirect(301, q ? `${target}?${q}` : target);
 }
 
+// Redirecciones 301 de URLs antiguas del blog que Google sigue mostrando (404 en GSC, nov 2026).
+// Se aceptan con y sin barra final; la query se conserva.
+const LEGACY_BLOG_REDIRECTS = {
+  'que-hacer-con-lana-de-oveja': 'que-hacer-con-la-lana-de-oveja',
+  'que-her-con-la-lana-de-oveja': 'que-hacer-con-la-lana-de-oveja',
+  'que-hacer-con-tu-lana': 'que-hacer-con-la-lana-de-oveja',
+  'que-hacer-con-las-lana-de-oveja': 'que-hacer-con-la-lana-de-oveja',
+  'que-hacer-con-la-lana-de-oveja-5-salidas-reales': 'que-hacer-con-la-lana-de-oveja',
+  'que-hacer-con-la-lana-de-oveja-5-salidas-real': 'que-hacer-con-la-lana-de-oveja',
+  'que-hacer-con-lana-de-oveja-5-salidas-reales': 'que-hacer-con-la-lana-de-oveja',
+  'que-hacer-con-lana-de-oveja-que-sobra-5-salidas-reales': 'que-hacer-con-la-lana-de-oveja',
+  'ia-for-artesanos-mas-taller-menos-pantalla': 'ia-para-artesanos'
+};
+app.get(/^\/blog\/([^/]+)\/?$/, (req, res, next) => {
+  const target = LEGACY_BLOG_REDIRECTS[req.params[0]];
+  if (!target) return next();
+  redirectWithQuery(`/blog/${target}/`, req, res);
+});
+
 // Redirecciones vanity
 app.get('/guia', (req, res) => {
   redirectWithQuery('/recursos/guia-materiales', req, res);

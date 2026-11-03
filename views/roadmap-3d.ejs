@@ -22,8 +22,8 @@
                         <li>Plan de comunicación para contar el proceso</li>
                     </ul>
                     <div class="hero-ctas">
-                        <a id="cta-hero" href="/contacto?service=roadmap-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-roadmap-3d&utm_content=hero&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar Roadmap 3D" data-event="click_cta" data-label="roadmap3d-hero">Quiero mi Roadmap 3D</a>
-                        <a id="cta-hero-example" href="/downloads/ejemplo-roadmap-3d.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-roadmap-3d&utm_content=hero" class="btn btn-secondary" aria-label="Ver ejemplo de roadmap" data-event="file_download" data-label="roadmap3d-hero-ejemplo">Ver ejemplo de roadmap</a>
+                        <a id="cta-hero" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=hero&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar Roadmap 3D" data-event="click_cta" data-label="roadmap3d-hero">Quiero mi Roadmap 3D</a>
+                        <a id="cta-hero-example" href="/downloads/ejemplo-roadmap-3d.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=hero" class="btn btn-secondary" aria-label="Ver ejemplo de roadmap" data-event="file_download" data-label="roadmap3d-hero-ejemplo">Ver ejemplo de roadmap</a>
                     </div>
                 </div>
                 <div class="hero-media" aria-hidden="true">
@@ -93,7 +93,7 @@
                 <li><strong>Semana 2 — Preparamos la comunicación</strong><br>Definimos qué contar y cuándo para documentar el proceso · Creamos plantillas de posts, emails y fichas · Montamos el sistema para medir resultados · Organizamos el calendario de comunicación</li>
             </ol>
             <div class="inline-cta">
-                <a id="cta-flow" href="/contacto?service=roadmap-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-roadmap-3d&utm_content=flow&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar desde metodología" data-event="click_cta" data-label="roadmap3d-flow">Quiero mi Roadmap 3D</a>
+                <a id="cta-flow" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=flow&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar desde metodología" data-event="click_cta" data-label="roadmap3d-flow">Quiero mi Roadmap 3D</a>
             </div>
         </div>
     </section>
@@ -174,8 +174,8 @@
             <h2 id="cta-final-title" class="section-title enhanced" data-label="Siguiente paso">¿Empezamos?</h2>
             <p>En 2 semanas tendrás un plan claro de 90 días con proveedores, recursos y plantillas. Todo lo que necesitas para dar el primer paso con confianza.</p>
             <div class="hero-ctas">
-                <a id="cta-footer" href="/contacto?service=roadmap-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-roadmap-3d&utm_content=footer&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar Roadmap 3D" data-event="click_cta" data-label="roadmap3d-footer">Quiero mi Roadmap 3D</a>
-                <a id="cta-footer-example" href="/downloads/ejemplo-roadmap-3d.pdf?utm_source=site&utm_medium=organic&utm_campaign=oc-roadmap-3d&utm_content=footer" class="btn btn-secondary" aria-label="Ver ejemplo de roadmap" data-event="file_download" data-label="roadmap3d-footer-ejemplo">Ver ejemplo de roadmap</a>
+                <a id="cta-footer" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=footer&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar Roadmap 3D" data-event="click_cta" data-label="roadmap3d-footer">Quiero mi Roadmap 3D</a>
+                <a id="cta-footer-example" href="/downloads/ejemplo-roadmap-3d.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=footer" class="btn btn-secondary" aria-label="Ver ejemplo de roadmap" data-event="file_download" data-label="roadmap3d-footer-ejemplo">Ver ejemplo de roadmap</a>
             </div>
         </div>
     </section>
@@ -216,11 +216,13 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       const u = new URL(href, window.location.origin);
       const page = new URLSearchParams(window.location.search);
-      for (const [k,v] of page) if (k.startsWith('utm_')) u.searchParams.set(k,v);
-      u.searchParams.set('utm_source','site');
-      u.searchParams.set('utm_medium','organic');
-      u.searchParams.set('utm_campaign','oc-roadmap-3d');
-      u.searchParams.set('utm_content',content);
+      // Enlaces internos: parámetros oc_* (los utm_* internos rompían la atribución de GA4).
+      const p = u.origin === window.location.origin ? 'oc_' : 'utm_';
+      for (const [k,v] of page) if (k.startsWith('utm_') || k.startsWith('oc_')) u.searchParams.set(p + k.replace(/^(utm|oc)_/,''), v);
+      u.searchParams.set(p+'source','site');
+      u.searchParams.set(p+'medium','organic');
+      u.searchParams.set(p+'campaign','oc-roadmap-3d');
+      u.searchParams.set(p+'content',content);
       el.setAttribute('href', u.toString());
     }
     el.addEventListener('click', function(){
@@ -240,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Sticky CTA móvil -->
 <div class="sticky-cta-mobile" aria-hidden="true">
-  <a id="cta-sticky-primary" class="btn btn-primary" href="/contacto?service=roadmap-3d&utm_source=site&utm_medium=organic&utm_campaign=oc-roadmap-3d&utm_content=sticky&page_path=/servicios/roadmap-3d" data-event="click_cta" data-label="roadmap3d-sticky">Reservar</a>
+  <a id="cta-sticky-primary" class="btn btn-primary" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=sticky&page_path=/servicios/roadmap-3d" data-event="click_cta" data-label="roadmap3d-sticky">Reservar</a>
   <a id="cta-sticky-secondary" class="btn btn-secondary" href="mailto:hola@oficioscirculares.com?subject=Roadmap%203D" data-event="click_cta" data-label="roadmap3d-sticky-secondary">Escribir primero</a>
 </div>
 
