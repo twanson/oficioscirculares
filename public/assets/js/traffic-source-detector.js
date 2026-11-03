@@ -174,12 +174,12 @@ class TrafficSourceDetector {
 // Auto-inicializar cuando el DOM esté listo
 // ── Tráfico interno (Jose) ──
 // Visitar cualquier página con ?oc_interno=1 marca este navegador como interno
-// durante 2 años (cookie oc_internal=1); ?oc_interno=0 lo desmarca.
-// GTM lee la cookie y envía traffic_type=internal a GA4, que lo filtra.
+// durante 2 años (cookie oc_internal=internal); ?oc_interno=0 lo desmarca.
+// GTM envía el valor de la cookie como traffic_type a GA4, que lo filtra.
 (function () {
     try {
         var v = new URLSearchParams(window.location.search).get('oc_interno');
-        if (v === '1') document.cookie = 'oc_internal=1; path=/; max-age=63072000; SameSite=Lax; Secure';
+        if (v === '1') document.cookie = 'oc_internal=internal; path=/; max-age=63072000; SameSite=Lax; Secure';
         if (v === '0') document.cookie = 'oc_internal=; path=/; max-age=0; SameSite=Lax; Secure';
     } catch (e) {}
 })();
