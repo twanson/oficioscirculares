@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Si no hay servicio, mostrar selector (arrastrando sector/utm a los enlaces)
     if (!service) {
         const carry = new URLSearchParams();
-        ['sector','utm_source','utm_medium','utm_campaign','utm_content','page_path'].forEach(function(k){
+        ['sector','utm_source','utm_medium','utm_campaign','utm_content','oc_source','oc_medium','oc_campaign','oc_content','page_path'].forEach(function(k){
             const v = urlParams.get(k);
             if (v) carry.set(k, v);
         });
@@ -226,10 +226,11 @@ document.addEventListener('DOMContentLoaded', function() {
         hideTitle: '1',
         service: urlParams.get('service') || '',
         sector: urlParams.get('sector') || '',
-        utm_source: urlParams.get('utm_source') || '',
-        utm_medium: urlParams.get('utm_medium') || '',
-        utm_campaign: urlParams.get('utm_campaign') || '',
-        utm_content: urlParams.get('utm_content') || '',
+        // Enlaces internos traen oc_*; campañas externas traen utm_*. Tally recibe ambos como utm_*.
+        utm_source: urlParams.get('utm_source') || urlParams.get('oc_source') || '',
+        utm_medium: urlParams.get('utm_medium') || urlParams.get('oc_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || urlParams.get('oc_campaign') || '',
+        utm_content: urlParams.get('utm_content') || urlParams.get('oc_content') || '',
         page_path: urlParams.get('page_path') || '',
     });
     
@@ -245,6 +246,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('📝 Tally form loaded with params:', Object.fromEntries(tallyParams));
 });
+
+// Conversión principal: envío del formulario de contacto (Tally avisa por postMessage).
+(function() {
+    var sent = false;
+    window.addEventListener('message', function(e) {
+        if (sent || typeof e.data !== 'string' || e.data.indexOf('Tally.FormSubmitted') === -1) return;
+        if (!/^https:\/\/tally\.so$/.test(e.origin)) return;
+        sent = true;
+        var p = new URLSearchParams(window.location.search);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: 'generate_lead',
+            lead_service: p.get('service') || '',
+            lead_sector: p.get('sector') || '',
+            lead_origin: p.get('page_path') || p.get('oc_campaign') || p.get('utm_campaign') || ''
+        });
+    });
+})();
 </script>
 
 <!-- Cargar script de Tally para funcionalidades avanzadas -->

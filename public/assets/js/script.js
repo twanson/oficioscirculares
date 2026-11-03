@@ -449,12 +449,12 @@ function setupServiciosDropdown() {
         const service = item.getAttribute('data-service');
         const originalHref = item.getAttribute('href');
         
-        // Add UTM parameters with header-dropdown content
+        // Parámetros internos oc_* (no utm_*, que romperían la atribución de GA4)
         const utm = {
-            utm_source: 'site',
-            utm_medium: 'internal',
-            utm_campaign: `oc-${service}`,
-            utm_content: 'header-dropdown'
+            oc_source: 'site',
+            oc_medium: 'internal',
+            oc_campaign: `oc-${service}`,
+            oc_content: 'header-dropdown'
         };
         
         const url = new URL(originalHref, window.location.origin);

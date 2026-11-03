@@ -825,7 +825,8 @@
                                                                 // El iframe no hereda la query string del padre: hay que pasarlas a mano.
                                                                 var qs = new URLSearchParams(window.location.search);
                                                                 ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
-                                                                    var v = qs.get(k);
+                                                                    // Enlaces internos traen oc_*; los externos (campañas) traen utm_*.
+                                                                    var v = qs.get(k) || qs.get(k.replace('utm_', 'oc_'));
                                                                     if (v) { src += '&' + k + '=' + encodeURIComponent(v); }
                                                                 });
                                                                 iframe.setAttribute('data-tally-src', src);

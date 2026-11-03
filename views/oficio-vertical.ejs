@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= oficio.titulo %></title>
-    <meta name="description" content="<%= oficio.subtitulo.replace(/"/g, '&quot;').substring(0, 160) %>">
+    <meta name="description" content="<%= (oficio.meta_description || oficio.subtitulo.substring(0, 155)).replace(/"/g, '&quot;') %>">
     <link rel="canonical" href="https://www.oficioscirculares.com/oficios/<%= oficio.slug %>">
     <meta name="robots" content="index, follow">
 
@@ -313,7 +313,7 @@
          EJEMPLO DE DIAGNÓSTICO 3D (tras la metodología)
          ═══════════════════════════════════ -->
     <% if (typeof seo !== 'undefined' && seo) {
-        const ejemploPdf = '/downloads/diagnosticos/ejemplo-diagnostico-' + oficio.slug + '.pdf?utm_source=web&utm_medium=vertical&utm_campaign=ejemplo_diagnostico'; %>
+        const ejemploPdf = '/downloads/diagnosticos/ejemplo-diagnostico-' + oficio.slug + '.pdf?oc_source=web&oc_medium=vertical&oc_campaign=ejemplo_diagnostico'; %>
     <section class="ejemplo-diagnostico">
       <div class="ejemplo-diagnostico__inner">
         <div class="ejemplo-diagnostico__text">

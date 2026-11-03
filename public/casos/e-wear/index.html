@@ -1234,7 +1234,7 @@
                 <a href="/#comunidad" class="nav-link">Comunidad</a>
                 <a href="/blog/" class="nav-link">Blog</a>
                 <a href="/recursos" class="nav-link">Recursos</a>
-                <a href="/conecta-lana?utm_source=home&amp;utm_medium=nav&amp;utm_campaign=conecta-lana" class="nav-link">Conecta Lana</a>
+                <a href="/conecta-lana?oc_source=home&amp;oc_medium=nav&amp;oc_campaign=conecta-lana" class="nav-link">Conecta Lana</a>
                 <a href="/#forma-parte-red" class="nav-link cta-nav">Únete a la Red</a>
             </div>
             <div class="hamburger" id="hamburger">
@@ -1959,10 +1959,10 @@
                 'resource_id': 'e-wear-docs',
                 'source': 'web',
                 'page_url': currentUrl.href,
-                'utm_source': urlParams.get('utm_source') || '',
-                'utm_medium': urlParams.get('utm_medium') || '',
-                'utm_campaign': urlParams.get('utm_campaign') || '',
-                'utm_content': urlParams.get('utm_content') || ''
+                'utm_source': urlParams.get('utm_source') || urlParams.get('oc_source') || '',
+                'utm_medium': urlParams.get('utm_medium') || urlParams.get('oc_medium') || '',
+                'utm_campaign': urlParams.get('utm_campaign') || urlParams.get('oc_campaign') || '',
+                'utm_content': urlParams.get('utm_content') || urlParams.get('oc_content') || ''
               };
               
               // Construir query string manualmente para campos ocultos
