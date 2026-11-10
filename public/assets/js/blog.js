@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
       date: '2026-11-12',
       readingMinutes: 10,
       cover: ASSETS_BASE + '/images/blog/trabajar-por-encargo-artesania/encargo-kraft-1440.jpg',
-      tags: ['estrategia', 'circularidad', 'casos']
+      tags: ['estrategia', 'circularidad', 'casos'],
+      publishAt: '2026-11-12T08:00:00+01:00'
     },
     {
       slug: './aislamiento-lana-de-oveja-huella-carbono/',
