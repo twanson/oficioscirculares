@@ -696,6 +696,59 @@
                                                 <p>PDF descargable de 11 páginas, lectura 15 min, con tres ejercicios accionables al final. Pensado para leer una vez y volver sobre los ejercicios cuando toque trabajarlos.</p>
                                             </div>
                                         </div>
+                                    <% } else if (recurso.slug==='trabajar-por-encargo' ) { %>
+                                        <!-- Contenido específico para la guía Trabajar por encargo -->
+                                        <div class="recurso-content-detail">
+
+                                            <div class="content-section">
+                                                <h2>¿Qué es?</h2>
+                                                <p>Una guía de <strong>10 páginas</strong> con seis maneras de organizar un taller que fabrica cuando hay pedido. Cada modelo tiene su ficha: cómo funciona, cuándo cobras, qué riesgo tiene y la frase exacta para contárselo a tu cliente. Con ejemplos reales y una tabla para elegir el tuyo.</p>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>¿Para quién?</h2>
+                                                <ul>
+                                                    <li><strong>Talleres que ya trabajan por encargo</strong> y quieren ordenar cómo cobran y cómo explican el plazo.</li>
+                                                    <li><strong>Talleres que venden desde un catálogo</strong> y se plantean fabricar menos y bajo pedido.</li>
+                                                    <li><strong>Oficios que trabajan por lotes</strong>, como la cerámica, que quieren llenar cada tanda con piezas ya vendidas.</li>
+                                                    <li><strong>Quien tiene lista de espera</strong> y no sabe cómo convertirla en una agenda que dé ingresos previsibles.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué encontrarás dentro</h2>
+                                                <ul>
+                                                    <li><strong>Dos maneras de producir:</strong> por previsión y por encargo, y qué cambia en cada una.</li>
+                                                    <li><strong>Seis fichas de modelo:</strong> encargo puro con señal, cupo anual con agenda, preventa por tandas, serie corta con reposición, encargo profesional, y reparación y mantenimiento.</li>
+                                                    <li><strong>En cada ficha:</strong> un diagrama de cuatro pasos con los momentos de cobro, cómo se cobra, el plazo, el riesgo, a quién le encaja, la frase para contarlo y un ejemplo real.</li>
+                                                    <li><strong>Una tabla para elegir modelo</strong> según la situación de tu taller.</li>
+                                                    <li><strong>Tres reglas comunes</strong> a todos los modelos y un apunte legal sobre el desistimiento en piezas personalizadas.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Cómo funciona (3 pasos)</h2>
+                                                <ol>
+                                                    <li><strong>Descárgala</strong> y busca en la tabla la situación que más se parece a la de tu taller.</li>
+                                                    <li><strong>Lee la ficha de ese modelo</strong> y fíjate en cuándo cobras y qué riesgo asumes.</li>
+                                                    <li><strong>Copia la frase</strong> para contárselo a tu cliente y ponla en tu web, tus fichas o tu presupuesto.</li>
+                                                </ol>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Qué te resuelve</h2>
+                                                <ul>
+                                                    <li>Dejas de fabricar lo que nadie te ha pedido sin quedarte sin ingresos mientras esperas pedidos.</li>
+                                                    <li>Sabes cuándo pedir señal y cuánto, y qué pasa con ella si el cliente cancela.</li>
+                                                    <li>Conviertes el plazo de espera en una prueba de que la pieza se hace para esa persona.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Formato</h2>
+                                                <p>PDF de 10 páginas: las dos maneras de producir, las seis fichas de modelo, la tabla para elegir, las tres reglas comunes y el apunte legal. Pensado para leer una vez y volver a la ficha de tu modelo cuando lo pongas en marcha.</p>
+                                            </div>
+                                        </div>
                                     <% } else if (recurso.slug==='lana-vs-sinteticos' ) { %>
                                         <!-- Contenido específico para el argumentario Lana vs. sintéticos -->
                                         <div class="recurso-content-detail">
@@ -796,7 +849,7 @@
                                     <% } %>
 
                                         <!-- FORMULARIO TALLY con parámetros optimizados -->
-                                        <% if (recurso.form_tally_id) { %>
+                                        <% if (recurso.form_tally_id && recurso.form_tally_id !== 'PENDIENTE') { %>
                                         <section class="recurso-cta">
                                             <div class="cta-container">
                                                 <h3>Completa el formulario para recibir el recurso</h3>
