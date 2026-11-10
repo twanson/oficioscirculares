@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const allPosts = [
     {
+      slug: './trabajar-por-encargo-artesania/',
+      title: 'Trabajar por encargo: el argumento que tu taller no cuenta',
+      excerpt: 'Trabajar por encargo evita fabricar de más. Seis modelos para organizar tu taller, cobrar con señal y contarle el plazo a tu cliente.',
+      date: '2026-11-12',
+      readingMinutes: 10,
+      cover: ASSETS_BASE + '/images/blog/trabajar-por-encargo-artesania/encargo-kraft-1440.jpg',
+      tags: ['estrategia', 'circularidad', 'casos']
+    },
+    {
       slug: './aislamiento-lana-de-oveja-huella-carbono/',
       title: 'Aislamiento de lana de oveja: la medición que falla',
       excerpt: 'La lana aísla bien, ya existe y se tira. Pero la huella de carbono la penaliza. Los 5 fallos de la calculadora y qué está cambiando en 2026.',

@@ -1,5 +1,34 @@
 [
     {
+        "slug": "trabajar-por-encargo",
+        "title": "Trabajar por encargo: seis modelos para tu taller",
+        "type": "guia",
+        "summary": "Seis maneras de organizar un taller que fabrica cuando hay pedido. Una ficha por modelo con cómo funciona, cuándo cobras, qué riesgo tiene y la frase exacta para contárselo a tu cliente. Con ejemplos reales y una tabla para elegir el tuyo.",
+        "tags": [
+            "estrategia",
+            "modelos de negocio",
+            "circularidad",
+            "pricing"
+        ],
+        "cover": "/img/recursos/covers/trabajar-por-encargo-cover.jpg",
+        "pdf": "/downloads/trabajar-por-encargo-seis-modelos.pdf",
+        "form_tally_id": "PENDIENTE",
+        "cta": "Descargar la guía gratis",
+        "updated_at": "2026-11-12",
+        "listed": true,
+        "publish_at": "2026-11-12T08:00:00+01:00",
+        "related": [
+            "calcula-tu-precio",
+            "defiende-tu-precio"
+        ],
+        "related_post": {
+            "slug": "trabajar-por-encargo-artesania",
+            "url": "/blog/trabajar-por-encargo-artesania/",
+            "cta_title": "¿Por qué trabajar por encargo es un argumento?",
+            "cta_text": "Lo contamos entero en el blog: qué cuenta como encargo y qué no, los cinco sitios donde decírselo a tu cliente y los errores más comunes. Con fuentes."
+        }
+    },
+    {
         "slug": "lana-vs-sinteticos",
         "title": "Lana vs. sintéticos: los datos",
         "type": "guia",
