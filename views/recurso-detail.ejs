@@ -852,8 +852,13 @@
                                         <% if (recurso.form_tally_id && recurso.form_tally_id !== 'PENDIENTE') { %>
                                         <section class="recurso-cta">
                                             <div class="cta-container">
+                                                <% if (recurso.slug==='trabajar-por-encargo' ) { %>
+                                                <h3>Completa el formulario para descargar la guía</h3>
+                                                <p>Lo descargas al instante, en la página siguiente.</p>
+                                                <% } else { %>
                                                 <h3>Completa el formulario para recibir el recurso</h3>
                                                 <p>Descarga inmediata después de completar los datos</p>
+                                                <% } %>
 
                                                 <!-- Constante base con parámetros del servidor -->
                                                 <% const
@@ -911,9 +916,15 @@
 
                                                     <!-- Información adicional -->
                                                     <div class="form-info">
+                                                        <% if (recurso.slug==='trabajar-por-encargo' ) { %>
+                                                        <p><small>🔒 Tus datos están seguros. Solo los usamos para
+                                                                darte acceso a la guía y, de vez en cuando,
+                                                                enviarte contenido relacionado.</small></p>
+                                                        <% } else { %>
                                                         <p><small>🔒 Tus datos están seguros. Solo los usamos para
                                                                 enviarte el recurso y contenido relacionado
                                                                 ocasionalmente.</small></p>
+                                                        <% } %>
                                                     </div>
                                             </div>
                                         </section>
