@@ -887,6 +887,11 @@
                                                                     var v = qs.get(k) || qs.get(k.replace('utm_', 'oc_'));
                                                                     if (v) { src += '&' + k + '=' + encodeURIComponent(v); }
                                                                 });
+                                                                // Identificadores de ManyChat (enlaces de los DM de Instagram) -> hidden fields ig_handle y manychat_id.
+                                                                ['ig_handle', 'manychat_id'].forEach(function (k) {
+                                                                    var v = qs.get(k);
+                                                                    if (v) { src += '&' + k + '=' + encodeURIComponent(v); }
+                                                                });
                                                                 iframe.setAttribute('data-tally-src', src);
                                                             }
 
