@@ -257,8 +257,8 @@ Las campañas de Brevo (E1 #30, E2 #31, E3 #28, E4 #32, E5 #29) no se han tocado
 6. **Plan de Supabase:** gratuito (se pausa por inactividad) o Pro (desde 25 $/mes, no se pausa).
 7. Enlace de pago del Diagnóstico para talleres, si se quiere compra directa (hoy va al formulario de contacto).
 8. Precio de la entrada al Club para quien compra el Diagnóstico, y crear ese enlace en Stripe (prueba y real).
-9. Caso E-WEAR: borrarlo, reescribirlo como ilustrativo o recuperarlo con datos reales (hoy redirige a `/servicios`).
-10. PDF público de ejemplo de textil (`/downloads/diagnosticos/ejemplo-diagnostico-textil-sostenible.pdf`): tiene detalles que podrían identificar a un taller real.
+9. ~~Caso E-WEAR~~ **Decidido (21 nov 2026): se queda retirado** (redirige a `/servicios`).
+10. PDF público de ejemplo de textil (`/downloads/diagnosticos/ejemplo-diagnostico-textil-sostenible.pdf`): tiene detalles que podrían identificar a un taller real. Cambio preparado en la rama `fix/retirar-pdf-textil` (sale de `main`), sin fusionar, a la espera del visto bueno de Jose.
 11. Confirmar qué cuenta «Personas en la comunidad» (1.070) y revisar las líneas «qué mide» de `/impacto`.
 12. Mantener o no la garantía del Sprint («seguimos trabajando hasta que funcione, sin coste adicional») y el descuento del Diagnóstico si después se contrata otro servicio.
 13. Reescribir con fechas de enero los cinco correos de Brevo (fuera del repositorio) antes de volver a programarlos.
