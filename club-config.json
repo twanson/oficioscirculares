@@ -5,5 +5,6 @@
   "proximo_directo_fecha": "",
   "telegram_invite_url": "",
   "video_bienvenida_url": "",
-  "stripe_billing_portal": "https://billing.stripe.com/p/login/9AQbMF7WPe2nfccdQQ"
+  "stripe_billing_portal": "https://billing.stripe.com/p/login/9AQbMF7WPe2nfccdQQ",
+  "club_abierto": false
 }

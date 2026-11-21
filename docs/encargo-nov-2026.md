@@ -119,3 +119,20 @@ No se ha tocado (se deja anotado):
 ### Pendiente del bloque 2
 - Confirmar qué cuenta «Personas en la comunidad» (1.070). Lleva un marcador visible en la página.
 - Revisar las líneas «qué mide» de cada cifra. Están redactadas a partir del nombre del indicador, sin añadir datos.
+
+---
+
+## Bloque 3 · Página del Diagnóstico 3D para talleres
+
+- `views/diagnostico-3d.ejs` reescrita como «Diagnóstico 3D para talleres» (misma URL, `/servicios/diagnostico-3d`, para no perder posicionamiento).
+- Proceso sin llamadas, en tres pasos: compras (90 € desde `data/precios.json`), respondes un cuestionario de unos 20 minutos (con audios y fotos) y recibes el informe en PDF y un vídeo de 5 a 10 minutos en el que Jose te lo explica. El plazo lleva el marcador `[PENDIENTE JOSE: plazo de entrega]`.
+- «Qué incluye el informe»: mapa del taller y de su entorno, inventario de lo que ya comunica, presencia en internet, oportunidades de circularidad y tres prioridades ordenadas.
+- Bloque «quien compra el Diagnóstico puede entrar en el Club aunque las plazas estén cerradas»: solo se muestra con `club_abierto: true` en `club-config.json` o con la variable de entorno `CLUB_ABIERTO=true` (manda la variable). Hoy está apagado. Comprobado que aparece y desaparece al cambiar el valor.
+- Eliminadas todas las menciones a la sesión o llamada de 45 minutos: cabecera, «Cómo funciona», precio, FAQ («¿45 minutos dan para algo?») y «Lo único que necesitas preparar». También en Impulso 3D («¿Cómo empezamos?», pasos 1 y 2) y en Sprint 3D («Diagnóstico (45 min)»).
+- Añadido el testimonio de Blanca. Quitado el enlace al ejemplo «marca artesanal»; se mantiene el ejemplo «taller pequeño» (PDF ya publicado).
+- El botón de compra sigue llevando al formulario de contacto (`/contacto?service=diagnostico-3d`), porque no hay enlace de pago propio del Diagnóstico.
+
+### Pendiente del bloque 3
+- Plazo de entrega del informe y del vídeo.
+- Enlace de pago del Diagnóstico (Stripe), si se quiere que la compra sea directa.
+- Confirmar que se mantiene «si después decides seguir con nosotros, te descontamos el importe del diagnóstico», que ya estaba publicado.

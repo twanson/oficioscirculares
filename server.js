@@ -553,7 +553,8 @@ app.get('/servicios/talleres', (req, res) => res.render('servicios', { puerta: '
 app.get('/servicios/empresas', (req, res) => res.render('servicios', { puerta: 'empresas' }));
 
 app.get('/servicios/diagnostico-3d', (req, res) => {
-  res.render('diagnostico-3d');
+  // Diagnóstico 3D para talleres. CLUB_ABIERTO activa el bloque de entrada al Club.
+  res.render('diagnostico-3d', { clubAbierto: clubConfig.getConfig().club_abierto });
 });
 
 app.get('/servicios/roadmap-3d', (req, res) => {

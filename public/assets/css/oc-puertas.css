@@ -120,3 +120,6 @@
 .ocp .ocp-puerta--empresa p,.ocp .ocp-puerta--empresa li span{color:var(--ocp-tinta)}
 .ocp .ocp-puerta h3{color:inherit}
 .ocp .ocp-puerta--empresa h3{color:var(--ocp-verde)}
+
+/* Diagnóstico para talleres: precio legible sobre la cabecera oscura */
+.page-service .service-hero p.diag3d-precio,.page-service .service-hero p.diag3d-precio .precio-iva{color:#FBF7EF!important;opacity:1!important}
