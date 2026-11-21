@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser');
 const clubConfig = require('./lib/clubConfig');
 const clubMembers = require('./lib/clubMembers');
 const clubContent = require('./lib/clubContent');
+const clubAutodiagnostico = require('./lib/clubAutodiagnostico');
 const brevoWaitlist = require('./lib/brevoWaitlist');
 const { getStripe, STRIPE_WEBHOOK_SECRET, PRICE_TO_PLAN } = require('./lib/stripeClub');
 const { createServerSupabase } = require('./lib/supabase');
@@ -496,6 +497,11 @@ app.get('/club/salir', async (req, res) => {
 
 // GET /club/dentro — el hogar del miembro (protegida)
 app.get('/club/dentro', requireMember, async (req, res) => {
+  // Primer acceso: si aún no ha hecho el autodiagnóstico, pasa antes por él.
+  // Solo si la columna existe (migración aplicada); si no, se entra sin más.
+  if (req.clubMember && 'autodiagnostico_at' in req.clubMember && !req.clubMember.autodiagnostico_at) {
+    return res.redirect('/club/dentro/empezar');
+  }
   const cfg = clubConfig.getConfig();
   const votacion = clubContent.votacion();
   const miVoto = votacion.ronda ? await clubMembers.getVoto(req.clubMember.id, votacion.ronda) : null;
@@ -511,6 +517,36 @@ app.get('/club/dentro', requireMember, async (req, res) => {
     votoMsg: typeof req.query.voto === 'string' ? req.query.voto : null,
     billingPortal: cfg.stripe_billing_portal
   });
+});
+
+// GET/POST /club/dentro/empezar — autodiagnóstico del alta (lib/clubAutodiagnostico.js).
+// Se puede rehacer: si ya hay respuestas, el formulario sale relleno.
+function renderEmpezar(res, req, respuestas, errores, errorGuardado) {
+  res.set('Cache-Control', 'private, no-store');
+  res.render('club-empezar', {
+    email: req.clubUser.email,
+    preguntas: clubAutodiagnostico.PREGUNTAS,
+    respuestas: respuestas || (req.clubMember && req.clubMember.autodiagnostico_respuestas) || {},
+    errores: errores || [],
+    errorGuardado: Boolean(errorGuardado),
+    rehacer: Boolean(req.clubMember && req.clubMember.autodiagnostico_at)
+  });
+}
+app.get('/club/dentro/empezar', requireMember, (req, res) => renderEmpezar(res, req));
+app.post('/club/dentro/empezar', requireMember, async (req, res) => {
+  const { respuestas, errores } = clubAutodiagnostico.validar(req.body);
+  if (errores.length) return renderEmpezar(res.status(400), req, respuestas, errores);
+  const r = clubAutodiagnostico.calcular(respuestas);
+  try {
+    await clubMembers.saveAutodiagnostico(req.clubUser.email, {
+      nivel: r.nivel, itinerario: r.itinerario, prioridades: r.prioridades, oficio: r.oficio,
+      respuestas: { ...respuestas, puntos: r.puntos, version: 1 }
+    });
+  } catch (e) {
+    console.error('❌ autodiagnóstico:', e.message);
+    return renderEmpezar(res.status(500), req, respuestas, [], true);
+  }
+  return res.redirect('/club/dentro#punto-de-partida');
 });
 
 // POST /club/dentro/votar — un voto por miembro y ronda (lo garantiza la base de datos)

@@ -71,7 +71,7 @@ Con un correo de prueba que no sea el de Jose:
 1. **Compra:** enlace de pago mensual → pago → llega a `/club/bienvenida`.
 2. **Alta:** la fila aparece en `club_members` con `status = active`, `plan = monthly` y su `stripe_customer_id`.
 3. **Acceso:** `/club/entrar` → llega el correo → el enlace lleva a `/club/dentro`.
-4. **Autodiagnóstico** (si ya está aprobado y construido): el primer acceso pasa por el formulario y el hogar muestra «Tu punto de partida» con nivel y tres prioridades. Comprobar en Supabase `nivel`, `itinerario` y `prioridades`.
+4. **Autodiagnóstico** (aprobado y construido el 21 nov): el primer acceso pasa por `/club/dentro/empezar` y el hogar muestra «Tu punto de partida» con nivel y tres prioridades. Comprobar en Supabase `nivel`, `itinerario` y `prioridades`.
 5. **Lección:** abrir una lección, comprobar el bloque «Diagnóstico de ejemplo» en «En tu oficio» y abrir un PDF.
 6. **Votación:** votar y comprobar que un segundo voto se rechaza.
 7. **Baja:** cancelar la suscripción desde el portal de Stripe → el webhook pone `status = canceled` → `/club/dentro` deja de dar acceso.

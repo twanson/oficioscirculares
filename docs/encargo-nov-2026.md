@@ -17,7 +17,7 @@ Eliminados (no eran de clientes):
 | `views/oficio-vertical.ejs` (las 16 páginas de oficio) | María, Javier y Lucía | Sección eliminada entera |
 | `views/impulso-3d.ejs` («Lo que cuentan quienes ya lo usan») | Elena R. (Toledo) y «Taller familiar» (Andalucía) | Testimonio de Blanca (Asociación Hilandia) |
 | `views/impulso-3d.ejs` (perfiles tipo) | Los perfiles llevaban nombre propio (Marta, Javier, Lucía, Antonio) | Los perfiles se mantienen sin nombre propio («Ceramista, en torno a 55 años») |
-| `views/club.ejs` | Tarjetas de Maika (sin permiso) y de Jorge Esteban | Solo Blanca. Jorge queda únicamente en Conecta Lana |
+| `views/club.ejs` | Tarjetas de Maika (sin permiso) y de Jorge Esteban | Solo Blanca. Jorge queda únicamente en Conecta Lana. **21 nov: vuelve la tarjeta de Maika** (Jose confirma su permiso), con su inicial en lugar de la foto de banco de imágenes |
 | `views/diagnostico-3d.ejs` | Cita anónima «Taller de diseño textil, Madrid» | Eliminada |
 | `views/roadmap-3d.ejs` | Cita anónima «Taller de carpintería, Barcelona» | Eliminada |
 | `views/conecta-lana.ejs` | Cita de Maika comentada en el HTML (visible en el código fuente) | Eliminada. Quedan Esther San Vicente (Al Fresco-Museos Efímeros) y Jorge Esteban (enlace a fenoquimica.es) |
@@ -150,7 +150,7 @@ La base de datos del Club (Supabase `club-oficios-circulares`) sigue en pausa. *
 - Probada contra un Postgres local (PGlite 0.2.17) con el esquema actual de `db/club-members.sql`: se aplica dos veces sin error, guarda un resultado de autodiagnóstico, rechaza un nivel inválido, más de tres prioridades y una ronda mal escrita, impide el segundo voto, borra el voto al borrar al miembro y deja RLS activa.
 
 ### 4.1 Autodiagnóstico en el alta
-- Propuesta de preguntas (9 + 1 opcional), regla de nivel, itinerario y prioridades en `docs/club-autodiagnostico.md`. **Formulario sin construir, a la espera de la aprobación de Jose.**
+- Preguntas, regla de nivel, itinerario y prioridades en `docs/club-autodiagnostico.md`. **Aprobado por Jose el 21 nov 2026 con cuatro cambios y construido** (`lib/clubAutodiagnostico.js`, `views/club-empezar.ejs`, `/club/dentro/empezar`, 14 pruebas con `npm test`). Sin probar contra Supabase, que sigue en pausa.
 - Recomendación: dentro de la web, no en Tally. El resultado se guarda en `club_members` en el mismo paso, sin webhook ni n8n entre medias.
 - Ya preparado: `saveAutodiagnostico()` en `lib/clubMembers.js`, y el bloque «Tu punto de partida» en `/club/dentro` (nivel, tres prioridades, siguiente paso e itinerario), que aparece en cuanto el miembro tiene nivel. Comprobado renderizando la plantilla con un miembro de prueba.
 
@@ -253,7 +253,7 @@ Las campañas de Brevo (E1 #30, E2 #31, E3 #28, E4 #32, E5 #29) no se han tocado
 2. **Plazo de entrega** del informe y del vídeo del Diagnóstico para talleres.
 3. **Testimonios:** no falta ningún texto. Los tres autorizados tenían su texto aprobado en el repositorio. Las páginas que se quedaron sin testimonio (portada, oficios, Diagnóstico de empresas, Roadmap y Sprint) ya no tienen sección.
 4. **Lección 05** (WhatsApp Business).
-5. **Preguntas y regla del autodiagnóstico** (`docs/club-autodiagnostico.md`), y confirmar que se hace dentro de la web. Sin esto no se construye el formulario.
+5. ~~Preguntas y regla del autodiagnóstico~~ **Aprobado y construido (21 nov 2026)**, dentro de la web.
 6. **Plan de Supabase:** gratuito (se pausa por inactividad) o Pro (desde 25 $/mes, no se pausa).
 7. Enlace de pago del Diagnóstico para talleres, si se quiere compra directa (hoy va al formulario de contacto).
 8. Precio de la entrada al Club para quien compra el Diagnóstico, y crear ese enlace en Stripe (prueba y real).

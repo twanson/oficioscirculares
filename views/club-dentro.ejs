@@ -45,7 +45,8 @@
     'radar-ayudas': 'radar.jpg',
     'mapa-del-contenido': 'mapa.jpg'
   };
-  var nivelTexto = { empieza: 'Empiezas', publica: 'Publicas', vende: 'Vendes' };
+  // Habla de la comunicación en internet, no del taller (lib/clubAutodiagnostico.js → NIVEL_TEXTO).
+  var nivelTexto = { empieza: 'estás empezando', publica: 'ya publicas', vende: 'ya vendes' };
   var itin = (member && Array.isArray(member.itinerario)) ? member.itinerario.map(getPiece).filter(Boolean) : [];
   var siguiente = itin[0] || null;
   var prioridades = (member && Array.isArray(member.prioridades)) ? member.prioridades.slice(0, 3) : [];
@@ -93,7 +94,7 @@
     <!-- Tu punto de partida (resultado del autodiagnóstico del alta) -->
     <section class="ca-partida wow" id="punto-de-partida" aria-labelledby="partida-title">
       <span class="ca-kicker">Tu punto de partida</span>
-      <h2 id="partida-title">Tu nivel: <span class="ca-nivel"><%= nivelTexto[member.nivel] || member.nivel %></span></h2>
+      <h2 id="partida-title">En internet <em><%= nivelTexto[member.nivel] || member.nivel %></em></h2>
       <% if (prioridades.length) { %>
         <p style="margin:0">Tus tres prioridades para este primer mes:</p>
         <ol class="ca-prioridades"><% prioridades.forEach(function(p){ %><li><%= p %></li><% }) %></ol>
@@ -102,6 +103,7 @@
         <p style="margin:0">Tu siguiente paso: <a class="ca-siguiente" href="/club/dentro/lecciones/<%= siguiente.slug %>"><%= siguiente.title %> &rarr;</a></p>
         <% if (itin.length > 1) { %><p style="margin:8px 0 0;color:var(--tinta-suave);font-size:14px">Tu itinerario: <%= itin.map(function(p){ return p.kicker; }).join(' · ') %></p><% } %>
       <% } %>
+      <p style="margin:14px 0 0;font-size:14px"><a href="/club/dentro/empezar" style="color:#934A1C;font-weight:700">Rehacer el autodiagnóstico</a></p>
     </section>
     <% } %>
 

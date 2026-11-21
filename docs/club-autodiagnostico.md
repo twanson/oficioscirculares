@@ -1,6 +1,21 @@
-# Club · Autodiagnóstico en el alta (propuesta)
+# Club · Autodiagnóstico en el alta
 
-**Estado: PROPUESTA, pendiente de la aprobación de Jose. El formulario NO está construido.**
+**Estado: APROBADO por Jose el 21 de noviembre de 2026, dentro de la web, y CONSTRUIDO en `development`.** No se ha probado contra Supabase porque el proyecto sigue en pausa: la prueba completa está en el paso 5 de `docs/checklist-4-enero.md`.
+
+Cambios de Jose sobre la propuesta:
+1. Pregunta nueva, sin puntos: «¿Con qué materiales trabajas y de dónde vienen?», con la casilla «Me sobra material o me cuesta encontrarlo». Se guarda en `autodiagnostico_respuestas` (`materiales` y `material_sobra_o_falta`).
+2. El resultado habla de la comunicación en internet, no del taller: «En internet estás empezando / ya publicas / ya vendes». Los valores internos (`empieza`, `publica`, `vende`) no cambian.
+3. La excepción que sube a «vende» solo se aplica a «Más de la mitad» en la pregunta de ventas por internet.
+4. Textil ve el diagnóstico de ejemplo de Lana y costura; Cerámica, el de Barro y alfarería; «Otro» no tiene ejemplo destacado y ve la lista completa.
+
+Dónde está:
+- `lib/clubAutodiagnostico.js`: preguntas, validación y regla. Pruebas en `test/clubAutodiagnostico.test.js` (`npm test`).
+- `views/club-empezar.ejs` y las rutas `GET/POST /club/dentro/empezar` en `server.js`.
+- `/club/dentro` lleva al formulario si `autodiagnostico_at` está vacío (solo si la columna existe, es decir, con la migración aplicada). Desde el inicio hay un enlace «Rehacer el autodiagnóstico».
+
+---
+
+*Propuesta original (con los cambios ya aplicados en el código):*
 
 Lo que ya está hecho y no depende de las preguntas:
 - Migración `db/migrations/20270104_club_novedades.sql`: columnas `nivel`, `itinerario`, `prioridades`, `oficio`, `autodiagnostico_respuestas` y `autodiagnostico_at` en `club_members`.
@@ -14,7 +29,9 @@ Lo que ya está hecho y no depende de las preguntas:
 
 Flujo propuesto: pago en Stripe → `/club/bienvenida` → primer acceso por enlace mágico → si `autodiagnostico_at` está vacío, el servidor lleva a `/club/dentro/empezar` (el formulario) → al enviarlo, se calcula el resultado, se guarda y se entra a `/club/dentro`. Así el autodiagnóstico queda «después del pago y antes de entrar por primera vez», como pide el encargo. Si alguien lo cierra a medias, se le vuelve a mostrar en el siguiente acceso.
 
-## Las preguntas (9 + 1 opcional)
+## Las preguntas (10 + 1 opcional)
+
+En el formulario, la pregunta de materiales va la tercera, después de «¿Dónde vendes hoy?». Abajo se mantiene la numeración de la propuesta.
 
 Todas de opción única salvo la 2. Se responden en 3 o 4 minutos.
 
@@ -42,7 +59,7 @@ Suma de las preguntas 3, 4, 5, 6 y 7: de 0 a 12 puntos.
 | 5 a 8 | **publica** |
 | 9 a 12 | **vende** |
 
-Excepción: si en la pregunta 4 responde «Entre una cuarta parte y la mitad» o «Más de la mitad», el nivel es **vende** aunque sume menos. Ya vende por internet y lo que necesita es tiempo y sistema.
+Excepción (corregida por Jose): si en la pregunta 4 responde «Más de la mitad», el nivel es **vende** aunque sume menos. Ya vende por internet y lo que necesita es tiempo y sistema.
 
 ### Itinerario (orden de las lecciones)
 Sale de los tres perfiles que ya están en el mapa del contenido:
@@ -77,8 +94,7 @@ Si no hay dos áreas flojas, se completan según el nivel: empieza → «Termina
 
 Si en la pregunta 9 responde «Menos de una hora», las prioridades se quedan en tres pero se muestran con la versión corta (una pieza, una foto, una publicación).
 
-## Lo que necesito de Jose
-- Aprobar o cambiar las preguntas y la regla.
-- Confirmar que se hace dentro de la web, no en Tally.
-
-Con la aprobación, construirlo lleva una sesión: el formulario en `/club/dentro/empezar`, el cálculo en `lib/clubAutodiagnostico.js` con pruebas y la redirección en el primer acceso.
+## Detalles que no estaban en la propuesta
+- «Sin repetir la primera»: «Me regatean» ya cubre el área de precio; «Me ven pero no me compran», la de bio; «No sé qué publicar» y «No tengo tiempo», la de constancia. Esas áreas no se repiten como prioridad 2 o 3.
+- Si la prioridad 1 ya cubría la única área floja, la tercera se completa con otro paso del nivel (empieza: guía y reto; publica: reto y radar; vende: radar y reto).
+- Las versiones cortas (menos de una hora a la semana) están en `lib/clubAutodiagnostico.js`.

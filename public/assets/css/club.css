@@ -227,6 +227,7 @@ html,body{overflow-x:clip}
 .club-landing .testi h2{font-size:clamp(34px,4.4vw,50px)}
 .club-landing .testi .cab p{font-style:italic;font-family:var(--serif);color:var(--tinta-suave);margin-top:10px;font-size:18px}
 .club-landing .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.club-landing .testi-grid--dos{grid-template-columns:repeat(2,1fr);max-width:760px;margin:0 auto}
 .club-landing .testi-card{background:var(--blanco);border-radius:var(--radius);box-shadow:0 10px 32px rgba(2,52,41,.08);padding:34px 32px;position:relative;transition:transform .25s ease,box-shadow .25s ease;display:flex;flex-direction:column}
 .club-landing .testi-card:hover{transform:translateY(-5px);box-shadow:0 22px 48px rgba(2,52,41,.14)}
 .club-landing .testi-card .comillas{font-family:var(--serif);font-style:italic;font-size:64px;line-height:1;color:rgba(147,74,28,.25);margin-bottom:8px}
