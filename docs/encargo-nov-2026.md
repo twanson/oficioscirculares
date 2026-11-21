@@ -136,3 +136,105 @@ No se ha tocado (se deja anotado):
 - Plazo de entrega del informe y del vídeo.
 - Enlace de pago del Diagnóstico (Stripe), si se quiere que la compra sea directa.
 - Confirmar que se mantiene «si después decides seguir con nosotros, te descontamos el importe del diagnóstico», que ya estaba publicado.
+
+---
+
+## Bloque 4 · Novedades del Club (solo entorno de pruebas)
+
+La base de datos del Club (Supabase `club-oficios-circulares`) sigue en pausa. **No se ha restaurado.**
+
+### Migración
+- `db/migrations/20270104_club_novedades.sql`, para aplicar el 4 de enero de 2027 (paso 1 de `docs/checklist-4-enero.md`). Es idempotente.
+  - `club_members`: columnas `nivel` (solo `empieza`, `publica` o `vende`), `itinerario`, `prioridades` (máximo tres), `oficio`, `autodiagnostico_respuestas` y `autodiagnostico_at`.
+  - Tabla `club_votos` (clave primaria miembro + ronda: un voto por miembro y ronda; se borra con el miembro) y vista `club_votos_recuento`. RLS activada y sin políticas, como `club_members`.
+- Probada contra un Postgres local (PGlite 0.2.17) con el esquema actual de `db/club-members.sql`: se aplica dos veces sin error, guarda un resultado de autodiagnóstico, rechaza un nivel inválido, más de tres prioridades y una ronda mal escrita, impide el segundo voto, borra el voto al borrar al miembro y deja RLS activa.
+
+### 4.1 Autodiagnóstico en el alta
+- Propuesta de preguntas (9 + 1 opcional), regla de nivel, itinerario y prioridades en `docs/club-autodiagnostico.md`. **Formulario sin construir, a la espera de la aprobación de Jose.**
+- Recomendación: dentro de la web, no en Tally. El resultado se guarda en `club_members` en el mismo paso, sin webhook ni n8n entre medias.
+- Ya preparado: `saveAutodiagnostico()` en `lib/clubMembers.js`, y el bloque «Tu punto de partida» en `/club/dentro` (nivel, tres prioridades, siguiente paso e itinerario), que aparece en cuanto el miembro tiene nivel. Comprobado renderizando la plantilla con un miembro de prueba.
+
+### 4.2 Diagnósticos de ejemplo por oficio
+- Revisados los 15 de `2_AREAS/Servicios_OC/_compartido/Plantillas_Comerciales/` (Markdown completo + texto del PDF):
+  - **14 subidos**, todos casos compuestos sin nombres reales: alimentación, barro, construcción, cosmética, cuero, encuadernación, fibras, forja, joyería, lana, madera, turismo, upcycling y vidrio.
+  - **Textil NO se sube.** No tiene nombres, pero junta detalles que podrían identificar a un taller real: taller en una capital del norte, tienda de museo de primer nivel, aparición en una televisión autonómica, volumen y precios por pieza.
+- Están en `club-content/diagnosticos-ejemplo/` (fuera de `public`, solo para miembros) y se sirven en `/club/dentro/diagnosticos/:oficio`.
+- En cada lección (01-04 y 06), al final de «En tu oficio», se añade un bloque con un enlace por oficio. Si el miembro tiene oficio guardado, el suyo sale destacado. Se inyecta al servir la página (`lib/clubLecciones.js`); los HTML originales no se tocan.
+- **Aviso:** el PDF público `public/downloads/diagnosticos/ejemplo-diagnostico-textil-sostenible.pdf`, enlazado desde `/oficios/textil-sostenible` y ya en producción, contiene esos mismos detalles. No se ha tocado; lo decide Jose.
+
+### 4.3 Mapa del contenido
+- Lección 06 «Ferias que venden» copiada de la carpeta local del Club a `club-content/` y añadida a la estantería (portada de texto hasta que haya imagen).
+- Mapa de lecciones con el estado escrito en texto, además del color (azul «Disponible», ámbar «Próximamente», ámbar con borde discontinuo «Pendiente»):
+  - en `/club/dentro` (datos en `lib/clubContent.js → MAPA_LECCIONES`);
+  - en `club-content/mapa-del-contenido.html` (sección nueva «Las lecciones, una a una»).
+- Estados: 01-04 y 06 disponibles; 05 WhatsApp Business `[PENDIENTE JOSE]` (no se ha inventado); 07 «Contar la historia de tu marca», próximamente, febrero de 2027; 08 «Lo circular como argumento de precio», próximamente, marzo de 2027; desde abril, una lección al mes por votación.
+- Votación: bloque en «Este mes en el Club» con la lista de temas y un voto por miembro (la base de datos impide el segundo). Temas en `club-content/votacion.json`, ronda `2027-04`: Etsy vs. tienda propia, Email básico, y Encargos a medida y Envíos y embalaje (las dos candidatas nuevas que ya estaban decididas en `ESTADO-DEL-PROYECTO.md`). WhatsApp y Ferias salen de la votación porque ya tienen número de lección.
+- El mapa (secciones 01, 06 y 07) ya no habla de «otoño de 2026» ni de votar con #pido en el chat.
+
+### 4.4 Directos con artesanos
+- Página `/club/dentro/directos` (vista `views/club-directos.ejs`, datos en `club-content/directos.json`): próximos encuentros y archivo de grabaciones.
+- Oculta: con `directos_visible: false` (o `DIRECTOS_VISIBLE=false`) la ruta redirige al hogar y no se enlaza desde ningún sitio. No aparece en la página de venta.
+
+### 4.5 Fechas
+Variables de configuración en `club-config.json`, que se pueden sobreescribir por variable de entorno: `club_apertura` = `2027-01-18` y `club_cierre` = `2027-01-27T23:59:00+01:00`.
+
+Sitios del repositorio con fecha escrita a mano:
+
+| Archivo | Había | Ahora |
+|---|---|---|
+| `views/club.ejs`, cabecera | «40 plazas hasta el 23 de septiembre» | «40 plazas, del 18 de enero al 27 de enero» (configuración) |
+| `views/club.ejs`, precios | «Abrimos el Club con 40 plazas hasta el 23 de septiembre» | «…del 18 de enero al 27 de enero de 2027» (configuración) |
+| `views/club.ejs`, cierre | «40 plazas fundador · Cierre: 23 de septiembre» | «Cierre: 27 de enero» (configuración) |
+| `club-content/guia-primera-victoria.html` | «[DÍA Y HORA — p. ej. jueves 24 de septiembre, 19:00]» | «[DÍA Y HORA del primer directo]» |
+| `club-content/mapa-del-contenido.html` | «Otoño 2026: primera lección votada…» | Febrero, marzo y abril de 2027 |
+| `docs/club-area-miembros.md` | «el 23 de septiembre» y el ejemplo de directo de octubre | Remite a `club_cierre` |
+
+El número de plazas (40) también sale ya de un único sitio (`data/precios.json`); `club-config.json` ya no lo repite.
+
+No se ha tocado:
+- `club-content/radar-ayudas-edicion-0.html`: «Aragón · hasta 1 sept», «Verano (jul–sept)». Son plazos de convocatorias de la edición de verano de 2026, no fechas del lanzamiento. Esa edición se sustituye por la Edición 1 en enero.
+
+Plantillas de correo de Brevo: **no hay ninguna en el repositorio.** Están en la carpeta local del Club (`1_PROYECTOS/Club Oficios Circulares/Emails_Brevo/`) y no se han modificado. Fechas de septiembre que contienen:
+
+| Correo | Fechas |
+|---|---|
+| `email-0-bienvenida-fundador.html` | comentario de envío «desde el 14 sept» |
+| `email-1-lun-7-sept-la-historia.html` | envío «lunes 7 de septiembre de 2026»; texto «el lunes 14 de septiembre abrimos las primeras plazas» |
+| `email-2-mie-9-sept-la-cuenta.html` | envío «miércoles 9 de septiembre de 2026»; texto «El lunes 14 de septiembre abrimos» |
+| `email-3-vie-11-sept-circulares.html` | envío «viernes 11 de septiembre de 2026» |
+| `email-4-lun-14-sept-apertura.html` | envío «lunes 14 de septiembre»; asunto «(hasta el 23 de septiembre)»; texto «hasta el miércoles 23 de septiembre»; banda «40 plazas · hasta el 23 de septiembre» |
+| `email-5-mie-23-sept-cierre.html` | envío «miércoles 23 de septiembre de 2026»; banda «40 plazas · hasta el 23 de septiembre» |
+
+Las campañas de Brevo (E1 #30, E2 #31, E3 #28, E4 #32, E5 #29) no se han tocado desde aquí.
+
+### 4.6 Entrada fuera de plazo
+- **No creado.** En este equipo no hay clave de Stripe ni acceso a Stripe desde las herramientas de la sesión, así que no se ha podido crear el enlace en modo de prueba. No se ha tocado nada en Stripe.
+- Pasos para crearlo en prueba y en real, y el ajuste del webhook, en `docs/club-entrada-fuera-de-plazo.md`.
+
+### 4.7 Vocabulario
+- No quedaba «socios» referido a miembros del Club. Se reescriben las dos únicas apariciones, que hablaban de otras asociaciones, para no usar la palabra: radar de ayudas («…a quienes forman parte de ellas») y lección 06 («si perteneces o no a la federación»).
+
+### 4.8 Página de venta del Club
+- Pilar «Aprende»: «Una lección nueva cada mes (desde abril, por votación)» y «Diagnósticos de ejemplo de tu oficio».
+- «Tu primera semana», día 1: el autodiagnóstico al entrar (nivel, orden de lecciones y tres prioridades).
+- «Cada mes»: «Una lección nueva cada mes» (antes decía «una lección corta a la semana»).
+- 40 plazas de fundador a 12 €/mes o 120 €/año, desde `data/precios.json` y con las fechas de la configuración.
+- «Las 40 plazas fundador han volado» (con plazas cerradas) pasa a «Las plazas de fundador están cerradas». El cierre lo marca la configuración, no el número real de altas.
+- No se mencionan los directos con artesanos. El directo mensual con revisión en vivo, que ya formaba parte del Club, sigue.
+
+### noindex
+- `/club` y todas las rutas que empiezan por `/club/` llevan ahora la cabecera `X-Robots-Tag: noindex, nofollow` desde un middleware. Además, `/club/lista-espera`, que estaba marcada como indexable, lleva ya la meta `noindex`. Comprobado en local con `/club`, `/club/lista-espera`, `/club/bienvenida`, `/club/entrar`, `/club/dentro`, `/club/dentro/directos` y `/club/dentro/diagnosticos/lana`.
+
+### Comprobación del bloque 4
+- Sin fecha de septiembre en el Club del repositorio (salvo los plazos del radar de verano, explicados arriba): hecho.
+- «Directos» no visible: hecho (redirige y no hay enlaces).
+- `/club` conserva `noindex`: hecho.
+- **Alta de prueba que pasa por el autodiagnóstico: NO se puede hacer todavía.** El formulario espera la aprobación de Jose y la base de datos está en pausa hasta el 4 de enero. Lo que sí está comprobado: la plantilla del hogar con un miembro de prueba que ya tiene nivel, itinerario y prioridades muestra «Tu punto de partida», y la migración funciona contra un Postgres local.
+
+### Pendiente del bloque 4
+- Aprobar las preguntas y la regla del autodiagnóstico (y construir el formulario).
+- Lección 05 (WhatsApp Business).
+- Precio de la entrada fuera de plazo y creación del enlace en Stripe (prueba y real).
+- Qué hacer con el PDF público de textil.
+- Portada (imagen) de la lección 06 para la estantería.
+- Reescribir y reprogramar los cinco correos de Brevo con las fechas de enero (fuera del repositorio).

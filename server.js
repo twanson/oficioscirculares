@@ -240,6 +240,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// El Club y todas sus rutas siguen sin indexar hasta el lanzamiento (encargo nov 2026).
+app.use((req, res, next) => {
+  if (/^\/club(\/|$)/.test(req.path) || req.path === '/auth/callback') res.set('X-Robots-Tag', 'noindex, nofollow');
+  next();
+});
+
 // Middleware para redirecciones PDF (maneja varias codificaciones)
 app.use('/', (req, res, next) => {
   const url = req.path;
@@ -365,7 +371,7 @@ app.get('/viaje/lana', (req, res) => {
 // CTA con Payment Links de Stripe reales; con plazas_abiertas=false pasan a lista de espera.
 app.get('/club', (req, res) => {
   const cfg = clubConfig.getConfig();
-  res.render('club', { plazasAbiertas: cfg.plazas_abiertas, config: cfg });
+  res.render('club', { plazasAbiertas: cfg.plazas_abiertas, config: cfg, directosVisible: cfg.directos_visible });
 });
 
 // ============================================================
@@ -411,12 +417,14 @@ function injectClubBar(html) {
   if (/<body[^>]*>/i.test(html)) return html.replace(/(<body[^>]*>)/i, '$1\n' + bar + '\n');
   return bar + html;
 }
-function serveClubPiece(res, piece) {
+const { diagnosticosBlock, injectAfterOficiosGrid } = require('./lib/clubLecciones');
+function serveClubPiece(res, piece, member) {
   let html = _clubPieceCache.get(piece.slug);
   if (!html) {
     html = injectClubBar(fs.readFileSync(clubContent.filePath(piece), 'utf8'));
     _clubPieceCache.set(piece.slug, html);
   }
+  if (piece.group === 'lecciones') html = injectAfterOficiosGrid(html, diagnosticosBlock(member));
   res.set('Cache-Control', 'private, no-store');
   res.set('X-Robots-Tag', 'noindex, nofollow');
   res.type('html').send(html);
@@ -487,26 +495,61 @@ app.get('/club/salir', async (req, res) => {
 });
 
 // GET /club/dentro — el hogar del miembro (protegida)
-app.get('/club/dentro', requireMember, (req, res) => {
+app.get('/club/dentro', requireMember, async (req, res) => {
   const cfg = clubConfig.getConfig();
+  const votacion = clubContent.votacion();
+  const miVoto = votacion.ronda ? await clubMembers.getVoto(req.clubMember.id, votacion.ronda) : null;
   res.render('club-dentro', {
     email: req.clubUser.email,
     member: req.clubMember,
     config: cfg,
     pieces: clubContent.PIECES,
+    mapaLecciones: clubContent.MAPA_LECCIONES,
+    getPiece: clubContent.get,
+    votacion,
+    miVoto,
+    votoMsg: typeof req.query.voto === 'string' ? req.query.voto : null,
     billingPortal: cfg.stripe_billing_portal
   });
+});
+
+// POST /club/dentro/votar — un voto por miembro y ronda (lo garantiza la base de datos)
+app.post('/club/dentro/votar', requireMember, async (req, res) => {
+  const votacion = clubContent.votacion();
+  const tema = String(req.body.tema || '');
+  if (!votacion.abierta || !votacion.ronda || !votacion.temas.some(t => t.clave === tema)) {
+    return res.redirect('/club/dentro?voto=error#votacion');
+  }
+  const r = await clubMembers.votar(req.clubMember.id, votacion.ronda, tema);
+  return res.redirect('/club/dentro?voto=' + (r === 'ok' ? 'ok' : r === 'ya-votado' ? 'ya' : 'error') + '#votacion');
+});
+
+// GET /club/dentro/diagnosticos/:clave — diagnóstico de ejemplo por oficio (PDF, solo miembros)
+app.get('/club/dentro/diagnosticos/:clave', requireMember, (req, res) => {
+  const d = clubContent.diagnostico(req.params.clave);
+  if (!d) return res.redirect('/club/dentro');
+  res.set('Cache-Control', 'private, no-store');
+  res.type('application/pdf');
+  res.sendFile(d.file);
+});
+
+// GET /club/dentro/directos — «Directos con artesanos». Oculta (redirige al hogar)
+// mientras directos_visible / DIRECTOS_VISIBLE sea false.
+app.get('/club/dentro/directos', requireMember, (req, res) => {
+  const cfg = clubConfig.getConfig();
+  if (!cfg.directos_visible) return res.redirect('/club/dentro');
+  res.render('club-directos', { email: req.clubUser.email, directos: clubContent.directos() });
 });
 
 // GET /club/dentro/lecciones/:slug — sirve cada pieza (protegida)
 app.get('/club/dentro/lecciones/:slug', requireMember, (req, res) => {
   const piece = clubContent.get(req.params.slug);
   if (!piece || !clubContent.exists(piece)) return res.redirect('/club/dentro');
-  try { serveClubPiece(res, piece); }
+  try { serveClubPiece(res, piece, req.clubMember); }
   catch (e) { console.error('serveClubPiece:', e.message); res.redirect('/club/dentro'); }
 });
 
-// GET /club/lista-espera — pública (indexable)
+// GET /club/lista-espera — pública, sin indexar (como todo /club)
 app.get('/club/lista-espera', (req, res) => {
   res.render('club-lista-espera', {
     done: req.query.ok === '1',

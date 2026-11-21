@@ -35,7 +35,7 @@ Opcionales (tienen valor por defecto en el código):
 
 ## 2. Supabase
 
-1. **Tabla**: ejecuta `db/club-members.sql` en el SQL Editor del proyecto. Crea
+1. **Tabla**: ejecuta `db/club-members.sql` y después `db/migrations/20270104_club_novedades.sql` en el SQL Editor del proyecto. Crea
    `club_members` con RLS activada (solo el service role escribe/lee). Es
    idempotente: si la tabla ya existía, el script hace `add column if not exists
    nombre` (columna opcional para saludar por su nombre en el hogar; si está
@@ -96,14 +96,24 @@ Opcionales (tienen valor por defecto en el código):
 ```json
 {
   "plazas_abiertas": true,
-  "plazas_totales": 40,
-  "proximo_directo": "Miércoles 8 de octubre, 19:00 (online)",
-  "proximo_directo_fecha": "2026-10-08",
+  "proximo_directo": "Miércoles 3 de febrero, 19:00 (online)",
+  "proximo_directo_fecha": "2027-02-03",
   "telegram_invite_url": "https://t.me/…",
   "video_bienvenida_url": "",
-  "stripe_billing_portal": "https://billing.stripe.com/p/login/9AQbMF7WPe2nfccdQQ"
+  "stripe_billing_portal": "https://billing.stripe.com/p/login/9AQbMF7WPe2nfccdQQ",
+  "club_abierto": false,
+  "directos_visible": false,
+  "club_apertura": "2027-01-18",
+  "club_cierre": "2027-01-27T23:59:00+01:00"
 }
 ```
+
+(El ejemplo de `proximo_directo` es ilustrativo.) Desde noviembre de 2026:
+- El número de plazas de fundador ya no está aquí: sale de `data/precios.json` (`club_plazas_fundador`), igual que los precios.
+- `club_apertura` y `club_cierre`: fechas de apertura y cierre de plazas. La landing las muestra en texto («del 18 de enero al 27 de enero»). Se pueden sobreescribir con las variables de entorno `CLUB_APERTURA` y `CLUB_CIERRE`.
+- `club_abierto` (o `CLUB_ABIERTO`): activa en el Diagnóstico 3D para talleres el aviso de que quien lo compra puede entrar en el Club con las plazas cerradas. Se activa el día del lanzamiento.
+- `directos_visible` (o `DIRECTOS_VISIBLE`): muestra la sección «Directos con artesanos» (`/club/dentro/directos`, datos en `club-content/directos.json`). Se activa cuando haya tres invitados confirmados con fecha.
+- La votación de la lección del mes se edita en `club-content/votacion.json`.
 
 Claves del hogar `/club/dentro`:
 - `proximo_directo`: texto que se muestra (libre).
@@ -114,7 +124,7 @@ Claves del hogar `/club/dentro`:
   `/assets/videos/club/bienvenida.mp4`). Vacía = no se muestra el reproductor.
   Jose lo graba en agosto; al subirlo, rellenar esta clave.
 
-**Cerrar las plazas** (cambio de un minuto — el 23 de septiembre O antes si se llenan las 40):
+**Cerrar las plazas** (cambio de un minuto, en la fecha de `club_cierre` o antes si se llenan las plazas):
 1. Edita `club-config.json`: `"plazas_abiertas": false`.
 2. Commit + push a `development` (o a `main` para producción). Railway redeploya solo.
 3. La landing `/club` sustituye automáticamente los botones de compra por el

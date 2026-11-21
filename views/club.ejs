@@ -43,7 +43,7 @@
       <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
       <a class="club-btn club-btn--ghost" href="#incluye">Ver qué incluye</a>
     </div>
-    <span class="datos-linea">Precio fundador: <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia · 40 plazas hasta el 23 de septiembre</span>
+    <span class="datos-linea">Precio fundador: <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia · <%= precios.plazasFundador() %> plazas, del <%= config.fechas.apertura_corta %> al <%= config.fechas.cierre_corta %></span>
   </div>
 </header>
 
@@ -150,6 +150,8 @@
           <li><strong>Vender online sin líos</strong> — tienda propia o Etsy, y el papeleo explicado en cristiano.</li>
           <li><strong>Precios con margen</strong> — cobra lo que vale tu trabajo, con números y sin culpa.</li>
           <li><strong>Instagram con constancia</strong> — un calendario realista para no quemarte ni dejar el torno.</li>
+          <li><strong>Una lección nueva cada mes</strong> — y desde abril la elegís entre los miembros, por votación.</li>
+          <li><strong>Diagnósticos de ejemplo de tu oficio</strong> — mira cómo es un Diagnóstico 3D completo de un taller como el tuyo.</li>
         </ul>
         <div class="tags"><span class="tag">5–20 min</span><span class="tag">con tu móvil</span><span class="tag">aplicable hoy</span></div>
       </div>
@@ -204,7 +206,7 @@
         <div class="bola">1</div>
         <div class="cuando">Día 1</div>
         <h3>Entras y te sitúas</h3>
-        <p>Bienvenida, te presentas en el chat de tu oficio y eliges tu primer objetivo con nuestra guía de arranque.</p>
+        <p>Respondes un autodiagnóstico corto que te dice tu nivel, el orden de lecciones que más te conviene y tus tres prioridades del primer mes. Luego te presentas en el chat de tu oficio.</p>
       </div>
       <div class="paso reveal">
         <div class="bola">2</div>
@@ -222,7 +224,7 @@
         <div class="bola">4</div>
         <div class="cuando">Cada mes</div>
         <h3>Ritmo de taller</h3>
-        <p>Una lección corta a la semana, el reto del trimestre, el chat siempre abierto y el directo mensual con revisiones en vivo.</p>
+        <p>Una lección nueva cada mes, el reto del trimestre, el chat siempre abierto y el directo mensual con revisiones en vivo.</p>
       </div>
     </div>
   </div>
@@ -314,7 +316,7 @@
   <div class="cab">
     <span class="eyebrow">Oferta fundador — beta</span>
     <h2>Entra como fundador. <em>Este precio, para siempre.</em></h2>
-    <p>Abrimos el Club con 40 plazas hasta el 23 de septiembre. ¿Por qué un límite? Porque los directos con revisión en vivo funcionan con decenas de personas, no con cientos. La escasez no es teatro: es aforo.</p>
+    <p>Abrimos el Club con <%= precios.plazasFundador() %> plazas de fundador, del <%= config.fechas.apertura_corta %> al <%= config.fechas.cierre %>. ¿Por qué un límite? Porque los directos con revisión en vivo funcionan con decenas de personas, no con cientos. La escasez no es teatro: es aforo.</p>
   </div>
   <div class="wrap">
     <% var plazasOpen = (typeof plazasAbiertas === 'undefined') ? true : plazasAbiertas; %>
@@ -356,8 +358,8 @@
     </div>
     <% } else { %>
     <div class="planes-cerrado" style="max-width:620px;margin:0 auto;text-align:center;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:28px;box-shadow:0 20px 50px rgba(2,52,41,.12);padding:48px 40px">
-      <span class="plan-eyebrow" style="color:var(--terracota)">Plazas fundador agotadas</span>
-      <h3 style="font-size:clamp(26px,3.4vw,34px);margin:6px 0 14px">Las 40 plazas fundador han volado</h3>
+      <span class="plan-eyebrow" style="color:var(--terracota)">Plazas fundador cerradas</span>
+      <h3 style="font-size:clamp(26px,3.4vw,34px);margin:6px 0 14px">Las plazas de fundador están cerradas</h3>
       <p style="max-width:52ch;margin:0 auto 26px;color:var(--tinta-suave)">Déjanos tu correo: los de esta lista entran primero en la próxima apertura (y te avisamos solo para eso).</p>
       <form method="POST" action="/club/lista-espera" style="display:flex;gap:10px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center">
         <input type="email" name="email" required autocomplete="email" placeholder="tu@correo.com" aria-label="Tu correo" style="flex:1;min-width:240px;padding:15px 20px;border-radius:999px;border:1.5px solid rgba(2,52,41,.2);font-family:inherit;font-size:16px;background:#fff;color:var(--tinta)">
@@ -425,7 +427,7 @@
     <h2>Tu oficio lleva generaciones pasando de mano en mano. Que no se pare en la tuya <em>por falta de clientes.</em></h2>
     <p>Entra al Club, publica tu primera pieza esta semana y deja de trabajar solo.</p>
     <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
-    <span class="micro micro--luz">40 plazas fundador · Cierre: 23 de septiembre · <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia</span>
+    <span class="micro micro--luz"><%= precios.plazasFundador() %> plazas fundador · Cierre: <%= config.fechas.cierre_corta %> · <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia</span>
     <p class="pd">¿Dudas antes de entrar? Escríbenos a <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>. Te contesta una persona, no un robot. Somos un taller pequeño, como el tuyo.</p>
   </div>
 </section>

@@ -1,0 +1,5 @@
+{
+  "_nota": "Sección «Directos con artesanos». Oculta mientras directos_visible sea false (club-config.json o DIRECTOS_VISIBLE). Se activa cuando haya tres invitados confirmados con fecha. No se anuncia en la página de venta mientras esté oculta. fecha en ISO.",
+  "proximos": [],
+  "grabaciones": []
+}

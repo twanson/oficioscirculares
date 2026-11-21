@@ -6,6 +6,27 @@
 }) %>
 
 <link rel="stylesheet" href="/assets/css/club-area.css?v=20260805">
+<style>
+  /* Novedades nov 2026: punto de partida, mapa de lecciones y votación. DS OC v2. */
+  .ca-partida{margin:0 0 40px;padding:28px;border-radius:22px;background:#FBF7EF;border:1px solid rgba(2,52,41,.12)}
+  .ca-partida h2{font-family:'Newsreader',Georgia,serif;color:#023429;margin:4px 0 10px}
+  .ca-nivel{display:inline-block;padding:5px 12px;border-radius:999px;background:#023429;color:#FBF7EF;font-weight:700;font-size:14px}
+  .ca-prioridades{margin:14px 0;padding-left:22px}
+  .ca-prioridades li{margin-bottom:6px}
+  .ca-siguiente{display:inline-block;margin-top:6px;font-weight:700;color:#023429}
+  .ca-lecciones{list-style:none;padding:0;margin:0 0 40px;display:grid;gap:10px}
+  .ca-leccion{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:14px;background:#fff;border:1px solid rgba(2,52,41,.12)}
+  .ca-leccion b{font-family:'Newsreader',Georgia,serif;font-size:18px;color:#023429}
+  .ca-leccion .num{color:#934A1C;font-weight:800;margin-right:10px}
+  .ca-estado{flex-shrink:0;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid}
+  .ca-estado--disponible{color:#1D4E89;background:#E7F0FB;border-color:#9DBCE3}
+  .ca-estado--proximamente{color:#8A5A00;background:#FFF4DC;border-color:#E2C27A}
+  .ca-estado--pendiente{color:#8A5A00;background:#FFF4DC;border-color:#C9A227;border-style:dashed}
+  .ca-book-cover--texto{display:flex;align-items:flex-end;padding:18px;aspect-ratio:16/10;background:linear-gradient(150deg,#0C5140,#023429);color:#FBF7EF;font-family:'Newsreader',Georgia,serif;font-size:22px;line-height:1.2}
+  .ca-votar label{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px;cursor:pointer}
+  .ca-votar input{margin-top:5px}
+  .ca-votar small{display:block;color:rgba(251,247,239,.78);font-size:13px;line-height:1.4;margin-top:2px}
+</style>
 <%
   var featured = pieces.find(function(p){ return p.group === 'empieza'; });
   var rest = pieces.filter(function(p){ return p.group !== 'empieza'; });
@@ -24,6 +45,10 @@
     'radar-ayudas': 'radar.jpg',
     'mapa-del-contenido': 'mapa.jpg'
   };
+  var nivelTexto = { empieza: 'Empiezas', publica: 'Publicas', vende: 'Vendes' };
+  var itin = (member && Array.isArray(member.itinerario)) ? member.itinerario.map(getPiece).filter(Boolean) : [];
+  var siguiente = itin[0] || null;
+  var prioridades = (member && Array.isArray(member.prioridades)) ? member.prioridades.slice(0, 3) : [];
   var videoBienvenida = config && config.video_bienvenida_url;
   var fechaDirecto = config && config.proximo_directo_fecha;
 %>
@@ -64,6 +89,22 @@
   </section>
 
   <div class="ca-wrap">
+    <% if (member && member.nivel) { %>
+    <!-- Tu punto de partida (resultado del autodiagnóstico del alta) -->
+    <section class="ca-partida wow" id="punto-de-partida" aria-labelledby="partida-title">
+      <span class="ca-kicker">Tu punto de partida</span>
+      <h2 id="partida-title">Tu nivel: <span class="ca-nivel"><%= nivelTexto[member.nivel] || member.nivel %></span></h2>
+      <% if (prioridades.length) { %>
+        <p style="margin:0">Tus tres prioridades para este primer mes:</p>
+        <ol class="ca-prioridades"><% prioridades.forEach(function(p){ %><li><%= p %></li><% }) %></ol>
+      <% } %>
+      <% if (siguiente) { %>
+        <p style="margin:0">Tu siguiente paso: <a class="ca-siguiente" href="/club/dentro/lecciones/<%= siguiente.slug %>"><%= siguiente.title %> &rarr;</a></p>
+        <% if (itin.length > 1) { %><p style="margin:8px 0 0;color:var(--tinta-suave);font-size:14px">Tu itinerario: <%= itin.map(function(p){ return p.kicker; }).join(' · ') %></p><% } %>
+      <% } %>
+    </section>
+    <% } %>
+
     <!-- 2. Tu primera victoria -->
     <% if (featured) { %>
       <div class="ca-featured wow" id="victoria">
@@ -109,7 +150,11 @@
     <div class="ca-shelf">
       <% rest.forEach(function(p, i){ %>
         <a class="ca-book wow" href="/club/dentro/lecciones/<%= p.slug %>">
+          <% if (covers[p.slug]) { %>
           <div class="ca-book-cover"><img src="/assets/images/club/covers/<%= covers[p.slug] %>" alt="<%= p.title %>"<% if (i > 1) { %> loading="lazy"<% } %>></div>
+          <% } else { %>
+          <div class="ca-book-cover ca-book-cover--texto"><span><small style="display:block;font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#E8D5B7"><%= p.kicker %></small><%= p.title %></span></div>
+          <% } %>
           <div class="ca-book-band">
             <p><%= p.desc %></p>
             <span class="ca-go">Abrir →</span>
@@ -117,6 +162,23 @@
         </a>
       <% }); %>
     </div>
+
+    <!-- 3b. El mapa de lecciones (estado en texto, no solo en color) -->
+    <h2 class="ca-section-title wow" id="lecciones">Las lecciones, una a una</h2>
+    <ul class="ca-lecciones">
+      <% mapaLecciones.forEach(function(l){ %>
+      <li class="ca-leccion wow">
+        <span><span class="num"><%= l.num %></span><% if (l.estado === 'disponible' && l.slug) { %><a href="/club/dentro/lecciones/<%= l.slug %>" style="text-decoration:none"><b><%= l.titulo %></b></a><% } else { %><b><%= l.titulo %></b><% } %></span>
+        <% if (l.estado === 'disponible') { %><span class="ca-estado ca-estado--disponible">Disponible</span>
+        <% } else if (l.estado === 'proximamente') { %><span class="ca-estado ca-estado--proximamente">Próximamente · <%= l.cuando %></span>
+        <% } else { %><span class="ca-estado ca-estado--pendiente"><%= l.nota || 'Pendiente' %></span><% } %>
+      </li>
+      <% }) %>
+      <li class="ca-leccion wow"><span><span class="num">+</span><b>Desde abril de 2027, una lección nueva cada mes</b></span><span class="ca-estado ca-estado--proximamente">La elegís por votación</span></li>
+    </ul>
+    <% if (config && config.directos_visible) { %>
+      <p class="wow"><a class="ca-btn ca-btn--arena" href="/club/dentro/directos">Directos con artesanos &rarr;</a></p>
+    <% } %>
   </div>
 
   <!-- 4. Este mes en el Club -->
@@ -139,15 +201,25 @@
             <p>El grupo se estrena con la primera hornada — te llegará el enlace por correo.</p>
           <% } %>
         </div>
-        <div class="ca-mes-card wow">
+        <div class="ca-mes-card wow" id="votacion">
           <h3>Se vota la próxima lección</h3>
-          <ul class="ca-vota">
-            <li>WhatsApp Business</li>
-            <li>Etsy vs tienda propia</li>
-            <li>Ferias que venden</li>
-            <li>Email básico</li>
-          </ul>
-          <p>Vota con <span class="ca-hash">#pido</span> en el chat.</p>
+          <% var temaVotado = miVoto && votacion.temas.find(function(t){ return t.clave === miVoto; }); %>
+          <% if (votoMsg === 'ok') { %><p class="ca-msg ca-msg--ok">Voto guardado. Gracias.</p><% } %>
+          <% if (votoMsg === 'ya') { %><p class="ca-msg ca-msg--warn">Ya habías votado en esta ronda: un voto por miembro.</p><% } %>
+          <% if (votoMsg === 'error') { %><p class="ca-msg ca-msg--warn">No se ha podido guardar el voto. Inténtalo de nuevo en un rato.</p><% } %>
+          <% if (temaVotado) { %>
+            <p>Tu voto: <b><%= temaVotado.titulo %></b>. El recuento se anuncia en el directo.</p>
+          <% } else if (votacion.abierta && votacion.temas.length) { %>
+            <form class="ca-votar" method="POST" action="/club/dentro/votar">
+              <% votacion.temas.forEach(function(t, i){ %>
+              <label><input type="radio" name="tema" value="<%= t.clave %>"<% if (i === 0) { %> required<% } %>><span><b><%= t.titulo %></b><small><%= t.descripcion %></small></span></label>
+              <% }) %>
+              <button class="ca-btn ca-btn--arena" type="submit">Votar</button>
+              <p style="font-size:13px;margin-top:8px">Un voto por miembro. La más votada será la lección del mes siguiente.</p>
+            </form>
+          <% } else { %>
+            <p>La votación de este mes está cerrada. El recuento se anuncia en el directo.</p>
+          <% } %>
         </div>
       </div>
       <div class="ca-radar-nota wow">
