@@ -101,3 +101,21 @@ No se ha tocado (se deja anotado):
 ### Pendiente del bloque 1
 - Precios únicos de Diagnóstico 3D para empresas, Roadmap 3D, Sprint 3D y los dos soportes mensuales del Impulso.
 - Qué hacer con el caso E-WEAR: borrarlo, reescribirlo como caso ilustrativo o recuperarlo con datos reales.
+
+---
+
+## Bloque 2 · Página pública de impacto
+
+- Ruta nueva `/impacto` (indexable, en el `sitemap.xml`). Vista `views/impacto.ejs`, estilos en `oc-puertas.css`.
+- Datos en `data/impacto.json`: cada indicador lleva valor, detalle, una línea «qué mide» y su fecha. Para la revisión trimestral basta con cambiar ese archivo.
+- Las ocho cifras son las de la tabla del encargo, cada una con su fecha.
+- Debajo, los tres bloques: «Cómo contamos», «Qué queremos conseguir antes de octubre de 2027» (barras de progreso con la cifra también en texto; «Materiales con red activa» va sin barra porque no hay dato actual) y «Qué lo respalda» (ensayo de acolchado en Ourense con analíticas del INORDE y Promálaga Base 2026, sin nombres de personas).
+- Enlaces: en el pie global (sustituye a «Comunidad»), en el menú principal, y en «Sobre nosotros» (texto y pie).
+- Sin gráficos decorativos.
+
+### Comprobación
+`/impacto` responde 200 en local y todas las cifras y fechas coinciden con la tabla del encargo.
+
+### Pendiente del bloque 2
+- Confirmar qué cuenta «Personas en la comunidad» (1.070). Lleva un marcador visible en la página.
+- Revisar las líneas «qué mide» de cada cifra. Están redactadas a partir del nombre del indicador, sin añadir datos.

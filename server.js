@@ -539,6 +539,14 @@ app.get('/diagnostico-3d', (req, res) => res.redirect(301, '/servicios/diagnosti
 app.get('/roadmap-3d', (req, res) => res.redirect(301, '/servicios/roadmap-3d'));
 app.get('/sprint-3d', (req, res) => res.redirect(301, '/servicios/sprint-3d'));
 
+// /impacto — cifras públicas de la red (data/impacto.json, se revisan cada trimestre). Indexable.
+app.get(['/impacto', '/impacto/'], (req, res) => {
+  let impacto;
+  try { impacto = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'impacto.json'), 'utf8')); }
+  catch (e) { console.error('impacto.json:', e.message); return res.status(500).send('Error'); }
+  res.render('impacto', { impacto });
+});
+
 // Rutas de servicios — dos puertas: talleres / empresas (precios en data/precios.json)
 app.get(['/servicios', '/servicios/'], (req, res) => res.render('servicios', { puerta: 'index' }));
 app.get('/servicios/talleres', (req, res) => res.render('servicios', { puerta: 'talleres' }));

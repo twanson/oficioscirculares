@@ -1,0 +1,91 @@
+<%
+// /impacto — cifras leídas de data/impacto.json (se actualizan cada trimestre sin tocar esta plantilla).
+const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fecha(iso) { const [a, m, d] = iso.split('-').map(Number); return d + ' de ' + MESES[m - 1] + ' de ' + a; }
+// es-ES no agrupa números de 4 cifras: forzamos el punto de miles para que 1.070 y 1.318 se lean igual que en la tabla.
+function miles(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+const porId = Object.fromEntries(impacto.indicadores.map(i => [i.id, i]));
+function pendiente(txt) { return txt.replace(/\[PENDIENTE JOSE:[^\]]*\]/g, m => '<span class="precio-pendiente">' + m + '</span>'); }
+%>
+<%- include('partials/head-meta', {
+    title: 'Impacto · Las cifras de la red | Oficios Circulares',
+    description: 'Lo que ha movido la red de Oficios Circulares, con la fecha de cada dato: lana registrada en Conecta Lana, emparejamientos cerrados, kilos con salida real y comunidad.',
+    canonical: '/impacto'
+}) %>
+<link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261121b">
+<%- include('partials/header') %>
+
+<main class="ocp" id="maincontent">
+    <section class="ocp-hero">
+        <div class="ocp-wrap">
+            <span class="ocp-eyebrow">Impacto</span>
+            <h1>Lo que ha movido la red, <em>con fecha</em></h1>
+            <p class="ocp-lead">Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos. Estas son las cifras de esa red, cada una con el d&iacute;a en que se tom&oacute; y lo que mide.</p>
+        </div>
+    </section>
+
+    <section class="ocp-section" aria-labelledby="cifras-title">
+        <div class="ocp-wrap">
+            <h2 id="cifras-title" class="ocp-eyebrow" style="font-family:'Manrope',sans-serif">Las cifras</h2>
+            <div class="ocp-cifras">
+                <% impacto.indicadores.forEach(function (i) { %>
+                <article class="ocp-cifra">
+                    <span class="ocp-cifra-ind"><%= i.indicador %></span>
+                    <span class="ocp-cifra-valor"><%= miles(i.valor) %><% if (i.unidad) { %> <%= i.unidad %><% } %></span>
+                    <% if (i.detalle) { %><p class="ocp-cifra-detalle"><%= i.detalle %></p><% } %>
+                    <p class="ocp-cifra-mide"><%- pendiente(i.mide.replace(/&/g,'&amp;').replace(/</g,'&lt;')) %></p>
+                    <span class="ocp-cifra-fecha">Dato a <time datetime="<%= i.fecha %>"><%= fecha(i.fecha) %></time></span>
+                </article>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <section class="ocp-section ocp-section--crema" aria-labelledby="como-title">
+        <div class="ocp-wrap">
+            <span class="ocp-eyebrow">1 &middot; C&oacute;mo contamos</span>
+            <h2 id="como-title">Solo lo que se puede comprobar</h2>
+            <p class="ocp-lead">Los kilos con salida solo cuentan cuando hay peso anotado; las entregas sin pesar se indican aparte y no se suman. Las cifras se revisan cada trimestre: en enero, abril, julio y octubre.</p>
+        </div>
+    </section>
+
+    <section class="ocp-section" aria-labelledby="objetivos-title">
+        <div class="ocp-wrap">
+            <span class="ocp-eyebrow">2 &middot; Hacia d&oacute;nde vamos</span>
+            <h2 id="objetivos-title">Qu&eacute; queremos conseguir antes de <%= impacto.objetivos.fecha_limite %></h2>
+            <div class="ocp-objetivos">
+                <% impacto.objetivos.lista.forEach(function (o) {
+                     const actual = o.actual_de ? porId[o.actual_de].valor : null;
+                     const u = o.unidad ? ' ' + o.unidad : '';
+                     const pct = actual == null ? null : Math.min(100, Math.round(actual / o.objetivo * 100)); %>
+                <div class="ocp-objetivo">
+                    <div class="ocp-objetivo-txt">
+                        <span><%= o.texto %></span>
+                        <b>Objetivo: <%= miles(o.objetivo) %><%= u %></b>
+                    </div>
+                    <% if (pct !== null) { %>
+                    <div class="ocp-barra" role="progressbar" aria-valuemin="0" aria-valuemax="<%= o.objetivo %>" aria-valuenow="<%= actual %>" aria-label="<%= o.texto %>: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %>"><span style="width:<%= Math.max(pct, 1) %>%"></span></div>
+                    <p class="ocp-precio-nota" style="margin:8px 0 0">Hoy: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %> (<%= pct %> %)</p>
+                    <% } %>
+                </div>
+                <% }) %>
+            </div>
+            <p class="ocp-nota-datos">Las cifras de &laquo;hoy&raquo; son las de la tabla de arriba, con su fecha.</p>
+        </div>
+    </section>
+    <section class="ocp-section ocp-section--crema" aria-labelledby="respalda-title">
+        <div class="ocp-wrap">
+            <span class="ocp-eyebrow">3 &middot; Qu&eacute; lo respalda</span>
+            <h2 id="respalda-title">Ensayos y programas</h2>
+            <ul class="ocp-incluye">
+                <li><b>Ensayo de acolchado con lana</b>600 kg de lana en casta&ntilde;os, en Ourense, con anal&iacute;ticas del INORDE.</li>
+                <li><b>Prom&aacute;laga Base 2026</b>Participaci&oacute;n en el programa.</li>
+            </ul>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+<script src="/assets/js/script.js"></script>
+</body>
+</html>
