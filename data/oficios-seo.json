@@ -24,7 +24,7 @@
     "/blog/logistica-inversa/": "Logística inversa para marcas artesanales: cuándo tiene sentido y cuándo no",
     "/recursos/plantilla-dpp": "Plantilla Base DPP + Checklist 30 días",
     "/recursos/guia-upcycling-artistas": "Guía Artistas Upcycling + Toolkit Práctico",
-    "/casos/e-wear/": "E-WEAR: De residuo electrónico a joya con historia"
+    "/casos/e-wear/": "Ejemplo ilustrativo: un taller de joyería con plata recuperada"
   },
   "verticals": {
     "alimentacion-artesanal": {
@@ -304,7 +304,8 @@
       "links": [
         "/blog/artesania-de-lujo-posicionar-valor-real/",
         "/recursos/guia-artesania-lujo",
-        "/recursos/calcula-tu-precio"
+        "/recursos/calcula-tu-precio",
+        "/casos/e-wear/"
       ]
     },
     "lana-y-costura": {

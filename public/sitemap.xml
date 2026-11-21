@@ -367,6 +367,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.oficioscirculares.com/casos/e-wear/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://www.oficioscirculares.com/servicios</loc>
     <lastmod>2026-11-21</lastmod>
     <changefreq>monthly</changefreq>

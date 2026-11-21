@@ -316,9 +316,13 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
   });
 });
 
-// Caso E-WEAR retirado (encargo nov 2026): era un caso compuesto presentado como real,
-// con cifras sin respaldo. Redirección temporal (302) mientras Jose decide qué hacer con él.
-app.get(/^\/casos\/e-wear(\/.*)?$/, (req, res) => res.redirect(302, '/servicios'));
+// E-WEAR (decisión de Jose, 21 nov 2026): reescrito como EJEMPLO ILUSTRATIVO, sin cifras
+// de resultado ni citas. No debe aparecer en listados de «casos reales» o «casos de éxito».
+// Sin barra final o con subrutas del caso antiguo (index.html…), 301 a la página nueva.
+app.get(/^\/casos\/e-wear(\/.*)?$/, (req, res) => {
+  if (req.path === '/casos/e-wear/') return res.render('caso-e-wear');
+  return res.redirect(301, '/casos/e-wear/');
+});
 
 // Coming Soon (página genérica para secciones no disponibles)
 app.get('/coming-soon', (req, res) => {
