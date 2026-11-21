@@ -238,3 +238,48 @@ Las campañas de Brevo (E1 #30, E2 #31, E3 #28, E4 #32, E5 #29) no se han tocado
 - Qué hacer con el PDF público de textil.
 - Portada (imagen) de la lección 06 para la estantería.
 - Reescribir y reprogramar los cinco correos de Brevo con las fechas de enero (fuera del repositorio).
+
+---
+
+## Bloque 5 · Informe de infraestructura
+
+`docs/checklist-4-enero.md`: restaurar Supabase y aplicar las migraciones (con la decisión entre plan gratuito y Pro), Brevo, webhook de Stripe, variables de Railway por entorno y prueba completa de compra, alta, autodiagnóstico, lección y baja. No modifica nada.
+
+---
+
+## Lista única de pendientes para Jose
+
+1. **Precio único** del Diagnóstico 3D para empresas, del Roadmap 3D y del Sprint 3D (y de los dos soportes mensuales del Impulso: Básico y Activo). Se cambian en `data/precios.json`.
+2. **Plazo de entrega** del informe y del vídeo del Diagnóstico para talleres.
+3. **Testimonios:** no falta ningún texto. Los tres autorizados tenían su texto aprobado en el repositorio. Las páginas que se quedaron sin testimonio (portada, oficios, Diagnóstico de empresas, Roadmap y Sprint) ya no tienen sección.
+4. **Lección 05** (WhatsApp Business).
+5. **Preguntas y regla del autodiagnóstico** (`docs/club-autodiagnostico.md`), y confirmar que se hace dentro de la web. Sin esto no se construye el formulario.
+6. **Plan de Supabase:** gratuito (se pausa por inactividad) o Pro (desde 25 $/mes, no se pausa).
+7. Enlace de pago del Diagnóstico para talleres, si se quiere compra directa (hoy va al formulario de contacto).
+8. Precio de la entrada al Club para quien compra el Diagnóstico, y crear ese enlace en Stripe (prueba y real).
+9. Caso E-WEAR: borrarlo, reescribirlo como ilustrativo o recuperarlo con datos reales (hoy redirige a `/servicios`).
+10. PDF público de ejemplo de textil (`/downloads/diagnosticos/ejemplo-diagnostico-textil-sostenible.pdf`): tiene detalles que podrían identificar a un taller real.
+11. Confirmar qué cuenta «Personas en la comunidad» (1.070) y revisar las líneas «qué mide» de `/impacto`.
+12. Mantener o no la garantía del Sprint («seguimos trabajando hasta que funcione, sin coste adicional») y el descuento del Diagnóstico si después se contrata otro servicio.
+13. Reescribir con fechas de enero los cinco correos de Brevo (fuera del repositorio) antes de volver a programarlos.
+14. Portada de la lección 06 para la estantería del Club.
+
+## Direcciones del entorno de pruebas para revisar
+
+Base: `https://oficioscirculares-production.up.railway.app`
+
+- `/`: portada (presentación como red, las dos puertas, sin testimonios)
+- `/servicios`, `/servicios/talleres`, `/servicios/empresas`: las dos puertas y sus precios
+- `/servicios/diagnostico-3d`: Diagnóstico 3D para talleres
+- `/impulso-3d`: precios únicos y testimonio de Blanca
+- `/servicios/roadmap-3d` y `/servicios/sprint-3d`: precio pendiente, sin cifras sin fuente
+- `/impacto`: página de impacto
+- `/sobre-nosotros/`: nueva presentación y enlace a impacto
+- `/faqs/`: precios desde el archivo único
+- `/conecta-lana`: testimonios de Esther y Jorge
+- `/oficios/joyeria-artesanal` (o cualquier oficio): puertas, sin testimonios, ejemplo «compuesto»
+- `/club`: página de venta actualizada (sigue con `noindex`)
+- `/club/dentro`: área de miembros (necesita Supabase restaurado para entrar)
+- `/casos/e-wear/`: debe redirigir a `/servicios`
+
+Nada de esto está en `main` ni en `www.oficioscirculares.com`.
