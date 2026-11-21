@@ -17,8 +17,7 @@
                     <p id="hero-lead" class="hero-sub">Una sesión de 45 minutos donde analizamos juntos tu proceso, tus materiales y tus residuos. En 48h recibes un informe con oportunidades concretas y los pasos para aprovecharlas.</p>
                     <ul class="hero-bullets" aria-label="Beneficios clave">
                         <li>Oportunidades reales que puedes implementar en 30–60 días</li>
-                        <li>Datos concretos: kg que recuperas, dinero que ahorras, valor que ganas</li>
-                        <li>Un plan claro con prioridades para empezar sin perder tiempo</li>
+                                                <li>Un plan claro con prioridades para empezar sin perder tiempo</li>
                     </ul>
                     <div class="hero-ctas">
                         <a id="cta-hero" href="/contacto?service=diagnostico-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-diagnostico-3d&oc_content=hero&page_path=/servicios/diagnostico-3d" class="btn btn-primary btn-large" aria-label="Reservar Diagnóstico 3D" data-event="click_cta" data-label="diag3d-hero">Quiero mi Diagnóstico 3D</a>
@@ -85,26 +84,12 @@
         </div>
     </section>
 
-    <!-- Ejemplo real + Testimonial -->
-    <section class="service-section" id="ejemplo" aria-labelledby="ejemplo-title">
-        <div class="container">
-            <h2 id="ejemplo-title" class="section-title enhanced" data-label="Caso real">Ejemplo real</h2>
-            <div class="ui-card example-card" style="margin-bottom:16px;">
-                <p><strong>Un taller de cerámica en Valencia</strong> generaba recortes de obra que iban directos al contenedor. En 45 minutos identificamos que podían recuperar 72 kg al mes y transformarlos en mosaico terrazzo. Resultado: un producto nuevo con más margen y 200 €/mes menos en gestión de residuos.</p>
-            </div>
-            <div class="ui-card example-card">
-                <blockquote style="margin:0 0 10px 0">“Llevaba 3 años diciendo que era sostenible pero sin datos que lo demostraran. En 45 minutos me dieron 3 KPIs concretos y una hoja de ruta clara para comunicarlo.”</blockquote>
-                <p style="color:#6b7280; margin:0;">— Taller de diseño textil, Madrid</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Precio y garantías -->
     <section class="service-section" id="precio" aria-labelledby="precio-title">
         <div class="container">
             <h2 id="precio-title" class="section-title enhanced" data-label="Inversión">Tu inversión</h2>
             <div class="ui-card">
-                <p><strong>90–350€ <span class="precio-iva">+ IVA</span></strong> (según complejidad del proyecto)</p>
+                <p><strong><%- precios.html('diagnostico_talleres') %></strong></p>
                 <p>Incluye la sesión de 45 minutos y el informe con oportunidades en 24–48h. <em>(Si después decides seguir con nosotros, te descontamos el importe del diagnóstico.)</em></p>
                 <div class="badges"><span class="badge">Sin greenwashing</span><span class="badge">Sin datos, no hay caso</span><span class="badge">Plazos claros</span></div>
             </div>
@@ -164,7 +149,7 @@
   },
   "areaServed": "ES",
   "serviceType": "Consulting",
-  "offers": "90–350€",
+  "offers": { "@type": "Offer", "price": String(precios.num('diagnostico_talleres')), "priceCurrency": "EUR" },
   "url": "https://www.oficioscirculares.com/servicios/diagnostico-3d"
 }, null, 2) %>
 </script>

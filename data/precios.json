@@ -1,0 +1,18 @@
+{
+  "_nota": "ÚNICA fuente de precios de la web. Las plantillas EJS leen de aquí (app.locals.precios) y las páginas estáticas usan marcas {{precio:clave}}. Un precio a null se muestra como [PENDIENTE JOSE: precio único]. Importes en euros, sin IVA salvo el Club.",
+  "servicios": {
+    "club_mensual":          { "nombre": "Club de Oficios Circulares (mensual)", "importe": 15,  "periodo": "mes", "iva": false },
+    "club_anual":            { "nombre": "Club de Oficios Circulares (anual)",   "importe": 150, "periodo": "año", "iva": false },
+    "club_fundador_mensual": { "nombre": "Club · fundadores (mensual)",          "importe": 12,  "periodo": "mes", "iva": false },
+    "club_fundador_anual":   { "nombre": "Club · fundadores (anual)",            "importe": 120, "periodo": "año", "iva": false },
+    "diagnostico_talleres":  { "nombre": "Diagnóstico 3D para talleres",          "importe": 90,  "iva": true },
+    "impulso_3d":            { "nombre": "Impulso 3D",                             "importe": 495, "iva": true },
+    "impulso_3d_completo":   { "nombre": "Impulso 3D Completo",                    "importe": 895, "iva": true },
+    "diagnostico_empresas":  { "nombre": "Diagnóstico 3D para empresas",          "importe": null, "iva": true },
+    "roadmap_3d":            { "nombre": "Roadmap 3D",                             "importe": null, "iva": true },
+    "sprint_3d":             { "nombre": "Sprint 3D",                              "importe": null, "iva": true },
+    "soporte_basico":        { "nombre": "Impulso 3D · Soporte Básico",            "importe": null, "periodo": "mes", "iva": true },
+    "soporte_activo":        { "nombre": "Impulso 3D · Soporte Activo",            "importe": null, "periodo": "mes", "iva": true }
+  },
+  "club_plazas_fundador": 40
+}

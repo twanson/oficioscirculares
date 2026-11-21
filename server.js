@@ -15,6 +15,7 @@ const clubContent = require('./lib/clubContent');
 const brevoWaitlist = require('./lib/brevoWaitlist');
 const { getStripe, STRIPE_WEBHOOK_SECRET, PRICE_TO_PLAN } = require('./lib/stripeClub');
 const { createServerSupabase } = require('./lib/supabase');
+const precios = require('./lib/precios');
 require('dotenv').config();
 
 const app = express();
@@ -143,6 +144,8 @@ if (!MAILCHIMP_API_KEY) {
 // Configurar EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+// Precios: única fuente (data/precios.json) disponible en todas las vistas EJS.
+app.locals.precios = precios;
 
 // --- Webhook de Stripe (Club) ---
 // DEBE registrarse ANTES de express.json(): la verificación de firma necesita
@@ -305,6 +308,10 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
     canonical: '/recursos/modelos-sostenibles'
   });
 });
+
+// Caso E-WEAR retirado (encargo nov 2026): era un caso compuesto presentado como real,
+// con cifras sin respaldo. Redirección temporal (302) mientras Jose decide qué hacer con él.
+app.get(/^\/casos\/e-wear(\/.*)?$/, (req, res) => res.redirect(302, '/servicios'));
 
 // Coming Soon (página genérica para secciones no disponibles)
 app.get('/coming-soon', (req, res) => {
@@ -532,7 +539,11 @@ app.get('/diagnostico-3d', (req, res) => res.redirect(301, '/servicios/diagnosti
 app.get('/roadmap-3d', (req, res) => res.redirect(301, '/servicios/roadmap-3d'));
 app.get('/sprint-3d', (req, res) => res.redirect(301, '/servicios/sprint-3d'));
 
-// Rutas de servicios
+// Rutas de servicios — dos puertas: talleres / empresas (precios en data/precios.json)
+app.get(['/servicios', '/servicios/'], (req, res) => res.render('servicios', { puerta: 'index' }));
+app.get('/servicios/talleres', (req, res) => res.render('servicios', { puerta: 'talleres' }));
+app.get('/servicios/empresas', (req, res) => res.render('servicios', { puerta: 'empresas' }));
+
 app.get('/servicios/diagnostico-3d', (req, res) => {
   res.render('diagnostico-3d');
 });
@@ -976,6 +987,28 @@ app.get('/sitemap.xml', (req, res) => {
 app.use('/downloads', (req, res, next) => {
   res.set('X-Robots-Tag', 'noindex');
   next();
+});
+
+// Páginas estáticas con marcas de precio ({{precio:clave}}): se sirven con los
+// precios de data/precios.json sustituidos, para que no haya cifras duplicadas.
+const _staticPriceCache = new Map();
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  let rel = decodeURIComponent(req.path);
+  if (rel.includes('..')) return next();
+  if (rel.endsWith('/')) rel += 'index.html';
+  if (!rel.endsWith('.html')) return next();
+  const file = path.join(__dirname, 'public', rel);
+  let html = _staticPriceCache.get(file);
+  if (html === undefined) {
+    try {
+      const raw = fs.readFileSync(file, 'utf8');
+      html = raw.includes('{{precio') || raw.includes('{{plazas-fundador') ? precios.renderTokens(raw) : null;
+    } catch (e) { html = null; }
+    _staticPriceCache.set(file, html);
+  }
+  if (html === null) return next();
+  res.type('html').send(html);
 });
 
 app.use(express.static('public'));

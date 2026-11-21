@@ -1,0 +1,25 @@
+<%# Las dos puertas de servicios. Precios desde data/precios.json (app.locals.precios). %>
+<div class="ocp-puertas">
+    <a class="ocp-puerta ocp-puerta--taller" href="/servicios/talleres" data-event="click_cta" data-label="puerta-talleres">
+        <span class="ocp-puerta-quien">Soy un taller o una marca artesana</span>
+        <h3>Para talleres y marcas artesanas</h3>
+        <p>M&eacute;todo, comunidad y acompa&ntilde;amiento para que tu oficio se entienda y se venda.</p>
+        <ul class="ocp-puerta-lista">
+            <li><span>Club de Oficios Circulares</span><b><%= precios.texto('club_mensual') %></b></li>
+            <li><span>Diagn&oacute;stico 3D para talleres</span><b><%= precios.texto('diagnostico_talleres') %></b></li>
+            <li><span>Impulso 3D</span><b><%= precios.texto('impulso_3d') %></b></li>
+        </ul>
+        <span class="ocp-puerta-cta">Ver los servicios para talleres &rarr;</span>
+    </a>
+    <a class="ocp-puerta ocp-puerta--empresa" href="/servicios/empresas" data-event="click_cta" data-label="puerta-empresas">
+        <span class="ocp-puerta-quien">Soy una empresa</span>
+        <h3>Para empresas</h3>
+        <p>Para empresas que quieren dar salida a sus materiales, convertir una mejora circular en un plan y ponerla en marcha.</p>
+        <ul class="ocp-puerta-lista">
+            <li><span>Diagn&oacute;stico 3D para empresas</span><b><%- precios.html('diagnostico_empresas') %></b></li>
+            <li><span>Roadmap 3D</span><b><%- precios.html('roadmap_3d') %></b></li>
+            <li><span>Sprint 3D</span><b><%- precios.html('sprint_3d') %></b></li>
+        </ul>
+        <span class="ocp-puerta-cta">Ver los servicios para empresas &rarr;</span>
+    </a>
+</div>

@@ -1,0 +1,122 @@
+/* =====================================================================
+   OC · Puertas de servicios, impacto y Diagnóstico para talleres
+   Design System OC v2: verde #023429 · terracota #934A1C · arena #E8D5B7
+   · crema #FBF7EF · Newsreader (títulos) + Manrope (texto). Sin emojis.
+   Todo va bajo .ocp para no chocar con el CSS global del sitio.
+   ===================================================================== */
+.ocp{
+  --ocp-verde:#023429;--ocp-verde-2:#1F4B3F;--ocp-terracota:#934A1C;
+  --ocp-arena:#E8D5B7;--ocp-crema:#FBF7EF;--ocp-tinta:#1b1c1c;--ocp-gris:#4a4f4c;
+  --ocp-ambar:#8A5A00;--ocp-ambar-bg:#FFF4DC;--ocp-azul:#1D4E89;--ocp-azul-bg:#E7F0FB;
+  font-family:'Manrope',system-ui,-apple-system,sans-serif;color:var(--ocp-tinta);line-height:1.6;
+}
+.ocp *,.ocp *::before,.ocp *::after{box-sizing:border-box}
+.ocp h1,.ocp h2,.ocp h3{font-family:'Newsreader',Georgia,serif;color:var(--ocp-verde);font-weight:600;line-height:1.15;margin:0 0 .5em}
+.ocp p{margin:0 0 1em}
+.ocp a{color:var(--ocp-verde)}
+.ocp-wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+@media(min-width:720px){.ocp-wrap{padding:0 32px}}
+.ocp-section{padding:56px 0}
+@media(min-width:900px){.ocp-section{padding:80px 0}}
+.ocp-section--crema{background:var(--ocp-crema)}
+.ocp-section--arena{background:#F4EADB}
+.ocp-section--verde{background:var(--ocp-verde);color:var(--ocp-crema)}
+.ocp-section--verde h2,.ocp-section--verde h3{color:var(--ocp-crema)}
+.ocp-eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ocp-terracota);margin-bottom:12px}
+.ocp-section--verde .ocp-eyebrow{color:var(--ocp-arena)}
+.ocp-lead{font-size:1.125rem;color:var(--ocp-gris);max-width:720px}
+.ocp-hero{padding:128px 0 48px;background:var(--ocp-crema)}
+.ocp-hero h1{font-size:clamp(2rem,4.4vw,3.2rem);max-width:820px}
+.ocp-hero em{font-style:italic;color:var(--ocp-terracota)}
+
+/* Botones */
+.ocp-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;border:2px solid var(--ocp-verde);transition:background .2s,color .2s}
+.ocp-btn--primario{background:var(--ocp-verde);color:var(--ocp-crema)!important}
+.ocp-btn--primario:hover{background:var(--ocp-verde-2)}
+.ocp-btn--secundario{background:transparent;color:var(--ocp-verde)!important}
+.ocp-btn--secundario:hover{background:var(--ocp-arena)}
+.ocp-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+
+/* Dos puertas */
+.ocp-puertas{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:860px){.ocp-puertas{grid-template-columns:1fr 1fr}}
+.ocp-puerta{display:flex;flex-direction:column;border-radius:18px;padding:28px;text-decoration:none!important;border:1px solid rgba(2,52,41,.14);background:#fff;transition:transform .2s,box-shadow .2s}
+.ocp-puerta:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(2,52,41,.12)}
+.ocp-puerta--taller{background:var(--ocp-verde);color:var(--ocp-crema)}
+.ocp-puerta--taller h3,.ocp-puerta--taller .ocp-puerta-cta{color:var(--ocp-crema)}
+.ocp-puerta--taller .ocp-puerta-lista li{border-color:rgba(251,247,239,.18)}
+.ocp-puerta--empresa{background:var(--ocp-crema)}
+.ocp-puerta-quien{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ocp-arena);margin-bottom:10px}
+.ocp-puerta--empresa .ocp-puerta-quien{color:var(--ocp-terracota)}
+.ocp-puerta h3{font-size:1.75rem;margin-bottom:12px}
+.ocp-puerta p{opacity:.9}
+.ocp-puerta-lista{list-style:none;margin:8px 0 20px;padding:0}
+.ocp-puerta-lista li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(2,52,41,.12);font-size:.95rem}
+.ocp-puerta-lista b{font-weight:700;white-space:nowrap}
+.ocp-puerta-cta{margin-top:auto;font-weight:700;color:var(--ocp-verde)}
+
+/* Tarjetas de servicio */
+.ocp-servicios{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:900px){.ocp-servicios{grid-template-columns:repeat(3,1fr)}}
+.ocp-servicio{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(2,52,41,.14);border-radius:16px;padding:26px}
+.ocp-servicio h3{font-size:1.45rem}
+.ocp-precio{font-family:'Newsreader',Georgia,serif;font-size:2rem;font-weight:600;color:var(--ocp-verde);margin:4px 0 6px;line-height:1.1}
+.ocp-precio small{font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:500;color:var(--ocp-gris)}
+.ocp-precio-nota{font-size:.88rem;color:var(--ocp-gris)}
+.ocp-servicio ul{padding-left:18px;margin:8px 0 18px}
+.ocp-servicio li{margin-bottom:6px}
+.ocp-servicio .ocp-btn{margin-top:auto;align-self:flex-start}
+.precio-pendiente{display:inline-block;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:700;color:var(--ocp-ambar,#8A5A00);background:var(--ocp-ambar-bg,#FFF4DC);border:1px dashed #C9A227;border-radius:6px;padding:2px 8px}
+
+/* Testimonio */
+.ocp-testimonio{max-width:780px;margin:0 auto;text-align:center}
+.ocp-testimonio blockquote{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:clamp(1.35rem,2.6vw,1.9rem);line-height:1.35;color:var(--ocp-verde);margin:0 0 18px}
+.ocp-section--verde .ocp-testimonio blockquote{color:var(--ocp-crema)}
+.ocp-testimonio-firma{display:inline-flex;align-items:center;gap:12px;font-size:.95rem}
+.ocp-testimonio-firma img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.ocp-testimonio-firma b{display:block}
+
+/* Pasos */
+.ocp-pasos{list-style:none;counter-reset:paso;padding:0;margin:0;display:grid;gap:16px}
+@media(min-width:900px){.ocp-pasos{grid-template-columns:repeat(3,1fr)}}
+.ocp-pasos li{counter-increment:paso;background:#fff;border-radius:16px;padding:24px;border:1px solid rgba(2,52,41,.12)}
+.ocp-pasos li::before{content:counter(paso,decimal-leading-zero);display:block;font-family:'Newsreader',Georgia,serif;font-size:2rem;color:var(--ocp-terracota);margin-bottom:6px}
+.ocp-pasos h3{font-size:1.2rem}
+
+/* Aviso / bloque destacado */
+.ocp-aviso{border-left:4px solid var(--ocp-terracota);background:#fff;border-radius:0 12px 12px 0;padding:18px 22px}
+.ocp-incluye{display:grid;gap:12px;grid-template-columns:1fr;padding:0;list-style:none}
+@media(min-width:760px){.ocp-incluye{grid-template-columns:1fr 1fr}}
+.ocp-incluye li{background:#fff;border-radius:12px;padding:16px 18px;border:1px solid rgba(2,52,41,.12)}
+.ocp-incluye b{display:block;color:var(--ocp-verde);margin-bottom:2px}
+
+/* Impacto */
+.ocp-cifras{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:700px){.ocp-cifras{grid-template-columns:1fr 1fr}}
+@media(min-width:1040px){.ocp-cifras{grid-template-columns:repeat(4,1fr)}}
+.ocp-cifra{background:#fff;border:1px solid rgba(2,52,41,.14);border-radius:16px;padding:22px;display:flex;flex-direction:column}
+.ocp-cifra-ind{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ocp-terracota);margin-bottom:8px}
+.ocp-cifra-valor{font-family:'Newsreader',Georgia,serif;font-size:2.4rem;font-weight:600;color:var(--ocp-verde);line-height:1.05}
+.ocp-cifra-detalle{font-size:.95rem;color:var(--ocp-tinta);margin:4px 0 10px}
+.ocp-cifra-mide{font-size:.88rem;color:var(--ocp-gris);margin-bottom:12px}
+.ocp-cifra-fecha{margin-top:auto;font-size:.8rem;font-weight:600;color:var(--ocp-gris);border-top:1px solid rgba(2,52,41,.1);padding-top:10px}
+.ocp-objetivos{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:760px){.ocp-objetivos{grid-template-columns:1fr 1fr}}
+.ocp-objetivo{background:#fff;border-radius:14px;padding:20px;border:1px solid rgba(2,52,41,.12)}
+.ocp-objetivo-txt{display:flex;justify-content:space-between;gap:12px;font-size:.95rem;margin-bottom:10px}
+.ocp-objetivo-txt b{color:var(--ocp-verde)}
+.ocp-barra{height:10px;border-radius:999px;background:#E9E3D8;overflow:hidden}
+.ocp-barra span{display:block;height:100%;background:var(--ocp-verde)}
+.ocp-tres{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:900px){.ocp-tres{grid-template-columns:repeat(3,1fr)}}
+.ocp-tres article{background:#fff;border-radius:16px;padding:24px;border:1px solid rgba(2,52,41,.12)}
+.ocp-tres h3{font-size:1.3rem}
+.ocp-nota-datos{font-size:.88rem;color:var(--ocp-gris);margin-top:18px}
+
+/* Refuerzo de contraste: el CSS global de la portada (.servicios-v2 p, li…) pisa
+   los colores heredados dentro de las puertas. */
+.ocp .ocp-puerta--taller,.ocp .ocp-puerta--taller p,.ocp .ocp-puerta--taller li,.ocp .ocp-puerta--taller span,.ocp .ocp-puerta--taller b{color:var(--ocp-crema)}
+.ocp .ocp-puerta--taller .ocp-puerta-quien{color:var(--ocp-arena)}
+.ocp .ocp-puerta--empresa p,.ocp .ocp-puerta--empresa li span{color:var(--ocp-tinta)}
+.ocp .ocp-puerta h3{color:inherit}
+.ocp .ocp-puerta--empresa h3{color:var(--ocp-verde)}

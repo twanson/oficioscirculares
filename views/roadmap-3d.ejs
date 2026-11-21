@@ -113,13 +113,6 @@
                 </ul>
             </div>
 
-            <!-- Ejemplo real -->
-            <div class="ui-card example-card" style="margin-top: 24px;">
-                <h3>Ejemplo real</h3>
-                <p><strong>Un estudio textil en Barcelona</strong> quería pasar a tintes naturales pero no sabía por dónde empezar. En 2 semanas diseñamos su plan: qué plantas cultivar, proveedores de semillas, proceso de extracción, recetas de mordientes, y un calendario de contenidos para documentar cada paso. Resultado: proceso validado y 3 meses de contenido listo.</p>
-                <blockquote style="margin: 16px 0 8px 0; font-style: italic;">"Nos ahorramos meses de prueba y error. El roadmap nos dio la confianza para invertir 3.000€ en el piloto sabiendo que iba a funcionar."</blockquote>
-                <p style="color: #6b7280; margin: 0;">— Taller de carpintería, Barcelona</p>
-            </div>
         </div>
     </section>
 
@@ -128,7 +121,7 @@
         <div class="container">
             <h2 id="precio-title" class="section-title enhanced" data-label="Inversión">Tu inversión</h2>
             <div class="ui-card">
-                <p><strong>350–1.500€ <span class="precio-iva">+ IVA</span></strong> (según complejidad del proyecto)</p>
+                <p><strong><%- precios.html('roadmap_3d') %></strong></p>
                 <p>Incluye 2 semanas de trabajo dedicado y todas las plantillas listas para usar</p>
                 <div class="ui-card" style="background: linear-gradient(135deg, #fffbf5 0%, #ffffff 100%); border-left: 4px solid #934a1c; margin-top: 20px;">
                     <h4 style="color: #934a1c; margin-bottom: 8px;">¿Por qué vale la pena?</h4>
@@ -136,7 +129,7 @@
                 </div>
                 <div class="badges" style="margin-top: 20px;">
                     <span class="badge">Plan paso a paso</span>
-                    <span class="badge">Proveedores validados</span>
+                    <span class="badge">Proveedores identificados</span>
                     <span class="badge">Plantillas incluidas</span>
                 </div>
             </div>
@@ -150,7 +143,7 @@
             <div class="faq-grid">
                 <div class="ui-card">
                     <h3>¿Cuál es la diferencia real con el Diagnóstico?</h3>
-                    <p>El Diagnóstico identifica oportunidades. El Roadmap diseña cómo implementar la mejor oportunidad con garantías de éxito.</p>
+                    <p>El Diagnóstico identifica oportunidades. El Roadmap diseña cómo implementar la mejor oportunidad, paso a paso.</p>
                 </div>
                 <div class="ui-card">
                     <h3>¿Y si el piloto no funciona como esperábamos?</h3>
@@ -159,10 +152,6 @@
                 <div class="ui-card">
                     <h3>¿Podemos empezar sin haber hecho el Diagnóstico?</h3>
                     <p>Sí, pero lo incluimos en las primeras sesiones para asegurar que elegimos la mejor oportunidad.</p>
-                </div>
-                <div class="ui-card">
-                    <h3>¿En qué se basa el rango de precio 350–1.500€ + IVA?</h3>
-                    <p>Depende de tu proyecto: cuántos materiales o proveedores hay que investigar, el nivel de innovación que necesitas, y cuántos contenidos preparar.</p>
                 </div>
             </div>
         </div>
@@ -192,7 +181,7 @@
   },
   "areaServed": "ES",
   "serviceType": "Consulting",
-  "offers": "350–1.500€",
+  "offers": precios.pendiente('roadmap_3d') ? undefined : { "@type": "Offer", "price": String(precios.num('roadmap_3d')), "priceCurrency": "EUR" },
   "url": "https://www.oficioscirculares.com/servicios/roadmap-3d"
 }, null, 2) %>
 </script>

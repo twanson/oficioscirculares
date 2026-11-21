@@ -43,7 +43,7 @@
       <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
       <a class="club-btn club-btn--ghost" href="#incluye">Ver qué incluye</a>
     </div>
-    <span class="datos-linea">Precio fundador: 12 €/mes o 120 €/año, para siempre · Sin permanencia · 40 plazas hasta el 23 de septiembre</span>
+    <span class="datos-linea">Precio fundador: <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia · 40 plazas hasta el 23 de septiembre</span>
   </div>
 </header>
 
@@ -81,11 +81,11 @@
 
       <div class="beat" data-foto="2">
         <span class="eyebrow eyebrow--arena">La vida del taller · 03</span>
-        <div class="grande grande--uno">8 <em>de cada 10</em></div>
-        <p>pagarían algo más por lo hecho aquí al lado. Y más de la mitad pagaría más por piezas que duran y se reparan — justo lo que tú haces desde siempre.</p>
+        <div class="grande grande--uno">2 <em>de cada 3</em></div>
+        <p>pagarían más por un producto que les diga cuánto dura y si se puede reparar (Observatorio Cetelem, 2025). Justo lo que tú haces desde siempre.</p>
         <p><em>La pregunta no es si tu trabajo vale. Es si te encuentran.</em></p>
         <div class="pildoras">
-          <span class="pildora">Consumo en España</span>
+          <span class="pildora">Observatorio Cetelem 2025</span>
           <span class="pildora">km0 = confianza</span>
           <span class="pildora">durabilidad = precio justo</span>
         </div>
@@ -119,8 +119,8 @@
     <span class="cred-titulo">No somos nuevos en esto</span>
     <div class="cred-items">
       <div class="cred-item"><b>Conecta Lana</b><span>la bolsa de la lana española, creada por nosotros</span></div>
-      <div class="cred-item"><b>+200 talleres</b><span>en el Mapa Circular Artesano</span></div>
-      <div class="cred-item"><b>Impulso 3D</b><span>talleres acompañados uno a uno, cada mes</span></div>
+      <div class="cred-item"><b>Mapa Circular Artesano</b><span>talleres y recursos circulares de toda España</span></div>
+      <div class="cred-item"><b>Impulso 3D</b><span>talleres acompañados uno a uno</span></div>
     </div>
   </div>
 </section>
@@ -235,7 +235,7 @@
   <div class="cab">
     <span class="eyebrow">Comunidad</span>
     <h2>Gente que también <em>huele a taller</em></h2>
-    <p>Lo que nos escriben quienes ya trabajan con nosotros.</p>
+    <p>Lo que nos cuenta quien ya trabaja con nosotros.</p>
   </div>
   <div class="wrap">
     <div class="testi-grid">
@@ -247,36 +247,12 @@
           <div class="avatar"><img loading="lazy" src="/assets/images/club/blanca-hilandia.jpg" alt="Blanca tejiendo con el mandil de Hilandia"></div>
           <div>
             <h3>Blanca Fernández</h3>
-            <div class="rol">Hilandia · tejido artesanal</div>
-          </div>
-        </div>
-      </div>
-      <!-- Cita literal de correo real (14 jul 2026). PENDIENTE DE PERMISO — no publicar en main hasta confirmar. Avatar Pexels PROVISIONAL. -->
-      <div class="testi-card reveal">
-        <div class="comillas">"</div>
-        <p>Muchísimas gracias. Esta labor que hacéis es de agradecer.</p>
-        <div class="firma">
-          <div class="avatar"><img loading="lazy" src="/assets/images/club/avatar-maika.jpg" alt=""></div>
-          <div>
-            <h3>Maika</h3>
-            <div class="rol">Encontró lana para su aula con Conecta Lana</div>
-          </div>
-        </div>
-      </div>
-      <!-- Cita literal de correo real (16 jul 2026). PENDIENTE DE PERMISO — no publicar en main hasta confirmar. Avatar Pexels PROVISIONAL. -->
-      <div class="testi-card reveal">
-        <div class="comillas">"</div>
-        <p>Estamos encantados. Ya estamos gestionando el envío con la ganadera que nos presentasteis.</p>
-        <div class="firma">
-          <div class="avatar"><img loading="lazy" src="/assets/images/club/avatar-jorge.jpg" alt=""></div>
-          <div>
-            <h3>Jorge Esteban</h3>
-            <div class="rol">Empresa conectada con lana española vía Conecta Lana</div>
+            <div class="rol">Asociación Hilandia · tejido artesanal</div>
           </div>
         </div>
       </div>
     </div>
-    <p class="nota">Citas de correos reales de clientes y miembros de la red, publicadas con su permiso.</p>
+    <p class="nota">Testimonio real, publicado con su permiso.</p>
   </div>
 </section>
 
@@ -348,8 +324,8 @@
         <span class="plan-badge">Recomendado</span>
         <span class="plan-eyebrow">El Club completo · un año · 2 meses gratis</span>
         <h3>Fundador anual</h3>
-        <div class="plan-precio"><s>150 €</s>120 €<span>/año</span></div>
-        <p class="plan-equiv">Sale a 10 €/mes. Una pieza vendida de más al año y el Club te ha salido gratis.</p>
+        <div class="plan-precio"><s><%= precios.texto('club_anual', {periodo:false}) %></s><%= precios.texto('club_fundador_anual', {periodo:false}) %><span>/año</span></div>
+        <p class="plan-equiv">Sale a <%= precios.num('club_fundador_anual') / 12 %> €/mes. Una pieza vendida de más al año y el Club te ha salido gratis.</p>
         <ul>
           <li>Todas las lecciones cortas de venta online</li>
           <li>Directo mensual con revisión en vivo de tu perfil o tienda</li>
@@ -363,7 +339,7 @@
       <div class="plan plan--mensual reveal">
         <span class="plan-eyebrow">El Club completo · mes a mes</span>
         <h3>Fundador mensual</h3>
-        <div class="plan-precio"><s>15 €</s>12 €<span>/mes</span></div>
+        <div class="plan-precio"><s><%= precios.texto('club_mensual', {periodo:false}) %></s><%= precios.texto('club_fundador_mensual', {periodo:false}) %><span>/mes</span></div>
         <p class="plan-equiv">Lo mismo, mes a mes. Para entrar con un pie y quedarte cuando lo veas claro.</p>
         <ul>
           <li>Acceso completo al Club</li>
@@ -390,7 +366,6 @@
       <span class="micro" style="margin-top:16px">Lista propia del Club · Solo te escribimos para la reapertura</span>
     </div>
     <% } %>
-    <p class="pro-nota">¿Buscas acompañamiento 1:1? El plan <b>Taller Pro</b> (35 €/mes, con revisión personalizada trimestral) se abrirá después de la beta — y los fundadores tendréis preferencia.</p>
   </div>
 </section>
 
@@ -411,7 +386,7 @@
     </details>
     <details>
       <summary>"¿Otra cuota más? Bastante tengo con la de autónomos."</summary>
-      <p class="resp">Lo sabemos, y por eso el número es el que es. La cuenta honesta: 150 € al año (120 € como fundador). Si el radar de ayudas te consigue una sola subvención, o vendes una sola pieza más gracias a lo que aplicas, ya está pagado. Si en unos meses sientes que no te compensa, te vas sin permanencia y tan amigos.</p>
+      <p class="resp">Lo sabemos, y por eso el número es el que es. La cuenta honesta: <%= precios.texto('club_anual', {periodo:false}) %> al año (<%= precios.texto('club_fundador_anual', {periodo:false}) %> como fundador). Si el radar de ayudas te consigue una sola subvención, o vendes una sola pieza más gracias a lo que aplicas, ya está pagado. Si en unos meses sientes que no te compensa, te vas sin permanencia y tan amigos.</p>
     </details>
     <details>
       <summary>"Yo vivo de las ferias. Me funcionan."</summary>
@@ -423,7 +398,7 @@
     </details>
     <details>
       <summary>"¿Cuándo veré resultados?"</summary>
-      <p class="resp">Tu primera victoria, en 7 días: tu primer reel o tu ficha de producto publicados con método. ¿Clientes constantes? Eso son meses de constancia, y quien te prometa otra cosa te engaña. Lo que sí te prometemos: método probado, revisión cada mes y no volver a trabajar a ciegas.</p>
+      <p class="resp">Tu primera victoria, en 7 días: tu primer reel o tu ficha de producto publicados con método. ¿Clientes constantes? Eso son meses de constancia, y quien te prometa otra cosa te engaña. Lo que sí te prometemos: método, revisión cada mes y no volver a trabajar a ciegas.</p>
     </details>
     <details>
       <summary>"¿Puedo darme de baja cuando quiera?"</summary>
@@ -450,7 +425,7 @@
     <h2>Tu oficio lleva generaciones pasando de mano en mano. Que no se pare en la tuya <em>por falta de clientes.</em></h2>
     <p>Entra al Club, publica tu primera pieza esta semana y deja de trabajar solo.</p>
     <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
-    <span class="micro micro--luz">40 plazas fundador · Cierre: 23 de septiembre · 12 €/mes o 120 €/año, para siempre · Sin permanencia</span>
+    <span class="micro micro--luz">40 plazas fundador · Cierre: 23 de septiembre · <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia</span>
     <p class="pd">¿Dudas antes de entrar? Escríbenos a <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>. Te contesta una persona, no un robot. Somos un taller pequeño, como el tuyo.</p>
   </div>
 </section>
@@ -512,7 +487,7 @@
   "mainEntity": [
     {"@type": "Question", "name": "No tengo tiempo, ¿puedo aprovechar el Club?", "acceptedAnswer": {"@type": "Answer", "text": "El Club está diseñado con una regla de máximo dos horas a la semana: lecciones de 5 a 20 minutos y plantillas listas para rellenar. No es un curso que caduca; avanzas a tu ritmo."}},
     {"@type": "Question", "name": "No soy de redes sociales, ¿me sirve?", "acceptedAnswer": {"@type": "Answer", "text": "Es técnica y se aprende, empezando por lo básico con tu móvil. No hace falta ponerse delante de la cámara: tus manos y tu proceso son el contenido que mejor funciona."}},
-    {"@type": "Question", "name": "¿Merece la pena la cuota?", "acceptedAnswer": {"@type": "Answer", "text": "150 € al año (120 € como fundador). Una sola subvención conseguida con el radar de ayudas o una pieza más vendida al año ya lo paga. Sin permanencia."}},
+    {"@type": "Question", "name": "¿Merece la pena la cuota?", "acceptedAnswer": {"@type": "Answer", "text": "<%= precios.texto('club_anual', {periodo:false}) %> al año (<%= precios.texto('club_fundador_anual', {periodo:false}) %> como fundador). Una sola subvención conseguida con el radar de ayudas o una pieza más vendida al año ya lo paga. Sin permanencia."}},
     {"@type": "Question", "name": "Vivo de las ferias, ¿esto es para mí?", "acceptedAnswer": {"@type": "Answer", "text": "Sí: no se trata de dejar las ferias sino de no depender solo de ellas. La presencia digital mejora tus ferias y el radar incluye ayudas para ferias de tu comunidad."}},
     {"@type": "Question", "name": "¿Es un curso online?", "acceptedAnswer": {"@type": "Answer", "text": "No. Es un taller continuo: método, revisión en vivo mensual y comunidad de tu oficio. Cada mes hay algo vivo esperándote."}},
     {"@type": "Question", "name": "¿Cuándo veré resultados?", "acceptedAnswer": {"@type": "Answer", "text": "Tu primera victoria en 7 días: tu primer reel o ficha de producto publicados con método. Los clientes constantes llegan con meses de constancia acompañada."}},

@@ -4811,3 +4811,7 @@ iframe[src*="tally.so"] {
     .about-content .content-section--sello .oc-sello { --sello-w: 80px; top: -18px; right: 0; }
 }
 
+
+/* Marcador visible de dato pendiente de Jose (encargo nov 2026). Ámbar, con borde
+   discontinuo y texto: no depende solo del color. Retirar cuando no quede ninguno. */
+.precio-pendiente{display:inline-block;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:700;color:#8A5A00;background:#FFF4DC;border:1px dashed #C9A227;border-radius:6px;padding:2px 8px;line-height:1.4}

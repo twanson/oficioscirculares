@@ -1,0 +1,144 @@
+<%
+// Una vista para tres páginas: /servicios (las dos puertas), /servicios/talleres y /servicios/empresas.
+// Cada puerta muestra SOLO sus servicios y sus precios (data/precios.json).
+const P = precios;
+const meta = {
+  index:    { title: 'Servicios | Oficios Circulares', canonical: '/servicios',
+              description: 'Dos entradas: si eres un taller o una marca artesana, o si eres una empresa con materiales y procesos que quieres hacer circulares.' },
+  talleres: { title: 'Servicios para talleres y marcas artesanas | Oficios Circulares', canonical: '/servicios/talleres',
+              description: 'El Club de Oficios Circulares, el Diagnóstico 3D para talleres y el Impulso 3D. Precio único para cada servicio.' },
+  empresas: { title: 'Servicios para empresas | Oficios Circulares', canonical: '/servicios/empresas',
+              description: 'Diagnóstico 3D para empresas, Roadmap 3D y Sprint 3D: de detectar una mejora circular a ponerla en marcha y contarla.' }
+}[puerta];
+%>
+<%- include('partials/head-meta', meta) %>
+<link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261121b">
+<%- include('partials/header') %>
+
+<main class="ocp" id="maincontent">
+<% if (puerta === 'index') { %>
+    <section class="ocp-hero">
+        <div class="ocp-wrap">
+            <span class="ocp-eyebrow">Servicios</span>
+            <h1>&iquest;Por d&oacute;nde <em>entras</em>?</h1>
+            <p class="ocp-lead">Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos. Los servicios acompa&ntilde;an a esa red: elige la puerta que te corresponde.</p>
+        </div>
+    </section>
+    <section class="ocp-section">
+        <div class="ocp-wrap">
+            <%- include('partials/puertas') %>
+        </div>
+    </section>
+
+<% } else if (puerta === 'talleres') { %>
+    <section class="ocp-hero">
+        <div class="ocp-wrap">
+            <span class="ocp-eyebrow">Soy un taller o una marca artesana</span>
+            <h1>Que tu oficio se <em>entienda y se venda</em></h1>
+            <p class="ocp-lead">Tres formas de trabajar con nosotros, de la m&aacute;s ligera a la m&aacute;s completa. Cada una tiene un precio cerrado.</p>
+            <p><a href="/servicios/empresas">&iquest;Eres una empresa? Estos son tus servicios &rarr;</a></p>
+        </div>
+    </section>
+    <section class="ocp-section">
+        <div class="ocp-wrap">
+            <div class="ocp-servicios">
+                <article class="ocp-servicio">
+                    <span class="ocp-eyebrow">Comunidad y m&eacute;todo</span>
+                    <h3>Club de Oficios Circulares</h3>
+                    <p class="ocp-precio"><%= P.texto('club_mensual') %> <small>o <%= P.texto('club_anual') %></small></p>
+                    <p class="ocp-precio-nota">Fundadores: <%= P.texto('club_fundador_mensual') %> o <%= P.texto('club_fundador_anual') %>, con <%= P.plazasFundador() %> plazas.</p>
+                    <ul>
+                        <li>Lecciones pr&aacute;cticas para mostrar y vender tu trabajo</li>
+                        <li>Un directo al mes con revisiones en vivo</li>
+                        <li>Radar de ayudas y biblioteca de plantillas</li>
+                    </ul>
+                    <a class="ocp-btn ocp-btn--primario" href="/club">Conocer el Club</a>
+                </article>
+                <article class="ocp-servicio">
+                    <span class="ocp-eyebrow">Para saber por d&oacute;nde empezar</span>
+                    <h3>Diagn&oacute;stico 3D para talleres</h3>
+                    <p class="ocp-precio"><%- P.html('diagnostico_talleres') %></p>
+                    <p class="ocp-precio-nota">Sin llamadas: respondes un cuestionario y recibes el informe y un v&iacute;deo que te lo explica.</p>
+                    <ul>
+                        <li>El mapa de tu taller y de su entorno</li>
+                        <li>Lo que ya comunicas y c&oacute;mo est&aacute; tu presencia en internet</li>
+                        <li>Tres prioridades ordenadas</li>
+                    </ul>
+                    <a class="ocp-btn ocp-btn--primario" href="/servicios/diagnostico-3d">Ver el Diagn&oacute;stico</a>
+                </article>
+                <article class="ocp-servicio">
+                    <span class="ocp-eyebrow">Tu sistema de comunicaci&oacute;n</span>
+                    <h3>Impulso 3D</h3>
+                    <p class="ocp-precio"><%- P.html('impulso_3d') %></p>
+                    <p class="ocp-precio-nota">Impulso 3D Completo: <%- P.html('impulso_3d_completo') %></p>
+                    <ul>
+                        <li>Tu manual de marca y tus f&oacute;rmulas de contenido</li>
+                        <li>Plantillas listas para tu Instagram</li>
+                        <li>Sesi&oacute;n de trabajo para que lo uses desde el primer d&iacute;a</li>
+                    </ul>
+                    <a class="ocp-btn ocp-btn--primario" href="/impulso-3d">Ver el Impulso 3D</a>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="ocp-section ocp-section--crema">
+        <div class="ocp-wrap">
+            <%- include('partials/testimonio-blanca') %>
+        </div>
+    </section>
+
+<% } else { %>
+    <section class="ocp-hero">
+        <div class="ocp-wrap">
+            <span class="ocp-eyebrow">Soy una empresa</span>
+            <h1>De la idea circular <em>al caso que puedes contar</em></h1>
+            <p class="ocp-lead">Para empresas que fabrican o transforman materiales y quieren detectar una mejora circular, planificarla y ponerla en marcha.</p>
+            <p><a href="/servicios/talleres">&iquest;Eres un taller o una marca artesana? Estos son tus servicios &rarr;</a></p>
+        </div>
+    </section>
+    <section class="ocp-section">
+        <div class="ocp-wrap">
+            <div class="ocp-servicios">
+                <article class="ocp-servicio">
+                    <span class="ocp-eyebrow">Detectar</span>
+                    <h3>Diagn&oacute;stico 3D para empresas</h3>
+                    <p class="ocp-precio"><%- P.html('diagnostico_empresas') %></p>
+                    <ul>
+                        <li>Repaso de tus materiales, tu proceso y lo que desechas</li>
+                        <li>Oportunidades de mejora y de comunicaci&oacute;n</li>
+                        <li>Informe con las oportunidades ordenadas por prioridad</li>
+                    </ul>
+                    <a class="ocp-btn ocp-btn--primario" href="/contacto?service=diagnostico-3d-empresas&oc_source=site&oc_medium=internal&oc_campaign=oc-empresas&oc_content=diagnostico&page_path=/servicios/empresas">Solicitar el Diagn&oacute;stico</a>
+                </article>
+                <article class="ocp-servicio">
+                    <span class="ocp-eyebrow">Planificar</span>
+                    <h3>Roadmap 3D</h3>
+                    <p class="ocp-precio"><%- P.html('roadmap_3d') %></p>
+                    <ul>
+                        <li>Un plan de 90 d&iacute;as para tu primera mejora circular</li>
+                        <li>Proveedores, materiales y recursos identificados</li>
+                        <li>Plan de comunicaci&oacute;n para contar el proceso</li>
+                    </ul>
+                    <a class="ocp-btn ocp-btn--primario" href="/servicios/roadmap-3d">Ver el Roadmap 3D</a>
+                </article>
+                <article class="ocp-servicio">
+                    <span class="ocp-eyebrow">Poner en marcha</span>
+                    <h3>Sprint 3D</h3>
+                    <p class="ocp-precio"><%- P.html('sprint_3d') %></p>
+                    <ul>
+                        <li>Implementamos el piloto contigo</li>
+                        <li>Lo documentamos con datos medidos</li>
+                        <li>Preparamos los materiales para contarlo</li>
+                    </ul>
+                    <a class="ocp-btn ocp-btn--primario" href="/servicios/sprint-3d">Ver el Sprint 3D</a>
+                </article>
+            </div>
+        </div>
+    </section>
+<% } %>
+</main>
+
+<%- include('partials/footer') %>
+<script src="/assets/js/script.js"></script>
+</body>
+</html>

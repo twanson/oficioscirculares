@@ -150,7 +150,7 @@
                         <img src="/assets/images/Perfil artesana experimentada.png" alt="Artesana ceramista experimentada">
                     </div>
                     <h3>La Artesana Experimentada</h3>
-                    <p class="profile-age">Marta, &asymp;55 a&ntilde;os, ceramista</p>
+                    <p class="profile-age">Ceramista, en torno a 55 a&ntilde;os</p>
                     <p class="profile-quote">&ldquo;Yo ya era circular sin saberlo, pero no sab&iacute;a c&oacute;mo explicarlo.&rdquo;</p>
                     <p class="profile-desc">Domina su oficio con maestr&iacute;a pero se siente abrumada por lo digital. Necesita un sistema sencillo para contar lo que ya hace.</p>
                 </div>
@@ -160,7 +160,7 @@
                         <img src="/assets/images/artesano innovador.png" alt="Maker moderno carpintero">
                     </div>
                     <h3>El Maker Moderno</h3>
-                    <p class="profile-age">Javier, &asymp;32 a&ntilde;os, carpintero</p>
+                    <p class="profile-age">Carpintero, en torno a 32 a&ntilde;os</p>
                     <p class="profile-quote">&ldquo;Tengo las herramientas, pero necesito la estrategia.&rdquo;</p>
                     <p class="profile-desc">Combina tecnolog&iacute;a con prop&oacute;sito. Busca impacto y comunidad, y quiere aplicar circularidad con coherencia.</p>
                 </div>
@@ -170,7 +170,7 @@
                         <img src="/assets/images/perfil_dise&ntilde;adora_consciente .png" alt="Diseñadora joyera consciente">
                     </div>
                     <h3>La Dise&ntilde;adora Consciente</h3>
-                    <p class="profile-age">Luc&iacute;a, &asymp;28 a&ntilde;os, joyera</p>
+                    <p class="profile-age">Joyera, en torno a 28 a&ntilde;os</p>
                     <p class="profile-quote">&ldquo;S&eacute; por qu&eacute; lo hago, pero necesito saber c&oacute;mo hacerlo mejor.&rdquo;</p>
                     <p class="profile-desc">La sostenibilidad es su pilar desde el inicio. Necesita comunicar su diferenciaci&oacute;n y llegar a su cliente ideal.</p>
                 </div>
@@ -180,7 +180,7 @@
                         <img src="/assets/images/perfil_taller_familiar.png" alt="Director de taller cer&aacute;mico familiar">
                     </div>
                     <h3>El Taller con Historia</h3>
-                    <p class="profile-age">Antonio, &asymp;50 a&ntilde;os, taller cer&aacute;mico familiar, 3&ordf; generaci&oacute;n</p>
+                    <p class="profile-age">Taller cer&aacute;mico familiar, tercera generaci&oacute;n</p>
                     <p class="profile-quote">&ldquo;Tenemos 50 a&ntilde;os de historia pero en redes parecemos invisibles.&rdquo;</p>
                     <p class="profile-desc">Dirige un taller con tradici&oacute;n y equipo, pero la comunicaci&oacute;n digital siempre qued&oacute; en segundo plano. Necesita un sistema que cuente la historia que llevan d&eacute;cadas construyendo.</p>
                 </div>
@@ -256,10 +256,9 @@
                         <h3>Diagn&oacute;stico 3D</h3>
                         <p class="subtitle">Radiograf&iacute;a de tu Oficio</p>
                         <div class="price-amount">
-                            <span class="price-desde">Desde</span> <span class="value">90</span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
+                            <span class="value"><%= precios.num('diagnostico_talleres') %></span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
                         </div>
-                        <p class="price-duration">Sesi&oacute;n 45-60 min + informe en 5 d&iacute;as</p>
-                        <p class="price-note">Precio final seg&uacute;n tu proyecto</p>
+                        <p class="price-duration">Cuestionario de unos 20 minutos + informe en PDF y v&iacute;deo explicativo</p>
                     </div>
                     <div class="price-card-body">
                         <ul class="price-features">
@@ -268,12 +267,12 @@
                             <li>Diagn&oacute;stico de presencia digital actual</li>
                             <li>Oportunidades de mejora en circularidad detectadas</li>
                             <li>3 oportunidades priorizadas (comunicaci&oacute;n + circularidad)</li>
-                            <li>Recomendaci&oacute;n personalizada de siguiente paso</li>
+                            <li>Recomendaci&oacute;n de siguiente paso</li>
                         </ul>
                         <div class="price-deliverable">
-                            <strong>Entregable:</strong> Documento visual de 6-8 p&aacute;ginas con tu diagn&oacute;stico completo
+                            <strong>Entregable:</strong> Informe en PDF con tu diagn&oacute;stico completo y un v&iacute;deo en el que te lo explicamos
                         </div>
-                        <a href="/contacto?service=diagnostico-3d&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-diag&page_path=/impulso-3d" class="btn btn-coral">Quiero mi Diagn&oacute;stico</a>
+                        <a href="/servicios/diagnostico-3d?oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-diag" class="btn btn-coral">Quiero mi Diagn&oacute;stico</a>
                         <p class="price-ideal"><strong>Ideal para:</strong> Quien necesita claridad sobre qu&eacute; tiene y qu&eacute; puede hacer con ello</p>
                     </div>
                 </div>
@@ -284,10 +283,9 @@
                         <h3>Impulso 3D</h3>
                         <p class="subtitle">Tu sistema de comunicaci&oacute;n</p>
                         <div class="price-amount">
-                            <span class="price-desde">Desde</span> <span class="value">495</span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
+                            <span class="value"><%= precios.num('impulso_3d') %></span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
                         </div>
                         <p class="price-duration">3 semanas + sesi&oacute;n de trabajo 90 min</p>
-                        <p class="price-note">Precio final seg&uacute;n tu proyecto</p>
                     </div>
                     <div class="price-card-body">
                         <ul class="price-features">
@@ -317,10 +315,9 @@
                         <h3>Impulso 3D Completo</h3>
                         <p class="subtitle">Tu taller de comunicaci&oacute;n equipado</p>
                         <div class="price-amount">
-                            <span class="price-desde">Desde</span> <span class="value">895</span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
+                            <span class="value"><%= precios.num('impulso_3d_completo') %></span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
                         </div>
                         <p class="price-duration">4-5 semanas + 2 sesiones de trabajo</p>
-                        <p class="price-note">Precio final seg&uacute;n tu proyecto</p>
                     </div>
                     <div class="price-card-body">
                         <ul class="price-features">
@@ -344,7 +341,7 @@
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Incluye herramienta digital con coste de 20&euro;/mes tras la configuraci&oacute;n inicial</p>
 
                         <a href="/contacto?service=impulso-3d-completo&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-completo&page_path=/impulso-3d" class="btn btn-coral">Quiero el Impulso Completo</a>
-                        <p class="price-ideal"><strong>Ideal para:</strong> Quien quiere dedicar menos de una hora a la semana a comunicar sin perder su voz</p>
+                        <p class="price-ideal"><strong>Ideal para:</strong> Quien quiere dedicar el menor tiempo posible a comunicar sin perder su voz</p>
                     </div>
                 </div>
             </div>
@@ -412,7 +409,7 @@
             <div class="support-grid">
                 <div class="support-card fade-in">
                     <h3>Soporte B&aacute;sico</h3>
-                    <div class="support-price">75 &ndash; 150&euro;<span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">/mes</span> <span class="precio-iva">+ IVA</span></div>
+                    <div class="support-price"><%- precios.html('soporte_basico') %></div>
                     <ul class="support-features">
                         <li>1 revisi&oacute;n mensual de tu asistente de contenido</li>
                         <li>Resoluci&oacute;n de dudas por email</li>
@@ -422,7 +419,7 @@
                 </div>
                 <div class="support-card fade-in">
                     <h3>Soporte Activo</h3>
-                    <div class="support-price">150 &ndash; 300&euro;<span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">/mes</span> <span class="precio-iva">+ IVA</span></div>
+                    <div class="support-price"><%- precios.html('soporte_activo') %></div>
                     <ul class="support-features">
                         <li>1 sesi&oacute;n mensual de 30 min</li>
                         <li>Iteraciones ilimitadas de tu asistente de contenido</li>
@@ -435,29 +432,11 @@
         </div>
     </section>
 
-    <!-- SOCIAL PROOF -->
-    <section class="impulso-section impulso-section-cream">
+    <!-- TESTIMONIO (único autorizado para talleres: Blanca, Asociación Hilandia) -->
+    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261121b">
+    <section class="impulso-section impulso-section-cream ocp">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Experiencias</span>
-                <h2>Lo que cuentan quienes ya lo usan</h2>
-            </div>
-
-            <div class="testimonial-card fade-in">
-                <p class="testimonial-text">&ldquo;Antes pod&iacute;a pasar un mes sin publicar nada porque no sab&iacute;a qu&eacute; decir. Ahora en 20 minutos tengo el post hecho con mi voz, mis fotos, y sin la sensaci&oacute;n de estar vendiendo humo. Lo mejor es que la gente me dice que nota que soy yo de verdad.&rdquo;</p>
-                <div class="testimonial-author">
-                    <p class="testimonial-name">Elena R.</p>
-                    <p class="testimonial-role">Cer&aacute;mica artesanal &middot; Toledo</p>
-                </div>
-            </div>
-
-            <div class="testimonial-card fade-in">
-                <p class="testimonial-text">&ldquo;Llevamos tres generaciones y nunca hab&iacute;amos sabido contar lo que nos hace diferentes. Ahora nuestros clientes entienden el valor de lo artesanal antes de entrar por la puerta.&rdquo;</p>
-                <div class="testimonial-author">
-                    <p class="testimonial-name">Taller familiar</p>
-                    <p class="testimonial-role">Andaluc&iacute;a</p>
-                </div>
-            </div>
+            <%- include('partials/testimonio-blanca') %>
         </div>
     </section>
 
@@ -526,7 +505,7 @@
                         <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                     </div>
                     <div class="faq-answer">
-                        <p>Con el Impulso 3D recibes el kit completo de materiales &mdash; plantillas, calendario, f&oacute;rmulas de texto, Manual de Marca &mdash; y un cuaderno de trabajo digital para crear contenido con tu voz. T&uacute; escribes usando las f&oacute;rmulas y montas los dise&ntilde;os en Canva. Con el Impulso 3D Completo recibes todo lo anterior m&aacute;s un asistente digital que te prepara borradores y dise&ntilde;os base. La diferencia en el d&iacute;a a d&iacute;a: con el primero dedicas unas 2 horas a la semana a comunicar; con el segundo, menos de una hora. En ambos casos, t&uacute; siempre revisas y decides.</p>
+                        <p>Con el Impulso 3D recibes el kit completo de materiales &mdash; plantillas, calendario, f&oacute;rmulas de texto, Manual de Marca &mdash; y un cuaderno de trabajo digital para crear contenido con tu voz. T&uacute; escribes usando las f&oacute;rmulas y montas los dise&ntilde;os en Canva. Con el Impulso 3D Completo recibes todo lo anterior m&aacute;s un asistente digital que te prepara borradores y dise&ntilde;os base. La diferencia en el d&iacute;a a d&iacute;a: con el segundo, buena parte del trabajo te llega ya preparado. En ambos casos, t&uacute; siempre revisas y decides.</p>
                     </div>
                 </div>
 
@@ -597,25 +576,25 @@
       {
         "@type": "Offer",
         "name": "Diagnóstico 3D",
-        "price": "90",
+        "price": String(precios.num('diagnostico_talleres')),
         "priceCurrency": "EUR",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "90", "priceCurrency": "EUR", "unitText": "desde" },
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": String(precios.num('diagnostico_talleres')), "priceCurrency": "EUR" },
         "description": "Sesión de diagnóstico + informe visual con oportunidades de circularidad detectadas"
       },
       {
         "@type": "Offer",
         "name": "Impulso 3D",
-        "price": "495",
+        "price": String(precios.num('impulso_3d')),
         "priceCurrency": "EUR",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "495", "priceCurrency": "EUR", "unitText": "desde" },
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": String(precios.num('impulso_3d')), "priceCurrency": "EUR" },
         "description": "Kit completo de comunicación con fórmulas, plantillas, Manual de Marca y guía de mejoras circulares"
       },
       {
         "@type": "Offer",
         "name": "Impulso 3D Completo",
-        "price": "895",
+        "price": String(precios.num('impulso_3d_completo')),
         "priceCurrency": "EUR",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "895", "priceCurrency": "EUR", "unitText": "desde" },
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": String(precios.num('impulso_3d_completo')), "priceCurrency": "EUR" },
         "description": "Sistema completo con asistente digital personalizado, materiales, formación y circularidad integrada"
       }
     ]
@@ -630,7 +609,7 @@
 
 <!-- Sticky CTA móvil -->
 <div class="impulso-sticky-mobile" aria-hidden="true">
-    <a href="/contacto?service=diagnostico-3d&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=sticky-mobile&page_path=/impulso-3d" class="btn btn-coral">Reservar Diagnóstico</a>
+    <a href="/servicios/diagnostico-3d?oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=sticky-mobile" class="btn btn-coral">Quiero mi Diagnóstico</a>
 </div>
 
 </body>
