@@ -499,3 +499,45 @@ html:has(.oc-landing),html:has(.oc-landing) body{overflow-x:clip}
 .cl-testimonio__firma{font-size:15px;color:rgba(251,247,239,.75)}
 .cl-testimonio__firma a{color:#E8D5B7;text-decoration:underline;text-underline-offset:2px}
 .cl-testimonio blockquote.cl-testimonio__secundaria{font-size:clamp(20px,2.6vw,28px);margin-top:56px}
+
+/* ===================================================================
+   AMPLIACIONES PARA LAS PÁGINAS DE SERVICIOS (solo .oc-landing; /club no las usa)
+   =================================================================== */
+/* Caja sin foto arriba: el chip no sube sobre la imagen */
+.oc-landing .caja--sinfoto{padding-top:34px}
+.oc-landing .caja--sinfoto .chip{margin-top:0}
+/* Caja con un documento (portada de un informe) en vez de foto */
+.oc-landing .caja-doc{margin:0 -34px;height:236px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;background:radial-gradient(420px 220px at 50% 100%,rgba(232,213,183,.28),transparent 70%),linear-gradient(180deg,#0C5140,#03392C)}
+.oc-landing .caja-doc img{width:150px;height:auto;border-radius:6px 6px 0 0;transform:perspective(900px) rotateX(14deg) rotateZ(-4deg) translateY(18px);box-shadow:0 24px 46px rgba(0,0,0,.45),0 0 0 1px rgba(232,213,183,.25);transition:transform .5s ease}
+.oc-landing .caja:hover .caja-doc img{transform:perspective(900px) rotateX(6deg) rotateZ(-2deg) translateY(8px)}
+.oc-landing .caja-doc + .chip{margin-top:-29px}
+.oc-landing .cajas-grid--seis .caja--sinfoto .lema{margin-bottom:0}
+/* Fila de portadas de ejemplo («Así es un Diagnóstico 3D») sobre verde hondo */
+.oc-landing .oc-ejemplos{background:radial-gradient(760px 420px at 50% 0%,rgba(232,213,183,.1),transparent 65%),var(--verde-hondo);padding:110px 0;text-align:center}
+.oc-landing .oc-ejemplos h2{font-size:clamp(34px,4.4vw,50px);color:var(--crema);margin-bottom:14px}
+.oc-landing .oc-ejemplos h2 em{color:var(--arena)}
+.oc-landing .oc-ejemplos .cab p{color:rgba(251,247,239,.8);max-width:58ch;margin:0 auto 54px}
+.oc-landing .oc-portadas{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;max-width:980px;margin:0 auto 48px;padding:0 24px}
+.oc-landing .oc-portada img{width:100%;height:auto;border-radius:8px;box-shadow:0 26px 60px rgba(0,0,0,.45),0 0 0 1px rgba(232,213,183,.18);transition:transform .35s ease}
+.oc-landing .oc-portada:nth-child(odd) img{transform:rotate(-1.5deg)}
+.oc-landing .oc-portada:nth-child(even) img{transform:rotate(1.5deg) translateY(14px)}
+.oc-landing .oc-portada:hover img{transform:rotate(0) translateY(-6px)}
+.oc-landing .oc-portada figcaption{margin-top:22px;font-size:13.5px;font-weight:600;color:rgba(251,247,239,.75)}
+/* Testimonios: una sola tarjeta centrada */
+.oc-landing .testi-grid--uno{grid-template-columns:minmax(0,560px);justify-content:center}
+/* Plan único, centrado */
+.oc-landing .planes--uno{grid-template-columns:minmax(0,560px);justify-content:center}
+.oc-landing .plan-precio .precio-iva{font-family:var(--sans);font-size:17px;color:var(--tinta-suave);font-weight:600}
+/* Pasos en tres columnas (el componente trae cuatro) */
+.oc-landing .pasos-grid--tres{grid-template-columns:repeat(3,1fr)}
+.oc-landing .pasos-grid--tres::before{left:17%;right:17%}
+/* Foto del relato en móvil: apaisada, no a toda la altura */
+.oc-landing .prob-movil img{width:100%;height:260px;object-fit:cover}
+@media(max-width:980px){
+  .oc-landing .oc-portadas{grid-template-columns:1fr 1fr;max-width:520px}
+  .oc-landing .pasos-grid--tres{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+}
+@media(max-width:640px){
+  .oc-landing .oc-ejemplos{padding:76px 0}
+  .oc-landing .oc-portadas{gap:18px}
+}

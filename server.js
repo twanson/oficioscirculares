@@ -147,6 +147,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 // Precios: única fuente (data/precios.json) disponible en todas las vistas EJS.
 app.locals.precios = precios;
+app.locals.testimoniosLib = require('./lib/testimonios'); // data/testimonios.json
 
 // --- Webhook de Stripe (Club) ---
 // DEBE registrarse ANTES de express.json(): la verificación de firma necesita
@@ -637,7 +638,13 @@ app.get('/servicios/empresas', (req, res) => res.render('servicios', { puerta: '
 
 app.get('/servicios/diagnostico-3d', (req, res) => {
   // Diagnóstico 3D para talleres. CLUB_ABIERTO activa el bloque de entrada al Club.
-  res.render('diagnostico-3d', { clubAbierto: clubConfig.getConfig().club_abierto });
+  // ?propuestas=1 enseña SOLO en local los textos pendientes de aprobar (manifiesto y
+  // «para quién sí y para quién no»). En staging y producción no se publican.
+  const local = ['localhost', '127.0.0.1'].includes(req.hostname);
+  res.render('diagnostico-3d', {
+    clubAbierto: clubConfig.getConfig().club_abierto,
+    propuestas: local && req.query.propuestas === '1' ? (req.query.manifiesto === 'b' ? 'b' : 'a') : null
+  });
 });
 
 app.get('/servicios/roadmap-3d', (req, res) => {
