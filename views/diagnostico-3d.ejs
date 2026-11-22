@@ -5,150 +5,160 @@
     ogImage: 'https://www.oficioscirculares.com/img/servicios/diagnostico-3d-hero.jpg',
     ogImageAlt: 'Diagnóstico 3D de Oficios Circulares para talleres y marcas artesanas'
 }) %>
-<link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261121c">
+<link rel="stylesheet" href="/assets/css/impulso-3d.css?v=20260320b">
+<link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260612">
+<link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
+<link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122a">
 <%- include('partials/header') %>
 
 <%
   // Mientras no haya enlace de pago propio del Diagnóstico, la compra entra por el formulario de contacto.
   const comprarHref = '/contacto?service=diagnostico-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-diagnostico-3d&page_path=/servicios/diagnostico-3d';
+  const ejemploHref = '/downloads/diagnostico-3d-ejemplo-taller-pequeno.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-diagnostico-3d';
 %>
-<main class="main-content page-service diag3d" id="maincontent">
-    <!-- HERO split -->
-    <section class="service-hero" id="hero" aria-labelledby="hero-title" aria-describedby="hero-lead">
-        <div class="container">
-            <div class="hero-split-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">Diagnóstico 3D para talleres y marcas artesanas</p>
-                    <h1 id="hero-title" class="hero-title">Descubre qué puedes hacer con lo que ya tienes</h1>
-                    <p id="hero-lead" class="hero-sub">Sin llamadas ni agendas. Respondes un cuestionario cuando te venga bien y recibes un informe en PDF y un vídeo en el que Jose te lo explica.</p>
-                    <ul class="hero-bullets" aria-label="Qué incluye">
-                        <li>El mapa de tu taller y de su entorno</li>
-                        <li>Lo que ya comunicas y cómo está tu presencia en internet</li>
-                        <li>Tres prioridades ordenadas para empezar</li>
-                    </ul>
-                    <p class="diag3d-precio" style="font-size:1.35rem;font-weight:700;color:#FBF7EF;margin:14px 0 0"><%- precios.html('diagnostico_talleres') %></p>
-                    <div class="hero-ctas">
-                        <a id="cta-hero" href="<%= comprarHref %>&oc_content=hero" class="btn btn-primary btn-large" aria-label="Quiero mi Diagnóstico 3D" data-event="click_cta" data-label="diag3d-hero">Quiero mi Diagnóstico 3D</a>
-                        <a id="cta-hero-email-taller" href="/downloads/diagnostico-3d-ejemplo-taller-pequeno.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-diagnostico-3d&oc_content=hero" class="btn btn-secondary" aria-label="Ver un informe de ejemplo" data-event="file_download" data-label="diag3d-hero-taller">Ver un informe de ejemplo</a>
-                    </div>
-                </div>
-                <div class="hero-media" aria-hidden="true">
-                    <div class="media-frame">
-                        <img src="/img/servicios/diagnostico-3d-hero.jpg" alt="" loading="eager" style="display:block;width:100%;height:auto;">
-                    </div>
-                    <img class="oc-sello oc-sello--claro" src="/assets/images/brand/oc-sello-crema.webp" alt="" aria-hidden="true" width="560" height="560">
-                </div>
-            </div>
-        </div>
-    </section>
+<main class="main-content impulso-3d oc-pagina diag3d" id="maincontent">
+    <%- include('partials/oc-hero', {
+        badge: 'Diagn&oacute;stico 3D para talleres',
+        titulo: 'Descubre qu&eacute; puedes hacer con lo que ya tienes',
+        subtitulo: 'Sin llamadas ni agendas. Respondes un cuestionario cuando te venga bien y recibes un informe en PDF y un v&iacute;deo en el que Jose te lo explica.',
+        extra: '<p class="hero-precio">' + precios.html('diagnostico_talleres') + '</p>',
+        ctas: [
+            { href: comprarHref + '&oc_content=hero', texto: 'Quiero mi Diagn&oacute;stico 3D &rarr;', clase: 'btn-coral', id: 'cta-hero', label: 'diag3d-hero' },
+            { href: ejemploHref + '&oc_content=hero', texto: 'Ver un informe de ejemplo', clase: 'btn-outline-white', id: 'cta-hero-email-taller' }
+        ],
+        img: '/img/servicios/diagnostico-3d-hero.jpg',
+        alt: 'Mano con un lápiz sobre la mesa de trabajo de un taller'
+    }) %>
 
-    <!-- ¿Te suena esto? -->
-    <section class="service-section" id="para-quien" aria-labelledby="para-quien-title">
+    <section class="impulso-section impulso-section-cream" id="para-quien" aria-labelledby="para-quien-title">
         <div class="container">
-            <h2 id="para-quien-title" class="section-title enhanced" data-label="Encaje">¿Te suena esto?</h2>
-            <div class="encaje-wrap">
-                <div class="ui-card">
-                    <ul class="simple-list">
-                        <li><strong>«Hago cosas sostenibles pero nadie lo valora»</strong> — Te ayudamos a que se vea</li>
-                        <li><strong>«No sé por dónde empezar a contar lo que hago»</strong> — Te damos tres prioridades, en orden</li>
-                        <li><strong>«Genero restos que intuyo que tienen salida»</strong> — Te mostramos qué se puede aprovechar</li>
-                        <li><strong>«Quiero diferenciarme pero todos dicen lo mismo»</strong> — Te ayudamos a contar lo que te hace diferente, con hechos</li>
-                    </ul>
+            <div class="section-header">
+                <span class="section-label">Encaje</span>
+                <h2 id="para-quien-title">&iquest;Te suena esto?</h2>
+                <p>Si te reconoces en alguna de estas frases, el Diagn&oacute;stico es para ti.</p>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                    <div><h4>&laquo;Hago cosas sostenibles pero nadie lo valora&raquo;</h4><p>Te ayudamos a que se vea.</p></div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
+                    <div><h4>&laquo;No s&eacute; por d&oacute;nde empezar a contar lo que hago&raquo;</h4><p>Te damos tres prioridades, en orden.</p></div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/></svg></div>
+                    <div><h4>&laquo;Genero restos que intuyo que tienen salida&raquo;</h4><p>Te mostramos qu&eacute; se puede aprovechar.</p></div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"/></svg></div>
+                    <div><h4>&laquo;Quiero diferenciarme pero todos dicen lo mismo&raquo;</h4><p>Te ayudamos a contar lo que te hace diferente, con hechos.</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Cómo funciona -->
-    <section class="service-section ocp" id="como-funciona" aria-labelledby="flujo-title">
-        <div class="container">
-            <h2 id="flujo-title" class="section-title enhanced" data-label="Proceso">Cómo funciona</h2>
-            <ol class="ocp-pasos">
-                <li>
-                    <h3>Compras el Diagnóstico</h3>
-                    <p><%- precios.html('diagnostico_talleres') %>. Sin llamadas ni citas que cuadrar.</p>
-                </li>
-                <li>
-                    <h3>Respondes el cuestionario</h3>
-                    <p>Te llega un cuestionario que respondes en unos 20 minutos. Puedes contestar con audios y adjuntar fotos de tus piezas y de tu taller.</p>
-                </li>
-                <li>
-                    <h3>Recibes el informe y el vídeo</h3>
-                    <p>En <span class="precio-pendiente">[PENDIENTE JOSE: plazo de entrega]</span> recibes el informe en PDF y un vídeo de 5 a 10 minutos en el que Jose te lo explica.</p>
-                </li>
-            </ol>
-            <div class="inline-cta">
-                <a id="cta-flow" href="<%= comprarHref %>&oc_content=flow" class="btn btn-primary btn-large" aria-label="Quiero mi Diagnóstico 3D" data-event="click_cta" data-label="diag3d-flow">Quiero mi Diagnóstico 3D</a>
-            </div>
-        </div>
-    </section>
+    <%- include('partials/metodo-3d', {
+        fondo: 'white',
+        label: 'Proceso',
+        titulo: 'C&oacute;mo funciona',
+        intro: 'Tres pasos, sin llamadas ni citas que cuadrar.',
+        fases: [
+            { t: 'Compras el Diagn&oacute;stico', p: precios.html('diagnostico_talleres') + '. Sin llamadas ni citas que cuadrar.' },
+            { t: 'Respondes el cuestionario', p: 'Te llega un cuestionario que respondes en unos 20 minutos. Puedes contestar con audios y adjuntar fotos de tus piezas y de tu taller.' },
+            { t: 'Recibes el informe y el v&iacute;deo', p: 'Recibes el informe en PDF y un v&iacute;deo de 5 a 10 minutos en el que Jose te lo explica.' }
+        ]
+    }) %>
 
-    <!-- Qué incluye el informe -->
-    <section class="service-section ocp" id="que-te-llevas" aria-labelledby="que-llevas-title">
+    <section class="impulso-section impulso-section-cream" id="que-te-llevas" aria-labelledby="que-llevas-title">
         <div class="container">
-            <h2 id="que-llevas-title" class="section-title enhanced" data-label="Entregables">Qué incluye el informe</h2>
-            <ul class="ocp-incluye">
-                <li><b>El mapa del taller y de su entorno</b>Quién eres, con quién trabajas, de dónde vienen tus materiales y adónde van tus piezas.</li>
-                <li><b>El inventario de lo que ya comunica</b>Tu historia, tu proceso, tus materiales y tus valores: lo que ya tienes para contar.</li>
-                <li><b>El estado de tu presencia en internet</b>Cómo se ve hoy tu taller en redes, en tu web y en los buscadores.</li>
-                <li><b>Las oportunidades de circularidad</b>Lo que ya haces de forma circular y lo que podrías aprovechar mejor.</li>
-                <li><b>Tres prioridades ordenadas</b>Qué hacer primero, qué después y qué puede esperar.</li>
-            </ul>
+            <div class="section-header">
+                <span class="section-label">Entregables</span>
+                <h2 id="que-llevas-title">Qu&eacute; incluye el informe</h2>
+            </div>
+            <div class="problems-grid oc-tres">
+                <div class="problem-card"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>El mapa del taller y de su entorno</h4><p>Qui&eacute;n eres, con qui&eacute;n trabajas, de d&oacute;nde vienen tus materiales y ad&oacute;nde van tus piezas.</p></div></div>
+                <div class="problem-card"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="m9 14 2 2 4-4"/></svg></div><div><h4>El inventario de lo que ya comunica</h4><p>Tu historia, tu proceso, tus materiales y tus valores: lo que ya tienes para contar.</p></div></div>
+                <div class="problem-card"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div><h4>El estado de tu presencia en internet</h4><p>C&oacute;mo se ve hoy tu taller en redes, en tu web y en los buscadores.</p></div></div>
+                <div class="problem-card"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></div><div><h4>Las oportunidades de circularidad</h4><p>Lo que ya haces de forma circular y lo que podr&iacute;as aprovechar mejor.</p></div></div>
+                <div class="problem-card"><div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h11M10 12h11M10 18h11"/><path d="M4 6h1v4M4 10h2M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></div><div><h4>Tres prioridades ordenadas</h4><p>Qu&eacute; hacer primero, qu&eacute; despu&eacute;s y qu&eacute; puede esperar.</p></div></div>
+            </div>
         </div>
     </section>
 
     <% if (clubAbierto) { %>
     <!-- Entrada al Club con el Diagnóstico (se activa con CLUB_ABIERTO el día del lanzamiento) -->
-    <section class="service-section ocp" id="club" aria-labelledby="club-title">
+    <section class="impulso-section impulso-section-white" id="club" aria-labelledby="club-title">
         <div class="container">
-            <div class="ocp-aviso">
-                <h2 id="club-title" style="font-size:1.4rem">Con el Diagnóstico, el Club te espera</h2>
-                <p style="margin:0">Quien compra el Diagnóstico puede entrar en el <a href="/club">Club de Oficios Circulares</a> aunque las plazas estén cerradas.</p>
+            <div class="problem-card" style="max-width:760px;margin:0 auto">
+                <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div><h4 id="club-title">Con el Diagn&oacute;stico, el Club te espera</h4><p>Quien compra el Diagn&oacute;stico puede entrar en el <a href="/club">Club de Oficios Circulares</a> aunque las plazas est&eacute;n cerradas.</p></div>
             </div>
         </div>
     </section>
     <% } %>
 
-    <!-- Precio -->
-    <section class="service-section" id="precio" aria-labelledby="precio-title">
+    <section class="impulso-section impulso-section-white" id="precio" aria-labelledby="precio-title">
         <div class="container">
-            <h2 id="precio-title" class="section-title enhanced" data-label="Inversión">Tu inversión</h2>
-            <div class="ui-card">
-                <p><strong><%- precios.html('diagnostico_talleres') %></strong></p>
-                <p>Incluye el cuestionario, el informe en PDF y el vídeo en el que te lo explicamos. <em>(Si después decides seguir con nosotros, te descontamos el importe del diagnóstico.)</em></p>
-                <div class="badges"><span class="badge">Sin llamadas</span><span class="badge">Sin greenwashing</span><span class="badge">Precio cerrado</span></div>
+            <div class="section-header">
+                <span class="section-label">Inversi&oacute;n</span>
+                <h2 id="precio-title">Tu inversi&oacute;n</h2>
+            </div>
+            <div class="price-card featured" style="max-width:520px;margin:0 auto">
+                <span class="price-badge">Precio cerrado</span>
+                <div class="price-card-header">
+                    <h3>Diagn&oacute;stico 3D para talleres</h3>
+                    <p class="subtitle">Sin llamadas &middot; sin greenwashing</p>
+                    <div class="price-amount"><span class="value"><%= precios.num('diagnostico_talleres') %></span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span></div>
+                </div>
+                <div class="price-card-body">
+                    <ul class="price-features">
+                        <li>El cuestionario, el informe en PDF y el v&iacute;deo en el que te lo explicamos</li>
+                        <li>Si despu&eacute;s decides seguir con nosotros, te descontamos el importe del diagn&oacute;stico</li>
+                    </ul>
+                    <a href="<%= comprarHref %>&oc_content=precio" class="btn btn-coral" data-event="click_cta" data-label="diag3d-precio">Quiero mi Diagn&oacute;stico 3D</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonio -->
-    <section class="service-section ocp" aria-label="Testimonio">
+    <section class="impulso-section impulso-section-cream" aria-label="Testimonio">
         <div class="container">
+            <div class="section-header">
+                <span class="section-label">Experiencias</span>
+                <h2>Lo que cuentan quienes ya lo usan</h2>
+            </div>
             <%- include('partials/testimonio-blanca') %>
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="service-section" id="faq" aria-labelledby="faq-title">
+    <section class="impulso-section impulso-section-white" id="faq" aria-labelledby="faq-title">
         <div class="container">
-            <h2 id="faq-title" class="section-title enhanced" data-label="FAQ">Preguntas frecuentes</h2>
-            <div class="faq-grid">
-                <div class="ui-card"><h3>¿Tengo que hacer alguna llamada?</h3><p>No. Todo funciona por escrito: respondes el cuestionario a tu ritmo y recibes el informe y el vídeo. Si algo no queda claro, nos escribes.</p></div>
-                <div class="ui-card"><h3>¿Puedo responder con audios?</h3><p>Sí. Puedes contestar con audios y adjuntar fotos. Es lo más cómodo si estás en el taller.</p></div>
-                <div class="ui-card"><h3>¿Trabajáis con mi oficio?</h3><p>Con cualquier taller o marca artesana que haga piezas físicas: cerámica, madera, textil, cuero, joyería, cosmética natural y más. Si eres una empresa, tienes tu propio <a href="/servicios/empresas">Diagnóstico para empresas</a>.</p></div>
-                <div class="ui-card"><h3>¿Y la confidencialidad?</h3><p>Lo que nos cuentas se queda entre nosotros. Firmamos un acuerdo de confidencialidad si lo necesitas.</p></div>
+            <div class="section-header">
+                <span class="section-label">FAQ</span>
+                <h2 id="faq-title">Preguntas frecuentes</h2>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card oc-card-ancha"><h4>&iquest;Tengo que hacer alguna llamada?</h4><p>No. Todo funciona por escrito: respondes el cuestionario a tu ritmo y recibes el informe y el v&iacute;deo. Si algo no queda claro, nos escribes.</p></div>
+                <div class="problem-card oc-card-ancha"><h4>&iquest;Puedo responder con audios?</h4><p>S&iacute;. Puedes contestar con audios y adjuntar fotos. Es lo m&aacute;s c&oacute;modo si est&aacute;s en el taller.</p></div>
+                <div class="problem-card oc-card-ancha"><h4>&iquest;Trabaj&aacute;is con mi oficio?</h4><p>Con cualquier taller o marca artesana que haga piezas f&iacute;sicas: cer&aacute;mica, madera, textil, cuero, joyer&iacute;a, cosm&eacute;tica natural y m&aacute;s. Si eres una empresa, tienes tu propio <a href="/servicios/empresas">Diagn&oacute;stico para empresas</a>.</p></div>
+                <div class="problem-card oc-card-ancha"><h4>&iquest;Y la confidencialidad?</h4><p>Lo que nos cuentas se queda entre nosotros. Firmamos un acuerdo de confidencialidad si lo necesitas.</p></div>
             </div>
         </div>
     </section>
 
-    <!-- CTA final -->
-    <section class="service-section cta-final" id="cta-final" aria-labelledby="cta-final-title">
-        <div class="container">
-            <h2 id="cta-final-title" class="section-title enhanced" data-label="Siguiente paso">¿Empezamos?</h2>
-            <p>Un cuestionario de unos 20 minutos, un informe y un vídeo. Y sabrás qué hacer primero.</p>
-            <div class="hero-ctas">
-                <a id="cta-footer" href="<%= comprarHref %>&oc_content=footer" class="btn btn-primary btn-large" aria-label="Quiero mi Diagnóstico 3D" data-event="click_cta" data-label="diag3d-footer">Quiero mi Diagnóstico 3D</a>
-                <a id="cta-footer-email-taller" class="btn btn-secondary" href="/downloads/diagnostico-3d-ejemplo-taller-pequeno.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-diagnostico-3d&oc_content=footer" aria-label="Ver un informe de ejemplo" data-event="file_download" data-label="diag3d-footer-taller">Ver un informe de ejemplo</a>
+    <!-- Banda final: componente «Transforma tu proyecto» de la portada (cta-v2) -->
+    <section class="cta-v2" id="cta-final" aria-labelledby="cta-final-title">
+        <div class="cta-v2-bg">
+            <img src="/assets/images/workshop_tools.jpg" alt="" loading="lazy">
+            <div class="cta-v2-overlay"></div>
+        </div>
+        <div class="cta-v2-content">
+            <h2 id="cta-final-title">&iquest;Empezamos?<br><em>Sabr&aacute;s qu&eacute; hacer primero</em></h2>
+            <p>Un cuestionario de unos 20 minutos, un informe y un v&iacute;deo.</p>
+            <div class="cta-v2-buttons">
+                <a id="cta-footer" href="<%= comprarHref %>&oc_content=footer" class="btn-cta-primary" data-event="click_cta" data-label="diag3d-footer">Quiero mi Diagn&oacute;stico 3D</a>
+                <a id="cta-footer-email-taller" href="<%= ejemploHref %>&oc_content=footer" class="btn-cta-secondary" data-event="file_download" data-label="diag3d-footer-taller">Ver un informe de ejemplo</a>
             </div>
         </div>
     </section>

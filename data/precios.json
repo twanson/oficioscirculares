@@ -1,5 +1,5 @@
 {
-  "_nota": "ÚNICA fuente de precios de la web. Las plantillas EJS leen de aquí (app.locals.precios) y las páginas estáticas usan marcas {{precio:clave}}. Un precio a null se muestra como [PENDIENTE JOSE: precio único]. Importes en euros, sin IVA salvo el Club.",
+  "_nota": "ÚNICA fuente de precios de la web. Las plantillas EJS leen de aquí (app.locals.precios) y las páginas estáticas usan marcas {{precio:clave}}. Un precio a null está PENDIENTE de Jose: la web muestra «Precio cerrado tras el Diagnóstico» (Roadmap y Sprint) o «Consultar» (el resto), ver lib/precios.js. Importes en euros, sin IVA salvo el Club.",
   "servicios": {
     "club_mensual":          { "nombre": "Club de Oficios Circulares (mensual)", "importe": 15,  "periodo": "mes", "iva": false },
     "club_anual":            { "nombre": "Club de Oficios Circulares (anual)",   "importe": 150, "periodo": "año", "iva": false },

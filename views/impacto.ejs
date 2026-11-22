@@ -1,88 +1,147 @@
 <%
 // /impacto — cifras leídas de data/impacto.json (se actualizan cada trimestre sin tocar esta plantilla).
+// Componentes de Impulso 3D (impulso-3d.css) y banda final de la portada (home-v2.css); ajustes en oc-puertas.css.
 const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 function fecha(iso) { const [a, m, d] = iso.split('-').map(Number); return d + ' de ' + MESES[m - 1] + ' de ' + a; }
-// es-ES no agrupa números de 4 cifras: forzamos el punto de miles para que 1.070 y 1.318 se lean igual que en la tabla.
+// es-ES no agrupa números de 4 cifras: forzamos el punto de miles para que 1.070 y 1.318 se lean igual.
 function miles(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+// Los marcadores [PENDIENTE JOSE: …] se quedan en el JSON (lista de pendientes) pero no se publican.
+function limpio(txt) { return String(txt || '').replace(/\s*\[PENDIENTE JOSE:[^\]]*\]/g, '').trim(); }
 const porId = Object.fromEntries(impacto.indicadores.map(i => [i.id, i]));
-function pendiente(txt) { return txt.replace(/\[PENDIENTE JOSE:[^\]]*\]/g, m => '<span class="precio-pendiente">' + m + '</span>'); }
+const DESTACADAS = ['altas_conecta_lana', 'lana_registrada', 'emparejamientos', 'material_con_salida'];
+const grandes = DESTACADAS.map(id => porId[id]).filter(Boolean);
+const resto = impacto.indicadores.filter(i => DESTACADAS.indexOf(i.id) === -1);
+const CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+function cifra(i) { %>
+                <article class="oc-cifra">
+                    <span class="oc-cifra-valor"><%= miles(i.valor) %><% if (i.unidad) { %><span class="oc-cifra-unidad"><%= i.unidad %></span><% } %></span>
+                    <h3 class="oc-cifra-ind"><%= i.indicador %></h3>
+                    <% if (i.detalle) { %><p class="oc-cifra-detalle"><%= i.detalle %></p><% } %>
+                    <span class="oc-cifra-fecha"><%- CAL %><span>Dato a <time datetime="<%= i.fecha %>"><%= fecha(i.fecha) %></time></span></span>
+                </article>
+<% }
 %>
 <%- include('partials/head-meta', {
     title: 'Impacto · Las cifras de la red | Oficios Circulares',
     description: 'Lo que ha movido la red de Oficios Circulares, con la fecha de cada dato: lana registrada en Conecta Lana, emparejamientos cerrados, kilos con salida real y comunidad.',
     canonical: '/impacto'
 }) %>
-<link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261121c">
+<link rel="stylesheet" href="/assets/css/impulso-3d.css?v=20260320b">
+<link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260612">
+<link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
+<link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122a">
 <%- include('partials/header') %>
 
-<main class="ocp" id="maincontent">
-    <section class="ocp-hero">
-        <div class="ocp-wrap">
-            <span class="ocp-eyebrow">Impacto</span>
-            <h1>Lo que ha movido la red, <em>con fecha</em></h1>
-            <p class="ocp-lead">Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos. Estas son las cifras de esa red, cada una con el d&iacute;a en que se tom&oacute; y lo que mide.</p>
-        </div>
-    </section>
+<main class="main-content impulso-3d oc-pagina" id="maincontent">
+    <%- include('partials/oc-hero', {
+        badge: 'Impacto',
+        titulo: 'Lo que ha movido la red, con fecha',
+        subtitulo: 'Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos. Estas son las cifras de esa red, cada una con el d&iacute;a en que se tom&oacute; y lo que mide.',
+        ctas: [ { href: '#cifras', texto: 'Ver las cifras &rarr;', clase: 'btn-coral' }, { href: '#como-contamos', texto: 'C&oacute;mo contamos', clase: 'btn-outline-white' } ],
+        img: '/assets/images/viaje-lana/nave-vellones-1600.webp',
+        alt: 'Vellones de lana apilados en una nave'
+    }) %>
 
-    <section class="ocp-section" aria-labelledby="cifras-title">
-        <div class="ocp-wrap">
-            <h2 id="cifras-title" class="ocp-eyebrow" style="font-family:'Manrope',sans-serif">Las cifras</h2>
-            <div class="ocp-cifras">
-                <% impacto.indicadores.forEach(function (i) { %>
-                <article class="ocp-cifra">
-                    <span class="ocp-cifra-ind"><%= i.indicador %></span>
-                    <span class="ocp-cifra-valor"><%= miles(i.valor) %><% if (i.unidad) { %> <%= i.unidad %><% } %></span>
-                    <% if (i.detalle) { %><p class="ocp-cifra-detalle"><%= i.detalle %></p><% } %>
-                    <p class="ocp-cifra-mide"><%- pendiente(i.mide.replace(/&/g,'&amp;').replace(/</g,'&lt;')) %></p>
-                    <span class="ocp-cifra-fecha">Dato a <time datetime="<%= i.fecha %>"><%= fecha(i.fecha) %></time></span>
-                </article>
-                <% }) %>
+    <section class="impulso-section oc-cifras-banda" id="cifras" aria-labelledby="cifras-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Las cifras</span>
+                <h2 id="cifras-title">La red, en n&uacute;meros</h2>
+                <p>Actualizadas el <time datetime="<%= impacto.actualizado %>"><%= fecha(impacto.actualizado) %></time>. Cada cifra lleva su propia fecha.</p>
+            </div>
+            <div class="oc-cifras oc-cifras--grandes">
+                <% grandes.forEach(cifra) %>
+            </div>
+            <div class="oc-cifras oc-cifras--resto">
+                <% resto.forEach(cifra) %>
             </div>
         </div>
     </section>
 
-    <section class="ocp-section ocp-section--crema" aria-labelledby="como-title">
-        <div class="ocp-wrap">
-            <span class="ocp-eyebrow">1 &middot; C&oacute;mo contamos</span>
-            <h2 id="como-title">Solo lo que se puede comprobar</h2>
-            <p class="ocp-lead">Los kilos con salida solo cuentan cuando hay peso anotado; las entregas sin pesar se indican aparte y no se suman. Las cifras se revisan cada trimestre: en enero, abril, julio y octubre.</p>
+    <section class="impulso-section impulso-section-cream" id="como-contamos" aria-labelledby="como-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">C&oacute;mo contamos</span>
+                <h2 id="como-title">Solo lo que se puede comprobar</h2>
+                <p>Las cifras se revisan cada trimestre: en enero, abril, julio y octubre.</p>
+            </div>
+            <div class="problems-grid oc-tres">
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
+                    <div><h4>Solo kilos pesados</h4><p>Los kilos con salida solo cuentan cuando hay peso anotado.</p></div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-6"/><path d="M12 8V2"/><path d="M4 12H2"/><path d="M10 12H8"/><path d="M16 12h-2"/><path d="M22 12h-2"/></svg></div>
+                    <div><h4>Lo que no se pesa, aparte</h4><p>Las entregas sin pesar se indican aparte y no se suman.</p></div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon"><%- CAL %></div>
+                    <div><h4>Cada cifra, con su fecha</h4><p>Cada dato lleva el d&iacute;a en que se tom&oacute;, para que sepas de cu&aacute;ndo es.</p></div>
+                </div>
+            </div>
+            <div class="problem-card oc-card-ancha" style="margin-top:20px">
+                <h4>Qu&eacute; mide cada cifra</h4>
+                <ul class="price-features" style="margin:8px 0 0">
+                    <% impacto.indicadores.forEach(function (i) { %>
+                    <li><strong><%= i.indicador %>:</strong> <%= limpio(i.mide) %></li>
+                    <% }) %>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <section class="ocp-section" aria-labelledby="objetivos-title">
-        <div class="ocp-wrap">
-            <span class="ocp-eyebrow">2 &middot; Hacia d&oacute;nde vamos</span>
-            <h2 id="objetivos-title">Qu&eacute; queremos conseguir antes de <%= impacto.objetivos.fecha_limite %></h2>
-            <div class="ocp-objetivos">
+    <section class="impulso-section impulso-section-white" id="objetivos" aria-labelledby="objetivos-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Hacia d&oacute;nde vamos</span>
+                <h2 id="objetivos-title">Qu&eacute; queremos conseguir antes de <%= impacto.objetivos.fecha_limite %></h2>
+                <p>Las cifras de &laquo;hoy&raquo; son las de arriba, con su fecha.</p>
+            </div>
+            <div class="problems-grid">
                 <% impacto.objetivos.lista.forEach(function (o) {
                      const actual = o.actual_de ? porId[o.actual_de].valor : null;
                      const u = o.unidad ? ' ' + o.unidad : '';
                      const pct = actual == null ? null : Math.min(100, Math.round(actual / o.objetivo * 100)); %>
-                <div class="ocp-objetivo">
-                    <div class="ocp-objetivo-txt">
-                        <span><%= o.texto %></span>
-                        <b>Objetivo: <%= miles(o.objetivo) %><%= u %></b>
-                    </div>
+                <div class="problem-card oc-card-ancha">
+                    <h4><%= o.texto %></h4>
+                    <p class="oc-objetivo-meta">Objetivo: <%= miles(o.objetivo) %><%= u %></p>
                     <% if (pct !== null) { %>
-                    <div class="ocp-barra" role="progressbar" aria-valuemin="0" aria-valuemax="<%= o.objetivo %>" aria-valuenow="<%= actual %>" aria-label="<%= o.texto %>: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %>"><span style="width:<%= Math.max(pct, 1) %>%"></span></div>
-                    <p class="ocp-precio-nota" style="margin:8px 0 0">Hoy: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %> (<%= pct %> %)</p>
+                    <div class="oc-objetivo-barra" role="progressbar" aria-valuemin="0" aria-valuemax="<%= o.objetivo %>" aria-valuenow="<%= actual %>" aria-label="<%= o.texto %>: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %>"><span style="width:<%= Math.max(pct, 1) %>%"></span></div>
+                    <p class="oc-objetivo-hoy">Hoy: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %> (<%= pct %> %)</p>
+                    <% } else { %>
+                    <p class="oc-objetivo-hoy">Todav&iacute;a sin cifra de partida.</p>
                     <% } %>
                 </div>
                 <% }) %>
             </div>
-            <p class="ocp-nota-datos">Las cifras de &laquo;hoy&raquo; son las de la tabla de arriba, con su fecha.</p>
         </div>
     </section>
-    <section class="ocp-section ocp-section--crema" aria-labelledby="respalda-title">
-        <div class="ocp-wrap">
-            <span class="ocp-eyebrow">3 &middot; Qu&eacute; lo respalda</span>
-            <h2 id="respalda-title">Ensayos y programas</h2>
-            <ul class="ocp-incluye">
-                <li><b>Ensayo de acolchado con lana</b>600 kg de lana en casta&ntilde;os, en Ourense, con anal&iacute;ticas del INORDE.</li>
-                <li><b>Prom&aacute;laga Base 2026</b>Participaci&oacute;n en el programa.</li>
-            </ul>
+
+    <section class="impulso-section impulso-section-cream" id="respalda" aria-labelledby="respalda-title">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Qu&eacute; lo respalda</span>
+                <h2 id="respalda-title">Ensayos y programas</h2>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg></div>
+                    <div><h4>Ensayo de acolchado con lana</h4><p>600 kg de lana en casta&ntilde;os, en Ourense, con anal&iacute;ticas del INORDE.</p></div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+                    <div><h4>Prom&aacute;laga Base 2026</h4><p>Participaci&oacute;n en el programa.</p></div>
+                </div>
+            </div>
         </div>
     </section>
+
+    <%- include('partials/oc-cta-band', {
+        titulo: 'Suma tus materiales<br><em>a la red</em>',
+        texto: '&iquest;Tienes lana o la buscas? Conecta Lana te pone en contacto con la otra parte. Gratis, sin comisi&oacute;n por la lana.',
+        primario: { href: '/conecta-lana?oc_source=impacto&oc_medium=cta-band&oc_campaign=conecta-lana', texto: 'Ir a Conecta Lana' },
+        secundario: { href: '/servicios', texto: 'Ver los servicios' }
+    }) %>
 </main>
 
 <%- include('partials/footer') %>

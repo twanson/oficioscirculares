@@ -317,12 +317,9 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
 });
 
 // Guía de joyería con plata recuperada (decisión de Jose, 22 nov 2026). Sustituye al
-// antiguo caso E-WEAR: no presenta a ningún cliente. Vive en el blog; la URL vieja
-// /casos/e-wear (con o sin barra, o subrutas) redirige con 301.
-app.get(/^\/blog\/joyeria-plata-recuperada(\/.*)?$/, (req, res) => {
-  if (req.path === '/blog/joyeria-plata-recuperada/') return res.render('blog-joyeria-plata-recuperada');
-  return redirectWithQuery('/blog/joyeria-plata-recuperada/', req, res);
-});
+// antiguo caso E-WEAR: no presenta a ningún cliente. Es un artículo estático del blog
+// (public/blog/joyeria-plata-recuperada/). La URL vieja /casos/e-wear (con o sin barra,
+// o subrutas) redirige con 301.
 app.get(/^\/casos\/e-wear(\/.*)?$/, (req, res) => {
   redirectWithQuery('/blog/joyeria-plata-recuperada/', req, res);
 });

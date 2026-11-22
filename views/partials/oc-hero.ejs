@@ -1,0 +1,27 @@
+<%#
+  Cabecera de página con el componente de Impulso 3D (impulso-hero): fondo verde con degradado,
+  insignia, título en Newsreader claro, subtítulo y foto a la derecha.
+  Parámetros: badge, titulo (HTML), subtitulo, ctas [{href, texto, clase, label}], img, alt,
+  extra (HTML opcional bajo el subtítulo), imgPos (object-position opcional).
+  Requiere <main class="impulso-3d"> y /assets/css/impulso-3d.css.
+%>
+<section class="impulso-hero" id="hero">
+    <div class="container">
+        <div class="hero-split">
+            <div class="hero-text">
+                <div class="hero-badge"><%- badge %></div>
+                <h1><%- titulo %></h1>
+                <% if (locals.subtitulo) { %><p class="hero-subtitle"><%- subtitulo %></p><% } %>
+                <% if (locals.extra) { %><%- extra %><% } %>
+                <% if (locals.ctas && ctas.length) { %>
+                <div class="hero-ctas">
+                    <% ctas.forEach(function (c) { %><a href="<%= c.href %>" class="btn <%= c.clase || 'btn-coral' %>"<% if (c.label) { %> data-event="click_cta" data-label="<%= c.label %>"<% } %><% if (c.id) { %> id="<%= c.id %>"<% } %>><%- c.texto %></a><% }) %>
+                </div>
+                <% } %>
+            </div>
+            <div class="hero-image">
+                <img src="<%= img %>" alt="<%= alt %>" loading="eager"<% if (locals.imgPos) { %> style="object-position:<%= imgPos %>"<% } %>>
+            </div>
+        </div>
+    </div>
+</section>

@@ -30,7 +30,7 @@ Se borran las fotos provisionales `public/assets/images/club/avatar-maika.jpg` y
 
 - Archivo único: `data/precios.json`, leído por `lib/precios.js`. Las plantillas EJS usan `precios.texto('clave')`, `precios.html('clave')` o `precios.num('clave')`, disponibles en todas las vistas (`app.locals.precios`).
 - Las páginas estáticas (FAQ, blog) usan marcas `{{precio:clave}}` o `{{precio-html:clave}}`. Un middleware de `server.js` las sustituye al servir la página.
-- Un importe `null` se muestra como `[PENDIENTE JOSE: precio único]`, con estilo ámbar y borde discontinuo (`.precio-pendiente`).
+- Un importe `null` se mostraba como `[PENDIENTE JOSE: precio único]`. **Desde el 22 nov 2026 ya no se publica el marcador:** Roadmap y Sprint muestran «Precio cerrado tras el Diagnóstico» y el resto (Diagnóstico para empresas, soportes del Impulso) «Consultar» (`lib/precios.js`, `SIN_PRECIO`). Siguen pendientes en la lista de abajo.
 - Diagnóstico: 90 € en todas partes. Eliminados «desde 90 €» (Impulso 3D, blog «IA para artesanos») y «90–350 €» (página del Diagnóstico y FAQ).
 - Impulso 3D: 495 € e Impulso 3D Completo: 895 €, sin «Desde» ni «Precio final según tu proyecto». Los datos estructurados ya no llevan `unitText: "desde"`.
 - Roadmap 3D y Sprint 3D: horquillas eliminadas (350–1.500 € y 1.500–4.500 €), igual que las preguntas frecuentes que explicaban el rango. Se muestra el marcador de pendiente.
@@ -250,25 +250,36 @@ Las campañas de Brevo (E1 #30, E2 #31, E3 #28, E4 #32, E5 #29) no se han tocado
 ## Lista única de pendientes para Jose
 
 1. **Precio único** del Diagnóstico 3D para empresas, del Roadmap 3D y del Sprint 3D (y de los dos soportes mensuales del Impulso: Básico y Activo). Se cambian en `data/precios.json`.
-2. **Plazo de entrega** del informe y del vídeo del Diagnóstico para talleres.
-3. **Testimonios:** no falta ningún texto. Los tres autorizados tenían su texto aprobado en el repositorio. Las páginas que se quedaron sin testimonio (portada, oficios, Diagnóstico de empresas, Roadmap y Sprint) ya no tienen sección.
+2. **Plazo de entrega** del informe y del vídeo del Diagnóstico para talleres. Mientras falte, la página no da plazo («Recibes el informe en PDF y un vídeo…»).
+3. **Testimonios:** textos aprobados de Blanca, Maika, Jorge Esteban y Esther San Vicente. En la sección «Comunidad» de la portada (tarjetas con retrato) **solo se publica Blanca**: faltan las **fotos** de Maika, Jorge y Esther. Sus tarjetas están preparadas en `views/index.ejs` y salen solas en cuanto se añada la foto.
 4. **Lección 05** (WhatsApp Business).
 5. ~~Preguntas y regla del autodiagnóstico~~ **Aprobado y construido (21 nov 2026)**, dentro de la web.
 6. **Plan de Supabase:** gratuito (se pausa por inactividad) o Pro (desde 25 $/mes, no se pausa).
 7. Enlace de pago del Diagnóstico para talleres, si se quiere compra directa (hoy va al formulario de contacto).
 8. Precio de la entrada al Club para quien compra el Diagnóstico, y crear ese enlace en Stripe (prueba y real).
-9. **E-WEAR pasa a ser una guía del blog (22 nov 2026).** Tras un primer cambio el 21 nov (ejemplo ilustrativo en `/casos/e-wear/`), Jose decide que deje de ser un caso: ahora es la guía «Cómo lanzar una colección de joyería con plata recuperada, paso a paso» en `/blog/joyeria-plata-recuperada/` (`views/blog-joyeria-plata-recuperada.ejs`). Sin el nombre E-WEAR, sin insignia ni avisos de «ejemplo ilustrativo», sin cifras de resultado, sin citas y sin datos estructurados de caso o reseña. Mantiene diagnosticar, diseñar, difundir y «Qué habría que medir»; botón final a `/servicios` («Ver cómo trabajamos →»). `/casos/e-wear` (con o sin barra y subrutas) redirige con 301 a la guía. Está en el sitemap, en el índice del blog (HTML estático y `blog.js`, donde se ha quitado la antigua ficha «E-WEAR… Cómo Laura transformó… Un caso real») y en las lecturas de la página de joyería como «Guía». Las páginas de gracias de los PDF ahora dicen «Volver a la guía». **Commit local sin subir, a la espera de que Jose apruebe el texto.**
+9. **E-WEAR pasa a ser una guía del blog (22 nov 2026).** Tras un primer cambio el 21 nov (ejemplo ilustrativo en `/casos/e-wear/`), Jose decide que deje de ser un caso: ahora es la guía «Cómo lanzar una colección de joyería con plata recuperada, paso a paso» en `/blog/joyeria-plata-recuperada/` (desde el 22 nov, artículo estático con la plantilla del blog: `public/blog/joyeria-plata-recuperada/index.html`). Sin el nombre E-WEAR, sin insignia ni avisos de «ejemplo ilustrativo», sin cifras de resultado, sin citas y sin datos estructurados de caso o reseña. Mantiene diagnosticar, diseñar, difundir y «Qué habría que medir»; botón final a `/servicios` («Ver cómo trabajamos →»). `/casos/e-wear` (con o sin barra y subrutas) redirige con 301 a la guía. Está en el sitemap, en el índice del blog (HTML estático y `blog.js`, donde se ha quitado la antigua ficha «E-WEAR… Cómo Laura transformó… Un caso real») y en las lecturas de la página de joyería como «Guía». Las páginas de gracias de los PDF ahora dicen «Volver a la guía». Texto aprobado y subido a staging el 22 nov 2026.
 10. PDF público de ejemplo de textil (`/downloads/diagnosticos/ejemplo-diagnostico-textil-sostenible.pdf`): tiene detalles que podrían identificar a un taller real. Cambio preparado en la rama `fix/retirar-pdf-textil` (sale de `main`), sin fusionar, a la espera del visto bueno de Jose.
-11. Confirmar qué cuenta «Personas en la comunidad» (1.070) y revisar las líneas «qué mide» de `/impacto`.
+11. Confirmar qué cuenta «Personas en la comunidad» (1.070) y revisar las líneas «qué mide» de `/impacto`. El marcador sigue en `data/impacto.json`, pero la página ya no lo muestra.
 12. Mantener o no la garantía del Sprint («seguimos trabajando hasta que funcione, sin coste adicional») y el descuento del Diagnóstico si después se contrata otro servicio.
 13. Reescribir con fechas de enero los cinco correos de Brevo (fuera del repositorio) antes de volver a programarlos.
 14. Portada de la lección 06 para la estantería del Club.
+15. **Arquetipos «¿Te reconoces?» de Impulso 3D:** siguen en la página, sin nombres propios, pero cada perfil conserva una frase en primera persona entre comillas. Decidir si se quitan las comillas.
+
+## Rediseño visual de las páginas del encargo (22 nov 2026)
+
+Las páginas nuevas pasan a usar los componentes de Impulso 3D (`impulso-3d.css`) y de la portada (`home-v2.css`) en vez de un estilo propio. `oc-puertas.css` queda reducido a los ajustes que esos componentes no traen.
+
+- Parciales nuevos: `oc-hero` (cabecera verde con insignia, título, subtítulo y foto), `metodo-3d` (tres pasos numerados), `oc-cta-band` (banda «Transforma tu proyecto»). `puertas` usa las tarjetas de «Forma parte de la Red»; `testimonio-blanca` usa la tarjeta de testimonio de Impulso.
+- Fotos de cabecera, sin repetir: `/servicios` artesanos en taller · `/servicios/talleres` alfarero · `/servicios/empresas` taller de metal · `/impacto` nave de vellones · Diagnóstico su foto de siempre · guía de joyería la macro de plata.
+- Portada: vuelve el bloque «Metodología Círculo de Valor 3D» de producción (foto del yunque, cita del fundador) con la puerta de talleres en la tarjeta grande y la de empresas en la lateral; vuelve «Comunidad» con tarjetas de retrato, solo con testimonios autorizados y sin la nota «Testimonios inspirados en experiencias reales».
+- Comparada con `main`, la portada solo había perdido esos dos bloques; el resto de imágenes y secciones sigue.
+- Guía de joyería: artículo estático con la plantilla de los demás artículos del blog.
 
 ## Direcciones del entorno de pruebas para revisar
 
 Base: `https://oficioscirculares-production.up.railway.app`
 
-- `/`: portada (presentación como red, las dos puertas, sin testimonios)
+- `/`: portada (presentación como red, «Metodología Círculo de Valor 3D» con las dos puertas, «Comunidad» con Blanca)
 - `/servicios`, `/servicios/talleres`, `/servicios/empresas`: las dos puertas y sus precios
 - `/servicios/diagnostico-3d`: Diagnóstico 3D para talleres
 - `/impulso-3d`: precios únicos y testimonio de Blanca
@@ -280,6 +291,7 @@ Base: `https://oficioscirculares-production.up.railway.app`
 - `/oficios/joyeria-artesanal` (o cualquier oficio): puertas, sin testimonios, ejemplo «compuesto»
 - `/club`: página de venta actualizada (sigue con `noindex`)
 - `/club/dentro`: área de miembros (necesita Supabase restaurado para entrar)
+- `/blog/joyeria-plata-recuperada/`: guía con la plantilla del blog
 - `/casos/e-wear/`: debe redirigir (301) a `/blog/joyeria-plata-recuperada/`
 
 Nada de esto está en `main` ni en `www.oficioscirculares.com`.

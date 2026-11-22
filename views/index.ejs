@@ -34,8 +34,8 @@
     <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
     <link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260325c">
     <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
-    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261121c">
-
+    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122a">
+    
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -183,14 +183,50 @@
     <section class="servicios-v2" id="servicios">
         <div class="container">
             <div class="servicios-v2-header">
-                <h2>Los servicios, <em>en dos puertas</em></h2>
-                <p>La red es la base. Los servicios la complementan: elige si vienes como taller o marca artesana, o como empresa.</p>
+                <h2>Metodolog&iacute;a <em>C&iacute;rculo de Valor 3D</em></h2>
+                <p>Diagnosticar, dise&ntilde;ar y difundir. La red es la base; los servicios la complementan con dos puertas: una para talleres y marcas artesanas, otra para empresas.</p>
             </div>
 
             <div class="servicios-v2-layout">
-                <!-- Dos puertas: talleres / empresas (precios en data/precios.json) -->
-                <div class="ocp" style="margin-bottom:24px">
-                    <%- include('partials/puertas') %>
+                <!-- ROW 1: puerta de talleres (destacada, 2/3) + puerta de empresas (1/3).
+                     Precios en data/precios.json; aquí solo los nombres de los servicios. -->
+                <div class="servicio-featured">
+                    <div class="servicio-featured-inner">
+                        <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                        <span class="servicio-featured-label">Para talleres y marcas artesanas</span>
+                        <h3>Que tu oficio se entienda y se venda</h3>
+                        <p>
+                            M&eacute;todo, comunidad y acompa&ntilde;amiento: el Club, el Diagn&oacute;stico 3D y el Impulso 3D.
+                        </p>
+                        <div class="servicio-featured-ctas">
+                            <a href="/servicios/talleres" class="btn-servicio-primary" data-event="click_cta" data-label="home-puerta-talleres">Ver servicios para talleres &rarr;</a>
+                            <span class="servicio-featured-note serif-italic">Diagn&oacute;stico 3D: <%= precios.texto('diagnostico_talleres') %> + IVA</span>
+                        </div>
+                    </div>
+                    <div class="servicio-featured-img">
+                        <img src="/assets/images/yunque 3.jpg"
+                             alt="Artesano trabajando en el yunque"
+                             loading="lazy">
+                        <div class="servicio-featured-quote glass-card">
+                            <p class="quote-text">
+                                "El puente entre el saber ancestral y las necesidades del presente."
+                            </p>
+                            <p class="quote-author">&mdash; Jose, Fundador</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="servicio-impulso">
+                    <div class="paper-texture" style="position:absolute;inset:0;"></div>
+                    <div class="servicio-card-icon servicio-impulso-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>
+                    </div>
+                    <h4>Para empresas</h4>
+                    <p class="servicio-impulso-tagline">De la idea circular al caso que puedes contar.</p>
+                    <p>
+                        Para dar salida a tus materiales, convertir una mejora circular en un plan y ponerla en marcha: Diagn&oacute;stico, Roadmap y Sprint 3D.
+                    </p>
+                    <a href="/servicios/empresas" class="btn-servicio-impulso" data-event="click_cta" data-label="home-puerta-empresas">Ver servicios para empresas &rarr;</a>
                 </div>
 
                 <!-- ROW 2: Comunidad (full width, compact) -->
@@ -209,8 +245,48 @@
     </section>
 
 
-    <%# Ancla heredada: los menús de todo el sitio enlazan a /#comunidad %>
-    <div id="comunidad"></div>
+    <!-- ═══════════════════════════════════
+         COMUNIDAD — tarjetas con retrato. SOLO testimonios autorizados, con texto y foto
+         aprobados en el repositorio. Una tarjeta sin foto o sin texto NO se publica
+         (publicar: false) hasta que Jose la complete.
+         ═══════════════════════════════════ -->
+    <%
+      const comunidad = [
+        { nombre: 'Blanca Fernández', rol: 'Asociación Hilandia · tejido artesanal',
+          texto: 'Tener todo configurado y explicado —plantillas con mi logo, blog y guía paso a paso— facilita mucho las cosas. Es una forma excelente de empezar.',
+          foto: '/assets/images/club/blanca-hilandia.jpg', alt: 'Blanca tejiendo con el mandil de Hilandia' },
+        // Texto aprobado (correo del 14 jul 2026, permiso 21 nov 2026). FALTA FOTO.
+        { nombre: 'Maika', rol: 'Encontró lana para su aula con Conecta Lana',
+          texto: 'Muchísimas gracias. Esta labor que hacéis es de agradecer.', foto: null },
+        // Texto aprobado (17 jul 2026, views/conecta-lana.ejs). FALTA FOTO.
+        { nombre: 'Jorge Esteban', rol: 'Fenoquímica · encontró lana española en Conecta Lana',
+          texto: 'Estamos encantados. Ya estamos gestionando el envío con la ganadera que nos presentasteis.', foto: null },
+        // Texto aprobado (17 jul 2026, views/conecta-lana.ejs). FALTA FOTO.
+        { nombre: 'Esther San Vicente', rol: 'Al Fresco-Museos Efímeros',
+          texto: 'Nos habéis dado un servicio impecable y estoy difundiendo vuestra iniciativa a los cuatro vientos.', foto: null }
+      ].filter(t => t.foto && t.texto);
+    %>
+    <section class="comunidad-v2" id="comunidad">
+        <div class="container">
+            <div class="comunidad-v2-header">
+                <h2>Comunidad</h2>
+                <p class="comunidad-v2-sub">Lo que cuentan quienes ya forman parte de la red.</p>
+            </div>
+            <div class="comunidad-v2-grid<%= comunidad.length < 3 ? ' oc-comunidad-pocas' : '' %>">
+                <% comunidad.forEach(function (t) { %>
+                <div class="testimonio-v2">
+                    <div class="testimonio-v2-img">
+                        <img src="<%= t.foto %>" alt="<%= t.alt %>" loading="lazy">
+                    </div>
+                    <h4><%= t.nombre %></h4>
+                    <span class="testimonio-role"><%= t.rol %></span>
+                    <p class="testimonio-quote">&ldquo;<%= t.texto %>&rdquo;</p>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
     <%- include('partials/comunidad-recursos') %>
 
     <!-- ═══════════════════════════════════
@@ -263,7 +339,7 @@
             }
 
             // ── Intersection Observer for scroll animations ──
-            const animatedEls = document.querySelectorAll('.card-v2, .servicio-comunidad');
+            const animatedEls = document.querySelectorAll('.card-v2, .testimonio-v2, .servicio-featured, .servicio-impulso, .servicio-comunidad');
             if ('IntersectionObserver' in window && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
                 animatedEls.forEach(function(el) {
                     el.classList.add('anim-hidden');
