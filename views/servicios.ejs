@@ -29,9 +29,7 @@ const ICONOS = {
   rayo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>'
 };
 %>
-<%- include('partials/head-meta', meta) %>
-<link rel="stylesheet" href="/assets/css/impulso-3d.css?v=20260320b">
-<link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260612">
+<%- include('partials/head-meta', Object.assign({ cssPrevios: ['/assets/css/impulso-3d.css?v=20260320b'] }, meta)) %>
 <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
 <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122a">
 <%- include('partials/header') %>

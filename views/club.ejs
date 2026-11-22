@@ -7,7 +7,8 @@
     ogImageAlt: 'Artesano puliendo madera en su taller — El Club de Oficios Circulares'
 }) %>
 
-<link rel="stylesheet" href="/assets/css/club.css?v=20261121m">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122a">
+<link rel="stylesheet" href="/assets/css/club.css?v=20261122a">
 
 <%# En esta vista el CTA del nav del sitio pasa a ser "Plazas fundador" -> #precios
     (sustituye a la antigua .topbar propia del club: una sola barra fija al hacer scroll) %>
@@ -486,7 +487,9 @@
   }, {threshold: 0.45});
   document.querySelectorAll('.beat').forEach(b => beatObserver.observe(b));
 
-  // Reveal on scroll
+  // Reveal on scroll. La clase oc-reveal activa el estado oculto (oc-landing.css):
+  // si este script no llega a ejecutarse, el contenido se ve igualmente.
+  document.documentElement.classList.add('oc-reveal');
   const rev = new IntersectionObserver((entries) => {
     entries.forEach(en => {
       if (en.isIntersecting) { en.target.classList.add('in'); rev.unobserve(en.target); }
