@@ -260,3 +260,110 @@ Base: `https://oficioscirculares-production.up.railway.app`
 - `/servicios/talleres`
 - `/servicios/empresas`
 - `/servicios/diagnostico-3d`: textos aprobados y barra de móvil
+
+---
+
+## Fase 3 · Roadmap, Sprint, Impulso, Impacto y guía de joyería (22 nov 2026)
+
+### Qué se ha hecho
+
+- **Roadmap 3D y Sprint 3D (plantilla directa).** Las dos páginas se migran por completo desde la plantilla antigua `service-*` y conservan sus textos.
+  - **Orden:** cabecera compacta con plazo · qué te llevas (cajas con foto) · cómo trabajamos (pasos sobre verde hondo) · «tiene sentido si…» como lista, con la comparación al lado · el entregable con la portada del PDF de ejemplo en perspectiva · cifras de la red con su fecha · cómo se llega al precio (tres pasos y foto) · preguntas frecuentes · cierre.
+  - **Sprint:** conserva la garantía («seguimos trabajando hasta que funcione»), que sigue pendiente de decisión.
+- **Impulso 3D (plantilla relato).** Conserva todo su contenido. Los textos se han copiado del archivo anterior sin tocarlos.
+  - **Relato:** los cuatro problemas de «Reconoces esto, ¿verdad?» van como relato del problema.
+  - **Manifiesto:** usa el lema que ya tenía la página, «Menos tiempo en difusión. Más tiempo en tu oficio.», con el texto «Sin perder tu esencia».
+  - **Resto de secciones:** el Método 3D, «¿Te reconoces?» y herramientas con foto. Siguen «No solo te ayudamos a comunicar», precios y entregables en cajas con foto, «¿Cómo empezamos?» en cinco pasos, el soporte, el testimonio de Blanca, «Quién está detrás» con su texto propio, las preguntas frecuentes y el cierre.
+  - **«¿Te reconoces?»:** son los cuatro arquetipos, con foto, sin nombres propios y sin comillas.
+  - **Barra fija de móvil:** lleva al Diagnóstico.
+- **`/impacto`.**
+  - **Cifras destacadas:** las cuatro van en grande sobre verde hondo, con el tratamiento de `/conecta-lana` (número enorme en Newsreader). Cada una lleva qué mide y la fecha en una etiqueta. Los emparejamientos llevan además una barra con «10 de 57».
+  - **Otras cuatro cifras:** van en una banda de credibilidad sobre crema.
+  - **Bloques:** «Cómo contamos», los objetivos (barra y cifra en texto) y «Qué lo respalda», cada uno con una foto.
+  - **Cita a pantalla completa:** Esther, Jorge y los mensajes 1, 2 y 6, con la nota «Mensajes reales de usuarios de la red».
+- **`/conecta-lana`.** Añade los mensajes 1, 2 y 6 debajo de los de Esther y Jorge, con la misma nota. El diseño no cambia.
+- **Guía de joyería.**
+  - **Cabecera:** una foto de taller de joyería (`espai-micra-taller`).
+  - **Dentro del texto:** la textura de plata y el prototipo de anillo.
+  - **Por qué cambia la cabecera:** así la textura puede ir dentro del texto sin repetir ninguna foto.
+  - **Imágenes descartadas:** el resto de imágenes de E-WEAR (packaging, tarjeta y lotes) muestran el nombre «E-WEAR» o parecen documentos de un caso real.
+- **CSS.** Hay variantes nuevas en `oc-landing.css`, todas bajo `.oc-landing`:
+  - `oc-encaje`, `oc-documento` (y `--foto`), `oc-bloque` (y `--oscuro`, `--hueso`, `--invertido`);
+  - `oc-cifras-hondo`, `oc-cifra-xl` y `oc-fecha`;
+  - `cajas-grid--dos`, `--cuatro` y `pasos-grid--dos`, `--cinco`.
+  - Se ha comprobado que `/club` sigue igual.
+
+### Comprobaciones
+
+Hechas en staging:
+- `/servicios/roadmap-3d`, `/servicios/sprint-3d`, `/impulso-3d`, `/impacto`, `/conecta-lana` y la guía:
+  - consola sin errores;
+  - ningún marcador `[PENDIENTE…]` visible;
+  - sin desbordamiento a 375 px. Sprint se salía 4 px por una rejilla de dos columnas; está corregido.
+- El menú funciona con ratón, con teclado y en móvil en las cinco páginas con la cabecera común. `/conecta-lana` tiene su propia cabecera.
+- Las capturas a 1.280 y a 375 px están en `docs/capturas/fase-3/`.
+- **No medido:** Lighthouse.
+
+### Imagen asignada por sección
+
+| Página | Sección | Imagen | Origen |
+|---|---|---|---|
+| Roadmap | Cabecera | `landing/roadmap/hero-roadmap-taller-metal.webp` | `taller clasico metal.jpg` |
+| Roadmap | Operación / Comunicación | `caja-operacion-material.webp` / `caja-comunicacion-plan.webp` | `viaje-lana/interludio-textura` / `img/servicios/Hero_Roadmap3d.png` |
+| Roadmap | Entregable | `documento-portada.webp` | portada de `downloads/ejemplo-roadmap-3d.pdf` |
+| Roadmap | Precio / Cierre | `precio-materiales.webp` / `cierre-bobinas.webp` | `oficios/barro-artesanal` / `viaje-lana/puerto-bobinas` |
+| Sprint | Cabecera | `landing/sprint/hero-sprint-contenedores.webp` | `viaje-lana/puerto-contenedores` |
+| Sprint | Operación / Comunicación | `caja-mejora-tablero.webp` / `caja-contarlo-producto.webp` | `img/servicios/sprint3d-hero.png` / `viaje-lana/escaparate-punto` |
+| Sprint | Entregable | `documento-portada.webp` | portada de `downloads/mini-caso-sprint-3d.pdf` |
+| Sprint | Precio / Cierre | `precio-forja.webp` / `cierre-vidrio.webp` | `oficios/forja-y-herreria` / `oficios/vidrio-artesanal` |
+| Impulso | Cabecera | `landing/impulso/hero-impulso-artesana.webp` | `artesana artista pinta casa.jpg` (la de antes, `mirandomadera.jpg`, mide 612 px) |
+| Impulso | Relato 1–4 | `prob-1-artesana`, `prob-2-manos-barro`, `prob-3-retrato`, `prob-4-taller-vacio` | `artesana blanco y negro`, `pottery_hands` (800 px), `cara pintada`, `Taller vacio` |
+| Impulso | ¿Te reconoces? | `perfil-*.webp` | los cuatro retratos de arquetipo que ya tenía la página |
+| Impulso | Herramientas | `herramientas-mesa.webp` | `artesana moderna despacho flores` |
+| Impulso | Precios | portada del Diagnóstico de cerámica, `caja-impulso-herramientas`, `caja-completo-taller` | `assets/diagnosticos`, `herramientas cortar madera amarilla`, `pinturas en tabla` |
+| Impulso | Cierre | `cierre-yunque.webp` | `yunque 2.jpg` |
+| Impacto | Cabecera | `landing/impacto/hero-impacto-rebano.webp` | `viaje-lana/cierre-rebano` |
+| Impacto | Cómo contamos / Objetivos / Respalda | `contamos-vellones` / `objetivos-ovillo` / `respalda-rebano` | `viaje-lana/nave-vellones`, `taller-ovillo`, `interludio-rebano` |
+| Impacto | Cierre | `cierre-tejiendo.webp` | `viaje-lana/taller-tejiendo` |
+| Guía | Cabecera / texto | `blog/joyeria-plata-recuperada/hero-taller-joyeria`, `textura-plata`, `prototipo-anillo` | `oficios/espai-micra-taller`, `cases/e-wear/macro-textura-plata`, `cases/e-wear/prototipo-vs-final-anillo` |
+
+### Imágenes que faltan
+
+| Página | Sección | Qué haría falta |
+|---|---|---|
+| Impulso 3D | ¿Te reconoces? | Los cuatro retratos no casan con su descripción. Por ejemplo, «La Artesana Experimentada, ceramista, en torno a 55 años» muestra a una mujer joven, y «La Diseñadora Consciente, joyera, 28 años» muestra a una mujer mayor cosiendo. Son las imágenes que ya había. Harían falta cuatro retratos acordes. |
+| Impulso 3D | Relato 02 | Una foto de manos en el taller de más resolución: `pottery_hands.jpg` mide 800 px. |
+| Guía de joyería | Texto | Una tercera imagen de joyería sin marca, si se quieren tres dentro del texto. |
+| Roadmap y Sprint | Tarjetas | Fotos de fabricación en el mismo tono. Las ilustraciones de oficina de Roadmap y Sprint no casan del todo con las demás. |
+
+### Textos nuevos que conviene revisar
+
+- **Roadmap y Sprint:**
+  - los tres pasos de «Cómo se llega al precio», los mismos que en empresas;
+  - la frase de Roadmap «Incluye 2 semanas de trabajo dedicado y todas las plantillas listas para usar», que ya existía;
+  - los titulares de cierre «Un plan claro de 90 días» y «En 4 semanas, funcionando».
+- **Impulso:** el manifiesto es el lema que ya existía; no hay texto nuevo.
+- **Impacto:**
+  - «Cifra 01…04» como antetítulo;
+  - «Cerrados con entrega, de los gestionados» en la barra;
+  - el cierre «Suma tus materiales a la red», que ya existía.
+
+### Pendientes para Jose
+
+1. Precio y plazo del Diagnóstico para empresas. Los precios de Roadmap, Sprint y los soportes.
+2. Mantener o no la garantía del Sprint.
+3. Las imágenes de la tabla de arriba.
+4. Medir Lighthouse en móvil.
+5. Fase 4: limpieza de CSS sin uso (`oc-puertas.css`, `impulso-3d.css`, plantilla `service-*`).
+6. Permiso o nombre para los seis mensajes sin nombre.
+
+### Direcciones para revisar
+
+Base: `https://oficioscirculares-production.up.railway.app`
+
+- `/servicios/roadmap-3d`
+- `/servicios/sprint-3d`
+- `/impulso-3d`
+- `/impacto`
+- `/conecta-lana`: los tres mensajes nuevos al final de la cita
+- `/blog/joyeria-plata-recuperada/`
