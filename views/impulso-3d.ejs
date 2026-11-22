@@ -1,559 +1,368 @@
+<%#
+  /impulso-3d — plantilla «relato» del sistema oc-landing (docs/sistema-landing.md).
+  Conserva todo el contenido de la página anterior (textos extraídos tal cual), incluida
+  «¿Te reconoces?»: son arquetipos, no testimonios (sin nombres propios ni comillas).
+%>
+<%
+  const IMG = '/assets/images/landing/impulso/';
+  const diagHref = '/contacto?service=diagnostico-3d&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&page_path=/impulso-3d';
+  const testi = testimoniosLib.paraPagina('impulso-3d');
+%>
 <%- include('partials/head-meta', {
-    cssPrevios: ['/assets/css/impulso-3d.css?v=20260320b'],
     title: 'Impulso 3D — Comunica tu valor | Oficios Circulares',
     description: 'Un sistema de comunicación a tu medida para contar el valor de tu trabajo sin perder horas de taller. Te acompañamos hasta que funcione solo.',
     canonical: '/impulso-3d',
     ogImage: 'https://www.oficioscirculares.com/assets/images/mirandomadera.jpg',
-    ogImageAlt: 'Artesano observando madera en su taller - Impulso 3D de Oficios Circulares'
+    ogImageAlt: 'Artesano observando madera en su taller - Impulso 3D de Oficios Circulares',
+    precargaImagen: IMG + 'hero-impulso-artesana.webp'
 }) %>
-
-<link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122a">
-
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122h">
 <%- include('partials/header') %>
 
-<main class="main-content impulso-3d" id="maincontent">
+<main class="oc-landing" id="maincontent">
+  <%- include('partials/landing-hero', {
+      img: IMG + 'hero-impulso-artesana.webp',
+      badge: 'Sistema de comunicaci&oacute;n circular',
+      titulo: '&iquest;Haces un trabajo extraordinario pero no encuentras tiempo <em>para contarlo</em>?',
+      sub: 'Un sistema de comunicaci&oacute;n a tu medida que hace visible tu proceso, tus materiales y tu saber hacer. Da igual si eres artesano/a en solitario o un taller con historia: te acompa&ntilde;amos hasta que funcione solo.',
+      ctas: [
+        { href: '#servicios', texto: 'Quiero mi Diagn&oacute;stico 3D &rarr;', clase: 'terracota', id: 'cta-hero', label: 'impulso-hero' },
+        { href: '#metodo', texto: '&iquest;C&oacute;mo funciona?', clase: 'ghost' }
+      ],
+      datos: 'Impulso 3D: ' + precios.texto('impulso_3d') + ' + IVA &middot; Completo: ' + precios.texto('impulso_3d_completo') + ' + IVA &middot; Empieza con el Diagn&oacute;stico: ' + precios.texto('diagnostico_talleres') + ' + IVA'
+  }) %>
 
-    <!-- HERO -->
-    <section class="impulso-hero" id="hero">
-        <div class="container">
-            <div class="hero-split">
-                <div class="hero-text">
-                    <div class="hero-badge">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                        Sistema de comunicaci&oacute;n circular
-                    </div>
-
-                    <h1>&iquest;Haces un trabajo extraordinario pero no encuentras tiempo para contarlo?</h1>
-
-                    <p class="hero-claim">Menos tiempo en difusi&oacute;n. M&aacute;s tiempo en tu oficio.</p>
-
-                    <p class="hero-subtitle">Un sistema de comunicaci&oacute;n a tu medida que hace visible tu proceso, tus materiales y tu saber hacer. Da igual si eres artesano/a en solitario o un taller con historia: te acompa&ntilde;amos hasta que funcione solo.</p>
-
-                    <div class="hero-essence">
-                        <button class="essence-trigger" onclick="toggleEssence()" aria-expanded="false">
-                            Sin perder tu esencia
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </button>
-                        <div class="essence-reveal" id="essenceReveal">
-                            <div class="essence-box">
-                                <p>La tecnolog&iacute;a es <strong>una herramienta m&aacute;s</strong>, como un martillo o un telar. Lo importante es la mano que la mueve. Nosotros configuramos un sistema que <strong>habla como t&uacute;</strong>, que conoce tu historia, tus valores y tu proceso. No genera contenido gen&eacute;rico: genera <strong>tu contenido</strong>, con tu voz.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="hero-ctas">
-                        <a href="#servicios" class="btn btn-green">Quiero mi Diagn&oacute;stico 3D &rarr;</a>
-                        <a href="#metodo" class="btn btn-outline-white">&iquest;C&oacute;mo funciona?</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="/assets/images/mirandomadera.jpg" alt="Artesano observando madera en su taller" loading="eager">
-                </div>
-            </div>
+  <!-- RELATO DEL PROBLEMA: «Reconoces esto, ¿verdad?» -->
+  <section class="prob" id="problema" aria-label="Reconoces esto, &iquest;verdad?">
+    <div class="prob-grid">
+      <div class="beats">
+        <div class="prob-movil"><img loading="lazy" src="<%= IMG %>prob-1-artesana.webp" alt="Artesana concentrada en su trabajo en el taller" width="900" height="1352"></div>
+      <div class="beat" data-foto="0" data-pie="Tiempo que no vuelve">
+        <span class="eyebrow eyebrow--arena">Reconoces esto, &iquest;verdad? &middot; 01</span>
+        <div class="grande grande--frase">Demasiado tiempo pensando qu&eacute; publicar</div>
+        <p>Las horas que dedicas a planificar, pensar y crear contenido son horas que preferir&iacute;as dedicar a lo que te apasiona. Y aun as&iacute;, sientes que no consigues transmitir el valor real de tu trabajo ni el esfuerzo que hay detr&aacute;s de cada pieza.</p>
+      </div>
+      <div class="beat" data-foto="1" data-pie="El valor que no se ve">
+        <span class="eyebrow eyebrow--arena">Reconoces esto, &iquest;verdad? &middot; 02</span>
+        <div class="grande grande--frase">Tu trabajo vale m&aacute;s de lo que se ve desde fuera</div>
+        <p>Hay un proceso detr&aacute;s de cada pieza: materiales elegidos con criterio, t&eacute;cnicas depuradas, decisiones conscientes. Pero desde fuera solo se ve el resultado final, no todo lo que lo hace especial.</p>
+      </div>
+      <div class="beat" data-foto="2" data-pie="Otros, más visibles">
+        <span class="eyebrow eyebrow--arena">Reconoces esto, &iquest;verdad? &middot; 03</span>
+        <div class="grande grande--frase">Otros con menos calidad, m&aacute;s visibles</div>
+        <p>Ves a marcas con menos calidad que la tuya posicionarse mejor porque comunican mejor.</p>
+      </div>
+      <div class="beat" data-foto="3" data-pie="La presión de estar">
+        <span class="eyebrow eyebrow--arena">Reconoces esto, &iquest;verdad? &middot; 04</span>
+        <div class="grande grande--frase">La comunicaci&oacute;n digital te agota</div>
+        <p>No sabes por d&oacute;nde empezar, lo que publicas no refleja la realidad de tu trabajo, y la presi&oacute;n de &lsquo;tener que estar&rsquo; en redes te quita energ&iacute;a para lo que importa.</p>
+      </div>
+      </div>
+      <div class="prob-visual" aria-hidden="true">
+        <div class="prob-sticky" id="probSticky">
+        <img class="activa" loading="lazy" src="/assets/images/landing/impulso/prob-1-artesana.webp" alt="" width="900" height="1352">
+        <img loading="lazy" src="/assets/images/landing/impulso/prob-2-manos-barro.webp" alt="" width="800" height="449">
+        <img loading="lazy" src="/assets/images/landing/impulso/prob-3-retrato.webp" alt="" width="900" height="493">
+        <img loading="lazy" src="/assets/images/landing/impulso/prob-4-taller-vacio.webp" alt="" width="900" height="600">
+          <span class="pie" id="probPie">Tiempo que no vuelve</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- PROBLEMA -->
-    <section class="impulso-section impulso-section-cream" id="problema">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">El problema</span>
-                <h2>Reconoces esto, &iquest;verdad?</h2>
-                <p>El d&iacute;a a d&iacute;a de quien crea con las manos y sabe que su trabajo merece m&aacute;s visibilidad &mdash; seas artesano/a independiente, taller familiar o marca artesana.</p>
-            </div>
+  <!-- MANIFIESTO: el lema de la página -->
+  <section class="resol">
+    <img class="sello" src="/assets/images/brand/oc-logo-2026-cuadrado.png" alt="" width="52" height="52">
+    <h2>Menos tiempo en difusi&oacute;n. <em>M&aacute;s tiempo en tu oficio.</em></h2>
+    <p class="puente">Sin perder tu esencia</p>
+    <p>La tecnolog&iacute;a es <strong>una herramienta m&aacute;s</strong>, como un martillo o un telar. Lo importante es la mano que la mueve. Nosotros configuramos un sistema que <strong>habla como t&uacute;</strong>, que conoce tu historia, tus valores y tu proceso. No genera contenido gen&eacute;rico: genera <strong>tu contenido</strong>, con tu voz.</p>
+  </section>
 
-            <div class="problems-grid">
-                <div class="problem-card fade-in">
-                    <div class="problem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    </div>
-                    <div>
-                        <h4>Demasiado tiempo pensando qu&eacute; publicar</h4>
-                        <p>Las horas que dedicas a planificar, pensar y crear contenido son horas que preferir&iacute;as dedicar a lo que te apasiona. Y aun as&iacute;, sientes que no consigues transmitir el valor real de tu trabajo ni el esfuerzo que hay detr&aacute;s de cada pieza.</p>
-                    </div>
-                </div>
+  <!-- MÉTODO 3D -->
+  <section class="pasos" id="metodo">
+    <div class="cab">
+      <span class="eyebrow">La soluci&oacute;n</span>
+      <h2>El M&eacute;todo 3D <em>adaptado a tu oficio</em></h2>
+      <p>Nuestra metodolog&iacute;a adaptada a tu realidad: poco tiempo, mucho valor por contar.</p>
+    </div>
+    <div class="wrap">
+      <div class="pasos-grid pasos-grid--tres">
+        <div class="paso reveal"><div class="bola">1</div><div class="cuando">Fase 1</div><h3>Diagnosticar</h3><p>Mapeamos tu proceso, identificamos todo el valor que no est&aacute;s comunicando &mdash; tu saber hacer, tus materiales, tu historia &mdash; y detectamos oportunidades para mejorar tu circularidad.</p></div>
+        <div class="paso reveal"><div class="bola">2</div><div class="cuando">Fase 2</div><h3>Dise&ntilde;ar</h3><p>Dise&ntilde;amos un plan realista de 90 d&iacute;as: qu&eacute; contar y d&oacute;nde, qu&eacute; mejoras circulares implementar, y con qu&eacute; herramientas hacerlo.</p></div>
+        <div class="paso reveal"><div class="bola">3</div><div class="cuando">Fase 3</div><h3>Difundir</h3><p>Te montamos un sistema para que produzcas contenido aut&eacute;ntico en minutos. La tecnolog&iacute;a est&aacute; al servicio de tu oficio &mdash; la mano que la mueve es lo importante.</p></div>
+      </div>
+    </div>
+  </section>
 
-                <div class="problem-card fade-in">
-                    <div class="problem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    </div>
-                    <div>
-                        <h4>Tu trabajo vale m&aacute;s de lo que se ve desde fuera</h4>
-                        <p>Hay un proceso detr&aacute;s de cada pieza: materiales elegidos con criterio, t&eacute;cnicas depuradas, decisiones conscientes. Pero desde fuera solo se ve el resultado final, no todo lo que lo hace especial.</p>
-                    </div>
-                </div>
-
-                <div class="problem-card fade-in">
-                    <div class="problem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                    </div>
-                    <div>
-                        <h4>Otros con menos calidad, m&aacute;s visibles</h4>
-                        <p>Ves a marcas con menos calidad que la tuya posicionarse mejor porque comunican mejor.</p>
-                    </div>
-                </div>
-
-                <div class="problem-card fade-in">
-                    <div class="problem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                    </div>
-                    <div>
-                        <h4>La comunicaci&oacute;n digital te agota</h4>
-                        <p>No sabes por d&oacute;nde empezar, lo que publicas no refleja la realidad de tu trabajo, y la presi&oacute;n de &lsquo;tener que estar&rsquo; en redes te quita energ&iacute;a para lo que importa.</p>
-                    </div>
-                </div>
-            </div>
+  <!-- ¿TE RECONOCES? — arquetipos -->
+  <section class="cajas" id="para-quien">
+    <div class="cab">
+      <span class="eyebrow">Para qui&eacute;n</span>
+      <h2>&iquest;Te <em>reconoces</em>?</h2>
+      <p>Impulso 3D es para quien necesita un sistema de comunicaci&oacute;n que funcione sin robarle tiempo al taller.</p>
+    </div>
+    <div class="wrap">
+      <div class="cajas-grid cajas-grid--cuatro">
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-artesana-experimentada.webp" alt="Artesana ceramista experimentada" width="600" height="375"></div>
+          <span class="num" style="margin-top:22px">Ceramista, en torno a 55 a&ntilde;os</span>
+          <h3>La Artesana Experimentada</h3>
+          <p class="lema"><em>Yo ya era circular sin saberlo, pero no sab&iacute;a c&oacute;mo explicarlo.</em></p>
+          <p class="lema" style="margin-bottom:0">Domina su oficio con maestr&iacute;a pero se siente abrumada por lo digital. Necesita un sistema sencillo para contar lo que ya hace.</p>
         </div>
-    </section>
-
-    <!-- MÉTODO 3D -->
-    <section class="impulso-section impulso-section-white" id="metodo">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">La soluci&oacute;n</span>
-                <h2>El M&eacute;todo 3D adaptado a tu oficio</h2>
-                <p>Nuestra metodolog&iacute;a adaptada a tu realidad: poco tiempo, mucho valor por contar.</p>
-            </div>
-
-            <div class="method-phases">
-                <div class="phase-card fade-in">
-                    <div class="phase-number">1</div>
-                    <h3>Diagnosticar</h3>
-                    <p>Mapeamos tu proceso, identificamos todo el valor que no est&aacute;s comunicando &mdash; tu saber hacer, tus materiales, tu historia &mdash; y detectamos oportunidades para mejorar tu circularidad.</p>
-                </div>
-                <div class="phase-card fade-in">
-                    <div class="phase-number">2</div>
-                    <h3>Dise&ntilde;ar</h3>
-                    <p>Dise&ntilde;amos un plan realista de 90 d&iacute;as: qu&eacute; contar y d&oacute;nde, qu&eacute; mejoras circulares implementar, y con qu&eacute; herramientas hacerlo.</p>
-                </div>
-                <div class="phase-card fade-in">
-                    <div class="phase-number">3</div>
-                    <h3>Difundir</h3>
-                    <p>Te montamos un sistema para que produzcas contenido aut&eacute;ntico en minutos. La tecnolog&iacute;a est&aacute; al servicio de tu oficio &mdash; la mano que la mueve es lo importante.</p>
-                </div>
-            </div>
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-maker-moderno.webp" alt="Maker moderno carpintero" width="600" height="375"></div>
+          <span class="num" style="margin-top:22px">Carpintero, en torno a 32 a&ntilde;os</span>
+          <h3>El Maker Moderno</h3>
+          <p class="lema"><em>Tengo las herramientas, pero necesito la estrategia.</em></p>
+          <p class="lema" style="margin-bottom:0">Combina tecnolog&iacute;a con prop&oacute;sito. Busca impacto y comunidad, y quiere aplicar circularidad con coherencia.</p>
         </div>
-    </section>
-
-    <!-- ARQUETIPOS / PERFILES -->
-    <section class="impulso-section impulso-section-cream" id="para-quien">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Para qui&eacute;n</span>
-                <h2>&iquest;Te reconoces?</h2>
-                <p>Impulso 3D es para quien necesita un sistema de comunicaci&oacute;n que funcione sin robarle tiempo al taller.</p>
-            </div>
-
-            <div class="impulso-profiles">
-                <div class="impulso-profile-card fade-in">
-                    <div class="profile-avatar">
-                        <img src="/assets/images/Perfil artesana experimentada.png" alt="Artesana ceramista experimentada">
-                    </div>
-                    <h3>La Artesana Experimentada</h3>
-                    <p class="profile-age">Ceramista, en torno a 55 a&ntilde;os</p>
-                    <p class="profile-quote">Yo ya era circular sin saberlo, pero no sab&iacute;a c&oacute;mo explicarlo.</p>
-                    <p class="profile-desc">Domina su oficio con maestr&iacute;a pero se siente abrumada por lo digital. Necesita un sistema sencillo para contar lo que ya hace.</p>
-                </div>
-
-                <div class="impulso-profile-card fade-in">
-                    <div class="profile-avatar">
-                        <img src="/assets/images/artesano innovador.png" alt="Maker moderno carpintero">
-                    </div>
-                    <h3>El Maker Moderno</h3>
-                    <p class="profile-age">Carpintero, en torno a 32 a&ntilde;os</p>
-                    <p class="profile-quote">Tengo las herramientas, pero necesito la estrategia.</p>
-                    <p class="profile-desc">Combina tecnolog&iacute;a con prop&oacute;sito. Busca impacto y comunidad, y quiere aplicar circularidad con coherencia.</p>
-                </div>
-
-                <div class="impulso-profile-card fade-in">
-                    <div class="profile-avatar">
-                        <img src="/assets/images/perfil_dise&ntilde;adora_consciente .png" alt="Diseñadora joyera consciente">
-                    </div>
-                    <h3>La Dise&ntilde;adora Consciente</h3>
-                    <p class="profile-age">Joyera, en torno a 28 a&ntilde;os</p>
-                    <p class="profile-quote">S&eacute; por qu&eacute; lo hago, pero necesito saber c&oacute;mo hacerlo mejor.</p>
-                    <p class="profile-desc">La sostenibilidad es su pilar desde el inicio. Necesita comunicar su diferenciaci&oacute;n y llegar a su cliente ideal.</p>
-                </div>
-
-                <div class="impulso-profile-card fade-in">
-                    <div class="profile-avatar">
-                        <img src="/assets/images/perfil_taller_familiar.png" alt="Director de taller cer&aacute;mico familiar">
-                    </div>
-                    <h3>El Taller con Historia</h3>
-                    <p class="profile-age">Taller cer&aacute;mico familiar, tercera generaci&oacute;n</p>
-                    <p class="profile-quote">Tenemos 50 a&ntilde;os de historia pero en redes parecemos invisibles.</p>
-                    <p class="profile-desc">Dirige un taller con tradici&oacute;n y equipo, pero la comunicaci&oacute;n digital siempre qued&oacute; en segundo plano. Necesita un sistema que cuente la historia que llevan d&eacute;cadas construyendo.</p>
-                </div>
-            </div>
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-disenadora-consciente.webp" alt="Diseñadora joyera consciente" width="600" height="375"></div>
+          <span class="num" style="margin-top:22px">Joyera, en torno a 28 a&ntilde;os</span>
+          <h3>La Dise&ntilde;adora Consciente</h3>
+          <p class="lema"><em>S&eacute; por qu&eacute; lo hago, pero necesito saber c&oacute;mo hacerlo mejor.</em></p>
+          <p class="lema" style="margin-bottom:0">La sostenibilidad es su pilar desde el inicio. Necesita comunicar su diferenciaci&oacute;n y llegar a su cliente ideal.</p>
         </div>
-    </section>
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-taller-familiar.webp" alt="Director de taller cer&aacute;mico familiar" width="600" height="375"></div>
+          <span class="num" style="margin-top:22px">Taller cer&aacute;mico familiar, tercera generaci&oacute;n</span>
+          <h3>El Taller con Historia</h3>
+          <p class="lema"><em>Tenemos 50 a&ntilde;os de historia pero en redes parecemos invisibles.</em></p>
+          <p class="lema" style="margin-bottom:0">Dirige un taller con tradici&oacute;n y equipo, pero la comunicaci&oacute;n digital siempre qued&oacute; en segundo plano. Necesita un sistema que cuente la historia que llevan d&eacute;cadas construyendo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- AI SECTION -->
-    <section class="impulso-section impulso-section-cream" id="ia">
-        <div class="container">
-            <div class="ai-block fade-in">
-                <div class="ai-text">
-                    <h2>Herramientas que hablan como t&uacute;, no como una m&aacute;quina</h2>
-                    <p>Te damos un <strong>sistema de comunicaci&oacute;n adaptado a tu marca</strong>. En su forma m&aacute;s sencilla, es un cuaderno de trabajo digital con f&oacute;rmulas y plantillas para que crear contenido sea cuesti&oacute;n de minutos, no de horas. Le cambias el tema del d&iacute;a, le pones tu toque, y listo. En su versi&oacute;n completa, adem&aacute;s incluye un asistente digital personalizado que te prepara borradores de texto y dise&ntilde;o &mdash; t&uacute; los revisas, retoques lo que quieras, y publicas.</p>
+  <!-- HERRAMIENTAS -->
+  <section class="oc-documento oc-documento--foto" id="herramientas">
+    <div class="wrap">
+      <div class="oc-documento-img reveal"><img loading="lazy" src="<%= IMG %>herramientas-mesa.webp" alt="Artesana trabajando en su mesa, rodeada de plantas" width="900" height="1000"></div>
+      <div class="reveal">
+        <span class="eyebrow eyebrow--arena">Herramientas</span>
+        <h2>Herramientas que hablan como t&uacute;, <em>no como una m&aacute;quina</em></h2>
+        <p>Te damos un <strong>sistema de comunicaci&oacute;n adaptado a tu marca</strong>. En su forma m&aacute;s sencilla, es un cuaderno de trabajo digital con f&oacute;rmulas y plantillas para que crear contenido sea cuesti&oacute;n de minutos, no de horas. Le cambias el tema del d&iacute;a, le pones tu toque, y listo. En su versi&oacute;n completa, adem&aacute;s incluye un asistente digital personalizado que te prepara borradores de texto y dise&ntilde;o &mdash; t&uacute; los revisas, retoques lo que quieras, y publicas.</p>
                     <p>En ambos casos, el sistema conoce tu voz, tu historia y tus valores. No genera contenido gen&eacute;rico: genera <strong>tu contenido</strong>. Y siempre tienes la &uacute;ltima palabra.</p>
-                </div>
-                <div class="ai-visual">
-                    <div class="ai-feature">
-                        <div class="ai-feature-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                        </div>
-                        <div>
-                            <h4>Tu voz, no la de una m&aacute;quina</h4>
-                            <p>Configurado con tu manera de hablar, tus valores y tu historia</p>
-                        </div>
-                    </div>
-                    <div class="ai-feature">
-                        <div class="ai-feature-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                        </div>
-                        <div>
-                            <h4>De la idea al post en minutos</h4>
-                            <p>F&oacute;rmulas y plantillas listas para adaptar, o borradores preparados para revisar</p>
-                        </div>
-                    </div>
-                    <div class="ai-feature">
-                        <div class="ai-feature-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
-                        <div>
-                            <h4>Siempre t&uacute; al mando</h4>
-                            <p>T&uacute; revisas, retoques, eliges tus fotos y decides qu&eacute; se publica</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <ul>
+          <li><strong>Tu voz, no la de una m&aacute;quina</strong> &mdash; Configurado con tu manera de hablar, tus valores y tu historia</li>
+          <li><strong>De la idea al post en minutos</strong> &mdash; F&oacute;rmulas y plantillas listas para adaptar, o borradores preparados para revisar</li>
+          <li><strong>Siempre t&uacute; al mando</strong> &mdash; T&uacute; revisas, retoques, eliges tus fotos y decides qu&eacute; se publica</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NO SOLO COMUNICAR -->
+  <section class="oc-intro" id="circularidad-extra">
+    <div class="wrap">
+      <span class="eyebrow">Circularidad</span>
+      <h2>No solo te ayudamos <em>a comunicar</em></h2>
+      <p>Adem&aacute;s de darte las herramientas para contar tu historia, analizamos tu proceso y te proponemos mejoras concretas en circularidad: desde la elecci&oacute;n de materiales hasta la reutilizaci&oacute;n de residuos. Porque comunicar circularidad es m&aacute;s f&aacute;cil cuando realmente la practicas.</p>
+    </div>
+  </section>
+
+  <!-- SERVICIOS Y PRECIOS (entregables) -->
+  <section class="cajas" id="servicios">
+    <div class="cab">
+      <span class="eyebrow">Servicios</span>
+      <h2>Tu camino con <em>Oficios Circulares</em></h2>
+      <p>Empieza por el diagn&oacute;stico y decide hasta d&oacute;nde quieres llegar. Cada paso te da herramientas m&aacute;s completas para comunicar tu valor.</p>
+    </div>
+    <div class="wrap">
+      <div class="cajas-grid">
+        <div class="caja caja--light reveal">
+          <div class="caja-doc"><img loading="lazy" src="/assets/images/landing/diagnostico/portada-ceramica-artesanal.webp" alt="Portada de un Diagn&oacute;stico 3D de ejemplo" width="600" height="849"></div>
+          <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <span class="num">Radiograf&iacute;a de tu Oficio</span>
+          <h3>Diagn&oacute;stico 3D</h3>
+          <div class="caja-precio"><%= precios.texto('diagnostico_talleres') %> <small>+ IVA</small></div>
+          <p class="dato dato--inline">Cuestionario de unos 20 minutos + informe en PDF y v&iacute;deo explicativo</p>
+          <ul>
+            <li>Mapa de tu proceso con identificaci&oacute;n de valor oculto</li>
+            <li>Inventario de activos comunicativos: historia, proceso, materiales, valores</li>
+            <li>Diagn&oacute;stico de presencia digital actual</li>
+            <li>Oportunidades de mejora en circularidad detectadas</li>
+            <li>3 oportunidades priorizadas (comunicaci&oacute;n + circularidad)</li>
+            <li>Recomendaci&oacute;n de siguiente paso</li>
+          </ul>
+          <p class="lema"><strong>Entregable:</strong> Informe en PDF con tu diagn&oacute;stico completo y un v&iacute;deo en el que te lo explicamos</p>
+          <p class="lema"><strong>Ideal para:</strong> Quien necesita claridad sobre qu&eacute; tiene y qu&eacute; puede hacer con ello</p>
+          <a id="cta-card-diag" class="club-btn club-btn--verde" href="/servicios/diagnostico-3d?oc_source=site&amp;oc_medium=internal&amp;oc_campaign=oc-impulso-3d&amp;oc_content=card-diag">Quiero mi Diagn&oacute;stico</a>
         </div>
-    </section>
-
-    <!-- NO SOLO COMUNICAR -->
-    <section class="impulso-section impulso-section-white" id="circularidad-extra">
-        <div class="container">
-            <div class="circularidad-callout fade-in">
-                <h2>No solo te ayudamos a comunicar</h2>
-                <p>Adem&aacute;s de darte las herramientas para contar tu historia, analizamos tu proceso y te proponemos mejoras concretas en circularidad: desde la elecci&oacute;n de materiales hasta la reutilizaci&oacute;n de residuos. Porque comunicar circularidad es m&aacute;s f&aacute;cil cuando realmente la practicas.</p>
-            </div>
+        <div class="caja caja--dark reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-impulso-herramientas.webp" alt="Herramientas de taller sobre una mesa oscura" width="900" height="562"></div>
+          <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+          <span class="num">Tu sistema de comunicaci&oacute;n</span>
+          <h3>Impulso 3D</h3>
+          <div class="caja-precio"><%= precios.texto('impulso_3d') %> <small>+ IVA</small></div>
+          <p class="dato dato--inline">3 semanas + sesi&oacute;n de trabajo 90 min</p>
+          <ul>
+            <li>Sesi&oacute;n de trabajo donde definimos tu estrategia juntos</li>
+            <li>Kit de Instagram completo: bio, mensajes, hashtags investigados, paleta de dise&ntilde;o</li>
+            <li>5 plantillas de feed editables en Canva, dise&ntilde;adas con tu est&eacute;tica</li>
+            <li>Mockup de tu perfil con highlights y 5 portadas listas para subir</li>
+            <li>Gu&iacute;a de textos con f&oacute;rmulas por tipo de publicaci&oacute;n</li>
+            <li>Calendario editorial de 4 semanas</li>
+            <li>Manual de Marca: el documento que define c&oacute;mo habla tu proyecto</li>
+            <li>Cuaderno de trabajo digital con 15-20 f&oacute;rmulas de contenido listas para usar</li>
+            <li>Gu&iacute;a de mejoras circulares aplicables a tu taller + ideas para comunicarlas</li>
+            <li>Todo empaquetado en kit profesional</li>
+          </ul>
+          <p class="lema"><strong>Entregable:</strong> Kit completo de comunicaci&oacute;n + cuaderno de f&oacute;rmulas para crear contenido con tu voz</p>
+          <p class="lema"><strong>Ideal para:</strong> Quien quiere herramientas y f&oacute;rmulas para comunicar sin empezar de cero cada vez</p>
+          <a id="cta-card-impulso" class="club-btn club-btn--terracota" href="/contacto?service=impulso-3d-basico&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-impulso&page_path=/impulso-3d">Quiero mi Impulso 3D</a>
         </div>
-    </section>
-
-    <!-- SERVICIOS / PRICING -->
-    <section class="impulso-section impulso-section-white" id="servicios">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Servicios</span>
-                <h2>Tu camino con Oficios Circulares</h2>
-                <p>Empieza por el diagn&oacute;stico y decide hasta d&oacute;nde quieres llegar. Cada paso te da herramientas m&aacute;s completas para comunicar tu valor.</p>
-            </div>
-
-            <div class="pricing-grid">
-                <!-- DIAGNÓSTICO 3D -->
-                <div class="price-card fade-in">
-                    <div class="price-card-header">
-                        <h3>Diagn&oacute;stico 3D</h3>
-                        <p class="subtitle">Radiograf&iacute;a de tu Oficio</p>
-                        <div class="price-amount">
-                            <span class="value"><%= precios.num('diagnostico_talleres') %></span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
-                        </div>
-                        <p class="price-duration">Cuestionario de unos 20 minutos + informe en PDF y v&iacute;deo explicativo</p>
-                    </div>
-                    <div class="price-card-body">
-                        <ul class="price-features">
-                            <li>Mapa de tu proceso con identificaci&oacute;n de valor oculto</li>
-                            <li>Inventario de activos comunicativos: historia, proceso, materiales, valores</li>
-                            <li>Diagn&oacute;stico de presencia digital actual</li>
-                            <li>Oportunidades de mejora en circularidad detectadas</li>
-                            <li>3 oportunidades priorizadas (comunicaci&oacute;n + circularidad)</li>
-                            <li>Recomendaci&oacute;n de siguiente paso</li>
-                        </ul>
-                        <div class="price-deliverable">
-                            <strong>Entregable:</strong> Informe en PDF con tu diagn&oacute;stico completo y un v&iacute;deo en el que te lo explicamos
-                        </div>
-                        <a href="/servicios/diagnostico-3d?oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-diag" class="btn btn-coral">Quiero mi Diagn&oacute;stico</a>
-                        <p class="price-ideal"><strong>Ideal para:</strong> Quien necesita claridad sobre qu&eacute; tiene y qu&eacute; puede hacer con ello</p>
-                    </div>
-                </div>
-
-                <!-- IMPULSO 3D -->
-                <div class="price-card fade-in">
-                    <div class="price-card-header">
-                        <h3>Impulso 3D</h3>
-                        <p class="subtitle">Tu sistema de comunicaci&oacute;n</p>
-                        <div class="price-amount">
-                            <span class="value"><%= precios.num('impulso_3d') %></span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
-                        </div>
-                        <p class="price-duration">3 semanas + sesi&oacute;n de trabajo 90 min</p>
-                    </div>
-                    <div class="price-card-body">
-                        <ul class="price-features">
-                            <li>Sesi&oacute;n de trabajo donde definimos tu estrategia juntos</li>
-                            <li>Kit de Instagram completo: bio, mensajes, hashtags investigados, paleta de dise&ntilde;o</li>
-                            <li>5 plantillas de feed editables en Canva, dise&ntilde;adas con tu est&eacute;tica</li>
-                            <li>Mockup de tu perfil con highlights y 5 portadas listas para subir</li>
-                            <li>Gu&iacute;a de textos con f&oacute;rmulas por tipo de publicaci&oacute;n</li>
-                            <li>Calendario editorial de 4 semanas</li>
-                            <li>Manual de Marca: el documento que define c&oacute;mo habla tu proyecto</li>
-                            <li>Cuaderno de trabajo digital con 15-20 f&oacute;rmulas de contenido listas para usar</li>
-                            <li>Gu&iacute;a de mejoras circulares aplicables a tu taller + ideas para comunicarlas</li>
-                            <li>Todo empaquetado en kit profesional</li>
-                        </ul>
-                        <div class="price-deliverable">
-                            <strong>Entregable:</strong> Kit completo de comunicaci&oacute;n + cuaderno de f&oacute;rmulas para crear contenido con tu voz
-                        </div>
-                        <a href="/contacto?service=impulso-3d-basico&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-impulso&page_path=/impulso-3d" class="btn btn-coral">Quiero mi Impulso 3D</a>
-                        <p class="price-ideal"><strong>Ideal para:</strong> Quien quiere herramientas y f&oacute;rmulas para comunicar sin empezar de cero cada vez</p>
-                    </div>
-                </div>
-
-                <!-- IMPULSO 3D COMPLETO -->
-                <div class="price-card featured fade-in">
-                    <span class="price-badge">Taller de comunicaci&oacute;n equipado</span>
-                    <div class="price-card-header">
-                        <h3>Impulso 3D Completo</h3>
-                        <p class="subtitle">Tu taller de comunicaci&oacute;n equipado</p>
-                        <div class="price-amount">
-                            <span class="value"><%= precios.num('impulso_3d_completo') %></span><span class="currency">&euro;</span> <span class="precio-iva">+ IVA</span>
-                        </div>
-                        <p class="price-duration">4-5 semanas + 2 sesiones de trabajo</p>
-                    </div>
-                    <div class="price-card-body">
-                        <ul class="price-features">
-                            <li>Todo lo incluido en Impulso 3D</li>
-                            <li>Asistente digital personalizado que conoce tu marca y te prepara borradores de texto y dise&ntilde;o base &mdash; t&uacute; revisas, retoques y publicas</li>
-                            <li>Gu&iacute;a de v&iacute;deo corto con 5 tipos adaptados a tu sector y recetas paso a paso</li>
-                            <li>Kit de stories con plantillas verticales</li>
-                            <li>Landing page o mejora de una secci&oacute;n de tu web</li>
-                            <li>Circularidad integrada: tu asistente conoce tus pr&aacute;cticas sostenibles y las convierte en contenido</li>
-                            <li>Sesi&oacute;n de formaci&oacute;n en tu sistema completo (90 min)</li>
-                            <li>2 semanas de soporte por WhatsApp incluidas</li>
-                        </ul>
-
-                        <div class="price-deliverable" style="background: #fef9f0; border-left: 3px solid var(--terracota);">
-                            <strong>&iquest;Cu&aacute;l es la diferencia?</strong> Con el Impulso 3D, t&uacute; escribes usando las f&oacute;rmulas y montas los dise&ntilde;os. Con el Completo, el asistente te prepara borradores y dise&ntilde;os base &mdash; t&uacute; los revisas, les das tu toque, y publicas. Siempre t&uacute; al mando, pero con mucho menos esfuerzo.
-                        </div>
-
-                        <div class="price-deliverable">
-                            <strong>Entregable:</strong> Sistema completo de comunicaci&oacute;n con asistente digital + materiales + formaci&oacute;n
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Incluye herramienta digital con coste de 20&euro;/mes tras la configuraci&oacute;n inicial</p>
-
-                        <a href="/contacto?service=impulso-3d-completo&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-completo&page_path=/impulso-3d" class="btn btn-coral">Quiero el Impulso Completo</a>
-                        <p class="price-ideal"><strong>Ideal para:</strong> Quien quiere dedicar el menor tiempo posible a comunicar sin perder su voz</p>
-                    </div>
-                </div>
-            </div>
+        <div class="caja caja--accent reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-completo-taller.webp" alt="Esp&aacute;tulas de pintor sobre un lienzo en blanco" width="900" height="562"></div>
+          <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"/></svg></div>
+          <span class="num">Tu taller de comunicaci&oacute;n equipado</span>
+          <h3>Impulso 3D Completo</h3>
+          <div class="caja-precio"><%= precios.texto('impulso_3d_completo') %> <small>+ IVA</small></div>
+          <p class="dato dato--inline">4-5 semanas + 2 sesiones de trabajo</p>
+          <ul>
+            <li>Todo lo incluido en Impulso 3D</li>
+            <li>Asistente digital personalizado que conoce tu marca y te prepara borradores de texto y dise&ntilde;o base &mdash; t&uacute; revisas, retoques y publicas</li>
+            <li>Gu&iacute;a de v&iacute;deo corto con 5 tipos adaptados a tu sector y recetas paso a paso</li>
+            <li>Kit de stories con plantillas verticales</li>
+            <li>Landing page o mejora de una secci&oacute;n de tu web</li>
+            <li>Circularidad integrada: tu asistente conoce tus pr&aacute;cticas sostenibles y las convierte en contenido</li>
+            <li>Sesi&oacute;n de formaci&oacute;n en tu sistema completo (90 min)</li>
+            <li>2 semanas de soporte por WhatsApp incluidas</li>
+          </ul>
+          <p class="lema"><strong>&iquest;Cu&aacute;l es la diferencia?</strong> Con el Impulso 3D, t&uacute; escribes usando las f&oacute;rmulas y montas los dise&ntilde;os. Con el Completo, el asistente te prepara borradores y dise&ntilde;os base &mdash; t&uacute; los revisas, les das tu toque, y publicas. Siempre t&uacute; al mando, pero con mucho menos esfuerzo.
+                        </p>
+          <p class="lema"><strong>Entregable:</strong> Sistema completo de comunicaci&oacute;n con asistente digital + materiales + formaci&oacute;n</p>
+          <p class="lema">Incluye herramienta digital con coste de 20&euro;/mes tras la configuraci&oacute;n inicial</p>
+          <p class="lema"><strong>Ideal para:</strong> Quien quiere dedicar el menor tiempo posible a comunicar sin perder su voz</p>
+          <a id="cta-card-completo" class="club-btn club-btn--terracota" href="/contacto?service=impulso-3d-completo&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-completo&page_path=/impulso-3d">Quiero el Impulso Completo</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- JOURNEY -->
-    <section class="impulso-section impulso-section-cream" id="journey">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">El proceso</span>
-                <h2>&iquest;C&oacute;mo empezamos?</h2>
-                <p>Un camino claro, sin sorpresas.</p>
-            </div>
+  <!-- ¿CÓMO EMPEZAMOS? -->
+  <section class="pasos pasos--oscuro" id="journey">
+    <div class="cab">
+      <span class="eyebrow">El proceso</span>
+      <h2>&iquest;C&oacute;mo <em>empezamos</em>?</h2>
+      <p>Un camino claro, sin sorpresas.</p>
+    </div>
+    <div class="wrap">
+      <div class="pasos-grid pasos-grid--cinco">
+        <div class="paso reveal"><div class="bola">1</div><div class="cuando">Paso 1</div><h3>Compra tu Diagn&oacute;stico</h3><p>Recibes un cuestionario que respondes en unos 20 minutos, cuando te venga bien. Puedes contestar con audios y adjuntar fotos.</p></div>
+        <div class="paso reveal"><div class="bola">2</div><div class="cuando">Paso 2</div><h3>Recibe tu informe</h3><p>Recibes el informe en PDF y un v&iacute;deo en el que te lo explicamos: el mapa de tu taller, lo que ya comunicas y tres prioridades ordenadas.</p></div>
+        <div class="paso reveal"><div class="bola">3</div><div class="cuando">Paso 3</div><h3>Decide tu siguiente paso</h3><p>Con el diagn&oacute;stico en mano, decides si quieres el Impulso 3D, el Impulso 3D Completo, o si ya tienes lo que necesitabas.</p></div>
+        <div class="paso reveal"><div class="bola">4</div><div class="cuando">Paso 4</div><h3>Construimos tu sistema</h3><p>Si sigues adelante, creamos juntos tu hoja de ruta y tu sistema de contenido. T&uacute; siempre al mando.</p></div>
+        <div class="paso reveal"><div class="bola">5</div><div class="cuando">Paso 5</div><h3>Comunicas con autonom&iacute;a</h3><p>Tienes las herramientas, el sistema y el acompa&ntilde;amiento para comunicar tu valor de forma constante y aut&eacute;ntica.</p></div>
+      </div>
+    </div>
+  </section>
 
-            <div class="journey-steps">
-                <div class="journey-step fade-in">
-                    <div class="journey-dot">1</div>
-                    <div class="journey-card">
-                        <h4>Compra tu Diagn&oacute;stico</h4>
-                        <p>Recibes un cuestionario que respondes en unos 20 minutos, cuando te venga bien. Puedes contestar con audios y adjuntar fotos.</p>
-                    </div>
-                </div>
-                <div class="journey-step fade-in">
-                    <div class="journey-dot">2</div>
-                    <div class="journey-card">
-                        <h4>Recibe tu informe</h4>
-                        <p>Recibes el informe en PDF y un v&iacute;deo en el que te lo explicamos: el mapa de tu taller, lo que ya comunicas y tres prioridades ordenadas.</p>
-                    </div>
-                </div>
-                <div class="journey-step fade-in">
-                    <div class="journey-dot">3</div>
-                    <div class="journey-card">
-                        <h4>Decide tu siguiente paso</h4>
-                        <p>Con el diagn&oacute;stico en mano, decides si quieres el Impulso 3D, el Impulso 3D Completo, o si ya tienes lo que necesitabas.</p>
-                    </div>
-                </div>
-                <div class="journey-step fade-in">
-                    <div class="journey-dot">4</div>
-                    <div class="journey-card">
-                        <h4>Construimos tu sistema</h4>
-                        <p>Si sigues adelante, creamos juntos tu hoja de ruta y tu sistema de contenido. T&uacute; siempre al mando.</p>
-                    </div>
-                </div>
-                <div class="journey-step journey-step--result fade-in">
-                    <div class="journey-dot">&check;</div>
-                    <div class="journey-card">
-                        <h4>Comunicas con autonom&iacute;a</h4>
-                        <p>Tienes las herramientas, el sistema y el acompa&ntilde;amiento para comunicar tu valor de forma constante y aut&eacute;ntica.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SOPORTE MENSUAL -->
-    <section class="impulso-section impulso-section-white" id="soporte">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Acompa&ntilde;amiento</span>
-                <h2>&iquest;Necesitas soporte continuo?</h2>
-                <p>Si prefieres tener a alguien cerca despu&eacute;s de la implementaci&oacute;n.</p>
-            </div>
-
-            <div class="support-grid">
-                <div class="support-card fade-in">
-                    <h3>Soporte B&aacute;sico</h3>
-                    <div class="support-price"><%- precios.html('soporte_basico') %></div>
-                    <ul class="support-features">
+  <!-- SOPORTE -->
+  <section class="cajas" id="soporte">
+    <div class="cab">
+      <span class="eyebrow">Acompa&ntilde;amiento</span>
+      <h2>&iquest;Necesitas <em>soporte continuo</em>?</h2>
+      <p>Si prefieres tener a alguien cerca despu&eacute;s de la implementaci&oacute;n.</p>
+    </div>
+    <div class="wrap">
+      <div class="cajas-grid cajas-grid--dos">
+        <div class="caja caja--light caja--sinfoto reveal">
+          <span class="num">Mensual</span>
+          <h3>Soporte B&aacute;sico</h3>
+          <span class="caja-precio--texto"><%= precios.texto('soporte_basico') %></span>
+          <ul>
                         <li>1 revisi&oacute;n mensual de tu asistente de contenido</li>
                         <li>Resoluci&oacute;n de dudas por email</li>
                         <li>Acceso a actualizaciones del sistema</li>
                         <li>Recomendaciones mensuales de contenido</li>
                     </ul>
-                </div>
-                <div class="support-card fade-in">
-                    <h3>Soporte Activo</h3>
-                    <div class="support-price"><%- precios.html('soporte_activo') %></div>
-                    <ul class="support-features">
+        </div>
+        <div class="caja caja--light caja--sinfoto reveal">
+          <span class="num">Mensual</span>
+          <h3>Soporte Activo</h3>
+          <span class="caja-precio--texto"><%= precios.texto('soporte_activo') %></span>
+          <ul>
                         <li>1 sesi&oacute;n mensual de 30 min</li>
                         <li>Iteraciones ilimitadas de tu asistente de contenido</li>
                         <li>Revisi&oacute;n y optimizaci&oacute;n de contenido</li>
                         <li>An&aacute;lisis mensual de resultados</li>
                         <li>Acceso prioritario por WhatsApp</li>
                     </ul>
-                </div>
-            </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- TESTIMONIO (único autorizado para talleres: Blanca, Asociación Hilandia) -->
-    <section class="impulso-section impulso-section-cream">
-        <div class="container">
-            <%- include('partials/testimonio-blanca') %>
+  <!-- TESTIMONIO (data/testimonios.json, página impulso-3d) -->
+  <% if (testi.length) { %>
+  <section class="testi" id="testimonios">
+    <div class="cab">
+      <span class="eyebrow">Experiencias</span>
+      <h2>Lo que cuentan <em>quienes ya lo usan</em></h2>
+    </div>
+    <div class="wrap">
+      <div class="testi-grid <%= testi.length === 1 ? 'testi-grid--uno' : 'testi-grid--dos' %>">
+        <% testi.forEach(function (t) { %>
+        <div class="testi-card reveal">
+          <div class="comillas" aria-hidden="true">"</div>
+          <p><%= t.texto %></p>
+          <div class="firma">
+            <div class="avatar"><img loading="lazy" src="<%= t.avatar === 'foto' && t.foto ? t.foto : '/assets/images/brand/oc-logo-2026-cuadrado.png' %>" alt="<%= t.foto_alt || '' %>" width="56" height="56"></div>
+            <div><h3><%= t.nombre || t.firma %></h3><% if (t.nombre) { %><div class="rol"><%= t.firma %></div><% } %></div>
+          </div>
         </div>
-    </section>
+        <% }) %>
+      </div>
+      <% if (testimoniosLib.todosConPermiso(testi)) { %><p class="nota">Testimonios reales, publicados con su permiso.</p><% } %>
+    </div>
+  </section>
+  <% } %>
 
-    <!-- FAQ -->
-    <section class="impulso-section impulso-section-white" id="faq">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Preguntas frecuentes</span>
-                <h2>Quiero saber m&aacute;s</h2>
-            </div>
+  <!-- QUIÉN ESTÁ DETRÁS (texto propio de Impulso 3D) -->
+  <section class="detras">
+    <div class="wrap detras-grid">
+      <div class="detras-foto reveal"><img loading="lazy" src="/assets/images/fotosobrenosotrosOC.png" alt="Jos&eacute; Moscard&oacute;, fundador de Oficios Circulares" width="300" height="300"></div>
+      <div class="detras-texto reveal">
+        <span class="eyebrow">Qui&eacute;n est&aacute; detr&aacute;s</span>
+        <h2>Hola, soy <em>Jose</em></h2>
+        <p>Soy <strong>Jos&eacute; Moscard&oacute;</strong>, fundador de Oficios Circulares. Llevo m&aacute;s de diez a&ntilde;os trabajando en estrategia, marketing y sostenibilidad. Cre&eacute; esta consultor&iacute;a para acompa&ntilde;ar a artesanos y proyectos con alma que quieren comunicar su valor y mejorar su circularidad.</p>
+        <p class="detras-firma">&ldquo;Oficios Circulares naci&oacute; para acompa&ntilde;ar a proyectos que mezclan lo humano con lo estrat&eacute;gico. Lo artesanal con lo innovador.&rdquo;</p>
+        <p style="margin-top:18px"><a href="/sobre-nosotros" style="font-weight:700">Conoce m&aacute;s sobre m&iacute; &rarr;</a></p>
+      </div>
+    </div>
+  </section>
 
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>&iquest;Qu&eacute; herramientas de comunicaci&oacute;n incluye?</h4>
-                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Depende del nivel que elijas. El Impulso 3D incluye un cuaderno de trabajo digital: un documento con f&oacute;rmulas de texto para cada tipo de publicaci&oacute;n (posts, emails, descripciones...), adaptadas a tu voz y tu marca. Eliges la f&oacute;rmula, la personalizas con lo que ha pasado ese d&iacute;a, y tienes tu texto. Adem&aacute;s incluye plantillas de dise&ntilde;o editables en Canva. El Impulso 3D Completo a&ntilde;ade un asistente digital personalizado: le cuentas qu&eacute; quieres comunicar y te prepara un borrador de texto y un dise&ntilde;o base con tu paleta y tu estilo. T&uacute; lo revisas, le das tu toque, eliges tus fotos, y publicas. En ambos casos, no necesitas saber de tecnolog&iacute;a y siempre tienes la &uacute;ltima palabra.</p>
-                    </div>
-                </div>
+  <!-- PREGUNTAS FRECUENTES -->
+  <section class="faq" id="faq">
+    <div class="wrap-n">
+      <h2>Quiero <em>saber m&aacute;s</em></h2>
+      <details><summary>&iquest;Qu&eacute; herramientas de comunicaci&oacute;n incluye?</summary><p class="resp">Depende del nivel que elijas. El Impulso 3D incluye un cuaderno de trabajo digital: un documento con f&oacute;rmulas de texto para cada tipo de publicaci&oacute;n (posts, emails, descripciones...), adaptadas a tu voz y tu marca. Eliges la f&oacute;rmula, la personalizas con lo que ha pasado ese d&iacute;a, y tienes tu texto. Adem&aacute;s incluye plantillas de dise&ntilde;o editables en Canva. El Impulso 3D Completo a&ntilde;ade un asistente digital personalizado: le cuentas qu&eacute; quieres comunicar y te prepara un borrador de texto y un dise&ntilde;o base con tu paleta y tu estilo. T&uacute; lo revisas, le das tu toque, eliges tus fotos, y publicas. En ambos casos, no necesitas saber de tecnolog&iacute;a y siempre tienes la &uacute;ltima palabra.</p></details>
+      <details><summary>&iquest;Qu&eacute; significa &ldquo;circularidad&rdquo; en este contexto?</summary><p class="resp">Trabajamos desde la econom&iacute;a circular: reutilizar, reparar, revalorizar. Muchos artesanos ya practican circularidad sin saberlo. Nosotros te ayudamos a identificar esas pr&aacute;cticas, a mejorarlas donde hay oportunidad, y a convertirlas en argumentos de comunicaci&oacute;n que conectan con tu p&uacute;blico. No es solo contarlo &mdash; es tambi&eacute;n hacerlo mejor.</p></details>
+      <details><summary>&iquest;Necesito saber de tecnolog&iacute;a?</summary><p class="resp">No. Con el Impulso 3D trabajas con plantillas en Canva y f&oacute;rmulas de texto en un documento &mdash; si sabes copiar y pegar, puedes hacerlo. Con el Impulso 3D Completo, el asistente digital funciona como un chat: le cuentas qu&eacute; quieres comunicar y te prepara el borrador. Si sabes usar WhatsApp, puedes usarlo. En ambos casos, incluimos una sesi&oacute;n de formaci&oacute;n para que arranques con confianza.</p></details>
+      <details><summary>&iquest;Puedo empezar solo con el Diagn&oacute;stico?</summary><p class="resp">S&iacute;, y de hecho es lo que recomendamos. El Diagn&oacute;stico 3D es un servicio completo en s&iacute; mismo que te da claridad sobre tu situaci&oacute;n. Despu&eacute;s decides si quieres dar el siguiente paso o no. Sin compromiso.</p></details>
+      <details><summary>&iquest;Impulso 3D es solo para artesanos individuales?</summary><p class="resp">No. Impulso 3D funciona igual de bien para un artesano independiente que para un taller familiar o una marca artesana con equipo. El problema que resolvemos &mdash; comunicar el valor de tu trabajo sin perder horas del taller &mdash; no depende del tama&ntilde;o. De hecho, cuanta m&aacute;s historia tiene un proyecto, m&aacute;s valor hay que contar.</p></details>
+      <details><summary>&iquest;Cu&aacute;l es la diferencia entre Impulso 3D e Impulso 3D Completo?</summary><p class="resp">Con el Impulso 3D recibes el kit completo de materiales &mdash; plantillas, calendario, f&oacute;rmulas de texto, Manual de Marca &mdash; y un cuaderno de trabajo digital para crear contenido con tu voz. T&uacute; escribes usando las f&oacute;rmulas y montas los dise&ntilde;os en Canva. Con el Impulso 3D Completo recibes todo lo anterior m&aacute;s un asistente digital que te prepara borradores y dise&ntilde;os base. La diferencia en el d&iacute;a a d&iacute;a: con el segundo, buena parte del trabajo te llega ya preparado. En ambos casos, t&uacute; siempre revisas y decides.</p></details>
+      <details><summary>&iquest;No perder&eacute; autenticidad usando este sistema?</summary><p class="resp">Es la pregunta m&aacute;s importante y la respuesta es no. Tanto las f&oacute;rmulas del Impulso 3D como el asistente del Completo se configuran espec&iacute;ficamente con tu voz, tu historia y tus valores. No generan contenido gen&eacute;rico: generan borradores que suenan como t&uacute;. Y siempre tienes la &uacute;ltima palabra antes de publicar. La tecnolog&iacute;a es una herramienta &mdash; como un martillo o un telar. Lo importante es la mano que la mueve.</p></details>
+    </div>
+  </section>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>&iquest;Qu&eacute; significa &ldquo;circularidad&rdquo; en este contexto?</h4>
-                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Trabajamos desde la econom&iacute;a circular: reutilizar, reparar, revalorizar. Muchos artesanos ya practican circularidad sin saberlo. Nosotros te ayudamos a identificar esas pr&aacute;cticas, a mejorarlas donde hay oportunidad, y a convertirlas en argumentos de comunicaci&oacute;n que conectan con tu p&uacute;blico. No es solo contarlo &mdash; es tambi&eacute;n hacerlo mejor.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>&iquest;Necesito saber de tecnolog&iacute;a?</h4>
-                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. Con el Impulso 3D trabajas con plantillas en Canva y f&oacute;rmulas de texto en un documento &mdash; si sabes copiar y pegar, puedes hacerlo. Con el Impulso 3D Completo, el asistente digital funciona como un chat: le cuentas qu&eacute; quieres comunicar y te prepara el borrador. Si sabes usar WhatsApp, puedes usarlo. En ambos casos, incluimos una sesi&oacute;n de formaci&oacute;n para que arranques con confianza.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>&iquest;Puedo empezar solo con el Diagn&oacute;stico?</h4>
-                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
-                    <div class="faq-answer">
-                        <p>S&iacute;, y de hecho es lo que recomendamos. El Diagn&oacute;stico 3D es un servicio completo en s&iacute; mismo que te da claridad sobre tu situaci&oacute;n. Despu&eacute;s decides si quieres dar el siguiente paso o no. Sin compromiso.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>&iquest;Impulso 3D es solo para artesanos individuales?</h4>
-                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. Impulso 3D funciona igual de bien para un artesano independiente que para un taller familiar o una marca artesana con equipo. El problema que resolvemos &mdash; comunicar el valor de tu trabajo sin perder horas del taller &mdash; no depende del tama&ntilde;o. De hecho, cuanta m&aacute;s historia tiene un proyecto, m&aacute;s valor hay que contar.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>&iquest;Cu&aacute;l es la diferencia entre Impulso 3D e Impulso 3D Completo?</h4>
-                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Con el Impulso 3D recibes el kit completo de materiales &mdash; plantillas, calendario, f&oacute;rmulas de texto, Manual de Marca &mdash; y un cuaderno de trabajo digital para crear contenido con tu voz. T&uacute; escribes usando las f&oacute;rmulas y montas los dise&ntilde;os en Canva. Con el Impulso 3D Completo recibes todo lo anterior m&aacute;s un asistente digital que te prepara borradores y dise&ntilde;os base. La diferencia en el d&iacute;a a d&iacute;a: con el segundo, buena parte del trabajo te llega ya preparado. En ambos casos, t&uacute; siempre revisas y decides.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <h4>&iquest;No perder&eacute; autenticidad usando este sistema?</h4>
-                        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Es la pregunta m&aacute;s importante y la respuesta es no. Tanto las f&oacute;rmulas del Impulso 3D como el asistente del Completo se configuran espec&iacute;ficamente con tu voz, tu historia y tus valores. No generan contenido gen&eacute;rico: generan borradores que suenan como t&uacute;. Y siempre tienes la &uacute;ltima palabra antes de publicar. La tecnolog&iacute;a es una herramienta &mdash; como un martillo o un telar. Lo importante es la mano que la mueve.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="impulso-section impulso-section-cream">
-    <!-- QUIÉN ESTÁ DETRÁS -->
-    <section class="about-founder">
-        <div class="container">
-            <div class="founder-card fade-in">
-                <div class="founder-photo">
-                    <img src="/assets/images/fotosobrenosotrosOC.png" alt="Jos&eacute; Moscard&oacute;, fundador de Oficios Circulares" width="180" height="180" loading="lazy">
-                </div>
-                <div class="founder-info">
-                    <h2>Qui&eacute;n est&aacute; detr&aacute;s</h2>
-                    <p>Soy <strong>Jos&eacute; Moscard&oacute;</strong>, fundador de Oficios Circulares. Llevo m&aacute;s de diez a&ntilde;os trabajando en estrategia, marketing y sostenibilidad. Cre&eacute; esta consultor&iacute;a para acompa&ntilde;ar a artesanos y proyectos con alma que quieren comunicar su valor y mejorar su circularidad.</p>
-                    <blockquote class="founder-quote">&ldquo;Oficios Circulares naci&oacute; para acompa&ntilde;ar a proyectos que mezclan lo humano con lo estrat&eacute;gico. Lo artesanal con lo innovador.&rdquo;</blockquote>
-                    <a href="/sobre-nosotros" class="founder-link">Conoce m&aacute;s sobre m&iacute; &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        <div class="container">
-            <div class="final-cta fade-in">
-                <h2>Tu oficio tiene valor. Vamos a contarlo.</h2>
-                <p>Empieza con un Diagn&oacute;stico 3D y descubre todo lo que tu proyecto ya tiene para comunicar.</p>
-                <div class="final-cta-buttons">
-                    <a href="/contacto?service=diagnostico-3d&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=final-cta&page_path=/impulso-3d" class="btn btn-coral">Reservar mi Diagn&oacute;stico &rarr;</a>
-                    <a href="mailto:hola@oficioscirculares.com" class="btn btn-outline-white">Tengo dudas, prefiero escribir</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
+  <%- include('partials/landing-final', {
+      img: IMG + 'cierre-yunque.webp',
+      eyebrow: 'Siguiente paso',
+      titulo: 'Tu oficio tiene valor. <em>Vamos a contarlo.</em>',
+      texto: 'Empieza con un Diagn&oacute;stico 3D y descubre todo lo que tu proyecto ya tiene para comunicar.',
+      cta: { href: diagHref + '&oc_content=final-cta', texto: 'Reservar mi Diagn&oacute;stico &rarr;', id: 'cta-final', label: 'impulso-final' },
+      pd: '<a href="mailto:hola@oficioscirculares.com">Tengo dudas, prefiero escribir</a>'
+  }) %>
 </main>
+
+<%# Barra fija de móvil (página con precio y compra directa) %>
+<div class="oc-barra-movil" role="region" aria-label="Empezar por el Diagn&oacute;stico 3D">
+  <span class="oc-barra-movil__precio"><%= precios.texto('diagnostico_talleres') %> <small>+ IVA</small></span>
+  <a id="cta-sticky" class="club-btn club-btn--terracota" href="/servicios/diagnostico-3d?oc_source=site&amp;oc_medium=internal&amp;oc_campaign=oc-impulso-3d&amp;oc_content=sticky-mobile">Quiero mi Diagn&oacute;stico</a>
+</div>
 
 <script type="application/ld+json">
 <%- JSON.stringify({
@@ -602,14 +411,7 @@
 </script>
 
 <%- include('partials/footer') %>
-
-<script src="/assets/js/script.js"></script>
-<script src="/assets/js/impulso-3d.js"></script>
-
-<!-- Sticky CTA móvil -->
-<div class="impulso-sticky-mobile" aria-hidden="true">
-    <a href="/servicios/diagnostico-3d?oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=sticky-mobile" class="btn btn-coral">Quiero mi Diagnóstico</a>
-</div>
-
+<script src="/assets/js/oc-landing.js?v=20261122" defer></script>
+<%- include('partials/landing-tracking', { campaign: 'oc-impulso-3d', offer: 'impulso-3d', ids: { 'cta-hero': 'hero', 'cta-card-impulso': 'card-impulso', 'cta-card-completo': 'card-completo', 'cta-final': 'final-cta', 'cta-sticky': 'sticky-mobile' } }) %>
 </body>
 </html>

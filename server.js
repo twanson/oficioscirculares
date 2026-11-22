@@ -647,11 +647,11 @@ app.get('/servicios/diagnostico-3d', (req, res) => {
 });
 
 app.get('/servicios/roadmap-3d', (req, res) => {
-  res.render('roadmap-3d');
+  res.render('roadmap-3d', { impacto: leerImpacto() });
 });
 
 app.get('/servicios/sprint-3d', (req, res) => {
-  res.render('sprint-3d');
+  res.render('sprint-3d', { impacto: leerImpacto() });
 });
 
 // Página de contacto con formulario Tally

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
       excerpt: 'Guía paso a paso para lanzar una colección de joyería con plata recuperada: cómo conseguir el material, demostrar su origen y contarlo sin exagerar.',
       date: '2026-11-22',
       readingMinutes: 5,
-      cover: ASSETS_BASE + '/images/cases/e-wear/macro-textura-plata.webp',
+      cover: ASSETS_BASE + '/images/blog/joyeria-plata-recuperada/hero-taller-joyeria.webp',
       tags: ['guía práctica', 'materiales', 'circularidad']
     },
     {

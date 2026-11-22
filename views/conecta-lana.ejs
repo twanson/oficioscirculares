@@ -135,7 +135,7 @@ html,body{overflow-x:clip}
 
 </style>
 <%# Puertas (cl-doors), cifra grande (cl-why) y cita (cl-testimonio) viven en oc-landing.css %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122a">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122h">
 
 <main class="cl-landing">
 
@@ -333,6 +333,14 @@ html,body{overflow-x:clip}
       — Jorge Esteban · <a href="https://www.fenoquimica.es" target="_blank" rel="noopener">FENOQUÍMICA</a>,
       encontró lana española en la bolsa
     </p>
+
+    <%# Mensajes reales de usuarios de Conecta Lana, sin nombre y con permiso pendiente
+        (data/testimonios.json: 1, 2 y 6). Texto literal. %>
+    <% testimoniosLib.paraPagina('conecta-lana').filter(t => !t.nombre).forEach(function (t) { %>
+    <blockquote class="cl-testimonio__secundaria">"<%= t.texto %>"</blockquote>
+    <p class="cl-testimonio__firma">— <%= t.firma %></p>
+    <% }) %>
+    <p class="cl-testimonio__firma" style="margin-top:40px;font-size:13px;font-style:italic;opacity:.8">Mensajes reales de usuarios de la red.</p>
 
   </section>
 

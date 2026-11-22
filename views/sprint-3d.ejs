@@ -1,192 +1,176 @@
+<%#
+  /servicios/sprint-3d — plantilla «directa» del sistema oc-landing (docs/sistema-landing.md).
+  Textos: los que ya tenía la página. Sin precio todavía: «Cómo se llega al precio».
+  La garantía sigue pendiente de decisión de Jose (docs/encargo-nov-2026.md, punto 12).
+%>
+<%
+  const IMG = '/assets/images/landing/sprint/';
+  const contacto = c => '/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=' + c + '&page_path=/servicios/sprint-3d';
+  const minicaso = '/downloads/mini-caso-sprint-3d.pdf';
+%>
 <%- include('partials/head-meta', {
     title: 'Sprint 3D · Piloto circular en 4 semanas | Oficios Circulares',
     description: 'Ejecutamos un piloto circular y lo convertimos en caso publicable con landing, ficha, creativos y email. KPIs operativos y de mercado, sin greenwashing.',
     canonical: '/servicios/sprint-3d',
     ogImage: 'https://www.oficioscirculares.com/img/servicios/sprint3d-hero.png',
-    ogImageAlt: 'Sprint 3D de Oficios Circulares: piloto y kit comercial en 3–4 semanas'
+    ogImageAlt: 'Sprint 3D de Oficios Circulares: piloto y kit comercial en 3–4 semanas',
+    precargaImagen: IMG + 'hero-sprint-contenedores.webp'
 }) %>
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122h">
 <%- include('partials/header') %>
 
-<main class="main-content page-service sprint3d" id="maincontent">
-    <!-- HERO split -->
-    <section class="service-hero" aria-labelledby="hero-title">
-        <div class="container">
-            <div class="hero-split-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">Implementación + Comunicación</p>
-                    <h1 id="hero-title" class="hero-title">Sprint 3D: lo hacemos realidad y te ayudamos a contarlo</h1>
-                    <p class="hero-sub">En 4 semanas tu mejora circular está funcionando, documentada con datos reales y con todo preparado para que el mundo lo sepa.</p>
-                    <ul class="hero-bullets" aria-label="Beneficios clave">
-                        <li>Piloto implementado y funcionando con datos reales</li>
-                        <li>Landing + ficha técnica + contenido redes + email lanzamiento</li>
-                        <li>Caso documentado con datos medidos para contarlo</li>
-                    </ul>
-                    <div class="hero-ctas">
-                        <a id="cta-hero" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=hero&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar Sprint 3D" data-event="click_cta" data-label="sprint3d-hero">Quiero poner mi mejora en marcha</a>
-                        <a id="cta-hero-case" href="/downloads/mini-caso-sprint-3d.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=hero" class="btn btn-secondary" aria-label="Ver mini-caso" data-event="file_download" data-label="sprint3d-hero-caso">Ver mini-caso</a>
-                    </div>
-                </div>
-                <div class="hero-media" aria-hidden="true">
-                    <div class="media-frame">
-                        <img src="/img/servicios/sprint3d-hero.png" alt="Sprint 3D: piloto circular y kit comercial en timeline visual" loading="eager" style="max-width: 100%; height: auto;">
-                    </div>
-                </div>
-            </div>
+<main class="oc-landing" id="maincontent">
+  <%- include('partials/landing-hero', {
+      img: IMG + 'hero-sprint-contenedores.webp', ancho: 1500, alto: 1000, compacta: true,
+      badge: 'Sprint 3D · Implementación + comunicación',
+      titulo: 'Lo hacemos realidad <em>y te ayudamos a contarlo</em>',
+      sub: 'En 4 semanas tu mejora circular está funcionando, documentada con datos reales y con todo preparado para que el mundo lo sepa.',
+      ctas: [
+        { href: contacto('hero'), texto: 'Reservar Sprint 3D →', clase: 'terracota', id: 'cta-hero', label: 'sprint3d-hero' },
+        { href: minicaso, texto: 'Ver mini-caso', clase: 'ghost', id: 'cta-hero-case' }
+      ],
+      datos: 'En 4 semanas · Piloto con datos reales · Precio cerrado tras el Diagnóstico'
+  }) %>
+
+  <!-- Qué te llevas en 4 semanas: cajas con imagen -->
+  <section class="cajas" id="incluye">
+    <div class="cab">
+      <span class="eyebrow">Entregables</span>
+      <h2>Qué te llevas <em>en 4 semanas</em></h2>
+    </div>
+    <div class="wrap">
+      <div class="cajas-grid cajas-grid--dos">
+        <div class="caja caja--dark reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-mejora-tablero.webp" alt="Tablero de planificación con las notas de un piloto" width="900" height="562"></div>
+          <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <span class="num">Operación</span>
+          <h3>Tu mejora circular funcionando</h3>
+          <ul>
+            <li>Mejora puesta en marcha y medida (ej: recuperación de recortes, servicio de reparación)</li>
+            <li>Datos reales: kg recuperados, dinero ahorrado, clientes satisfechos</li>
+            <li>Proceso documentado para poder replicarlo</li>
+            <li>Proveedor y proceso validado y funcionando</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- ¿Cuándo necesitas esto? -->
-    <section class="service-section" id="encaje" aria-labelledby="encaje-title">
-        <div class="container">
-            <h2 id="encaje-title" class="section-title enhanced" data-label="Encaje">Tiene sentido si...</h2>
-            <div class="encaje-wrap">
-                <div class="ui-card">
-                    <ul class="simple-list">
-                        <li><strong>Ya sabes qué quieres implementar</strong> y necesitas que funcione seguro</li>
-                        <li><strong>Quieres tener un caso documentado</strong> para diferenciarte de la competencia</li>
-                        <li><strong>Necesitas contenido y materiales</strong> profesionales para comunicarlo</li>
-                        <li><strong>Prefieres delegar la implementación</strong> a expertos mientras tú sigues produciendo</li>
-                    </ul>
-                </div>
-                <div class="ui-card" style="background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 100%); border-left: 4px solid #1F4B3F;">
-                    <h3 style="color: #023429; margin-bottom: 12px;">¿En qué se diferencia?</h3>
-                    <p><strong>Diagnóstico</strong> — Descubrimos qué puedes hacer</p>
-                    <p><strong>Roadmap</strong> — Diseñamos cómo hacerlo (2 semanas)</p>
-                    <p><strong>Sprint</strong> — Lo ponemos en marcha y creamos todo para contarlo (4 semanas)</p>
-                </div>
-            </div>
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-contarlo-producto.webp" alt="Prendas de punto dobladas y presentadas" width="900" height="562"></div>
+          <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+          <span class="num">Comunicación</span>
+          <h3>Todo lo que necesitas para contarlo</h3>
+          <ul>
+            <li>Landing page con tu caso y datos reales</li>
+            <li>Ficha técnica con especificaciones y datos clave</li>
+            <li>Kit de prescripción técnica para profesionales (si aplica)</li>
+            <li>Contenido para redes: tu caso contado en 5 posts + 1 reel</li>
+            <li>Email para anunciar la novedad a tus contactos</li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Al terminar las 4 semanas tendrás -->
-    <section class="service-section" id="incluye" aria-labelledby="incluye-title">
-        <div class="container">
-            <h2 id="incluye-title" class="section-title enhanced" data-label="Entregables">Qué te llevas en 4 semanas</h2>
-            <div class="deliverables-grid">
-                <div class="ui-card card-operacion">
-                    <h3>Tu mejora circular funcionando</h3>
-                    <ul class="simple-list">
-                        <li>Mejora puesta en marcha y medida (ej: recuperación de recortes, servicio de reparación)</li>
-                        <li>Datos reales: kg recuperados, dinero ahorrado, clientes satisfechos</li>
-                        <li>Proceso documentado para poder replicarlo</li>
-                        <li>Proveedor y proceso validado y funcionando</li>
-                    </ul>
-                </div>
-                <div class="ui-card card-comercial">
-                    <h3>Todo lo que necesitas para contarlo</h3>
-                    <ul class="simple-list">
-                        <li>Landing page con tu caso y datos reales</li>
-                        <li>Ficha técnica con especificaciones y datos clave</li>
-                        <li>Kit de prescripción técnica para profesionales (si aplica)</li>
-                        <li>Contenido para redes: tu caso contado en 5 posts + 1 reel</li>
-                        <li>Email para anunciar la novedad a tus contactos</li>
-                    </ul>
-                </div>
-            </div>
+  <!-- Cómo trabajamos en 4 semanas -->
+  <section class="pasos pasos--oscuro" id="metodologia">
+    <div class="cab">
+      <span class="eyebrow">Metodología</span>
+      <h2>Cómo trabajamos <em>en 4 semanas</em></h2>
+    </div>
+    <div class="wrap">
+      <div class="pasos-grid">
+        <div class="paso reveal"><div class="bola">1</div><div class="cuando">Semana 1</div><h3>Arrancamos</h3><p>Ponemos en marcha la mejora en tu taller · Configuramos cómo medir los resultados · Resolvemos lo que surja sobre la marcha · Primeros datos y ajustes</p></div>
+        <div class="paso reveal"><div class="bola">2</div><div class="cuando">Semana 2</div><h3>Ajustamos</h3><p>Refinamos el proceso con los primeros resultados · Documentamos lo que funciona para que puedas replicarlo · Preparamos todo para escalar si decides hacerlo · Calculamos los resultados del piloto</p></div>
+        <div class="paso reveal"><div class="bola">3</div><div class="cuando">Semana 3</div><h3>Creamos los materiales</h3><p>Desarrollamos tu landing con el caso documentado · Creamos la ficha técnica y materiales profesionales · Diseñamos el contenido para redes · Preparamos el email de lanzamiento</p></div>
+        <div class="paso reveal"><div class="bola">4</div><div class="cuando">Semana 4</div><h3>Lanzamos</h3><p>Publicamos todo · Lanzamos la comunicación · Te enseñamos a usar los materiales · Te entregamos el sistema completo funcionando</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tiene sentido si… (como lista, no como relato) -->
+  <section class="oc-encaje" id="encaje">
+    <div class="wrap">
+      <h2>Tiene sentido <em>si…</em></h2>
+      <div class="quien-grid">
+        <div class="quien-col si reveal">
+          <h3>Tiene sentido si…</h3>
+          <ul>
+            <li><strong>Ya sabes qué quieres implementar</strong> y necesitas que funcione seguro</li>
+            <li><strong>Quieres tener un caso documentado</strong> para diferenciarte de la competencia</li>
+            <li><strong>Necesitas contenido y materiales</strong> profesionales para comunicarlo</li>
+            <li><strong>Prefieres delegar la implementación</strong> a expertos mientras tú sigues produciendo</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Metodología Sprint en 4 semanas -->
-    <section class="service-section" id="metodologia" aria-labelledby="metodologia-title">
-        <div class="container">
-            <h2 id="metodologia-title" class="section-title enhanced" data-label="Metodología">Cómo trabajamos en 4 semanas</h2>
-            <ol class="timeline timeline-4">
-                <li><strong>Semana 1 — Arrancamos</strong><br>Ponemos en marcha la mejora en tu taller · Configuramos cómo medir los resultados · Resolvemos lo que surja sobre la marcha · Primeros datos y ajustes</li>
-                <li><strong>Semana 2 — Ajustamos</strong><br>Refinamos el proceso con los primeros resultados · Documentamos lo que funciona para que puedas replicarlo · Preparamos todo para escalar si decides hacerlo · Calculamos los resultados del piloto</li>
-                <li><strong>Semana 3 — Creamos los materiales</strong><br>Desarrollamos tu landing con el caso documentado · Creamos la ficha técnica y materiales profesionales · Diseñamos el contenido para redes · Preparamos el email de lanzamiento</li>
-                <li><strong>Semana 4 — Lanzamos</strong><br>Publicamos todo · Lanzamos la comunicación · Te enseñamos a usar los materiales · Te entregamos el sistema completo funcionando</li>
-            </ol>
-            <div class="inline-cta">
-                <a id="cta-flow" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=flow&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar desde metodología" data-event="click_cta" data-label="sprint3d-flow">Quiero poner mi mejora en marcha</a>
-            </div>
+        <div class="caja caja--accent caja--sinfoto reveal">
+          <span class="num">Para no confundirlos</span>
+          <h3>¿En qué se diferencia?</h3>
+          <p><strong>Diagnóstico</strong> — Descubrimos qué puedes hacer</p>
+          <p><strong>Roadmap</strong> — Diseñamos cómo hacerlo (2 semanas)</p>
+          <p><strong>Sprint</strong> — Lo ponemos en marcha y creamos todo para contarlo (4 semanas)</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Qué incluye exactamente -->
-    <section class="service-section" id="entregable" aria-labelledby="entregable-title">
-        <div class="container">
-            <h2 id="entregable-title" class="section-title enhanced" data-label="Detalle">Todo lo que recibes</h2>
-            <div class="ui-card card-informe">
-                <h3>El entregable completo</h3>
-                <ul class="simple-list">
-                    <li>Tu mejora funcionando con datos reales</li>
-                    <li>Landing page con tu caso y fotos del proceso</li>
-                    <li>Ficha técnica con especificaciones y datos clave</li>
-                    <li>Kit de prescripción técnica (planos si aplica)</li>
-                    <li>Caso documentado: antes, después y resultados</li>
-                    <li>Reel de 30s mostrando el proceso</li>
-                    <li>5 posts para redes con el lanzamiento</li>
-                    <li>Email para anunciar la novedad a tus contactos</li>
-                    <li>Guía para que tu equipo sepa usar los materiales</li>
-                </ul>
-            </div>
+  <!-- El entregable, con la imagen del documento -->
+  <section class="oc-documento" id="entregable">
+    <div class="wrap">
+      <div class="oc-documento-img reveal"><img loading="lazy" src="<%= IMG %>documento-portada.webp" alt="Portada del mini-caso de Sprint 3D" width="700" height="991"></div>
+      <div class="reveal">
+        <span class="eyebrow eyebrow--arena">Detalle</span>
+        <h2>Todo lo que <em>recibes</em></h2>
+        <ul>
+          <li>Tu mejora funcionando con datos reales</li>
+          <li>Landing page con tu caso y fotos del proceso</li>
+          <li>Ficha técnica con especificaciones y datos clave</li>
+          <li>Kit de prescripción técnica (planos si aplica)</li>
+          <li>Caso documentado: antes, después y resultados</li>
+          <li>Reel de 30s mostrando el proceso</li>
+          <li>5 posts para redes con el lanzamiento</li>
+          <li>Email para anunciar la novedad a tus contactos</li>
+          <li>Guía para que tu equipo sepa usar los materiales</li>
+        </ul>
+        <a id="cta-entregable-case" class="club-btn club-btn--arena" href="<%= minicaso %>" data-event="file_download" data-label="sprint3d-entregable-caso">Ver mini-caso</a>
+      </div>
+    </div>
+  </section>
 
-            <!-- Ejemplo real detallado (oculto temporalmente) -->
-        </div>
-    </section>
+  <!-- Prueba: cifras de la red, con su fecha -->
+  <%- include('partials/landing-cifras', { impacto, ids: ['altas_conecta_lana', 'emparejamientos', 'material_con_salida'], titulo: 'La red, con fecha', claro: true }) %>
 
-    <!-- Inversión -->
-    <section class="service-section" id="precio" aria-labelledby="precio-title">
-        <div class="container">
-            <h2 id="precio-title" class="section-title enhanced" data-label="Inversión">Tu inversión</h2>
-            <div class="ui-card">
-                <p><strong><%- precios.html('sprint_3d') %></strong></p>
+  <!-- Cómo se llega al precio -->
+  <section class="precios" id="precio">
+    <div class="cab">
+      <span class="eyebrow">Inversión</span>
+      <h2>Cómo se llega <em>al precio</em></h2>
+    </div>
+    <div class="wrap oc-camino-wrap">
+      <div class="oc-camino-foto reveal"><img loading="lazy" src="<%= IMG %>precio-forja.webp" alt="Yunque en una fragua" width="900" height="720"></div>
+      <ol class="oc-camino oc-camino--lista">
+        <li class="reveal"><span class="n">1</span><b>Diagnóstico</b><span>Detectamos las oportunidades y cuál conviene hacer primero.</span></li>
+        <li class="reveal"><span class="n">2</span><b>Propuesta cerrada</b><span>Te enviamos alcance, plazo y precio cerrados para el Sprint.</span></li>
+        <li class="reveal"><span class="n">3</span><b>Decides</b><span>Solo entonces decides si seguimos.</span></li>
+      </ol>
+    </div>
+    <p class="oc-camino-nota"><strong>Qué recibes a cambio:</strong> nos encargamos de la implementación contigo, los materiales de comunicación listados arriba y un caso documentado que puedes usar a largo plazo. <strong>Garantía:</strong> si el piloto no funciona como esperado, seguimos trabajando hasta que funcione. Sin coste adicional.</p>
+  </section>
 
-                <div class="ui-card" style="background: linear-gradient(135deg, #fffbf5 0%, #ffffff 100%); border-left: 4px solid #934a1c; margin: 20px 0;">
-                    <h4 style="color: #934a1c; margin-bottom: 8px;">¿Qué recibes a cambio?</h4>
-                    <ul class="simple-list">
-                        <li>Nos encargamos de la implementación contigo</li>
-                        <li>Los materiales de comunicación listados arriba</li>
-                        <li>Un caso documentado que puedes usar a largo plazo</li>
-                    </ul>
-                </div>
+  <!-- Preguntas frecuentes -->
+  <section class="faq" id="faq">
+    <div class="wrap-n">
+      <h2>Preguntas <em>frecuentes</em></h2>
+      <details><summary>¿Y si durante la implementación surgen problemas?</summary><p class="resp">Es normal. Por eso lo hacemos contigo: los resolvemos juntos durante las cuatro semanas.</p></details>
+      <details><summary>¿Podemos hacer el Sprint sin Roadmap previo?</summary><p class="resp">Sí, incluimos una fase de planificación intensiva en la primera semana.</p></details>
+      <details><summary>¿Qué pasa después de las 4 semanas?</summary><p class="resp">Tienes todo funcionando y documentado para seguir tú. Opcionalmente ofrecemos acompañamiento mensual para escalar.</p></details>
+    </div>
+  </section>
 
-                <div class="ui-card" style="background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 100%); border-left: 4px solid #1F4B3F; margin-top: 20px;">
-                    <h4 style="color: #023429; margin-bottom: 8px;">Garantía:</h4>
-                    <p>Si el piloto no funciona como esperado, seguimos trabajando hasta que funcione. Sin coste adicional.</p>
-                </div>
-
-                <div class="badges" style="margin-top: 20px;">
-                    <span class="badge">Nos hacemos cargo</span>
-                    <span class="badge">Contenido para meses</span>
-                    <span class="badge">Datos medidos</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="service-section" id="faq" aria-labelledby="faq-title">
-        <div class="container">
-            <h2 id="faq-title" class="section-title enhanced" data-label="FAQ">Preguntas frecuentes</h2>
-            <div class="faq-grid">
-                <div class="ui-card">
-                    <h3>¿Y si durante la implementación surgen problemas?</h3>
-                    <p>Es normal. Por eso lo hacemos contigo: los resolvemos juntos durante las cuatro semanas.</p>
-                </div>
-                <div class="ui-card">
-                    <h3>¿Podemos hacer el Sprint sin Roadmap previo?</h3>
-                    <p>Sí, incluimos una fase de planificación intensiva en la primera semana.</p>
-                </div>
-                <div class="ui-card">
-                    <h3>¿Qué pasa después de las 4 semanas?</h3>
-                    <p>Tienes todo funcionando y documentado para seguir tú. Opcionalmente ofrecemos acompañamiento mensual para escalar.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA final -->
-    <section class="service-section cta-final" id="cta-final" aria-labelledby="cta-final-title">
-        <div class="container">
-            <h2 id="cta-final-title" class="section-title enhanced" data-label="Siguiente paso">¿Damos el paso?</h2>
-            <p>En 4 semanas tendrás tu mejora funcionando, datos reales y todo preparado para contarlo.</p>
-            <div class="hero-ctas">
-                <a id="cta-footer" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=footer&page_path=/servicios/sprint-3d" class="btn btn-primary btn-large" aria-label="Reservar Sprint 3D" data-event="click_cta" data-label="sprint3d-footer">Quiero poner mi mejora en marcha</a>
-                <a id="cta-footer-question" href="https://tally.so/r/nPxWM0?utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=footer-question&page_path=/servicios/sprint-3d" class="btn btn-secondary" aria-label="Consultar Sprint 3D" data-event="click_cta" data-label="sprint3d-footer-consulta" target="_blank" rel="noopener">Tengo una pregunta</a>
-            </div>
-        </div>
-    </section>
+  <%- include('partials/landing-final', {
+      img: IMG + 'cierre-vidrio.webp',
+      eyebrow: 'Siguiente paso',
+      titulo: '¿Damos el paso? <em>En 4 semanas, funcionando</em>',
+      texto: 'En 4 semanas tendrás tu mejora funcionando, datos reales y todo preparado para contarlo.',
+      cta: { href: contacto('footer'), texto: 'Reservar Sprint 3D →', id: 'cta-footer', label: 'sprint3d-footer' },
+      pd: '<a id="cta-footer-question" href="https://tally.so/r/nPxWM0?utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=footer-question&page_path=/servicios/sprint-3d" target="_blank" rel="noopener">Tengo una pregunta</a>'
+  }) %>
 </main>
 
 <script type="application/ld+json">
@@ -194,10 +178,7 @@
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Sprint 3D",
-  "provider": {
-    "@type": "Organization",
-    "name": "Oficios Circulares"
-  },
+  "provider": { "@type": "Organization", "name": "Oficios Circulares" },
   "areaServed": "ES",
   "serviceType": "Consulting",
   "offers": precios.pendiente('sprint_3d') ? undefined : { "@type": "Offer", "price": String(precios.num('sprint_3d')), "priceCurrency": "EUR" },
@@ -206,53 +187,7 @@
 </script>
 
 <%- include('partials/footer') %>
-
-<script src="/assets/js/script.js"></script>
-<script>
-// UTM y GA4 consistentes en la landing Sprint 3D
-document.addEventListener('DOMContentLoaded', function() {
-  function attachTracking(el, content) {
-    if (!el) return;
-    const href = el.getAttribute('href') || '#';
-    if (href.startsWith('mailto:')) {
-      const [base, raw] = href.split('?');
-      const q = new URLSearchParams(raw || '');
-      const body = q.get('body') || '';
-      const utm = `utm_source=site&utm_medium=organic&utm_campaign=oc-sprint-3d&utm_content=${encodeURIComponent(content)}`;
-      q.set('body', body ? body + "\n\n" + utm : utm);
-      el.setAttribute('href', `${base}?${q.toString()}`);
-    } else {
-      const u = new URL(href, window.location.origin);
-      const page = new URLSearchParams(window.location.search);
-      // Enlaces internos: parámetros oc_* (los utm_* internos rompían la atribución de GA4).
-      const p = u.origin === window.location.origin ? 'oc_' : 'utm_';
-      for (const [k,v] of page) if (k.startsWith('utm_') || k.startsWith('oc_')) u.searchParams.set(p + k.replace(/^(utm|oc)_/,''), v);
-      u.searchParams.set(p+'source','site');
-      u.searchParams.set(p+'medium','organic');
-      u.searchParams.set(p+'campaign','oc-sprint-3d');
-      u.searchParams.set(p+'content',content);
-      el.setAttribute('href', u.toString());
-    }
-    el.addEventListener('click', function(){
-      window.dataLayer = window.dataLayer || [];
-      const ev = el.dataset.event || 'click_cta';
-      const label = el.dataset.label || content;
-      window.dataLayer.push({ event: ev, cta_offer: 'sprint-3d', cta_location: content, label });
-    });
-  }
-  attachTracking(document.getElementById('cta-hero'), 'hero');
-  attachTracking(document.getElementById('cta-hero-case'), 'hero');
-  attachTracking(document.getElementById('cta-flow'), 'flow');
-  attachTracking(document.getElementById('cta-footer'), 'footer');
-  attachTracking(document.getElementById('cta-footer-question'), 'footer');
-});
-</script>
-
-<!-- Sticky CTA móvil -->
-<div class="sticky-cta-mobile" aria-hidden="true">
-  <a id="cta-sticky-primary" class="btn btn-primary" href="/contacto?service=sprint-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-sprint-3d&oc_content=sticky&page_path=/servicios/sprint-3d" data-event="click_cta" data-label="sprint3d-sticky">Reservar</a>
-  <a id="cta-sticky-secondary" class="btn btn-secondary" href="mailto:hola@oficioscirculares.com?subject=Sprint%203D" data-event="click_cta" data-label="sprint3d-sticky-secondary">Escribir primero</a>
-</div>
-
+<script src="/assets/js/oc-landing.js?v=20261122" defer></script>
+<%- include('partials/landing-tracking', { campaign: 'oc-sprint-3d', offer: 'sprint-3d', ids: { 'cta-hero': 'hero', 'cta-hero-case': 'hero', 'cta-entregable-case': 'entregable', 'cta-footer': 'footer' } }) %>
 </body>
 </html>
