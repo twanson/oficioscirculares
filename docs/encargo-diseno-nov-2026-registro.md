@@ -56,3 +56,83 @@ Encargo: `docs/encargo-diseno-servicios-nov-2026.md`. Rama: `development`. Nada 
 ### Pendiente de fases siguientes
 
 - Eliminar las reglas sin uso de `oc-puertas.css`, `impulso-3d.css` y la plantilla `service-*` de `pages-v2.css` cuando las páginas estén migradas (fase 4).
+
+---
+
+## Fase 1 · Página piloto `/servicios/diagnostico-3d` (22 nov 2026)
+
+La página está reconstruida entera con el sistema `oc-landing` (`views/diagnostico-3d.ejs`). Conserva los textos que ya tenía. Los componentes nuevos que no existían en `/club` están al final de `oc-landing.css`, en el bloque «Ampliaciones» y solo bajo `.oc-landing`:
+- caja sin foto;
+- caja con un documento en perspectiva;
+- fila de portadas;
+- pasos a tres columnas;
+- testimonio y plan únicos centrados.
+
+El comportamiento (relato y aparición) está en `public/assets/js/oc-landing.js`. La imagen de cabecera se precarga (`head-meta` acepta `precargaImagen`).
+
+### Estructura y criterios de aceptación
+
+Orden de arriba abajo: cabecera inmersiva · relato del problema (verde hondo) · [manifiesto, propuesta] · cómo funciona · qué incluye el informe · un ejemplo para ver (verde hondo) · [para quién sí y no, propuesta] · precio · testimonio · quién está detrás · preguntas frecuentes · cierre con foto · banda de confianza (verde hondo).
+
+- **Tramos oscuros:** relato, ejemplos, cierre y confianza, alternados con tramos claros.
+- **Imagen en las secciones:** sin contar la cabecera, 6 de las 10 secciones publicadas llevan imagen (relato, informe, ejemplos, testimonio, Jose y cierre).
+- **Ritmo:** no hay dos secciones seguidas con el mismo tipo de bloque.
+- **375 px:** sin desbordamiento horizontal.
+- **Consola y menú:** sin errores en consola, en local y en staging. El menú funciona con ratón, con teclado y en móvil.
+- **Marcadores:** ninguno visible.
+- **Testimonios:** solo Blanca. Es el único autorizado para páginas de pago.
+- **Rendimiento:** la imagen de cabecera se precarga y el resto se carga en diferido. **No se ha medido Lighthouse**: no está instalado y no se ha descargado. Queda pendiente medirlo antes de la fase 2.
+
+### Imagen asignada por sección
+
+| Sección | Imagen | Origen |
+|---|---|---|
+| Cabecera | `landing/diagnostico/hero-manos-cuero.webp` (1920×1280) | `manos cuero2.jpg` |
+| Relato 01 | `prob-1-ceramista.webp` | `oficios/precio-ceramista-etiqueta.jpg` |
+| Relato 02 | `prob-2-mesa.webp` | `artesana moderna despacho flores.jpg` |
+| Relato 03 | `prob-3-madera.webp` | `oficios/carpinteria-y-ebanisteria.jpg` |
+| Relato 04 | `prob-4-taller-noche.webp` | `oficios/precio-taller-noche.jpg` |
+| Qué incluye (caja destacada) | `portada-barro-artesanal.webp`, en perspectiva | `assets/diagnosticos/barro-artesanal-cover.jpg` |
+| Ejemplos | portadas de cerámica, carpintería, joyería y cuero (no textil) | `assets/diagnosticos/*-cover.jpg` |
+| Testimonio | `club/blanca-hilandia.jpg` | aprobado |
+| Quién está detrás | `fotosobrenosotrosOC.png` | la misma de `/club` |
+| Cierre | `workshop_tools.jpg` | la misma de la portada y de `/club` |
+
+`pottery_hands.jpg` no se usa en la cabecera porque mide 800 px de ancho y se ve borrosa a sangre.
+
+### Imágenes que faltan
+
+| Página | Sección | Qué haría falta |
+|---|---|---|
+| `/servicios/diagnostico-3d` | Testimonios | Un segundo testimonio autorizado de un taller que haya hecho el Diagnóstico (texto y retrato). El encargo pide dos tarjetas y solo hay uno válido para páginas de pago. |
+| `/servicios/diagnostico-3d` | Qué incluye | Una foto o captura real de un informe abierto (páginas interiores). Hoy se enseña la portada de un diagnóstico de ejemplo. |
+
+### Textos que esperan aprobación
+
+Solo se ven en local con `?propuestas=1`; con `&manifiesto=b` se ve la opción B. En staging y en producción no aparecen. Hay capturas en `docs/capturas/fase-1/propuestas/`.
+
+**Manifiesto**, hecho a partir de frases que ya hay en la página:
+- **A.** «Un cuestionario, un informe y un vídeo. *Y sabrás qué hacer primero.*»
+- **B.** «Lo que ya tienes para contar, *en tres prioridades ordenadas.*»
+
+**Para quién sí y para quién no**, sacado de las preguntas frecuentes y de los distintivos de la página:
+- **Es para ti si…**
+  - Tienes un taller o una marca artesana que hace piezas físicas: cerámica, madera, textil, cuero, joyería, cosmética natural y más.
+  - Prefieres responder a tu ritmo, con audios y fotos, sin llamadas.
+  - Quieres saber qué hacer primero, con tres prioridades ordenadas.
+- **No es para ti si…**
+  - Eres una empresa: tienes tu propio Diagnóstico para empresas.
+  - Quieres resolverlo todo en una llamada: aquí todo funciona por escrito.
+  - Buscas una etiqueta verde: el Diagnóstico solo cuenta lo que se puede demostrar.
+
+### Otras decisiones
+
+- **«Quién está detrás»:** lleva el bloque de `/club` sin su segundo párrafo, que habla del Club.
+- **Banda de confianza:** usa los distintivos que ya tenía la página («Sin llamadas · Sin greenwashing · Precio cerrado») y la frase del descuento.
+- **Barra móvil fija con botón:** la página antigua tenía una («Quiero mi Diagnóstico» / «Escribir primero») y se ha quitado, porque el sistema de `/club` no la usa. Si se quiere recuperar, se añade.
+- **Enlaces de la página:** conservan sus parámetros `oc_*` y los eventos de GA4.
+
+### Direcciones para revisar
+
+- Staging: `https://oficioscirculares-production.up.railway.app/servicios/diagnostico-3d`
+- Capturas: `docs/capturas/fase-1/diagnostico-3d-1280.jpg`, `diagnostico-3d-375.jpg` y `propuestas/`.
