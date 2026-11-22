@@ -263,7 +263,7 @@ Las campañas de Brevo (E1 #30, E2 #31, E3 #28, E4 #32, E5 #29) no se han tocado
 12. Mantener o no la garantía del Sprint («seguimos trabajando hasta que funcione, sin coste adicional») y el descuento del Diagnóstico si después se contrata otro servicio.
 13. Reescribir con fechas de enero los cinco correos de Brevo (fuera del repositorio) antes de volver a programarlos.
 14. Portada de la lección 06 para la estantería del Club.
-15. **Arquetipos «¿Te reconoces?» de Impulso 3D:** siguen en la página, sin nombres propios, pero cada perfil conserva una frase en primera persona entre comillas. Decidir si se quitan las comillas.
+15. ~~Arquetipos «¿Te reconoces?» de Impulso 3D~~ **Resuelto (22 nov 2026):** siguen en la página, sin nombres propios y sin comillas en sus frases.
 
 ## Rediseño visual de las páginas del encargo (22 nov 2026)
 
