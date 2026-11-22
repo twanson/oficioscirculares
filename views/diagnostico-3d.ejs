@@ -1,8 +1,8 @@
 <%#
   /servicios/diagnostico-3d — PÁGINA PILOTO del sistema oc-landing (encargo de diseño, fase 1).
   Componentes de /club y /conecta-lana (public/assets/css/oc-landing.css, docs/sistema-landing.md).
-  Textos: los que ya tenía la página. El manifiesto y «para quién sí y para quién no» son
-  PROPUESTAS sin aprobar: solo se ven en local con ?propuestas=1 (variable `propuestas`).
+  Textos: los que ya tenía la página. Manifiesto (opción A) y «¿Es para ti?» aprobados por
+  Jose el 22 nov 2026. Plantilla «relato» (docs/sistema-landing.md).
 %>
 <%
   const T = testimoniosLib;
@@ -28,7 +28,7 @@
     ogImageAlt: 'Diagnóstico 3D de Oficios Circulares para talleres y marcas artesanas',
     precargaImagen: IMG + 'hero-manos-cuero.webp'
 }) %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122c">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122f">
 <%- include('partials/header') %>
 
 <main class="oc-landing" id="maincontent">
@@ -92,18 +92,11 @@
   </div>
 </section>
 
-<% if (propuestas) { %>
-<!-- 3 · MANIFIESTO — PROPUESTA <%= propuestas.toUpperCase() %>, sin aprobar (solo local) -->
+<!-- 3 · MANIFIESTO (opción A, aprobada) -->
 <section class="resol">
   <img class="sello" src="/assets/images/brand/oc-logo-2026-cuadrado.png" alt="" width="52" height="52">
-  <span class="eyebrow eyebrow--arena">Propuesta <%= propuestas.toUpperCase() %> · sin aprobar</span>
-  <% if (propuestas === 'a') { %>
   <h2>Un cuestionario, un informe y un vídeo. <em>Y sabrás qué hacer primero.</em></h2>
-  <% } else { %>
-  <h2>Lo que ya tienes para contar, <em>en tres prioridades ordenadas.</em></h2>
-  <% } %>
 </section>
-<% } %>
 
 <!-- 4 · CÓMO FUNCIONA -->
 <section class="pasos" id="como-funciona">
@@ -201,11 +194,10 @@
   <a id="cta-hero-email-taller" class="club-btn club-btn--arena" href="<%= ejemploHref %>&oc_content=ejemplos" data-event="file_download" data-label="diag3d-ejemplos-taller">Ver un informe de ejemplo</a>
 </section>
 
-<% if (propuestas) { %>
-<!-- 7 · PARA QUIÉN SÍ Y PARA QUIÉN NO — PROPUESTA sin aprobar (solo local) -->
+<!-- 7 · ¿ES PARA TI? (aprobado) -->
 <section class="quien">
   <div class="wrap">
-    <h2>¿Es <em>para ti</em>? <small style="display:block;font-size:14px;font-family:var(--sans);color:var(--terracota);margin-top:8px">Propuesta sin aprobar</small></h2>
+    <h2>¿Es <em>para ti</em>?</h2>
     <div class="quien-grid">
       <div class="quien-col si reveal">
         <h3>Es para ti si…</h3>
@@ -218,7 +210,7 @@
       <div class="quien-col no reveal">
         <h3>No es para ti si…</h3>
         <ul>
-          <li>Eres una empresa: tienes tu propio <a href="/servicios/empresas">Diagnóstico para empresas</a>.</li>
+          <li>Si eres una empresa, <a href="/servicios/empresas">tu puerta es otra</a>.</li>
           <li>Quieres resolverlo todo en una llamada: aquí todo funciona por escrito.</li>
           <li>Buscas una etiqueta verde: el Diagnóstico solo cuenta lo que se puede demostrar.</li>
         </ul>
@@ -226,7 +218,7 @@
     </div>
   </div>
 </section>
-<% } %>
+
 
 <% if (clubAbierto) { %>
 <!-- Entrada al Club con el Diagnóstico (se activa con CLUB_ABIERTO el día del lanzamiento) -->
@@ -348,6 +340,12 @@
 
 </main>
 
+<%# Barra fija de móvil: solo en páginas con precio y compra directa (decisión de Jose, 22 nov 2026) %>
+<div class="oc-barra-movil" role="region" aria-label="Comprar el Diagnóstico 3D">
+  <span class="oc-barra-movil__precio"><%= precios.texto('diagnostico_talleres') %> <small>+ IVA</small></span>
+  <a id="cta-sticky" class="club-btn club-btn--terracota" href="<%= comprarHref %>&oc_content=sticky" data-event="click_cta" data-label="diag3d-sticky">Quiero mi Diagnóstico</a>
+</div>
+
 <script type="application/ld+json">
 <%- JSON.stringify({
   "@context": "https://schema.org",
@@ -388,6 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
   attachTracking(document.getElementById('cta-flow'), 'precio');
   attachTracking(document.getElementById('cta-footer'), 'footer');
   attachTracking(document.getElementById('cta-footer-email-taller'), 'footer');
+  attachTracking(document.getElementById('cta-sticky'), 'sticky');
 });
 </script>
 </body>

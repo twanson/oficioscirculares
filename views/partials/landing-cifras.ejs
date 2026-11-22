@@ -1,0 +1,21 @@
+<%#
+  Banda de credibilidad con cifras de la red, cada una con su fecha (data/impacto.json).
+  Parámetros: impacto, ids (lista de indicadores), titulo, claro (true = sobre crema).
+%>
+<% if (impacto) {
+  const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const fecha = iso => { const [a, m, d] = iso.split('-').map(Number); return d + ' ' + MESES[m - 1] + ' ' + a; };
+  const miles = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const lista = ids.map(id => impacto.indicadores.find(i => i.id === id)).filter(Boolean); %>
+<section class="cred<%= locals.claro ? ' cred--claro' : '' %>" aria-label="<%= titulo %>">
+  <div class="wrap cred-inner">
+    <span class="cred-titulo"><%= titulo %></span>
+    <div class="cred-items">
+      <% lista.forEach(function (i) { %>
+      <div class="cred-item"><b><%= miles(i.valor) %><%= i.unidad ? ' ' + i.unidad : '' %></b><span><%= i.indicador %></span><span class="cred-fecha">Dato a <time datetime="<%= i.fecha %>"><%= fecha(i.fecha) %></time></span></div>
+      <% }) %>
+    </div>
+    <p style="margin-top:22px;font-size:14px"><a href="/impacto" style="font-weight:700">Ver todas las cifras de la red &rarr;</a></p>
+  </div>
+</section>
+<% } %>

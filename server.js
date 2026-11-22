@@ -632,19 +632,18 @@ app.get(['/impacto', '/impacto/'], (req, res) => {
 });
 
 // Rutas de servicios — dos puertas: talleres / empresas (precios en data/precios.json)
-app.get(['/servicios', '/servicios/'], (req, res) => res.render('servicios', { puerta: 'index' }));
-app.get('/servicios/talleres', (req, res) => res.render('servicios', { puerta: 'talleres' }));
-app.get('/servicios/empresas', (req, res) => res.render('servicios', { puerta: 'empresas' }));
+// Las páginas de servicios enseñan cifras de la red con su fecha (data/impacto.json).
+function leerImpacto() {
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'impacto.json'), 'utf8')); }
+  catch (e) { console.error('impacto.json:', e.message); return null; }
+}
+app.get(['/servicios', '/servicios/'], (req, res) => res.render('servicios', { puerta: 'index', impacto: leerImpacto() }));
+app.get('/servicios/talleres', (req, res) => res.render('servicios', { puerta: 'talleres', impacto: leerImpacto() }));
+app.get('/servicios/empresas', (req, res) => res.render('servicios', { puerta: 'empresas', impacto: leerImpacto() }));
 
 app.get('/servicios/diagnostico-3d', (req, res) => {
   // Diagnóstico 3D para talleres. CLUB_ABIERTO activa el bloque de entrada al Club.
-  // ?propuestas=1 enseña SOLO en local los textos pendientes de aprobar (manifiesto y
-  // «para quién sí y para quién no»). En staging y producción no se publican.
-  const local = ['localhost', '127.0.0.1'].includes(req.hostname);
-  res.render('diagnostico-3d', {
-    clubAbierto: clubConfig.getConfig().club_abierto,
-    propuestas: local && req.query.propuestas === '1' ? (req.query.manifiesto === 'b' ? 'b' : 'a') : null
-  });
+  res.render('diagnostico-3d', { clubAbierto: clubConfig.getConfig().club_abierto });
 });
 
 app.get('/servicios/roadmap-3d', (req, res) => {

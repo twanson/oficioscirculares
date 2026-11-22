@@ -24,6 +24,74 @@ Este es el sistema de las páginas principales: `/club` y `/conecta-lana`. Cualq
   document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
   ```
 
+## Dos plantillas sobre el mismo sistema
+
+Decisión de Jose, 22 nov 2026. Las dos plantillas comparten:
+- la cabecera (`partials/landing-hero.ejs`);
+- tramos oscuros y claros alternos;
+- fotos dentro de las secciones;
+- botones, radios y tipografía;
+- el cierre (`partials/landing-final.ejs`).
+
+Las dos cumplen los criterios de aceptación del apartado 11 del encargo.
+
+### Plantilla «relato» (como `/club`)
+
+**Solo para:** Diagnóstico 3D para talleres (`/servicios/diagnostico-3d`) e Impulso 3D.
+
+**Estructura, de arriba abajo:**
+1. Cabecera inmersiva.
+2. Relato del problema: `.prob`, con la foto fija y los pasos `.beat`.
+3. Manifiesto: `.resol`.
+4. Cómo funciona: `.pasos`.
+5. Qué incluye: `.cajas`.
+6. Un ejemplo para ver: `.oc-ejemplos`.
+7. Para quién sí y para quién no: `.quien`.
+8. Precio: `.precios`, con un plan.
+9. Testimonios: `.testi`.
+10. Quién está detrás: `.detras`.
+11. Preguntas frecuentes: `.faq`.
+12. Cierre: `.final` y `.confianza`.
+
+Necesita `oc-landing.js`, que mueve la foto fija del relato y hace aparecer los bloques al hacer scroll.
+
+**Barra fija de móvil:** `.oc-barra-movil`. Va solo en páginas con precio y compra directa.
+
+### Plantilla «directa» (como la portada)
+
+**Para:** `/servicios`, `/servicios/talleres`, `/servicios/empresas`, Roadmap 3D y Sprint 3D.
+
+**No lleva** tramo de scroll con pasos fijos ni manifiesto. Lo que en el encargo era «relato corto del problema» o «tiene sentido si…» va como tarjetas o lista.
+
+**Estructura, de arriba abajo:**
+1. Cabecera a sangre con foto, insignia y titular (`landing-hero`). En las páginas para empresas va compacta (`compacta: true`), para que lo que se entrega y los plazos se vean en la primera pantalla y media.
+2. Qué es y para quién, en un bloque breve: `.oc-intro`, o la cabecera de la sección siguiente.
+3. Tarjetas con imagen:
+   - `.cajas` con `.caja-foto`, o `.caja-doc` si se enseña un documento;
+   - o las puertas `.cl-doors--claro` con `.cl-card-foto`.
+4. Método en pasos sobre verde hondo: `.pasos.pasos--oscuro` con `.pasos-grid--tres`.
+5. Prueba, según la página:
+   - cifras de la red con su fecha (`partials/landing-cifras.ejs`, `.cred--claro`);
+   - o el testimonio autorizado (`.testi`).
+6. Precio, o cómo se llega al precio: `.oc-camino`, que tiene la variante `.oc-camino-wrap` con foto al lado.
+7. Preguntas frecuentes, solo donde ya existan: `.faq`.
+8. Cierre con foto: `landing-final`.
+
+**Páginas para empresas:**
+- Tono sobrio y frases cortas.
+- Fotos de fabricación y de material, no de manos de artesano.
+- Mientras falte el precio, se pone un texto pequeño bajo el nombre (`.caja-precio--texto`), nunca con tamaño de precio.
+
+### Piezas comunes nuevas
+
+| Pieza | Archivo o clase | Para qué |
+|---|---|---|
+| Cabecera | `partials/landing-hero.ejs` | `img`, `badge`, `titulo` (con `<em>`), `sub`, `ctas`, `datos`, `compacta` |
+| Cierre | `partials/landing-final.ejs` | `img`, `eyebrow`, `titulo`, `texto`, `cta`, `pd`, `confianza` |
+| Cifras con fecha | `partials/landing-cifras.ejs` | `impacto`, `ids`, `titulo`, `claro` |
+| Precio dentro de una caja | `.caja-precio` (con `small`) y `.caja-precio--texto` | Precio con jerarquía, o texto pequeño si aún no hay precio |
+| Precarga de la cabecera | `head-meta` con `precargaImagen` | La foto de cabecera se pide la primera |
+
 ## Componentes
 
 | Componente | Clases | Para qué |

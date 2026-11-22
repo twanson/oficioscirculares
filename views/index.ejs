@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
     <link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260325c">
     <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
-    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122a">
+    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122b">
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -246,46 +246,51 @@
 
 
     <!-- ═══════════════════════════════════
-         COMUNIDAD — tarjetas con retrato. SOLO testimonios autorizados, con texto y foto
-         aprobados en el repositorio. Una tarjeta sin foto o sin texto NO se publica
-         (publicar: false) hasta que Jose la complete.
+         COMUNIDAD — tarjetas con retrato. Testimonios de data/testimonios.json (portada):
+         los autorizados con nombre primero y después los mensajes sin nombre (permiso
+         pendiente). Sin foto: el sello de la marca, con el mismo tamaño que el retrato.
+         Se ven seis; «Ver más» enseña el resto (sin JavaScript se ven todos).
          ═══════════════════════════════════ -->
-    <%
-      const comunidad = [
-        { nombre: 'Blanca Fernández', rol: 'Asociación Hilandia · tejido artesanal',
-          texto: 'Tener todo configurado y explicado —plantillas con mi logo, blog y guía paso a paso— facilita mucho las cosas. Es una forma excelente de empezar.',
-          foto: '/assets/images/club/blanca-hilandia.jpg', alt: 'Blanca tejiendo con el mandil de Hilandia' },
-        // Texto aprobado (correo del 14 jul 2026, permiso 21 nov 2026). FALTA FOTO.
-        { nombre: 'Maika', rol: 'Encontró lana para su aula con Conecta Lana',
-          texto: 'Muchísimas gracias. Esta labor que hacéis es de agradecer.', foto: null },
-        // Texto aprobado (17 jul 2026, views/conecta-lana.ejs). FALTA FOTO.
-        { nombre: 'Jorge Esteban', rol: 'Fenoquímica · encontró lana española en Conecta Lana',
-          texto: 'Estamos encantados. Ya estamos gestionando el envío con la ganadera que nos presentasteis.', foto: null },
-        // Texto aprobado (17 jul 2026, views/conecta-lana.ejs). FALTA FOTO.
-        { nombre: 'Esther San Vicente', rol: 'Al Fresco-Museos Efímeros',
-          texto: 'Nos habéis dado un servicio impecable y estoy difundiendo vuestra iniciativa a los cuatro vientos.', foto: null }
-      ].filter(t => t.foto && t.texto);
-    %>
+    <% const comunidad = testimoniosLib.paraPagina('portada'); %>
     <section class="comunidad-v2" id="comunidad">
         <div class="container">
             <div class="comunidad-v2-header">
                 <h2>Comunidad</h2>
                 <p class="comunidad-v2-sub">Lo que cuentan quienes ya forman parte de la red.</p>
             </div>
-            <div class="comunidad-v2-grid<%= comunidad.length < 3 ? ' oc-comunidad-pocas' : '' %>">
-                <% comunidad.forEach(function (t) { %>
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="<%= t.foto %>" alt="<%= t.alt %>" loading="lazy">
+            <div class="comunidad-v2-grid oc-comunidad-grid" id="comunidad-grid">
+                <% comunidad.forEach(function (t, i) {
+                     const nombre = t.nombre || t.firma;
+                     let rol = t.nombre ? t.firma : '';
+                     if (t.nombre && t.contexto && rol.indexOf('Conecta Lana') === -1) rol += ' · ' + t.contexto; %>
+                <div class="testimonio-v2<%= i >= 6 ? ' oc-comunidad-mas' : '' %>">
+                    <div class="testimonio-v2-img<%= t.avatar === 'foto' && t.foto ? '' : ' oc-sello-retrato' %>">
+                        <% if (t.avatar === 'foto' && t.foto) { %><img src="<%= t.foto %>" alt="<%= t.foto_alt || '' %>" loading="lazy" width="600" height="450"><% } else { %><img src="/assets/images/brand/oc-sello-verde.webp" alt="" loading="lazy" width="560" height="560"><% } %>
                     </div>
-                    <h4><%= t.nombre %></h4>
-                    <span class="testimonio-role"><%= t.rol %></span>
+                    <h4><%= nombre %></h4>
+                    <% if (rol) { %><span class="testimonio-role"><% if (t.enlace) { %><a href="<%= t.enlace %>" target="_blank" rel="noopener"><%= rol %></a><% } else { %><%= rol %><% } %></span><% } %>
                     <p class="testimonio-quote">&ldquo;<%= t.texto %>&rdquo;</p>
                 </div>
                 <% }) %>
             </div>
+            <% if (comunidad.length > 6) { %>
+            <div class="oc-comunidad-ver"><button type="button" class="btn-ghost" id="comunidad-ver-mas" aria-controls="comunidad-grid" aria-expanded="false" hidden>Ver más mensajes</button></div>
+            <% } %>
+            <p class="comunidad-v2-disclaimer"><% if (testimoniosLib.todosConPermiso(comunidad)) { %>Testimonios reales, publicados con su permiso.<% } else { %>Mensajes reales de usuarios de la red.<% } %></p>
         </div>
     </section>
+    <script>
+    (function () {
+        var b = document.getElementById('comunidad-ver-mas'), g = document.getElementById('comunidad-grid');
+        if (!b || !g) return;
+        g.classList.add('oc-comunidad-plegada'); b.hidden = false;
+        b.addEventListener('click', function () {
+            var plegada = g.classList.toggle('oc-comunidad-plegada');
+            b.setAttribute('aria-expanded', String(!plegada));
+            b.textContent = plegada ? 'Ver más mensajes' : 'Ver menos';
+        });
+    })();
+    </script>
 
     <%- include('partials/comunidad-recursos') %>
 

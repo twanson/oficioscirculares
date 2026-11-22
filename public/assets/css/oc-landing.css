@@ -541,3 +541,104 @@ html:has(.oc-landing),html:has(.oc-landing) body{overflow-x:clip}
   .oc-landing .oc-ejemplos{padding:76px 0}
   .oc-landing .oc-portadas{gap:18px}
 }
+
+/* Barra fija de móvil: SOLO en páginas con precio y compra directa (Diagnóstico para talleres,
+   Impulso 3D). Deja sitio abajo para que no tape el pie. */
+.oc-barra-movil{display:none}
+@media(max-width:768px){
+  .oc-barra-movil{display:flex;align-items:center;justify-content:space-between;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:999;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(3,42,32,.97);box-shadow:0 -8px 24px rgba(0,0,0,.25);font-family:'Manrope',sans-serif}
+  .oc-barra-movil__precio{font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:600;color:#FBF7EF;white-space:nowrap}
+  .oc-barra-movil__precio small{font-family:'Manrope',sans-serif;font-size:12px;font-weight:600;color:rgba(251,247,239,.7)}
+  .oc-barra-movil .club-btn{padding:13px 20px;font-size:15px;display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:999px;background:linear-gradient(135deg,#934A1C,#B05E2B);color:#fff;text-decoration:none}
+  body:has(.oc-barra-movil){padding-bottom:72px}
+}
+
+/* ===================================================================
+   PLANTILLA «DIRECTA» (servicios, talleres, empresas, Roadmap, Sprint)
+   Variantes de los mismos componentes; ver docs/sistema-landing.md.
+   =================================================================== */
+/* Pasos sobre verde hondo */
+.oc-landing .pasos--oscuro{background:radial-gradient(800px 480px at 12% 8%,rgba(232,213,183,.1),transparent 60%),var(--verde-hondo)}
+.oc-landing .pasos--oscuro h2{color:var(--crema)}
+.oc-landing .pasos--oscuro h2 em{color:var(--arena)}
+.oc-landing .pasos--oscuro .cab p{color:rgba(251,247,239,.8)}
+.oc-landing .pasos--oscuro .eyebrow{color:var(--arena)}
+.oc-landing .pasos--oscuro .pasos-grid::before{border-top-color:rgba(232,213,183,.3)}
+.oc-landing .pasos--oscuro .paso{background:rgba(251,247,239,.05);border:1px solid rgba(232,213,183,.18);box-shadow:none}
+.oc-landing .pasos--oscuro .paso h3{color:var(--crema)}
+.oc-landing .pasos--oscuro .paso p{color:rgba(251,247,239,.78)}
+.oc-landing .pasos--oscuro .paso .cuando{color:var(--arena)}
+.oc-landing .pasos--oscuro .paso .bola{background:linear-gradient(150deg,var(--arena),#d9bf95);color:var(--verde)}
+/* Banda de credibilidad sobre crema */
+.oc-landing .cred--claro{background:var(--hueso);border-top:0;padding:72px 0}
+.oc-landing .cred--claro .cred-titulo{color:var(--terracota)}
+.oc-landing .cred--claro .cred-item{background:var(--blanco);border-color:rgba(2,52,41,.09);box-shadow:0 10px 30px rgba(2,52,41,.07)}
+.oc-landing .cred--claro .cred-item b{color:var(--verde);font-size:30px}
+.oc-landing .cred--claro .cred-item span{color:var(--tinta-suave)}
+.oc-landing .cred-fecha{display:block;margin-top:6px;font-size:12px;font-weight:700;color:var(--terracota)}
+.oc-landing .cred .cred-fecha{color:var(--arena)}
+.oc-landing .cred--claro .cred-fecha{color:var(--terracota)}
+/* Puertas (cl-cards) sobre fondo claro y con foto arriba */
+.oc-landing .cl-doors--claro{background:radial-gradient(900px 520px at 88% 0%,rgba(232,213,183,.4),transparent 62%),var(--crema)}
+.oc-landing .cl-doors--claro .cl-d-head .cl-ey{color:var(--terracota)}
+.oc-landing .cl-doors--claro .cl-d-head h2{color:var(--verde)}
+.oc-landing .cl-doors--claro .cl-d-head h2 em{color:var(--terracota)}
+.oc-landing .cl-doors--claro .cl-d-head p{color:var(--tinta-suave)}
+.oc-landing .cl-cards--dos{grid-template-columns:repeat(2,1fr);max-width:900px}
+.oc-landing .cl-card-foto{margin:-38px -36px 24px;height:190px;overflow:hidden;position:relative}
+.oc-landing .cl-card-foto img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.oc-landing .cl-card:hover .cl-card-foto img{transform:scale(1.05)}
+.oc-landing .cl-card-foto + .cl-ico{margin-top:-53px;position:relative;z-index:2;background:#fbf6ec;box-shadow:0 8px 20px rgba(2,52,41,.18)}
+.oc-landing .cl-lista{list-style:none;margin:0 0 24px;padding:0}
+.oc-landing .cl-lista li{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px dashed rgba(2,52,41,.16);font-size:.95rem;color:#5d5746}
+.oc-landing .cl-lista li b{color:var(--verde);text-align:right}
+/* Precio dentro de una caja */
+.oc-landing .caja-precio{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1;margin:2px 0 14px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.oc-landing .caja-precio small{font-family:var(--sans);font-size:14px;font-weight:600;opacity:.75}
+.oc-landing .caja--dark .caja-precio{color:var(--crema)}
+.oc-landing .caja--light .caja-precio,.oc-landing .caja--accent .caja-precio{color:var(--verde)}
+/* Sin precio aún: texto pequeño bajo el nombre, sin tamaño de precio */
+.oc-landing .caja-precio--texto{font-family:var(--sans);font-size:14px;font-weight:700;margin:0 0 14px;display:block}
+.oc-landing .caja--dark .caja-precio--texto{color:var(--arena)}
+.oc-landing .caja--light .caja-precio--texto{color:var(--terracota)}
+.oc-landing .caja .club-btn{margin-top:auto;align-self:flex-start}
+.oc-landing .caja ul + .club-btn{margin-top:auto}
+/* Bloque breve «qué es y para quién» */
+.oc-landing .oc-intro{background:var(--crema);padding:96px 0 40px;text-align:center}
+.oc-landing .oc-intro h2{font-size:clamp(32px,4vw,46px);margin:0 auto 18px;max-width:22ch}
+.oc-landing .oc-intro h2 em{color:var(--terracota)}
+.oc-landing .oc-intro p{color:var(--tinta-suave);font-size:18px;max-width:60ch;margin:0 auto}
+.oc-landing .oc-intro + .cajas{padding-top:40px}
+/* Cómo se llega al precio (empresas, Roadmap, Sprint) */
+.oc-landing .oc-camino{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:980px;margin:0 auto}
+.oc-landing .oc-camino li{list-style:none;background:var(--blanco);border-radius:var(--radius-sm);padding:30px 26px;box-shadow:0 10px 30px rgba(2,52,41,.07);position:relative}
+.oc-landing .oc-camino li b{display:block;font-family:var(--serif);font-size:22px;color:var(--verde);margin:10px 0 6px}
+.oc-landing .oc-camino li span{font-size:14.5px;color:var(--tinta-suave);line-height:1.55}
+.oc-landing .oc-camino .n{font-family:var(--serif);font-style:italic;font-size:28px;color:var(--terracota)}
+@media(max-width:980px){
+  .oc-landing .cl-cards--dos{grid-template-columns:1fr;max-width:480px}
+  .oc-landing .oc-camino{grid-template-columns:1fr;max-width:480px}
+}
+@media(max-width:600px){
+  .oc-landing .cl-card-foto{margin:-30px -26px 22px}
+  .oc-landing .oc-intro{padding:72px 0 24px}
+  .oc-landing .cred--claro .cred-item{min-width:0;width:100%}
+}
+
+.oc-landing .cred a{color:var(--arena);font-weight:700}
+.oc-landing .cred--claro a{color:var(--terracota)}
+
+/* Cabecera compacta (empresas): lo que se entrega y los plazos, en la primera pantalla y media */
+.oc-landing .club-hero--compacta{min-height:74vh}
+.oc-landing .club-hero--compacta .hero-inner{padding-top:120px;padding-bottom:72px}
+.oc-landing .club-hero--compacta h1{font-size:clamp(44px,6.4vw,80px)}
+.oc-landing .club-hero--compacta + .cajas{padding-top:72px}
+/* Cómo se llega al precio, con foto al lado */
+.oc-landing .oc-camino-wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:center;max-width:1060px}
+.oc-landing .oc-camino-foto{border-radius:24px;overflow:hidden;box-shadow:var(--sombra)}
+.oc-landing .oc-camino-foto img{width:100%;height:auto;display:block}
+.oc-landing .oc-camino--lista{grid-template-columns:1fr;gap:14px;padding:0;margin:0}
+.oc-landing .oc-camino--lista li{display:grid;grid-template-columns:44px 1fr;column-gap:12px;padding:22px 24px}
+.oc-landing .oc-camino--lista li .n{grid-row:span 2;align-self:start}
+.oc-landing .oc-camino--lista li b{margin:0 0 4px}
+@media(max-width:980px){.oc-landing .oc-camino-wrap{grid-template-columns:1fr;max-width:520px}}
