@@ -316,12 +316,15 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
   });
 });
 
-// E-WEAR (decisión de Jose, 21 nov 2026): reescrito como EJEMPLO ILUSTRATIVO, sin cifras
-// de resultado ni citas. No debe aparecer en listados de «casos reales» o «casos de éxito».
-// Sin barra final o con subrutas del caso antiguo (index.html…), 301 a la página nueva.
+// Guía de joyería con plata recuperada (decisión de Jose, 22 nov 2026). Sustituye al
+// antiguo caso E-WEAR: no presenta a ningún cliente. Vive en el blog; la URL vieja
+// /casos/e-wear (con o sin barra, o subrutas) redirige con 301.
+app.get(/^\/blog\/joyeria-plata-recuperada(\/.*)?$/, (req, res) => {
+  if (req.path === '/blog/joyeria-plata-recuperada/') return res.render('blog-joyeria-plata-recuperada');
+  return redirectWithQuery('/blog/joyeria-plata-recuperada/', req, res);
+});
 app.get(/^\/casos\/e-wear(\/.*)?$/, (req, res) => {
-  if (req.path === '/casos/e-wear/') return res.render('caso-e-wear');
-  return res.redirect(301, '/casos/e-wear/');
+  redirectWithQuery('/blog/joyeria-plata-recuperada/', req, res);
 });
 
 // Coming Soon (página genérica para secciones no disponibles)
