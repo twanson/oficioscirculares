@@ -64,8 +64,8 @@ Necesita `oc-landing.js`, que mueve la foto fija del relato y hace aparecer los 
 **No lleva** tramo de scroll con pasos fijos ni manifiesto. Lo que en el encargo era «relato corto del problema» o «tiene sentido si…» va como tarjetas o lista.
 
 **Estructura, de arriba abajo:**
-1. Cabecera a sangre con foto, insignia y titular (`landing-hero`). En las páginas para empresas va compacta (`compacta: true`), para que lo que se entrega y los plazos se vean en la primera pantalla y media.
-2. Qué es y para quién, en un bloque breve: `.oc-intro`, o la cabecera de la sección siguiente.
+1. Cabecera a sangre con foto, insignia y titular (`landing-hero`), o partida si la imagen no da para ir a sangre (Roadmap y Sprint). En las páginas para empresas va compacta (`compacta: true`), para que lo que se entrega y los plazos se vean en la primera pantalla y media.
+2. Qué es y para quién: en el subtítulo de la cabecera. No se abre un bloque centrado solo para eso.
 3. Tarjetas con imagen:
    - `.cajas` con `.caja-foto`, o `.caja-doc` si se enseña un documento;
    - o las puertas `.cl-doors--claro` con `.cl-card-foto`.
@@ -86,11 +86,27 @@ Necesita `oc-landing.js`, que mueve la foto fija del relato y hace aparecer los 
 
 | Pieza | Archivo o clase | Para qué |
 |---|---|---|
-| Cabecera | `partials/landing-hero.ejs` | `img`, `badge`, `titulo` (con `<em>`), `sub`, `ctas`, `datos`, `compacta` |
+| Cabecera | `partials/landing-hero.ejs` | `img`, `badge`, `titulo` (con `<em>`), `sub`, `ctas`, `datos`, `compacta`, `partida` (con `alt`) |
 | Cierre | `partials/landing-final.ejs` | `img`, `eyebrow`, `titulo`, `texto`, `cta`, `pd`, `confianza` |
 | Cifras con fecha | `partials/landing-cifras.ejs` | `impacto`, `ids`, `titulo`, `claro` |
 | Precio dentro de una caja | `.caja-precio` (con `small`) y `.caja-precio--texto` | Precio con jerarquía, o texto pequeño si aún no hay precio |
 | Precarga de la cabecera | `head-meta` con `precargaImagen` | La foto de cabecera se pide la primera |
+
+### Cabecera partida (`partida: true`)
+
+Para imágenes que no dan para ir a sangre (ilustraciones de unos 1.000 px). Clases: `.club-hero--partida`, `.hero-texto` y `.hero-ilustracion`.
+- Texto a la izquierda sobre verde hondo: insignia, titular, subtítulo, botones y línea de dato.
+- Ilustración a la derecha, con radio de 24 px y la sombra del sistema. No lleva velo.
+- Hasta 980 px, la ilustración va debajo del texto.
+- La ilustración es contenido: necesita `alt`.
+
+```ejs
+<%- include('partials/landing-hero', { img: '…webp', ancho: 1000, alto: 1000, partida: true, alt: 'Qué se ve', badge: '…', titulo: '… <em>…</em>', sub: '…', ctas: [ … ], datos: '…' }) %>
+```
+
+### Caja con página de documento (`.caja-foto.caja-foto--doc`)
+
+Enseña una página del PDF de ejemplo dentro de una caja: más alta, sin velo y alineada arriba.
 
 ## Componentes
 
@@ -162,3 +178,5 @@ Necesita `oc-landing.js`, que mueve la foto fija del relato y hace aparecer los 
 - Imágenes en WebP, con `width` y `height`. Todas con `loading="lazy"` salvo la de la cabecera, que va con `fetchpriority="high"`. Texto alternativo que describa lo que se ve.
 - Ninguna foto de cabecera se repite entre páginas, y ninguna foto aparece dos veces en la misma página.
 - Sin marcadores `[PENDIENTE…]` visibles, sin emojis y sin testimonios fuera de `data/testimonios.json`.
+- **Pertinencia:** cada imagen tiene relación directa con lo que dice su sección y se justifica en una línea en el registro («por qué esta imagen aquí»). Si no se puede justificar, se cambia o pasa a «imágenes que faltan».
+- **Ritmo de titulares:** no hay dos secciones seguidas que sean solo etiqueta, titular y párrafo centrados.

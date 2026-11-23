@@ -367,3 +367,127 @@ Base: `https://oficioscirculares-production.up.railway.app`
 - `/impacto`
 - `/conecta-lana`: los tres mensajes nuevos al final de la cita
 - `/blog/joyeria-plata-recuperada/`
+
+---
+
+## Arreglos previos a la fase 4 (23 nov 2026)
+
+### Qué se ha hecho
+
+1. **Titulares centrados seguidos.** Regla: no puede haber dos secciones seguidas que sean solo etiqueta, titular y párrafo centrados.
+   - **Talleres:** se elimina el bloque `oc-intro`. Su frase «Para cualquier taller o marca artesana…» abre ahora el subtítulo de la cabecera.
+   - **Impulso 3D:** «No solo te ayudamos a comunicar» tenía el mismo problema (bloque centrado seguido de «Tu camino con Oficios Circulares»). Ahora es un `oc-bloque` con foto al lado y el mismo texto.
+   - **Resto de páginas:** revisadas, sin más casos. Las demás secciones llevan tarjetas, pasos, cifras, lista o foto tras su titular. El manifiesto (`.resol`) va solo sobre verde hondo y le sigue una sección con pasos.
+2. **Cabecera partida** (`landing-hero` con `partida: true`) en Roadmap y Sprint, con sus dos ilustraciones. En móvil la ilustración va debajo del texto.
+3. **Pertinencia de las imágenes.** Tabla completa abajo. Las tarjetas y el precio de Roadmap y Sprint enseñan páginas de sus propios PDF de ejemplo (`caja-foto--doc`). De Sprint se han dejado fuera las cifras ilustrativas del piloto.
+4. **Impulso, «¿Te reconoces?»:** cuatro fotos de `oficios/`, sin caras.
+5. **Corregido de paso:** en Impulso, los dos párrafos de «Herramientas que hablan como tú» salían oscuros sobre verde y no se leían. Era un fallo de la fase 3.
+6. Se han borrado las imágenes de `landing/` que ya no usa ninguna página. Los originales siguen en `assets/images`.
+
+### Aviso: dos fotos con marca de agua
+
+`workshop_tools.jpg` y `pottery_hands.jpg` llevan visible la marca de agua de un banco de imágenes (dreamstime) y miden 800 px. Se han quitado de `/servicios`, el Diagnóstico e Impulso. **`workshop_tools.jpg` sigue en la portada, en `/club` y en las páginas de oficio** (`oc-cta-band`, `oficio-vertical`), que no entraban en este encargo. Hay que sustituirla o comprar la licencia. Está también en producción.
+
+### Imágenes y por qué están ahí (sustituye a las tablas anteriores)
+
+| Página | Sección | Imagen | Por qué esta imagen aquí |
+|---|---|---|---|
+| `/servicios` | Cabecera | `hero-servicios-artesanos` | Dos personas trabajando en un taller: a quién acompañan los servicios |
+| `/servicios` | Puerta talleres | `puerta-talleres-torno` | Un artesano en su taller, que es quien entra por esa puerta |
+| `/servicios` | Puerta empresas | `puerta-empresas-bobinas` | Fabricación textil: empresa con material y proceso |
+| `/servicios` | Cierre | `cierre-servicios-cesteria` | Manos haciendo una pieza: «Tu oficio tiene valor» |
+| Talleres | Cabecera | `hero-talleres-alfarero` | Alfarero con sus piezas: el oficio que hay que dar a entender |
+| Talleres | Club | `caja-club-manos` | Varias personas sobre la misma mesa: comunidad. Sustituye a una foto con niños, de 640 px |
+| Talleres | Diagnóstico | portada de ejemplo | Es el documento que se entrega |
+| Talleres | Impulso | `impulso/caja-impulso-perfil` | Perfil de Instagram de ejemplo, que es lo que prepara el Impulso |
+| Talleres | Testimonio | retrato de Blanca | Es quien firma el testimonio |
+| Talleres | Cierre | `cierre-talleres-taller` | Un taller con todo a la vista: «Empieza por saber qué tienes» |
+| Empresas | Cabecera | `hero-empresas-bobinas` | Planta de hilatura: empresas que fabrican o transforman materiales |
+| Empresas | Diagnóstico | `caja-empresas-material` | Corcho recogido en cubos: «materiales, proceso y lo que desechas» |
+| Empresas | Roadmap | `caja-empresas-roadmap` | Ilustración del servicio: carpeta «Roadmap 3D» y calendario |
+| Empresas | Sprint | `caja-empresas-sprint` | Ilustración del servicio: tablero del piloto y su lanzamiento |
+| Empresas | Precio | `precio-empresas-matriz` | La matriz con la que se elige «cuál conviene hacer primero» (PDF de ejemplo) |
+| Empresas | Cierre | `cierre-empresas-vellones` | Lana acumulada en una nave: material con una oportunidad por descubrir |
+| Diagnóstico | Cabecera | `hero-manos-cuero` | Mesa de trabajo con material: «lo que ya tienes» |
+| Diagnóstico | Relato 01 | `prob-1-ceramista` | Ceramista mirando su pieza: nadie ve ese valor |
+| Diagnóstico | Relato 02 | `prob-2-mesa` | Artesana sentada a su mesa: por dónde empezar a contar |
+| Diagnóstico | Relato 03 | `prob-3-restos` | Corcho triturado: restos que tienen salida |
+| Diagnóstico | Relato 04 | `prob-4-cestas` | Un puesto de cestas casi iguales: «todos dicen lo mismo» |
+| Diagnóstico | Informe y ejemplos | portadas | Son los documentos de ejemplo |
+| Diagnóstico | Testimonio / Jose | retratos | Son las personas de las que habla la sección |
+| Diagnóstico | Cierre | `cierre-herramientas` | Herramientas junto a una hoja en blanco: empezar |
+| Roadmap | Cabecera | `hero-roadmap-ilustracion` | Ilustración del servicio: carpeta, calendario de 90 días y cronograma |
+| Roadmap | Operación | `caja-operacion-plan90` | El cronograma de 90 días con hitos (PDF de ejemplo, p. 5) |
+| Roadmap | Comunicación | `caja-comunicacion-piezas` | La lista de piezas por producir (PDF de ejemplo, p. 6) |
+| Roadmap | Entregable | `documento-portada` | Portada del documento que se entrega |
+| Roadmap | Precio | `precio-alcance` | Lo que incluye y lo que no: el alcance cerrado (PDF de ejemplo, p. 7) |
+| Roadmap | Cierre | `cierre-trazado` | Trazar el patrón antes de cortar: planificar antes de invertir |
+| Sprint | Cabecera | `hero-sprint-ilustracion` | Ilustración del servicio: tablero del piloto, ficha, landing y caso |
+| Sprint | Operación | `caja-operacion-piloto` | Los cinco pasos del piloto (mini-caso, p. 4) |
+| Sprint | Comunicación | `caja-comunicacion-kit` | Las piezas del kit comercial (mini-caso, p. 5) |
+| Sprint | Entregable | `documento-portada` | Portada del mini-caso |
+| Sprint | Precio | `precio-alcance` | Lo que incluye y lo que se cotiza aparte (mini-caso, p. 8) |
+| Sprint | Cierre | `cierre-mosaico` | Piezas de barro colocadas: el mini-caso va «del recorte al mosaico» |
+| Impulso | Cabecera | `hero-impulso-artesana` | Artista en mitad de su trabajo: sin tiempo para contarlo |
+| Impulso | Relato 01 | `prob-1-artesana` | Artesana concentrada en lo que quiere hacer: su oficio |
+| Impulso | Relato 02 | `prob-2-cuero` | Detalle de técnica que no se ve en la pieza acabada |
+| Impulso | Relato 03 | `diagnostico/prob-4-cestas` | Un puesto donde todo se parece: competir por ser visible |
+| Impulso | Relato 04 | `prob-4-taller-noche` | Trabajo de noche: la comunicación como carga añadida |
+| Impulso | Ceramista | `oficio-ceramista` | Manos con una pieza de cerámica (`precio-ceramista-etiqueta`, sin cara) |
+| Impulso | Carpintero | `oficio-carpintero` | Manos con un tablero (`carpinteria-y-ebanisteria`) |
+| Impulso | Joyera | `oficio-joyera` | Vitrina de un taller de joyería (`espai-micra-taller`, sin personas) |
+| Impulso | Taller cerámico | `oficio-taller-ceramico` | Manos entregando un encargo, con estantes de cerámica (`precio-entrega-pieza`) |
+| Impulso | Herramientas | `herramientas-mesa` | Artesana trabajando en su cuaderno: el cuaderno de trabajo |
+| Impulso | Circularidad | `circularidad-pieza` | Pieza hecha con corcho triturado: reutilizar residuos |
+| Impulso | Precios | portada, `caja-impulso-perfil`, `caja-completo-video` | Lo que se entrega: informe, perfil de Instagram y vídeo corto |
+| Impulso | Cierre | `cierre-yunque` | El oficio en marcha: «Tu oficio tiene valor» |
+| Impacto | Cabecera | `hero-impacto-rebano` | El origen de la lana que mueve la red |
+| Impacto | Cómo contamos | `contamos-vellones` | El material que se pesa |
+| Impacto | Objetivos | `objetivos-ovillo` | La lana ya convertida en hilo: adónde se quiere llegar |
+| Impacto | Respalda | `respalda-fibra` | Lana sin procesar, el material del ensayo de acolchado (no es una foto del ensayo) |
+| Impacto | Cierre | `cierre-tejiendo` | Manos que usan la lana: la otra parte de la red |
+| Guía | Cabecera / texto | taller, plata y anillos | Joyería y plata, el tema de la guía |
+
+### Imágenes que faltan (actualizada)
+
+| Página | Sección | Qué haría falta |
+|---|---|---|
+| Impulso | ¿Te reconoces?, joyera | Manos trabajando joyería: en `oficios/` solo hay vitrina y piezas |
+| Impulso y Talleres | Tarjetas Impulso y Completo | Capturas de un kit real. Hoy son recortes de las portadas de las lecciones del Club, con un perfil de ejemplo («Taller Alba») |
+| Impulso y Diagnóstico | Relato «otros más visibles» y «todos dicen lo mismo» | Una foto propia para cada página: hoy comparten la de las cestas |
+| Impacto | Qué lo respalda | Una foto del ensayo de acolchado en Ourense |
+| Empresas | Diagnóstico y cierre | Fotos de una empresa real con su material sobrante |
+| Empresas | Tarjetas Roadmap y Sprint | Se mantienen las ilustraciones: explican el servicio, pero el tono es más claro que el resto |
+| Portada, Club y oficios | Cierres | Sustituto de `workshop_tools.jpg` (marca de agua) |
+| Portada | Comunidad | Retratos de Esther, Jorge y Maika |
+| Diagnóstico | Testimonios | Un segundo testimonio autorizado |
+
+### Lighthouse móvil (23 nov 2026, v13.6.0, una pasada por página)
+
+Staging, con `npx lighthouse` y sus ajustes móviles por defecto. Columna «producción»: rendimiento de la página que hoy está en www, para el criterio 9 (no bajar más de cinco puntos).
+
+| Página | Rendimiento | Producción | Accesibilidad | Prácticas | SEO | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|---|
+| `/` | 91 | 72 | 95 | 73 | 100 | 3,3 s | 0 | 60 ms |
+| `/servicios` | 95 | no existe | 95 | 77 | 100 | 2,7 s | 0 | 50 ms |
+| `/servicios/talleres` | 97 | no existe | 95 | 77 | 100 | 2,3 s | 0,01 | 60 ms |
+| `/servicios/empresas` | 98 | no existe | 95 | 77 | 100 | 1,9 s | 0 | 70 ms |
+| `/servicios/diagnostico-3d` | 97 | 98 | 95 | 77 | 100 | 2,3 s | 0 | 70 ms |
+| `/servicios/roadmap-3d` | 99 | 98 | 95 | 77 | 100 | 1,8 s | 0,008 | 60 ms |
+| `/servicios/sprint-3d` | 98 | 99 | 95 | 77 | 100 | 1,9 s | 0,011 | 60 ms |
+| `/impulso-3d` | 98 | 96 | 95 | 77 | 100 | 1,8 s | 0,03 | 60 ms |
+| `/impacto` | 97 | no existe | 95 | 77 | 100 | 2,2 s | 0 | 70 ms |
+| `/conecta-lana` | 98 | 99 | 94 | 77 | 100 | 1,9 s | 0 | 60 ms |
+| Guía de joyería | 89 | no medida | 97 | 77 | 100 | 3,1 s | 0 | 90 ms |
+| `/club` | 88 | no medida | 95 | 77 | 69 | 3,4 s | 0 | 80 ms |
+
+- **Criterio 9:** se cumple en las seis páginas comparables. La bajada mayor es de un punto. Una sola pasada tiene unos puntos de variación; el 72 de la portada de producción salió con un LCP de 63 s, anómalo.
+- **Prácticas 73–77:** cookies de terceros (LinkedIn), que entran por GTM. No se toca GTM.
+- **Accesibilidad 94–97:** contraste en los créditos del pie (4,04 frente a 4,5) y salto de nivel de titulares en el pie (`h4`), ambos en la parte común. Solo se ha mirado el detalle en Roadmap.
+- **SEO 69 de `/club`:** es por el noindex, que es intencionado.
+- **Posibles mejoras:** el logo cuadrado pesa 195 KB y se muestra a 20 px; la portada descarga 12 MB en fotos de origen.
+
+### Comprobaciones
+
+- Menú con ratón, teclado y móvil, y consola limpia, en las ocho páginas del encargo (en local). Capturas a 375 px sin desbordamiento horizontal.
+- En staging, todas las imágenes de `landing/` responden 200. `npm test`: 18 pruebas, todas pasan.
