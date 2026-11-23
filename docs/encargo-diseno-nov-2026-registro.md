@@ -536,3 +536,14 @@ Se han borrado `impulso-3d.css` y tres partials sin uso (`oc-cta-band`, `oc-hero
 
 - **Portada:** el 91 de antes no contaba la foto de cabecera, que aún se estaba descargando cuando se pintaba el texto. Lo que más frena ahora es la hoja de Google Fonts (unos 0,9 s simulados).
 - **`/club`:** reparte al azar vídeo (3,7 MB) o cuatro fotos (1,9 MB en JPG), y a veces el texto de cabecera salta (CLS 0,16). En `/club` solo han cambiado el logo y la foto del cierre, que es diferida, además del CSS podado. No se ha optimizado.
+
+### Después de la fase 4 (23 nov 2026)
+
+- `fix/retirar-pdf-y-marcas-agua` fusionada en `main` (`b352f86`) y comprobada en www.
+- **Artículo de incendios:** fuera `incendio-monte.jpg` (EFE). En su lugar, `og-incendios-despoblacion.jpg`: la ladera de matorral es «lo que se encuentran cuando llegan». Es la misma escena que la cabecera, que va bajo un velo casi opaco. Rama para `main`: `fix/imagen-incendios`, sin fusionar.
+- **Puerta de talleres en `/servicios`:** de `new_hero_potter.jpg` a un recorte de `artesana cermica.jpg` (manos en el barro: «para talleres y marcas artesanas»).
+- **Distintivo «Ai»:** borrada `ficha-lote-ejemplo-redactada.webp`; recortadas las siete ilustraciones de `OC_Guia_Materiales_Corta_2025.pdf`, que pasa de 39 a 15 MB.
+- **Sin tocar:** `mirandomadera.jpg` y `hero_artisan_leather.jpg`, hasta que Jose compruebe la licencia.
+- **Menú «Servicios»:** las 25 páginas estáticas con cabecera cargan `nav.js`.
+- **PDF del Sprint:** regenerado desde su fuente (`Servicios_OC/_compartido/Ejemplos_Descargables_Web/_fuente`). El logo y el sello de 2026 no están en esa fuente: se traspasan del PDF publicado.
+- Pendientes de diciembre: `docs/pendientes-diciembre-2026.md`.

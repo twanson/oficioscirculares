@@ -409,6 +409,8 @@
             </div>
         </div>
     </nav>
+    <!-- Menú común (desplegable «Servicios» y menú móvil); síncrono para que los scripts de la página no lo dupliquen -->
+    <script src="/assets/js/nav.js?v=20261122"></script>
   
   <!-- Back to top button -->
   <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
@@ -679,7 +681,7 @@
       const hamburger = document.querySelector('.hamburger');
       const navMenu = document.querySelector('.nav-menu');
       
-      if (hamburger && navMenu) {
+      if (hamburger && navMenu && !window.__ocNav) {
         hamburger.addEventListener('click', () => {
           hamburger.classList.toggle('active');
           navMenu.classList.toggle('active');
@@ -689,7 +691,7 @@
       // Servicios dropdown
       const dropdownBtn = document.getElementById('servicios-dropdown-btn');
       const dropdownMenu = document.getElementById('servicios-dropdown-menu');
-      if (dropdownBtn && dropdownMenu) {
+      if (dropdownBtn && dropdownMenu && !window.__ocNav) {
         dropdownBtn.addEventListener('click', function(e) {
           e.preventDefault();
           const isOpen = dropdownBtn.getAttribute('aria-expanded') === 'false';
