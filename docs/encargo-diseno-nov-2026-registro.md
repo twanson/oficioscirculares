@@ -540,10 +540,12 @@ Se han borrado `impulso-3d.css` y tres partials sin uso (`oc-cta-band`, `oc-hero
 ### Después de la fase 4 (23 nov 2026)
 
 - `fix/retirar-pdf-y-marcas-agua` fusionada en `main` (`b352f86`) y comprobada en www.
-- **Artículo de incendios:** fuera `incendio-monte.jpg` (EFE). En su lugar, `og-incendios-despoblacion.jpg`: la ladera de matorral es «lo que se encuentran cuando llegan». Es la misma escena que la cabecera, que va bajo un velo casi opaco. Rama para `main`: `fix/imagen-incendios`, sin fusionar.
+- **Artículo de incendios:** fuera `incendio-monte.jpg` (EFE). En su lugar, `og-incendios-despoblacion.jpg`: la ladera de matorral es «lo que se encuentran cuando llegan». Es la misma escena que la cabecera, que va bajo un velo casi opaco. `fix/imagen-incendios`, fusionada en `main` (`2c16989`).
 - **Puerta de talleres en `/servicios`:** de `new_hero_potter.jpg` a un recorte de `artesana cermica.jpg` (manos en el barro: «para talleres y marcas artesanas»).
 - **Distintivo «Ai»:** borrada `ficha-lote-ejemplo-redactada.webp`; recortadas las siete ilustraciones de `OC_Guia_Materiales_Corta_2025.pdf`, que pasa de 39 a 15 MB.
 - **Sin tocar:** `mirandomadera.jpg` y `hero_artisan_leather.jpg`, hasta que Jose compruebe la licencia.
 - **Menú «Servicios»:** las 25 páginas estáticas con cabecera cargan `nav.js`.
-- **PDF del Sprint:** regenerado desde su fuente (`Servicios_OC/_compartido/Ejemplos_Descargables_Web/_fuente`). El logo y el sello de 2026 no están en esa fuente: se traspasan del PDF publicado.
+- **PDF del Sprint:** regenerado desde su fuente (`Servicios_OC/_compartido/Ejemplos_Descargables_Web/_fuente`). El logo y el sello de 2026 están en `_fuente/assets` y los coloca el script. El del Roadmap aún no lleva el sello en su fuente.
 - Pendientes de diciembre: `docs/pendientes-diciembre-2026.md`.
+- **PDF del Sprint, segunda revisión:** «Ejemplo ilustrativo, inspirado en un tipo de proyecto real…» en portada y página 2; «ciclo cerrado» pasa a «aprovechamiento de recortes».
+- **Consola:** `observerOptions` renombrado en `/blog/` y `/sobre-nosotros/`; mismas capturas antes y después.
