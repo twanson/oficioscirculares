@@ -675,7 +675,7 @@ html:has(.oc-landing),html:has(.oc-landing) body{overflow-x:clip}
 .oc-landing .pasos-grid--cinco .paso{padding:30px 18px 26px}
 .oc-landing .pasos-grid--cinco::before{left:9%;right:9%}
 .oc-landing .oc-documento--foto .oc-documento-img img{width:100%;max-width:440px;border-radius:24px;transform:none;filter:none}
-.oc-landing .oc-documento p{font-size:16.5px;line-height:1.65;margin-bottom:14px}
+.oc-landing .oc-documento p{color:rgba(251,247,239,.86);font-size:16.5px;line-height:1.65;margin-bottom:14px}
 .oc-landing .oc-documento p strong{color:var(--crema)}
 .oc-landing .oc-documento li strong{color:var(--crema)}
 .oc-landing .resol > p:not(.puente){color:rgba(251,247,239,.85);font-size:19px;max-width:56ch;margin:0 auto 18px}
@@ -749,3 +749,25 @@ html:has(.oc-landing),html:has(.oc-landing) body{overflow-x:clip}
   .oc-landing .cajas-grid--dos{grid-template-columns:1fr;max-width:560px}
   .oc-landing .pasos-grid--dos{grid-template-columns:1fr;max-width:420px}
 }
+
+/* Cabecera partida: texto sobre verde hondo e ilustración enmarcada (imágenes que no dan para ir a sangre) */
+.oc-landing .club-hero--partida{min-height:0;background:radial-gradient(760px 520px at 82% 40%,rgba(232,213,183,.14),transparent 65%),var(--verde-hondo)}
+.oc-landing .club-hero--partida .hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;max-width:1200px;padding-top:120px;padding-bottom:80px}
+.oc-landing .club-hero--partida h1{font-size:clamp(42px,4.8vw,66px);margin-bottom:22px}
+.oc-landing .club-hero--partida .sub{margin-bottom:34px}
+.oc-landing .hero-ilustracion{margin:0;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.oc-landing .hero-ilustracion img{width:100%;height:auto;display:block}
+.oc-landing .club-hero--partida + .cajas{padding-top:72px}
+@media(max-width:980px){
+  .oc-landing .club-hero--partida .hero-inner{grid-template-columns:1fr;gap:40px;padding-top:104px;padding-bottom:56px}
+  .oc-landing .hero-ilustracion{max-width:560px}
+}
+@media(max-width:640px){
+  .oc-landing .club-hero--partida .hero-inner{padding-top:76px;padding-bottom:44px}
+}
+
+/* Caja con una página del documento de ejemplo: más alta, sin velo y alineada arriba */
+.oc-landing .caja-foto--doc{height:250px;background:#FAF9F6}
+.oc-landing .caja-foto--doc img{object-position:top}
+.oc-landing .caja-foto--doc::after{content:none}
+@media(max-width:640px){.oc-landing .caja-foto--doc{height:210px}}

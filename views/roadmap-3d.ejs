@@ -13,14 +13,14 @@
     canonical: '/servicios/roadmap-3d',
     ogImage: 'https://www.oficioscirculares.com/img/servicios/Hero_Roadmap3d.png',
     ogImageAlt: 'Roadmap 3D de Oficios Circulares: plan de 90 días con hitos y métricas',
-    precargaImagen: IMG + 'hero-roadmap-taller-metal.webp'
+    precargaImagen: IMG + 'hero-roadmap-ilustracion.webp'
 }) %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122h">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123b">
 <%- include('partials/header') %>
 
 <main class="oc-landing" id="maincontent">
   <%- include('partials/landing-hero', {
-      img: IMG + 'hero-roadmap-taller-metal.webp', compacta: true,
+      img: IMG + 'hero-roadmap-ilustracion.webp', ancho: 1000, alto: 1000, partida: true, alt: 'Mesa con una carpeta del Roadmap 3D, un calendario de 90 días y un cronograma en el portátil',
       badge: 'Roadmap 3D · Plan de 90 días',
       titulo: 'Tu plan paso a paso <em>para hacerlo realidad</em>',
       sub: 'Ya sabes qué quieres hacer. Ahora necesitas saber cómo. En 2 semanas te diseñamos un plan de 90 días con todo lo que necesitas para poner en marcha tu primera mejora circular con confianza.',
@@ -40,7 +40,7 @@
     <div class="wrap">
       <div class="cajas-grid cajas-grid--dos">
         <div class="caja caja--dark reveal">
-          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-operacion-material.webp" alt="Lana en bruto vista de cerca" width="900" height="562"></div>
+          <div class="caja-foto caja-foto--doc"><img loading="lazy" src="<%= IMG %>caja-operacion-plan90.webp" alt="Cronograma del Roadmap 3D de ejemplo: líneas de trabajo por mes e hitos en los días 30, 60 y 90" width="900" height="562"></div>
           <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
           <span class="num">Operación</span>
           <h3>Tu mejora circular definida al detalle</h3>
@@ -52,7 +52,7 @@
           </ul>
         </div>
         <div class="caja caja--light reveal">
-          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-comunicacion-plan.webp" alt="Mesa con un portátil, un calendario y una carpeta de planificación" width="900" height="562"></div>
+          <div class="caja-foto caja-foto--doc"><img loading="lazy" src="<%= IMG %>caja-comunicacion-piezas.webp" alt="Lista de piezas del Roadmap 3D de ejemplo, con prioridad y responsable" width="900" height="562"></div>
           <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
           <span class="num">Comunicación</span>
           <h3>Cómo vas a contarlo</h3>
@@ -135,7 +135,7 @@
       <p>Un plan bien pensado te ahorra meses de prueba y error. Los materiales, el tiempo y la reputación que proteges valen mucho más que esta inversión.</p>
     </div>
     <div class="wrap oc-camino-wrap">
-      <div class="oc-camino-foto reveal"><img loading="lazy" src="<%= IMG %>precio-materiales.webp" alt="Ladrillos de barro colocados en espiga" width="900" height="720"></div>
+      <div class="oc-camino-foto reveal"><img loading="lazy" src="<%= IMG %>precio-alcance.webp" alt="Página del Roadmap 3D de ejemplo con lo que incluye y lo que no" width="900" height="720"></div>
       <ol class="oc-camino oc-camino--lista">
         <li class="reveal"><span class="n">1</span><b>Diagnóstico</b><span>Detectamos las oportunidades y cuál conviene hacer primero.</span></li>
         <li class="reveal"><span class="n">2</span><b>Propuesta cerrada</b><span>Te enviamos alcance, plazo y precio cerrados para el Roadmap.</span></li>
@@ -156,7 +156,7 @@
   </section>
 
   <%- include('partials/landing-final', {
-      img: IMG + 'cierre-bobinas.webp',
+      img: IMG + 'cierre-trazado.webp',
       eyebrow: 'Siguiente paso',
       titulo: '¿Empezamos? <em>Un plan claro de 90 días</em>',
       texto: 'En 2 semanas tendrás un plan claro de 90 días con proveedores, recursos y plantillas. Todo lo que necesitas para dar el primer paso con confianza.',

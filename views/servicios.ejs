@@ -14,7 +14,7 @@ const meta = {
               precargaImagen: IMG + 'hero-talleres-alfarero.webp' },
   empresas: { title: 'Servicios para empresas | Oficios Circulares', canonical: '/servicios/empresas',
               description: 'Diagnóstico 3D para empresas, Roadmap 3D y Sprint 3D: de detectar una mejora circular a ponerla en marcha y contarla.',
-              precargaImagen: IMG + 'hero-empresas-acero.webp' }
+              precargaImagen: IMG + 'hero-empresas-bobinas.webp' }
 }[puerta];
 const CIFRAS = ['altas_conecta_lana', 'lana_registrada', 'material_con_salida'];
 const contactoEmpresas = c => '/contacto?service=diagnostico-3d-empresas&oc_source=site&oc_medium=internal&oc_campaign=oc-empresas&oc_content=' + c + '&page_path=/servicios/empresas';
@@ -30,7 +30,7 @@ const ICO = {
 const T = testimoniosLib;
 %>
 <%- include('partials/head-meta', meta) %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122h">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123b">
 <%- include('partials/header') %>
 
 <main class="oc-landing" id="maincontent">
@@ -101,7 +101,7 @@ const T = testimoniosLib;
   <%- include('partials/landing-cifras', { impacto, ids: CIFRAS, titulo: 'La red, con fecha', claro: true }) %>
 
   <%- include('partials/landing-final', {
-      img: '/assets/images/workshop_tools.jpg',
+      img: IMG + 'cierre-servicios-cesteria.webp',
       eyebrow: 'Siguiente paso',
       titulo: 'Tu oficio tiene valor, <em>vamos a contarlo</em>',
       texto: 'Empieza por la puerta que te corresponde. Si dudas, escríbenos y te decimos cuál.',
@@ -114,22 +114,13 @@ const T = testimoniosLib;
       img: IMG + 'hero-talleres-alfarero.webp', alto: 1272,
       badge: 'Soy un taller o una marca artesana',
       titulo: 'Que tu oficio se entienda <em>y se venda</em>',
-      sub: 'Tres formas de trabajar con nosotros, de la más ligera a la más completa. Cada una tiene un precio cerrado.',
+      sub: 'Para cualquier taller o marca artesana que haga piezas físicas: cerámica, madera, textil, cuero, joyería, cosmética natural y más. Tres formas de trabajar con nosotros, de la más ligera a la más completa. Cada una tiene un precio cerrado.',
       ctas: [
         { href: '#servicios', texto: 'Ver los servicios →', clase: 'terracota' },
         { href: '/servicios/empresas', texto: '¿Eres una empresa?', clase: 'ghost', label: 'talleres-hero-empresas' }
       ],
       datos: 'Club ' + P.texto('club_mensual') + ' · Diagnóstico ' + P.texto('diagnostico_talleres') + ' + IVA · Impulso 3D ' + P.texto('impulso_3d') + ' + IVA'
   }) %>
-
-  <!-- Qué es y para quién -->
-  <section class="oc-intro">
-    <div class="wrap">
-      <span class="eyebrow">Para talleres y marcas artesanas</span>
-      <h2>Método, comunidad y acompañamiento <em>para que tu oficio se entienda y se venda</em></h2>
-      <p>Para cualquier taller o marca artesana que haga piezas físicas: cerámica, madera, textil, cuero, joyería, cosmética natural y más.</p>
-    </div>
-  </section>
 
   <!-- Tu camino: cajas con foto -->
   <section class="cajas" id="servicios">
@@ -141,7 +132,7 @@ const T = testimoniosLib;
     <div class="wrap">
       <div class="cajas-grid">
         <div class="caja caja--light reveal">
-          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-club-taller.webp" alt="Varias personas trabajando juntas en un taller compartido" width="640" height="427"></div>
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-club-manos.webp" alt="Varias personas trabajando juntas sobre la misma mesa de taller" width="900" height="562"></div>
           <div class="chip"><%- ICO.club %></div>
           <span class="num">Comunidad y método</span>
           <h3>Club de Oficios Circulares</h3>
@@ -169,7 +160,7 @@ const T = testimoniosLib;
           <a class="club-btn club-btn--terracota" href="/servicios/diagnostico-3d">Ver el Diagnóstico →</a>
         </div>
         <div class="caja caja--accent reveal">
-          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-impulso-textil.webp" alt="Manos marcando un patrón sobre tela en un taller" width="900" height="562"></div>
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/caja-impulso-perfil.webp" alt="Móvil con el perfil de ejemplo de un taller de cerámica" width="900" height="562"></div>
           <div class="chip"><%- ICO.megafono %></div>
           <span class="num">Tu sistema de comunicación</span>
           <h3>Impulso 3D</h3>
@@ -238,7 +229,7 @@ const T = testimoniosLib;
 
 <% } else { %>
   <%- include('partials/landing-hero', {
-      img: IMG + 'hero-empresas-acero.webp', compacta: true,
+      img: IMG + 'hero-empresas-bobinas.webp', ancho: 1600, alto: 1067, compacta: true,
       badge: 'Soy una empresa',
       titulo: 'De la idea circular <em>al caso que puedes contar</em>',
       sub: 'Para empresas que fabrican o transforman materiales y quieren detectar una mejora circular, planificarla y ponerla en marcha.',
@@ -259,7 +250,7 @@ const T = testimoniosLib;
     <div class="wrap">
       <div class="cajas-grid">
         <div class="caja caja--dark reveal">
-          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-empresas-diagnostico.webp" alt="Mano con un lápiz sobre una mesa de trabajo" width="900" height="562"></div>
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-empresas-material.webp" alt="Cubo y cajas de madera llenos de tapones de corcho recogidos" width="900" height="562"></div>
           <div class="chip"><%- ICO.lupa %></div>
           <span class="num">Detectar</span>
           <h3>Diagnóstico 3D para empresas</h3>
@@ -329,7 +320,7 @@ const T = testimoniosLib;
       <h2>Cómo se llega <em>al precio</em></h2>
     </div>
     <div class="wrap oc-camino-wrap">
-      <div class="oc-camino-foto reveal"><img loading="lazy" src="<%= IMG %>precio-empresas-taller-metal.webp" alt="Operario trabajando en un taller de metal con su maquinaria" width="900" height="720"></div>
+      <div class="oc-camino-foto reveal"><img loading="lazy" src="<%= IMG %>precio-empresas-matriz.webp" alt="Matriz de viabilidad de un Roadmap 3D de ejemplo: cada opción con su impacto, su factibilidad y su veredicto" width="900" height="720"></div>
       <ol class="oc-camino oc-camino--lista">
         <li class="reveal"><span class="n">1</span><b>Diagnóstico</b><span>Detectamos las oportunidades y cuál conviene hacer primero.</span></li>
         <li class="reveal"><span class="n">2</span><b>Propuesta cerrada</b><span>Te enviamos alcance, plazo y precio cerrados para el Roadmap o el Sprint.</span></li>
@@ -339,7 +330,7 @@ const T = testimoniosLib;
   </section>
 
   <%- include('partials/landing-final', {
-      img: IMG + 'cierre-empresas-ladrillo.webp',
+      img: IMG + 'cierre-empresas-vellones.webp',
       eyebrow: 'Siguiente paso',
       titulo: 'Convierte una mejora circular <em>en un caso que puedes contar</em>',
       texto: 'Empieza por el Diagnóstico: te decimos qué oportunidades tienes y cuál conviene hacer primero.',

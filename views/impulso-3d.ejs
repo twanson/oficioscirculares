@@ -16,7 +16,7 @@
     ogImageAlt: 'Artesano observando madera en su taller - Impulso 3D de Oficios Circulares',
     precargaImagen: IMG + 'hero-impulso-artesana.webp'
 }) %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122h">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123b">
 <%- include('partials/header') %>
 
 <main class="oc-landing" id="maincontent">
@@ -61,9 +61,9 @@
       <div class="prob-visual" aria-hidden="true">
         <div class="prob-sticky" id="probSticky">
         <img class="activa" loading="lazy" src="/assets/images/landing/impulso/prob-1-artesana.webp" alt="" width="900" height="1352">
-        <img loading="lazy" src="/assets/images/landing/impulso/prob-2-manos-barro.webp" alt="" width="800" height="449">
-        <img loading="lazy" src="/assets/images/landing/impulso/prob-3-retrato.webp" alt="" width="900" height="493">
-        <img loading="lazy" src="/assets/images/landing/impulso/prob-4-taller-vacio.webp" alt="" width="900" height="600">
+        <img loading="lazy" src="/assets/images/landing/impulso/prob-2-cuero.webp" alt="" width="900" height="1350">
+        <img loading="lazy" src="/assets/images/landing/diagnostico/prob-4-cestas.webp" alt="" width="900" height="1117">
+        <img loading="lazy" src="/assets/images/landing/impulso/prob-4-taller-noche.webp" alt="" width="900" height="1117">
           <span class="pie" id="probPie">Tiempo que no vuelve</span>
         </div>
       </div>
@@ -104,28 +104,28 @@
     <div class="wrap">
       <div class="cajas-grid cajas-grid--cuatro">
         <div class="caja caja--light reveal">
-          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-artesana-experimentada.webp" alt="Artesana ceramista experimentada" width="600" height="375"></div>
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/oficio-ceramista.webp" alt="Manos de una ceramista sosteniendo una de sus piezas" width="800" height="500"></div>
           <span class="num" style="margin-top:22px">Ceramista, en torno a 55 a&ntilde;os</span>
           <h3>La Artesana Experimentada</h3>
           <p class="lema"><em>Yo ya era circular sin saberlo, pero no sab&iacute;a c&oacute;mo explicarlo.</em></p>
           <p class="lema" style="margin-bottom:0">Domina su oficio con maestr&iacute;a pero se siente abrumada por lo digital. Necesita un sistema sencillo para contar lo que ya hace.</p>
         </div>
         <div class="caja caja--light reveal">
-          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-maker-moderno.webp" alt="Maker moderno carpintero" width="600" height="375"></div>
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/oficio-carpintero.webp" alt="Manos de un carpintero revisando un tablero de madera" width="800" height="500"></div>
           <span class="num" style="margin-top:22px">Carpintero, en torno a 32 a&ntilde;os</span>
           <h3>El Maker Moderno</h3>
           <p class="lema"><em>Tengo las herramientas, pero necesito la estrategia.</em></p>
           <p class="lema" style="margin-bottom:0">Combina tecnolog&iacute;a con prop&oacute;sito. Busca impacto y comunidad, y quiere aplicar circularidad con coherencia.</p>
         </div>
         <div class="caja caja--light reveal">
-          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-disenadora-consciente.webp" alt="Diseñadora joyera consciente" width="600" height="375"></div>
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/oficio-joyera.webp" alt="Vitrina con joyas en un taller de joyería" width="800" height="500"></div>
           <span class="num" style="margin-top:22px">Joyera, en torno a 28 a&ntilde;os</span>
           <h3>La Dise&ntilde;adora Consciente</h3>
           <p class="lema"><em>S&eacute; por qu&eacute; lo hago, pero necesito saber c&oacute;mo hacerlo mejor.</em></p>
           <p class="lema" style="margin-bottom:0">La sostenibilidad es su pilar desde el inicio. Necesita comunicar su diferenciaci&oacute;n y llegar a su cliente ideal.</p>
         </div>
         <div class="caja caja--light reveal">
-          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/perfil-taller-familiar.webp" alt="Director de taller cer&aacute;mico familiar" width="600" height="375"></div>
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/oficio-taller-ceramico.webp" alt="Manos entregando un encargo en un taller de cerámica" width="800" height="500"></div>
           <span class="num" style="margin-top:22px">Taller cer&aacute;mico familiar, tercera generaci&oacute;n</span>
           <h3>El Taller con Historia</h3>
           <p class="lema"><em>Tenemos 50 a&ntilde;os de historia pero en redes parecemos invisibles.</em></p>
@@ -154,11 +154,14 @@
   </section>
 
   <!-- NO SOLO COMUNICAR -->
-  <section class="oc-intro" id="circularidad-extra">
+  <section class="oc-bloque oc-bloque--invertido" id="circularidad-extra">
     <div class="wrap">
-      <span class="eyebrow">Circularidad</span>
-      <h2>No solo te ayudamos <em>a comunicar</em></h2>
-      <p>Adem&aacute;s de darte las herramientas para contar tu historia, analizamos tu proceso y te proponemos mejoras concretas en circularidad: desde la elecci&oacute;n de materiales hasta la reutilizaci&oacute;n de residuos. Porque comunicar circularidad es m&aacute;s f&aacute;cil cuando realmente la practicas.</p>
+      <div class="oc-bloque-foto reveal"><img loading="lazy" src="<%= IMG %>circularidad-pieza.webp" alt="Pieza hecha con corcho triturado, junto al material del que sale" width="900" height="720"></div>
+      <div class="reveal">
+        <span class="eyebrow">Circularidad</span>
+        <h2>No solo te ayudamos <em>a comunicar</em></h2>
+        <p class="intro">Adem&aacute;s de darte las herramientas para contar tu historia, analizamos tu proceso y te proponemos mejoras concretas en circularidad: desde la elecci&oacute;n de materiales hasta la reutilizaci&oacute;n de residuos. Porque comunicar circularidad es m&aacute;s f&aacute;cil cuando realmente la practicas.</p>
+      </div>
     </div>
   </section>
 
@@ -191,7 +194,7 @@
           <a id="cta-card-diag" class="club-btn club-btn--verde" href="/servicios/diagnostico-3d?oc_source=site&amp;oc_medium=internal&amp;oc_campaign=oc-impulso-3d&amp;oc_content=card-diag">Quiero mi Diagn&oacute;stico</a>
         </div>
         <div class="caja caja--dark reveal">
-          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-impulso-herramientas.webp" alt="Herramientas de taller sobre una mesa oscura" width="900" height="562"></div>
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-impulso-perfil.webp" alt="Móvil con el perfil de ejemplo de un taller de cerámica" width="900" height="562"></div>
           <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
           <span class="num">Tu sistema de comunicaci&oacute;n</span>
           <h3>Impulso 3D</h3>
@@ -214,7 +217,7 @@
           <a id="cta-card-impulso" class="club-btn club-btn--terracota" href="/contacto?service=impulso-3d-basico&oc_source=site&oc_medium=internal&oc_campaign=oc-impulso-3d&oc_content=card-impulso&page_path=/impulso-3d">Quiero mi Impulso 3D</a>
         </div>
         <div class="caja caja--accent reveal">
-          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-completo-taller.webp" alt="Esp&aacute;tulas de pintor sobre un lienzo en blanco" width="900" height="562"></div>
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-completo-video.webp" alt="Secuencia de planos de un vídeo corto grabado en el taller" width="900" height="562"></div>
           <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 14.6l-4.9 3.6 1.9-5.8L4 8.8h6.1z"/></svg></div>
           <span class="num">Tu taller de comunicaci&oacute;n equipado</span>
           <h3>Impulso 3D Completo</h3>

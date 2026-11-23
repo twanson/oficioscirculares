@@ -2,16 +2,21 @@
   Cabecera inmersiva del sistema oc-landing (las dos plantillas). Foto a sangre con velo.
   Parámetros: img, ancho, alto, badge, titulo (HTML, con <em> de acento), sub (HTML),
   ctas [{href, texto, clase ('terracota'|'ghost'|'arena'), id, label}], datos (línea de precio o dato), compacta (true = menos alto, para que lo que se entrega se vea antes).
+  partida (true = texto a la izquierda sobre verde hondo e ilustración enmarcada a la derecha; para imágenes
+  que no dan para ir a sangre; alt describe la ilustración).
   La imagen se precarga desde head-meta con precargaImagen.
 %>
-<header class="club-hero<%= locals.compacta ? ' club-hero--compacta' : '' %>" id="top">
+<header class="club-hero<%= locals.compacta ? ' club-hero--compacta' : '' %><%= locals.partida ? ' club-hero--partida' : '' %>" id="top">
+  <% if (!locals.partida) { %>
   <div class="hero-media" aria-hidden="true">
     <div class="hero-slides">
       <img src="<%= img %>" alt="" width="<%= locals.ancho || 1920 %>" height="<%= locals.alto || 1280 %>" fetchpriority="high" style="opacity:1;animation:none">
     </div>
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
+  <% } %>
   <div class="hero-inner">
+    <% if (locals.partida) { %><div class="hero-texto"><% } %>
     <span class="hero-badge"><img src="/assets/images/brand/oc-logo-2026-cuadrado.png" alt="" width="20" height="20"><%- badge %></span>
     <h1><%- titulo %></h1>
     <% if (locals.sub) { %><p class="sub"><%- sub %></p><% } %>
@@ -22,5 +27,7 @@
     </div>
     <% } %>
     <% if (locals.datos) { %><span class="datos-linea"><%- datos %></span><% } %>
+    <% if (locals.partida) { %></div>
+    <figure class="hero-ilustracion"><img src="<%= img %>" alt="<%= locals.alt || '' %>" width="<%= locals.ancho || 1000 %>" height="<%= locals.alto || 1000 %>" fetchpriority="high"></figure><% } %>
   </div>
 </header>
