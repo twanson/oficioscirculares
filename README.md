@@ -39,8 +39,6 @@ oficios_circulares_website/
 │   └── images/
 │       ├── logodegraoscuro.png
 │       ├── hero_artisan_leather.jpg
-│       ├── pottery_hands.jpg
-│       ├── workshop_tools.jpg
 │       ├── community_workshop.jpg
 │       └── wood_texture.jpg
 └── README.md                  # Este archivo
