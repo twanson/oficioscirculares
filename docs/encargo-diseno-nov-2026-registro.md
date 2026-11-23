@@ -458,7 +458,6 @@ Base: `https://oficioscirculares-production.up.railway.app`
 | Impacto | Qué lo respalda | Una foto del ensayo de acolchado en Ourense |
 | Empresas | Diagnóstico y cierre | Fotos de una empresa real con su material sobrante |
 | Empresas | Tarjetas Roadmap y Sprint | Se mantienen las ilustraciones: explican el servicio, pero el tono es más claro que el resto |
-| Portada, Club y oficios | Cierres | Sustituto de `workshop_tools.jpg` (marca de agua) |
 | Portada | Comunidad | Retratos de Esther, Jorge y Maika |
 | Diagnóstico | Testimonios | Un segundo testimonio autorizado |
 
@@ -491,3 +490,49 @@ Staging, con `npx lighthouse` y sus ajustes móviles por defecto. Columna «prod
 
 - Menú con ratón, teclado y móvil, y consola limpia, en las ocho páginas del encargo (en local). Capturas a 375 px sin desbordamiento horizontal.
 - En staging, todas las imágenes de `landing/` responden 200. `npm test`: 18 pruebas, todas pasan.
+
+## Fase 4 y marcas de agua (23 nov 2026)
+
+### Marcas de agua
+
+`workshop_tools.jpg` y `pottery_hands.jpg` (dreamstime) se han borrado. La rama `fix/retirar-pdf-y-marcas-agua`, que sale de `main`, lleva lo mismo para producción, más la retirada del PDF de textil. No está fusionada.
+
+| Sección | Antes | Ahora | Por qué esta imagen aquí |
+|---|---|---|---|
+| Portada, cierre | `workshop_tools.jpg` | `cierres/taller-oficio.webp` | Una persona en su taller: «cada creador se convierte en agente de transformación» |
+| Oficios, cierre (los 16) | `workshop_tools.jpg` | `cierres/herramientas-oficio.webp` | Herramientas de varios oficios: sirve en cualquier vertical |
+| `/club`, cierre | `workshop_tools.jpg` | `cierres/relevo-taller.webp` | Dos generaciones sobre la misma pieza: «pasando de mano en mano» |
+| Talleres, cierre | recorte de `Taller vacio.png` | recorte de `taller acero.jpg` | Todo el herramental a la vista: «saber qué tienes». La anterior era una versión sin marca de la misma escena de dreamstime |
+
+Revisión de todas las imágenes de `public/` a ojo y por metadatos, y de las imágenes incrustadas en los PDF. No hay más marcas de banco. Otras dudas, sin tocar:
+
+| Archivo | Qué pasa | Dónde se ve |
+|---|---|---|
+| `mirandomadera.jpg` | Metadatos de Getty/iStock (PeopleImages) | Imagen para compartir de `/impulso-3d` y dentro de `Circular_Express…2025.pdf` |
+| `blog/incendios-…/incendio-monte.jpg` | Metadatos de EFE, sin crédito en la página | Artículo de incendios |
+| `new_hero_potter.jpg`, `hero_artisan_leather.jpg` | Firma «MULLINS» en la esquina | Recortada, sin la firma, en la puerta de talleres de `/servicios`. No están en producción |
+| `cases/e-wear/ficha-lote-ejemplo-redactada.webp` | Distintivo de generador en la esquina | Sin uso |
+| `OC_Guia_Materiales_Corta_2025.pdf` | El mismo distintivo en varias ilustraciones | Descargable |
+| `Taller vacio.png` | Misma escena que la foto de dreamstime, sin marca | Sin uso |
+
+### CSS
+
+Se han borrado `impulso-3d.css` y tres partials sin uso (`oc-cta-band`, `oc-hero`, `testimonio-blanca`). En `pages-v2.css`, `oc-puertas.css` y `oc-landing.css` se han quitado las clases que no aparecen en ninguna vista, página, script ni dato: de 68 a menos de 33 KB, de 7,7 a 3,3 KB y 0,8 KB menos. Comparadas 15 páginas a 1280 y 375 px: solo cambia lo buscado, más las cabeceras animadas.
+
+### Portada
+
+- Fotos en WebP con varios anchos. La primera con prioridad; las otras cinco se piden de una en una.
+- Con Lighthouse móvil baja de unos 12 MB a 1,6 MB.
+- Logo cuadrado: de 195 a 12 KB en todas las páginas que lo llevan. Sello: de 67 a 35 KB.
+
+### Lighthouse móvil en staging (rendimiento)
+
+| Página | Antes (una pasada) | Ahora | Mediana |
+|---|---|---|---|
+| `/` | 91 | 91, 90, 90, 89, 84 | 90 |
+| Guía de joyería | 89 | 90, 93, 79, 93, 97 | 93 |
+| `/club`, primera tanda | 88 | 90, 74, 86 | 86 |
+| `/club`, dos tandas después | — | 74, 65, 67, 75 (una fallida) y 78, 71, 65, 74, 72 | 72–74 |
+
+- **Portada:** el 91 de antes no contaba la foto de cabecera, que aún se estaba descargando cuando se pintaba el texto. Lo que más frena ahora es la hoja de Google Fonts (unos 0,9 s simulados).
+- **`/club`:** reparte al azar vídeo (3,7 MB) o cuatro fotos (1,9 MB en JPG), y a veces el texto de cabecera salta (CLS 0,16). En `/club` solo han cambiado el logo y la foto del cierre, que es diferida, además del CSS podado. No se ha optimizado.
