@@ -510,14 +510,14 @@ Revisión de todas las imágenes de `public/` a ojo y por metadatos, y de las im
 |---|---|---|
 | `mirandomadera.jpg` | Metadatos de Getty/iStock (PeopleImages) | Imagen para compartir de `/impulso-3d` y dentro de `Circular_Express…2025.pdf` |
 | `blog/incendios-…/incendio-monte.jpg` | Metadatos de EFE, sin crédito en la página | Artículo de incendios |
-| `new_hero_potter.jpg`, `hero_artisan_leather.jpg` | Firma «MULLINS» en la esquina | Recortada, sin la firma, en la puerta de talleres de `/servicios`. No están en producción |
+| `new_hero_potter.jpg`, `hero_artisan_leather.jpg` | Firma «MULLINS» en la esquina | Recortada, sin la firma, en la puerta de talleres de `/servicios`. Los originales están en producción, sin uso |
 | `cases/e-wear/ficha-lote-ejemplo-redactada.webp` | Distintivo de generador en la esquina | Sin uso |
 | `OC_Guia_Materiales_Corta_2025.pdf` | El mismo distintivo en varias ilustraciones | Descargable |
 | `Taller vacio.png` | Misma escena que la foto de dreamstime, sin marca | Sin uso |
 
 ### CSS
 
-Se han borrado `impulso-3d.css` y tres partials sin uso (`oc-cta-band`, `oc-hero`, `testimonio-blanca`). En `pages-v2.css`, `oc-puertas.css` y `oc-landing.css` se han quitado las clases que no aparecen en ninguna vista, página, script ni dato: de 68 a menos de 33 KB, de 7,7 a 3,3 KB y 0,8 KB menos. Comparadas 15 páginas a 1280 y 375 px: solo cambia lo buscado, más las cabeceras animadas.
+Se han borrado `impulso-3d.css` y tres partials sin uso (`oc-cta-band`, `oc-hero`, `testimonio-blanca`). En `pages-v2.css`, `oc-puertas.css` y `oc-landing.css` se han quitado las clases que no aparecen en ninguna vista, página, script ni dato: de 68 a 28 KB, de 7,7 a 2,3 KB y 0,8 KB menos. Comparadas 15 páginas a 1280 y 375 px: solo cambia lo buscado, más las cabeceras animadas.
 
 ### Portada
 
