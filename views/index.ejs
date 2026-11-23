@@ -32,9 +32,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
-    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260325c">
+    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=20261123c">
     <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
-    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261122b">
+    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261123c">
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -96,28 +96,35 @@
          ═══════════════════════════════════ -->
     <section class="hero-v2" id="hero">
         <div class="hero-v2-bg">
-            <img class="hero-slide active" src="/assets/images/artesana blanco y negro.jpg"
+            <img class="hero-slide active" src="/assets/images/portada/hero-artesana-1600.webp"
+                 srcset="/assets/images/portada/hero-artesana-640.webp 640w, /assets/images/portada/hero-artesana-960.webp 960w, /assets/images/portada/hero-artesana-1600.webp 1600w, /assets/images/portada/hero-artesana-2397.webp 2397w"
+                 sizes="max(100vw, 67vh)" width="1600" height="2404" fetchpriority="high"
                  alt="Artesana enfocada en su proceso creativo"
                  style="object-position: 70% center"
                  loading="eager">
-            <img class="hero-slide" src="/assets/images/wood_texture.jpg"
-                 alt="Textura de madera natural"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/Diseñadora_taller_Textil.jpg"
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-madera-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-madera-960.webp 960w, /assets/images/portada/hero-madera-1440.webp 1440w, /assets/images/portada/hero-madera-1920.webp 1920w, /assets/images/portada/hero-madera-2560.webp 2560w"
+                 sizes="max(100vw, 150vh)"
+                 alt="Textura de madera natural">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-textil-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-textil-960.webp 960w, /assets/images/portada/hero-textil-1440.webp 1440w, /assets/images/portada/hero-textil-1920.webp 1920w, /assets/images/portada/hero-textil-2560.webp 2560w"
+                 sizes="max(100vw, 150vh)"
                  alt="Diseñadora en su taller textil"
-                 style="object-position: 65% center"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/Herramientas moderno-301703.jpg"
-                 alt="Herramientas de oficio modernas"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/artesana cermica.jpg"
+                 style="object-position: 65% center">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-herramientas-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-herramientas-960.webp 960w, /assets/images/portada/hero-herramientas-1440.webp 1440w, /assets/images/portada/hero-herramientas-1920.webp 1920w, /assets/images/portada/hero-herramientas-2560.webp 2560w"
+                 sizes="max(100vw, 150vh)"
+                 alt="Herramientas de oficio modernas">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-ceramica-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-ceramica-960.webp 960w, /assets/images/portada/hero-ceramica-1440.webp 1440w, /assets/images/portada/hero-ceramica-1920.webp 1920w, /assets/images/portada/hero-ceramica-2560.webp 2560w"
+                 sizes="max(100vw, 150vh)"
                  alt="Artesana trabajando la cerámica"
-                 style="object-position: 70% center"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/puliendo madera.jpg"
+                 style="object-position: 70% center">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-pulido-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-pulido-960.webp 960w, /assets/images/portada/hero-pulido-1440.webp 1440w, /assets/images/portada/hero-pulido-1920.webp 1920w, /assets/images/portada/hero-pulido-2560.webp 2560w"
+                 sizes="max(100vw, 150vh)"
                  alt="Artesano puliendo madera"
-                 style="transform: scaleX(-1); object-position: 60% center"
-                 loading="eager">
+                 style="transform: scaleX(-1); object-position: 60% center">
             <div class="hero-v2-gradient"></div>
         </div>
 
@@ -204,7 +211,9 @@
                         </div>
                     </div>
                     <div class="servicio-featured-img">
-                        <img src="/assets/images/yunque 3.jpg"
+                        <img src="/assets/images/portada/yunque-1200.webp"
+                             srcset="/assets/images/portada/yunque-700.webp 700w, /assets/images/portada/yunque-1200.webp 1200w"
+                             sizes="(max-width: 1024px) 100vw, 600px"
                              alt="Artesano trabajando en el yunque"
                              loading="lazy">
                         <div class="servicio-featured-quote glass-card">
@@ -336,10 +345,26 @@
             const slides = document.querySelectorAll('.hero-slide');
             if (slides.length > 1) {
                 let current = 0;
+                // Las fotos 2 a 6 se piden de una en una, cuando la anterior ya está en pantalla.
+                const cargar = function(img) {
+                    if (img && img.dataset.foto) {
+                        img.srcset = img.dataset.fotoSrcset;
+                        img.src = img.dataset.foto;
+                        delete img.dataset.foto;
+                        delete img.dataset.fotoSrcset;
+                    }
+                };
+                const preparar = function() { cargar(slides[(current + 1) % slides.length]); };
+                if (document.readyState === 'complete') preparar();
+                else window.addEventListener('load', preparar);
                 setInterval(function() {
+                    const siguiente = (current + 1) % slides.length;
+                    cargar(slides[siguiente]);
+                    if (!slides[siguiente].complete || !slides[siguiente].naturalWidth) return;
                     slides[current].classList.remove('active');
-                    current = (current + 1) % slides.length;
+                    current = siguiente;
                     slides[current].classList.add('active');
+                    preparar();
                 }, 5000);
             }
 
@@ -404,7 +429,7 @@
       <button class="blog-popup__close" id="blog-popup-close" aria-label="Cerrar">×</button>
       <a class="blog-popup__link" href="/conecta-lana?oc_source=home&amp;oc_medium=popup&amp;oc_campaign=conecta-lana">
         <div class="blog-popup__media">
-          <img class="blog-popup__img" src="/assets/images/conecta-cover.jpg" alt="Rebaño de ovejas en una dehesa española al atardecer" loading="lazy">
+          <img class="blog-popup__img" src="/assets/images/portada/conecta-lana-720.webp" alt="Rebaño de ovejas en una dehesa española al atardecer" loading="lazy">
           <span class="blog-popup__badge">Nuevo</span>
         </div>
         <div class="blog-popup__body">

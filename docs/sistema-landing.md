@@ -1,12 +1,12 @@
 # Sistema de las páginas de aterrizaje (`oc-landing.css`)
 
-Este es el sistema de las páginas principales: `/club` y `/conecta-lana`. Cualquier página de aterrizaje nueva se monta con estos componentes. No se inventa un estilo propio para ella.
+Este es el sistema de las páginas principales: `/club`, `/conecta-lana`, `/servicios` (con talleres y empresas), Diagnóstico, Roadmap, Sprint, Impulso e Impacto. Cualquier página de aterrizaje nueva se monta con estos componentes. No se inventa un estilo propio para ella.
 
 ## Cómo se usa
 
 ```html
 <%- include('partials/head-meta', { title: '…', description: '…', canonical: '/…' }) %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261122a">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123c">
 <%- include('partials/header') %>   <!-- trae nav.js: menú «Servicios» y menú móvil -->
 <main class="oc-landing">
   … secciones …
@@ -23,6 +23,17 @@ Este es el sistema de las páginas principales: `/club` y `/conecta-lana`. Cualq
   const rev = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); } }), {threshold: .12});
   document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
   ```
+
+### Qué hoja lleva cada página
+
+| Hoja | Dónde se usa |
+|---|---|
+| `styles.css` | Todas: cabecera, pie y base |
+| `oc-landing.css` | Las páginas de este sistema |
+| `home-v2.css` y `oc-puertas.css` | Portada y `/oficios/…` |
+| `pages-v2.css` | Portada, oficios, blog, FAQ y las vistas con `head-meta` |
+
+`impulso-3d.css` ya no existe. `pages-v2.css` y `oc-puertas.css` solo conservan clases en uso (poda de la fase 4).
 
 ## Dos plantillas sobre el mismo sistema
 
@@ -121,7 +132,7 @@ Enseña una página del PDF de ejemplo dentro de una caja: más alta, sin velo y
 | Testimonios | `.testi` `.testi-grid` (`--dos`) `.testi-card` `.comillas` `.firma` `.avatar` `.rol` `.nota` | Cita con retrato. Se leen de `data/testimonios.json` (`lib/testimonios.js`) |
 | Quién está detrás | `.detras` `.detras-grid` `.detras-foto` `.detras-texto` `.detras-firma` | Jose, con foto y firma |
 | Para quién sí y no | `.quien` `.quien-grid` `.quien-col.si` `.quien-col.no` `.quien-cta` | Dos columnas enfrentadas, con icono y texto (no solo color) |
-| Precio | `.precios` `.planes` `.plan` (`--destacado`, `--mensual`) `.plan-badge` `.plan-eyebrow` `.plan-precio` `.plan-equiv` `.perks` `.perk` `.pro-nota` | Precio con jerarquía |
+| Precio | `.precios` `.planes` `.plan` (`--destacado`, `--mensual`) `.plan-badge` `.plan-eyebrow` `.plan-precio` `.plan-equiv` `.perks` `.perk` | Precio con jerarquía |
 | Preguntas frecuentes | `.faq` con `<details><summary>…</summary><p class="resp">…</p></details>` | Acordeón nativo, accesible con teclado |
 | Cierre | `.final` `.fondo` `.contenido` `.pd` | Foto a sangre con llamada a la acción |
 | Banda de confianza | `.confianza` | Sello y frase final sobre verde hondo |
@@ -180,3 +191,6 @@ Enseña una página del PDF de ejemplo dentro de una caja: más alta, sin velo y
 - Sin marcadores `[PENDIENTE…]` visibles, sin emojis y sin testimonios fuera de `data/testimonios.json`.
 - **Pertinencia:** cada imagen tiene relación directa con lo que dice su sección y se justifica en una línea en el registro («por qué esta imagen aquí»). Si no se puede justificar, se cambia o pasa a «imágenes que faltan».
 - **Ritmo de titulares:** no hay dos secciones seguidas que sean solo etiqueta, titular y párrafo centrados.
+- **Marca de agua:** no se sube ninguna foto con marca de un banco de imágenes ni se recortan firmas para taparlas. Ante la duda, se mira el original y sus metadatos.
+- **Logo pequeño:** hasta 56 px se usa `brand/oc-logo-2026-cuadrado-168.webp` (12 KB). El PNG de 195 KB es solo el original.
+- **Fotos a sangre:** `srcset` con varios anchos y `sizes` pensado para `object-fit: cover` (`max(100vw, 150vh)` en foto apaisada). Los carruseles piden cada foto cuando la anterior ya se ve; no se usa `data-src`, porque `script.js` carga de golpe todo lo que lo lleva.

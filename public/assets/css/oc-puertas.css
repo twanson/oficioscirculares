@@ -1,20 +1,5 @@
-/* =====================================================================
-   OC · Ajustes mínimos para las páginas del encargo de noviembre 2026
-   (/servicios, /servicios/talleres, /servicios/empresas, /impacto,
-   /servicios/diagnostico-3d y las dos puertas de la portada).
-
-   Estas páginas usan los componentes de Impulso 3D (impulso-3d.css:
-   impulso-hero, impulso-section, section-header, problem-card, phase-card,
-   price-card, testimonial-card) y de la portada (home-v2.css: fr-card,
-   servicio-featured, testimonio-v2, cta-v2). Aquí SOLO va lo que esos
-   componentes no traen. No redefinir aquí nada que ya exista en ellos.
-   ===================================================================== */
-
-/* El fondo de las cabeceras: el hero de Impulso no lleva <main> con padding superior propio */
-.oc-pagina .impulso-hero{padding-top:120px}
-@media (max-width:768px){.oc-pagina .impulso-hero{padding-top:96px}}
-.oc-pagina .impulso-hero .hero-image img{aspect-ratio:4/3;object-fit:cover}
-.oc-pagina .impulso-hero .hero-subtitle{margin-bottom:28px}
+/* OC · Portada y oficios: las dos puertas (partials/puertas.ejs) y la rejilla de Comunidad.
+   El resto del sistema vive en oc-landing.css (docs/sistema-landing.md). */
 
 /* Dos puertas con tarjetas fr-card: rejilla de dos columnas */
 .cards-v2-grid.oc-puertas-grid{grid-template-columns:repeat(2,1fr);max-width:980px;gap:24px}
@@ -26,68 +11,6 @@
 .fr-lista li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid rgba(255,255,255,.2);font-size:.95rem;color:rgba(253,246,236,.92)}
 .fr-lista li:last-child{border-bottom:1px solid rgba(255,255,255,.2)}
 .fr-lista b{font-weight:700;text-align:right;color:#fdf6ec}
-
-/* Tarjetas de servicio (price-card): icono y precio sin cifra */
-.price-card-header .price-icon{margin-bottom:18px}
-.price-amount{flex-wrap:wrap}
-.impulso-3d .price-amount .value--texto{font-size:1.3rem;line-height:1.3}
-.price-amount .price-periodo{font-size:1rem;font-weight:600;color:var(--verde-profundo)}
-.price-amount .precio-iva{font-size:.82rem;color:var(--text-muted)}
-.pricing-grid .price-card .btn-coral{margin-top:auto}
-
-/* Testimonio con foto (testimonial-card) */
-.oc-testimonio{margin:0 auto}
-.oc-testimonio blockquote{margin:0}
-.oc-testimonio-firma{display:flex;align-items:center;justify-content:flex-end;gap:14px;text-align:left}
-.oc-testimonio-firma img{width:56px;height:56px;border-radius:50%;object-fit:cover}
-.oc-testimonio-firma .testimonial-name,.oc-testimonio-firma .testimonial-role{display:block}
-
-/* Precio en la cabecera del Diagnóstico */
-.oc-pagina .hero-precio{font-family:var(--font-headline,'Newsreader',serif);font-size:2rem;font-weight:700;color:#fff;margin:0 0 26px}
-.impulso-3d .hero-precio .precio-iva{font-family:var(--font-body,'Manrope',sans-serif);font-size:.9rem;font-weight:500;color:rgba(255,255,255,.8)}
-
-/* Rejilla de tarjetas problem-card a tres columnas (el componente trae dos) */
-.problems-grid.oc-tres{grid-template-columns:repeat(3,1fr)}
-@media (max-width:1024px){.problems-grid.oc-tres{grid-template-columns:1fr 1fr}}
-@media (max-width:768px){.problems-grid.oc-tres{grid-template-columns:1fr}}
-
-/* ── Impacto ── */
-.oc-cifras-banda{background:linear-gradient(165deg,#1a3d33 0%,#28604f 55%,#3a7d6a 100%);color:#fff}
-.impulso-section.oc-cifras-banda .section-header h2{color:#fff}
-.impulso-section.oc-cifras-banda .section-header p{color:rgba(255,255,255,.8)}
-.impulso-section.oc-cifras-banda .section-label{color:var(--secondary-container,#fd9f6a)}
-.oc-cifras{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-@media (max-width:1024px){.oc-cifras{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.oc-cifras{grid-template-columns:1fr}}
-.oc-cifra{display:flex;flex-direction:column;border-radius:var(--radius-lg,20px);padding:28px 24px}
-.oc-cifras--grandes .oc-cifra{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
-.impulso-3d .oc-cifra-valor{font-family:var(--font-headline,'Newsreader',serif);font-weight:700;line-height:1;letter-spacing:-.01em}
-.oc-cifras--grandes .oc-cifra-valor{font-size:clamp(2.6rem,4.2vw,3.4rem);color:#fff}
-.oc-cifra-unidad{font-size:.55em;font-weight:600;margin-left:4px}
-.oc-cifra-ind{font-weight:700;font-size:1rem;margin:12px 0 4px}
-.oc-cifras--grandes .oc-cifra-ind{color:#fff}
-.oc-cifra-detalle{font-size:.92rem;margin:0 0 16px}
-.oc-cifras--grandes .oc-cifra-detalle{color:rgba(255,255,255,.78)}
-.impulso-3d .oc-cifra-fecha{margin-top:auto;display:inline-flex;align-self:flex-start;align-items:center;gap:6px;font-size:.85rem;font-weight:700;padding:6px 12px;border-radius:100px}
-.oc-cifras--grandes .oc-cifra-fecha{background:rgba(255,255,255,.14);color:#fff}
-.oc-cifra-fecha svg{width:14px;height:14px}
-.oc-cifras--resto{margin-top:20px}
-.oc-cifras--resto .oc-cifra{background:#fff;box-shadow:0 4px 16px var(--shadow-green,rgba(31,75,63,.12))}
-.oc-cifras--resto .oc-cifra-valor{font-size:2.3rem;color:var(--verde-profundo)}
-.oc-cifras--resto .oc-cifra-ind{color:var(--text-dark)}
-.oc-cifras--resto .oc-cifra-detalle{color:var(--text-muted)}
-.oc-cifras--resto .oc-cifra-fecha{background:var(--blanco-calido);color:var(--verde-profundo)}
-.oc-cifras-nota{text-align:center;margin:28px auto 0;max-width:640px;font-size:.95rem;color:rgba(255,255,255,.8)}
-.oc-cifras-nota a{color:#fff}
-.oc-objetivo-barra{height:10px;border-radius:100px;background:var(--cream-dark,#edeae3);overflow:hidden;margin:14px 0 8px}
-.oc-objetivo-barra span{display:block;height:100%;background:linear-gradient(90deg,var(--verde-hoja),var(--verde-profundo))}
-.oc-objetivo-hoy{font-size:.88rem;color:var(--text-muted);margin:0}
-.problem-card .oc-objetivo-meta{font-family:var(--font-headline,'Newsreader',serif);font-size:1.5rem;font-weight:700;color:var(--verde-profundo);margin:2px 0 0}
-.problem-card.oc-card-ancha{display:block}
-
-/* Portada · Comunidad: con una o dos tarjetas, centradas y con el ancho de una tarjeta normal */
-.comunidad-v2-grid.oc-comunidad-pocas{grid-template-columns:repeat(auto-fit,minmax(0,300px));justify-content:center}
-.impulso-3d .price-card.featured .precio-iva,.impulso-3d .price-card.featured .price-periodo{color:rgba(255,255,255,.8)}
 
 /* Portada · Comunidad con data/testimonios.json: rejilla de tres, retrato apaisado igual para
    todas (foto o sello), seis visibles y «Ver más». */
