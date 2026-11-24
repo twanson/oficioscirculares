@@ -14,12 +14,13 @@
         hamburger.setAttribute('tabindex', hamburger.getAttribute('tabindex') || '0');
         hamburger.setAttribute('aria-controls', 'nav-menu');
         hamburger.setAttribute('aria-expanded', 'false');
-        if (!hamburger.getAttribute('aria-label')) hamburger.setAttribute('aria-label', 'Abrir el menú');
+        hamburger.setAttribute('aria-label', 'Abrir el menú');
         function abrir(estado) {
             const abierto = estado !== undefined ? estado : !navMenu.classList.contains('active');
             navMenu.classList.toggle('active', abierto);
             hamburger.classList.toggle('active', abierto);
             hamburger.setAttribute('aria-expanded', String(abierto));
+            hamburger.setAttribute('aria-label', abierto ? 'Cerrar el menú' : 'Abrir el menú');
         }
         hamburger.addEventListener('click', function () { abrir(); });
         hamburger.addEventListener('keydown', function (e) {
