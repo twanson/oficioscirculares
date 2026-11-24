@@ -7,15 +7,15 @@
 - [x] **Resuelto (24 nov): plazas cerradas y sin enlaces de pago; la lista de espera falla con un error visible si Brevo no guarda el alta. Falta una clave de Brevo válida (hoy responde 401 «API Key is not enabled»).** Antes: **El Club se podía comprar.** `/club` va con `noindex`, pero el menú, el pie y las páginas de servicios enlazan a él. `club-config.json` tiene `plazas_abiertas: true` y la página lleva dos enlaces de pago de Stripe. La apertura es del 18 al 27 de enero y Supabase está en pausa: quien pague hoy no podría entrar. Opciones:
   - poner `plazas_abiertas: false`: los botones pasan a lista de espera, que necesita `BREVO_API_KEY`; sin ella el correo no se guarda y la página responde igual que si sí;
   - o quitar `/club` del menú, el pie y los servicios hasta enero.
-- [ ] **La fusión directa tiene 28 conflictos.** La base común es del 14 de julio y muchos cambios de `main` se llevaron a `development` a mano. Hay que hacerla en una rama aparte, resolver archivo por archivo y probarla en staging antes de tocar `main`.
+- [x] **Resuelto (24 nov): rama local `release/nov-2026`, desde `main` (`5c3a921`) con `development` fusionada; 21 pruebas pasan. Falta probarla en un entorno y volver a fusionar lo que cambie después.** Antes: **la fusión directa tenía 28 conflictos (30 al prepararla).** La base común es del 14 de julio y muchos cambios de `main` se llevaron a `development` a mano. Hay que hacerla en una rama aparte, resolver archivo por archivo y probarla en staging antes de tocar `main`.
   - Vistas: `index`, `oficio-vertical`, `diagnostico-3d`, `impulso-3d`, `roadmap-3d`, `sprint-3d`, `conecta-lana`, `viaje-lana`, `partials/header`, `partials/head-meta`.
   - Blog: `blog/index`, `blog.js` y los artículos de lana (aislamiento), incendios, corcho y trabajar por encargo.
   - Otros: `server.js`, `styles.css`, `sitemap.xml`, `oficios-seo.json`, `oficios-verticales.json`, `dir/index`, `plantillas/index`, tres PDF (corcho, relevo y lana frente a sintéticos) y la página `/casos/e-wear` (borrada en `development`).
   - PDF de ejemplo de textil: en las dos ramas queda **retirado** (en `development` seguía; se ha quitado el 24 nov).
-- [ ] **No perder lo que solo está en `main`:** `.github/workflows/sitemap.yml` y `oficios/hilandia-escarmenando.jpg` (la usa la newsletter). `brand/og-default.png` también falta en `development`; comprobar que nada externo la usa.
+- [ ] **No perder lo que solo está en `main`:** `.github/workflows/sitemap.yml` y `oficios/hilandia-escarmenando.jpg` (la usa la newsletter). `brand/og-default.png` se conserva en la rama: ninguna página la usa ya, pero enlaces compartidos antiguos pueden apuntar a ella.
 - [ ] **Compra del Diagnóstico:** decidir si el botón sigue yendo al formulario de contacto (hoy va ahí).
 - [ ] **Decisión pendiente:** garantía del Sprint («seguimos trabajando hasta que funcione») y plazo del Diagnóstico para empresas.
-- [ ] **Ramas abiertas:** `fix/pdf-ejemplos` (dos PDF, en local). Si se publica `development`, ya no hace falta.
+- [ ] **Ramas abiertas:** `fix/pdf-segunda-linea` (dos PDF, en local). Si se publica `development`, ya no hace falta.
 
 ## 1. Qué cambia
 
@@ -80,7 +80,7 @@ Nombres mirados en Railway el 24 nov (sin valores): producción ya tiene `APP_UR
 ## 6. Antes de fusionar
 
 - [ ] Rama de integración desde `main`, fusión de `development`, conflictos resueltos, `npm ci` y `npm test` (21 pruebas).
-- [ ] Anotar el commit de `main` para volver atrás (hoy `2c16989`).
+- [ ] Anotar el commit de `main` para volver atrás (hoy `5c3a921`).
 - [ ] Repaso en staging: menú con ratón, teclado y móvil; consola; formularios de contacto y Tally; una descarga por tipo.
 - [ ] Buscar `[PENDIENTE`, `{{precio` y `oficioscirculares-production` en el HTML servido: cero resultados.
 - [ ] GTM sin cambios (`GTM-W7CH52J6`); comprobar que llegan `generate_lead`, `file_download` y `click_cta`.
