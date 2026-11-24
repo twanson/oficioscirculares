@@ -1548,14 +1548,28 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(250, 249, 247, 0.98);
-        backdrop-filter: blur(10px);
+        background: #FAF9F7;
         box-shadow: 0 8px 32px rgba(31, 75, 63, 0.15);
         border-radius: 0 0 20px 20px;
         padding: 20px 0;
-        animation: slideDown 0.3s ease-out;
+        flex-wrap: nowrap;
+        max-height: calc(100vh - 81px);
+        max-height: calc(100dvh - 81px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
     }
     
+    /* Con el menú abierto, la cabecera tampoco deja ver la página */
+    .navbar:has(.nav-menu.active) {
+        background: #FAF9F7;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .nav-menu.active > * {
+        flex-shrink: 0;
+    }
+
     .nav-menu.active .nav-link {
         padding: 12px 24px;
         margin: 0;
@@ -4728,8 +4742,9 @@ iframe[src*="tally.so"] {
         transition: max-height 0.3s ease-out, padding 0.3s ease-out;
     }
     
+    /* Cabe entero; el que se desplaza es el menú, no el desplegable */
     .dropdown-menu.show {
-        max-height: 400px;
+        max-height: 1200px;
         padding: 12px 0;
     }
     

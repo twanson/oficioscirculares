@@ -24,6 +24,22 @@ Este es el sistema de las páginas principales: `/club`, `/conecta-lana`, `/serv
   document.querySelectorAll('.reveal').forEach(el => rev.observe(el));
   ```
 
+### Menú de las páginas estáticas
+
+La cabecera tiene una sola fuente: `views/partials/header.ejs`. Las vistas la incluyen. Las páginas de `public/` (blog, FAQ, sobre nosotros, privacidad…) llevan una copia que pone un script. **No se edita a mano.**
+
+Cada vez que cambies `header.ejs` o la versión de `nav.js`:
+
+```bash
+node scripts/menu-estatico.mjs
+```
+
+- Busca en `public/` todas las páginas con `<nav class="navbar">` (menos `_deprecated`). No hay lista que mantener.
+- Cambia solo ese bloque y la versión de `nav.js`; el resto de la página no se toca.
+- `node scripts/menu-estatico.mjs --comprobar` avisa sin escribir. `npm test` hace la misma comprobación (`test/menuEstatico.test.js`) y falla si una página se queda atrás.
+- Una página estática nueva necesita un `<nav class="navbar"></nav>` y, justo después, `<script src="/assets/js/nav.js?v=…"></script>` sin `defer`, para que los scripts de la página no dupliquen el menú. El script rellena el resto.
+- Si cambia `styles.css`, hay que subir aparte su versión en las páginas: el script no la toca.
+
 ### Qué hoja lleva cada página
 
 | Hoja | Dónde se usa |

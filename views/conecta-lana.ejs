@@ -40,7 +40,7 @@
 @media(max-width:860px){
   .cl-nav .cl-brand span{display:none}
   .cl-burger{display:flex}
-  .cl-nav .cl-links{position:absolute;top:calc(100% + 6px);right:20px;left:auto;flex-direction:column;gap:2px;min-width:220px;background:rgba(3,32,26,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(246,201,138,.28);border-radius:16px;padding:10px;box-shadow:0 24px 60px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .25s ease,transform .25s ease,visibility .25s ease}
+  .cl-nav .cl-links{position:absolute;top:calc(100% + 6px);right:20px;left:auto;flex-direction:column;gap:2px;min-width:220px;background:#03201A;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(246,201,138,.28);border-radius:16px;padding:10px;box-shadow:0 24px 60px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .25s ease,transform .25s ease,visibility .25s ease}
   .cl-nav .cl-links.cl-open{opacity:1;visibility:visible;transform:translateY(0)}
   .cl-nav .cl-links a{padding:13px 16px;border-radius:10px;font-size:1.02rem;font-weight:700;color:#fbf6ec}
   .cl-nav .cl-links a:hover{background:rgba(246,201,138,.12);opacity:1}
@@ -135,7 +135,7 @@ html,body{overflow-x:clip}
 
 </style>
 <%# Puertas (cl-doors), cifra grande (cl-why) y cita (cl-testimonio) viven en oc-landing.css %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123c">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261124a">
 
 <main class="cl-landing">
 
@@ -167,7 +167,7 @@ html,body{overflow-x:clip}
         <a href="/recursos">Recursos</a>
         <a href="/#comunidad">Comunidad</a>
       </div>
-      <button class="cl-burger" id="cl-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="cl-links">
+      <button class="cl-burger" id="cl-burger" type="button" aria-label="Abrir el menú" aria-expanded="false" aria-controls="cl-links">
         <span></span><span></span><span></span>
       </button>
     </nav>
@@ -402,12 +402,13 @@ html,body{overflow-x:clip}
   var b=document.getElementById('cl-burger');
   var m=document.getElementById('cl-links');
   if(!b||!m) return;
-  function close(){b.classList.remove('cl-open');m.classList.remove('cl-open');b.setAttribute('aria-expanded','false');}
+  function close(){b.classList.remove('cl-open');m.classList.remove('cl-open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Abrir el menú');}
   b.addEventListener('click',function(e){
     e.stopPropagation();
     var open=m.classList.toggle('cl-open');
     b.classList.toggle('cl-open',open);
     b.setAttribute('aria-expanded',open?'true':'false');
+    b.setAttribute('aria-label',open?'Cerrar el menú':'Abrir el menú');
   });
   m.addEventListener('click',function(e){ if(e.target.tagName==='A') close(); });
   document.addEventListener('click',function(e){ if(!m.contains(e.target)&&!b.contains(e.target)) close(); });
