@@ -4,7 +4,7 @@
 
 ## 0. Bloqueos: resolver antes de publicar
 
-- [ ] **El Club se puede comprar.** `/club` va con `noindex`, pero el menú, el pie y las páginas de servicios enlazan a él. `club-config.json` tiene `plazas_abiertas: true` y la página lleva dos enlaces de pago de Stripe. La apertura es del 18 al 27 de enero y Supabase está en pausa: quien pague hoy no podría entrar. Opciones:
+- [x] **Resuelto (24 nov): plazas cerradas y sin enlaces de pago; la lista de espera falla con un error visible si Brevo no guarda el alta. Falta una clave de Brevo válida (hoy responde 401 «API Key is not enabled»).** Antes: **El Club se podía comprar.** `/club` va con `noindex`, pero el menú, el pie y las páginas de servicios enlazan a él. `club-config.json` tiene `plazas_abiertas: true` y la página lleva dos enlaces de pago de Stripe. La apertura es del 18 al 27 de enero y Supabase está en pausa: quien pague hoy no podría entrar. Opciones:
   - poner `plazas_abiertas: false`: los botones pasan a lista de espera, que necesita `BREVO_API_KEY`; sin ella el correo no se guarda y la página responde igual que si sí;
   - o quitar `/club` del menú, el pie y los servicios hasta enero.
 - [ ] **La fusión directa tiene 28 conflictos.** La base común es del 14 de julio y muchos cambios de `main` se llevaron a `development` a mano. Hay que hacerla en una rama aparte, resolver archivo por archivo y probarla en staging antes de tocar `main`.
@@ -53,7 +53,7 @@
 
 ## 4. Variables de entorno en producción
 
-No se ha mirado qué hay puesto en Railway. Para la web pública **no hace falta ninguna nueva**: las actuales (`GOOGLE_SERVICE_ACCOUNT_JSON`, `SPREADSHEET_ID`, `SHEET_NAME`, `DIRECTORIO_*`, `CONECTA_LANA_*`, `MAILCHIMP_*`, `REISSUE_*`, `NODE_ENV`) deben seguir igual.
+Nombres mirados en Railway el 24 nov (sin valores): producción ya tiene `APP_URL`, `BREVO_API_KEY`, `BREVO_WAITLIST_LIST_ID`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` y las tres de Supabase. No tiene `CLUB_ABIERTO` ni `DIRECTOS_VISIBLE`, y no hacen falta: valen `false` por defecto. Para la web pública **no hace falta ninguna nueva**: las actuales (`GOOGLE_SERVICE_ACCOUNT_JSON`, `SPREADSHEET_ID`, `SHEET_NAME`, `DIRECTORIO_*`, `CONECTA_LANA_*`, `MAILCHIMP_*`, `REISSUE_*`, `NODE_ENV`) deben seguir igual.
 
 | Variable nueva | Al publicar | En enero |
 |---|---|---|
@@ -79,7 +79,7 @@ No se ha mirado qué hay puesto en Railway. Para la web pública **no hace falta
 
 ## 6. Antes de fusionar
 
-- [ ] Rama de integración desde `main`, fusión de `development`, conflictos resueltos, `npm ci` y `npm test` (18 pruebas).
+- [ ] Rama de integración desde `main`, fusión de `development`, conflictos resueltos, `npm ci` y `npm test` (21 pruebas).
 - [ ] Anotar el commit de `main` para volver atrás (hoy `2c16989`).
 - [ ] Repaso en staging: menú con ratón, teclado y móvil; consola; formularios de contacto y Tally; una descarga por tipo.
 - [ ] Buscar `[PENDIENTE`, `{{precio` y `oficioscirculares-production` en el HTML servido: cero resultados.

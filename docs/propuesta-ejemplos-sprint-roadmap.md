@@ -1,6 +1,6 @@
 # Propuesta: ejemplos de Sprint y Roadmap más lejos del caso de origen (24 nov 2026)
 
-Nada de esto está aplicado. Los dos PDF comparten caso, así que se cambian juntos. Criterios: una empresa que fabrica con material y aprovecha un sobrante; nada de baldosa, barro ni mosaico; y fuera el circuito obra → instalador → retorno, que es lo más reconocible del original. En las dos opciones el sobrante sale del propio taller.
+Guardada para más adelante (Jose, 24 nov 2026): no se aplica ni A ni B. Se hizo un cambio mínimo: «Del sobrante a una segunda línea de producto» y «piezas de pequeño formato hechas con recortes cerámicos». Las páginas citadas abajo se refieren a la versión anterior. Los dos PDF comparten caso, así que se cambian juntos. Criterios: una empresa que fabrica con material y aprovecha un sobrante; nada de baldosa, barro ni mosaico; y fuera el circuito obra → instalador → retorno, que es lo más reconocible del original. En las dos opciones el sobrante sale del propio taller.
 
 Se han revisado los PDF y las notas de clientes, prospectos y colaboraciones. Se descartan madera (Patapalo), cuero (Lola Hacedora) y textil (Larsson, Resuinsa, Hilandia). Vidrio y chapa metálica no coinciden con ninguno; solo salen en menciones sueltas. No se han revisado presentaciones, audios ni imágenes.
 
