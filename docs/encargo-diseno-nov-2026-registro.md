@@ -545,7 +545,8 @@ Se han borrado `impulso-3d.css` y tres partials sin uso (`oc-cta-band`, `oc-hero
 - **Distintivo «Ai»:** borrada `ficha-lote-ejemplo-redactada.webp`; recortadas las siete ilustraciones de `OC_Guia_Materiales_Corta_2025.pdf`, que pasa de 39 a 15 MB.
 - **Sin tocar:** `mirandomadera.jpg` y `hero_artisan_leather.jpg`, hasta que Jose compruebe la licencia.
 - **Menú «Servicios»:** las 25 páginas estáticas con cabecera cargan `nav.js`.
-- **PDF del Sprint:** regenerado desde su fuente (`Servicios_OC/_compartido/Ejemplos_Descargables_Web/_fuente`). El logo y el sello de 2026 están en `_fuente/assets` y los coloca el script. El del Roadmap aún no lleva el sello en su fuente.
+- **PDF del Sprint:** regenerado desde su fuente (`Servicios_OC/_compartido/Ejemplos_Descargables_Web/_fuente`). El logo y el sello de 2026 están en `_fuente/assets` y los coloca el script.
 - Pendientes de diciembre: `docs/pendientes-diciembre-2026.md`.
 - **PDF del Sprint, segunda revisión:** «Ejemplo ilustrativo, inspirado en un tipo de proyecto real…» en portada y página 2; «ciclo cerrado» pasa a «aprovechamiento de recortes».
 - **Consola:** `observerOptions` renombrado en `/blog/` y `/sobre-nosotros/`; mismas capturas antes y después.
+- **PDF del Roadmap (24 nov):** los mismos cambios que en el Sprint, desde la fuente; regenerados sus recortes en `/servicios/roadmap-3d` y `/servicios/empresas`. Rama para `main` con los dos PDF: `fix/pdf-ejemplos`, sin fusionar.
