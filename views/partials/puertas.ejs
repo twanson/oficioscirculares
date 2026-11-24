@@ -1,0 +1,36 @@
+<%# Las dos puertas de servicios, con el componente de tarjetas de «Forma parte de la Red»
+    (fr-card, home-v2.css). Precios desde data/precios.json (app.locals.precios). %>
+<div class="cards-v2-grid oc-puertas-grid">
+    <div class="fr-card fr-card--lana">
+        <div class="fr-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.4 8.4a2.1 2.1 0 1 1-3-3L12 9"/><path d="M17.6 15 22 10.6"/><path d="m20.9 11.7-1.3-1.3a2 2 0 0 1 0-2.8l.9-.9-3.6-3.6-.9.9a2 2 0 0 1-2.8 0l-1.3-1.3"/></svg>
+        </div>
+        <span class="fr-quien">Soy un taller o una marca artesana</span>
+        <h3>Para talleres y marcas artesanas</h3>
+        <p>M&eacute;todo, comunidad y acompa&ntilde;amiento para que tu oficio se entienda y se venda.</p>
+        <ul class="fr-lista">
+            <li><span>Club de Oficios Circulares</span><b><%= precios.texto('club_mensual') %></b></li>
+            <li><span>Diagn&oacute;stico 3D para talleres</span><b><%= precios.texto('diagnostico_talleres') %></b></li>
+            <li><span>Impulso 3D</span><b><%= precios.texto('impulso_3d') %></b></li>
+        </ul>
+        <div class="fr-acc">
+            <a class="fr-btn" href="/servicios/talleres" data-event="click_cta" data-label="puerta-talleres">Ver los servicios para talleres &rarr;</a>
+        </div>
+    </div>
+    <div class="fr-card fr-card--dir">
+        <div class="fr-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>
+        </div>
+        <span class="fr-quien">Soy una empresa</span>
+        <h3>Para empresas</h3>
+        <p>Para empresas que quieren dar salida a sus materiales, convertir una mejora circular en un plan y ponerla en marcha.</p>
+        <ul class="fr-lista">
+            <li><span>Diagn&oacute;stico 3D para empresas</span><b><%= precios.texto('diagnostico_empresas') %></b></li>
+            <li><span>Roadmap 3D</span><b><%= precios.texto('roadmap_3d') %></b></li>
+            <li><span>Sprint 3D</span><b><%= precios.texto('sprint_3d') %></b></li>
+        </ul>
+        <div class="fr-acc">
+            <a class="fr-btn" href="/servicios/empresas" data-event="click_cta" data-label="puerta-empresas">Ver los servicios para empresas &rarr;</a>
+        </div>
+    </div>
+</div>

@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     
-    if (hamburger && navMenu) {
+    if (hamburger && navMenu && !window.__ocNav) {
         hamburger.addEventListener('click', function() {
             navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
@@ -402,6 +402,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalSlides = slides.length;
     let currentSlide = 0;
 
+    // Solo en páginas con pase de imágenes (evita el error de classList en las demás)
+    if (!totalSlides) {
+        if (!window.__ocNav) setupServiciosDropdown();
+        return;
+    }
+
     function showSlide(index) {
         // Remove active class from all slides
         slides.forEach(slide => slide.classList.remove('active'));
@@ -430,8 +436,8 @@ document.addEventListener('DOMContentLoaded', function() {
     //     });
     // }
     
-    // Setup servicios dropdown if it exists
-    setupServiciosDropdown();
+    // Setup servicios dropdown if it exists (si nav.js no lo ha hecho ya)
+    if (!window.__ocNav) setupServiciosDropdown();
 });
 
 // ===== SERVICIOS DROPDOWN FUNCTIONALITY =====

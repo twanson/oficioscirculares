@@ -409,6 +409,8 @@
             </div>
         </div>
     </nav>
+    <!-- Menú común (desplegable «Servicios» y menú móvil); síncrono para que los scripts de la página no lo dupliquen -->
+    <script src="/assets/js/nav.js?v=20261122"></script>
   
   <!-- Back to top button -->
   <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
@@ -444,6 +446,17 @@
     </div>
     
     <div id="posts" class="posts-grid">
+        <a href="/blog/joyeria-plata-recuperada/" class="post-card-link" style="text-decoration: none; color: inherit;">
+          <article class="post-card">
+            <img src="../assets/images/blog/joyeria-plata-recuperada/hero-taller-joyeria.webp?v=1" alt="Cómo lanzar una colección de joyería con plata recuperada, paso a paso" class="post-card-image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/images/cases/e-wear/placeholder-16x9.jpg?v=1'" />
+            <div class="post-card-content">
+              <h2 class="post-card-title">Cómo lanzar una colección de joyería con plata recuperada, paso a paso</h2>
+              <div class="post-card-meta">22 de noviembre de 2026 · 5 min de lectura</div>
+              <p class="post-card-excerpt">Guía paso a paso para lanzar una colección de joyería con plata recuperada: cómo conseguir el material, demostrar su origen y contarlo sin exagerar.</p>
+              <div class="post-card-tags"><span class="post-tag">guía práctica</span><span class="post-tag">materiales</span><span class="post-tag">circularidad</span></div>
+            </div>
+          </article>
+        </a>
         <a href="/blog/trabajar-por-encargo-artesania/" class="post-card-link" style="text-decoration: none; color: inherit;">
           <article class="post-card">
             <img src="../assets/images/blog/trabajar-por-encargo-artesania/encargo-kraft-1440.jpg?v=1" alt="Trabajar por encargo: el argumento que tu taller no cuenta" class="post-card-image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/images/cases/e-wear/placeholder-16x9.jpg?v=1'" />
@@ -620,17 +633,6 @@
             </div>
           </article>
         </a>
-        <a href="/casos/e-wear/" class="post-card-link" style="text-decoration: none; color: inherit;">
-          <article class="post-card">
-            <img src="../assets/images/cases/e-wear/hero-packaging-movil-concha.webp?v=1" alt="E-WEAR: De residuo electrónico a joya con historia" class="post-card-image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/images/cases/e-wear/placeholder-16x9.jpg?v=1'" />
-            <div class="post-card-content">
-              <h2 class="post-card-title">E-WEAR: De residuo electrónico a joya con historia</h2>
-              <div class="post-card-meta">8 de agosto de 2025 · 8 min de lectura</div>
-              <p class="post-card-excerpt">Cómo Laura transformó su taller de joyería tradicional en un modelo circular que recupera plata de residuos electrónicos. Un caso real de economía circular artesanal.</p>
-              <div class="post-card-tags"><span class="post-tag">casos</span><span class="post-tag">estrategia</span><span class="post-tag">circularidad</span></div>
-            </div>
-          </article>
-        </a>
     </div>
   </main>
 
@@ -641,19 +643,19 @@
     }, true);
     
     // Smooth animations on scroll
-    const observerOptions = {
+    const opcionesAparicion = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
     };
     
-    const observer = new IntersectionObserver((entries) => {
+    const observadorAparicion = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
         }
       });
-    }, observerOptions);
+    }, opcionesAparicion);
     
     document.addEventListener('DOMContentLoaded', () => {
       // Enhanced navbar behavior
@@ -679,7 +681,7 @@
       const hamburger = document.querySelector('.hamburger');
       const navMenu = document.querySelector('.nav-menu');
       
-      if (hamburger && navMenu) {
+      if (hamburger && navMenu && !window.__ocNav) {
         hamburger.addEventListener('click', () => {
           hamburger.classList.toggle('active');
           navMenu.classList.toggle('active');
@@ -689,7 +691,7 @@
       // Servicios dropdown
       const dropdownBtn = document.getElementById('servicios-dropdown-btn');
       const dropdownMenu = document.getElementById('servicios-dropdown-menu');
-      if (dropdownBtn && dropdownMenu) {
+      if (dropdownBtn && dropdownMenu && !window.__ocNav) {
         dropdownBtn.addEventListener('click', function(e) {
           e.preventDefault();
           const isOpen = dropdownBtn.getAttribute('aria-expanded') === 'false';
@@ -710,13 +712,13 @@
           card.style.opacity = '0';
           card.style.transform = 'translateY(30px)';
           card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-          observer.observe(card);
+          observadorAparicion.observe(card);
         });
       }, 100);
     });
   </script>
       <script src="/assets/js/script.js"></script>
-      <script src="/assets/js/blog.js?v=encargo-2026b"></script>
+      <script src="/assets/js/blog.js?v=joyeria-2026b"></script>
 </body>
 </html>
 

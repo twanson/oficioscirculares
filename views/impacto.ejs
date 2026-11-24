@@ -1,0 +1,165 @@
+<%#
+  /impacto — sistema oc-landing, sin relato (docs/sistema-landing.md).
+  Cifras de data/impacto.json (se actualizan cada trimestre sin tocar esta plantilla).
+  Testimonios de data/testimonios.json (página «impacto»).
+%>
+<%
+const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function fecha(iso) { const [a, m, d] = iso.split('-').map(Number); return d + ' de ' + MESES[m - 1] + ' de ' + a; }
+// es-ES no agrupa números de 4 cifras: forzamos el punto de miles para que 1.070 y 1.318 se lean igual.
+function miles(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+// Los marcadores [PENDIENTE JOSE: …] se quedan en el JSON (lista de pendientes) pero no se publican.
+function limpio(txt) { return String(txt || '').replace(/\s*\[PENDIENTE JOSE:[^\]]*\]/g, '').trim(); }
+const porId = Object.fromEntries(impacto.indicadores.map(i => [i.id, i]));
+const DESTACADAS = ['altas_conecta_lana', 'lana_registrada', 'emparejamientos', 'material_con_salida'];
+const grandes = DESTACADAS.map(id => porId[id]).filter(Boolean);
+const resto = impacto.indicadores.filter(i => DESTACADAS.indexOf(i.id) === -1).map(i => i.id);
+const CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+const IMG = '/assets/images/landing/impacto/';
+const testi = testimoniosLib.paraPagina('impacto');
+const emp = porId.emparejamientos;
+const gestionados = emp && /de (\d+) gestionados/.test(emp.detalle) ? Number(emp.detalle.match(/de (\d+) gestionados/)[1]) : null;
+%>
+<%- include('partials/head-meta', {
+    title: 'Impacto · Las cifras de la red | Oficios Circulares',
+    description: 'Lo que ha movido la red de Oficios Circulares, con la fecha de cada dato: lana registrada en Conecta Lana, emparejamientos cerrados, kilos con salida real y comunidad.',
+    canonical: '/impacto',
+    precargaImagen: IMG + 'hero-impacto-rebano.webp'
+}) %>
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123c">
+<%- include('partials/header') %>
+
+<main class="oc-landing" id="maincontent">
+  <%- include('partials/landing-hero', {
+      img: IMG + 'hero-impacto-rebano.webp', ancho: 1500, alto: 843,
+      badge: 'Impacto',
+      titulo: 'Lo que ha movido la red, <em>con fecha</em>',
+      sub: 'Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos. Estas son las cifras de esa red, cada una con el día en que se tomó y lo que mide.',
+      ctas: [ { href: '#cifras', texto: 'Ver las cifras →', clase: 'terracota' }, { href: '#como-contamos', texto: 'Cómo contamos', clase: 'ghost' } ],
+      datos: 'Datos actualizados a ' + fecha(impacto.actualizado) + ' · Se revisan cada trimestre'
+  }) %>
+
+  <!-- Las cuatro cifras de la red, en grande -->
+  <section class="oc-cifras-hondo" id="cifras" aria-labelledby="cifras-title">
+    <div class="cab">
+      <span class="eyebrow eyebrow--arena">Las cifras</span>
+      <h2 id="cifras-title">La red, <em>en números</em></h2>
+      <p>Cada cifra lleva su propia fecha.</p>
+    </div>
+    <div class="oc-cifras-grid">
+      <% grandes.forEach(function (i, n) { %>
+      <article class="oc-cifra-xl reveal">
+        <span class="cl-k" style="color:var(--oro)">Cifra 0<%= n + 1 %></span>
+        <div class="cl-big"><%= miles(i.valor) %><% if (i.unidad) { %><small><%= i.unidad %></small><% } %></div>
+        <h3><%= i.indicador %></h3>
+        <% if (i.detalle) { %><p class="det"><%= i.detalle %></p><% } %>
+        <p class="mide"><%= limpio(i.mide) %></p>
+        <% if (i.id === 'emparejamientos' && gestionados) { const pct = Math.round(i.valor / gestionados * 100); %>
+        <div class="cl-bar" role="img" aria-label="<%= i.valor %> de <%= gestionados %> emparejamientos gestionados han terminado con material entregado">
+          <div class="cl-bl"><span>Cerrados con entrega, de los gestionados</span><b><%= i.valor %> de <%= gestionados %></b></div>
+          <div class="cl-track"><div class="cl-fill" style="width:<%= Math.max(pct, 2) %>%"></div></div>
+        </div>
+        <% } %>
+        <span class="oc-fecha"><%- CAL %>Dato a <time datetime="<%= i.fecha %>"><%= fecha(i.fecha) %></time></span>
+      </article>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Las otras cuatro, en banda sobre crema -->
+  <%- include('partials/landing-cifras', { impacto, ids: resto, titulo: 'Y además', claro: true }) %>
+
+  <!-- Cómo contamos -->
+  <section class="oc-bloque" id="como-contamos" aria-labelledby="como-title">
+    <div class="wrap">
+      <div class="oc-bloque-foto reveal"><img loading="lazy" src="<%= IMG %>contamos-vellones.webp" alt="Vellones de lana apilados en una nave" width="900" height="720"></div>
+      <div class="reveal">
+        <span class="eyebrow">Cómo contamos</span>
+        <h2 id="como-title">Solo lo que se <em>puede comprobar</em></h2>
+        <p class="intro">Las cifras se revisan cada trimestre: en enero, abril, julio y octubre.</p>
+        <ul class="oc-reglas">
+          <li><b>Solo kilos pesados</b>Los kilos con salida solo cuentan cuando hay peso anotado.</li>
+          <li><b>Lo que no se pesa, aparte</b>Las entregas sin pesar se indican aparte y no se suman.</li>
+          <li><b>Cada cifra, con su fecha</b>Cada dato lleva el día en que se tomó, para que sepas de cuándo es.</li>
+        </ul>
+        <details class="oc-mide">
+          <summary>Qué mide cada cifra</summary>
+          <dl>
+            <% impacto.indicadores.forEach(function (i) { %><dt><%= i.indicador %></dt><dd><%= limpio(i.mide) %></dd><% }) %>
+          </dl>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objetivos -->
+  <section class="oc-bloque oc-bloque--oscuro oc-bloque--invertido" id="objetivos" aria-labelledby="objetivos-title">
+    <div class="wrap">
+      <div class="oc-bloque-foto reveal"><img loading="lazy" src="<%= IMG %>objetivos-ovillo.webp" alt="Manos sosteniendo un ovillo de lana" width="900" height="720"></div>
+      <div class="reveal">
+        <span class="eyebrow">Hacia dónde vamos</span>
+        <h2 id="objetivos-title">Qué queremos conseguir <em>antes de <%= impacto.objetivos.fecha_limite %></em></h2>
+        <p class="intro">Las cifras de «hoy» son las de arriba, con su fecha.</p>
+        <div class="oc-objetivos">
+          <% impacto.objetivos.lista.forEach(function (o) {
+               const actual = o.actual_de ? porId[o.actual_de].valor : null;
+               const u = o.unidad ? ' ' + o.unidad : '';
+               const pct = actual == null ? null : Math.min(100, Math.round(actual / o.objetivo * 100)); %>
+          <div class="oc-objetivo">
+            <div class="cl-bl"><span><%= o.texto %></span><b>Objetivo: <%= miles(o.objetivo) %><%= u %></b></div>
+            <% if (pct !== null) { %>
+            <div class="cl-track" role="progressbar" aria-valuemin="0" aria-valuemax="<%= o.objetivo %>" aria-valuenow="<%= actual %>" aria-label="<%= o.texto %>: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %>"><div class="cl-fill" style="width:<%= Math.max(pct, 2) %>%"></div></div>
+            <p class="hoy">Hoy: <%= miles(actual) %><%= u %> de <%= miles(o.objetivo) %><%= u %> (<%= pct %> %)</p>
+            <% } else { %>
+            <p class="hoy">Todavía sin cifra de partida.</p>
+            <% } %>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué lo respalda -->
+  <section class="oc-bloque oc-bloque--hueso" id="respalda" aria-labelledby="respalda-title">
+    <div class="wrap">
+      <div class="oc-bloque-foto reveal"><img loading="lazy" src="<%= IMG %>respalda-fibra.webp" alt="Lana de oveja sin procesar, vista de cerca" width="900" height="720"></div>
+      <div class="reveal">
+        <span class="eyebrow">Qué lo respalda</span>
+        <h2 id="respalda-title">Ensayos <em>y programas</em></h2>
+        <ul class="oc-respaldo">
+          <li><b>Ensayo de acolchado con lana</b>600 kg de lana en castaños, en Ourense, con analíticas del INORDE.</li>
+          <li><b>Promálaga Base 2026</b>Participación en el programa.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lo que dicen los usuarios de la red (data/testimonios.json, página «impacto») -->
+  <% if (testi.length) { const [principal, ...resto2] = testi; %>
+  <section class="cl-testimonio" aria-label="Lo que dicen los usuarios de la red">
+    <span class="cl-testimonio__eyebrow">Ya está pasando</span>
+    <blockquote>"<%= principal.texto %>"</blockquote>
+    <p class="cl-testimonio__firma">— <%= principal.nombre ? principal.nombre + ' · ' + principal.firma : principal.firma %></p>
+    <% resto2.forEach(function (t) { %>
+    <blockquote class="cl-testimonio__secundaria">"<%= t.texto %>"</blockquote>
+    <p class="cl-testimonio__firma">— <%= t.nombre ? t.nombre + ' · ' : '' %><% if (t.enlace) { %><a href="<%= t.enlace %>" target="_blank" rel="noopener"><%= t.firma %></a><% } else { %><%= t.firma %><% } %></p>
+    <% }) %>
+    <p class="oc-nota-testi"><%= testimoniosLib.nota(testi) %></p>
+  </section>
+  <% } %>
+
+  <%- include('partials/landing-final', {
+      img: IMG + 'cierre-tejiendo.webp',
+      eyebrow: 'Forma parte de la red',
+      titulo: 'Suma tus materiales <em>a la red</em>',
+      texto: '¿Tienes lana o la buscas? Conecta Lana te pone en contacto con la otra parte. Gratis, sin comisión por la lana.',
+      cta: { href: '/conecta-lana?oc_source=impacto&oc_medium=cierre&oc_campaign=conecta-lana', texto: 'Ir a Conecta Lana →' },
+      pd: '¿Eres un taller o una empresa? <a href="/servicios">Ver los servicios</a>'
+  }) %>
+</main>
+
+<%- include('partials/footer') %>
+<script src="/assets/js/oc-landing.js?v=20261122" defer></script>
+</body>
+</html>

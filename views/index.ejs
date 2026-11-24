@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oficios Circulares — Economía circular y relato para artesanos</title>
-    <meta name="description" content="Ayudamos a talleres y marcas artesanas a contar el valor de su oficio, venderlo a precio justo y hacer visible su circularidad.">
+    <meta name="description" content="Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos, y acompaña a esos talleres para que sepan contarlo y venderlo.">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Oficios Circulares — Economía circular y relato para artesanos">
-    <meta property="og:description" content="Ayudamos a talleres y marcas artesanas a contar el valor de su oficio, venderlo a precio justo y hacer visible su circularidad.">
-    <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/brand/og-default.png">
+    <meta property="og:description" content="Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos, y acompaña a esos talleres para que sepan contarlo y venderlo.">
+    <meta property="og:image" content="https://www.oficioscirculares.com/assets/images/brand/og-oc-2026.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://www.oficioscirculares.com">
     <meta property="og:site_name" content="Oficios Circulares">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oficios Circulares — Economía circular y relato para artesanos">
-    <meta name="twitter:description" content="Ayudamos a talleres y marcas artesanas a contar el valor de su oficio, venderlo a precio justo y hacer visible su circularidad.">
-    <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/brand/og-default.png">
+    <meta name="twitter:description" content="Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos, y acompaña a esos talleres para que sepan contarlo y venderlo.">
+    <meta name="twitter:image" content="https://www.oficioscirculares.com/assets/images/brand/og-oc-2026.png">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://www.oficioscirculares.com/">
@@ -30,9 +32,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
-    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260325c">
+    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=20261123c">
     <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
-
+    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261123c">
+    
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -67,7 +70,7 @@
           "email": "hola@oficioscirculares.com",
           "founder": { "@type": "Person", "name": "Jose María Moscardó" },
           "areaServed": "ES",
-          "description": "Estrategia, comunicación y economía circular para artesanos y proyectos con propósito. Metodología Círculo de Valor 3D: Diagnosticar, Diseñar, Difundir."
+          "description": "Red y plataforma de materiales de oficio: conecta a quien tiene materiales sin salida con los talleres que pueden usarlos, y acompaña a esos talleres para que sepan contarlo y venderlo."
         },
         {
           "@type": "WebSite",
@@ -93,45 +96,52 @@
          ═══════════════════════════════════ -->
     <section class="hero-v2" id="hero">
         <div class="hero-v2-bg">
-            <img class="hero-slide active" src="/assets/images/artesana blanco y negro.jpg"
+            <img class="hero-slide active" src="/assets/images/portada/hero-artesana-1600.webp"
+                 srcset="/assets/images/portada/hero-artesana-640.webp 640w, /assets/images/portada/hero-artesana-800.webp 800w, /assets/images/portada/hero-artesana-1100.webp 1100w, /assets/images/portada/hero-artesana-1600.webp 1600w, /assets/images/portada/hero-artesana-2397.webp 2397w"
+                 sizes="max(100vw, 67vh)" width="1600" height="2404" fetchpriority="high"
                  alt="Artesana enfocada en su proceso creativo"
                  style="object-position: 70% center"
                  loading="eager">
-            <img class="hero-slide" src="/assets/images/wood_texture.jpg"
-                 alt="Textura de madera natural"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/Diseñadora_taller_Textil.jpg"
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-madera-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-madera-960.webp 960w, /assets/images/portada/hero-madera-1440.webp 1440w, /assets/images/portada/hero-madera-1920.webp 1920w, /assets/images/portada/hero-madera-2560.webp 2560w"
+                 sizes="(max-width: 768px) 110vh, max(100vw, 150vh)"
+                 alt="Textura de madera natural">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-textil-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-textil-960.webp 960w, /assets/images/portada/hero-textil-1440.webp 1440w, /assets/images/portada/hero-textil-1920.webp 1920w, /assets/images/portada/hero-textil-2560.webp 2560w"
+                 sizes="(max-width: 768px) 110vh, max(100vw, 150vh)"
                  alt="Diseñadora en su taller textil"
-                 style="object-position: 65% center"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/Herramientas moderno-301703.jpg"
-                 alt="Herramientas de oficio modernas"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/artesana cermica.jpg"
+                 style="object-position: 65% center">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-herramientas-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-herramientas-960.webp 960w, /assets/images/portada/hero-herramientas-1440.webp 1440w, /assets/images/portada/hero-herramientas-1920.webp 1920w, /assets/images/portada/hero-herramientas-2560.webp 2560w"
+                 sizes="(max-width: 768px) 110vh, max(100vw, 150vh)"
+                 alt="Herramientas de oficio modernas">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-ceramica-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-ceramica-960.webp 960w, /assets/images/portada/hero-ceramica-1440.webp 1440w, /assets/images/portada/hero-ceramica-1920.webp 1920w, /assets/images/portada/hero-ceramica-2560.webp 2560w"
+                 sizes="(max-width: 768px) 110vh, max(100vw, 150vh)"
                  alt="Artesana trabajando la cerámica"
-                 style="object-position: 70% center"
-                 loading="eager">
-            <img class="hero-slide" src="/assets/images/puliendo madera.jpg"
+                 style="object-position: 70% center">
+            <img class="hero-slide" data-foto="/assets/images/portada/hero-pulido-1920.webp"
+                 data-foto-srcset="/assets/images/portada/hero-pulido-960.webp 960w, /assets/images/portada/hero-pulido-1440.webp 1440w, /assets/images/portada/hero-pulido-1920.webp 1920w, /assets/images/portada/hero-pulido-2560.webp 2560w"
+                 sizes="(max-width: 768px) 110vh, max(100vw, 150vh)"
                  alt="Artesano puliendo madera"
-                 style="transform: scaleX(-1); object-position: 60% center"
-                 loading="eager">
+                 style="transform: scaleX(-1); object-position: 60% center">
             <div class="hero-v2-gradient"></div>
         </div>
 
         <div class="hero-v2-content">
             <div class="glass-card">
                 <div class="paper-texture" style="position:absolute;inset:0;"></div>
-                <img class="oc-sello oc-sello--tinta oc-sello--estampa" src="/assets/images/brand/oc-sello-verde.webp" alt="" aria-hidden="true" width="560" height="560">
-                <span class="hero-v2-badge">Economía circular y relato para oficios</span>
+                <img class="oc-sello oc-sello--tinta oc-sello--estampa" src="/assets/images/brand/oc-sello-verde-400.webp" alt="" aria-hidden="true" width="560" height="560">
+                <span class="hero-v2-badge">Red y plataforma de materiales de oficio</span>
                 <h1>
                     Tu oficio tiene más <em>valor del que crees</em>
-                    <img class="oc-sello oc-sello--tinta oc-sello--estampa oc-sello--movil" src="/assets/images/brand/oc-sello-verde.webp" alt="" aria-hidden="true" width="560" height="560">
+                    <img class="oc-sello oc-sello--tinta oc-sello--estampa oc-sello--movil" src="/assets/images/brand/oc-sello-verde-400.webp" alt="" aria-hidden="true" width="560" height="560">
                 </h1>
                 <p>
-                    Potenciamos tu proyecto, su comunicación y su camino hacia la circularidad.
+                    Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos, y acompaña a esos talleres para que sepan contarlo y venderlo.
                 </p>
                 <div class="hero-v2-ctas">
-                    <a href="#servicios" class="btn btn-primary">Nuestro Método &rarr;</a>
+                    <a href="#servicios" class="btn btn-primary">Elige tu puerta &rarr;</a>
                     <a href="#contacto" class="btn-ghost">Únete a la Red</a>
                 </div>
             </div>
@@ -180,34 +190,37 @@
     <section class="servicios-v2" id="servicios">
         <div class="container">
             <div class="servicios-v2-header">
-                <h2>Metodología <em>Círculo de Valor 3D</em></h2>
-                <p>Diagnosticar, Diseñar y Difundir. Proyectos que regeneran el entorno y dignifican el trabajo con propósito.</p>
+                <h2>Metodolog&iacute;a <em>C&iacute;rculo de Valor 3D</em></h2>
+                <p>Diagnosticar, dise&ntilde;ar y difundir. La red es la base; los servicios la complementan con dos puertas: una para talleres y marcas artesanas, otra para empresas.</p>
             </div>
 
             <div class="servicios-v2-layout">
-                <!-- ROW 1: Consultoría featured (2/3) + Impulso 3D (1/3) -->
+                <!-- ROW 1: puerta de talleres (destacada, 2/3) + puerta de empresas (1/3).
+                     Precios en data/precios.json; aquí solo los nombres de los servicios. -->
                 <div class="servicio-featured">
                     <div class="servicio-featured-inner">
                         <div class="paper-texture" style="position:absolute;inset:0;"></div>
-                        <span class="servicio-featured-label">Consultoría Estratégica</span>
-                        <h3>Diseñamos tu hoja de ruta sostenible</h3>
+                        <span class="servicio-featured-label">Para talleres y marcas artesanas</span>
+                        <h3>Que tu oficio se entienda y se venda</h3>
                         <p>
-                            Analizamos tu proyecto y diseñamos una estrategia circular y rentable, paso a paso.
+                            M&eacute;todo, comunidad y acompa&ntilde;amiento: el Club, el Diagn&oacute;stico 3D y el Impulso 3D.
                         </p>
                         <div class="servicio-featured-ctas">
-                            <a href="/servicios/diagnostico-3d" class="btn-servicio-primary">Agendar Diagnóstico &rarr;</a>
-                            <span class="servicio-featured-note serif-italic">Cupos limitados por trimestre</span>
+                            <a href="/servicios/talleres" class="btn-servicio-primary" data-event="click_cta" data-label="home-puerta-talleres">Ver servicios para talleres &rarr;</a>
+                            <span class="servicio-featured-note serif-italic">Diagn&oacute;stico 3D: <%= precios.texto('diagnostico_talleres') %> + IVA</span>
                         </div>
                     </div>
                     <div class="servicio-featured-img">
-                        <img src="/assets/images/yunque 3.jpg"
+                        <img src="/assets/images/portada/yunque-1200.webp"
+                             srcset="/assets/images/portada/yunque-700.webp 700w, /assets/images/portada/yunque-1200.webp 1200w"
+                             sizes="(max-width: 1024px) 100vw, 600px"
                              alt="Artesano trabajando en el yunque"
                              loading="lazy">
                         <div class="servicio-featured-quote glass-card">
                             <p class="quote-text">
                                 "El puente entre el saber ancestral y las necesidades del presente."
                             </p>
-                            <p class="quote-author">— Jose, Fundador</p>
+                            <p class="quote-author">&mdash; Jose, Fundador</p>
                         </div>
                     </div>
                 </div>
@@ -215,14 +228,14 @@
                 <div class="servicio-impulso">
                     <div class="paper-texture" style="position:absolute;inset:0;"></div>
                     <div class="servicio-card-icon servicio-impulso-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v16h16"/><path d="m5 19 6-6"/><path d="m2 6 3-3 3 3"/><path d="m18 16 3 3-3 3"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>
                     </div>
-                    <h4>Impulso 3D</h4>
-                    <p class="servicio-impulso-tagline">Menos tiempo en difusión. Más tiempo en tu oficio.</p>
+                    <h4>Para empresas</h4>
+                    <p class="servicio-impulso-tagline">De la idea circular al caso que puedes contar.</p>
                     <p>
-                        Un sistema de comunicación a tu medida. Te acompañamos hasta que funcione solo.
+                        Para dar salida a tus materiales, convertir una mejora circular en un plan y ponerla en marcha: Diagn&oacute;stico, Roadmap y Sprint 3D.
                     </p>
-                    <a href="/impulso-3d" class="btn-servicio-impulso">Descubrir Impulso 3D &rarr;</a>
+                    <a href="/servicios/empresas" class="btn-servicio-impulso" data-event="click_cta" data-label="home-puerta-empresas">Ver servicios para empresas &rarr;</a>
                 </div>
 
                 <!-- ROW 2: Comunidad (full width, compact) -->
@@ -240,67 +253,53 @@
         </div>
     </section>
 
+
     <!-- ═══════════════════════════════════
-         COMUNIDAD — Testimonial cards
+         COMUNIDAD — tarjetas con retrato. Testimonios de data/testimonios.json (portada):
+         los autorizados con nombre primero y después el mensaje sin nombre (permiso
+         pendiente). Sin foto: el sello de la marca, con el mismo tamaño que el retrato.
+         Se ven seis; «Ver más» enseña el resto (sin JavaScript se ven todos).
          ═══════════════════════════════════ -->
+    <% const comunidad = testimoniosLib.paraPagina('portada'); %>
     <section class="comunidad-v2" id="comunidad">
         <div class="container">
             <div class="comunidad-v2-header">
                 <h2>Comunidad</h2>
-                <p class="comunidad-v2-sub">Historias de transformación real.</p>
+                <p class="comunidad-v2-sub">Lo que cuentan quienes ya forman parte de la red.</p>
             </div>
-
-            <div class="comunidad-v2-grid">
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="/assets/images/Perfil artesana experimentada.png"
-                             alt="María, ceramista rural"
-                             loading="lazy">
+            <div class="comunidad-v2-grid oc-comunidad-grid" id="comunidad-grid">
+                <% comunidad.forEach(function (t, i) {
+                     const nombre = t.nombre || t.firma;
+                     let rol = t.nombre ? t.firma : '';
+                     if (t.nombre && t.contexto && rol.indexOf('Conecta Lana') === -1) rol += ' · ' + t.contexto; %>
+                <div class="testimonio-v2<%= i >= 6 ? ' oc-comunidad-mas' : '' %>">
+                    <div class="testimonio-v2-img<%= t.avatar === 'foto' && t.foto ? '' : ' oc-sello-retrato' %>">
+                        <% if (t.avatar === 'foto' && t.foto) { %><img src="<%= t.foto %>" alt="<%= t.foto_alt || '' %>" loading="lazy" width="600" height="450"><% } else { %><img src="/assets/images/brand/oc-sello-verde-400.webp" alt="" loading="lazy" width="560" height="560"><% } %>
                     </div>
-                    <h4>María</h4>
-                    <span class="testimonio-role">Ceramista rural</span>
-                    <p class="testimonio-quote">"Me ayudaron a entender que lo que hacía intuitivamente tenía un valor enorme. Ahora sé comunicarlo y mis clientes lo valoran."</p>
+                    <h4><%= nombre %></h4>
+                    <% if (rol) { %><span class="testimonio-role"><% if (t.enlace) { %><a href="<%= t.enlace %>" target="_blank" rel="noopener"><%= rol %></a><% } else { %><%= rol %><% } %></span><% } %>
+                    <p class="testimonio-quote">&ldquo;<%= t.texto %>&rdquo;</p>
                 </div>
-
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="/assets/images/artesano innovador.png"
-                             alt="Javier, carpintero innovador"
-                             loading="lazy">
-                    </div>
-                    <h4>Javier</h4>
-                    <span class="testimonio-role">Carpintero innovador</span>
-                    <p class="testimonio-quote">"Encontré la estrategia que me faltaba para unir mi pasión por la innovación con mi compromiso ambiental."</p>
-                </div>
-
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="/assets/images/perfil_diseñadora_consciente .png"
-                             alt="Lucía, diseñadora consciente"
-                             loading="lazy">
-                    </div>
-                    <h4>Lucía</h4>
-                    <span class="testimonio-role">Diseñadora consciente</span>
-                    <p class="testimonio-quote">"Ya no me siento sola en este camino. La comunidad me ha dado herramientas, contactos y la confianza para escalar sin perder mis valores."</p>
-                </div>
-
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="/assets/images/perfil_taller_familiar.png"
-                             alt="Antonio, taller cer&aacute;mico familiar"
-                             loading="lazy">
-                    </div>
-                    <h4>Antonio</h4>
-                    <span class="testimonio-role">Taller cer&aacute;mico familiar</span>
-                    <p class="testimonio-quote">"Tenemos 50 a&ntilde;os de historia pero en redes parec&iacute;amos invisibles. Ahora nuestros clientes entienden el valor de lo artesanal antes de entrar por la puerta."</p>
-                </div>
+                <% }) %>
             </div>
-
-            <p class="comunidad-v2-disclaimer">
-                <em>Testimonios inspirados en experiencias reales de proyectos en proceso.</em>
-            </p>
+            <% if (comunidad.length > 6) { %>
+            <div class="oc-comunidad-ver"><button type="button" class="btn-ghost" id="comunidad-ver-mas" aria-controls="comunidad-grid" aria-expanded="false" hidden>Ver más mensajes</button></div>
+            <% } %>
+            <p class="comunidad-v2-disclaimer"><%= testimoniosLib.nota(comunidad) %></p>
         </div>
     </section>
+    <script>
+    (function () {
+        var b = document.getElementById('comunidad-ver-mas'), g = document.getElementById('comunidad-grid');
+        if (!b || !g) return;
+        g.classList.add('oc-comunidad-plegada'); b.hidden = false;
+        b.addEventListener('click', function () {
+            var plegada = g.classList.toggle('oc-comunidad-plegada');
+            b.setAttribute('aria-expanded', String(!plegada));
+            b.textContent = plegada ? 'Ver más mensajes' : 'Ver menos';
+        });
+    })();
+    </script>
 
     <%- include('partials/comunidad-recursos') %>
 
@@ -325,8 +324,8 @@
                 <a href="https://tally.so/r/mOyV98" target="_blank" class="btn-cta-primary">
                     Únete a Oficios Circulares
                 </a>
-                <a href="/contacto?service=diagnostico-3d&oc_source=site&oc_medium=internal&oc_campaign=oc-home&oc_content=cta-final&page_path=/" class="btn-cta-secondary">
-                    Agenda una llamada estratégica
+                <a href="/servicios" class="btn-cta-secondary">
+                    Ver los servicios
                 </a>
             </div>
         </div>
@@ -346,10 +345,26 @@
             const slides = document.querySelectorAll('.hero-slide');
             if (slides.length > 1) {
                 let current = 0;
+                // Las fotos 2 a 6 se piden de una en una, cuando la anterior ya está en pantalla.
+                const cargar = function(img) {
+                    if (img && img.dataset.foto) {
+                        img.srcset = img.dataset.fotoSrcset;
+                        img.src = img.dataset.foto;
+                        delete img.dataset.foto;
+                        delete img.dataset.fotoSrcset;
+                    }
+                };
+                const preparar = function() { cargar(slides[(current + 1) % slides.length]); };
+                if (document.readyState === 'complete') preparar();
+                else window.addEventListener('load', preparar);
                 setInterval(function() {
+                    const siguiente = (current + 1) % slides.length;
+                    cargar(slides[siguiente]);
+                    if (!slides[siguiente].complete || !slides[siguiente].naturalWidth) return;
                     slides[current].classList.remove('active');
-                    current = (current + 1) % slides.length;
+                    current = siguiente;
                     slides[current].classList.add('active');
+                    preparar();
                 }, 5000);
             }
 
@@ -414,7 +429,7 @@
       <button class="blog-popup__close" id="blog-popup-close" aria-label="Cerrar">×</button>
       <a class="blog-popup__link" href="/conecta-lana?oc_source=home&amp;oc_medium=popup&amp;oc_campaign=conecta-lana">
         <div class="blog-popup__media">
-          <img class="blog-popup__img" src="/assets/images/conecta-cover.jpg" alt="Rebaño de ovejas en una dehesa española al atardecer" loading="lazy">
+          <img class="blog-popup__img" src="/assets/images/portada/conecta-lana-720.webp" alt="Rebaño de ovejas en una dehesa española al atardecer" loading="lazy">
           <span class="blog-popup__badge">Nuevo</span>
         </div>
         <div class="blog-popup__body">

@@ -1,184 +1,168 @@
+<%#
+  /servicios/roadmap-3d — plantilla «directa» del sistema oc-landing (docs/sistema-landing.md).
+  Textos: los que ya tenía la página. Sin precio todavía: «Cómo se llega al precio».
+%>
+<%
+  const IMG = '/assets/images/landing/roadmap/';
+  const contacto = c => '/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=' + c + '&page_path=/servicios/roadmap-3d';
+  const ejemplo = '/downloads/ejemplo-roadmap-3d.pdf';
+%>
 <%- include('partials/head-meta', {
     title: 'Roadmap 3D · Tu plan circular de 90 días | Oficios Circulares',
     description: 'En 2 semanas te entregamos un plan de 90 días con piloto priorizado, backlog de activos, KPIs y calendario. Método Círculo de Valor 3D.',
     canonical: '/servicios/roadmap-3d',
     ogImage: 'https://www.oficioscirculares.com/img/servicios/Hero_Roadmap3d.png',
-    ogImageAlt: 'Roadmap 3D de Oficios Circulares: plan de 90 días con hitos y métricas'
+    ogImageAlt: 'Roadmap 3D de Oficios Circulares: plan de 90 días con hitos y métricas',
+    precargaImagen: IMG + 'hero-roadmap-ilustracion.webp'
 }) %>
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123c">
 <%- include('partials/header') %>
 
-<main class="main-content page-service roadmap3d" id="maincontent">
-    <!-- HERO split -->
-    <section class="service-hero" aria-labelledby="hero-title">
-        <div class="container">
-            <div class="hero-split-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">Plan de 90 días</p>
-                    <h1 id="hero-title" class="hero-title">Roadmap 3D: tu plan paso a paso para hacerlo realidad</h1>
-                    <p class="hero-sub">Ya sabes qué quieres hacer. Ahora necesitas saber cómo. En 2 semanas te diseñamos un plan de 90 días con todo lo que necesitas para poner en marcha tu primera mejora circular con confianza.</p>
-                    <ul class="hero-bullets" aria-label="Beneficios clave">
-                        <li>Tu primera mejora circular definida al detalle</li>
-                        <li>Proveedores, materiales y recursos identificados</li>
-                        <li>Plan de comunicación para contar el proceso</li>
-                    </ul>
-                    <div class="hero-ctas">
-                        <a id="cta-hero" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=hero&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar Roadmap 3D" data-event="click_cta" data-label="roadmap3d-hero">Quiero mi Roadmap 3D</a>
-                        <a id="cta-hero-example" href="/downloads/ejemplo-roadmap-3d.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=hero" class="btn btn-secondary" aria-label="Ver ejemplo de roadmap" data-event="file_download" data-label="roadmap3d-hero-ejemplo">Ver ejemplo de roadmap</a>
-                    </div>
-                </div>
-                <div class="hero-media" aria-hidden="true">
-                    <div class="media-frame">
-                        <img src="/img/servicios/Hero_Roadmap3d.png" alt="Roadmap 3D visual con hitos, cronograma y métricas de circularidad" loading="eager" style="max-width: 100%; height: auto;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<main class="oc-landing" id="maincontent">
+  <%- include('partials/landing-hero', {
+      img: IMG + 'hero-roadmap-ilustracion.webp', ancho: 1000, alto: 1000, partida: true, alt: 'Mesa con una carpeta del Roadmap 3D, un calendario de 90 días y un cronograma en el portátil',
+      badge: 'Roadmap 3D · Plan de 90 días',
+      titulo: 'Tu plan paso a paso <em>para hacerlo realidad</em>',
+      sub: 'Ya sabes qué quieres hacer. Ahora necesitas saber cómo. En 2 semanas te diseñamos un plan de 90 días con todo lo que necesitas para poner en marcha tu primera mejora circular con confianza.',
+      ctas: [
+        { href: contacto('hero'), texto: 'Reservar Roadmap 3D →', clase: 'terracota', id: 'cta-hero', label: 'roadmap3d-hero' },
+        { href: ejemplo, texto: 'Ver un ejemplo', clase: 'ghost', id: 'cta-hero-example' }
+      ],
+      datos: 'En 2 semanas · Plan de 90 días · Precio cerrado tras el Diagnóstico'
+  }) %>
 
-    <!-- ¿Cuándo necesitas esto? -->
-    <section class="service-section" id="encaje" aria-labelledby="encaje-title">
-        <div class="container">
-            <h2 id="encaje-title" class="section-title enhanced" data-label="Encaje">Sabes que quieres avanzar, pero...</h2>
-            <div class="encaje-wrap">
-                <div class="ui-card">
-                    <ul class="simple-list">
-                        <li><strong>No sabes por dónde empezar</strong> sin arriesgar tiempo y dinero</li>
-                        <li><strong>Quieres asegurar el éxito</strong> antes de invertir en cambios</li>
-                        <li><strong>Necesitas un plan realista</strong> que se adapte a tus recursos</li>
-                        <li><strong>Quieres documentar el proceso</strong> para comunicarlo después</li>
-                    </ul>
-                </div>
-                <div class="ui-card" style="background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 100%); border-left: 4px solid #1F4B3F;">
-                    <h3 style="color: #023429; margin-bottom: 12px;">¿En qué se diferencia del Diagnóstico?</h3>
-                    <p><strong>Diagnóstico 3D</strong> — Te decimos qué puedes hacer</p>
-                    <p><strong>Roadmap 3D</strong> — Te diseñamos cómo hacerlo, paso a paso</p>
-                </div>
-            </div>
+  <!-- Qué te llevas en 2 semanas: cajas con imagen -->
+  <section class="cajas" id="incluye">
+    <div class="cab">
+      <span class="eyebrow">Entregables</span>
+      <h2>Qué te llevas <em>en 2 semanas</em></h2>
+    </div>
+    <div class="wrap">
+      <div class="cajas-grid cajas-grid--dos">
+        <div class="caja caja--dark reveal">
+          <div class="caja-foto caja-foto--doc"><img loading="lazy" src="<%= IMG %>caja-operacion-plan90.webp" alt="Cronograma del Roadmap 3D de ejemplo: líneas de trabajo por mes e hitos en los días 30, 60 y 90" width="900" height="562"></div>
+          <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+          <span class="num">Operación</span>
+          <h3>Tu mejora circular definida al detalle</h3>
+          <ul>
+            <li>Qué mejora implementar primero y por qué tiene sentido</li>
+            <li>Cronograma de 90 días con hitos claros</li>
+            <li>Proveedores, materiales y recursos que vas a necesitar</li>
+            <li>Cuánto cuesta ponerlo en marcha y qué puedes esperar a cambio</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Al final de las 2 semanas tendrás -->
-    <section class="service-section" id="incluye" aria-labelledby="incluye-title">
-        <div class="container">
-            <h2 id="incluye-title" class="section-title enhanced" data-label="Entregables">Qué te llevas en 2 semanas</h2>
-            <div class="deliverables-grid">
-                <div class="ui-card card-operacion">
-                    <h3>Tu mejora circular definida al detalle</h3>
-                    <ul class="simple-list">
-                        <li>Qué mejora implementar primero y por qué tiene sentido</li>
-                        <li>Cronograma de 90 días con hitos claros</li>
-                        <li>Proveedores, materiales y recursos que vas a necesitar</li>
-                        <li>Cuánto cuesta ponerlo en marcha y qué puedes esperar a cambio</li>
-                    </ul>
-                </div>
-                <div class="ui-card card-comercial">
-                    <h3>Cómo vas a contarlo</h3>
-                    <ul class="simple-list">
-                        <li>Qué contar en cada fase del proceso</li>
-                        <li>Calendario de publicaciones y momentos clave</li>
-                        <li>Plantillas listas para usar (posts, emails, fichas)</li>
-                        <li>Cómo medir resultados para demostrar lo que consigues</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="caja caja--light reveal">
+          <div class="caja-foto caja-foto--doc"><img loading="lazy" src="<%= IMG %>caja-comunicacion-piezas.webp" alt="Lista de piezas del Roadmap 3D de ejemplo, con prioridad y responsable" width="900" height="562"></div>
+          <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+          <span class="num">Comunicación</span>
+          <h3>Cómo vas a contarlo</h3>
+          <ul>
+            <li>Qué contar en cada fase del proceso</li>
+            <li>Calendario de publicaciones y momentos clave</li>
+            <li>Plantillas listas para usar (posts, emails, fichas)</li>
+            <li>Cómo medir resultados para demostrar lo que consigues</li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Cómo trabajamos -->
-    <section class="service-section" id="metodologia" aria-labelledby="metodologia-title">
-        <div class="container">
-            <h2 id="metodologia-title" class="section-title enhanced" data-label="Metodología">Cómo trabajamos</h2>
-            <ol class="timeline">
-                <li><strong>Semana 1 — Diseñamos tu mejora</strong><br>Analizamos si tiene sentido técnico y económico · Buscamos los proveedores y recursos que necesitas · Creamos un cronograma con hitos y responsables · Calculamos la inversión y lo que puedes esperar a cambio</li>
-                <li><strong>Semana 2 — Preparamos la comunicación</strong><br>Definimos qué contar y cuándo para documentar el proceso · Creamos plantillas de posts, emails y fichas · Montamos el sistema para medir resultados · Organizamos el calendario de comunicación</li>
-            </ol>
-            <div class="inline-cta">
-                <a id="cta-flow" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=flow&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar desde metodología" data-event="click_cta" data-label="roadmap3d-flow">Quiero mi Roadmap 3D</a>
-            </div>
+  <!-- Cómo trabajamos: pasos sobre verde hondo -->
+  <section class="pasos pasos--oscuro" id="metodologia">
+    <div class="cab">
+      <span class="eyebrow">Metodología</span>
+      <h2>Cómo <em>trabajamos</em></h2>
+    </div>
+    <div class="wrap">
+      <div class="pasos-grid pasos-grid--dos">
+        <div class="paso reveal"><div class="bola">1</div><div class="cuando">Semana 1</div><h3>Diseñamos tu mejora</h3><p>Analizamos si tiene sentido técnico y económico · Buscamos los proveedores y recursos que necesitas · Creamos un cronograma con hitos y responsables · Calculamos la inversión y lo que puedes esperar a cambio</p></div>
+        <div class="paso reveal"><div class="bola">2</div><div class="cuando">Semana 2</div><h3>Preparamos la comunicación</h3><p>Definimos qué contar y cuándo para documentar el proceso · Creamos plantillas de posts, emails y fichas · Montamos el sistema para medir resultados · Organizamos el calendario de comunicación</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tiene sentido si… (como lista, no como relato) -->
+  <section class="oc-encaje" id="encaje">
+    <div class="wrap">
+      <h2>Sabes que quieres avanzar, <em>pero…</em></h2>
+      <div class="quien-grid">
+        <div class="quien-col si reveal">
+          <h3>Tiene sentido si…</h3>
+          <ul>
+            <li><strong>No sabes por dónde empezar</strong> sin arriesgar tiempo y dinero</li>
+            <li><strong>Quieres asegurar el éxito</strong> antes de invertir en cambios</li>
+            <li><strong>Necesitas un plan realista</strong> que se adapte a tus recursos</li>
+            <li><strong>Quieres documentar el proceso</strong> para comunicarlo después</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Qué incluye el entregable -->
-    <section class="service-section" id="entregable" aria-labelledby="entregable-title">
-        <div class="container">
-            <h2 id="entregable-title" class="section-title enhanced" data-label="Detalle">Qué incluye el entregable</h2>
-            <div class="ui-card card-informe">
-                <h3>Tu documento Roadmap 3D</h3>
-                <ul class="simple-list">
-                    <li>Plan de implementación de 90 días paso a paso</li>
-                    <li>Lista de proveedores y recursos con contactos</li>
-                    <li>Plantillas de comunicación listas para usar</li>
-                    <li>Sistema de medición y seguimiento</li>
-                    <li>Sesión de 60 minutos donde te lo presentamos y resolvemos dudas</li>
-                </ul>
-            </div>
-
-            <!-- Ejemplo real -->
-            <div class="ui-card example-card" style="margin-top: 24px;">
-                <h3>Ejemplo real</h3>
-                <p><strong>Un estudio textil en Barcelona</strong> quería pasar a tintes naturales pero no sabía por dónde empezar. En 2 semanas diseñamos su plan: qué plantas cultivar, proveedores de semillas, proceso de extracción, recetas de mordientes, y un calendario de contenidos para documentar cada paso. Resultado: proceso validado y 3 meses de contenido listo.</p>
-                <blockquote style="margin: 16px 0 8px 0; font-style: italic;">"Nos ahorramos meses de prueba y error. El roadmap nos dio la confianza para invertir 3.000€ en el piloto sabiendo que iba a funcionar."</blockquote>
-                <p style="color: #6b7280; margin: 0;">— Taller de carpintería, Barcelona</p>
-            </div>
+        <div class="caja caja--accent caja--sinfoto reveal">
+          <span class="num">Para no confundirlos</span>
+          <h3>¿En qué se diferencia del Diagnóstico?</h3>
+          <p><strong>Diagnóstico 3D</strong> — Te decimos qué puedes hacer</p>
+          <p><strong>Roadmap 3D</strong> — Te diseñamos cómo hacerlo, paso a paso</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Inversión -->
-    <section class="service-section" id="precio" aria-labelledby="precio-title">
-        <div class="container">
-            <h2 id="precio-title" class="section-title enhanced" data-label="Inversión">Tu inversión</h2>
-            <div class="ui-card">
-                <p><strong>350–1.500€ <span class="precio-iva">+ IVA</span></strong> (según complejidad del proyecto)</p>
-                <p>Incluye 2 semanas de trabajo dedicado y todas las plantillas listas para usar</p>
-                <div class="ui-card" style="background: linear-gradient(135deg, #fffbf5 0%, #ffffff 100%); border-left: 4px solid #934a1c; margin-top: 20px;">
-                    <h4 style="color: #934a1c; margin-bottom: 8px;">¿Por qué vale la pena?</h4>
-                    <p>Un plan bien pensado te ahorra meses de prueba y error. Los materiales, el tiempo y la reputación que proteges valen mucho más que esta inversión.</p>
-                </div>
-                <div class="badges" style="margin-top: 20px;">
-                    <span class="badge">Plan paso a paso</span>
-                    <span class="badge">Proveedores validados</span>
-                    <span class="badge">Plantillas incluidas</span>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- El entregable, con la imagen del documento -->
+  <section class="oc-documento" id="entregable">
+    <div class="wrap">
+      <div class="oc-documento-img reveal"><img loading="lazy" src="<%= IMG %>documento-portada.webp" alt="Portada del ejemplo de Roadmap 3D" width="700" height="991"></div>
+      <div class="reveal">
+        <span class="eyebrow eyebrow--arena">Detalle</span>
+        <h2>Tu documento <em>Roadmap 3D</em></h2>
+        <ul>
+          <li>Plan de implementación de 90 días paso a paso</li>
+          <li>Lista de proveedores y recursos con contactos</li>
+          <li>Plantillas de comunicación listas para usar</li>
+          <li>Sistema de medición y seguimiento</li>
+          <li>Sesión de 60 minutos donde te lo presentamos y resolvemos dudas</li>
+        </ul>
+        <a id="cta-entregable-example" class="club-btn club-btn--arena" href="<%= ejemplo %>" data-event="file_download" data-label="roadmap3d-entregable-ejemplo">Ver un ejemplo de Roadmap</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- FAQ -->
-    <section class="service-section" id="faq" aria-labelledby="faq-title">
-        <div class="container">
-            <h2 id="faq-title" class="section-title enhanced" data-label="FAQ">Preguntas frecuentes</h2>
-            <div class="faq-grid">
-                <div class="ui-card">
-                    <h3>¿Cuál es la diferencia real con el Diagnóstico?</h3>
-                    <p>El Diagnóstico identifica oportunidades. El Roadmap diseña cómo implementar la mejor oportunidad con garantías de éxito.</p>
-                </div>
-                <div class="ui-card">
-                    <h3>¿Y si el piloto no funciona como esperábamos?</h3>
-                    <p>Te acompañamos durante la implementación para ajustar lo que sea necesario. El objetivo es que funcione.</p>
-                </div>
-                <div class="ui-card">
-                    <h3>¿Podemos empezar sin haber hecho el Diagnóstico?</h3>
-                    <p>Sí, pero lo incluimos en las primeras sesiones para asegurar que elegimos la mejor oportunidad.</p>
-                </div>
-                <div class="ui-card">
-                    <h3>¿En qué se basa el rango de precio 350–1.500€ + IVA?</h3>
-                    <p>Depende de tu proyecto: cuántos materiales o proveedores hay que investigar, el nivel de innovación que necesitas, y cuántos contenidos preparar.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Prueba: cifras de la red, con su fecha -->
+  <%- include('partials/landing-cifras', { impacto, ids: ['altas_conecta_lana', 'emparejamientos', 'material_con_salida'], titulo: 'La red, con fecha', claro: true }) %>
 
-    <!-- CTA final -->
-    <section class="service-section cta-final" id="cta-final" aria-labelledby="cta-final-title">
-        <div class="container">
-            <h2 id="cta-final-title" class="section-title enhanced" data-label="Siguiente paso">¿Empezamos?</h2>
-            <p>En 2 semanas tendrás un plan claro de 90 días con proveedores, recursos y plantillas. Todo lo que necesitas para dar el primer paso con confianza.</p>
-            <div class="hero-ctas">
-                <a id="cta-footer" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=footer&page_path=/servicios/roadmap-3d" class="btn btn-primary btn-large" aria-label="Reservar Roadmap 3D" data-event="click_cta" data-label="roadmap3d-footer">Quiero mi Roadmap 3D</a>
-                <a id="cta-footer-example" href="/downloads/ejemplo-roadmap-3d.pdf?oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=footer" class="btn btn-secondary" aria-label="Ver ejemplo de roadmap" data-event="file_download" data-label="roadmap3d-footer-ejemplo">Ver ejemplo de roadmap</a>
-            </div>
-        </div>
-    </section>
+  <!-- Cómo se llega al precio -->
+  <section class="precios" id="precio">
+    <div class="cab">
+      <span class="eyebrow">Inversión</span>
+      <h2>Cómo se llega <em>al precio</em></h2>
+      <p>Un plan bien pensado te ahorra meses de prueba y error. Los materiales, el tiempo y la reputación que proteges valen mucho más que esta inversión.</p>
+    </div>
+    <div class="wrap oc-camino-wrap">
+      <div class="oc-camino-foto reveal"><img loading="lazy" src="<%= IMG %>precio-alcance.webp" alt="Página del Roadmap 3D de ejemplo con lo que incluye y lo que no" width="900" height="720"></div>
+      <ol class="oc-camino oc-camino--lista">
+        <li class="reveal"><span class="n">1</span><b>Diagnóstico</b><span>Detectamos las oportunidades y cuál conviene hacer primero.</span></li>
+        <li class="reveal"><span class="n">2</span><b>Propuesta cerrada</b><span>Te enviamos alcance, plazo y precio cerrados para el Roadmap.</span></li>
+        <li class="reveal"><span class="n">3</span><b>Decides</b><span>Solo entonces decides si seguimos.</span></li>
+      </ol>
+    </div>
+    <p class="oc-camino-nota">Incluye <strong>2 semanas de trabajo dedicado</strong> y todas las plantillas listas para usar.</p>
+  </section>
+
+  <!-- Preguntas frecuentes -->
+  <section class="faq" id="faq">
+    <div class="wrap-n">
+      <h2>Preguntas <em>frecuentes</em></h2>
+      <details><summary>¿Cuál es la diferencia real con el Diagnóstico?</summary><p class="resp">El Diagnóstico identifica oportunidades. El Roadmap diseña cómo implementar la mejor oportunidad, paso a paso.</p></details>
+      <details><summary>¿Y si el piloto no funciona como esperábamos?</summary><p class="resp">Te acompañamos durante la implementación para ajustar lo que sea necesario. El objetivo es que funcione.</p></details>
+      <details><summary>¿Podemos empezar sin haber hecho el Diagnóstico?</summary><p class="resp">Sí, pero lo incluimos en las primeras sesiones para asegurar que elegimos la mejor oportunidad.</p></details>
+    </div>
+  </section>
+
+  <%- include('partials/landing-final', {
+      img: IMG + 'cierre-trazado.webp',
+      eyebrow: 'Siguiente paso',
+      titulo: '¿Empezamos? <em>Un plan claro de 90 días</em>',
+      texto: 'En 2 semanas tendrás un plan claro de 90 días con proveedores, recursos y plantillas. Todo lo que necesitas para dar el primer paso con confianza.',
+      cta: { href: contacto('footer'), texto: 'Reservar Roadmap 3D →', id: 'cta-footer', label: 'roadmap3d-footer' },
+      pd: '¿Quieres verlo antes? <a id="cta-footer-example" href="' + ejemplo + '">Ver un ejemplo de Roadmap</a>'
+  }) %>
 </main>
 
 <script type="application/ld+json">
@@ -186,65 +170,16 @@
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Roadmap 3D",
-  "provider": {
-    "@type": "Organization",
-    "name": "Oficios Circulares"
-  },
+  "provider": { "@type": "Organization", "name": "Oficios Circulares" },
   "areaServed": "ES",
   "serviceType": "Consulting",
-  "offers": "350–1.500€",
+  "offers": precios.pendiente('roadmap_3d') ? undefined : { "@type": "Offer", "price": String(precios.num('roadmap_3d')), "priceCurrency": "EUR" },
   "url": "https://www.oficioscirculares.com/servicios/roadmap-3d"
 }, null, 2) %>
 </script>
 
 <%- include('partials/footer') %>
-
-<script src="/assets/js/script.js"></script>
-<script>
-// UTM y GA4 consistentes en la landing Roadmap 3D
-document.addEventListener('DOMContentLoaded', function() {
-  function attachTracking(el, content) {
-    if (!el) return;
-    const href = el.getAttribute('href') || '#';
-    if (href.startsWith('mailto:')) {
-      const [base, raw] = href.split('?');
-      const q = new URLSearchParams(raw || '');
-      const body = q.get('body') || '';
-      const utm = `utm_source=site&utm_medium=organic&utm_campaign=oc-roadmap-3d&utm_content=${encodeURIComponent(content)}`;
-      q.set('body', body ? body + "\n\n" + utm : utm);
-      el.setAttribute('href', `${base}?${q.toString()}`);
-    } else {
-      const u = new URL(href, window.location.origin);
-      const page = new URLSearchParams(window.location.search);
-      // Enlaces internos: parámetros oc_* (los utm_* internos rompían la atribución de GA4).
-      const p = u.origin === window.location.origin ? 'oc_' : 'utm_';
-      for (const [k,v] of page) if (k.startsWith('utm_') || k.startsWith('oc_')) u.searchParams.set(p + k.replace(/^(utm|oc)_/,''), v);
-      u.searchParams.set(p+'source','site');
-      u.searchParams.set(p+'medium','organic');
-      u.searchParams.set(p+'campaign','oc-roadmap-3d');
-      u.searchParams.set(p+'content',content);
-      el.setAttribute('href', u.toString());
-    }
-    el.addEventListener('click', function(){
-      window.dataLayer = window.dataLayer || [];
-      const ev = el.dataset.event || 'click_cta';
-      const label = el.dataset.label || content;
-      window.dataLayer.push({ event: ev, cta_offer: 'roadmap-3d', cta_location: content, label });
-    });
-  }
-  attachTracking(document.getElementById('cta-hero'), 'hero');
-  attachTracking(document.getElementById('cta-hero-example'), 'hero');
-  attachTracking(document.getElementById('cta-flow'), 'flow');
-  attachTracking(document.getElementById('cta-footer'), 'footer');
-  attachTracking(document.getElementById('cta-footer-example'), 'footer');
-});
-</script>
-
-<!-- Sticky CTA móvil -->
-<div class="sticky-cta-mobile" aria-hidden="true">
-  <a id="cta-sticky-primary" class="btn btn-primary" href="/contacto?service=roadmap-3d&oc_source=site&oc_medium=organic&oc_campaign=oc-roadmap-3d&oc_content=sticky&page_path=/servicios/roadmap-3d" data-event="click_cta" data-label="roadmap3d-sticky">Reservar</a>
-  <a id="cta-sticky-secondary" class="btn btn-secondary" href="mailto:hola@oficioscirculares.com?subject=Roadmap%203D" data-event="click_cta" data-label="roadmap3d-sticky-secondary">Escribir primero</a>
-</div>
-
+<script src="/assets/js/oc-landing.js?v=20261122" defer></script>
+<%- include('partials/landing-tracking', { campaign: 'oc-roadmap-3d', offer: 'roadmap-3d', ids: { 'cta-hero': 'hero', 'cta-hero-example': 'hero', 'cta-entregable-example': 'entregable', 'cta-footer': 'footer', 'cta-footer-example': 'footer' } }) %>
 </body>
 </html>

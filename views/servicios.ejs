@@ -1,0 +1,346 @@
+<%
+// Una vista para tres páginas: /servicios (las dos puertas), /servicios/talleres y /servicios/empresas.
+// Plantilla «directa» del sistema oc-landing (docs/sistema-landing.md): cabecera a sangre, qué es y
+// para quién, tarjetas con imagen, método sobre verde hondo, prueba, precio o cómo se llega, cierre.
+// Precios desde data/precios.json; cifras desde data/impacto.json; testimonios desde data/testimonios.json.
+const P = precios;
+const IMG = '/assets/images/landing/servicios/';
+const meta = {
+  index:    { title: 'Servicios | Oficios Circulares', canonical: '/servicios',
+              description: 'Dos entradas: si eres un taller o una marca artesana, o si eres una empresa con materiales y procesos que quieres hacer circulares.',
+              precargaImagen: IMG + 'hero-servicios-artesanos.webp' },
+  talleres: { title: 'Servicios para talleres y marcas artesanas | Oficios Circulares', canonical: '/servicios/talleres',
+              description: 'El Club de Oficios Circulares, el Diagnóstico 3D para talleres y el Impulso 3D. Precio único para cada servicio.',
+              precargaImagen: IMG + 'hero-talleres-alfarero.webp' },
+  empresas: { title: 'Servicios para empresas | Oficios Circulares', canonical: '/servicios/empresas',
+              description: 'Diagnóstico 3D para empresas, Roadmap 3D y Sprint 3D: de detectar una mejora circular a ponerla en marcha y contarla.',
+              precargaImagen: IMG + 'hero-empresas-bobinas.webp' }
+}[puerta];
+const CIFRAS = ['altas_conecta_lana', 'lana_registrada', 'material_con_salida'];
+const contactoEmpresas = c => '/contacto?service=diagnostico-3d-empresas&oc_source=site&oc_medium=internal&oc_campaign=oc-empresas&oc_content=' + c + '&page_path=/servicios/empresas';
+const ICO = {
+  taller: '<svg viewBox="0 0 24 24" fill="none" stroke="#023429" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="m15 12-8.4 8.4a2.1 2.1 0 1 1-3-3L12 9"/><path d="M17.6 15 22 10.6"/><path d="m20.9 11.7-1.3-1.3a2 2 0 0 1 0-2.8l.9-.9-3.6-3.6-.9.9a2 2 0 0 1-2.8 0l-1.3-1.3"/></svg>',
+  fabrica: '<svg viewBox="0 0 24 24" fill="none" stroke="#9a5530" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1M12 18h1M7 18h1"/></svg>',
+  club: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  lupa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  megafono: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>',
+  mapa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15M9 3.236v15"/></svg>',
+  rayo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>'
+};
+const T = testimoniosLib;
+%>
+<%- include('partials/head-meta', meta) %>
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261123c">
+<%- include('partials/header') %>
+
+<main class="oc-landing" id="maincontent">
+<% if (puerta === 'index') { %>
+  <%- include('partials/landing-hero', {
+      img: IMG + 'hero-servicios-artesanos.webp',
+      badge: 'Servicios',
+      titulo: '¿Por dónde <em>entras</em>?',
+      sub: 'Oficios Circulares conecta a quien tiene materiales de oficio sin salida con los talleres que pueden usarlos. Los servicios acompañan a esa red: elige la puerta que te corresponde.',
+      ctas: [
+        { href: '/servicios/talleres', texto: 'Soy un taller →', clase: 'terracota', label: 'servicios-hero-talleres' },
+        { href: '/servicios/empresas', texto: 'Soy una empresa', clase: 'ghost', label: 'servicios-hero-empresas' }
+      ],
+      datos: 'Diagnóstico para talleres: ' + P.texto('diagnostico_talleres') + ' + IVA · Club: ' + P.texto('club_mensual') + ' · Empresas: precio cerrado tras el Diagnóstico'
+  }) %>
+
+  <!-- Las dos puertas (tarjetas de /conecta-lana con foto arriba) -->
+  <section class="cl-doors cl-doors--claro" id="puertas">
+    <div class="cl-d-head">
+      <span class="cl-ey">Dos puertas</span>
+      <h2>Elige <em>cómo vienes</em></h2>
+      <p>La red es la base. Los servicios la complementan, con un camino para talleres y otro para empresas.</p>
+    </div>
+    <div class="cl-cards cl-cards--dos">
+      <div class="cl-card cl-card--t reveal">
+        <div class="cl-card-foto"><img loading="lazy" src="<%= IMG %>puerta-talleres-ceramica.webp" alt="Manos de una ceramista modelando el barro en la mesa de su taller" width="900" height="562"></div>
+        <div class="cl-ico"><%- ICO.taller %></div>
+        <h3>Para talleres y marcas artesanas</h3>
+        <p class="cl-who">Método, comunidad y acompañamiento para que tu oficio se entienda y se venda.</p>
+        <ul class="cl-lista">
+          <li><span>Club de Oficios Circulares</span><b><%= P.texto('club_mensual') %></b></li>
+          <li><span>Diagnóstico 3D para talleres</span><b><%= P.texto('diagnostico_talleres') %> + IVA</b></li>
+          <li><span>Impulso 3D</span><b><%= P.texto('impulso_3d') %> + IVA</b></li>
+        </ul>
+        <a class="cl-cta" href="/servicios/talleres" data-event="click_cta" data-label="puerta-talleres">Ver los servicios para talleres →</a>
+      </div>
+      <div class="cl-card cl-card--b reveal">
+        <div class="cl-card-foto"><img loading="lazy" src="<%= IMG %>puerta-empresas-bobinas.webp" alt="Bobinas de hilo en una nave de fabricación textil" width="900" height="562"></div>
+        <div class="cl-ico"><%- ICO.fabrica %></div>
+        <h3>Para empresas</h3>
+        <p class="cl-who">Para empresas que quieren dar salida a sus materiales, convertir una mejora circular en un plan y ponerla en marcha.</p>
+        <ul class="cl-lista">
+          <li><span>Diagnóstico 3D para empresas</span><b><%- precios.html('diagnostico_empresas') %></b></li>
+          <li><span>Roadmap 3D</span><b>Tras el Diagnóstico</b></li>
+          <li><span>Sprint 3D</span><b>Tras el Diagnóstico</b></li>
+        </ul>
+        <a class="cl-cta" href="/servicios/empresas" data-event="click_cta" data-label="puerta-empresas">Ver los servicios para empresas →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Método sobre verde hondo -->
+  <section class="pasos pasos--oscuro" id="metodo">
+    <div class="cab">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>El <em>Método 3D</em></h2>
+      <p>Tres pasos, siempre en el mismo orden. Cada uno se apoya en el anterior.</p>
+    </div>
+    <div class="wrap">
+      <div class="pasos-grid pasos-grid--tres">
+        <div class="paso reveal"><div class="bola">1</div><div class="cuando">Paso 1</div><h3>Diagnosticar</h3><p>Miramos tu proceso, tus materiales y lo que ya comunicas, y detectamos lo que tiene valor y no se está contando.</p></div>
+        <div class="paso reveal"><div class="bola">2</div><div class="cuando">Paso 2</div><h3>Diseñar</h3><p>Convertimos lo que sale del diagnóstico en un plan realista: qué contar, qué mejorar y con qué herramientas.</p></div>
+        <div class="paso reveal"><div class="bola">3</div><div class="cuando">Paso 3</div><h3>Difundir</h3><p>Lo ponemos en marcha y te dejamos un sistema para contarlo con pruebas, sin exagerar y sin perder horas de trabajo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/landing-cifras', { impacto, ids: CIFRAS, titulo: 'La red, con fecha', claro: true }) %>
+
+  <%- include('partials/landing-final', {
+      img: IMG + 'cierre-servicios-cesteria.webp',
+      eyebrow: 'Siguiente paso',
+      titulo: 'Tu oficio tiene valor, <em>vamos a contarlo</em>',
+      texto: 'Empieza por la puerta que te corresponde. Si dudas, escríbenos y te decimos cuál.',
+      cta: { href: '/servicios/talleres', texto: 'Servicios para talleres →' },
+      pd: '¿Eres una empresa? <a href="/servicios/empresas">Estos son tus servicios</a>.'
+  }) %>
+
+<% } else if (puerta === 'talleres') { %>
+  <%- include('partials/landing-hero', {
+      img: IMG + 'hero-talleres-alfarero.webp', alto: 1272,
+      badge: 'Soy un taller o una marca artesana',
+      titulo: 'Que tu oficio se entienda <em>y se venda</em>',
+      sub: 'Para cualquier taller o marca artesana que haga piezas físicas: cerámica, madera, textil, cuero, joyería, cosmética natural y más. Tres formas de trabajar con nosotros, de la más ligera a la más completa. Cada una tiene un precio cerrado.',
+      ctas: [
+        { href: '#servicios', texto: 'Ver los servicios →', clase: 'terracota' },
+        { href: '/servicios/empresas', texto: '¿Eres una empresa?', clase: 'ghost', label: 'talleres-hero-empresas' }
+      ],
+      datos: 'Club ' + P.texto('club_mensual') + ' · Diagnóstico ' + P.texto('diagnostico_talleres') + ' + IVA · Impulso 3D ' + P.texto('impulso_3d') + ' + IVA'
+  }) %>
+
+  <!-- Tu camino: cajas con foto -->
+  <section class="cajas" id="servicios">
+    <div class="cab">
+      <span class="eyebrow">Servicios para talleres</span>
+      <h2>Tu camino con <em>Oficios Circulares</em></h2>
+      <p>Empieza por donde te haga falta. Cada servicio funciona por sí solo y se puede sumar al siguiente.</p>
+    </div>
+    <div class="wrap">
+      <div class="cajas-grid">
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-club-manos.webp" alt="Varias personas trabajando juntas sobre la misma mesa de taller" width="900" height="562"></div>
+          <div class="chip"><%- ICO.club %></div>
+          <span class="num">Comunidad y método</span>
+          <h3>Club de Oficios Circulares</h3>
+          <div class="caja-precio"><%= P.texto('club_mensual') %> <small>o <%= P.texto('club_anual') %></small></div>
+          <p class="dato dato--inline">Fundadores: <%= P.texto('club_fundador_mensual') %> o <%= P.texto('club_fundador_anual') %>, con <%= P.plazasFundador() %> plazas</p>
+          <ul>
+            <li>Lecciones prácticas para mostrar y vender tu trabajo</li>
+            <li>Un directo al mes con revisiones en vivo</li>
+            <li>Radar de ayudas y biblioteca de plantillas</li>
+          </ul>
+          <a class="club-btn club-btn--verde" href="/club">Conocer el Club</a>
+        </div>
+        <div class="caja caja--dark reveal">
+          <div class="caja-doc"><img loading="lazy" src="/assets/images/landing/diagnostico/portada-barro-artesanal.webp" alt="Portada de un Diagnóstico 3D de ejemplo" width="600" height="849"></div>
+          <div class="chip"><%- ICO.lupa %></div>
+          <span class="num">Por dónde empezar</span>
+          <h3>Diagnóstico 3D para talleres</h3>
+          <div class="caja-precio"><%= P.texto('diagnostico_talleres') %> <small>+ IVA</small></div>
+          <p class="lema">Sin llamadas: respondes un cuestionario y recibes el informe y un vídeo que te lo explica.</p>
+          <ul>
+            <li>El mapa de tu taller y de su entorno</li>
+            <li>Lo que ya comunicas y cómo está tu presencia en internet</li>
+            <li>Tres prioridades ordenadas</li>
+          </ul>
+          <a class="club-btn club-btn--terracota" href="/servicios/diagnostico-3d">Ver el Diagnóstico →</a>
+        </div>
+        <div class="caja caja--accent reveal">
+          <div class="caja-foto"><img loading="lazy" src="/assets/images/landing/impulso/caja-impulso-perfil.webp" alt="Móvil con el perfil de ejemplo de un taller de cerámica" width="900" height="562"></div>
+          <div class="chip"><%- ICO.megafono %></div>
+          <span class="num">Tu sistema de comunicación</span>
+          <h3>Impulso 3D</h3>
+          <div class="caja-precio"><%= P.texto('impulso_3d') %> <small>+ IVA</small></div>
+          <p class="dato dato--inline">Impulso 3D Completo: <%= P.texto('impulso_3d_completo') %> + IVA</p>
+          <ul>
+            <li>Tu manual de marca y tus fórmulas de contenido</li>
+            <li>Plantillas listas para tu Instagram</li>
+            <li>Sesión de trabajo para que lo uses desde el primer día</li>
+          </ul>
+          <a class="club-btn club-btn--verde" href="/impulso-3d">Ver el Impulso 3D</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Método sobre verde hondo -->
+  <section class="pasos pasos--oscuro" id="metodo">
+    <div class="cab">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>El Método 3D <em>adaptado a tu taller</em></h2>
+      <p>Lo que hay detrás de cada servicio: tres pasos, siempre en el mismo orden.</p>
+    </div>
+    <div class="wrap">
+      <div class="pasos-grid pasos-grid--tres">
+        <div class="paso reveal"><div class="bola">1</div><div class="cuando">Paso 1</div><h3>Diagnosticar</h3><p>Miramos tu taller, tus materiales y lo que ya comunicas, y detectamos todo el valor que no estás contando.</p></div>
+        <div class="paso reveal"><div class="bola">2</div><div class="cuando">Paso 2</div><h3>Diseñar</h3><p>Lo convertimos en un plan realista: qué contar y dónde, qué mejorar y con qué herramientas.</p></div>
+        <div class="paso reveal"><div class="bola">3</div><div class="cuando">Paso 3</div><h3>Difundir</h3><p>Te dejamos un sistema para contarlo con tu voz, de forma constante y sin pasarte el día en redes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prueba: testimonio autorizado para talleres -->
+  <% const testi = T.paraPagina('servicios-talleres'); if (testi.length) { %>
+  <section class="testi" id="testimonios">
+    <div class="cab">
+      <span class="eyebrow">Experiencias</span>
+      <h2>Lo que cuentan <em>quienes ya lo usan</em></h2>
+    </div>
+    <div class="wrap">
+      <div class="testi-grid <%= testi.length === 1 ? 'testi-grid--uno' : 'testi-grid--dos' %>">
+        <% testi.forEach(function (t) { %>
+        <div class="testi-card reveal">
+          <div class="comillas" aria-hidden="true">"</div>
+          <p><%= t.texto %></p>
+          <div class="firma">
+            <div class="avatar"><img loading="lazy" src="<%= t.avatar === 'foto' && t.foto ? t.foto : '/assets/images/brand/oc-logo-2026-cuadrado-168.webp' %>" alt="<%= t.foto_alt || '' %>" width="56" height="56"></div>
+            <div><h3><%= t.nombre || t.firma %></h3><% if (t.nombre) { %><div class="rol"><%= t.firma %></div><% } %></div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% if (T.todosConPermiso(testi)) { %><p class="nota">Testimonios reales, publicados con su permiso.</p><% } %>
+    </div>
+  </section>
+  <% } %>
+
+  <%- include('partials/landing-final', {
+      img: IMG + 'cierre-talleres-taller.webp',
+      eyebrow: 'Siguiente paso',
+      titulo: 'Empieza por saber <em>qué tienes</em>',
+      texto: 'El Diagnóstico 3D te dice por dónde empezar, sin llamadas y con tres prioridades ordenadas.',
+      cta: { href: '/servicios/diagnostico-3d', texto: 'Quiero mi Diagnóstico →', label: 'talleres-cierre-diagnostico' },
+      pd: '¿Prefieres empezar por la comunidad? <a href="/club">Conoce el Club</a>.'
+  }) %>
+
+<% } else { %>
+  <%- include('partials/landing-hero', {
+      img: IMG + 'hero-empresas-bobinas.webp', ancho: 1600, alto: 1067, compacta: true,
+      badge: 'Soy una empresa',
+      titulo: 'De la idea circular <em>al caso que puedes contar</em>',
+      sub: 'Para empresas que fabrican o transforman materiales y quieren detectar una mejora circular, planificarla y ponerla en marcha.',
+      ctas: [
+        { href: contactoEmpresas('hero'), texto: 'Solicitar el Diagnóstico →', clase: 'terracota', label: 'empresas-hero-diagnostico' },
+        { href: '#servicios', texto: 'Qué entregamos', clase: 'ghost' }
+      ],
+      datos: 'Diagnóstico: ' + precios.texto('diagnostico_empresas') + ' + IVA · Roadmap en 2 semanas · Sprint en 4 semanas'
+  }) %>
+
+  <!-- Qué entregamos y en qué plazo: cajas con imagen -->
+  <section class="cajas" id="servicios">
+    <div class="cab">
+      <span class="eyebrow">Servicios para empresas</span>
+      <h2>De detectar <em>a poner en marcha</em></h2>
+      <p>Tres servicios encadenados. Puedes quedarte en el primero o seguir hasta el piloto.</p>
+    </div>
+    <div class="wrap">
+      <div class="cajas-grid">
+        <div class="caja caja--dark reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-empresas-material.webp" alt="Cubo y cajas de madera llenos de tapones de corcho recogidos" width="900" height="562"></div>
+          <div class="chip"><%- ICO.lupa %></div>
+          <span class="num">Detectar</span>
+          <h3>Diagnóstico 3D para empresas</h3>
+          <div class="caja-precio"><%= precios.texto('diagnostico_empresas') %> <small>+ IVA</small></div>
+          <ul>
+            <li>Repaso de tus materiales, tu proceso y lo que desechas</li>
+            <li>Oportunidades de mejora y de comunicación</li>
+            <li>Informe con las oportunidades ordenadas por prioridad</li>
+          </ul>
+          <a class="club-btn club-btn--terracota" href="<%= contactoEmpresas('diagnostico') %>">Solicitar el Diagnóstico</a>
+        </div>
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-empresas-roadmap.webp" alt="Mesa con un portátil, un calendario y una carpeta del Roadmap 3D" width="900" height="562"></div>
+          <div class="chip"><%- ICO.mapa %></div>
+          <span class="num">Planificar</span>
+          <h3>Roadmap 3D</h3>
+          <span class="caja-precio--texto">Precio cerrado tras el Diagnóstico</span>
+          <p class="dato">En 2 semanas</p>
+          <ul>
+            <li>Un plan de 90 días para tu primera mejora circular</li>
+            <li>Proveedores, materiales y recursos identificados</li>
+            <li>Plan de comunicación para contar el proceso</li>
+          </ul>
+          <a class="club-btn club-btn--verde" href="/servicios/roadmap-3d">Ver el Roadmap 3D</a>
+        </div>
+        <div class="caja caja--light reveal">
+          <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-empresas-sprint.webp" alt="Tablero de planificación con notas del piloto y su lanzamiento" width="900" height="562"></div>
+          <div class="chip"><%- ICO.rayo %></div>
+          <span class="num">Poner en marcha</span>
+          <h3>Sprint 3D</h3>
+          <span class="caja-precio--texto">Precio cerrado tras el Diagnóstico</span>
+          <p class="dato">En 4 semanas</p>
+          <ul>
+            <li>Implementamos el piloto contigo</li>
+            <li>Lo documentamos con datos medidos</li>
+            <li>Preparamos los materiales para contarlo</li>
+          </ul>
+          <a class="club-btn club-btn--verde" href="/servicios/sprint-3d">Ver el Sprint 3D</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Método sobre verde hondo -->
+  <section class="pasos pasos--oscuro" id="metodo">
+    <div class="cab">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>El Método 3D <em>aplicado a tu empresa</em></h2>
+      <p>Cada servicio es un paso del método. Se hacen en orden y cada uno se apoya en el anterior.</p>
+    </div>
+    <div class="wrap">
+      <div class="pasos-grid pasos-grid--tres">
+        <div class="paso reveal"><div class="bola">1</div><div class="cuando">Diagnóstico 3D</div><h3>Diagnosticar</h3><p>Repasamos materiales, proceso y residuos, y ordenamos las oportunidades por prioridad.</p></div>
+        <div class="paso reveal"><div class="bola">2</div><div class="cuando">Roadmap 3D</div><h3>Diseñar</h3><p>Convertimos la oportunidad elegida en un plan de 90 días, con proveedores y recursos.</p></div>
+        <div class="paso reveal"><div class="bola">3</div><div class="cuando">Sprint 3D</div><h3>Difundir</h3><p>Ponemos en marcha el piloto, lo medimos y preparamos los materiales para contarlo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prueba: cifras de la red (no hay testimonio de empresa) -->
+  <%- include('partials/landing-cifras', { impacto, ids: CIFRAS, titulo: 'La red, con fecha', claro: true }) %>
+
+  <!-- Cómo se llega al precio -->
+  <section class="precios" id="precio">
+    <div class="cab">
+      <span class="eyebrow">Precio</span>
+      <h2>Cómo se llega <em>al precio</em></h2>
+    </div>
+    <div class="wrap oc-camino-wrap">
+      <div class="oc-camino-foto reveal"><img loading="lazy" src="<%= IMG %>precio-empresas-matriz.webp" alt="Matriz de viabilidad de un Roadmap 3D de ejemplo: cada opción con su impacto, su factibilidad y su veredicto" width="900" height="720"></div>
+      <ol class="oc-camino oc-camino--lista">
+        <li class="reveal"><span class="n">1</span><b>Diagnóstico</b><span>Detectamos las oportunidades y cuál conviene hacer primero.</span></li>
+        <li class="reveal"><span class="n">2</span><b>Propuesta cerrada</b><span>Te enviamos alcance, plazo y precio cerrados para el Roadmap o el Sprint.</span></li>
+        <li class="reveal"><span class="n">3</span><b>Decides</b><span>Solo entonces decides si seguimos.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <%- include('partials/landing-final', {
+      img: IMG + 'cierre-empresas-vellones.webp',
+      eyebrow: 'Siguiente paso',
+      titulo: 'Convierte una mejora circular <em>en un caso que puedes contar</em>',
+      texto: 'Empieza por el Diagnóstico: te decimos qué oportunidades tienes y cuál conviene hacer primero.',
+      cta: { href: contactoEmpresas('cierre'), texto: 'Solicitar el Diagnóstico →', label: 'empresas-cierre-diagnostico' },
+      pd: '¿Prefieres escribir primero? <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>'
+  }) %>
+<% } %>
+</main>
+
+<%- include('partials/footer') %>
+<script src="/assets/js/oc-landing.js?v=20261122" defer></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<%# Parámetros oc_* y eventos GA4 en los botones de una landing. Parámetros: campaign, offer, ids {id: contenido}. %>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var ids = <%- JSON.stringify(ids) %>;
+  Object.keys(ids).forEach(function (id) {
+    var el = document.getElementById(id), content = ids[id];
+    if (!el) return;
+    var href = el.getAttribute('href') || '#';
+    if (href.indexOf('mailto:') !== 0) {
+      var u = new URL(href, window.location.origin);
+      var p = u.origin === window.location.origin ? 'oc_' : 'utm_';
+      new URLSearchParams(window.location.search).forEach(function (v, k) { if (/^(utm|oc)_/.test(k)) u.searchParams.set(p + k.replace(/^(utm|oc)_/, ''), v); });
+      u.searchParams.set(p + 'source', 'site'); u.searchParams.set(p + 'medium', 'organic');
+      u.searchParams.set(p + 'campaign', '<%= campaign %>'); u.searchParams.set(p + 'content', content);
+      el.setAttribute('href', u.toString());
+    }
+    el.addEventListener('click', function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: el.dataset.event || 'click_cta', cta_offer: '<%= offer %>', cta_location: content, label: el.dataset.label || content });
+    });
+  });
+});
+</script>

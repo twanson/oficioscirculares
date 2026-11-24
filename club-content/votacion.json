@@ -1,0 +1,11 @@
+{
+  "_nota": "Votación de la lección del mes. 'ronda' = mes cuya lección se decide (AAAA-MM). Un voto por miembro y ronda (tabla club_votos). Para abrir una ronda nueva, cambia 'ronda' y la lista de temas. 'abierta': false cierra la votación sin borrar los votos.",
+  "ronda": "2027-04",
+  "abierta": true,
+  "temas": [
+    { "clave": "etsy", "titulo": "Etsy vs. tienda propia (vs. no tener tienda)", "descripcion": "Dónde vender online según tu volumen y cuándo no te conviene montar tienda todavía." },
+    { "clave": "email", "titulo": "Email básico para talleres", "descripcion": "Cómo empezar una lista pequeña de clientes desde cero y qué mandar sin dar la lata." },
+    { "clave": "encargos", "titulo": "Encargos a medida", "descripcion": "Presupuestar, cobrar la señal y gestionar cambios sin que el encargo se tuerza." },
+    { "clave": "envios", "titulo": "Envíos y embalaje", "descripcion": "Que la pieza llegue entera y que abrir el paquete también cuente tu oficio." }
+  ]
+}

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lección 06 · Ferias que venden (y las que no) — El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  img{display:block;max-width:100%}
+  .doc{max-width:820px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:66ch}
+  .lead{font-size:19px;color:var(--tinta-suave)}
+  strong{color:var(--verde)}
+  a{color:var(--terracota)}
+  .fuente{font-size:12.5px;color:var(--tinta-suave);font-style:normal}
+
+  /* ====== Cabecera — el puesto al amanecer ====== */
+  .lec-head{display:grid;grid-template-columns:1fr 1fr;min-height:78vh;background:linear-gradient(180deg,#0B2A23 0%,#2D3A30 38%,#6E4A30 74%,#A9693D 100%);position:relative;overflow:hidden}
+  .lec-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:38%;background:radial-gradient(ellipse 70% 100% at 30% 100%,rgba(232,213,183,.32),transparent 70%);pointer-events:none}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%;background:var(--crema)}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--arena)}
+  .lec-head h1{font-size:clamp(46px,5.6vw,80px);color:var(--crema);margin-bottom:10px;max-width:12ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--arena)}
+  .lec-head .h1-cola{display:block;font-family:var(--serif);font-style:italic;font-size:clamp(24px,2.6vw,34px);color:rgba(232,213,183,.78);margin-bottom:24px}
+  .lec-head .sub{font-size:19.5px;color:rgba(251,247,239,.86);max-width:42ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(232,213,183,.35);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:rgba(251,247,239,.85);background:rgba(2,42,32,.35);backdrop-filter:blur(3px)}
+  .lec-meta b{color:var(--arena)}
+
+  .lec-feria{position:relative;min-height:640px;overflow:hidden;background:linear-gradient(180deg,rgba(6,30,24,.78) 0%,rgba(30,40,32,.5) 40%,rgba(147,74,28,.42) 100%),url('https://images.pexels.com/photos/15807344/pexels-photo-15807344.jpeg?auto=compress&cs=tinysrgb&w=1600') 22% center/cover}
+  .lec-feria .sol{position:absolute;left:-12%;bottom:-18%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(244,220,180,.55),rgba(232,170,110,.18) 45%,transparent 70%);z-index:0;pointer-events:none}
+  .lec-feria .grano{position:absolute;inset:0;z-index:0;opacity:.3;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+  .lec-num-feria{position:absolute;right:22px;bottom:6px;z-index:1;font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(130px,14vw,190px);line-height:1;color:rgba(232,213,183,.12);user-select:none;pointer-events:none}
+  .firma-feria{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(2,42,32,.55);border:1px solid rgba(232,213,183,.25);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  .firma-feria b{font-family:var(--sans);font-style:normal;font-weight:800;letter-spacing:.06em;margin-right:6px}
+
+  /* la hoja de cuentas: cuaderno cuadriculado sujeto con pinza */
+  .hoja{position:absolute;left:9%;top:11%;width:min(310px,58%);z-index:3;background-color:#FFFDF6;background-image:linear-gradient(rgba(2,52,41,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(2,52,41,.07) 1px,transparent 1px);background-size:14px 14px;padding:30px 24px 20px;box-shadow:0 26px 60px rgba(0,0,0,.55);transform:rotate(-2.2deg);font-size:13.5px;color:var(--tinta)}
+  .hoja::before{content:"";position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:74px;height:26px;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#5B5F5A,#2F3330);box-shadow:0 4px 8px rgba(0,0,0,.4)}
+  .hoja .h-tit{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--verde);border-bottom:2px solid rgba(147,74,28,.35);padding-bottom:6px;margin-bottom:10px}
+  .hoja .h-tit small{display:block;font-family:var(--sans);font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--terracota);margin-top:2px}
+  .hoja .fila{display:flex;justify-content:space-between;gap:10px;padding:3px 0;font-family:var(--serif);font-size:14.5px}
+  .hoja .fila span:last-child{font-weight:700;color:var(--verde);white-space:nowrap}
+  .hoja .fila.total{border-top:1.5px solid rgba(2,52,41,.35);margin-top:8px;padding-top:8px;font-weight:700}
+  .hoja .fila.total span:last-child{color:var(--terracota);font-size:17px}
+  .hoja .conclusion{margin-top:12px;font-family:var(--serif);font-style:italic;font-size:14.5px;line-height:1.4;color:var(--verde)}
+  .hoja .conclusion b{font-style:normal;color:var(--terracota);font-size:20px}
+  .hoja .rodeo{display:inline-block;border:2px solid var(--terracota);border-radius:50%;padding:0 6px;transform:rotate(-4deg)}
+
+  /* la pizarra de caballete */
+  .pizarra{position:absolute;right:8%;bottom:12%;z-index:3;width:200px;background:linear-gradient(160deg,#2B302C,#1C201D);border:9px solid #8A6440;border-radius:6px;padding:20px 16px;text-align:center;transform:rotate(2.5deg);box-shadow:0 22px 50px rgba(0,0,0,.6)}
+  .pizarra::after{content:"";position:absolute;left:50%;bottom:-40px;width:9px;height:34px;background:#7A5636;transform:translateX(-50%)}
+  .pizarra .p1{display:block;font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(232,213,183,.7)}
+  .pizarra .p2{display:block;font-family:var(--serif);font-size:34px;color:#F5EFE2;line-height:1.1;margin:6px 0}
+  .pizarra .p3{display:block;font-family:var(--serif);font-style:italic;font-size:13.5px;color:rgba(245,239,226,.8)}
+
+  /* la caja sin desembalar */
+  .caja{position:absolute;left:12%;bottom:9%;z-index:2;width:150px;height:96px;background:linear-gradient(170deg,#C49A69,#A87E50);border-radius:3px;box-shadow:0 18px 40px rgba(0,0,0,.5);transform:rotate(-1.5deg)}
+  .caja::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:26px;transform:translateX(-50%);background:rgba(232,213,183,.55)}
+  .caja span{position:absolute;left:10px;bottom:10px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(30,35,33,.65)}
+
+  /* ====== Resultado ====== */
+  .resultado{background:linear-gradient(160deg,#EFDFC2,var(--arena) 60%,#E0C69E);border-radius:24px;padding:38px 42px;margin:-38px auto 0;position:relative;z-index:3;box-shadow:0 18px 48px rgba(2,52,41,.14)}
+  .resultado .etiq{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);display:block;margin-bottom:10px}
+  .resultado p{font-family:var(--serif);font-size:21px;line-height:1.4;color:var(--verde);margin:0;max-width:none}
+
+  /* ====== Secciones (molde de la colección) ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:20px}
+  .cap h2 em{color:var(--terracota)}
+  .pull{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,28px);line-height:1.32;color:var(--verde);border-left:5px solid var(--terracota);padding:6px 0 6px 26px;margin:34px 0;max-width:none}
+  .paso-linea{display:grid;grid-template-columns:52px 1fr;gap:18px;margin-bottom:24px}
+  .paso-linea .n{width:44px;height:44px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 5px 14px rgba(2,52,41,.22)}
+  .paso-linea h4{font-size:19px;margin-bottom:6px}
+  .paso-linea p{font-size:15px;color:var(--tinta-suave)}
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+  .error{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:16px;padding:18px 24px 18px 66px;margin:12px 0;font-size:15px;box-shadow:0 4px 14px rgba(2,52,41,.04)}
+  .error::before{content:"✕";position:absolute;left:20px;top:17px;width:28px;height:28px;border-radius:50%;background:rgba(147,74,28,.1);color:var(--terracota);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+  .error b{color:var(--terracota)}
+
+  /* ====== Los cuatro tipos de feria ====== */
+  .tipos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0}
+  .tipo{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;padding:24px 24px 20px;position:relative;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tipo .t-etiq{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota);background:rgba(147,74,28,.08);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+  .tipo h4{font-size:20px;margin-bottom:8px}
+  .tipo p{font-size:14.5px;color:var(--tinta-suave);margin-bottom:10px}
+  .tipo .mide{font-size:13.5px;border-top:1px dashed rgba(2,52,41,.15);padding-top:10px;color:var(--tinta)}
+  .tipo .mide b{color:var(--verde)}
+
+  /* ====== Filtro (preguntas) ====== */
+  .filtro{background:var(--verde);border-radius:22px;padding:34px 38px;margin:26px 0;color:rgba(251,247,239,.9)}
+  .filtro h3{color:var(--crema);font-size:22px;margin-bottom:6px}
+  .filtro .sub-f{font-size:14px;color:rgba(251,247,239,.65);margin-bottom:18px}
+  .preg{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:12px 0;border-bottom:1px dashed rgba(232,213,183,.2);font-size:15px}
+  .preg:last-child{border-bottom:none}
+  .preg .pn{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--arena);line-height:1.3}
+  .preg b{color:var(--crema)}
+  .preg span{display:block;font-size:13.5px;color:rgba(251,247,239,.68);margin-top:2px}
+
+  /* ====== Calculadora (patrón L03) ====== */
+  .calc{background:linear-gradient(165deg,var(--verde),#03392C);border-radius:26px;padding:44px 46px;margin:34px 0;color:rgba(251,247,239,.9);position:relative;overflow:hidden}
+  .calc::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--terracota),var(--arena));border-radius:26px 26px 0 0}
+  .calc h3{color:var(--crema);font-size:24px;margin-bottom:6px}
+  .calc .sub-c{font-size:14.5px;color:rgba(251,247,239,.7);margin-bottom:22px}
+  .calc .bloque{font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);opacity:.75;margin:22px 0 12px;display:flex;align-items:center;gap:12px}
+  .calc .bloque::after{content:"";flex:1;border-top:1px solid rgba(232,213,183,.2)}
+  .calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 20px}
+  .campo-c label{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--arena);margin-bottom:7px}
+  .campo-c input,.campo-c select{width:100%;background:rgba(251,247,239,.08);border:1.5px solid rgba(232,213,183,.3);border-radius:12px;padding:12px 14px;font-size:17px;font-weight:700;color:var(--crema);font-family:var(--sans);outline:none}
+  .campo-c input:focus,.campo-c select:focus{border-color:var(--arena)}
+  .campo-c select option{color:var(--tinta)}
+  .campo-c .mini{font-size:12px;color:rgba(251,247,239,.55);margin-top:5px;display:block;font-weight:500;line-height:1.45}
+  .calc-out{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+  .out-card{background:rgba(251,247,239,.07);border:1px solid rgba(232,213,183,.22);border-radius:16px;padding:18px 16px;text-align:center}
+  .out-card .ol{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(251,247,239,.6);display:block;margin-bottom:6px;min-height:4em}
+  .out-card .ov{font-family:var(--serif);font-size:clamp(26px,3.2vw,34px);color:var(--crema);line-height:1}
+  .out-card .os{display:block;font-size:12px;color:rgba(251,247,239,.55);margin-top:6px}
+  .out-card.destacada{background:var(--arena);border:none}
+  .out-card.destacada .ol{color:var(--terracota)}
+  .out-card.destacada .ov{color:var(--verde)}
+  .out-card.destacada .os{color:#6b5c48}
+  .calc .veredicto{margin-top:22px;background:rgba(2,42,32,.45);border:1px dashed rgba(232,213,183,.35);border-radius:14px;padding:18px 22px;font-size:15px}
+  .calc .veredicto b{color:var(--arena)}
+  .calc .veredicto .frase{font-family:var(--serif);font-style:italic;color:var(--crema);display:block;margin-top:8px;font-size:17px;line-height:1.45}
+
+  /* ====== Puesto: plano ====== */
+  .plano{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid rgba(2,52,41,.18);border-radius:18px;overflow:hidden;margin:26px 0;background:var(--blanco)}
+  .zona{padding:20px 18px;border-right:1px dashed rgba(2,52,41,.15);font-size:14px;color:var(--tinta-suave)}
+  .zona:last-child{border-right:none}
+  .zona b{display:block;font-family:var(--serif);font-size:17px;color:var(--verde);margin-bottom:4px}
+  .zona .z-et{display:block;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota);margin-bottom:6px}
+  .plano .pasillo{grid-column:1/-1;background:var(--arena-clara);text-align:center;padding:10px;font-size:11.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#8a7558;border-top:2px solid rgba(2,52,41,.18)}
+
+  /* ====== En tu oficio ====== */
+  .en-tu-oficio{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:20px;padding:30px 34px;margin:28px 0;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .en-tu-oficio .titulo-o{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .en-tu-oficio .titulo-o b{font-family:var(--serif);font-size:21px;color:var(--verde)}
+  .en-tu-oficio .titulo-o::before{content:"✦";width:34px;height:34px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .en-tu-oficio .sub-o{font-size:14px;color:var(--tinta-suave);margin-bottom:20px}
+  .oficios-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 32px}
+  .of{padding:11px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:13.5px;line-height:1.5}
+  .of b{display:block;font-family:var(--serif);font-size:15.5px;color:var(--verde);margin-bottom:2px}
+  .of span{display:block;color:var(--tinta-suave)}
+
+  /* ====== Companion (Radar) ====== */
+  .companion{display:flex;gap:22px;align-items:center;background:linear-gradient(160deg,#EFDFC2,var(--arena));border-radius:20px;padding:28px 32px;margin:28px 0}
+  .companion .icono-r{width:72px;height:72px;border-radius:50%;flex-shrink:0;background:radial-gradient(circle,rgba(2,52,41,0) 0 30%,rgba(2,52,41,.15) 31% 32%,rgba(2,52,41,0) 33% 60%,rgba(2,52,41,.15) 61% 62%,rgba(2,52,41,0) 63%),conic-gradient(from 20deg,rgba(147,74,28,.55),rgba(147,74,28,0) 70deg,rgba(147,74,28,0)),var(--verde);box-shadow:0 8px 20px rgba(2,52,41,.25);position:relative}
+  .companion .icono-r::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--arena);top:24%;left:60%;box-shadow:0 0 8px var(--arena)}
+  .companion h4{font-size:19px;margin-bottom:4px}
+  .companion p{font-size:14px;color:#5d5347;margin:0 0 8px}
+  .companion a{font-weight:800;font-size:14px}
+
+  /* ====== Ayudas: dos fichas ====== */
+  .ayudas{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0}
+  .ayuda{background:var(--blanco);border-left:5px solid var(--terracota);border-radius:14px;padding:20px 22px;box-shadow:0 6px 20px rgba(2,52,41,.05);font-size:14.5px;color:var(--tinta-suave)}
+  .ayuda b{display:block;font-family:var(--serif);font-size:18px;color:var(--verde);margin-bottom:6px}
+  .ayuda .cifra{font-family:var(--serif);font-size:30px;color:var(--terracota);line-height:1;display:block;margin:4px 0 8px}
+
+  /* ====== Práctica / checklist / cierre ====== */
+  .practica{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);border-radius:24px;padding:40px 44px;margin:40px 0;position:relative;overflow:hidden}
+  .practica::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .practica .etiq{display:block;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .practica h3{font-size:24px;margin-bottom:14px}
+  .practica p{font-size:15.5px;color:#5d5347}
+  .practica ol{margin:18px 0 0;padding:0;list-style:none;counter-reset:pr}
+  .practica ol li{counter-increment:pr;position:relative;padding:10px 0 10px 46px;font-size:15px}
+  .practica ol li::before{content:counter(pr);position:absolute;left:0;top:8px;width:32px;height:32px;border-radius:50%;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .tabla-cal{width:100%;border-collapse:collapse;margin:20px 0 0;font-size:14px;background:var(--blanco);border-radius:12px;overflow:hidden}
+  .tabla-cal th{background:var(--verde);color:var(--arena);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:10px 12px}
+  .tabla-cal td{padding:10px 12px;border-bottom:1px dashed rgba(2,52,41,.12);color:#8a7a66;font-family:var(--serif);font-style:italic}
+  .tabla-wrap{overflow-x:auto}
+  .copiable{background:var(--verde-hondo);color:rgba(251,247,239,.92);border-radius:16px;padding:22px 26px;margin:20px 0 0;font-size:14.5px}
+  .copiable .etiq2{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);display:block;margin-bottom:10px}
+  .copiable p{color:rgba(251,247,239,.92);margin:0;max-width:none}
+  .checklist{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;padding:28px 32px;margin:26px 0}
+  .checklist .titulo-c{font-family:var(--serif);font-size:20px;color:var(--verde);margin-bottom:18px}
+  .check{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:15px}
+  .check:last-child{border-bottom:none}
+  .check input[type=checkbox]{appearance:none;width:24px;height:24px;border:2px solid rgba(2,52,41,.3);border-radius:7px;cursor:pointer;flex-shrink:0;position:relative;margin-top:1px;background:var(--crema)}
+  .check input[type=checkbox]:checked{background:var(--verde);border-color:var(--verde)}
+  .check input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--arena);font-size:14px;font-weight:800}
+  .check label{cursor:pointer}
+  .check label b{color:var(--verde)}
+  .siguiente{background:var(--verde);border-radius:24px;padding:44px 46px;margin:60px 0 30px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .siguiente .txt b{display:block;font-family:var(--serif);font-size:22px;color:var(--crema);margin-bottom:6px}
+  .siguiente .txt span{font-size:14.5px;color:rgba(251,247,239,.75)}
+  .siguiente .pill{background:var(--arena);color:var(--verde);font-weight:800;font-size:14.5px;padding:13px 26px;border-radius:999px;white-space:nowrap}
+  .fuentes{border-top:1px solid rgba(2,52,41,.12);padding:22px 0 10px;margin:0 0 20px;font-size:12.5px;color:var(--tinta-suave)}
+  .fuentes b{display:block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota);margin-bottom:8px}
+  .fuentes li{margin:0 0 5px 18px}
+  .pie-doc{text-align:center;padding:0 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+
+  @media(max-width:860px){
+    .calc-grid{grid-template-columns:1fr 1fr}
+    .calc-out{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:720px){
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .lec-feria{order:2;min-height:660px}
+    .hoja{left:5%;top:72px;width:min(285px,80%)}
+    .pizarra{right:6%;bottom:78px;width:150px;padding:14px 12px}
+    .pizarra .p2{font-size:24px}
+    .pizarra::after{bottom:-30px;height:24px}
+    .caja{left:6%;bottom:70px;width:110px;height:70px}
+    .resultado{padding:28px 24px}
+    .tipos,.ayudas{grid-template-columns:1fr}
+    .filtro{padding:28px 22px}
+    .calc{padding:30px 22px}
+    .calc-grid{grid-template-columns:1fr}
+    .calc-out{grid-template-columns:1fr}
+    .plano{grid-template-columns:1fr}
+    .zona{border-right:none;border-bottom:1px dashed rgba(2,52,41,.15)}
+    .oficios-grid{grid-template-columns:1fr}
+    .companion{flex-direction:column;text-align:center}
+    .practica{padding:30px 22px}
+    .siguiente{padding:32px 26px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA — el puesto al amanecer, montaje a medio hacer ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · Pilar Aprende · Lección 06</span>
+    </div>
+    <h1>Ferias que <em>venden</em></h1>
+    <span class="h1-cola">(y las que no)</span>
+    <p class="sub">Enero es cuando se decide el año de ferias. Hoy aprendes a elegir cuáles merecen tu caseta, a saber antes de pagar cuántas piezas tienes que vender para no perder, y a que la gente que pasa por delante vuelva a encontrarte cuando la feria ya se ha desmontado.</p>
+    <div class="lec-meta">
+      <span><b>Lectura</b> 18 min</span>
+      <span><b>Práctica</b> 30 min</span>
+      <span><b>Necesitas</b> tu lista de ferias candidatas · los números de la lección 03</span>
+    </div>
+  </div>
+  <!-- El puesto a medio montar: la hoja de cuentas, la pizarra y la caja todavía cerrada -->
+  <div class="lec-feria" aria-label="Puesto de feria al amanecer, a medio montar, con la hoja de cuentas de la feria">
+    <div class="sol"></div>
+    <div class="grano"></div>
+    <span class="firma-feria"><b>07:40</b> el puesto, a medio montar</span>
+    <div class="lec-num-feria">06</div>
+    <div class="hoja">
+      <div class="h-tit">Feria de primavera<small>10 días · stand 3×2</small></div>
+      <div class="fila"><span>Cuota del stand</span><span>850 €</span></div>
+      <div class="fila"><span>Gasolina, ida y vuelta</span><span>120 €</span></div>
+      <div class="fila"><span>Comidas, 10 × 15</span><span>150 €</span></div>
+      <div class="fila"><span>Seguro y puesto</span><span>60 €</span></div>
+      <div class="fila total"><span>Me cuesta</span><span>1.180 €</span></div>
+      <div class="conclusion">Cada venta me deja unos 35 €.<br>Para no perder: <span class="rodeo"><b>34</b></span> piezas.<br>Si cuento mis 80 horas: <b>75</b>.</div>
+    </div>
+    <div class="caja"><span>Frágil · taller</span></div>
+    <div class="pizarra">
+      <span class="p1">Hecho en mi taller</span>
+      <span class="p2">Abrimos 11:00</span>
+      <span class="p3">pasa, se puede tocar</span>
+    </div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <section class="resultado">
+    <span class="etiq">Lo que consigues hoy</span>
+    <p>Tu calendario de ferias de 2027 filtrado con números: cada feria candidata con su punto de equilibrio calculado, las que no pasan el corte tachadas, y un plan para que cada visitante que se interese se lleve una forma de volver a encontrarte.</p>
+  </section>
+
+  <!-- ============ 1. POR QUÉ ============ -->
+  <section class="cap">
+    <div class="cap-num">01 · Por qué importa</div>
+    <h2>Una feria es una <em>apuesta con fecha</em></h2>
+    <p>Las ferias siguen siendo el sitio donde la gente quiere comprar artesanía. En el estudio más grande que se ha hecho sobre quién compra artesanía, con unas 5.300 personas encuestadas en Reino Unido, la mayoría seguía prefiriendo comprar en persona, aunque la compra por internet se había triplicado en una década <span class="fuente">(Crafts Council, <em>The Market for Craft</em>, 2020)</span>. Tocar la pieza, conocer a quien la hace y llevársela en la mano sigue pesando.</p>
+    <p>Pero una feria también cuesta dinero de verdad, y se paga antes de vender nada. Las cinco ferias de artesanía que organiza la federación de Castilla y León en 2026 cobran entre <strong>850 € y 1.912 €</strong> por un stand de diez días, según el tamaño y si perteneces o no a la federación, y exigen el pago completo antes de que abra la feria <span class="fuente">(FOACAL, bases de participación 2026)</span>. A eso hay que sumarle el viaje, las comidas, a veces el alojamiento, y todas las horas que no estás en el taller.</p>
+    <p>Por eso la pregunta útil no es "¿me irá bien en esta feria?", que nadie puede responder de antemano. La pregunta útil es <strong>"¿cuántas piezas tengo que vender para que me salga a cuenta, y es realista venderlas aquí?"</strong>. Esa sí tiene respuesta, y la vas a calcular hoy.</p>
+    <div class="pull">Una feria no se juzga por la gente que pasa por delante. Se juzga por lo que queda cuando desmontas.</div>
+  </section>
+
+  <!-- ============ 2. LOS CUATRO TIPOS ============ -->
+  <section class="cap">
+    <div class="cap-num">02 · El mapa</div>
+    <h2>No hay "ferias": hay <em>cuatro tipos</em>, y cada una sirve para algo distinto</h2>
+    <p>El error más caro es medir todas las ferias con la misma vara. Antes de apuntarte, decide para qué vas: a vender, a que te conozcan o a conseguir tiendas que te compren al por mayor.</p>
+    <div class="tipos">
+      <div class="tipo">
+        <span class="t-etiq">Vender</span>
+        <h4>La feria oficial de artesanía</h4>
+        <p>La organiza una federación o un ayuntamiento, dura varios días y tiene jurado de selección. El público viene buscando artesanía, así que el ticket medio puede ser alto. A cambio, la cuota es la más cara y el compromiso es estar todo el horario, todos los días.</p>
+        <div class="mide"><b>Se mide en:</b> euros vendidos frente a tu punto de equilibrio.</div>
+      </div>
+      <div class="tipo">
+        <span class="t-etiq">Darte a conocer</span>
+        <h4>El mercado de diseño urbano</h4>
+        <p>Uno o dos días, en la ciudad, con público joven que pasea. Se venden bien las piezas pequeñas (las de entrada de tu catálogo, lección 03) y es un sitio excelente para ganar seguidores. Rara vez se vende aquí la pieza grande.</p>
+        <div class="mide"><b>Se mide en:</b> ventas más contactos nuevos (seguidores, correos, encargos).</div>
+      </div>
+      <div class="tipo">
+        <span class="t-etiq">Vender a tu público</span>
+        <h4>La feria de tu oficio</h4>
+        <p>Ferias de alfarería, de cerámica, de cuchillería, de lana. El público viene a por tu oficio en concreto y entiende lo que vale. Ojo con las ferias "temáticas" de paseo (las medievales, por ejemplo): mucho público, pero que pasea más que compra.</p>
+        <div class="mide"><b>Se mide en:</b> ventas, y en encargos que salen después.</div>
+      </div>
+      <div class="tipo">
+        <span class="t-etiq">Conseguir tiendas</span>
+        <h4>La feria profesional</h4>
+        <p>Aquí no vendes piezas sueltas: buscas tiendas que te hagan pedidos. Un ejemplo es Intergift, la feria de decoración y regalo de IFEMA Madrid, que en 2027 se celebra del 3 al 6 de febrero <span class="fuente">(IFEMA, guía del expositor 2027)</span>. Solo tiene sentido si ya tienes precio de mayorista (lección 03) y capacidad para servir pedidos.</p>
+        <div class="mide"><b>Se mide en:</b> pedidos firmados y tiendas interesadas.</div>
+      </div>
+    </div>
+    <div class="tip"><b>Una feria puede no "vender" y aun así salir bien,</b> siempre que hayas decidido antes para qué ibas. Un mercado de diseño donde cubres gastos y te llevas cuarenta correos de gente interesada es un buen día. Una feria oficial donde cubres gastos y no te llevas nada más es un mal negocio con buena cara.</div>
+  </section>
+
+  <!-- ============ 3. EL FILTRO ============ -->
+  <section class="cap">
+    <div class="cap-num">03 · El filtro</div>
+    <h2>Siete preguntas <em>antes de pagar la caseta</em></h2>
+    <p>Todas se pueden responder con un correo a la organización y dos llamadas a artesanos que estuvieron el año pasado. Si una feria no te deja contestarlas, ya tienes una respuesta.</p>
+    <div class="filtro">
+      <h3>El filtro de la feria</h3>
+      <p class="sub-f">Pásalo a cada feria candidata. Si fallan tres o más, no va a tu calendario.</p>
+      <div class="preg"><span class="pn">1</span><div><b>¿Cuántas ediciones lleva?</b><span>Una feria con años de historia tiene público que vuelve. La primera edición es una lotería: si vas, que sea con una cuota baja.</span></div></div>
+      <div class="preg"><span class="pn">2</span><div><b>¿Quién viene, y a qué viene?</b><span>No es lo mismo un público que viene a comprar artesanía que familias de paseo en fiestas. Pregunta cuántos visitantes hubo y, sobre todo, qué tipo de visitantes.</span></div></div>
+      <div class="preg"><span class="pn">3</span><div><b>¿Qué tienes al lado?</b><span>Pregunta si solo admiten producción propia y si lo vigilan. Las de FOACAL, por ejemplo, prohíben la reventa y los productos industriales, y pueden retirar piezas que no cumplan (bases 2026). Competir con importación barata en el puesto de al lado hunde tu precio.</span></div></div>
+      <div class="preg"><span class="pn">4</span><div><b>¿Dónde cae tu stand?</b><span>Las esquinas, las entradas y la zona junto a las demostraciones reciben más paso. Pide ver el plano y pregunta cómo se reparten los sitios.</span></div></div>
+      <div class="preg"><span class="pn">5</span><div><b>¿Qué horario te compromete?</b><span>Las ferias de Castilla y León de 2026 abren de 11:00 a 14:30 y de 17:00 a 21:00 o 22:00, diez días seguidos, y exigen estar desde la inauguración hasta la clausura (FOACAL, 2026). Son unas 75 horas solo de puesto abierto, más montaje y viaje. Esas horas van a la calculadora.</span></div></div>
+      <div class="preg"><span class="pn">6</span><div><b>¿Qué pasa si no puedes ir?</b><span>Lee la letra de la cancelación. En FOACAL recuperas todo si renuncias con 20 días de antelación; después pierdes la cuota entera, salvo causa de fuerza mayor acreditada (bases 2026).</span></div></div>
+      <div class="preg"><span class="pn">7</span><div><b>¿Qué papeles te piden?</b><span>Lo habitual: alta de autónomo, estar al corriente con Hacienda y Seguridad Social, y un seguro de responsabilidad civil para venta ambulante. FOACAL pide una cobertura mínima de 300.000 € (bases 2026). Tener el carné de artesano suma: en la selección de FOACAL da 3 puntos. Si no lo tienes, el Radar explica cómo sacarlo.</span></div></div>
+    </div>
+    <div class="tip"><b>La llamada que más ahorra:</b> busca en Instagram a dos artesanos que estuvieron en la última edición y escríbeles. Pregunta solo esto: "¿Repetirías?". Un "sí" rápido vale más que el folleto de la feria. Un "bueno…" largo te ahorra mil euros.</div>
+  </section>
+
+  <!-- ============ 4. CALCULADORA ============ -->
+  <section class="cap" id="calculadora">
+    <div class="cap-num">04 · Tu calculadora</div>
+    <h2>¿Cuántas piezas tienes que vender <em>para que salga a cuenta?</em></h2>
+    <p class="lead">Rellénala con una feria concreta que estés pensando hacer este año. Los resultados se actualizan solos. Viene rellenada con el ejemplo de la hoja de cuentas de arriba.</p>
+    <div class="calc">
+      <h3>La cuenta de la feria</h3>
+      <p class="sub-c">Lo que te deja cada venta = precio − materiales − comisión del datáfono · Piezas para no perder = gastos de la feria ÷ lo que te deja cada venta</p>
+
+      <div class="bloque">Lo que cuesta ir</div>
+      <div class="calc-grid">
+        <div class="campo-c"><label for="fStand">Cuota del stand (€)</label><input type="number" id="fStand" value="850" min="0" step="10"><span class="mini">las ferias de 10 días de FOACAL van de 850 a 1.912 € (2026)</span></div>
+        <div class="campo-c"><label for="fAyuda">Ayuda pública al stand</label><select id="fAyuda"><option value="0" selected>Sin ayuda</option><option value="0.4">40 % del stand</option><option value="0.6">60 % del stand</option><option value="0.8">80 % del stand</option></select><span class="mini">solo si tu comunidad la convoca y llegas a tiempo (sección 07)</span></div>
+        <div class="campo-c"><label for="fDias">Días de feria</label><input type="number" id="fDias" value="10" min="1" step="1"><span class="mini">días con el puesto abierto</span></div>
+        <div class="campo-c"><label for="fViaje">Desplazamiento total (€)</label><input type="number" id="fViaje" value="120" min="0" step="5"><span class="mini">gasolina, peajes, aparcamiento, furgoneta</span></div>
+        <div class="campo-c"><label for="fAloja">Alojamiento total (€)</label><input type="number" id="fAloja" value="0" min="0" step="10"><span class="mini">0 si duermes en casa</span></div>
+        <div class="campo-c"><label for="fComida">Comidas y extras por día (€)</label><input type="number" id="fComida" value="15" min="0" step="1"><span class="mini">lo que gastas fuera de casa cada día</span></div>
+        <div class="campo-c"><label for="fOtros">Seguro, permisos y puesto (€)</label><input type="number" id="fOtros" value="60" min="0" step="5"><span class="mini">parte del seguro de RC, luces, cartelería, bolsas</span></div>
+        <div class="campo-c"><label for="fHoras">Tus horas totales</label><input type="number" id="fHoras" value="80" min="0" step="1"><span class="mini">puesto abierto + montaje + desmontaje + viaje</span></div>
+        <div class="campo-c"><label for="fTarifa">Tu tarifa (€/hora)</label><input type="number" id="fTarifa" value="18" min="0" step="1"><span class="mini">la misma de la lección 03 (suelo digno: 15-20 €/h)</span></div>
+      </div>
+
+      <div class="bloque">Lo que te deja cada venta</div>
+      <div class="calc-grid">
+        <div class="campo-c"><label for="fTicket">Precio medio por venta (€)</label><input type="number" id="fTicket" value="45" min="0" step="1"><span class="mini">lo que paga de media quien te compra</span></div>
+        <div class="campo-c"><label for="fMat">Materiales por venta (€)</label><input type="number" id="fMat" value="9" min="0" step="0.5"><span class="mini">materiales y embalaje de esa pieza media</span></div>
+        <div class="campo-c"><label for="fCom">Comisión del datáfono (%)</label><input type="number" id="fCom" value="1.5" min="0" max="10" step="0.1"><span class="mini">la que te cobre tu terminal: consúltala</span></div>
+      </div>
+
+      <div class="bloque">Tu previsión</div>
+      <div class="calc-grid">
+        <div class="campo-c"><label for="fEspero">Ventas que esperas</label><input type="number" id="fEspero" value="60" min="0" step="1"><span class="mini">sé prudente: usa lo que vendiste en una feria parecida</span></div>
+      </div>
+
+      <div class="calc-out">
+        <div class="out-card"><span class="ol">Gastos de la feria</span><span class="ov" id="oGastos">—</span><span class="os" id="oGastosS">&nbsp;</span></div>
+        <div class="out-card"><span class="ol">Piezas para no perder dinero</span><span class="ov" id="oEqG">—</span><span class="os" id="oEqGS">&nbsp;</span></div>
+        <div class="out-card destacada"><span class="ol">Piezas para cobrar también tus horas</span><span class="ov" id="oEqH">—</span><span class="os" id="oEqHS">&nbsp;</span></div>
+        <div class="out-card"><span class="ol">Lo que ganas por hora con tu previsión</span><span class="ov" id="oHora">—</span><span class="os" id="oHoraS">&nbsp;</span></div>
+      </div>
+      <div class="veredicto">
+        <b>Lo que te dicen estos números:</b>
+        <span class="frase" id="oVeredicto">—</span>
+      </div>
+    </div>
+    <div class="tip"><b>Por qué hay dos puntos de equilibrio:</b> el primero te dice cuándo dejas de perder dinero de tu bolsillo. El segundo te dice cuándo la feria te paga tu trabajo a una tarifa digna. Una feria que solo alcanza el primero te ha tenido diez días trabajando gratis. Puede valer la pena si ibas a darte a conocer, pero tiene que ser una decisión, no una sorpresa.</div>
+    <div class="tip"><b>De dónde sale el "precio medio por venta":</b> suma lo que vendiste en tu última feria y divídelo entre el número de ventas. Si nunca lo has apuntado, empieza en la próxima: una libreta y una raya por venta bastan. Es el dato que más cambia el resultado.</div>
+  </section>
+
+  <!-- ============ 5. EL PUESTO ============ -->
+  <section class="cap">
+    <div class="cap-num">05 · El puesto</div>
+    <h2>Un puesto que <em>para a la gente</em></h2>
+    <p>Quien pasea por una feria decide en pocos pasos si se para o sigue. No se para por tus piezas una a una: se para porque algo del puesto le llama. Las ferias lo saben: en las de FOACAL, la <strong>presentación del stand</strong> es uno de los criterios con los que el jurado elige a quién admite (bases 2026). Piensa tu puesto en tres zonas:</p>
+    <div class="plano" aria-label="Plano del puesto en tres zonas">
+      <div class="zona"><span class="z-et">Zona 1 · el reclamo</span><b>Lo que se ve desde lejos</b>Una pieza grande o llamativa a la altura de los ojos, y un cartel con tu nombre y tu oficio que se lea a cinco metros.</div>
+      <div class="zona"><span class="z-et">Zona 2 · las manos</span><b>Lo que se puede tocar</b>En la parte delantera de la mesa, las piezas pequeñas y de entrada, con el precio a la vista. Se tocan sin miedo.</div>
+      <div class="zona"><span class="z-et">Zona 3 · la historia</span><b>Lo que hace que se queden</b>Al fondo o a un lado: tu proceso. Una herramienta, una pieza a medio hacer o una foto del taller.</div>
+      <div class="pasillo">pasillo · por aquí pasa la gente</div>
+    </div>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Haz algo en directo</h4><p>Un torno, un telar pequeño, una lima, una puntada. Ver trabajar a alguien para a más gente que cualquier cartel, y responde sin palabras a "¿esto es hecho a mano?". Hay ferias que lo fomentan: la Feria de Artesanía de la Región de Murcia (FERAMUR) invita a sus expositores a proponer demostraciones y talleres en su edición de 2026. Pregunta si la tuya lo permite.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>Precios visibles, redondos y sin vergüenza</h4><p>Hay quien no pregunta el precio por vergüenza, y se va sin saberlo. Pon el precio en cada pieza o en una pizarra, en números redondos (lección 03). Un precio a la vista no espanta a nadie: lo que espanta es tener que preguntarlo.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>Tú, de pie y sin móvil</h4><p>Atender sentado y mirando el móvil le dice al que pasa que no le esperabas. De pie, a un lado de la mesa (no detrás, como una barrera) y con una frase de entrada que no sea "¿te ayudo?". Por ejemplo: "Esta la hice la semana pasada, cógela y verás lo que pesa".</p></div></div>
+    <div class="paso-linea"><div class="n">4</div><div><h4>Luz cálida propia</h4><p>El stand modular suele traer una iluminación básica: en FOACAL, dos focos LED y un enchufe de 500 W por stand (bases 2026). Esa luz es blanca y plana. Un par de focos de luz cálida sobre tus piezas estrella cambian el puesto entero a partir de las siete de la tarde, que es cuando más se pasea.</p></div></div>
+    <div class="paso-linea"><div class="n">5</div><div><h4>Cobra de todas las formas</h4><p>En España, el 57 % de las compras en tiendas físicas todavía se pagan en efectivo, pero en las compras de más de 50 € manda la tarjeta: un 42 % se pagan con tarjeta, frente a un 39 % en efectivo y un 10 % con el móvil <span class="fuente">(Banco de España, a partir de la encuesta SPACE del BCE, 2024)</span>. Tus piezas grandes cuestan más de 50 €. Sin datáfono, pierdes justo las ventas que más te dejan. Lleva datáfono, cambio y tu número para Bizum a la vista.</p></div></div>
+    <div class="tip"><b>La prueba de los cinco metros:</b> cuando termines de montar, aléjate cinco metros y mira tu puesto como si fueras un visitante con prisa. ¿Se entiende en dos segundos qué haces y que lo haces tú? Si no, falta el cartel o falta la pieza reclamo.</div>
+  </section>
+
+  <!-- ============ 6. DE VISITANTE A CLIENTE ============ -->
+  <section class="cap">
+    <div class="cap-num">06 · Después del "me lo pienso"</div>
+    <h2>De visitante a seguidor, <em>y de seguidor a cliente</em></h2>
+    <p>Buena parte de la gente que se interesa por tu puesto no compra ese día. No tiene efectivo, no es el momento, o quiere pensarlo. Si se va sin una forma de volver a encontrarte, esa venta se pierde para siempre. Por eso cada feria tiene que dejarte <strong>contactos</strong>, no solo ventas.</p>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Una tarjeta que se puede usar</h4><p>Tu nombre, tu oficio y un código QR que lleve a tu Instagram o a tu WhatsApp Business. Que la bio a la que llega esté preparada para recibirle (lección 04). Mete la tarjeta en cada bolsa, también en las de quien ya ha comprado.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>La libreta de "avísame"</h4><p>Ten a la vista una libreta con una frase clara: "Déjame tu correo y te aviso cuando saque piezas nuevas o vuelva a esta ciudad". Para poder escribirles después, la persona tiene que dar su permiso de forma expresa: pon una casilla o una frase en la hoja que diga para qué usarás su correo, y no lo uses para otra cosa.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>Los encargos se cierran en el puesto</h4><p>"No tengo esta en azul" no es un no: es un encargo. Apunta nombre, contacto, pieza y plazo, y cobra la señal allí mismo. La regla de la lección 03 sirve igual en la feria: presupuesto cerrado y el 50 % por adelantado.</p></div></div>
+    <div class="paso-linea"><div class="n">4</div><div><h4>Las 48 horas de después</h4><p>En los dos días siguientes, escribe a todos los que dejaron contacto o encargo: un mensaje corto, con una foto de la pieza que miraron. Es el momento en que aún se acuerdan de ti. Publica también un resumen de la feria en tu perfil y etiqueta a la organización, que a veces lo comparte.</p></div></div>
+    <div class="tip"><b>Cuenta los contactos igual que cuentas el dinero.</b> Al cerrar cada día, apunta dos cifras: lo vendido y los contactos nuevos (seguidores, correos, encargos). Al terminar la temporada sabrás qué ferias te dan ventas, cuáles te dan clientes para todo el año y cuáles no te dan ninguna de las dos cosas.</div>
+  </section>
+
+  <!-- ============ 7. AYUDAS ============ -->
+  <section class="cap">
+    <div class="cap-num">07 · Que la caseta te salga más barata</div>
+    <h2>Las ayudas que pagan parte <em>del stand</em></h2>
+    <p>Varias comunidades autónomas convocan cada año ayudas para que los talleres artesanos vayan a ferias. Pueden cambiar por completo el resultado de la calculadora, pero tienen dos trampas: hay que pedirlas en plazo, y casi siempre exigen estar acreditado como artesano. Dos ejemplos de cómo funcionan, con las convocatorias de 2026:</p>
+    <div class="ayudas">
+      <div class="ayuda"><b>Comunitat Valenciana · CREA Artesanía</b><span class="cifra">hasta 40 %</span>Del importe solicitado, con un límite de 5.000 €. Cubre alquiler del espacio y del stand, montaje, desmontaje, decoración y rotulación, también en ferias fuera de la Comunitat. Exige el Documento de Calificación Artesana. El plazo de 2026 cerró el 25 de junio. <span class="fuente">(Generalitat Valenciana, convocatoria 2026)</span></div>
+      <div class="ayuda"><b>Aragón · ayudas al sector artesano</b><span class="cifra">hasta 80 %</span>Del gasto subvencionable, con un gasto máximo de 10.000 € en la línea de ferias: cuota, stand, montaje, publicidad y transporte de mercancía. No cubre desplazamiento ni alojamiento, excluye las ferias de carácter recreativo y puntúa más las dirigidas a compradores profesionales. Exige estar en el Registro General de Artesanía de Aragón. El plazo de 2026 cerró el 1 de septiembre. <span class="fuente">(Gobierno de Aragón, Orden ECE/920/2026)</span></div>
+    </div>
+    <p>Fíjate en lo que tienen en común: <strong>las dos se piden con el calendario de ferias ya decidido</strong>, y las dos piden un papel que tarda semanas en conseguirse. Por eso esta lección va en enero: el calendario que hagas hoy es el que te permitirá pedir la ayuda cuando abra tu comunidad.</p>
+    <div class="companion">
+      <div class="icono-r" aria-hidden="true"></div>
+      <div>
+        <h4>El Radar de Ayudas: la parte de ferias</h4>
+        <p>Qué comunidades tienen línea de ferias, cuándo suelen abrir, qué cubren y cómo sacar el carné de artesano paso a paso. La edición de enero trae las convocatorias de 2027 con sus plazos.</p>
+        <a href="/club/dentro/lecciones/radar-ayudas#tu-caso">Abrir el Radar en "Ir a ferias y mercados" →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. EN TU OFICIO ============ -->
+  <section class="cap">
+    <div class="cap-num">08 · En tu oficio</div>
+    <h2>Lo que hace parar a la gente <em>en cada oficio</em></h2>
+    <div class="en-tu-oficio">
+      <div class="titulo-o"><b>En tu oficio: tu reclamo y tu cuidado en feria</b></div>
+      <p class="sub-o">Cada oficio tiene algo que para a la gente y algo que se rompe, se estropea o se pierde en una feria. El tuyo es este:</p>
+      <div class="oficios-grid">
+        <div class="of"><b>Cerámica</b><span>el torno en marcha para a cualquiera; embala por capas y lleva piezas de repuesto para la zona de tocar</span></div>
+        <div class="of"><b>Barro y alfarería</b><span>busca las ferias de alfarería de tu zona: su público viene a por el barro y entiende el precio</span></div>
+        <div class="of"><b>Joyería</b><span>espejo en la mesa y piezas probables a mano; las vitrinas cerradas guardan lo caro, no lo de entrada</span></div>
+        <div class="of"><b>Carpintería y ebanistería</b><span>deja oler y tocar la madera; trae la pieza grande en fotos y vende en feria la tabla o la cuchara</span></div>
+        <div class="of"><b>Cosmética natural</b><span>los probadores venden solos; lleva al día el etiquetado y el registro, que en feria te lo pueden pedir</span></div>
+        <div class="of"><b>Textil</b><span>un telar pequeño en marcha; cuelga las piezas para que caigan, nunca dobladas en montón</span></div>
+        <div class="of"><b>Alimentación</b><span>la degustación es tu reclamo; las autorizaciones sanitarias, tu primer papel antes de pedir sitio</span></div>
+        <div class="of"><b>Restauración y upcycling</b><span>enseña el antes y el después de una misma pieza: es tu mejor cartel</span></div>
+        <div class="of"><b>Cuero</b><span>personaliza en directo con iniciales grabadas: convierte el "me lo pienso" en una compra con fecha</span></div>
+        <div class="of"><b>Forja y herrería</b><span>el yunque atrae, pero pregunta antes si dejan trabajar en caliente; si no, enseña el proceso en vídeo</span></div>
+        <div class="of"><b>Vidrio</b><span>la luz lo es todo: ilumina desde atrás; embalaje rígido y el seguro revisado para roturas</span></div>
+        <div class="of"><b>Encuadernación</b><span>deja hojear un cuaderno de muestra; ofrece grabar el nombre en la tapa sobre la marcha</span></div>
+        <div class="of"><b>Lana y costura</b><span>madejas en una cesta para meter la mano; vende también el kit para tejer en casa</span></div>
+        <div class="of"><b>Cestería y mimbre</b><span>trenzar en directo explica el precio sin palabras; cuelga las piezas en altura para ganar mesa</span></div>
+        <div class="of"><b>Construcción tradicional</b><span>tu feria es la de rehabilitación y bioconstrucción, y tu cliente es el arquitecto: lleva muestras y fotos de obra</span></div>
+        <div class="of"><b>Turismo rural</b><span>tu feria es la de turismo y producto local: no vendes en el stand, llenas fechas; lleva el calendario de plazas libres</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. ERRORES ============ -->
+  <section class="cap">
+    <div class="cap-num">09 · Los clásicos</div>
+    <h2>Los 5 errores que <em>convierten una feria en pérdida</em></h2>
+    <div class="error"><b>Ir porque "hay que estar".</b> Si no sabes para qué vas (vender, darte a conocer o buscar tiendas), no sabrás si salió bien. Y repetirás la feria por costumbre.</div>
+    <div class="error"><b>Bajar precios para vender más en la feria.</b> Hay ferias que prohíben las rebajas y los 2x1 (FOACAL lo hace en sus bases de 2026), y tu precio de feria se convierte en el precio que la gente recuerda. Para mover piezas, usa la pieza de entrada, no el descuento.</div>
+    <div class="error"><b>Llevar todo el catálogo.</b> Una mesa abarrotada no deja ver nada. Lleva tu pieza reclamo, tus piezas de entrada y tus piezas corazón, y cuenta cuántas de cada una esperas vender.</div>
+    <div class="error"><b>No apuntar nada.</b> Sin la libreta de ventas y contactos de cada día, el año que viene vuelves a decidir a ciegas. Los números de esta temporada son el filtro de la siguiente.</div>
+    <div class="error"><b>Dejar que la feria se acabe al desmontar.</b> Si en las 48 horas siguientes no escribes a quien dejó su contacto, esa gente se ha ido para siempre. Esa es la parte de la feria que más rinde y la que menos se hace.</div>
+  </section>
+
+  <!-- ============ PRÁCTICA ============ -->
+  <section class="practica">
+    <span class="etiq">La práctica de hoy</span>
+    <h3>Tu calendario de ferias de 2027, en una tarde</h3>
+    <p>Siéntate con la lista de ferias que te tientan este año, aunque sean diez:</p>
+    <ol>
+      <li><b>Clasifícalas.</b> Pon al lado de cada una para qué irías: vender, darte a conocer o conseguir tiendas. (5 min)</li>
+      <li><b>Pásales el filtro de las siete preguntas.</b> Las que fallen tres o más, táchalas ya. (10 min)</li>
+      <li><b>Calcula las que queden.</b> Usa la calculadora con los números de cada una y apunta las piezas por día que te pide. Si nunca has vendido esa cantidad en una feria parecida, táchala o búscale una ayuda. (10 min)</li>
+      <li><b>Mira las ayudas de tu comunidad en el Radar</b> y apunta en tu agenda cuándo suelen abrir. (5 min)</li>
+    </ol>
+    <div class="tabla-wrap">
+      <table class="tabla-cal">
+        <thead><tr><th>Feria y fechas</th><th>Para qué voy</th><th>Filtro (fallos)</th><th>Piezas por día</th><th>Ayuda posible</th><th>¿Va?</th></tr></thead>
+        <tbody>
+          <tr><td>ej. feria de primavera · 10 días</td><td>vender</td><td>1 de 7</td><td>7,5</td><td>sí, si abre a tiempo</td><td>sí</td></tr>
+          <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+          <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="copiable">
+      <span class="etiq2">Mensaje para el chat: copia y pega</span>
+      <p>Lección 6 hecha. Tenía __ ferias en la lista y se quedan __. La que más dudas me da es __: me pide __ piezas al día para cobrar mis horas. ¿Alguien ha estado y me cuenta qué tal?</p>
+    </div>
+  </section>
+
+  <!-- ============ CHECKLIST ============ -->
+  <div class="checklist">
+    <div class="titulo-c">Checklist de la feria que vende</div>
+    <div class="check"><input type="checkbox" id="k1"><label for="k1"><b>Sé para qué voy</b>: vender, darme a conocer o conseguir tiendas.</label></div>
+    <div class="check"><input type="checkbox" id="k2"><label for="k2"><b>La feria ha pasado el filtro</b> y he hablado con alguien que estuvo el año pasado.</label></div>
+    <div class="check"><input type="checkbox" id="k3"><label for="k3"><b>Conozco mis dos puntos de equilibrio</b>: para no perder dinero y para cobrar mis horas.</label></div>
+    <div class="check"><input type="checkbox" id="k4"><label for="k4"><b>Mi puesto tiene sus tres zonas</b>: el reclamo, lo que se toca y la historia.</label></div>
+    <div class="check"><input type="checkbox" id="k5"><label for="k5"><b>Cobro de todas las formas</b>: datáfono, cambio y Bizum a la vista.</label></div>
+    <div class="check"><input type="checkbox" id="k6"><label for="k6"><b>Tengo tarjetas con QR y la libreta de "avísame"</b>, con el permiso para escribir bien claro.</label></div>
+    <div class="check"><input type="checkbox" id="k7"><label for="k7"><b>Tengo apuntado cuándo abre la ayuda de ferias de mi comunidad</b> y los papeles que pide.</label></div>
+  </div>
+
+  <!-- ============ SIGUIENTE ============ -->
+  <section class="siguiente">
+    <div class="txt">
+      <b>La siguiente lección la decides tú</b>
+      <span>Etsy o tienda propia, email básico, encargos a medida o envíos y embalaje: vota en el chat con #pido y la más pedida se produce el mes que viene.</span>
+    </div>
+    <span class="pill">Votar con #pido →</span>
+  </section>
+
+  <div class="fuentes">
+    <b>De dónde salen los datos</b>
+    <ul>
+      <li>Crafts Council (Reino Unido), <em>The Market for Craft</em>, 2020. Encuesta a unas 5.300 personas.</li>
+      <li>FOACAL (Federación de Organizaciones Artesanas de Castilla y León), bases de participación en las ferias de artesanía de 2026.</li>
+      <li>IFEMA Madrid, guía del expositor de Intergift 2027.</li>
+      <li>FERAMUR, Feria de Artesanía de la Región de Murcia, página de expositores, edición 2026.</li>
+      <li>Banco de España, "Evolución y tendencias en los pagos de los consumidores españoles", abril de 2025, a partir de la encuesta SPACE 2024 del BCE.</li>
+      <li>Generalitat Valenciana, ayudas CREA Artesanía para pymes (CMAPY4), convocatoria 2026.</li>
+      <li>Gobierno de Aragón, Orden ECE/920/2026 (BOA nº 121, 26 de junio de 2026), ayudas al sector artesano.</li>
+    </ul>
+  </div>
+
+  <p class="pie-doc">El Club de Oficios Circulares · Lección 06 · ¿Has estado en una feria que deberían conocer los demás, para bien o para mal? Cuéntalo en el chat con <b>#radar</b>. ¿Quieres una lección concreta? Pídela con <b>#pido</b>.</p>
+
+</div>
+
+<script>
+  // Calculadora de rentabilidad de feria — se actualiza en vivo
+  const $ = id => document.getElementById(id);
+  const num = id => { const v = parseFloat(String($(id).value).replace(',', '.')); return isNaN(v) ? 0 : v; };
+  // miles con punto también en cifras de 4 dígitos (1.180 €), como en la hoja de cuentas
+  const eur = n => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
+  const dec = n => n.toLocaleString('es-ES', {minimumFractionDigits: 0, maximumFractionDigits: 1});
+
+  function calcula(){
+    const stand = num('fStand'), ayuda = parseFloat($('fAyuda').value) || 0;
+    const dias = Math.max(1, num('fDias'));
+    const gastos = stand * (1 - ayuda) + num('fViaje') + num('fAloja') + num('fComida') * dias + num('fOtros');
+    const horas = num('fHoras'), tarifa = num('fTarifa');
+    const ticket = num('fTicket');
+    const margen = ticket - num('fMat') - ticket * num('fCom') / 100;
+    const espero = num('fEspero');
+
+    $('oGastos').textContent = eur(gastos);
+    $('oGastosS').textContent = ayuda > 0 ? 'con la ayuda descontada' : 'sin contar tus horas';
+
+    if (margen <= 0){
+      ['oEqG','oEqH','oHora'].forEach(id => $(id).textContent = '—');
+      $('oEqGS').textContent = $('oEqHS').textContent = $('oHoraS').textContent = ' ';
+      $('oVeredicto').textContent = 'Con estos números cada venta te cuesta dinero: el precio no cubre ni los materiales. Antes de pensar en ferias, vuelve a la calculadora de la lección 03.';
+      return;
+    }
+
+    const eqG = Math.ceil(gastos / margen);
+    const eqH = Math.ceil((gastos + horas * tarifa) / margen);
+    const porDia = eqH / dias;
+    const neto = espero * margen - gastos;
+    const porHora = horas > 0 ? neto / horas : 0;
+
+    $('oEqG').textContent = eqG;
+    $('oEqGS').textContent = dec(eqG / dias) + ' al día · ' + eur(eqG * ticket) + ' en ventas';
+    $('oEqH').textContent = eqH;
+    $('oEqHS').textContent = dec(porDia) + ' al día durante ' + dias + (dias === 1 ? ' día' : ' días');
+    $('oHora').textContent = horas > 0 ? (porHora < 0 ? '−' : '') + Math.abs(porHora).toLocaleString('es-ES', {maximumFractionDigits: 1}) + ' €' : '—';
+    $('oHoraS').textContent = 'si vendes ' + espero + (espero === 1 ? ' pieza' : ' piezas');
+
+    let frase = 'Cada venta te deja ' + eur(margen) + '. ';
+    if (espero < eqG){
+      frase += 'Con tu previsión de ' + espero + ' ventas pierdes ' + eur(-neto) + ' de tu bolsillo, además de tus horas. Solo tiene sentido si vas a darte a conocer y lo has decidido así, o si consigues una ayuda que te baje la cuota.';
+    } else if (espero < eqH){
+      frase += 'Con tu previsión cubres gastos, pero tu trabajo sale a ' + dec(porHora) + ' €/hora, por debajo de los ' + dec(tarifa) + ' €/hora que te pusiste. Pregúntate si esos días rinden más en el taller.';
+    } else {
+      frase += 'Con tu previsión cubres gastos y cobras tus horas a ' + dec(porHora) + ' €/hora. Si la previsión es realista, esta feria entra en tu calendario.';
+    }
+    if (porDia > 8){
+      frase += ' Ojo: necesitas ' + dec(porDia) + ' ventas al día para cobrar tus horas. Solo cuenta con ese ritmo si ya lo has conseguido en una feria parecida.';
+    }
+    $('oVeredicto').textContent = frase;
+  }
+  ['fStand','fAyuda','fDias','fViaje','fAloja','fComida','fOtros','fHoras','fTarifa','fTicket','fMat','fCom','fEspero'].forEach(id => {
+    $(id).addEventListener('input', calcula); $(id).addEventListener('change', calcula);
+  });
+  calcula();
+</script>
+</body>
+</html>

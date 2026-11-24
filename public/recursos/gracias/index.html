@@ -625,6 +625,8 @@
             </div>
         </div>
     </nav>
+    <!-- Menú común (desplegable «Servicios» y menú móvil); síncrono para que los scripts de la página no lo dupliquen -->
+    <script src="/assets/js/nav.js?v=20261122"></script>
 
     <!-- Hero Section -->
     <section class="hero-gracias">
@@ -646,8 +648,8 @@
                 </div>
             </div>
 
-            <a href="../../casos/e-wear/" class="hero-cta-primary">
-                ← Continuar leyendo el caso E-WEAR
+            <a href="../../blog/joyeria-plata-recuperada/" class="hero-cta-primary">
+                ← Volver a la guía
             </a>
         </div>
     </section>
@@ -872,7 +874,7 @@
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
 
-        if (hamburger && navMenu) {
+        if (hamburger && navMenu && !window.__ocNav) {
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');

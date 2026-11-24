@@ -1,0 +1,25 @@
+/* ===================================================================
+   EL CLUB DE OFICIOS CIRCULARES — landing standalone
+   OC Design System v2.
+
+   Estilos 100% scoped bajo .club-landing para aislarlos del CSS global
+   del sitio (las clases .hero/.btn/.wrap/.final/.card ya existen).
+   - .hero  -> .club-hero  (el .hero global fuerza height:100vh y padding-left)
+   - .btn   -> .club-btn    (el .btn global trae 63 reglas, ::before y otra fuente)
+   El resto se aísla por especificidad con el prefijo .club-landing.
+
+   El navbar y el footer los aporta el layout del sitio (partials/header,
+   partials/footer). Las fuentes (Newsreader + Manrope) las carga head-meta.
+   =================================================================== */
+
+html{scroll-behavior:smooth}
+
+/* position:sticky se rompe si un ancestro es contenedor de scroll. El body
+   global del sitio usa overflow-x:hidden; `clip` recorta el desbordamiento
+   horizontal SIN crear contenedor de scroll, así el panel sticky del
+   scrollytelling (.prob-sticky) vuelve a funcionar. (Solo carga en /club.) */
+html,body{overflow-x:clip}
+
+/* Los tokens y TODOS los componentes de esta página viven ahora en oc-landing.css
+   (ámbito común :is(.club-landing,.oc-landing)), que se carga antes que este archivo.
+   Aquí solo queda lo exclusivo del Club: las dos reglas globales de arriba. */

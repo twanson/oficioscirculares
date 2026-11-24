@@ -1,0 +1,105 @@
+<%- include('partials/head-meta', {
+    title: 'El Club · Tu punto de partida',
+    description: 'Autodiagnóstico del Club de Oficios Circulares.',
+    canonical: '/club/dentro/empezar',
+    noindex: true
+}) %>
+
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260805">
+<style>
+  /* Autodiagnóstico del alta. DS OC v2. Los errores se indican con texto, no solo con color. */
+  .ae-wrap{max-width:720px;margin:0 auto;padding:48px 24px 80px}
+  .ae-intro h1{font-size:clamp(30px,5vw,42px);margin:8px 0 12px}
+  .ae-intro p{color:var(--tinta-suave);margin:0 0 8px}
+  .ae-kicker{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota)}
+  .ae-aviso{margin:24px 0 0;padding:16px 18px;border-radius:14px;background:#FFF4DC;border:1.5px solid #C9A227;color:#5A3D00;font-weight:600}
+  .ae-form{margin-top:32px;display:grid;gap:18px}
+  .ae-q{border:1.5px solid rgba(2,52,41,.14);border-radius:18px;background:#fff;padding:22px 22px 18px}
+  .ae-q legend{float:left;width:100%;padding:0;margin:0 0 4px;font-family:var(--serif);font-size:21px;font-weight:600;color:var(--verde);line-height:1.25}
+  .ae-q legend .n{color:var(--terracota);font-family:var(--sans);font-size:14px;font-weight:800;margin-right:8px}
+  .ae-ayuda{clear:both;display:block;font-size:14px;color:var(--tinta-suave);margin:0 0 10px}
+  .ae-ops{clear:both;display:grid;gap:8px;padding-top:6px}
+  .ae-ops--oficios{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .ae-op{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;border:1px solid rgba(2,52,41,.12);cursor:pointer;font-size:16px;line-height:1.35}
+  .ae-op:hover{border-color:var(--terracota)}
+  .ae-op input{margin-top:3px;accent-color:#023429;flex-shrink:0;width:18px;height:18px}
+  .ae-op:has(input:checked){border-color:#023429;background:#F2F6F4;font-weight:600}
+  .ae-op:has(input:focus-visible){outline:3px solid rgba(147,74,28,.45);outline-offset:2px}
+  .ae-q textarea{clear:both;display:block;width:100%;min-height:92px;font-family:var(--sans);font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid rgba(2,52,41,.18);resize:vertical}
+  .ae-q textarea:focus{outline:none;border-color:var(--terracota);box-shadow:0 0 0 4px rgba(147,74,28,.12)}
+  .ae-q--error{border-color:#934A1C;border-width:2px}
+  .ae-error{clear:both;display:block;margin:0 0 8px;font-size:14px;font-weight:700;color:#7A3A12}
+  .ae-enviar{margin-top:10px}
+  .ae-nota{font-size:14px;color:var(--tinta-suave);margin-top:10px}
+</style>
+<%
+  function marcado(id, valor) {
+    var r = respuestas ? respuestas[id] : undefined;
+    if (Array.isArray(r)) return r.map(String).indexOf(String(valor)) !== -1;
+    return r !== undefined && r !== null && String(r) === String(valor);
+  }
+  var n = 0;
+%>
+
+<main class="club-area">
+  <header class="ca-top">
+    <a class="ca-brand" href="/club/dentro">
+      <img src="/assets/images/brand/oc-logo-2026-cuadrado-168.webp" alt="Oficios Circulares">
+      <span>El Club</span>
+    </a>
+    <div class="ca-top-actions">
+      <span style="color:var(--tinta-suave);"><%= email %></span>
+      <a class="ca-salir" href="/club/salir">Salir</a>
+    </div>
+  </header>
+
+  <div class="ae-wrap">
+    <div class="ae-intro">
+      <span class="ae-kicker">Antes de entrar · 3 o 4 minutos</span>
+      <h1>Tu punto de <em>partida</em></h1>
+      <p>Unas preguntas sobre cómo vendes y cómo te mueves en internet. Con tus respuestas te decimos por dónde empezar dentro del Club y cuáles son tus tres prioridades para este primer mes.</p>
+      <p>No hay respuestas buenas ni malas: contesta cómo estás hoy.</p>
+      <% if (rehacer) { %><p><a href="/club/dentro">Volver a tu taller sin cambiar nada</a></p><% } %>
+    </div>
+
+    <% if (errorGuardado) { %>
+      <div class="ae-aviso" role="alert">No hemos podido guardar tus respuestas. Inténtalo de nuevo en un momento; si vuelve a pasar, escríbenos a <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>.</div>
+    <% } else if (errores.length) { %>
+      <div class="ae-aviso" role="alert">Te falta responder <%= errores.length === 1 ? 'una pregunta' : errores.length + ' preguntas' %>. Están marcadas con «Falta responder».</div>
+    <% } %>
+
+    <form class="ae-form" method="POST" action="/club/dentro/empezar" novalidate>
+      <% preguntas.forEach(function (p) { n++; var err = errores.indexOf(p.id) !== -1; var idq = 'q-' + p.id; %>
+      <fieldset class="ae-q<%= err ? ' ae-q--error' : '' %>" id="<%= idq %>"<% if (err) { %> aria-describedby="<%= idq %>-err"<% } %>>
+        <legend><span class="n"><%= n %></span><%= p.titulo %><% if (p.opcional) { %> <span style="font-family:var(--sans);font-size:14px;font-weight:600;color:var(--tinta-suave)">(opcional)</span><% } %></legend>
+        <% if (err) { %><span class="ae-error" id="<%= idq %>-err">Falta responder</span><% } %>
+        <% if (p.ayuda) { %><span class="ae-ayuda"><%= p.ayuda %></span><% } %>
+
+        <% if (p.tipo === 'unica' || p.tipo === 'varias') { %>
+          <div class="ae-ops<%= p.id === 'oficio' ? ' ae-ops--oficios' : '' %>">
+            <% p.opciones.forEach(function (o, i) { var tipo = p.tipo === 'varias' ? 'checkbox' : 'radio'; %>
+            <label class="ae-op"><input type="<%= tipo %>" name="<%= p.id %>" value="<%= o.valor %>"<%= marcado(p.id, o.valor) ? ' checked' : '' %><%= (tipo === 'radio' && i === 0) ? ' required' : '' %>> <span><%= o.texto %></span></label>
+            <% }) %>
+          </div>
+        <% } else if (p.tipo === 'materiales') { %>
+          <label class="ca-label" for="materiales" style="clear:both;font-weight:600;color:var(--tinta-suave)">Cuéntalo en una o dos frases</label>
+          <textarea id="materiales" name="materiales" maxlength="500" required><%= respuestas.materiales || '' %></textarea>
+          <div class="ae-ops" style="margin-top:10px">
+            <label class="ae-op"><input type="checkbox" name="material_sobra_o_falta" value="si"<%= respuestas.material_sobra_o_falta ? ' checked' : '' %>> <span>Me sobra material o me cuesta encontrarlo</span></label>
+          </div>
+        <% } else { %>
+          <label class="ca-label" for="<%= p.id %>" style="clear:both;font-weight:600;color:var(--tinta-suave)">Tu respuesta</label>
+          <textarea id="<%= p.id %>" name="<%= p.id %>" maxlength="1000"><%= respuestas[p.id] || '' %></textarea>
+        <% } %>
+      </fieldset>
+      <% }) %>
+
+      <div class="ae-enviar">
+        <button class="ca-btn ca-btn--terracota" type="submit">Ver mi punto de partida &rarr;</button>
+        <p class="ae-nota">Puedes rehacerlo cuando quieras desde la página de inicio del Club.</p>
+      </div>
+    </form>
+  </div>
+</main>
+</body>
+</html>

@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const allPosts = [
     {
+      slug: './joyeria-plata-recuperada/',
+      title: 'Cómo lanzar una colección de joyería con plata recuperada, paso a paso',
+      excerpt: 'Guía paso a paso para lanzar una colección de joyería con plata recuperada: cómo conseguir el material, demostrar su origen y contarlo sin exagerar.',
+      date: '2026-11-22',
+      readingMinutes: 5,
+      cover: ASSETS_BASE + '/images/blog/joyeria-plata-recuperada/hero-taller-joyeria.webp',
+      tags: ['guía práctica', 'materiales', 'circularidad']
+    },
+    {
       slug: './trabajar-por-encargo-artesania/',
       title: 'Trabajar por encargo: el argumento que tu taller no cuenta',
       excerpt: 'Trabajar por encargo evita fabricar de más. Seis modelos para organizar tu taller, cobrar con señal y contarle el plazo a tu cliente.',
@@ -158,15 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
       readingMinutes: 12,
       cover: ASSETS_BASE + '/images/blog/logistica-inversa/imagen-hero-artesanal.jpg',
       tags: ['estrategia', 'circularidad', 'logistica']
-    },
-    {
-      slug: '../casos/e-wear/',
-      title: 'E-WEAR: De residuo electrónico a joya con historia',
-      excerpt: 'Cómo Laura transformó su taller de joyería tradicional en un modelo circular que recupera plata de residuos electrónicos. Un caso real de economía circular artesanal.',
-      date: '2025-08-08',
-      readingMinutes: 8,
-      cover: ASSETS_BASE + '/images/cases/e-wear/hero-packaging-movil-concha.webp',
-      tags: ['casos', 'estrategia', 'circularidad']
     }
   ];
 
