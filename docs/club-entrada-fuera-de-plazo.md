@@ -10,8 +10,8 @@ Quien compra el Diagnóstico 3D para talleres puede entrar en el Club aunque las
 
 1. Stripe → activa **Modo de prueba** (interruptor arriba a la derecha).
 2. **Catálogo de productos** → crea el producto «Club de Oficios Circulares · entrada con Diagnóstico» con dos precios recurrentes:
-   - Mensual: el precio que decida Jose (¿fundador, 12 €, o normal, 15 €?).
-   - Anual: ídem (¿120 € o 150 €?).
+   - Mensual: fundador (12 €) mientras queden plazas de las 40; después, normal (15 €).
+   - Anual: fundador (120 €) mientras queden plazas; después, normal (150 €).
 3. **Enlaces de pago** → nuevo enlace con ese precio:
    - Después del pago: redirigir a `https://oficioscirculares-production.up.railway.app/club/bienvenida`.
    - Recoger el correo del cliente (por defecto).
@@ -34,5 +34,5 @@ El webhook (`lib/stripeClub.js`) solo reconoce dos precios (`STRIPE_PRICE_ANNUAL
 5. Hacer una compra real de 1 € o la mínima posible, comprobar el alta y reembolsarla, como se hizo el 11 de agosto.
 
 ## Decisiones de Jose
-- Con qué precio entra quien viene del Diagnóstico: el de fundador (12 € o 120 €) o el normal (15 € o 150 €).
+- ~~Con qué precio entra quien viene del Diagnóstico~~ **Cerrado (24 nov 2026):** precio de fundador (12 € o 120 €) mientras queden plazas de las 40; después, precio normal (15 € o 150 €). Al agotarse las plazas hay que cambiar el enlace que se envía.
 - Si se limita el número de entradas por este camino.

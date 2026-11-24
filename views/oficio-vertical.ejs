@@ -279,7 +279,8 @@
          EJEMPLO DE DIAGNÓSTICO 3D (tras la metodología)
          ═══════════════════════════════════ -->
     <% if (typeof seo !== 'undefined' && seo) {
-        const ejemploPdf = '/downloads/diagnosticos/ejemplo-diagnostico-' + oficio.slug + '.pdf?oc_source=web&oc_medium=vertical&oc_campaign=ejemplo_diagnostico'; %>
+        // seo.sinPdf: oficio sin PDF de ejemplo publicado (textil, retirado en nov 2026).
+        const ejemploPdf = seo.sinPdf ? null : '/downloads/diagnosticos/ejemplo-diagnostico-' + oficio.slug + '.pdf?oc_source=web&oc_medium=vertical&oc_campaign=ejemplo_diagnostico'; %>
     <section class="ejemplo-diagnostico">
       <div class="ejemplo-diagnostico__inner">
         <div class="ejemplo-diagnostico__text">
@@ -295,16 +296,18 @@
           </ul>
           <p class="ejemplo-diagnostico__nota">Caso compuesto a partir de varios talleres, con el mismo método y profundidad que el entregable: identidad inventada, cifras ilustrativas y sin precios.</p>
           <div class="ejemplo-diagnostico__ctas">
-            <a class="btn-ejemplo" href="<%= ejemploPdf %>" target="_blank" rel="noopener">Ver ejemplo completo (PDF)</a>
+            <% if (ejemploPdf) { %><a class="btn-ejemplo" href="<%= ejemploPdf %>" target="_blank" rel="noopener">Ver ejemplo completo (PDF)</a><% } %>
             <a class="link-ejemplo" href="/servicios/diagnostico-3d">Cómo funciona el Diagnóstico 3D &rarr;</a>
           </div>
         </div>
+        <% if (ejemploPdf) { %>
         <div class="ejemplo-diagnostico__coverwrap">
           <a href="<%= ejemploPdf %>" target="_blank" rel="noopener" aria-label="Abrir el ejemplo de diagnóstico en PDF">
             <img src="<%= seo.cover %>" alt="Portada del ejemplo de Diagnóstico 3D para <%= seo.nombreCorto %>" width="600" height="849" loading="lazy">
             <span class="ejemplo-diagnostico__chip">Ejemplo anonimizado · sin precios</span>
           </a>
         </div>
+        <% } %>
       </div>
     </section>
     <% } %>

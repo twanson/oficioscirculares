@@ -395,6 +395,7 @@
     },
     "textil-sostenible": {
       "nombreCorto": "textil sostenible",
+      "sinPdf": true,
       "cover": "/assets/diagnosticos/textil-sostenible-cover.jpg",
       "ejemplo": {
         "intro": "Así sería el trabajo con un estudio textil unipersonal de telar manual: producto circular por diseño — durabilidad, pieza única, fibra natural — sin un solo dato medido que lo hiciera cobrable.",
@@ -412,7 +413,7 @@
         },
         {
           "q": "¿Qué incluye un Diagnóstico 3D para un estudio textil?",
-          "a": "Análisis de fibra, proceso y canales (tienda de museo, selecto, online) con tres prioridades ordenadas y plan realista para una marca unipersonal. Descarga el ejemplo para ver el formato."
+          "a": "Análisis de fibra, proceso y canales de venta con tres prioridades ordenadas y plan realista para una marca unipersonal."
         }
       ],
       "links": [

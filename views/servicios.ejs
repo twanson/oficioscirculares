@@ -73,7 +73,7 @@ const T = testimoniosLib;
         <h3>Para empresas</h3>
         <p class="cl-who">Para empresas que quieren dar salida a sus materiales, convertir una mejora circular en un plan y ponerla en marcha.</p>
         <ul class="cl-lista">
-          <li><span>Diagnóstico 3D para empresas</span><b>Precio a consultar</b></li>
+          <li><span>Diagnóstico 3D para empresas</span><b><%- precios.html('diagnostico_empresas') %></b></li>
           <li><span>Roadmap 3D</span><b>Tras el Diagnóstico</b></li>
           <li><span>Sprint 3D</span><b>Tras el Diagnóstico</b></li>
         </ul>
@@ -237,7 +237,7 @@ const T = testimoniosLib;
         { href: contactoEmpresas('hero'), texto: 'Solicitar el Diagnóstico →', clase: 'terracota', label: 'empresas-hero-diagnostico' },
         { href: '#servicios', texto: 'Qué entregamos', clase: 'ghost' }
       ],
-      datos: 'Diagnóstico · Roadmap en 2 semanas · Sprint en 4 semanas · Precio cerrado tras el Diagnóstico'
+      datos: 'Diagnóstico: ' + precios.texto('diagnostico_empresas') + ' + IVA · Roadmap en 2 semanas · Sprint en 4 semanas'
   }) %>
 
   <!-- Qué entregamos y en qué plazo: cajas con imagen -->
@@ -254,7 +254,7 @@ const T = testimoniosLib;
           <div class="chip"><%- ICO.lupa %></div>
           <span class="num">Detectar</span>
           <h3>Diagnóstico 3D para empresas</h3>
-          <span class="caja-precio--texto">Precio a consultar</span>
+          <div class="caja-precio"><%= precios.texto('diagnostico_empresas') %> <small>+ IVA</small></div>
           <ul>
             <li>Repaso de tus materiales, tu proceso y lo que desechas</li>
             <li>Oportunidades de mejora y de comunicación</li>

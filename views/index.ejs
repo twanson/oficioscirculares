@@ -256,7 +256,7 @@
 
     <!-- ═══════════════════════════════════
          COMUNIDAD — tarjetas con retrato. Testimonios de data/testimonios.json (portada):
-         los autorizados con nombre primero y después los mensajes sin nombre (permiso
+         los autorizados con nombre primero y después el mensaje sin nombre (permiso
          pendiente). Sin foto: el sello de la marca, con el mismo tamaño que el retrato.
          Se ven seis; «Ver más» enseña el resto (sin JavaScript se ven todos).
          ═══════════════════════════════════ -->
@@ -285,7 +285,7 @@
             <% if (comunidad.length > 6) { %>
             <div class="oc-comunidad-ver"><button type="button" class="btn-ghost" id="comunidad-ver-mas" aria-controls="comunidad-grid" aria-expanded="false" hidden>Ver más mensajes</button></div>
             <% } %>
-            <p class="comunidad-v2-disclaimer"><% if (testimoniosLib.todosConPermiso(comunidad)) { %>Testimonios reales, publicados con su permiso.<% } else { %>Mensajes reales de usuarios de la red.<% } %></p>
+            <p class="comunidad-v2-disclaimer"><%= testimoniosLib.nota(comunidad) %></p>
         </div>
     </section>
     <script>

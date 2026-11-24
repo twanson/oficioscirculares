@@ -38,7 +38,7 @@ Fuentes: [Precios de Supabase](https://supabase.com/pricing) · [Pausa de proyec
 2. Comprobar que el secreto de firma de cada uno coincide con `STRIPE_WEBHOOK_SECRET` en su entorno de Railway.
 3. Comprobar que los enlaces de pago redirigen a `/club/bienvenida` del entorno correcto (en producción, a `www`).
 4. Compra de prueba en staging (modo de prueba o la compra mínima real con reembolso, como el 11 de agosto): la fila aparece en `club_members` en segundos y los registros de Railway muestran `✅ [club] alta/activación`.
-5. Crear el enlace privado de entrada fuera de plazo si Jose ya decidió el precio (`docs/club-entrada-fuera-de-plazo.md`).
+5. Crear el enlace privado de entrada fuera de plazo (precio decidido: fundador mientras queden plazas de las 40; después, normal) (`docs/club-entrada-fuera-de-plazo.md`).
 
 ## 4. Variables de entorno en Railway
 

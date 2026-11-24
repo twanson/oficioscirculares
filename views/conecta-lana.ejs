@@ -334,13 +334,14 @@ html,body{overflow-x:clip}
       encontró lana española en la bolsa
     </p>
 
-    <%# Mensajes reales de usuarios de Conecta Lana, sin nombre y con permiso pendiente
-        (data/testimonios.json: 1, 2 y 6). Texto literal. %>
-    <% testimoniosLib.paraPagina('conecta-lana').filter(t => !t.nombre).forEach(function (t) { %>
+    <%# Resto de mensajes de la página (data/testimonios.json). Texto literal; Esther y Jorge van arriba.
+        Con nombre si han dado permiso; si no, con la firma genérica. %>
+    <% const mensajesCL = testimoniosLib.paraPagina('conecta-lana');
+       mensajesCL.filter(t => !['esther', 'jorge'].includes(t.id)).forEach(function (t) { %>
     <blockquote class="cl-testimonio__secundaria">"<%= t.texto %>"</blockquote>
-    <p class="cl-testimonio__firma">— <%= t.firma %></p>
+    <p class="cl-testimonio__firma">— <% if (t.nombre) { %><%= t.nombre %> · <% } %><% if (t.enlace) { %><a href="<%= t.enlace %>" target="_blank" rel="noopener"><%= t.firma %></a><% } else { %><%= t.firma %><% } %></p>
     <% }) %>
-    <p class="cl-testimonio__firma" style="margin-top:40px;font-size:13px;font-style:italic;opacity:.8">Mensajes reales de usuarios de la red.</p>
+    <p class="cl-testimonio__firma" style="margin-top:40px;font-size:13px;font-style:italic;opacity:.8"><%= testimoniosLib.nota(mensajesCL) %></p>
 
   </section>
 

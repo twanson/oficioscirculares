@@ -49,7 +49,7 @@
       <a id="cta-hero" class="club-btn club-btn--terracota" href="<%= comprarHref %>&oc_content=hero" data-event="click_cta" data-label="diag3d-hero">Quiero mi Diagnóstico 3D →</a>
       <a class="club-btn club-btn--ghost" href="#incluye">Ver qué incluye</a>
     </div>
-    <span class="datos-linea"><%= precios.texto('diagnostico_talleres') %> + IVA · Sin llamadas · Informe y vídeo en tu correo</span>
+    <span class="datos-linea"><%= precios.texto('diagnostico_talleres') %> + IVA · Sin llamadas · Informe y vídeo en <%= precios.plazoDiagnostico() %> días</span>
   </div>
 </header>
 
@@ -123,7 +123,7 @@
         <div class="bola">3</div>
         <div class="cuando">Paso 3</div>
         <h3>Recibes el informe y el vídeo</h3>
-        <p>Recibes el informe en PDF y un vídeo de 5 a 10 minutos en el que Jose te lo explica.</p>
+        <p>En <%= precios.plazoDiagnostico() %> días desde que respondes el cuestionario, recibes el informe en PDF y un vídeo de 5 a 10 minutos en el que Jose te lo explica.</p>
       </div>
     </div>
   </div>
@@ -225,7 +225,7 @@
 <section class="cred" id="club" aria-labelledby="club-title">
   <div class="wrap cred-inner">
     <span class="cred-titulo" id="club-title">Con el Diagnóstico, el Club te espera</span>
-    <div class="cred-items"><div class="cred-item"><b>Entrada al Club</b><span>aunque las plazas estén cerradas · <a href="/club" style="color:var(--arena)">Ver el Club</a></span></div></div>
+    <div class="cred-items"><div class="cred-item"><b>Entrada al Club</b><span>aunque las plazas estén cerradas. A precio de fundador (<%= precios.texto('club_fundador_mensual') %>) mientras queden plazas de las <%= precios.plazasFundador() %>; después, <%= precios.texto('club_mensual') %> · <a href="/club" style="color:var(--arena)">Ver el Club</a></span></div></div>
   </div>
 </section>
 <% } %>
@@ -245,6 +245,7 @@
         <div class="plan-precio"><%= precios.texto('diagnostico_talleres') %><span class="precio-iva">+ IVA</span></div>
         <ul>
           <li>El cuestionario, el informe en PDF y el vídeo en el que te lo explicamos</li>
+          <li>Entrega en <%= precios.plazoDiagnostico() %> días desde que respondes el cuestionario</li>
           <li>El mapa de tu taller y de su entorno</li>
           <li>Lo que ya comunicas y cómo está tu presencia en internet</li>
           <li>Tres prioridades ordenadas para empezar</li>

@@ -249,16 +249,16 @@ Las campañas de Brevo (E1 #30, E2 #31, E3 #28, E4 #32, E5 #29) no se han tocado
 
 ## Lista única de pendientes para Jose
 
-1. **Precio único** del Diagnóstico 3D para empresas, del Roadmap 3D y del Sprint 3D (y de los dos soportes mensuales del Impulso: Básico y Activo). Se cambian en `data/precios.json`.
-2. **Plazo de entrega** del informe y del vídeo del Diagnóstico para talleres. Mientras falte, la página no da plazo («Recibes el informe en PDF y un vídeo…»).
-3. **Testimonios:** textos aprobados de Blanca, Maika, Jorge Esteban y Esther San Vicente. En la sección «Comunidad» de la portada (tarjetas con retrato) **solo se publica Blanca**: faltan las **fotos** de Maika, Jorge y Esther. Sus tarjetas están preparadas en `views/index.ejs` y salen solas en cuanto se añada la foto.
+1. ~~Precios para empresas y soportes del Impulso~~ **Cerrado (24 nov 2026):** Diagnóstico para empresas, 190 € + IVA; Roadmap y Sprint, «Precio cerrado tras el Diagnóstico»; los soportes mensuales se quitan de la web.
+2. ~~Plazo del Diagnóstico para talleres~~ **Cerrado (24 nov 2026):** 15 días desde que se responde el cuestionario (`data/precios.json`).
+3. **Testimonios (24 nov 2026):** nueve con nombre y permiso. Falta solo el de «…y en especial por la cercanía»: sin nombre y con permiso pendiente. Faltan los enlaces de Ana y de Teresa y María, y las fotos (van con el sello).
 4. **Lección 05** (WhatsApp Business).
 5. ~~Preguntas y regla del autodiagnóstico~~ **Aprobado y construido (21 nov 2026)**, dentro de la web.
 6. **Plan de Supabase:** gratuito (se pausa por inactividad) o Pro (desde 25 $/mes, no se pausa).
 7. Enlace de pago del Diagnóstico para talleres, si se quiere compra directa (hoy va al formulario de contacto).
-8. Precio de la entrada al Club para quien compra el Diagnóstico, y crear ese enlace en Stripe (prueba y real).
+8. ~~Precio de la entrada al Club para quien compra el Diagnóstico~~ **Cerrado (24 nov 2026):** fundador mientras queden plazas de las 40; después, normal. **Sigue pendiente** crear el enlace en Stripe (prueba y real).
 9. **E-WEAR pasa a ser una guía del blog (22 nov 2026).** Tras un primer cambio el 21 nov (ejemplo ilustrativo en `/casos/e-wear/`), Jose decide que deje de ser un caso: ahora es la guía «Cómo lanzar una colección de joyería con plata recuperada, paso a paso» en `/blog/joyeria-plata-recuperada/` (desde el 22 nov, artículo estático con la plantilla del blog: `public/blog/joyeria-plata-recuperada/index.html`). Sin el nombre E-WEAR, sin insignia ni avisos de «ejemplo ilustrativo», sin cifras de resultado, sin citas y sin datos estructurados de caso o reseña. Mantiene diagnosticar, diseñar, difundir y «Qué habría que medir»; botón final a `/servicios` («Ver cómo trabajamos →»). `/casos/e-wear` (con o sin barra y subrutas) redirige con 301 a la guía. Está en el sitemap, en el índice del blog (HTML estático y `blog.js`, donde se ha quitado la antigua ficha «E-WEAR… Cómo Laura transformó… Un caso real») y en las lecturas de la página de joyería como «Guía». Las páginas de gracias de los PDF ahora dicen «Volver a la guía». Texto aprobado y subido a staging el 22 nov 2026.
-10. PDF público de ejemplo de textil (`/downloads/diagnosticos/ejemplo-diagnostico-textil-sostenible.pdf`): tiene detalles que podrían identificar a un taller real. Cambio preparado en la rama `fix/retirar-pdf-textil` (sale de `main`), sin fusionar, a la espera del visto bueno de Jose.
+10. ~~PDF de ejemplo de textil~~ **Retirado de producción (23 nov 2026).**
 11. Confirmar qué cuenta «Personas en la comunidad» (1.070) y revisar las líneas «qué mide» de `/impacto`. El marcador sigue en `data/impacto.json`, pero la página ya no lo muestra.
 12. Mantener o no la garantía del Sprint («seguimos trabajando hasta que funcione, sin coste adicional») y el descuento del Diagnóstico si después se contrata otro servicio.
 13. Reescribir con fechas de enero los cinco correos de Brevo (fuera del repositorio) antes de volver a programarlos.

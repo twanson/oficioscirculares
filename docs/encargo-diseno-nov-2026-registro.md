@@ -246,7 +246,7 @@ No había texto previo para estas piezas. Salen de lo que ya decía cada página
 
 ### Pendientes para Jose
 
-1. Precio y plazo del Diagnóstico para empresas. Hoy la página dice «Precio a consultar» y no da plazo.
+1. Plazo del Diagnóstico para empresas (el precio, 190 € + IVA, se cerró el 24 nov).
 2. Fotos de la tabla «Imágenes que faltan».
 3. Medir Lighthouse en móvil, antes y después.
 4. Los testimonios 1, 2 y 6 en `/conecta-lana` y en `/impacto`. Se hace en la fase 3, con Impacto.
@@ -350,12 +350,12 @@ Hechas en staging:
 
 ### Pendientes para Jose
 
-1. Precio y plazo del Diagnóstico para empresas. Los precios de Roadmap, Sprint y los soportes.
+1. Plazo del Diagnóstico para empresas. Los precios y los soportes se cerraron el 24 nov.
 2. Mantener o no la garantía del Sprint.
 3. Las imágenes de la tabla de arriba.
 4. Medir Lighthouse en móvil.
 5. Fase 4: limpieza de CSS sin uso (`oc-puertas.css`, `impulso-3d.css`, plantilla `service-*`).
-6. Permiso o nombre para los seis mensajes sin nombre.
+6. Permiso o nombre para un mensaje sin nombre (los otros cinco, confirmados el 24 nov).
 
 ### Direcciones para revisar
 
@@ -508,7 +508,7 @@ Revisión de todas las imágenes de `public/` a ojo y por metadatos, y de las im
 
 | Archivo | Qué pasa | Dónde se ve |
 |---|---|---|
-| `mirandomadera.jpg` | Metadatos de Getty/iStock (PeopleImages) | Imagen para compartir de `/impulso-3d` y dentro de `Circular_Express…2025.pdf` |
+| `mirandomadera.jpg` | Metadatos de Getty/iStock (PeopleImages). Con licencia (24 nov) | Imagen para compartir de `/impulso-3d` y dentro de `Circular_Express…2025.pdf` |
 | `blog/incendios-…/incendio-monte.jpg` | Metadatos de EFE, sin crédito en la página | Artículo de incendios |
 | `new_hero_potter.jpg`, `hero_artisan_leather.jpg` | Firma «MULLINS» en la esquina | Recortada, sin la firma, en la puerta de talleres de `/servicios`. Los originales están en producción, sin uso |
 | `cases/e-wear/ficha-lote-ejemplo-redactada.webp` | Distintivo de generador en la esquina | Sin uso |
@@ -543,7 +543,7 @@ Se han borrado `impulso-3d.css` y tres partials sin uso (`oc-cta-band`, `oc-hero
 - **Artículo de incendios:** fuera `incendio-monte.jpg` (EFE). En su lugar, `og-incendios-despoblacion.jpg`: la ladera de matorral es «lo que se encuentran cuando llegan». Es la misma escena que la cabecera, que va bajo un velo casi opaco. `fix/imagen-incendios`, fusionada en `main` (`2c16989`).
 - **Puerta de talleres en `/servicios`:** de `new_hero_potter.jpg` a un recorte de `artesana cermica.jpg` (manos en el barro: «para talleres y marcas artesanas»).
 - **Distintivo «Ai»:** borrada `ficha-lote-ejemplo-redactada.webp`; recortadas las siete ilustraciones de `OC_Guia_Materiales_Corta_2025.pdf`, que pasa de 39 a 15 MB.
-- **Sin tocar:** `mirandomadera.jpg` y `hero_artisan_leather.jpg`, hasta que Jose compruebe la licencia.
+- `mirandomadera.jpg` y `hero_artisan_leather.jpg` tienen licencia y se quedan (Jose, 24 nov).
 - **Menú «Servicios»:** las 25 páginas estáticas con cabecera cargan `nav.js`.
 - **PDF del Sprint:** regenerado desde su fuente (`Servicios_OC/_compartido/Ejemplos_Descargables_Web/_fuente`). El logo y el sello de 2026 están en `_fuente/assets` y los coloca el script.
 - Pendientes de diciembre: `docs/pendientes-diciembre-2026.md`.

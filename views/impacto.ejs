@@ -145,7 +145,7 @@ const gestionados = emp && /de (\d+) gestionados/.test(emp.detalle) ? Number(emp
     <blockquote class="cl-testimonio__secundaria">"<%= t.texto %>"</blockquote>
     <p class="cl-testimonio__firma">— <%= t.nombre ? t.nombre + ' · ' : '' %><% if (t.enlace) { %><a href="<%= t.enlace %>" target="_blank" rel="noopener"><%= t.firma %></a><% } else { %><%= t.firma %><% } %></p>
     <% }) %>
-    <p class="oc-nota-testi"><%= testimoniosLib.todosConPermiso(testi) ? 'Testimonios reales, publicados con su permiso.' : 'Mensajes reales de usuarios de la red.' %></p>
+    <p class="oc-nota-testi"><%= testimoniosLib.nota(testi) %></p>
   </section>
   <% } %>
 
