@@ -93,3 +93,22 @@ Nombres mirados en Railway el 24 nov (sin valores): producción ya tiene `APP_UR
 - [ ] Comunidad: nueve mensajes con nombre y uno sin nombre, con la nota nueva.
 - [ ] Reenviar el sitemap en Search Console y vigilar los registros de Railway una hora.
 - [ ] Lighthouse en móvil: `/`, `/servicios`, `/servicios/diagnostico-3d`, `/impulso-3d`.
+
+## 8. Comprobación automática y vuelta atrás
+
+Rama: `release/nov-2026`. `main` anterior a publicar: **`9161c33`**. Volver a mirarlo justo antes de fusionar: el robot del sitemap puede haber añadido un commit los lunes.
+
+Tras fusionar y subir `main`:
+
+```bash
+node scripts/comprobar-publicacion.mjs https://www.oficioscirculares.com --esperar --alta prueba-lista-espera-www-AAAAMMDD@example.com
+```
+
+Comprueba páginas, Club (plazas cerradas, sin enlaces de pago, `noindex`), `/casos/e-wear`, archivos retirados, sitemap, consola y menú (ratón, teclado y móvil), y hace **un** alta de prueba. Marca la visita como interna. La confirmación del alta es la respuesta de Brevo: mirar además el contacto en la lista 14 y borrarlo.
+
+Si algo falla, no se toca nada sin decisión de Jose. Dos maneras de volver:
+
+1. **Railway, la más rápida:** servicio de producción → Deployments → despliegue de `9161c33` → Redeploy. No cambia Git; el siguiente push a `main` volvería a publicar la versión nueva.
+2. **Git, la definitiva:** `git revert -m 1 <commit de la fusión>` sobre `main` y push. No reescribe el historial; `main` queda con los archivos de `9161c33`. Para volver a publicar después habrá que revertir ese revert.
+
+No se usa `push --force`.
