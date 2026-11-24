@@ -98,7 +98,7 @@ Nombres mirados en Railway el 24 nov (sin valores): producción ya tiene `APP_UR
 
 Rama: `release/nov-2026`. `main` anterior a publicar: **`9161c33`**. Volver a mirarlo justo antes de fusionar: el robot del sitemap puede haber añadido un commit los lunes.
 
-Tras fusionar y subir `main`:
+Fusionar con `git merge --no-ff release/nov-2026` (sin `--no-ff` no habría commit de fusión que revertir). Tras subir `main`:
 
 ```bash
 node scripts/comprobar-publicacion.mjs https://www.oficioscirculares.com --esperar --alta prueba-lista-espera-www-AAAAMMDD@example.com
