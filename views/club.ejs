@@ -12,7 +12,8 @@
 
 <%# En esta vista el CTA del nav del sitio pasa a ser "Plazas fundador" -> #precios
     (sustituye a la antigua .topbar propia del club: una sola barra fija al hacer scroll) %>
-<%- include('partials/header', { navCtaText: 'Plazas fundador', navCtaHref: '#precios' }) %>
+<% var plazasOpen = (typeof plazasAbiertas === 'undefined') ? false : plazasAbiertas; %>
+<%- include('partials/header', { navCtaText: plazasOpen ? 'Plazas fundador' : 'Lista de espera', navCtaHref: '#precios' }) %>
 
 <main class="club-landing" id="maincontent">
 
@@ -41,7 +42,7 @@
     <h1>Deja de depender de las ferias. <em>Vende todo el año.</em></h1>
     <p class="sub">La comunidad donde artesanos y pequeños talleres aprenden a conseguir clientes online, mes a mes. Sin humo y sin dejar de ser taller.</p>
     <div class="cta-row">
-      <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
+      <a class="club-btn club-btn--terracota" href="#precios"><%= plazasOpen ? 'Quiero mi plaza de fundador →' : 'Apúntame a la lista de espera →' %></a>
       <a class="club-btn club-btn--ghost" href="#incluye">Ver qué incluye</a>
     </div>
     <span class="datos-linea">Precio fundador: <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia · <%= precios.plazasFundador() %> plazas, del <%= config.fechas.apertura_corta %> al <%= config.fechas.cierre_corta %></span>
@@ -318,7 +319,7 @@
         </ul>
       </div>
     </div>
-    <p class="quien-cta">¿Te has visto en la primera lista? <a href="#precios">Reserva tu plaza de fundador →</a></p>
+    <p class="quien-cta">¿Te has visto en la primera lista? <a href="#precios"><%= plazasOpen ? 'Reserva tu plaza de fundador →' : 'Apúntate a la lista de espera →' %></a></p>
   </div>
 </section>
 
@@ -329,11 +330,10 @@
 <section class="precios" id="precios">
   <div class="cab">
     <span class="eyebrow">Oferta fundador — beta</span>
-    <h2>Entra como fundador. <em>Este precio, para siempre.</em></h2>
+    <% if (plazasOpen) { %><h2>Entra como fundador. <em>Este precio, para siempre.</em></h2><% } else { %><h2>Lista de espera <em>para fundadores.</em></h2><% } %>
     <p>Abrimos el Club con <%= precios.plazasFundador() %> plazas de fundador, del <%= config.fechas.apertura_corta %> al <%= config.fechas.cierre %>. ¿Por qué un límite? Porque los directos con revisión en vivo funcionan con decenas de personas, no con cientos. La escasez no es teatro: es aforo.</p>
   </div>
   <div class="wrap">
-    <% var plazasOpen = (typeof plazasAbiertas === 'undefined') ? true : plazasAbiertas; %>
     <% if (plazasOpen) { %>
     <div class="planes">
       <div class="plan plan--destacado reveal">
@@ -439,9 +439,9 @@
   <div class="contenido">
     <span class="eyebrow eyebrow--arena">El Club de Oficios Circulares</span>
     <h2>Tu oficio lleva generaciones pasando de mano en mano. Que no se pare en la tuya <em>por falta de clientes.</em></h2>
-    <p>Entra al Club, publica tu primera pieza esta semana y deja de trabajar solo.</p>
-    <a class="club-btn club-btn--terracota" href="#precios">Quiero mi plaza de fundador →</a>
-    <span class="micro micro--luz"><%= precios.plazasFundador() %> plazas fundador · Cierre: <%= config.fechas.cierre_corta %> · <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia</span>
+    <p><%= plazasOpen ? 'Entra al Club, publica tu primera pieza esta semana y deja de trabajar solo.' : 'Déjanos tu correo y te avisamos en cuanto abramos plazas.' %></p>
+    <a class="club-btn club-btn--terracota" href="#precios"><%= plazasOpen ? 'Quiero mi plaza de fundador →' : 'Apúntame a la lista de espera →' %></a>
+    <span class="micro micro--luz"><%= precios.plazasFundador() %> plazas fundador · <%= plazasOpen ? 'Cierre: ' + config.fechas.cierre_corta : 'Del ' + config.fechas.apertura_corta + ' al ' + config.fechas.cierre_corta %> · <%= precios.texto('club_fundador_mensual') %> o <%= precios.texto('club_fundador_anual') %>, para siempre · Sin permanencia</span>
     <p class="pd">¿Dudas antes de entrar? Escríbenos a <a href="mailto:hola@oficioscirculares.com">hola@oficioscirculares.com</a>. Te contesta una persona, no un robot. Somos un taller pequeño, como el tuyo.</p>
   </div>
 </section>

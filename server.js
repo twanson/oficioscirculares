@@ -602,8 +602,14 @@ app.get('/club/lista-espera', (req, res) => {
 app.post('/club/lista-espera', rateLimitMiddleware, async (req, res) => {
   const email = String(req.body.email || '').toLowerCase().trim();
   if (!EMAIL_RE.test(email)) return res.redirect('/club/lista-espera?error=email');
-  try { await brevoWaitlist.addToWaitlist(email); }
-  catch (e) { console.error('lista-espera Brevo:', e.message); }
+  // Solo se confirma si Brevo ha guardado el contacto; si no, error visible y en el registro.
+  try {
+    const r = await brevoWaitlist.addToWaitlist(email);
+    if (!r || !r.ok) throw new Error('Brevo no configurado (BREVO_API_KEY / BREVO_WAITLIST_LIST_ID)');
+  } catch (e) {
+    console.error('❌ [club] lista de espera: alta NO guardada:', e.message);
+    return res.status(503).render('club-lista-espera', { done: false, error: 'guardar', email });
+  }
   return res.redirect('/club/lista-espera?ok=1');
 });
 

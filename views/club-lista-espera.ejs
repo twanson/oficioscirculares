@@ -25,11 +25,13 @@
         <p class="lead">Déjanos tu correo y serás el primero en saber cuándo abrimos de nuevo. Los de esta lista entran antes.</p>
         <% if (typeof error !== 'undefined' && error === 'email') { %>
           <div class="ca-msg ca-msg--warn">Ese correo no parece válido. Revísalo e inténtalo otra vez.</div>
+        <% } else if (typeof error !== 'undefined' && error === 'guardar') { %>
+          <div class="ca-msg ca-msg--warn" role="alert">No hemos podido apuntarte. Inténtalo otra vez en un rato o escríbenos a <a href="mailto:hola@oficioscirculares.com?subject=Lista%20de%20espera%20del%20Club">hola@oficioscirculares.com</a> y te apuntamos a mano.</div>
         <% } %>
         <form class="ca-form" method="POST" action="/club/lista-espera">
           <div>
             <label class="ca-label" for="email">Tu correo</label>
-            <input class="ca-field" type="email" id="email" name="email" required autocomplete="email" placeholder="tu@correo.com">
+            <input class="ca-field" type="email" id="email" name="email" required autocomplete="email" placeholder="tu@correo.com" value="<%= typeof email !== 'undefined' && email ? email : '' %>">
           </div>
           <button class="ca-btn ca-btn--terracota ca-btn--full" type="submit">Avisadme cuando abráis</button>
         </form>
