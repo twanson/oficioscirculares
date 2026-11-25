@@ -101,7 +101,7 @@ Rama: `release/nov-2026`. `main` anterior a publicar: **`9161c33`**. Volver a mi
 Fusionar con `git merge --no-ff release/nov-2026` (sin `--no-ff` no habría commit de fusión que revertir). Tras subir `main`:
 
 ```bash
-node scripts/comprobar-publicacion.mjs https://www.oficioscirculares.com --esperar --alta prueba-lista-espera-www-AAAAMMDD@example.com
+npm run comprobar -- https://www.oficioscirculares.com --esperar --alta prueba-lista-espera-www-AAAAMMDD@example.com
 ```
 
 Comprueba páginas, Club (plazas cerradas, sin enlaces de pago, `noindex`), `/casos/e-wear`, archivos retirados, sitemap, consola y menú (ratón, teclado y móvil), y hace **un** alta de prueba. Marca la visita como interna. La confirmación del alta es la respuesta de Brevo: mirar además el contacto en la lista 14 y borrarlo.
@@ -113,4 +113,8 @@ Si algo falla, no se toca nada sin decisión de Jose. Dos maneras de volver:
 
 No se usa `push --force`.
 
-**Fiabilidad del navegador (25 nov 2026).** Si la pantalla del Mac se apaga a mitad, Chrome puede dejar de pintar y el menú parece no abrirse. La comprobación impide que la pantalla se apague mientras corre y, si aun así Chrome deja de pintar, se cierra o no responde en 20 segundos, repite esa página en otro Chrome y lo escribe como `REINTENTO`. Un fallo con Chrome pintando cuenta a la primera.
+**Forma normal de lanzarla (25 nov 2026):** siempre con `npm run comprobar -- <dirección> [opciones]` y sin otras pruebas a la vez. Ese comando:
+- usa `caffeinate -dims`, para que el Mac no se duerma ni apague la pantalla (con la pantalla apagada, Chrome puede dejar de pintar y el menú parece no abrirse);
+- abre Chrome en modo headless y revisa las páginas en serie, una detrás de otra;
+- da 60 segundos como máximo a cada página del navegador y 10 minutos a toda la ejecución (sin contar la espera del despliegue). Si se pasa, corta, dice en qué página se quedó y no reintenta;
+- si Chrome deja de pintar o se cierra dentro del minuto, repite esa página en otro Chrome y lo escribe como `REINTENTO`. Un fallo con Chrome pintando cuenta a la primera.

@@ -1,6 +1,6 @@
 // Comprobación posterior a publicar. Solo lectura, salvo el alta de prueba con --alta.
-//   node scripts/comprobar-publicacion.mjs https://www.oficioscirculares.com --esperar --alta prueba-…@example.com
-//   node scripts/comprobar-publicacion.mjs http://localhost:3055            (ensayo)
+//   npm run comprobar -- https://www.oficioscirculares.com --esperar --alta prueba-…@example.com
+//   npm run comprobar -- http://localhost:3055            (ensayo)
 import { spawn } from 'node:child_process';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -14,12 +14,15 @@ const ALTA = iAlta >= 0 ? args[iAlta + 1] : null;
 if (iAlta >= 0 && !/^prueba-[^@]+@example\.com$/.test(ALTA || '')) { console.error('--alta exige una dirección prueba-…@example.com'); process.exit(2); }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const pedir = (r, o = {}) => fetch(BASE + r, { redirect: 'manual', signal: AbortSignal.timeout(20000), ...o });
+// Límites: una página del navegador, 60 s; la ejecución entera, 10 min. Al pasarse se corta y se dice dónde.
+const LIMITE_PAGINA = 60000, LIMITE_TOTAL = 600000;
 let fallos = 0;
 let apartado = null; // en el navegador, los resultados de una página se guardan hasta saber que son fiables
 const anotar = ([n, c, d]) => { if (!c) fallos++; console.log(`${c ? 'BIEN ' : 'FALLO'} ${n}${d ? ' · ' + d : ''}`); };
 const ok = (n, c, d = '') => apartado ? apartado.push([n, c, d]) : anotar([n, c, d]);
 const grupo = t => console.log('\n# ' + t);
-async function probar(n, f) { try { await f(); } catch (e) { ok(n, false, e.message); } }
+let actual = 'inicio';
+async function probar(n, f) { actual = n; try { await f(); } catch (e) { ok(n, false, e.message); } }
 const texto = h => h.replace(/<(script|style)[\s\S]*?<\/\1>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&iquest;/g, '¿').replace(/\s+/g, ' ');
 const h1 = h => texto((h.match(/<h1[\s\S]*?<\/h1>/) || [''])[0]);
 
@@ -48,6 +51,14 @@ if (args.includes('--esperar')) {
   ok('La versión nueva está desplegada (/impacto responde)', listo);
   if (listo) await sleep(20000);
 }
+
+// El límite total empieza a contar cuando la versión nueva ya responde.
+let c, ws, cafe;
+const cerrar = () => { try { ws?.close(); } catch {} c?.kill(); };
+setTimeout(() => {
+  console.log(`FALLO Corte a los 10 minutos · se quedó en ${actual}`);
+  cerrar(); cafe?.kill(); process.exit(3);
+}, LIMITE_TOTAL).unref();
 
 grupo('Páginas');
 for (const [r, frase] of PAGINAS) await probar(r, async () => {
@@ -99,11 +110,10 @@ await probar('sitemap', async () => {
 });
 
 grupo('Navegador: consola y menú «Servicios»');
-let c, ws, cafe;
-const cerrar = () => { try { ws?.close(); } catch {} c?.kill(); };
+try { ws?.close(); } catch {} c?.kill(); };
 try {
   // Si la pantalla se apaga a mitad, Chrome deja de pintar y las transiciones del menú no avanzan.
-  if (process.platform === 'darwin') { cafe = spawn('caffeinate', ['-di', '-w', String(process.pid)], { stdio: 'ignore' }); cafe.on('error', () => {}); }
+  if (process.platform === 'darwin') { cafe = spawn('caffeinate', ['-dims', '-w', String(process.pid)], { stdio: 'ignore' }); cafe.on('error', () => {}); }
   let id = 0, er = []; const p = new Map();
   const abrir = async () => {
   const port = 9800 + Math.floor(Math.random() * 100);
@@ -181,7 +191,10 @@ try {
   for (const [r] of [...PAGINAS, ['/club']]) {
     for (let intento = 1; ; intento++) {
       apartado = [];
-      await probar(r, () => pagina(r));
+      let reloj, pasado = false;
+      await probar(r, () => Promise.race([pagina(r), new Promise(x => { reloj = setTimeout(() => { pasado = true; x(); }, LIMITE_PAGINA); })]));
+      clearTimeout(reloj);
+      if (pasado) { const res = apartado; apartado = null; res.forEach(anotar); ok(r, false, 'pasa de 60 s; se corta aquí'); throw new Error(`ejecución cortada en ${r}`); }
       const res = apartado; apartado = null;
       if (res.every(x => x[1]) || (await pinta().catch(() => false))) { res.forEach(anotar); break; }
       if (intento === 3) { res.forEach(anotar); console.log(`AVISO Chrome no pinta o no responde en ${r} tras 3 intentos`); break; }
