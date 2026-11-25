@@ -1828,6 +1828,36 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
     }
 }
 
+/* Pie entre 481 y 1024 px: las cuatro columnas no caben al lado de la marca. La marca pasa
+   arriba; debajo, cuatro columnas si hay sitio, dos en tableta y Oficios a todo el ancho en lo más estrecho. */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+    }
+
+    .footer-brand {
+        max-width: 560px;
+    }
+
+    .footer-links {
+        grid-template-columns: auto auto auto auto;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 860px) {
+    .footer-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+    .footer-column--oficios {
+        grid-column: 1 / -1;
+    }
+}
+
 /* ===== ANIMATION FALLBACKS & VISIBILITY FIXES ===== */
 /* Asegurar que elementos sean visibles por defecto */
 .fade-in {
