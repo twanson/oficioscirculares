@@ -19,7 +19,7 @@
                     <ul>
                         <li><a href="/#beneficios">Qué consigues</a></li>
                         <li><a href="/impacto">Impacto</a></li>
-                        <li><a href="/club">El Club</a></li>
+                        <% if (typeof clubVisible !== 'undefined' && clubVisible) { %><li><a href="/club">El Club</a></li><% } %>
                         <li><a href="/blog/">Blog</a></li>
                         <li><a href="/recursos">Recursos</a></li>
                         <li><a href="/conecta-lana">Conecta Lana</a></li>

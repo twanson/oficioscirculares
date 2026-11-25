@@ -10,6 +10,7 @@ const conectaLanaDir = require('./lib/conecta-lana-directorio');
 const cookieParser = require('cookie-parser');
 // --- Club: área de miembros (Supabase Auth + Stripe) ---
 const clubConfig = require('./lib/clubConfig');
+const { clubVisible, esRutaClub, filtrar: filtrarClub } = require('./lib/clubVisible');
 const clubMembers = require('./lib/clubMembers');
 const clubContent = require('./lib/clubContent');
 const clubAutodiagnostico = require('./lib/clubAutodiagnostico');
@@ -147,6 +148,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 // Precios: única fuente (data/precios.json) disponible en todas las vistas EJS.
 app.locals.precios = precios;
+app.locals.clubVisible = clubVisible(); // CLUB_VISIBLE (lib/clubVisible.js)
 app.locals.testimoniosLib = require('./lib/testimonios'); // data/testimonios.json
 
 // --- Webhook de Stripe (Club) ---
@@ -242,6 +244,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// Con CLUB_VISIBLE distinto de true, el Club no existe para el visitante (cualquier método).
+// El webhook de Stripe no es una página y sigue funcionando.
+app.use((req, res, next) => {
+  if (!app.locals.clubVisible && esRutaClub(req.path)) {
+    return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  }
+  next();
+});
+
 // El Club y todas sus rutas siguen sin indexar hasta el lanzamiento (encargo nov 2026).
 app.use((req, res, next) => {
   if (/^\/club(\/|$)/.test(req.path) || req.path === '/auth/callback') res.set('X-Robots-Tag', 'noindex, nofollow');
@@ -305,7 +316,7 @@ app.get('/circular-express', (req, res) => {
 // Ruta específica para página de gracias de recursos (debe ir ANTES de /recursos/:slug)
 app.get('/recursos/gracias', (req, res) => {
   res.set('X-Robots-Tag', 'noindex, nofollow');
-  res.sendFile(path.join(__dirname, 'public', 'recursos', 'gracias', 'index.html'));
+  res.type('html').send(filtrarClub(fs.readFileSync(path.join(__dirname, 'public', 'recursos', 'gracias', 'index.html'), 'utf8'), app.locals.clubVisible));
 });
 
 // Ruta específica para modelos-sostenibles (coming soon)
@@ -1080,6 +1091,11 @@ app.get('/sitemap.xml', (req, res) => {
       const re = new RegExp('\\s*<url>(?:(?!</url>)[\\s\\S])*?/recursos/' + slug + '</loc>[\\s\\S]*?</url>', 'g');
       xml = xml.replace(re, '');
     });
+    // Nada del Club mientras esté oculto, tampoco dentro de comentarios.
+    if (!app.locals.clubVisible) {
+      xml = xml.replace(/\s*<!--(?:(?!-->)[\s\S])*\/club<\/loc>[\s\S]*?-->/g, '')
+        .replace(/\s*<url>(?:(?!<\/url>)[\s\S])*?\/club(?:\/[^<]*)?<\/loc>[\s\S]*?<\/url>/g, '');
+    }
     res.type('application/xml').send(xml);
   } catch (e) {
     console.error('❌ Error sirviendo sitemap:', e.message);
@@ -1093,7 +1109,7 @@ app.use('/downloads', (req, res, next) => {
   next();
 });
 
-// Páginas estáticas con marcas de precio ({{precio:clave}}): se sirven con los
+// Páginas estáticas con marcas de precio ({{precio:clave}}) o del Club: se sirven con los
 // precios de data/precios.json sustituidos, para que no haya cifras duplicadas.
 const _staticPriceCache = new Map();
 app.use((req, res, next) => {
@@ -1107,7 +1123,9 @@ app.use((req, res, next) => {
   if (html === undefined) {
     try {
       const raw = fs.readFileSync(file, 'utf8');
-      html = raw.includes('{{precio') || raw.includes('{{plazas-fundador') ? precios.renderTokens(raw) : null;
+      const conPrecios = raw.includes('{{precio') || raw.includes('{{plazas-fundador') ? precios.renderTokens(raw) : raw;
+      const servido = filtrarClub(conPrecios, app.locals.clubVisible); // marcas <!--club--> del menú
+      html = servido === raw ? null : servido;
     } catch (e) { html = null; }
     _staticPriceCache.set(file, html);
   }

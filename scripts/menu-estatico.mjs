@@ -6,6 +6,10 @@
  *   node scripts/menu-estatico.mjs              reescribe las páginas que estén desfasadas
  *   node scripts/menu-estatico.mjs --comprobar  no escribe; sale con error si alguna lo está
  *
+ * El archivo guarda el menú completo, con el Club entre marcas <!--club-->; el servidor lo quita
+ * al servirlo si CLUB_VISIBLE no es true. Así el mismo commit vale para staging y producción.
+ * La comprobación verifica los dos modos: lo servido debe ser igual a header.ejs en cada uno.
+ *
  * Solo cambia el bloque <nav class="navbar">…</nav> y la versión de nav.js. Añade una página
  * a la lista sin tocar este script: basta con que tenga ese bloque. `npm test` hace la comprobación.
  */
@@ -13,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ejs from 'ejs';
+import club from '../lib/clubVisible.js';
 
 const RAIZ = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLICO = path.join(RAIZ, 'public');
@@ -21,8 +26,8 @@ const NAV = /<nav class="navbar">[\s\S]*?<\/nav>/g;
 const NAV_JS = /\/assets\/js\/nav\.js\?v=[\w-]+/g;
 
 /** Cabecera ya renderizada, con los valores por defecto (los de una vista sin CTA propio). */
-export function cabecera() {
-  const html = ejs.render(fs.readFileSync(path.join(RAIZ, 'views/partials/header.ejs'), 'utf8'), {});
+export function cabecera(clubVisible = true) {
+  const html = ejs.render(fs.readFileSync(path.join(RAIZ, 'views/partials/header.ejs'), 'utf8'), { clubVisible });
   const nav = html.match(NAV);
   const js = html.match(NAV_JS);
   if (nav?.length !== 1 || js?.length !== 1) throw new Error('header.ejs debe tener un <nav class="navbar"> y un nav.js');
@@ -44,12 +49,20 @@ export function paginas(dir = PUBLICO) {
   }).sort();
 }
 
+const sinHuecos = (h) => h.replace(/\s+/g, ' ').replace(/> </g, '><');
+
 /** Problemas por página: menú distinto del de header.ejs, o sin nav.js. */
 export function desfasadas() {
   const cab = cabecera();
+  const oculto = sinHuecos(cabecera(false).nav);
   return paginas().filter((r) => {
     const html = fs.readFileSync(r, 'utf8');
-    return html.match(NAV)?.length !== 1 || !html.match(NAV_JS) || aplicar(html, cab) !== html;
+    const nav = html.match(NAV);
+    if (nav?.length !== 1) return true;
+    // Con el Club oculto, lo que se sirve tiene que ser el menú de header.ejs sin el Club.
+    const servido = club.filtrar(nav[0], false);
+    if (sinHuecos(servido) !== oculto || /club/i.test(servido)) return true;
+    return !html.match(NAV_JS) || aplicar(html, cab) !== html;
   });
 }
 

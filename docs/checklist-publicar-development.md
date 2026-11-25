@@ -57,6 +57,7 @@ Nombres mirados en Railway el 24 nov (sin valores): producción ya tiene `APP_UR
 
 | Variable nueva | Al publicar | En enero |
 |---|---|---|
+| `CLUB_VISIBLE` | `false` (sin poner vale lo mismo). Staging: `true` | `true` cuando Jose lo diga |
 | `CLUB_ABIERTO` | `false` o sin poner | `true` el día de apertura |
 | `DIRECTOS_VISIBLE` | `false` o sin poner | `true` con tres invitados con fecha |
 | `APP_URL` | `https://www.oficioscirculares.com` (recomendada) | igual |
@@ -101,10 +102,12 @@ Rama: `release/nov-2026`. `main` anterior a publicar: **`9161c33`**. Volver a mi
 Fusionar con `git merge --no-ff release/nov-2026` (sin `--no-ff` no habría commit de fusión que revertir). Tras subir `main`:
 
 ```bash
-npm run comprobar -- https://www.oficioscirculares.com --esperar --alta prueba-lista-espera-www-AAAAMMDD@example.com
+npm run comprobar -- https://www.oficioscirculares.com --esperar --club false
 ```
 
-Comprueba páginas, Club (plazas cerradas, sin enlaces de pago, `noindex`), `/casos/e-wear`, archivos retirados, sitemap, consola y menú (ratón, teclado y móvil), y hace **un** alta de prueba. Marca la visita como interna. La confirmación del alta es la respuesta de Brevo: mirar además el contacto en la lista 14 y borrarlo.
+**El Club sale oculto (25 nov 2026).** `--club false` comprueba que todas sus rutas dan 404, que el menú, el pie y el sitemap no lo llevan, que nada lo nombra y que no hay enlaces internos rotos. No hay alta de prueba. Con `--club true` (staging) comprueba lo de siempre.
+
+Comprueba páginas, Club (con `--club true`: plazas cerradas, sin enlaces de pago, `noindex`), `/casos/e-wear`, archivos retirados, sitemap, consola y menú (ratón, teclado y móvil), y, con `--club true` y `--alta`, hace **un** alta de prueba. Marca la visita como interna. La confirmación del alta es la respuesta de Brevo: mirar además el contacto en la lista 14 y borrarlo.
 
 Si algo falla, no se toca nada sin decisión de Jose. Dos maneras de volver:
 

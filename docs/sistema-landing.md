@@ -40,6 +40,14 @@ node scripts/menu-estatico.mjs
 - Una página estática nueva necesita un `<nav class="navbar"></nav>` y, justo después, `<script src="/assets/js/nav.js?v=…"></script>` sin `defer`, para que los scripts de la página no dupliquen el menú. El script rellena el resto.
 - Si cambia `styles.css`, hay que subir aparte su versión en las páginas: el script no la toca.
 
+### Club oculto o visible (`CLUB_VISIBLE`)
+
+Una variable de entorno (`lib/clubVisible.js`). Solo `true` enseña el Club; sin ella, está oculto. Se lee al arrancar el servidor.
+
+- Oculto: `/club…` y `/auth/callback` dan 404, y el Club no sale en el menú, el pie ni el sitemap.
+- En las vistas: `<% if (clubVisible) { %>`.
+- Las páginas estáticas guardan el menú completo con el Club entre `<!--club-->` y `<!--/club-->`; el servidor lo filtra al servirlas. `menu-estatico.mjs` y `npm test` comprueban los dos modos. Estas marcas valen también para otros textos de una página estática.
+
 ### Qué hoja lleva cada página
 
 | Hoja | Dónde se usa |
