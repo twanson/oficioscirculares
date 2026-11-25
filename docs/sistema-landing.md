@@ -135,6 +135,32 @@ Para imágenes que no dan para ir a sangre (ilustraciones de unos 1.000 px). Cla
 
 Enseña una página del PDF de ejemplo dentro de una caja: más alta, sin velo y alineada arriba.
 
+### Testimonios: añadir una foto
+
+1. Guarda la imagen en `public/assets/images/testimonios/` (por ejemplo, `esther.webp`).
+2. En `data/testimonios.json`, pon la ruta en ese testimonio: `"foto": "/assets/images/testimonios/esther.webp"`. Para quitarla, `"foto": null`.
+3. Opcional: `"foto_alt"` con lo que se ve. Si falta, se lee «Foto de» y el nombre.
+
+No hay que tocar plantillas. `npm test` falla si la ruta no existe.
+
+| | Medida |
+|---|---|
+| Formato | WebP (calidad 80) o JPG; perfil sRGB |
+| Tamaño | Cuadrada, 1000 × 1000 px. Mínimo 800 × 800 |
+| Peso | Hasta 150 KB |
+| Encuadre | La cara o las manos en la franja central: la portada recorta a 4:3 (arriba y abajo) y las páginas de servicio, a un círculo de 56 px |
+| Color | Se sube en color. La portada la pone en blanco y negro y vuelve al color al pasar el ratón |
+
+Pide permiso para publicar la foto, aparte del permiso de la cita.
+
+**Rejilla de Comunidad (portada).** La calcula `rejilla()` en `lib/testimonios.js`:
+- Sin foto: nombre, proyecto y cita. No hay recuadro ni sello.
+- Con foto: va delante, con el mismo ancho y dos filas de alto (en móvil, una detrás de otra).
+- Se ven seis casillas (una foto cuenta dos) y «Ver más mensajes» enseña el resto, siempre por fila completa.
+- Si a tres columnas sobra hueco al final, la cita más larga ocupa ese sitio, ensanchada.
+
+El nombre, el texto y la foto de `/club` y las citas de Conecta Lana escritas en su vista siguen en su plantilla: este campo no las cambia.
+
 ## Componentes
 
 | Componente | Clases | Para qué |
@@ -145,7 +171,7 @@ Enseña una página del PDF de ejemplo dentro de una caja: más alta, sin velo y
 | Banda de credibilidad | `.cred` `.cred-inner` `.cred-titulo` `.cred-items` `.cred-item` | Tres o cuatro datos comprobables, con su fecha |
 | Cajas con foto | `.cajas` `.cab` `.cajas-grid` `.caja` (`--dark`, `--light`, `--accent`) `.caja-foto` `.chip` `.num` `.lema` `.dato` `.tags` `.tag` | Lo que incluye un servicio; la `--dark` es la destacada |
 | Pasos | `.pasos` `.pasos-grid` `.paso` `.bola` `.cuando` | Proceso numerado (hasta cuatro) |
-| Testimonios | `.testi` `.testi-grid` (`--dos`) `.testi-card` `.comillas` `.firma` `.avatar` `.rol` `.nota` | Cita con retrato. Se leen de `data/testimonios.json` (`lib/testimonios.js`) |
+| Testimonios | `.testi` `.testi-grid` (`--dos`) `.testi-card` `.comillas` `.firma` `.avatar` `.rol` `.nota` | Cita con retrato. Se leen de `data/testimonios.json` (`lib/testimonios.js`). Foto: ver «Testimonios: añadir una foto» |
 | Quién está detrás | `.detras` `.detras-grid` `.detras-foto` `.detras-texto` `.detras-firma` | Jose, con foto y firma |
 | Para quién sí y no | `.quien` `.quien-grid` `.quien-col.si` `.quien-col.no` `.quien-cta` | Dos columnas enfrentadas, con icono y texto (no solo color) |
 | Precio | `.precios` `.planes` `.plan` (`--destacado`, `--mensual`) `.plan-badge` `.plan-eyebrow` `.plan-precio` `.plan-equiv` `.perks` `.perk` | Precio con jerarquía |

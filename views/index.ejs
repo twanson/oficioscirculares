@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
     <link rel="stylesheet" href="/assets/css/pages-v2.css?v=20261123c">
     <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
-    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261124a">
+    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261125a">
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -258,9 +258,10 @@
          COMUNIDAD — tarjetas con retrato. Testimonios de data/testimonios.json (portada):
          los autorizados con nombre primero y después el mensaje sin nombre (permiso
          pendiente). Sin foto: el sello de la marca, con el mismo tamaño que el retrato.
-         Se ven seis; «Ver más» enseña el resto (sin JavaScript se ven todos).
+         Con foto (campo `foto`): tarjeta de dos filas de alto y va delante. Sin foto: solo texto.
+         Se ven las dos primeras filas; «Ver más» enseña el resto (sin JavaScript se ven todos).
          ═══════════════════════════════════ -->
-    <% const comunidad = testimoniosLib.paraPagina('portada'); %>
+    <% const rejilla = testimoniosLib.rejilla(testimoniosLib.paraPagina('portada')); const comunidad = rejilla.map(function (c) { return c.t; }); %>
     <section class="comunidad-v2" id="comunidad">
         <div class="container">
             <div class="comunidad-v2-header">
@@ -268,21 +269,22 @@
                 <p class="comunidad-v2-sub">Lo que cuentan quienes ya forman parte de la red.</p>
             </div>
             <div class="comunidad-v2-grid oc-comunidad-grid" id="comunidad-grid">
-                <% comunidad.forEach(function (t, i) {
+                <% rejilla.forEach(function (c) {
+                     const t = c.t;
                      const nombre = t.nombre || t.firma;
                      let rol = t.nombre ? t.firma : '';
                      if (t.nombre && t.contexto && rol.indexOf('Conecta Lana') === -1) rol += ' · ' + t.contexto; %>
-                <div class="testimonio-v2<%= i >= 6 ? ' oc-comunidad-mas' : '' %>">
-                    <div class="testimonio-v2-img<%= t.avatar === 'foto' && t.foto ? '' : ' oc-sello-retrato' %>">
-                        <% if (t.avatar === 'foto' && t.foto) { %><img src="<%= t.foto %>" alt="<%= t.foto_alt || '' %>" loading="lazy" width="600" height="450"><% } else { %><img src="/assets/images/brand/oc-sello-verde-400.webp" alt="" loading="lazy" width="560" height="560"><% } %>
-                    </div>
+                <div class="<%= c.clases.join(' ') %>">
+                    <% if (t.foto) { %>
+                    <div class="testimonio-v2-img"><img src="<%= t.foto %>" alt="<%= t.foto_alt || ('Foto de ' + nombre) %>" loading="lazy" width="600" height="450"></div>
+                    <% } %>
                     <h4><%= nombre %></h4>
                     <% if (rol) { %><span class="testimonio-role"><% if (t.enlace) { %><a href="<%= t.enlace %>" target="_blank" rel="noopener"><%= rol %></a><% } else { %><%= rol %><% } %></span><% } %>
                     <p class="testimonio-quote">&ldquo;<%= t.texto %>&rdquo;</p>
                 </div>
                 <% }) %>
             </div>
-            <% if (comunidad.length > 6) { %>
+            <% if (rejilla.some(function (c) { return c.plegada; })) { %>
             <div class="oc-comunidad-ver"><button type="button" class="btn-ghost" id="comunidad-ver-mas" aria-controls="comunidad-grid" aria-expanded="false" hidden>Ver más mensajes</button></div>
             <% } %>
             <p class="comunidad-v2-disclaimer"><%= testimoniosLib.nota(comunidad) %></p>
