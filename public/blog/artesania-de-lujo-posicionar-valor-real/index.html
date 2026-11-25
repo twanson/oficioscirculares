@@ -203,6 +203,13 @@
             .comparison-grid { grid-template-columns: 1fr; }
             .data-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
+        /* Móvil: nada se sale del ancho de la pantalla */
+        @media (max-width: 768px) {
+            .data-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+            .data-card { padding: 1.25rem 0.6rem; }
+            .data-card-number { font-size: clamp(1.3rem, 7.4vw, 2.5rem); }
+        }
     </style>
 </head>
 <body>
