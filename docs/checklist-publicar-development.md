@@ -113,4 +113,4 @@ Si algo falla, no se toca nada sin decisión de Jose. Dos maneras de volver:
 
 No se usa `push --force`.
 
-**Fiabilidad del navegador (25 nov 2026).** Si la pantalla del Mac se apaga a mitad, Chrome puede dejar de pintar y el menú parece no abrirse. La comprobación impide que la pantalla se apague mientras corre y, si aun así Chrome deja de pintar, repite esa página en otro Chrome y lo escribe como `REINTENTO`. Un fallo con Chrome pintando cuenta a la primera.
+**Fiabilidad del navegador (25 nov 2026).** Si la pantalla del Mac se apaga a mitad, Chrome puede dejar de pintar y el menú parece no abrirse. La comprobación impide que la pantalla se apague mientras corre y, si aun así Chrome deja de pintar, se cierra o no responde en 20 segundos, repite esa página en otro Chrome y lo escribe como `REINTENTO`. Un fallo con Chrome pintando cuenta a la primera.

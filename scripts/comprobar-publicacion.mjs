@@ -122,7 +122,17 @@ try {
     }
   };
   };
-  const send = (method, params = {}) => new Promise(r => { const i = ++id; p.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
+  // Sin límite de espera, un Chrome que se cierra a mitad dejaría la comprobación colgada.
+  const send = (method, params = {}) => new Promise((r, x) => {
+    if (ws.readyState !== 1) return x(new Error('Chrome se ha cerrado'));
+    const i = ++id, s = ws;
+    const acabar = f => v => { clearTimeout(reloj); s.removeEventListener('close', roto); p.delete(i); f(v); };
+    const roto = () => acabar(x)(new Error('Chrome se ha cerrado'));
+    const reloj = setTimeout(() => acabar(x)(new Error('Chrome no responde')), 20000);
+    s.addEventListener('close', roto);
+    p.set(i, acabar(r));
+    s.send(JSON.stringify({ id: i, method, params }));
+  });
   const ev = async e => (await send('Runtime.evaluate', { expression: e, awaitPromise: true, returnByValue: true })).result?.result?.value;
   const tecla = async (key, n) => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key, code: key, windowsVirtualKeyCode: n, ...(key === 'Enter' && type === 'keyDown' ? { text: '\r' } : {}) }); await sleep(250); };
   const clic = async sel => {
@@ -174,8 +184,8 @@ try {
       await probar(r, () => pagina(r));
       const res = apartado; apartado = null;
       if (res.every(x => x[1]) || (await pinta().catch(() => false))) { res.forEach(anotar); break; }
-      if (intento === 3) { res.forEach(anotar); console.log(`AVISO Chrome no pinta en ${r} tras 3 intentos`); break; }
-      console.log(`REINTENTO ${r} · Chrome ha dejado de pintar; se abre otro`);
+      if (intento === 3) { res.forEach(anotar); console.log(`AVISO Chrome no pinta o no responde en ${r} tras 3 intentos`); break; }
+      console.log(`REINTENTO ${r} · Chrome ha dejado de pintar o de responder; se abre otro`);
       cerrar(); await preparar();
     }
   }
