@@ -207,12 +207,34 @@ try {
   const MENU = '#servicios-dropdown-menu', BOT = '#servicios-dropdown-btn';
   const abierto = `(()=>{const m=document.querySelector('${MENU}');const r=m.getBoundingClientRect();return m.classList.contains('show')&&getComputedStyle(m).visibility!=='hidden'&&r.height>50})()`;
   const DESTINOS = [...(CLUB_VISIBLE ? ['/club'] : []), '/servicios/diagnostico-3d', '/impulso-3d', '/servicios/empresas', '/servicios/roadmap-3d', '/servicios/sprint-3d', '/servicios'];
+  // body lleva overflow-x:hidden: lo que se sale no siempre ensancha la página, solo se corta. Por eso se mide
+  // también si algún texto visible pasa del borde, salvo dentro de un carrusel o caja con su propio recorte.
+  const DESBORDE = `(()=>{const W=document.documentElement.clientWidth,f=new Set();
+    if(document.documentElement.scrollWidth>W+1)f.add('la página mide '+document.documentElement.scrollWidth);
+    const t=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
+    while(n=t.nextNode()){const s=n.data.trim(),e=n.parentElement;if(!s||/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(e.tagName)||!e.checkVisibility({checkVisibilityCSS:true,checkOpacity:false}))continue;
+      const g=document.createRange();g.selectNodeContents(n);
+      if(![...g.getClientRects()].some(b=>b.width>1&&b.height>1&&(b.right>W+1||b.left<-1)))continue;
+      let x=e,libre=true;for(;x&&x!==document.body;x=x.parentElement){const c=getComputedStyle(x);if(c.position==='fixed'||(c.overflowX!=='visible'&&!x.querySelector('footer'))){libre=false;break}}
+      if(libre)f.add('se corta «'+s.slice(0,40)+'»'+(e.closest('footer')?' (pie)':''))}
+    return [...f].slice(0,6).join(' · ')})()`;
+  // Páginas estáticas cuyo pie no es el del partial: solo se les mide el desborde.
+  const SOLO_DESBORDE = ['/faqs/', '/gracias/', '/plantillas/', '/privacidad/'];
+  const desborde = async r => {
+    for (const w of [375, 768]) {
+      await send('Emulation.setDeviceMetricsOverride', { width: w, height: 1024, deviceScaleFactor: 1, mobile: true });
+      await send('Page.navigate', { url: BASE + r }); await sleep(2500);
+      const m = await ev(DESBORDE);
+      ok(`${r} sin desborde a ${w} px`, m === '', m ?? 'no se ha podido medir');
+    }
+  };
   const pagina = async r => {
+    if (SOLO_DESBORDE.includes(r)) return desborde(r);
     er = [];
     await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
     await send('Page.navigate', { url: BASE + r }); await sleep(3500);
     ok(`${r} consola limpia`, er.length === 0, [...new Set(er)].join(' | '));
-    if (!(await ev(`!!document.querySelector('${BOT}')`))) { ok(`${r} menú`, ['/conecta-lana'].includes(r), 'la página no lleva el menú común'); return; }
+    if (!(await ev(`!!document.querySelector('${BOT}')`))) { ok(`${r} menú`, ['/conecta-lana'].includes(r), 'la página no lleva el menú común'); return desborde(r); }
     const destinos = await ev(`[...document.querySelectorAll('${MENU} a')].map(a=>new URL(a.href,location.href).pathname.replace(/(.)\\/$/,'$1'))`);
     ok(`${r} menú: destinos`, DESTINOS.every(d => destinos.includes(d)), DESTINOS.filter(d => !destinos.includes(d)).join(' '));
     if (!CLUB_VISIBLE) ok(`${r} menú y pie sin el Club`, !(await ev(`[...document.querySelectorAll('.navbar, footer')].some(n=>/\\bclub\\b/i.test(n.outerHTML.replace(/\\/assets\\/\\S+/g,'')))`)));
@@ -232,10 +254,10 @@ try {
     await ev(`document.querySelector('${BOT}').scrollIntoView({block:'center'})`); await clic(BOT); const m2 = await ev(abierto);
     await ev(`window.scrollTo(0,0)`); await clic('#hamburger'); const m3 = !(await ev(`document.querySelector('#nav-menu').classList.contains('active')`));
     ok(`${r} menú en móvil`, m1 && m2 && m3, m1 && m2 && m3 ? '' : `abre ${m1}, Servicios ${m2}, cierra ${m3}`);
-    ok(`${r} sin desborde en móvil`, !(await ev('document.documentElement.scrollWidth>376')));
+    await desborde(r);
   };
   // Solo se repite una página si Chrome ha dejado de pintar: un fallo con Chrome sano cuenta a la primera.
-  for (const [r] of [...PAGINAS, ...(CLUB_VISIBLE ? [['/club']] : [])]) {
+  for (const [r] of [...PAGINAS, ...(CLUB_VISIBLE ? [['/club']] : []), ...SOLO_DESBORDE.map(r => [r])]) {
     for (let intento = 1; ; intento++) {
       apartado = [];
       let reloj, pasado = false;
