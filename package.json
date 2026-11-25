@@ -8,6 +8,7 @@
     "dev": "node server.js",
     "build": "echo 'No build needed'",
     "test": "node --test test/*.test.js",
+    "comprobar": "caffeinate -dims node scripts/comprobar-publicacion.mjs",
     "convert-images": "node scripts/convert-images.js",
     "convert-recurso": "node scripts/convert-images.js",
     "help-images": "node scripts/convert-images.js --help"
