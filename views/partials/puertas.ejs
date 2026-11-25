@@ -7,9 +7,9 @@
         </div>
         <span class="fr-quien">Soy un taller o una marca artesana</span>
         <h3>Para talleres y marcas artesanas</h3>
-        <p>M&eacute;todo, comunidad y acompa&ntilde;amiento para que tu oficio se entienda y se venda.</p>
+        <p>M&eacute;todo<% if (clubVisible) { %>, comunidad<% } %> y acompa&ntilde;amiento para que tu oficio se entienda y se venda.</p>
         <ul class="fr-lista">
-            <li><span>Club de Oficios Circulares</span><b><%= precios.texto('club_mensual') %></b></li>
+            <% if (clubVisible) { %><li><span>Club de Oficios Circulares</span><b><%= precios.texto('club_mensual') %></b></li><% } %>
             <li><span>Diagn&oacute;stico 3D para talleres</span><b><%= precios.texto('diagnostico_talleres') %></b></li>
             <li><span>Impulso 3D</span><b><%= precios.texto('impulso_3d') %></b></li>
         </ul>

@@ -768,3 +768,9 @@ html:has(.oc-landing),html:has(.oc-landing) body{overflow-x:clip}
 .oc-landing .caja-foto--doc img{object-position:top}
 .oc-landing .caja-foto--doc::after{content:none}
 @media(max-width:640px){.oc-landing .caja-foto--doc{height:210px}}
+
+/* Dos cajas, una con documento y otra con foto: misma altura de imagen, para que etiqueta,
+   título y precio queden a la misma línea (/servicios/talleres con el Club oculto). */
+.oc-landing .cajas-grid--parejas .caja-foto{height:236px}
+.oc-landing .cajas-grid--parejas .caja .dato--inline{margin:0 0 22px;align-self:flex-start}
+.oc-landing .cajas-grid--parejas .caja-foto img{object-position:center top}

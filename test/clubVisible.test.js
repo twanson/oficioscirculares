@@ -19,7 +19,7 @@ async function conServidor(valor, f) {
   const puerto = 41000 + Math.floor(Math.random() * 9000);
   const s = spawn(process.execPath, ['server.js'], {
     cwd: path.join(__dirname, '..'), stdio: 'ignore',
-    env: { ...process.env, PORT: String(puerto), CLUB_VISIBLE: valor, BREVO_API_KEY: '', BREVO_WAITLIST_LIST_ID: '' }
+    env: { ...process.env, PORT: String(puerto), CLUB_VISIBLE: valor, CLUB_ABIERTO: 'true', BREVO_API_KEY: '', BREVO_WAITLIST_LIST_ID: '' }
   });
   const pedir = (r, o = {}) => fetch(`http://localhost:${puerto}${r}`, { redirect: 'manual', ...o });
   try {
@@ -43,6 +43,10 @@ test('CLUB_VISIBLE=false: rutas 404 y sin Club en menú, pie y sitemap', async (
       assert.ok(t.includes('navbar'), r);
       assert.ok(!/\bclub\b/i.test(t), r);
     }
+    for (const r of [...PAGINAS, '/servicios', '/servicios/talleres', '/servicios/diagnostico-3d', '/impulso-3d', '/impacto', '/conecta-lana']) {
+      const h = (await (await pedir(r)).text()).replace(/<!--[\s\S]*?-->|<(script|style)[\s\S]*?<\/\1>/g, '').replace(/\/assets\/\S+/g, '');
+      assert.ok(!/\bclub\b(?!-)/i.test(h), `${r}: ${(h.match(/.{0,60}\bclub\b(?!-).{0,40}/i) || [''])[0]}`);
+    }
     assert.ok(!/\/club/.test(await (await pedir('/sitemap.xml')).text()));
   });
 });
@@ -57,6 +61,9 @@ test('CLUB_VISIBLE=true: el Club sigue como estaba', async () => {
     for (const r of PAGINAS) {
       const h = await (await pedir(r)).text();
       assert.strictEqual((menuYPie(h).match(/<a href="\/club" class="(dropdown-item|nav-link)"/g) || []).length, 2, r);
+    }
+    for (const [r, f] of [['/', 'el Club, el Diagn'], ['/servicios', 'Club: 15'], ['/servicios/talleres', 'Tres formas'], ['/servicios/talleres', 'Conoce el Club'], ['/faqs/', 'Club de Oficios Circulares: 15'], ['/oficios/ceramica-artesanal', '<span>Club de Oficios'], ['/servicios/diagnostico-3d', 'Entrada al Club']]) {
+      assert.ok((await (await pedir(r)).text()).includes(f), `${r} sin «${f}»`);
     }
   });
 });
