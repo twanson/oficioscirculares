@@ -242,6 +242,13 @@
             .triangle-table { font-size: 0.85rem; }
             .triangle-table th, .triangle-table td { padding: 0.6rem 0.5rem; }
         }
+
+        /* Móvil: nada se sale del ancho de la pantalla */
+        @media (max-width: 768px) {
+            .data-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+            .data-card { padding: 1.25rem 0.6rem; }
+            .data-card-number { font-size: clamp(1.2rem, 6.6vw, 1.9rem); }
+        }
     </style>
 </head>
 <body>

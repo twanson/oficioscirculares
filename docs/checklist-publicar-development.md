@@ -112,3 +112,5 @@ Si algo falla, no se toca nada sin decisión de Jose. Dos maneras de volver:
 2. **Git, la definitiva:** `git revert -m 1 <commit de la fusión>` sobre `main` y push. No reescribe el historial; `main` queda con los archivos de `9161c33`. Para volver a publicar después habrá que revertir ese revert.
 
 No se usa `push --force`.
+
+**Fiabilidad del navegador (25 nov 2026).** Si la pantalla del Mac se apaga a mitad, Chrome puede dejar de pintar y el menú parece no abrirse. La comprobación impide que la pantalla se apague mientras corre y, si aun así Chrome deja de pintar, repite esa página en otro Chrome y lo escribe como `REINTENTO`. Un fallo con Chrome pintando cuenta a la primera.

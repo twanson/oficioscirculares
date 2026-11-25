@@ -356,6 +356,15 @@
             .data-table, .semaforo-table { font-size: 0.88rem; }
             .data-table th, .data-table td, .semaforo-table th, .semaforo-table td { padding: 0.55rem 0.7rem; }
         }
+
+        /* Móvil: nada se sale del ancho de la pantalla */
+        @media (max-width: 768px) {
+            .dashboard-table { padding: 1.5rem 1rem; }
+            .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+            .dashboard-cell { padding: 1rem 0.25rem; }
+            .dashboard-cell .num { font-size: clamp(1.2rem, 7vw, 2.4rem); }
+            .data-table, .semaforo-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        }
     </style>
 </head>
 <body>

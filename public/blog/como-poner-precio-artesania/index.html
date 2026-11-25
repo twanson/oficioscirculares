@@ -348,6 +348,12 @@
             .bar100-legend .lg { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text); }
             .bar100-legend .sw { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
         }
+
+        /* Móvil: nada se sale del ancho de la pantalla */
+        @media (max-width: 768px) {
+            .r-row .r-concept { white-space: normal; min-width: 0; }
+            .r-row .r-dots { min-width: 1rem; }
+        }
     </style>
 </head>
 <body>

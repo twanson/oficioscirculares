@@ -15,7 +15,9 @@ if (iAlta >= 0 && !/^prueba-[^@]+@example\.com$/.test(ALTA || '')) { console.err
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const pedir = (r, o = {}) => fetch(BASE + r, { redirect: 'manual', signal: AbortSignal.timeout(20000), ...o });
 let fallos = 0;
-const ok = (n, c, d = '') => { if (!c) fallos++; console.log(`${c ? 'BIEN ' : 'FALLO'} ${n}${d ? ' · ' + d : ''}`); };
+let apartado = null; // en el navegador, los resultados de una página se guardan hasta saber que son fiables
+const anotar = ([n, c, d]) => { if (!c) fallos++; console.log(`${c ? 'BIEN ' : 'FALLO'} ${n}${d ? ' · ' + d : ''}`); };
+const ok = (n, c, d = '') => apartado ? apartado.push([n, c, d]) : anotar([n, c, d]);
 const grupo = t => console.log('\n# ' + t);
 async function probar(n, f) { try { await f(); } catch (e) { ok(n, false, e.message); } }
 const texto = h => h.replace(/<(script|style)[\s\S]*?<\/\1>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&iquest;/g, '¿').replace(/\s+/g, ' ');
@@ -97,13 +99,17 @@ await probar('sitemap', async () => {
 });
 
 grupo('Navegador: consola y menú «Servicios»');
-let c, ws;
+let c, ws, cafe;
+const cerrar = () => { try { ws?.close(); } catch {} c?.kill(); };
 try {
+  // Si la pantalla se apaga a mitad, Chrome deja de pintar y las transiciones del menú no avanzan.
+  if (process.platform === 'darwin') { cafe = spawn('caffeinate', ['-di', '-w', String(process.pid)], { stdio: 'ignore' }); cafe.on('error', () => {}); }
+  let id = 0, er = []; const p = new Map();
+  const abrir = async () => {
   const port = 9800 + Math.floor(Math.random() * 100);
-  c = spawn('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', ['--headless=new', `--remote-debugging-port=${port}`, '--no-first-run', `--user-data-dir=${mkdtempSync(join(tmpdir(), 'cdp-'))}`, 'about:blank'], { stdio: 'ignore' });
+  c = spawn('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', ['--headless=new', `--remote-debugging-port=${port}`, '--no-first-run', '--disable-backgrounding-occluded-windows', '--disable-renderer-backgrounding', `--user-data-dir=${mkdtempSync(join(tmpdir(), 'cdp-'))}`, 'about:blank'], { stdio: 'ignore' });
   let t; for (let i = 0; i < 50 && !t; i++) { try { t = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find(x => x.type === 'page'); } catch {} if (!t) await sleep(200); }
   ws = new WebSocket(t.webSocketDebuggerUrl); await new Promise(r => ws.onopen = r);
-  let id = 0, er = []; const p = new Map();
   ws.onmessage = m => {
     const d = JSON.parse(m.data);
     if (d.id) { p.get(d.id)?.(d); p.delete(d.id); }
@@ -115,6 +121,7 @@ try {
       if (/^https?:/.test(u) && new URL(u).host !== new URL(BASE).host) console.log('AVISO externo · ' + l); else er.push(l);
     }
   };
+  };
   const send = (method, params = {}) => new Promise(r => { const i = ++id; p.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
   const ev = async e => (await send('Runtime.evaluate', { expression: e, awaitPromise: true, returnByValue: true })).result?.result?.value;
   const tecla = async (key, n) => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key, code: key, windowsVirtualKeyCode: n, ...(key === 'Enter' && type === 'keyDown' ? { text: '\r' } : {}) }); await sleep(250); };
@@ -123,13 +130,18 @@ try {
     for (const type of ['mouseMoved', 'mousePressed', 'mouseReleased']) await send('Input.dispatchMouseEvent', { type, x: r[0], y: r[1], button: 'left', clickCount: 1 });
     await sleep(400);
   };
+  const preparar = async () => {
+  await abrir();
   for (const d of ['Page', 'Runtime', 'Network', 'Log']) await send(d + '.enable');
   // Marca la visita como interna para no ensuciar la medición.
   await send('Network.setCookie', { name: 'oc_internal', value: 'internal', url: BASE });
+  };
+  await preparar();
+  const pinta = async () => (await ev(`Promise.race([new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>r(true)))),new Promise(r=>setTimeout(()=>r(false),2000))])`)) === true;
   const MENU = '#servicios-dropdown-menu', BOT = '#servicios-dropdown-btn';
   const abierto = `(()=>{const m=document.querySelector('${MENU}');const r=m.getBoundingClientRect();return m.classList.contains('show')&&getComputedStyle(m).visibility!=='hidden'&&r.height>50})()`;
   const DESTINOS = ['/club', '/servicios/diagnostico-3d', '/impulso-3d', '/servicios/empresas', '/servicios/roadmap-3d', '/servicios/sprint-3d', '/servicios'];
-  for (const [r] of [...PAGINAS, ['/club']]) await probar(r, async () => {
+  const pagina = async r => {
     er = [];
     await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
     await send('Page.navigate', { url: BASE + r }); await sleep(3500);
@@ -154,9 +166,21 @@ try {
     await ev(`window.scrollTo(0,0)`); await clic('#hamburger'); const m3 = !(await ev(`document.querySelector('#nav-menu').classList.contains('active')`));
     ok(`${r} menú en móvil`, m1 && m2 && m3, m1 && m2 && m3 ? '' : `abre ${m1}, Servicios ${m2}, cierra ${m3}`);
     ok(`${r} sin desborde en móvil`, !(await ev('document.documentElement.scrollWidth>376')));
-  });
+  };
+  // Solo se repite una página si Chrome ha dejado de pintar: un fallo con Chrome sano cuenta a la primera.
+  for (const [r] of [...PAGINAS, ['/club']]) {
+    for (let intento = 1; ; intento++) {
+      apartado = [];
+      await probar(r, () => pagina(r));
+      const res = apartado; apartado = null;
+      if (res.every(x => x[1]) || (await pinta().catch(() => false))) { res.forEach(anotar); break; }
+      if (intento === 3) { res.forEach(anotar); console.log(`AVISO Chrome no pinta en ${r} tras 3 intentos`); break; }
+      console.log(`REINTENTO ${r} · Chrome ha dejado de pintar; se abre otro`);
+      cerrar(); await preparar();
+    }
+  }
 } catch (e) { ok('Navegador', false, e.message); }
-finally { try { ws?.close(); } catch {} c?.kill(); }
+finally { cerrar(); cafe?.kill(); }
 
 grupo('Lista de espera');
 if (ALTA) await probar('alta', async () => {
