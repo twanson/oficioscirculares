@@ -110,7 +110,6 @@ await probar('sitemap', async () => {
 });
 
 grupo('Navegador: consola y menú «Servicios»');
-try { ws?.close(); } catch {} c?.kill(); };
 try {
   // Si la pantalla se apaga a mitad, Chrome deja de pintar y las transiciones del menú no avanzan.
   if (process.platform === 'darwin') { cafe = spawn('caffeinate', ['-dims', '-w', String(process.pid)], { stdio: 'ignore' }); cafe.on('error', () => {}); }
