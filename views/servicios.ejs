@@ -10,7 +10,7 @@ const meta = {
               description: 'Dos entradas: si eres un taller o una marca artesana, o si eres una empresa con materiales y procesos que quieres hacer circulares.',
               precargaImagen: IMG + 'hero-servicios-artesanos.webp' },
   talleres: { title: 'Servicios para talleres y marcas artesanas | Oficios Circulares', canonical: '/servicios/talleres',
-              description: 'El Club de Oficios Circulares, el Diagnóstico 3D para talleres y el Impulso 3D. Precio único para cada servicio.',
+              description: (clubVisible ? 'El Club de Oficios Circulares, el' : 'El') + ' Diagnóstico 3D para talleres y el Impulso 3D. Precio único para cada servicio.',
               precargaImagen: IMG + 'hero-talleres-alfarero.webp' },
   empresas: { title: 'Servicios para empresas | Oficios Circulares', canonical: '/servicios/empresas',
               description: 'Diagnóstico 3D para empresas, Roadmap 3D y Sprint 3D: de detectar una mejora circular a ponerla en marcha y contarla.',
@@ -30,7 +30,7 @@ const ICO = {
 const T = testimoniosLib;
 %>
 <%- include('partials/head-meta', meta) %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261124a">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261125a">
 <%- include('partials/header') %>
 
 <main class="oc-landing" id="maincontent">
@@ -44,7 +44,7 @@ const T = testimoniosLib;
         { href: '/servicios/talleres', texto: 'Soy un taller →', clase: 'terracota', label: 'servicios-hero-talleres' },
         { href: '/servicios/empresas', texto: 'Soy una empresa', clase: 'ghost', label: 'servicios-hero-empresas' }
       ],
-      datos: 'Diagnóstico para talleres: ' + P.texto('diagnostico_talleres') + ' + IVA · Club: ' + P.texto('club_mensual') + ' · Empresas: precio cerrado tras el Diagnóstico'
+      datos: 'Diagnóstico para talleres: ' + P.texto('diagnostico_talleres') + ' + IVA' + (clubVisible ? ' · Club: ' + P.texto('club_mensual') : '') + ' · Empresas: precio cerrado tras el Diagnóstico'
   }) %>
 
   <!-- Las dos puertas (tarjetas de /conecta-lana con foto arriba) -->
@@ -59,9 +59,9 @@ const T = testimoniosLib;
         <div class="cl-card-foto"><img loading="lazy" src="<%= IMG %>puerta-talleres-ceramica.webp" alt="Manos de una ceramista modelando el barro en la mesa de su taller" width="900" height="562"></div>
         <div class="cl-ico"><%- ICO.taller %></div>
         <h3>Para talleres y marcas artesanas</h3>
-        <p class="cl-who">Método, comunidad y acompañamiento para que tu oficio se entienda y se venda.</p>
+        <p class="cl-who">Método<% if (clubVisible) { %>, comunidad<% } %> y acompañamiento para que tu oficio se entienda y se venda.</p>
         <ul class="cl-lista">
-          <li><span>Club de Oficios Circulares</span><b><%= P.texto('club_mensual') %></b></li>
+          <% if (clubVisible) { %><li><span>Club de Oficios Circulares</span><b><%= P.texto('club_mensual') %></b></li><% } %>
           <li><span>Diagnóstico 3D para talleres</span><b><%= P.texto('diagnostico_talleres') %> + IVA</b></li>
           <li><span>Impulso 3D</span><b><%= P.texto('impulso_3d') %> + IVA</b></li>
         </ul>
@@ -114,12 +114,12 @@ const T = testimoniosLib;
       img: IMG + 'hero-talleres-alfarero.webp', alto: 1272,
       badge: 'Soy un taller o una marca artesana',
       titulo: 'Que tu oficio se entienda <em>y se venda</em>',
-      sub: 'Para cualquier taller o marca artesana que haga piezas físicas: cerámica, madera, textil, cuero, joyería, cosmética natural y más. Tres formas de trabajar con nosotros, de la más ligera a la más completa. Cada una tiene un precio cerrado.',
+      sub: 'Para cualquier taller o marca artesana que haga piezas físicas: cerámica, madera, textil, cuero, joyería, cosmética natural y más. ' + (clubVisible ? 'Tres' : 'Dos') + ' formas de trabajar con nosotros, de la más ligera a la más completa. Cada una tiene un precio cerrado.',
       ctas: [
         { href: '#servicios', texto: 'Ver los servicios →', clase: 'terracota' },
         { href: '/servicios/empresas', texto: '¿Eres una empresa?', clase: 'ghost', label: 'talleres-hero-empresas' }
       ],
-      datos: 'Club ' + P.texto('club_mensual') + ' · Diagnóstico ' + P.texto('diagnostico_talleres') + ' + IVA · Impulso 3D ' + P.texto('impulso_3d') + ' + IVA'
+      datos: (clubVisible ? 'Club ' + P.texto('club_mensual') + ' · ' : '') + 'Diagnóstico ' + P.texto('diagnostico_talleres') + ' + IVA · Impulso 3D ' + P.texto('impulso_3d') + ' + IVA'
   }) %>
 
   <!-- Tu camino: cajas con foto -->
@@ -130,7 +130,8 @@ const T = testimoniosLib;
       <p>Empieza por donde te haga falta. Cada servicio funciona por sí solo y se puede sumar al siguiente.</p>
     </div>
     <div class="wrap">
-      <div class="cajas-grid">
+      <div class="cajas-grid<%= clubVisible ? '' : ' cajas-grid--dos cajas-grid--parejas' %>">
+        <% if (clubVisible) { %>
         <div class="caja caja--light reveal">
           <div class="caja-foto"><img loading="lazy" src="<%= IMG %>caja-club-manos.webp" alt="Varias personas trabajando juntas sobre la misma mesa de taller" width="900" height="562"></div>
           <div class="chip"><%- ICO.club %></div>
@@ -145,6 +146,7 @@ const T = testimoniosLib;
           </ul>
           <a class="club-btn club-btn--verde" href="/club">Conocer el Club</a>
         </div>
+        <% } %>
         <div class="caja caja--dark reveal">
           <div class="caja-doc"><img loading="lazy" src="/assets/images/landing/diagnostico/portada-barro-artesanal.webp" alt="Portada de un Diagnóstico 3D de ejemplo" width="600" height="849"></div>
           <div class="chip"><%- ICO.lupa %></div>
@@ -224,7 +226,7 @@ const T = testimoniosLib;
       titulo: 'Empieza por saber <em>qué tienes</em>',
       texto: 'El Diagnóstico 3D te dice por dónde empezar, sin llamadas y con tres prioridades ordenadas.',
       cta: { href: '/servicios/diagnostico-3d', texto: 'Quiero mi Diagnóstico →', label: 'talleres-cierre-diagnostico' },
-      pd: '¿Prefieres empezar por la comunidad? <a href="/club">Conoce el Club</a>.'
+      pd: clubVisible ? '¿Prefieres empezar por la comunidad? <a href="/club">Conoce el Club</a>.' : ''
   }) %>
 
 <% } else { %>

@@ -28,7 +28,7 @@
     ogImageAlt: 'Diagnóstico 3D de Oficios Circulares para talleres y marcas artesanas',
     precargaImagen: IMG + 'hero-manos-cuero.webp'
 }) %>
-<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261124a">
+<link rel="stylesheet" href="/assets/css/oc-landing.css?v=20261125a">
 <%- include('partials/header') %>
 
 <main class="oc-landing" id="maincontent">
@@ -220,7 +220,7 @@
 </section>
 
 
-<% if (clubAbierto) { %>
+<% if (clubVisible && clubAbierto) { %>
 <!-- Entrada al Club con el Diagnóstico (se activa con CLUB_ABIERTO el día del lanzamiento) -->
 <section class="cred" id="club" aria-labelledby="club-title">
   <div class="wrap cred-inner">

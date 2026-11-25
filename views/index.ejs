@@ -203,7 +203,7 @@
                         <span class="servicio-featured-label">Para talleres y marcas artesanas</span>
                         <h3>Que tu oficio se entienda y se venda</h3>
                         <p>
-                            M&eacute;todo, comunidad y acompa&ntilde;amiento: el Club, el Diagn&oacute;stico 3D y el Impulso 3D.
+                            <% if (clubVisible) { %>M&eacute;todo, comunidad y acompa&ntilde;amiento: el Club, el Diagn&oacute;stico 3D y el Impulso 3D.<% } else { %>M&eacute;todo y acompa&ntilde;amiento: el Diagn&oacute;stico 3D y el Impulso 3D.<% } %>
                         </p>
                         <div class="servicio-featured-ctas">
                             <a href="/servicios/talleres" class="btn-servicio-primary" data-event="click_cta" data-label="home-puerta-talleres">Ver servicios para talleres &rarr;</a>
