@@ -271,7 +271,7 @@
         <div class="comillas" aria-hidden="true">"</div>
         <p><%= t.texto %></p>
         <div class="firma">
-          <div class="avatar"><% if (t.avatar === 'foto' && t.foto) { %><img loading="lazy" src="<%= t.foto %>" alt="<%= t.foto_alt || '' %>" width="56" height="56"><% } else { %><img loading="lazy" src="/assets/images/brand/oc-logo-2026-cuadrado-168.webp" alt="" width="56" height="56"><% } %></div>
+          <div class="avatar"><% if (t.foto) { %><img loading="lazy" src="<%= t.foto %>" alt="<%= t.foto ? (t.foto_alt || ('Foto de ' + t.nombre)) : '' %>" width="56" height="56"><% } else { %><img loading="lazy" src="/assets/images/brand/oc-logo-2026-cuadrado-168.webp" alt="" width="56" height="56"><% } %></div>
           <div>
             <h3><%= t.nombre || t.firma %></h3>
             <% if (t.nombre) { %><div class="rol"><%= t.firma %></div><% } %>
