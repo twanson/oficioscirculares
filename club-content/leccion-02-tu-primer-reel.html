@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lección 02 · Tu primer reel del proceso — El Club de Oficios Circulares</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --verde:#023429; --verde-hondo:#032A20; --verde-medio:#0A4A3A;
+    --terracota:#934A1C; --terracota-viva:#B05E2B;
+    --arena:#E8D5B7; --arena-clara:#F4EBDB; --crema:#FBF7EF; --hueso:#F6F3EC;
+    --tinta:#1E2321; --tinta-suave:#4A544F; --blanco:#FFFFFF;
+    --serif:'Newsreader',Georgia,serif; --sans:'Manrope',-apple-system,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--tinta);background:var(--crema);line-height:1.7;font-size:16.5px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--verde)}
+  em{font-family:var(--serif);font-style:italic}
+  img{display:block;max-width:100%}
+  .doc{max-width:820px;margin:0 auto;padding:0 28px}
+  p{margin-bottom:16px;max-width:66ch}
+  .lead{font-size:19px;color:var(--tinta-suave)}
+  strong{color:var(--verde)}
+
+  /* ====== Cabecera — sala de montaje (oscura, cinematográfica) ====== */
+  .lec-head{display:grid;grid-template-columns:1.02fr .98fr;min-height:76vh;background:linear-gradient(168deg,#04382B,var(--verde-hondo) 60%,#021E17);position:relative;overflow:hidden}
+  .lec-head-cont{display:flex;flex-direction:column;justify-content:center;padding:76px 56px 76px max(28px,calc((100vw - 1120px)/2 + 28px));position:relative;z-index:2}
+  .lec-kicker{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+  .lec-kicker img{width:46px;height:46px;border-radius:50%}
+  .lec-kicker span{font-size:13.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--arena)}
+  .lec-head h1{font-size:clamp(46px,5.6vw,80px);color:var(--crema);margin-bottom:22px;max-width:12ch;letter-spacing:-.01em}
+  .lec-head h1 em{color:var(--arena)}
+  .lec-head .sub{font-size:20px;color:rgba(251,247,239,.82);max-width:40ch;line-height:1.6}
+  .lec-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+  .lec-meta span{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(232,213,183,.35);border-radius:999px;padding:11px 20px;font-size:14px;font-weight:700;color:rgba(251,247,239,.85);background:rgba(2,42,32,.4)}
+  .lec-meta b{color:var(--arena)}
+
+  /* La sala de montaje: tira de película */
+  .lec-cine{position:relative;min-height:820px;overflow:hidden;background:radial-gradient(600px 380px at 50% -5%,rgba(232,213,183,.13),transparent 62%),linear-gradient(168deg,rgba(2,36,27,.5),rgba(1,20,15,.75)),url('https://images.pexels.com/photos/7790143/pexels-photo-7790143.jpeg?auto=compress&cs=tinysrgb&w=1400') center/cover}
+  .lec-cine .grano{position:absolute;inset:0;z-index:0;opacity:.35;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+  .lec-num-cine{position:absolute;left:22px;bottom:6px;z-index:1;font-family:var(--serif);font-style:italic;font-weight:600;font-size:clamp(130px,14vw,190px);line-height:1;color:rgba(232,213,183,.1);user-select:none;pointer-events:none}
+  .firma-cine{position:absolute;top:18px;left:22px;z-index:5;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--arena);background:rgba(2,42,32,.55);border:1px solid rgba(232,213,183,.25);padding:6px 16px;border-radius:999px;backdrop-filter:blur(4px)}
+  .tira{position:absolute;top:24px;right:8%;width:min(365px,58%);transform:rotate(3.5deg);background:#0C0F0D;padding:16px 28px;box-shadow:0 30px 70px rgba(0,0,0,.6);z-index:2}
+  .tira::before,.tira::after{content:"";position:absolute;top:0;bottom:0;width:14px;background-image:radial-gradient(circle at 50% 50%,#0C0F0D 3px,transparent 3.5px),linear-gradient(#3a423d,#3a423d);background-size:14px 22px,4px 22px;background-position:center,center;background-repeat:repeat-y}
+  .tira::before{left:5px}
+  .tira::after{right:5px}
+  .fotograma{position:relative;margin:12px 0}
+  .fotograma img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:saturate(1.05) contrast(1.05)}
+  .fotograma .marca{position:absolute;top:8px;left:8px;background:rgba(12,15,13,.8);color:var(--arena);font-family:var(--serif);font-style:italic;font-size:12px;padding:3px 11px;border-radius:999px}
+  .fotograma .dur{position:absolute;bottom:8px;right:8px;background:var(--terracota);color:#fff;font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;letter-spacing:.06em}
+  .claqueta{position:absolute;bottom:26px;left:8%;z-index:3;background:#0C0F0D;color:var(--crema);padding:14px 20px 16px;transform:rotate(-3deg);box-shadow:0 18px 40px rgba(0,0,0,.55);font-family:var(--serif);font-style:italic;font-size:14px;border-top:12px solid;border-image:repeating-linear-gradient(135deg,#0C0F0D 0 12px,var(--arena) 12px 24px) 12}
+  .claqueta b{display:block;font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--arena);margin-bottom:4px}
+
+  /* ====== Resultado ====== */
+  .resultado{background:linear-gradient(160deg,#EFDFC2,var(--arena) 60%,#E0C69E);border-radius:24px;padding:38px 42px;margin:-38px auto 0;position:relative;z-index:3;box-shadow:0 18px 48px rgba(2,52,41,.14)}
+  .resultado .etiq{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);display:block;margin-bottom:10px}
+  .resultado p{font-family:var(--serif);font-size:21px;line-height:1.4;color:var(--verde);margin:0;max-width:none}
+
+  /* ====== Secciones (molde de la colección) ====== */
+  .cap{padding:72px 0 8px}
+  .cap-num{font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.06em;color:var(--terracota);display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .cap-num::after{content:"";flex:1;border-top:1px solid rgba(147,74,28,.25)}
+  .cap h2{font-size:clamp(28px,4.2vw,38px);margin-bottom:20px}
+  .cap h2 em{color:var(--terracota)}
+  .pull{font-family:var(--serif);font-style:italic;font-size:clamp(22px,3vw,28px);line-height:1.32;color:var(--verde);border-left:5px solid var(--terracota);padding:6px 0 6px 26px;margin:34px 0;max-width:none}
+  .paso-linea{display:grid;grid-template-columns:52px 1fr;gap:18px;margin-bottom:24px}
+  .paso-linea .n{width:44px;height:44px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 5px 14px rgba(2,52,41,.22)}
+  .paso-linea h4{font-size:19px;margin-bottom:6px}
+  .paso-linea p{font-size:15px;color:var(--tinta-suave)}
+  .tip{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:16px;padding:20px 26px 20px 72px;margin:20px 0;font-size:15px;box-shadow:0 6px 20px rgba(2,52,41,.05)}
+  .tip::before{content:"✦";position:absolute;left:22px;top:19px;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .tip b{color:var(--verde)}
+  .error{position:relative;background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:16px;padding:18px 24px 18px 66px;margin:12px 0;font-size:15px;box-shadow:0 4px 14px rgba(2,52,41,.04)}
+  .error::before{content:"✕";position:absolute;left:20px;top:17px;width:28px;height:28px;border-radius:50%;background:rgba(147,74,28,.1);color:var(--terracota);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+  .error b{color:var(--terracota)}
+
+  /* ====== Storyboard de 3 planos ====== */
+  .storyboard{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0 10px}
+  .sb-card{background:#0F1512;border-radius:18px;overflow:hidden;box-shadow:0 14px 34px rgba(2,52,41,.25);color:rgba(251,247,239,.85)}
+  .sb-card .marco{position:relative}
+  .sb-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
+  .sb-card .dur{position:absolute;bottom:10px;right:10px;background:var(--terracota);color:#fff;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:.05em}
+  .sb-card .cuerpo{padding:18px 20px 20px}
+  .sb-card .num-t{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--arena);display:block;margin-bottom:4px}
+  .sb-card b{font-family:var(--serif);font-size:18px;color:var(--crema);display:block;margin-bottom:6px}
+  .sb-card p{font-size:13.5px;color:rgba(251,247,239,.7);margin:0;line-height:1.55}
+
+  /* ====== En tu oficio (16 verticales) ====== */
+  .en-tu-oficio{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:20px;padding:30px 34px;margin:28px 0;box-shadow:0 8px 26px rgba(2,52,41,.06)}
+  .en-tu-oficio .titulo-o{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .en-tu-oficio .titulo-o b{font-family:var(--serif);font-size:21px;color:var(--verde)}
+  .en-tu-oficio .titulo-o::before{content:"✦";width:34px;height:34px;border-radius:11px;background:linear-gradient(150deg,#0C5140,var(--verde));color:var(--arena);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .en-tu-oficio .sub-o{font-size:14px;color:var(--tinta-suave);margin-bottom:20px}
+  .oficios-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 32px}
+  .of{padding:11px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:13.5px;line-height:1.5}
+  .of b{display:block;font-family:var(--serif);font-size:15.5px;color:var(--verde);margin-bottom:2px}
+  .of span{display:block;color:var(--tinta-suave)}
+  .of em{color:var(--terracota)}
+  @media(max-width:640px){.oficios-grid{grid-template-columns:1fr}}
+
+  /* ====== Las voces (arquetipos) ====== */
+  .voces{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:30px 0 10px}
+  .voz{border-radius:22px;padding:28px 30px;position:relative;overflow:hidden}
+  .voz::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .voz .quien{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:8px}
+  .voz b.nombre{font-family:var(--serif);font-size:21px;display:block;margin-bottom:8px}
+  .voz p{font-size:14.5px;margin:0 0 10px;line-height:1.6}
+  .voz .accion{font-size:13px;font-style:italic;font-family:var(--serif)}
+  .voz--dark{background:linear-gradient(165deg,var(--verde),#03392C);color:rgba(251,247,239,.85)}
+  .voz--dark::before{background:linear-gradient(90deg,var(--arena),rgba(232,213,183,.15))}
+  .voz--dark .quien{color:var(--arena)}
+  .voz--dark b.nombre{color:var(--crema)}
+  .voz--dark .accion{color:var(--arena)}
+  .voz--light{background:var(--blanco);border:1px solid rgba(2,52,41,.09);color:var(--tinta)}
+  .voz--light::before{background:linear-gradient(90deg,var(--terracota),rgba(147,74,28,.15))}
+  .voz--light .quien{color:var(--terracota)}
+  .voz--light b.nombre{color:var(--verde)}
+  .voz--light .accion{color:var(--terracota)}
+  .voz--light p{color:var(--tinta-suave)}
+  .voz--accent{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);color:#5d5347}
+  .voz--accent::before{background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .voz--accent .quien{color:var(--terracota)}
+  .voz--accent b.nombre{color:var(--verde)}
+  .voz--accent .accion{color:var(--terracota)}
+
+  /* ====== Historias (repertorio) ====== */
+  .historia{display:grid;grid-template-columns:52px 1fr;gap:18px;margin-bottom:20px;background:var(--blanco);border:1px solid rgba(2,52,41,.08);border-radius:16px;padding:20px 24px;box-shadow:0 4px 16px rgba(2,52,41,.04)}
+  .historia .n{width:44px;height:44px;border-radius:50%;background:linear-gradient(150deg,#0A4A3A,var(--verde));color:var(--arena);font-family:var(--serif);font-style:italic;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .historia h4{font-size:18px;margin-bottom:4px}
+  .historia .gancho{font-family:var(--serif);font-style:italic;color:var(--terracota);font-size:15px;display:block;margin-bottom:6px}
+  .historia p{font-size:14.5px;color:var(--tinta-suave);margin:0}
+
+  /* ====== Guion rellenable ====== */
+  .plantilla{background:var(--arena-clara);border:1.5px dashed rgba(147,74,28,.4);border-radius:18px;padding:30px 34px;margin:26px 0}
+  .plantilla .titulo-p{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:16px}
+  .plantilla .campo{margin-bottom:16px}
+  .plantilla .campo label{display:block;font-size:13px;font-weight:700;color:var(--verde);margin-bottom:5px}
+  .plantilla .campo .relleno{display:block;background:var(--blanco);border:1px solid rgba(2,52,41,.12);border-radius:10px;padding:12px 16px;font-size:15px;min-height:44px;color:var(--tinta);outline:none}
+  .plantilla .campo .relleno:focus{border-color:var(--terracota)}
+  .plantilla .campo .pista{font-size:12.5px;color:#8a7a5f;margin-top:4px;display:block}
+
+  /* ====== Práctica / checklist / cierre (molde) ====== */
+  .practica{background:linear-gradient(180deg,#FBF2E2,#F5E7CF);border-radius:24px;padding:40px 44px;margin:40px 0;position:relative;overflow:hidden}
+  .practica::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--terracota),var(--arena))}
+  .practica .etiq{display:block;font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--terracota);margin-bottom:10px}
+  .practica h3{font-size:24px;margin-bottom:14px}
+  .practica p{font-size:15.5px;color:#5d5347}
+  .practica ol{margin:18px 0 0;padding:0;list-style:none;counter-reset:pr}
+  .practica ol li{counter-increment:pr;position:relative;padding:10px 0 10px 46px;font-size:15px}
+  .practica ol li::before{content:counter(pr);position:absolute;left:0;top:8px;width:32px;height:32px;border-radius:50%;background:var(--verde);color:var(--arena);font-family:var(--serif);font-style:italic;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .copiable{background:var(--verde-hondo);color:rgba(251,247,239,.92);border-radius:16px;padding:22px 26px;margin:20px 0 0;font-size:14.5px}
+  .copiable .etiq2{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--arena);display:block;margin-bottom:10px}
+  .copiable p{color:rgba(251,247,239,.92);margin:0;max-width:none}
+  .checklist{background:var(--blanco);border:1px solid rgba(2,52,41,.09);border-radius:18px;padding:28px 32px;margin:26px 0}
+  .checklist .titulo-c{font-family:var(--serif);font-size:20px;color:var(--verde);margin-bottom:18px}
+  .check{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(2,52,41,.1);font-size:15px}
+  .check:last-child{border-bottom:none}
+  .check input[type=checkbox]{appearance:none;width:24px;height:24px;border:2px solid rgba(2,52,41,.3);border-radius:7px;cursor:pointer;flex-shrink:0;position:relative;margin-top:1px;background:var(--crema)}
+  .check input[type=checkbox]:checked{background:var(--verde);border-color:var(--verde)}
+  .check input[type=checkbox]:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--arena);font-size:14px;font-weight:800}
+  .check label{cursor:pointer}
+  .check label b{color:var(--verde)}
+  .siguiente{background:var(--verde);border-radius:24px;padding:44px 46px;margin:60px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .siguiente .txt b{display:block;font-family:var(--serif);font-size:22px;color:var(--crema);margin-bottom:6px}
+  .siguiente .txt span{font-size:14.5px;color:rgba(251,247,239,.75)}
+  .siguiente .pill{background:var(--arena);color:var(--verde);font-weight:800;font-size:14.5px;padding:13px 26px;border-radius:999px;white-space:nowrap}
+  .pie-doc{text-align:center;padding:0 0 56px;font-size:13px;color:var(--tinta-suave)}
+  .pie-doc b{color:var(--terracota)}
+
+  @media(max-width:720px){
+    .voces{grid-template-columns:1fr}
+    .lec-head{grid-template-columns:1fr;min-height:0}
+    .lec-head-cont{padding:56px 24px 40px;order:1}
+    .lec-cine{order:2;min-height:520px}
+    .tira{right:auto;left:50%;transform:translateX(-50%) rotate(3deg);top:18px;width:min(290px,78%)}
+    .fotograma:nth-child(4){display:none}
+    .lec-cine{min-height:560px}
+    .claqueta{left:6%;bottom:14px}
+    .resultado{padding:28px 24px}
+    .storyboard{grid-template-columns:1fr}
+    .practica{padding:30px 24px}
+    .siguiente{padding:32px 26px}
+    .plantilla{padding:24px 20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA — sala de montaje ============ -->
+<header class="lec-head">
+  <div class="lec-head-cont">
+    <div class="lec-kicker">
+      <img src="https://www.oficioscirculares.com/assets/images/logodegraoscuro.png" alt="Oficios Circulares">
+      <span>El Club · Pilar Aprende · Lección 02</span>
+    </div>
+    <h1>Tu primer reel <em>del proceso</em></h1>
+    <p class="sub">Las fotos enseñan la pieza; el vídeo enseña por qué vale lo que vale. Veinte segundos de tus manos trabajando — sin hablar a cámara y sin saber editar.</p>
+    <div class="lec-meta">
+      <span><b>Lectura</b> 15 min</span>
+      <span><b>Práctica</b> 45 min</span>
+      <span><b>Necesitas</b> móvil · tu trabajo de hoy</span>
+    </div>
+  </div>
+  <!-- La sala de montaje: tira de película con los 3 planos (misma sesión que la lección 01) -->
+  <div class="lec-cine" aria-label="Tira de película con los tres planos del reel">
+    <div class="grano"></div>
+    <span class="firma-cine">sala de montaje</span>
+    <div class="lec-num-cine">02</div>
+    <div class="tira">
+      <div class="fotograma"><img src="https://images.pexels.com/photos/4241334/pexels-photo-4241334.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Plano 1: las manos esmaltando la pieza"><span class="marca">plano 1 · las manos</span><span class="dur">8 s</span></div>
+      <div class="fotograma"><img src="https://images.pexels.com/photos/4241337/pexels-photo-4241337.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Plano 2: el proceso con las herramientas"><span class="marca">plano 2 · el proceso</span><span class="dur">10 s</span></div>
+      <div class="fotograma"><img src="https://images.pexels.com/photos/4241345/pexels-photo-4241345.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Plano 3: las piezas terminadas"><span class="marca">plano 3 · la pieza</span><span class="dur">6 s</span></div>
+      <div class="fotograma"><img src="https://images.pexels.com/photos/4241349/pexels-photo-4241349.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Extra: la artesana con su pieza, si quiere salir"><span class="marca">extra · tú, si te apetece</span><span class="dur">opcional</span></div>
+    </div>
+    <div class="claqueta"><b>Reel 01 · toma única</b>"tu martes en el taller"</div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <section class="resultado">
+    <span class="etiq">Lo que consigues hoy</span>
+    <p>Un reel de 20-25 segundos de tu proceso, grabado durante tu trabajo normal de hoy y montado en un cuarto de hora — listo para revisión y publicación.</p>
+  </section>
+
+  <!-- ============ 1. POR QUÉ ============ -->
+  <section class="cap">
+    <div class="cap-num">01 · Por qué importa</div>
+    <h2>Lo que para ti es rutina, <em>para ellos es magia</em></h2>
+    <p>Tú ves un martes cualquiera. Quien está al otro lado ve barro convirtiéndose en cuenco, hilo convirtiéndose en manta, hierro al rojo tomando forma. El proceso es hipnótico precisamente porque casi nadie lo ha visto en directo — y es la prueba irrefutable de que lo tuyo está hecho a mano.</p>
+    <p>Además, el vídeo corto es el formato al que Instagram da más alcance sin pagar: es tu mejor oportunidad de que te descubra gente que no te conoce. Y hay algo mejor: <strong>el proceso justifica el precio</strong>. Quien ha visto los veinte segundos de tus manos no pregunta "¿por qué tan caro?".</p>
+    <div class="pull">Nadie que ve nacer una pieza vuelve a preguntar por qué no cuesta como la de la gran superficie.</div>
+  </section>
+
+  <!-- ============ 2. LOS 3 PLANOS ============ -->
+  <section class="cap">
+    <div class="cap-num">02 · El storyboard</div>
+    <h2>Tres planos, <em>una historia</em></h2>
+    <p>Todo reel de proceso que funciona cuenta lo mismo: material → manos → pieza. No necesitas más:</p>
+    <div class="storyboard">
+      <div class="sb-card">
+        <div class="marco"><img src="https://images.pexels.com/photos/4241334/pexels-photo-4241334.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Las manos trabajando, de cerca"><span class="dur">≈ 8 s</span></div>
+        <div class="cuerpo"><span class="num-t">Plano 1</span><b>Las manos, cerca</b><p>Tu gesto más característico, a un palmo. El móvil apoyado, quieto. Es el gancho: los 2 primeros segundos deciden si siguen mirando.</p></div>
+      </div>
+      <div class="sb-card">
+        <div class="marco"><img src="https://images.pexels.com/photos/4241337/pexels-photo-4241337.jpeg?auto=compress&cs=tinysrgb&w=700" alt="El proceso con las herramientas y el taller"><span class="dur">≈ 10 s</span></div>
+        <div class="cuerpo"><span class="num-t">Plano 2</span><b>El proceso, medio</b><p>Tú trabajando, desde el lateral o la espalda — con el taller de fondo. Esa "textura" de taller real no la puede copiar nadie.</p></div>
+      </div>
+      <div class="sb-card">
+        <div class="marco"><img src="https://images.pexels.com/photos/4241345/pexels-photo-4241345.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Las piezas terminadas, quietas"><span class="dur">≈ 6 s</span></div>
+        <div class="cuerpo"><span class="num-t">Plano 3</span><b>La pieza, quieta</b><p>El resultado con buena luz: girando despacio en tus manos o posada junto a la ventana. Es la recompensa del que se quedó.</p></div>
+      </div>
+    </div>
+    <div class="en-tu-oficio">
+      <div class="titulo-o"><b>En tu oficio: el gesto estrella</b></div>
+      <p class="sub-o">El plano 1 de tu reel es este. Busca el tuyo y dale protagonismo:</p>
+      <div class="oficios-grid">
+        <div class="of"><b>Cerámica</b><span>el barro subiendo entre los dedos en el torno</span></div>
+        <div class="of"><b>Barro y alfarería</b><span>la pella centrándose; el alisado en la última vuelta</span></div>
+        <div class="of"><b>Joyería</b><span>la lima sacando brillo; el engaste bajo la lupa</span></div>
+        <div class="of"><b>Carpintería y ebanistería</b><span>la viruta rizándose al paso del cepillo</span></div>
+        <div class="of"><b>Cosmética natural</b><span>el vertido en el molde; el corte del jabón</span></div>
+        <div class="of"><b>Textil</b><span>la lanzadera cruzando; la tela creciendo pasada a pasada</span></div>
+        <div class="of"><b>Alimentación</b><span>el amasado; el corte que abre la miga</span></div>
+        <div class="of"><b>Restauración y upcycling</b><span>el decapado revelando lo que había debajo</span></div>
+        <div class="of"><b>Cuero</b><span>el punzón marcando; el bruñido del canto</span></div>
+        <div class="of"><b>Forja y herrería</b><span>el martillo sobre el hierro al rojo; el temple silbando</span></div>
+        <div class="of"><b>Vidrio</b><span>el soplo dando forma a la masa incandescente</span></div>
+        <div class="of"><b>Encuadernación</b><span>la costura de los cuadernillos; el dorado caliente</span></div>
+        <div class="of"><b>Lana y costura</b><span>el hilo naciendo en la rueca; el vellón cardándose</span></div>
+        <div class="of"><b>Cestería y mimbre</b><span>la vara entrelazándose; el remate del borde</span></div>
+        <div class="of"><b>Construcción tradicional</b><span>la cal extendiéndose a llana; la teja asentándose</span></div>
+        <div class="of"><b>Turismo rural</b><span>las manos de tu visitante probando el oficio <em>(tu reel es su experiencia)</em></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. TU VOZ ============ -->
+  <section class="cap">
+    <div class="cap-num">03 · Tu manera de contar</div>
+    <h2>Elige la voz que <em>ya tienes</em></h2>
+    <p class="lead">No hay una forma correcta de hacer reels: hay la tuya. Fuerza un estilo que no te pega y se nota a la legua; explota el que te sale solo y no podrás hacerlo mal. ¿Cuál eres?</p>
+    <div class="voces">
+      <div class="voz voz--dark">
+        <span class="quien">Si la cámara te impone</span>
+        <b class="nombre">El silencioso</b>
+        <p>Tu superpoder es el sonido: el torno, la gubia, el telar. Ni una palabra, ni música — solo el oficio sonando. Es el estilo que más engancha en este nicho: el audio "satisfying" es la razón por la que la gente se queda mirando.</p>
+        <span class="accion">Tu jugada: encuentra el momento más satisfactorio de tu oficio (desmoldar, el primer corte, verter el esmalte) y dale protagonismo.</span>
+      </div>
+      <div class="voz voz--light">
+        <span class="quien">Si te sale enseñar</span>
+        <b class="nombre">El maestro cercano</b>
+        <p>Una frase de voz en off natural por reel: "esto se hace despacio porque...", "aquí es donde la mayoría se equivoca...". Quien aprende algo contigo, vuelve — y el que vuelve, compra.</p>
+        <span class="accion">Tu jugada: cada reel responde UNA pregunta que te hacen en las ferias.</span>
+      </div>
+      <div class="voz voz--accent">
+        <span class="quien">Si te gusta contar</span>
+        <b class="nombre">El narrador</b>
+        <p>Tus reels tienen principio, nudo y desenlace: la historia del encargo, de dónde viene el material, qué pasó con esa pieza. El texto en pantalla o la voz en off llevan el hilo; las manos ponen las imágenes.</p>
+        <span class="accion">Tu jugada: empieza cada reel con "Esta pieza tiene una historia:" y ya no pueden irse.</span>
+      </div>
+      <div class="voz voz--light">
+        <span class="quien">Si eres de risa fácil</span>
+        <b class="nombre">El cómplice</b>
+        <p>El fail del horno, el "parecía fácil", el gato pisando el barro. El humor humaniza y comparte muchísimo — y en un nicho donde todos van de solemnes, destaca el doble.</p>
+        <span class="accion">Tu jugada: guarda los desastres. El reel de la pieza rota contada con gracia vale más que tres perfectas.</span>
+      </div>
+    </div>
+    <div class="tip"><b>La prueba del espejo:</b> si al ver tu reel montado algo te da vergüenza ajena, no es tu voz. Si se te escapa una sonrisa, vas bien. Tu gente comprará al que aparece ahí — que sea el de verdad.</div>
+  </section>
+
+  <!-- ============ 4. EL REPERTORIO ============ -->
+  <section class="cap">
+    <div class="cap-num">04 · El repertorio</div>
+    <h2>Siete historias que <em>siempre funcionan</em></h2>
+    <p class="lead">Cuando el reel básico del proceso ya lo tengas hecho, aquí tienes cuerda para meses. Todas se graban con los mismos 3 planos — cambia lo que cuentas encima:</p>
+    <div class="historia"><div class="n">1</div><div><h4>La transformación</h4><span class="gancho">"De esto... a esto."</span><p>El antes/después es el formato rey. Plano 1: el material en bruto (el vellón, el tablón, la plancha de metal). Corte seco. Plano final: la pieza. El cerebro no puede resistirse al salto.</p></div></div>
+    <div class="historia"><div class="n">2</div><div><h4>El encargo</h4><span class="gancho">"Me pidieron algo que no había hecho nunca."</span><p>La historia de un pedido real: qué te pidieron, qué te dio miedo, cómo quedó. Vende sin vender: todo el que lo ve piensa "yo también podría encargarle algo".</p></div></div>
+    <div class="historia"><div class="n">3</div><div><h4>El momento satisfying en bucle</h4><span class="gancho">(no necesita texto)</span><p>Desmoldar, el primer corte, el esmalte cayendo, la viruta rizándose: 5-8 segundos del momento más placentero de tu oficio, cortados para que el final empalme con el principio. Un loop limpio se ve 3-5 veces seguidas — y cada vuelta cuenta.</p></div></div>
+    <div class="historia"><div class="n">4</div><div><h4>El error honesto</h4><span class="gancho">"Esta pieza se rompió a una hora de terminarla."</span><p>Lo que salió mal y qué hiciste después. Genera más confianza que veinte piezas perfectas: nadie se cree la perfección, todo el mundo se cree el horno caprichoso.</p></div></div>
+    <div class="historia"><div class="n">5</div><div><h4>El material tiene nombre</h4><span class="gancho">"Esta lana viene de una oveja que conozco."</span><p>De dónde viene lo que usas: la ganadería, el aserradero, el proveedor de tu zona. Es tu circularidad convertida en historia — y justifica el precio sin mencionarlo.</p></div></div>
+    <div class="historia"><div class="n">6</div><div><h4>Un día en el taller</h4><span class="gancho">"7:45. Enciendo el horno."</span><p>Cinco clips de 3 segundos: el café, abrir el taller, el gesto estrella, el descanso, cerrar. La gente no compra solo piezas: compra formar parte de una vida que admira.</p></div></div>
+    <div class="historia"><div class="n">7</div><div><h4>El porqué</h4><span class="gancho">"Podría comprarlo hecho. Pero entonces..."</span><p>Tu mini manifiesto: por qué sigues haciendo esto a mano. Una vez cada uno o dos meses, no más — y ese día, prepárate para leer comentarios que te alegran la semana.</p></div></div>
+    <div class="tip"><b>Momentos con magia que quizá no ves:</b> el vapor saliendo de la taza recién esmaltada, la pieza aún caliente, la primera puntada, encender la fragua a oscuras. Son emocionalmente irresistibles y tú los tienes delante a diario. Apúntalos cuando los veas: son reels regalados.</div>
+  </section>
+
+  <!-- ============ 5. GRABAR ============ -->
+  <section class="cap">
+    <div class="cap-num">05 · La grabación</div>
+    <h2>Graba mientras trabajas, <em>no "para grabar"</em></h2>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Vertical, siempre</h4><p>El reel vive en 9:16. Gira el móvil de pie antes de darle al rojo — el vídeo horizontal reencuadrado pierde la mitad de la imagen.</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>El móvil apoyado, nunca en la mano de un ayudante</h4><p>Apóyalo contra un tarro, una balda, una caja de herramientas — a la altura de la encimera y estable. El plano fijo es más profesional que cualquier movimiento de cámara amateur. Trípode de 15 € si te enganchas, pero hoy no hace falta.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>La misma luz que en las fotos</h4><p>Ventana lateral, fluorescentes apagados (lección 01: todo aplica). El vídeo perdona aún menos la luz mala que la foto.</p></div></div>
+    <div class="paso-linea"><div class="n">4</div><div><h4>Graba largo, corta corto</h4><p>Deja el móvil grabando 1-2 minutos por plano mientras trabajas de verdad, y luego eliges los mejores segundos. No actúes: trabaja. La naturalidad se nota — y es lo que engancha.</p></div></div>
+    <div class="tip"><b>El sonido es oro:</b> el torno girando, el telar, el martillo — graba con el sonido ambiente del taller. Muchos reels de oficio funcionan MEJOR con sonido real que con música. Silencio alrededor (radio apagada) y ya.</div>
+  </section>
+
+  <!-- ============ 6. EL MONTAJE ============ -->
+  <section class="cap">
+    <div class="cap-num">06 · El montaje</div>
+    <h2>Quince minutos, <em>en el propio Instagram</em></h2>
+    <div class="paso-linea"><div class="n">1</div><div><h4>Instagram → ⊕ → Reel</h4><p>No necesitas apps de edición para el primero. El editor de Instagram corta, ordena y pone música. (Si un día quieres más: CapCut, gratis. Hoy no.)</p></div></div>
+    <div class="paso-linea"><div class="n">2</div><div><h4>Añade tus 3 clips en orden y recorta</h4><p>Manos (≈8s) → proceso (≈10s) → pieza (≈6s). Corta cada clip por donde el gesto esté más vivo. Total: 20-25 segundos. Menos es más: el reel corto se ve entero, y verse entero es lo que Instagram premia.</p></div></div>
+    <div class="paso-linea"><div class="n">3</div><div><h4>Una frase de texto los 3 primeros segundos</h4><p>El gancho escrito para quien mira sin sonido (la mayoría). Colócala arriba, que no tape las manos.</p></div></div>
+    <div class="paso-linea"><div class="n">4</div><div><h4>Sonido: real o suave</h4><p>Si el sonido de tu taller es bueno, sube su volumen y baja la música a cero. Si no, una instrumental tranquila del catálogo. Nada de éxitos del verano: tu taller no es una discoteca.</p></div></div>
+
+    <h3 style="font-size:22px;margin:34px 0 6px">Tu guion, para rellenar</h3>
+    <div class="plantilla">
+      <div class="titulo-p">Plantilla · Reel del proceso (20-25 s)</div>
+      <div class="campo"><label>Frase de gancho (texto en pantalla, 3 primeros segundos)</label><span class="relleno" contenteditable="true">Así nace un/una __________ en mi taller de __________</span><span class="pista">Otras que funcionan: "De un trozo de ____ a ____ en ____ horas" · "Esto no sale de una fábrica" · "El gesto que llevo ____ años puliendo"</span></div>
+      <div class="campo"><label>Caption</label><span class="relleno" contenteditable="true">Cada __________ pasa por estas manos [X horas / X pasos]. Sin moldes, sin prisas, sin dos iguales. ¿Quieres ver la pieza terminada? Está en la siguiente publicación.</span><span class="pista">Cierra con pregunta o invitación — es lo que genera comentarios, y los comentarios alcance.</span></div>
+      <div class="campo"><label>Hashtags (4-5 bastan)</label><span class="relleno" contenteditable="true">#hechoamano #artesanía #[tuoficio] #[tuzona] #oficios</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 7. CASOS REALES ============ -->
+  <section class="cap">
+    <div class="cap-num">07 · Casos reales</div>
+    <h2>¿Oficio lento? ¿Trabajas <em>solo?</em></h2>
+    <div class="paso-linea"><div class="n">a</div><div><h4>Tu proceso dura días (bordado, curtido, secado)</h4><p>El timelapse es tu amigo: modo "cámara rápida" del móvil apoyado media hora mientras trabajas = 15 segundos de progreso visible. O la fórmula "3 momentos": mismo encuadre el lunes, el miércoles y el viernes — el paso del tiempo ES la historia.</p></div></div>
+    <div class="paso-linea"><div class="n">b</div><div><h4>Trabajas completamente solo</h4><p>Todos los planos de esta lección se graban con el móvil apoyado — por diseño. Nadie te graba: colócalo, dale al rojo y olvídate de él. Revisa a los 2 minutos y recoloca si hace falta.</p></div></div>
+    <div class="paso-linea"><div class="n">c</div><div><h4>Tu taller es "feo" o diminuto</h4><p>Acércate más: el plano 1 (manos) no enseña taller, y el 3 (pieza) tampoco. Con un plano 2 de encuadre cerrado, tu reel entero puede ocurrir en medio metro cuadrado.</p></div></div>
+  </section>
+
+  <!-- ============ 8. ERRORES ============ -->
+  <section class="cap">
+    <div class="cap-num">08 · Los clásicos</div>
+    <h2>Los 5 errores del <em>primer reel</em></h2>
+    <div class="error"><b>Empezar por el logo o un cartel.</b> Tienes 2 segundos para enganchar: empieza por las manos en movimiento, siempre.</div>
+    <div class="error"><b>40 segundos o más.</b> A partir de los 25 la gente se va, y las salidas tempranas hunden el alcance. Corta con dolor.</div>
+    <div class="error"><b>Hablar a cámara en el primero.</b> No hace falta y te bloqueará. El proceso habla; tú ya hablarás cuando quieras.</div>
+    <div class="error"><b>Música épica de tráiler.</b> Desentona con un taller como un DJ en una ermita. Sonido real o instrumental suave.</div>
+    <div class="error"><b>Esperar "un proceso más bonito".</b> El de hoy vale. El reel imperfecto publicado gana al perfecto imaginado, siempre.</div>
+  </section>
+
+  <!-- ============ PRÁCTICA ============ -->
+  <section class="practica">
+    <span class="etiq">La práctica de hoy</span>
+    <h3>Graba hoy, monta mañana</h3>
+    <p>No lo hagas todo en un día — así es más fácil empezar:</p>
+    <ol>
+      <li><b>Hoy, mientras trabajas:</b> móvil apoyado, vertical, y graba 1-2 minutos de cada plano (manos / proceso / pieza). Sin actuar. (10 min extra sobre tu trabajo real)</li>
+      <li><b>Mañana, con un café:</b> monta en Instagram — 3 cortes, frase de gancho, sonido. (15 min)</li>
+      <li><b>Antes de publicar:</b> súbelo al chat con el mensaje de abajo. (5 min)</li>
+    </ol>
+    <div class="copiable">
+      <span class="etiq2">Mensaje para el chat — copia y pega</span>
+      <p>🎬 Lección 2 hecha. Mi primer reel del proceso, antes de publicar: ¿el gancho aguanta los 3 primeros segundos? ¿Cortaríais algo?</p>
+    </div>
+  </section>
+
+  <!-- ============ CHECKLIST ============ -->
+  <div class="checklist">
+    <div class="titulo-c">Checklist del reel que retiene</div>
+    <div class="check"><input type="checkbox" id="k1"><label for="k1"><b>Vertical (9:16)</b> y grabado con el móvil apoyado, no en mano.</label></div>
+    <div class="check"><input type="checkbox" id="k2"><label for="k2"><b>Empieza por las manos en movimiento</b> — nada de logos ni carteles.</label></div>
+    <div class="check"><input type="checkbox" id="k3"><label for="k3"><b>20-25 segundos en total</b> — tres planos, cortados por lo vivo.</label></div>
+    <div class="check"><input type="checkbox" id="k4"><label for="k4"><b>Una frase de gancho</b> en pantalla los 3 primeros segundos, sin tapar el gesto.</label></div>
+    <div class="check"><input type="checkbox" id="k5"><label for="k5"><b>Sonido con intención</b> — el del taller si es bueno; si no, instrumental suave.</label></div>
+    <div class="check"><input type="checkbox" id="k6"><label for="k6"><b>Revisado en el chat</b> antes de publicar — y publicado sin borrarlo en una semana.</label></div>
+  </div>
+
+  <!-- ============ SIGUIENTE ============ -->
+  <section class="siguiente">
+    <div class="txt">
+      <b>Siguiente lección: Precios con margen</b>
+      <span>Ya saben lo que cuesta hacerlo. Ahora, a cobrarlo sin que te tiemble la voz.</span>
+    </div>
+    <span class="pill">Lección 03 →</span>
+  </section>
+
+  <p class="pie-doc">El Club de Oficios Circulares · Lección 02 · ¿Se te atasca algo o quieres que exista una lección concreta? Dilo en el chat con <b>#pido</b> — las próximas se deciden contigo.</p>
+
+</div>
+</body>
+</html>

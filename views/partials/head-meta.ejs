@@ -11,7 +11,9 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="<%= title || 'Oficios Circulares' %>">
     <meta property="og:description" content="<%= description || '' %>">
-    <meta property="og:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? ogImage : 'https://www.oficioscirculares.com/assets/images/brand/og-default.png' %>">
+    <meta property="og:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? ogImage : 'https://www.oficioscirculares.com/assets/images/brand/og-oc-2026.png' %>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://www.oficioscirculares.com<%= canonical || '/' %>">
     <meta property="og:site_name" content="Oficios Circulares">
     <% if (typeof ogImageAlt !== 'undefined' && ogImageAlt) { %>
@@ -22,12 +24,13 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<%= title || 'Oficios Circulares' %>">
     <meta name="twitter:description" content="<%= description || '' %>">
-    <meta name="twitter:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? ogImage : 'https://www.oficioscirculares.com/assets/images/brand/og-default.png' %>">
+    <meta name="twitter:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? ogImage : 'https://www.oficioscirculares.com/assets/images/brand/og-oc-2026.png' %>">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.oficioscirculares.com<%= canonical || '/' %>">
     
-    <!-- Fonts -->
+    <% if (typeof precargaImagen !== 'undefined' && precargaImagen) { %><link rel="preload" as="image" href="<%= precargaImagen %>" fetchpriority="high">
+    <% } %><!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200;300;400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -35,7 +38,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/styles.css?v=EJSYSTEM">
     <link rel="stylesheet" href="/assets/css/animations.css">
-    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260612">
+    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=20261123c">
     
     <!-- Traffic Source Detector -->
     <script src="/assets/js/traffic-source-detector.js" async></script>

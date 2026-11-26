@@ -248,7 +248,7 @@ Es un sistema de comunicación a medida para talleres y marcas artesanas. Lo mon
 
 **Difundir** — Te montamos un sistema para que produzcas contenido auténtico en minutos. En su versión completa, incluye un asistente digital personalizado que conoce tu voz, tu historia y tus valores. Tú revisas, retocas lo que quieras, y publicas.
 
-El punto de entrada es el Diagnóstico 3D — una radiografía de tu comunicación y tu circularidad, desde 90 euros. A partir de ahí decides hasta dónde quieres llegar.
+El punto de entrada es el Diagnóstico 3D — una radiografía de tu comunicación y tu circularidad, por 90 euros. A partir de ahí decides hasta dónde quieres llegar.
 
 Porque al final, no se trata de usar más tecnología. Se trata de tener más tiempo para lo que de verdad importa.
 

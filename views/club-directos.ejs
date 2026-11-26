@@ -1,0 +1,40 @@
+<%- include('partials/head-meta', {
+    title: 'Directos con artesanos · El Club',
+    description: 'Encuentros en directo con artesanos invitados y archivo de grabaciones.',
+    canonical: '/club/dentro/directos',
+    noindex: true
+}) %>
+<link rel="stylesheet" href="/assets/css/club-area.css?v=20260805">
+<%
+  const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  function fecha(iso) { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ''); return m ? (+m[3]) + ' de ' + MESES[+m[2] - 1] + ' de ' + m[1] : ''; }
+%>
+<main class="club-area">
+  <header class="ca-top">
+    <a class="ca-brand" href="/club/dentro"><img src="/assets/images/brand/oc-logo-2026-cuadrado-168.webp" alt="Oficios Circulares"><span>El Club</span></a>
+    <div class="ca-top-actions"><span style="color:var(--tinta-suave);"><%= email %></span><a class="ca-salir" href="/club/salir">Salir</a></div>
+  </header>
+  <div class="ca-wrap" style="padding-top:40px">
+    <h1 class="ca-section-title">Directos con artesanos</h1>
+    <p>Conversaciones en directo con artesanos que cuentan cómo trabajan, cómo venden y qué les ha funcionado.</p>
+
+    <h2 class="ca-section-title">Próximos encuentros</h2>
+    <% if (directos.proximos.length) { %>
+      <ul class="ca-lecciones" style="list-style:none;padding:0">
+      <% directos.proximos.forEach(function(d){ %>
+        <li class="ca-mes-card"><h3><%= d.titulo %></h3><span class="ca-fecha"><%= fecha(d.fecha) %><% if (d.hora) { %>, <%= d.hora %><% } %></span><% if (d.invitado) { %><p>Con <%= d.invitado %></p><% } %><% if (d.enlace) { %><a class="ca-btn ca-btn--arena" href="<%= d.enlace %>" target="_blank" rel="noopener">Apuntarme &rarr;</a><% } %></li>
+      <% }) %>
+      </ul>
+    <% } else { %><p>Todavía no hay encuentros con fecha.</p><% } %>
+
+    <h2 class="ca-section-title">Archivo de grabaciones</h2>
+    <% if (directos.grabaciones.length) { %>
+      <ul style="padding-left:20px">
+      <% directos.grabaciones.forEach(function(g){ %><li><a href="<%= g.url %>" target="_blank" rel="noopener"><%= g.titulo %></a> · <%= fecha(g.fecha) %></li><% }) %>
+      </ul>
+    <% } else { %><p>Las grabaciones aparecerán aquí después de cada directo.</p><% } %>
+    <p style="margin-top:32px"><a href="/club/dentro">&larr; Volver a tu taller</a></p>
+  </div>
+</main>
+</body>
+</html>

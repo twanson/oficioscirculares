@@ -1,0 +1,21 @@
+<%#
+  Cierre con foto a sangre (.final) y banda de confianza opcional (.confianza).
+  Parámetros: img, eyebrow, titulo (HTML), texto, cta {href, texto, id, label}, pd (HTML opcional),
+  confianza (HTML opcional).
+%>
+<section class="final">
+  <div class="fondo" aria-hidden="true"><img loading="lazy" src="<%= img %>" alt=""></div>
+  <div class="contenido">
+    <% if (locals.eyebrow) { %><span class="eyebrow eyebrow--arena"><%- eyebrow %></span><% } %>
+    <h2><%- titulo %></h2>
+    <% if (locals.texto) { %><p><%- texto %></p><% } %>
+    <a class="club-btn club-btn--terracota" href="<%= cta.href %>"<% if (cta.id) { %> id="<%= cta.id %>"<% } %><% if (cta.label) { %> data-event="click_cta" data-label="<%= cta.label %>"<% } %>><%- cta.texto %></a>
+    <% if (locals.pd) { %><p class="pd"><%- pd %></p><% } %>
+  </div>
+</section>
+<% if (locals.confianza) { %>
+<section class="confianza">
+  <img src="/assets/images/brand/oc-logo-2026-cuadrado-168.webp" alt="Oficios Circulares" width="46" height="46">
+  <p><%- confianza %></p>
+</section>
+<% } %>

@@ -135,8 +135,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/styles.css?v=V2_MINIMAL_1">
-    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=V2_20260325c">
+    <link rel="stylesheet" href="/assets/css/pages-v2.css?v=20261123c">
     <link rel="stylesheet" href="/assets/css/home-v2.css?v=V2_20260628b">
+    <link rel="stylesheet" href="/assets/css/oc-puertas.css?v=20261125a">
 
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -254,44 +255,9 @@
             </div>
 
             <div class="servicios-v2-layout">
-                <!-- ROW 1: Consultoría featured (2/3) + Impulso 3D (1/3) -->
-                <div class="servicio-featured">
-                    <div class="servicio-featured-inner">
-                        <div class="paper-texture" style="position:absolute;inset:0;"></div>
-                        <span class="servicio-featured-label">Consultoría Estratégica</span>
-                        <h3>Diseñamos tu hoja de ruta sostenible</h3>
-                        <p>
-                            Analizamos tu proyecto y diseñamos una estrategia circular y rentable, paso a paso.
-                        </p>
-                        <div class="servicio-featured-ctas">
-                            <a href="/servicios/diagnostico-3d" class="btn-servicio-primary">Agendar Diagnóstico &rarr;</a>
-                            <span class="servicio-featured-note serif-italic">Cupos limitados por trimestre</span>
-                        </div>
-                    </div>
-                    <div class="servicio-featured-img">
-                        <img src="<%= oficio.card_image %>"
-                             alt="Artesano de <%= oficio.sector_lower %> en su taller"
-                             loading="lazy">
-                        <div class="servicio-featured-quote glass-card">
-                            <p class="quote-text">
-                                "El puente entre el saber ancestral y las necesidades del presente."
-                            </p>
-                            <p class="quote-author">— Jose, Fundador</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="servicio-impulso">
-                    <div class="paper-texture" style="position:absolute;inset:0;"></div>
-                    <div class="servicio-card-icon servicio-impulso-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v16h16"/><path d="m5 19 6-6"/><path d="m2 6 3-3 3 3"/><path d="m18 16 3 3-3 3"/></svg>
-                    </div>
-                    <h4>Impulso 3D</h4>
-                    <p class="servicio-impulso-tagline">Menos tiempo en difusión. Más tiempo en tu oficio.</p>
-                    <p>
-                        Un sistema de comunicación a tu medida. Te acompañamos hasta que funcione solo.
-                    </p>
-                    <a href="/impulso-3d" class="btn-servicio-impulso">Descubrir Impulso 3D &rarr;</a>
+                <!-- Dos puertas: talleres / empresas (precios en data/precios.json) -->
+                <div style="grid-column:1/-1;margin-bottom:24px">
+                    <%- include('partials/puertas') %>
                 </div>
 
                 <!-- ROW 2: Comunidad (full width, compact) -->
@@ -318,7 +284,7 @@
     <section class="ejemplo-diagnostico">
       <div class="ejemplo-diagnostico__inner">
         <div class="ejemplo-diagnostico__text">
-          <p class="ejemplo-diagnostico__eyebrow">Ejemplo real anonimizado</p>
+          <p class="ejemplo-diagnostico__eyebrow">Ejemplo compuesto y anonimizado</p>
           <h2>Cómo es un Diagnóstico 3D de <%= seo.nombreCorto %></h2>
           <p class="ejemplo-diagnostico__intro"><%= seo.ejemplo.intro %></p>
           <blockquote class="ejemplo-diagnostico__quote">
@@ -328,7 +294,7 @@
           <ul class="ejemplo-diagnostico__bullets">
             <% seo.ejemplo.bullets.forEach(function (b) { %><li><%= b %></li><% }) %>
           </ul>
-          <p class="ejemplo-diagnostico__nota">Mismo método y profundidad que el entregable real: identidad cambiada, cifras ilustrativas y sin precios.</p>
+          <p class="ejemplo-diagnostico__nota">Caso compuesto a partir de varios talleres, con el mismo método y profundidad que el entregable: identidad inventada, cifras ilustrativas y sin precios.</p>
           <div class="ejemplo-diagnostico__ctas">
             <% if (ejemploPdf) { %><a class="btn-ejemplo" href="<%= ejemploPdf %>" target="_blank" rel="noopener">Ver ejemplo completo (PDF)</a><% } %>
             <a class="link-ejemplo" href="/servicios/diagnostico-3d">Cómo funciona el Diagnóstico 3D &rarr;</a>
@@ -346,56 +312,8 @@
     </section>
     <% } %>
 
-    <!-- ═══════════════════════════════════
-         COMUNIDAD — Testimonial cards (IGUAL QUE HOME)
-         ═══════════════════════════════════ -->
-    <section class="comunidad-v2" id="comunidad">
-        <div class="container">
-            <div class="comunidad-v2-header">
-                <h2>Comunidad</h2>
-                <p class="comunidad-v2-sub">Historias de transformación real.</p>
-            </div>
-
-            <div class="comunidad-v2-grid comunidad-v2-grid--single">
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="/assets/images/Perfil artesana experimentada.png"
-                             alt="María, ceramista rural"
-                             loading="lazy">
-                    </div>
-                    <h4>María</h4>
-                    <span class="testimonio-role">Ceramista rural</span>
-                    <p class="testimonio-quote">"Me ayudaron a entender que lo que hacía intuitivamente tenía un valor enorme. Ahora sé comunicarlo y mis clientes lo valoran."</p>
-                </div>
-
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="/assets/images/artesano innovador.png"
-                             alt="Javier, carpintero innovador"
-                             loading="lazy">
-                    </div>
-                    <h4>Javier</h4>
-                    <span class="testimonio-role">Carpintero innovador</span>
-                    <p class="testimonio-quote">"Encontré la estrategia que me faltaba para unir mi pasión por la innovación con mi compromiso ambiental."</p>
-                </div>
-
-                <div class="testimonio-v2">
-                    <div class="testimonio-v2-img">
-                        <img src="/assets/images/perfil_diseñadora_consciente .png"
-                             alt="Lucía, diseñadora consciente"
-                             loading="lazy">
-                    </div>
-                    <h4>Lucía</h4>
-                    <span class="testimonio-role">Diseñadora consciente</span>
-                    <p class="testimonio-quote">"Ya no me siento sola en este camino. La comunidad me ha dado herramientas, contactos y la confianza para escalar sin perder mis valores."</p>
-                </div>
-            </div>
-
-            <p class="comunidad-v2-disclaimer">
-                <em>Testimonios inspirados en experiencias reales de proyectos en proceso.</em>
-            </p>
-        </div>
-    </section>
+    <%# Sin testimonios: los anteriores no eran de clientes reales (encargo nov 2026). %>
+    <div id="comunidad"></div>
 
     <%- include('partials/comunidad-recursos') %>
 
@@ -501,7 +419,7 @@
             window.scrollTo(0, 0);
 
             // ── Intersection Observer for scroll animations ──
-            const animatedEls = document.querySelectorAll('.card-v2, .testimonio-v2, .servicio-featured, .servicio-impulso, .servicio-comunidad');
+            const animatedEls = document.querySelectorAll('.card-v2, .servicio-comunidad');
             if ('IntersectionObserver' in window && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
                 animatedEls.forEach(function(el) {
                     el.classList.add('anim-hidden');

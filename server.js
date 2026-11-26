@@ -7,6 +7,17 @@ const posts = require('./lib/posts');
 const tokenValidator = require('./lib/tokenValidator');
 const directorio = require('./lib/directorio');
 const conectaLanaDir = require('./lib/conecta-lana-directorio');
+const cookieParser = require('cookie-parser');
+// --- Club: área de miembros (Supabase Auth + Stripe) ---
+const clubConfig = require('./lib/clubConfig');
+const { clubVisible, esRutaClub, filtrar: filtrarClub } = require('./lib/clubVisible');
+const clubMembers = require('./lib/clubMembers');
+const clubContent = require('./lib/clubContent');
+const clubAutodiagnostico = require('./lib/clubAutodiagnostico');
+const brevoWaitlist = require('./lib/brevoWaitlist');
+const { getStripe, STRIPE_WEBHOOK_SECRET, PRICE_TO_PLAN } = require('./lib/stripeClub');
+const { createServerSupabase } = require('./lib/supabase');
+const precios = require('./lib/precios');
 require('dotenv').config();
 
 const app = express();
@@ -135,9 +146,89 @@ if (!MAILCHIMP_API_KEY) {
 // Configurar EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+// Precios: única fuente (data/precios.json) disponible en todas las vistas EJS.
+app.locals.precios = precios;
+app.locals.clubVisible = clubVisible(); // CLUB_VISIBLE (lib/clubVisible.js)
+app.locals.testimoniosLib = require('./lib/testimonios'); // data/testimonios.json
+
+// --- Webhook de Stripe (Club) ---
+// DEBE registrarse ANTES de express.json(): la verificación de firma necesita
+// el body en crudo. Sincroniza club_members en Supabase. Fuente de verdad = Stripe.
+const handleStripeWebhook = async (req, res) => {
+  const stripe = getStripe();
+  if (!stripe || !STRIPE_WEBHOOK_SECRET) {
+    console.error('⚠️  Webhook Stripe recibido pero no configurado (STRIPE_SECRET_KEY/STRIPE_WEBHOOK_SECRET)');
+    return res.status(503).send('stripe not configured');
+  }
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], STRIPE_WEBHOOK_SECRET);
+  } catch (err) {
+    console.error('❌ Firma de webhook Stripe inválida:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+  try {
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+      const email = (session.customer_details && session.customer_details.email) || session.customer_email;
+      const customerId = typeof session.customer === 'string' ? session.customer : (session.customer && session.customer.id);
+      let plan = null;
+      try {
+        const items = await stripe.checkout.sessions.listLineItems(session.id, { limit: 1 });
+        const priceId = items.data[0] && items.data[0].price && items.data[0].price.id;
+        plan = PRICE_TO_PLAN[priceId] || null;
+      } catch (e) { console.error('listLineItems:', e.message); }
+      if (email) {
+        await clubMembers.upsertFromCheckout({ email, stripe_customer_id: customerId, plan, status: 'active' });
+        console.log(`✅ [club] alta/activación: ${email} (plan=${plan || '?'}, cust=${customerId || '?'})`);
+      } else {
+        console.error('⚠️  checkout.session.completed sin email');
+      }
+    } else if (event.type === 'customer.subscription.updated') {
+      const sub = event.data.object;
+      // active/trialing → active; past_due/unpaid → past_due (no cortar aún); el resto se ignora
+      let status = null;
+      if (sub.status === 'active' || sub.status === 'trialing') status = 'active';
+      else if (sub.status === 'past_due' || sub.status === 'unpaid') status = 'past_due';
+      if (status) {
+        const rows = await clubMembers.setStatusByCustomer(sub.customer, status);
+        if (!rows.length) await resolveAndSetStatus(stripe, sub.customer, status);
+        console.log(`✅ [club] status=${status} (sub.updated) cust=${sub.customer}`);
+      }
+    } else if (event.type === 'customer.subscription.deleted') {
+      const sub = event.data.object;
+      const rows = await clubMembers.setStatusByCustomer(sub.customer, 'canceled');
+      if (!rows.length) await resolveAndSetStatus(stripe, sub.customer, 'canceled');
+      console.log(`✅ [club] status=canceled (sub.deleted) cust=${sub.customer}`);
+    } else {
+      console.log(`ℹ️  [club] evento Stripe ignorado: ${event.type}`);
+    }
+    return res.json({ received: true });
+  } catch (e) {
+    console.error('❌ Error procesando webhook Stripe:', e.message);
+    return res.status(500).send('handler error');
+  }
+};
+// Fallback: si el customer no está en club_members (p.ej. fundador dado de alta a
+// mano sin stripe_customer_id), resolvemos su email vía Stripe y actualizamos por email.
+async function resolveAndSetStatus(stripe, customerId, status) {
+  try {
+    const customer = await stripe.customers.retrieve(customerId);
+    const email = customer && !customer.deleted && customer.email;
+    if (email) {
+      await clubMembers.setStatusByEmail(email, status, customerId);
+      console.log(`✅ [club] status=${status} resuelto por email ${email} (cust=${customerId})`);
+    } else {
+      console.error(`⚠️  [club] customer ${customerId} sin email; no se pudo sincronizar status`);
+    }
+  } catch (e) { console.error('resolveAndSetStatus:', e.message); }
+}
+app.post('/webhooks/stripe', express.raw({ type: 'application/json' }), handleStripeWebhook);
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Canonicalización: 301 de /ruta/ → /ruta SOLO en rutas EJS cuya URL canónica
 // es sin barra final. Se excluyen adrede los directorios estáticos (blog, casos,
@@ -150,6 +241,21 @@ app.use((req, res, next) => {
     const q = req.originalUrl.slice(req.path.length);
     return res.redirect(301, stripped + q);
   }
+  next();
+});
+
+// Con CLUB_VISIBLE distinto de true, el Club no existe para el visitante (cualquier método).
+// El webhook de Stripe no es una página y sigue funcionando.
+app.use((req, res, next) => {
+  if (!app.locals.clubVisible && esRutaClub(req.path)) {
+    return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  }
+  next();
+});
+
+// El Club y todas sus rutas siguen sin indexar hasta el lanzamiento (encargo nov 2026).
+app.use((req, res, next) => {
+  if (/^\/club(\/|$)/.test(req.path) || req.path === '/auth/callback') res.set('X-Robots-Tag', 'noindex, nofollow');
   next();
 });
 
@@ -210,7 +316,7 @@ app.get('/circular-express', (req, res) => {
 // Ruta específica para página de gracias de recursos (debe ir ANTES de /recursos/:slug)
 app.get('/recursos/gracias', (req, res) => {
   res.set('X-Robots-Tag', 'noindex, nofollow');
-  res.sendFile(path.join(__dirname, 'public', 'recursos', 'gracias', 'index.html'));
+  res.type('html').send(filtrarClub(fs.readFileSync(path.join(__dirname, 'public', 'recursos', 'gracias', 'index.html'), 'utf8'), app.locals.clubVisible));
 });
 
 // Ruta específica para modelos-sostenibles (coming soon)
@@ -220,6 +326,14 @@ app.get('/recursos/modelos-sostenibles', (req, res) => {
     description: 'Próximamente disponible: Guía completa de modelos de negocios sostenibles para artesanos y pequeñas marcas.',
     canonical: '/recursos/modelos-sostenibles'
   });
+});
+
+// Guía de joyería con plata recuperada (decisión de Jose, 22 nov 2026). Sustituye al
+// antiguo caso E-WEAR: no presenta a ningún cliente. Es un artículo estático del blog
+// (public/blog/joyeria-plata-recuperada/). La URL vieja /casos/e-wear (con o sin barra,
+// o subrutas) redirige con 301.
+app.get(/^\/casos\/e-wear(\/.*)?$/, (req, res) => {
+  redirectWithQuery('/blog/joyeria-plata-recuperada/', req, res);
 });
 
 // Coming Soon (página genérica para secciones no disponibles)
@@ -269,6 +383,247 @@ app.get('/viaje/lana', (req, res) => {
   res.render('viaje-lana');
 });
 
+// El Club de Oficios Circulares — landing de membresía (beta fundador)
+// noindex en la vista hasta lanzamiento (pendiente: permisos de testimonios).
+// CTA con Payment Links de Stripe reales; con plazas_abiertas=false pasan a lista de espera.
+app.get('/club', (req, res) => {
+  const cfg = clubConfig.getConfig();
+  res.render('club', { plazasAbiertas: cfg.plazas_abiertas, config: cfg, directosVisible: cfg.directos_visible });
+});
+
+// ============================================================
+//  ÁREA DE MIEMBROS DEL CLUB (Supabase Auth magic link + Stripe)
+// ============================================================
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+function baseUrl(req) {
+  const proto = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  return `${proto}://${req.get('host')}`;
+}
+// URL pública fija para los enlaces del magic link. Usar APP_URL evita depender
+// de cabeceras de proxy y garantiza que emailRedirectTo coincida EXACTAMENTE con
+// una de las Redirect URLs permitidas en Supabase (si no coincide, Supabase
+// ignora el redirect y manda al Site URL — ese era el bug). Fallback: la del request.
+function appUrl(req) {
+  return (process.env.APP_URL || baseUrl(req)).replace(/\/+$/, '');
+}
+
+// Middleware: sesión Supabase válida + email con acceso en club_members.
+async function requireMember(req, res, next) {
+  const supabase = createServerSupabase(req, res);
+  if (!supabase) return res.redirect('/club/entrar');
+  let user = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data && data.user;
+  } catch (e) { console.error('getUser:', e.message); }
+  if (!user || !user.email) return res.redirect('/club/entrar');
+  const member = await clubMembers.getMember(user.email);
+  if (!clubMembers.memberHasAccess(member)) return res.redirect('/club/entrar?error=inactivo');
+  req.clubUser = user;
+  req.clubMember = member;
+  next();
+}
+
+// Sirve una pieza de contenido (HTML autocontenido) con una barra mínima del área
+// inyectada. Cacheada en memoria; nunca cacheable por proxies ni indexable.
+const _clubPieceCache = new Map();
+function injectClubBar(html) {
+  const bar = '<div style="position:sticky;top:0;z-index:2147483000;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:#023429;color:#FBF7EF;font-family:\'Manrope\',system-ui,-apple-system,sans-serif;font-size:14px;box-shadow:0 2px 12px rgba(0,0,0,.25)">'
+    + '<a href="/club/dentro" style="display:inline-flex;align-items:center;gap:8px;color:#FBF7EF;text-decoration:none;font-weight:600"><img src="/assets/images/brand/oc-logo-2026-cuadrado-168.webp" alt="Oficios Circulares" style="width:24px;height:24px;display:inline-block"> El Club</a>'
+    + '<a href="/club/salir" style="color:#E8D5B7;text-decoration:none;font-weight:700">Salir</a></div>';
+  if (/<body[^>]*>/i.test(html)) return html.replace(/(<body[^>]*>)/i, '$1\n' + bar + '\n');
+  return bar + html;
+}
+const { diagnosticosBlock, injectAfterOficiosGrid } = require('./lib/clubLecciones');
+function serveClubPiece(res, piece, member) {
+  let html = _clubPieceCache.get(piece.slug);
+  if (!html) {
+    html = injectClubBar(fs.readFileSync(clubContent.filePath(piece), 'utf8'));
+    _clubPieceCache.set(piece.slug, html);
+  }
+  if (piece.group === 'lecciones') html = injectAfterOficiosGrid(html, diagnosticosBlock(member));
+  res.set('Cache-Control', 'private, no-store');
+  res.set('X-Robots-Tag', 'noindex, nofollow');
+  res.type('html').send(html);
+}
+
+// GET /club/bienvenida — post-pago. Es la URL de retorno de los payment links de
+// Stripe: el comprador llega SIN sesión, así que es pública (sin requireMember).
+app.get('/club/bienvenida', (req, res) => {
+  const cfg = clubConfig.getConfig();
+  res.render('club-bienvenida', { billingPortal: cfg.stripe_billing_portal });
+});
+
+// GET /club/entrar — login (campo email + magic link)
+app.get('/club/entrar', (req, res) => {
+  const cfg = clubConfig.getConfig();
+  res.render('club-entrar', {
+    sent: req.query.sent === '1',
+    loggedOut: req.query.sent === 'out',
+    error: typeof req.query.error === 'string' ? req.query.error : null,
+    billingPortal: cfg.stripe_billing_portal
+  });
+});
+
+// POST /club/entrar — si es miembro activo, envía magic link. Mensaje neutro siempre.
+app.post('/club/entrar', rateLimitMiddleware, async (req, res) => {
+  const email = String(req.body.email || '').toLowerCase().trim();
+  if (!EMAIL_RE.test(email)) return res.redirect('/club/entrar?error=email');
+  try {
+    if (await clubMembers.isActive(email)) {
+      const supabase = createServerSupabase(req, res);
+      if (supabase) {
+        const emailRedirectTo = `${appUrl(req)}/auth/callback`;
+        const { error } = await supabase.auth.signInWithOtp({
+          email, options: { emailRedirectTo, shouldCreateUser: true }
+        });
+        if (error) console.error('signInWithOtp:', error.message);
+      }
+    }
+  } catch (e) { console.error('POST /club/entrar:', e.message); }
+  return res.redirect('/club/entrar?sent=1'); // neutro: no revelar quién es miembro
+});
+
+// GET /auth/callback — cierra el magic link creando la sesión (cookies httpOnly).
+// Soporta las dos formas de enlace de Supabase:
+//   - PKCE: ?code=...            -> exchangeCodeForSession (mismo navegador)
+//   - token_hash: ?token_hash=...&type=email -> verifyOtp (sirve cross-device)
+app.get('/auth/callback', async (req, res) => {
+  const next = (typeof req.query.next === 'string' && req.query.next.startsWith('/')) ? req.query.next : '/club/dentro';
+  const code = typeof req.query.code === 'string' ? req.query.code : null;
+  const tokenHash = typeof req.query.token_hash === 'string' ? req.query.token_hash : null;
+  const type = typeof req.query.type === 'string' ? req.query.type : 'email';
+  const supabase = createServerSupabase(req, res);
+  if (!supabase || (!code && !tokenHash)) return res.redirect('/club/entrar?error=link');
+  try {
+    const { error } = code
+      ? await supabase.auth.exchangeCodeForSession(code)
+      : await supabase.auth.verifyOtp({ type, token_hash: tokenHash });
+    if (error) { console.error('auth/callback:', error.message); return res.redirect('/club/entrar?error=link'); }
+  } catch (e) { console.error('auth/callback:', e.message); return res.redirect('/club/entrar?error=link'); }
+  return res.redirect(next);
+});
+
+// GET /club/salir — cierra sesión
+app.get('/club/salir', async (req, res) => {
+  const supabase = createServerSupabase(req, res);
+  if (supabase) { try { await supabase.auth.signOut(); } catch (e) { /* noop */ } }
+  return res.redirect('/club/entrar?sent=out');
+});
+
+// GET /club/dentro — el hogar del miembro (protegida)
+app.get('/club/dentro', requireMember, async (req, res) => {
+  // Primer acceso: si aún no ha hecho el autodiagnóstico, pasa antes por él.
+  // Solo si la columna existe (migración aplicada); si no, se entra sin más.
+  if (req.clubMember && 'autodiagnostico_at' in req.clubMember && !req.clubMember.autodiagnostico_at) {
+    return res.redirect('/club/dentro/empezar');
+  }
+  const cfg = clubConfig.getConfig();
+  const votacion = clubContent.votacion();
+  const miVoto = votacion.ronda ? await clubMembers.getVoto(req.clubMember.id, votacion.ronda) : null;
+  res.render('club-dentro', {
+    email: req.clubUser.email,
+    member: req.clubMember,
+    config: cfg,
+    pieces: clubContent.PIECES,
+    mapaLecciones: clubContent.MAPA_LECCIONES,
+    getPiece: clubContent.get,
+    votacion,
+    miVoto,
+    votoMsg: typeof req.query.voto === 'string' ? req.query.voto : null,
+    billingPortal: cfg.stripe_billing_portal
+  });
+});
+
+// GET/POST /club/dentro/empezar — autodiagnóstico del alta (lib/clubAutodiagnostico.js).
+// Se puede rehacer: si ya hay respuestas, el formulario sale relleno.
+function renderEmpezar(res, req, respuestas, errores, errorGuardado) {
+  res.set('Cache-Control', 'private, no-store');
+  res.render('club-empezar', {
+    email: req.clubUser.email,
+    preguntas: clubAutodiagnostico.PREGUNTAS,
+    respuestas: respuestas || (req.clubMember && req.clubMember.autodiagnostico_respuestas) || {},
+    errores: errores || [],
+    errorGuardado: Boolean(errorGuardado),
+    rehacer: Boolean(req.clubMember && req.clubMember.autodiagnostico_at)
+  });
+}
+app.get('/club/dentro/empezar', requireMember, (req, res) => renderEmpezar(res, req));
+app.post('/club/dentro/empezar', requireMember, async (req, res) => {
+  const { respuestas, errores } = clubAutodiagnostico.validar(req.body);
+  if (errores.length) return renderEmpezar(res.status(400), req, respuestas, errores);
+  const r = clubAutodiagnostico.calcular(respuestas);
+  try {
+    await clubMembers.saveAutodiagnostico(req.clubUser.email, {
+      nivel: r.nivel, itinerario: r.itinerario, prioridades: r.prioridades, oficio: r.oficio,
+      respuestas: { ...respuestas, puntos: r.puntos, version: 1 }
+    });
+  } catch (e) {
+    console.error('❌ autodiagnóstico:', e.message);
+    return renderEmpezar(res.status(500), req, respuestas, [], true);
+  }
+  return res.redirect('/club/dentro#punto-de-partida');
+});
+
+// POST /club/dentro/votar — un voto por miembro y ronda (lo garantiza la base de datos)
+app.post('/club/dentro/votar', requireMember, async (req, res) => {
+  const votacion = clubContent.votacion();
+  const tema = String(req.body.tema || '');
+  if (!votacion.abierta || !votacion.ronda || !votacion.temas.some(t => t.clave === tema)) {
+    return res.redirect('/club/dentro?voto=error#votacion');
+  }
+  const r = await clubMembers.votar(req.clubMember.id, votacion.ronda, tema);
+  return res.redirect('/club/dentro?voto=' + (r === 'ok' ? 'ok' : r === 'ya-votado' ? 'ya' : 'error') + '#votacion');
+});
+
+// GET /club/dentro/diagnosticos/:clave — diagnóstico de ejemplo por oficio (PDF, solo miembros)
+app.get('/club/dentro/diagnosticos/:clave', requireMember, (req, res) => {
+  const d = clubContent.diagnostico(req.params.clave);
+  if (!d) return res.redirect('/club/dentro');
+  res.set('Cache-Control', 'private, no-store');
+  res.type('application/pdf');
+  res.sendFile(d.file);
+});
+
+// GET /club/dentro/directos — «Directos con artesanos». Oculta (redirige al hogar)
+// mientras directos_visible / DIRECTOS_VISIBLE sea false.
+app.get('/club/dentro/directos', requireMember, (req, res) => {
+  const cfg = clubConfig.getConfig();
+  if (!cfg.directos_visible) return res.redirect('/club/dentro');
+  res.render('club-directos', { email: req.clubUser.email, directos: clubContent.directos() });
+});
+
+// GET /club/dentro/lecciones/:slug — sirve cada pieza (protegida)
+app.get('/club/dentro/lecciones/:slug', requireMember, (req, res) => {
+  const piece = clubContent.get(req.params.slug);
+  if (!piece || !clubContent.exists(piece)) return res.redirect('/club/dentro');
+  try { serveClubPiece(res, piece, req.clubMember); }
+  catch (e) { console.error('serveClubPiece:', e.message); res.redirect('/club/dentro'); }
+});
+
+// GET /club/lista-espera — pública, sin indexar (como todo /club)
+app.get('/club/lista-espera', (req, res) => {
+  res.render('club-lista-espera', {
+    done: req.query.ok === '1',
+    error: typeof req.query.error === 'string' ? req.query.error : null
+  });
+});
+
+// POST /club/lista-espera — añade a la lista de Brevo propia del Club
+app.post('/club/lista-espera', rateLimitMiddleware, async (req, res) => {
+  const email = String(req.body.email || '').toLowerCase().trim();
+  if (!EMAIL_RE.test(email)) return res.redirect('/club/lista-espera?error=email');
+  // Solo se confirma si Brevo ha guardado el contacto; si no, error visible y en el registro.
+  try {
+    const r = await brevoWaitlist.addToWaitlist(email);
+    if (!r || !r.ok) throw new Error('Brevo no configurado (BREVO_API_KEY / BREVO_WAITLIST_LIST_ID)');
+  } catch (e) {
+    console.error('❌ [club] lista de espera: alta NO guardada:', e.message);
+    return res.status(503).render('club-lista-espera', { done: false, error: 'guardar', email });
+  }
+  return res.redirect('/club/lista-espera?ok=1');
+});
+
 // Directorio público de Conecta Lana (sin token: es captación)
 app.get('/conecta-lana/directorio', async (req, res) => {
   let grouped = { tengo: [], transformo: [], busco: [] };
@@ -285,17 +640,35 @@ app.get('/diagnostico-3d', (req, res) => res.redirect(301, '/servicios/diagnosti
 app.get('/roadmap-3d', (req, res) => res.redirect(301, '/servicios/roadmap-3d'));
 app.get('/sprint-3d', (req, res) => res.redirect(301, '/servicios/sprint-3d'));
 
-// Rutas de servicios
+// /impacto — cifras públicas de la red (data/impacto.json, se revisan cada trimestre). Indexable.
+app.get(['/impacto', '/impacto/'], (req, res) => {
+  let impacto;
+  try { impacto = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'impacto.json'), 'utf8')); }
+  catch (e) { console.error('impacto.json:', e.message); return res.status(500).send('Error'); }
+  res.render('impacto', { impacto });
+});
+
+// Rutas de servicios — dos puertas: talleres / empresas (precios en data/precios.json)
+// Las páginas de servicios enseñan cifras de la red con su fecha (data/impacto.json).
+function leerImpacto() {
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'impacto.json'), 'utf8')); }
+  catch (e) { console.error('impacto.json:', e.message); return null; }
+}
+app.get(['/servicios', '/servicios/'], (req, res) => res.render('servicios', { puerta: 'index', impacto: leerImpacto() }));
+app.get('/servicios/talleres', (req, res) => res.render('servicios', { puerta: 'talleres', impacto: leerImpacto() }));
+app.get('/servicios/empresas', (req, res) => res.render('servicios', { puerta: 'empresas', impacto: leerImpacto() }));
+
 app.get('/servicios/diagnostico-3d', (req, res) => {
-  res.render('diagnostico-3d');
+  // Diagnóstico 3D para talleres. CLUB_ABIERTO activa el bloque de entrada al Club.
+  res.render('diagnostico-3d', { clubAbierto: clubConfig.getConfig().club_abierto });
 });
 
 app.get('/servicios/roadmap-3d', (req, res) => {
-  res.render('roadmap-3d');
+  res.render('roadmap-3d', { impacto: leerImpacto() });
 });
 
 app.get('/servicios/sprint-3d', (req, res) => {
-  res.render('sprint-3d');
+  res.render('sprint-3d', { impacto: leerImpacto() });
 });
 
 // Página de contacto con formulario Tally
@@ -718,6 +1091,11 @@ app.get('/sitemap.xml', (req, res) => {
       const re = new RegExp('\\s*<url>(?:(?!</url>)[\\s\\S])*?/recursos/' + slug + '</loc>[\\s\\S]*?</url>', 'g');
       xml = xml.replace(re, '');
     });
+    // Nada del Club mientras esté oculto, tampoco dentro de comentarios.
+    if (!app.locals.clubVisible) {
+      xml = xml.replace(/\s*<!--(?:(?!-->)[\s\S])*\/club<\/loc>[\s\S]*?-->/g, '')
+        .replace(/\s*<url>(?:(?!<\/url>)[\s\S])*?\/club(?:\/[^<]*)?<\/loc>[\s\S]*?<\/url>/g, '');
+    }
     res.type('application/xml').send(xml);
   } catch (e) {
     console.error('❌ Error sirviendo sitemap:', e.message);
@@ -729,6 +1107,30 @@ app.get('/sitemap.xml', (req, res) => {
 app.use('/downloads', (req, res, next) => {
   res.set('X-Robots-Tag', 'noindex');
   next();
+});
+
+// Páginas estáticas con marcas de precio ({{precio:clave}}) o del Club: se sirven con los
+// precios de data/precios.json sustituidos, para que no haya cifras duplicadas.
+const _staticPriceCache = new Map();
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  let rel = decodeURIComponent(req.path);
+  if (rel.includes('..')) return next();
+  if (rel.endsWith('/')) rel += 'index.html';
+  if (!rel.endsWith('.html')) return next();
+  const file = path.join(__dirname, 'public', rel);
+  let html = _staticPriceCache.get(file);
+  if (html === undefined) {
+    try {
+      const raw = fs.readFileSync(file, 'utf8');
+      const conPrecios = raw.includes('{{precio') || raw.includes('{{plazas-fundador') ? precios.renderTokens(raw) : raw;
+      const servido = filtrarClub(conPrecios, app.locals.clubVisible); // marcas <!--club--> del menú
+      html = servido === raw ? null : servido;
+    } catch (e) { html = null; }
+    _staticPriceCache.set(file, html);
+  }
+  if (html === null) return next();
+  res.type('html').send(html);
 });
 
 app.use(express.static('public'));

@@ -1,0 +1,81 @@
+{
+  "_nota": "Cifras de /impacto. Se revisan cada trimestre (enero, abril, julio y octubre): cambia aquí valores y fechas, la plantilla no se toca. 'fecha' en ISO (AAAA-MM-DD). Para objetivos, 'actual' null = sin barra de progreso.",
+  "actualizado": "2026-11-12",
+  "indicadores": [
+    {
+      "id": "altas_conecta_lana",
+      "indicador": "Altas en Conecta Lana",
+      "valor": 177,
+      "detalle": "124 buscan lana, 40 la ofrecen y 13 la transforman",
+      "mide": "Personas, ganaderías, talleres y empresas que se han registrado en Conecta Lana, la bolsa de la lana española.",
+      "fecha": "2026-11-12"
+    },
+    {
+      "id": "lana_registrada",
+      "indicador": "Lana registrada en la red",
+      "valor": 103753,
+      "unidad": "kg",
+      "detalle": "de 36 ganaderos",
+      "mide": "Kilos de lana que los ganaderos registrados declaran tener disponibles para darles salida.",
+      "fecha": "2026-10-29"
+    },
+    {
+      "id": "emparejamientos",
+      "indicador": "Emparejamientos cerrados con material entregado",
+      "valor": 10,
+      "detalle": "de 57 gestionados",
+      "mide": "Contactos entre quien tiene lana y quien la necesita que han terminado con la lana entregada.",
+      "fecha": "2026-10-29"
+    },
+    {
+      "id": "material_con_salida",
+      "indicador": "Material con salida real",
+      "valor": 611,
+      "unidad": "kg",
+      "detalle": "con peso anotado, más 6 entregas sin pesar",
+      "mide": "Kilos que han cambiado de manos gracias a la red. Solo cuentan las entregas con peso anotado.",
+      "fecha": "2026-10-29"
+    },
+    {
+      "id": "talleres_acompanados",
+      "indicador": "Talleres y marcas acompañados",
+      "valor": 5,
+      "detalle": "",
+      "mide": "Talleres y marcas artesanas a los que Oficios Circulares ha acompañado con uno de sus servicios.",
+      "fecha": "2026-10-29"
+    },
+    {
+      "id": "comunidad",
+      "indicador": "Personas en la comunidad",
+      "valor": 1070,
+      "detalle": "",
+      "mide": "Personas que forman parte de la comunidad de Oficios Circulares. [PENDIENTE JOSE: confirmar qué se cuenta: lista de correo, grupos u otros]",
+      "fecha": "2026-10-29"
+    },
+    {
+      "id": "guias",
+      "indicador": "Guías descargadas",
+      "valor": 1318,
+      "detalle": "descargas de 16 guías",
+      "mide": "Descargas de las guías gratuitas de la web.",
+      "fecha": "2026-10-29"
+    },
+    {
+      "id": "instagram",
+      "indicador": "Seguidores en Instagram",
+      "valor": 20000,
+      "detalle": "",
+      "mide": "Seguidores de la cuenta de Oficios Circulares en Instagram.",
+      "fecha": "2026-10-29"
+    }
+  ],
+  "objetivos": {
+    "fecha_limite": "octubre de 2027",
+    "lista": [
+      { "texto": "Lana registrada", "objetivo": 250000, "unidad": "kg", "actual_de": "lana_registrada" },
+      { "texto": "Emparejamientos cerrados", "objetivo": 50, "actual_de": "emparejamientos" },
+      { "texto": "Material con salida real", "objetivo": 15000, "unidad": "kg", "actual_de": "material_con_salida" },
+      { "texto": "Materiales con red activa", "objetivo": 3, "actual_de": null }
+    ]
+  }
+}

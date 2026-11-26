@@ -1,0 +1,31 @@
+/* OC · Portada y oficios: las dos puertas (partials/puertas.ejs) y la rejilla de Comunidad.
+   El resto del sistema vive en oc-landing.css (docs/sistema-landing.md). */
+
+/* Dos puertas con tarjetas fr-card: rejilla de dos columnas */
+.cards-v2-grid.oc-puertas-grid{grid-template-columns:repeat(2,1fr);max-width:980px;gap:24px}
+@media (max-width:760px){.cards-v2-grid.oc-puertas-grid{grid-template-columns:1fr;max-width:480px}}
+.fr-quien{display:block;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;opacity:.85}
+.fr-card--lana .fr-quien{color:#f6c98a}
+.fr-card--dir .fr-quien{color:#f4d4ad}
+.fr-lista{list-style:none;margin:4px 0 26px;padding:0}
+.fr-lista li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid rgba(255,255,255,.2);font-size:.95rem;color:rgba(253,246,236,.92)}
+.fr-lista li:last-child{border-bottom:1px solid rgba(255,255,255,.2)}
+.fr-lista b{font-weight:700;text-align:right;color:#fdf6ec}
+
+/* Portada · Comunidad con data/testimonios.json (lib/testimonios.js, rejilla()): tres columnas.
+   Sin foto: nombre, proyecto y cita. Con foto: misma anchura y dos filas de alto, para que sus
+   vecinas no queden con hueco. «Ver más» parte siempre por fila completa. */
+.comunidad-v2-grid.oc-comunidad-grid{grid-template-columns:repeat(3,1fr);max-width:1100px}
+@media (max-width:980px){.comunidad-v2-grid.oc-comunidad-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.comunidad-v2-grid.oc-comunidad-grid{grid-template-columns:1fr;max-width:420px}}
+.oc-comunidad-grid .testimonio-v2{display:flex;flex-direction:column}
+.oc-comunidad-grid .testimonio-v2-img{aspect-ratio:4/3}
+@media (min-width:601px){.oc-comunidad-grid .oc-comunidad-con-foto{grid-row:span 2}}
+/* La última tarjeta ocupa las columnas que falten para cerrar la fila */
+@media (min-width:981px){.oc-comunidad-grid .oc-cierra3-2{grid-column:span 2}.oc-comunidad-grid .oc-cierra3-3{grid-column:span 3}}
+@media (min-width:601px) and (max-width:980px){.oc-comunidad-grid .oc-cierra2-2{grid-column:span 2}}
+.oc-comunidad-grid .testimonio-role a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.oc-comunidad-plegada .oc-comunidad-mas{display:none}
+.oc-comunidad-ver{text-align:center;margin-top:28px}
+.oc-comunidad-ver .btn-ghost{display:inline-flex;align-items:center;padding:12px 26px;border-radius:999px;border:2px solid #023429;background:transparent;color:#023429;font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit}
+.oc-comunidad-ver .btn-ghost:hover{background:#023429;color:#FBF7EF}

@@ -25,7 +25,7 @@
     /* Enhanced Blog Styles */
     .blog-hero {
       background: linear-gradient(135deg, #1F4B3F 0%, #2D5F4F 100%);
-      padding: 80px 0 100px;
+      padding: 105px 0 100px;
       color: white;
       text-align: center;
       display: flex;
@@ -322,7 +322,7 @@
       }
       
       .blog-hero {
-        padding: 60px 0 80px;
+        padding: 105px 0 80px;
       }
       
       .blog-filters {
@@ -376,7 +376,12 @@
             </a>
             <div class="nav-menu" id="nav-menu">
                 <div class="servicios-dropdown">
-                    <button class="nav-link dropdown-toggle" id="servicios-dropdown-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="servicios-dropdown-menu">
+                    <button
+                        class="nav-link dropdown-toggle"
+                        id="servicios-dropdown-btn"
+                        aria-haspopup="menu"
+                        aria-expanded="false"
+                        aria-controls="servicios-dropdown-menu">
                         Servicios
                         <svg class="dropdown-icon" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -384,22 +389,54 @@
                     </button>
                     <div class="dropdown-menu" id="servicios-dropdown-menu" role="menu" aria-labelledby="servicios-dropdown-btn">
                         <div class="dropdown-section">
-                            <span class="dropdown-section-title">¿Necesitas un sistema de comunicación?</span>
-                            <a href="/impulso-3d" class="dropdown-item" role="menuitem"><span class="item-title">Impulso 3D</span><span class="item-subtitle">Comunica sin perder horas de taller</span></a>
+                            <span class="dropdown-section-title">Soy un taller o una marca artesana</span>
+                            <!--club-->
+                            <a href="/club" class="dropdown-item" role="menuitem" data-service="club" aria-label="Ir al Club de Oficios Circulares">
+                                <span class="item-title">El Club</span>
+                                <span class="item-subtitle">Comunidad y m&eacute;todo</span>
+                            </a>
+                            <!--/club-->
+                            <a href="/servicios/diagnostico-3d" class="dropdown-item" role="menuitem" data-service="diagnostico-3d" aria-label="Ir al Diagnóstico 3D para talleres">
+                                <span class="item-title">Diagnóstico 3D</span>
+                                <span class="item-subtitle">Por dónde empezar</span>
+                            </a>
+                            <a href="/impulso-3d" class="dropdown-item" role="menuitem" data-service="impulso-3d" aria-label="Ir a Impulso 3D">
+                                <span class="item-title">Impulso 3D</span>
+                                <span class="item-subtitle">Tu sistema de comunicación</span>
+                            </a>
                         </div>
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-section">
-                            <span class="dropdown-section-title">¿Necesitas claridad estratégica?</span>
-                            <a href="/servicios/diagnostico-3d" class="dropdown-item" role="menuitem"><span class="item-title">Diagnóstico 3D</span><span class="item-subtitle">Análisis + oportunidades</span></a>
-                            <a href="/servicios/roadmap-3d" class="dropdown-item" role="menuitem"><span class="item-title">Roadmap 3D</span><span class="item-subtitle">Plan 90 días</span></a>
-                            <a href="/servicios/sprint-3d" class="dropdown-item" role="menuitem"><span class="item-title">Sprint 3D</span><span class="item-subtitle">Implementación intensiva</span></a>
+                            <span class="dropdown-section-title">Soy una empresa</span>
+                            <a href="/servicios/empresas" class="dropdown-item" role="menuitem" data-service="diagnostico-3d-empresas" aria-label="Ir al Diagnóstico 3D para empresas">
+                                <span class="item-title">Diagnóstico 3D para empresas</span>
+                                <span class="item-subtitle">Detectar oportunidades</span>
+                            </a>
+                            <a href="/servicios/roadmap-3d" class="dropdown-item" role="menuitem" data-service="roadmap-3d" aria-label="Ir a Roadmap 3D">
+                                <span class="item-title">Roadmap 3D</span>
+                                <span class="item-subtitle">Plan de 90 días</span>
+                            </a>
+                            <a href="/servicios/sprint-3d" class="dropdown-item" role="menuitem" data-service="sprint-3d" aria-label="Ir a Sprint 3D">
+                                <span class="item-title">Sprint 3D</span>
+                                <span class="item-subtitle">Puesta en marcha</span>
+                            </a>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-section">
+                            <a href="/servicios" class="dropdown-item" role="menuitem" aria-label="Ver todos los servicios">
+                                <span class="item-title">Ver las dos puertas</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <a href="/#comunidad" class="nav-link">Comunidad</a>
+                <a href="/impacto" class="nav-link">Impacto</a>
+                <!--club-->
+                <a href="/club" class="nav-link">El Club</a>
+                <!--/club-->
                 <a href="/blog/" class="nav-link">Blog</a>
                 <a href="/recursos" class="nav-link">Recursos</a>
-                <a href="/conecta-lana?oc_source=home&amp;oc_medium=nav&amp;oc_campaign=conecta-lana" class="nav-link">Conecta Lana</a>
+                <a href="/conecta-lana?oc_source=home&oc_medium=nav&oc_campaign=conecta-lana" class="nav-link">Conecta Lana</a>
+
                 <a href="/#forma-parte-red" class="nav-link cta-nav">Únete a la Red</a>
             </div>
             <div class="hamburger" id="hamburger">
@@ -409,6 +446,8 @@
             </div>
         </div>
     </nav>
+    <!-- Menú común (desplegable «Servicios» y menú móvil); síncrono para que los scripts de la página no lo dupliquen -->
+    <script src="/assets/js/nav.js?v=20261124a"></script>
   
   <!-- Back to top button -->
   <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
@@ -444,6 +483,17 @@
     </div>
     
     <div id="posts" class="posts-grid">
+        <a href="/blog/joyeria-plata-recuperada/" class="post-card-link" style="text-decoration: none; color: inherit;">
+          <article class="post-card">
+            <img src="../assets/images/blog/joyeria-plata-recuperada/hero-taller-joyeria.webp?v=1" alt="Cómo lanzar una colección de joyería con plata recuperada, paso a paso" class="post-card-image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/images/cases/e-wear/placeholder-16x9.jpg?v=1'" />
+            <div class="post-card-content">
+              <h2 class="post-card-title">Cómo lanzar una colección de joyería con plata recuperada, paso a paso</h2>
+              <div class="post-card-meta">22 de noviembre de 2026 · 5 min de lectura</div>
+              <p class="post-card-excerpt">Guía paso a paso para lanzar una colección de joyería con plata recuperada: cómo conseguir el material, demostrar su origen y contarlo sin exagerar.</p>
+              <div class="post-card-tags"><span class="post-tag">guía práctica</span><span class="post-tag">materiales</span><span class="post-tag">circularidad</span></div>
+            </div>
+          </article>
+        </a>
         <a href="/blog/trabajar-por-encargo-artesania/" class="post-card-link" style="text-decoration: none; color: inherit;">
           <article class="post-card">
             <img src="../assets/images/blog/trabajar-por-encargo-artesania/encargo-kraft-1440.jpg?v=1" alt="Trabajar por encargo: el argumento que tu taller no cuenta" class="post-card-image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/images/cases/e-wear/placeholder-16x9.jpg?v=1'" />
@@ -620,17 +670,6 @@
             </div>
           </article>
         </a>
-        <a href="/casos/e-wear/" class="post-card-link" style="text-decoration: none; color: inherit;">
-          <article class="post-card">
-            <img src="../assets/images/cases/e-wear/hero-packaging-movil-concha.webp?v=1" alt="E-WEAR: De residuo electrónico a joya con historia" class="post-card-image" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../assets/images/cases/e-wear/placeholder-16x9.jpg?v=1'" />
-            <div class="post-card-content">
-              <h2 class="post-card-title">E-WEAR: De residuo electrónico a joya con historia</h2>
-              <div class="post-card-meta">8 de agosto de 2025 · 8 min de lectura</div>
-              <p class="post-card-excerpt">Cómo Laura transformó su taller de joyería tradicional en un modelo circular que recupera plata de residuos electrónicos. Un caso real de economía circular artesanal.</p>
-              <div class="post-card-tags"><span class="post-tag">casos</span><span class="post-tag">estrategia</span><span class="post-tag">circularidad</span></div>
-            </div>
-          </article>
-        </a>
     </div>
   </main>
 
@@ -641,19 +680,19 @@
     }, true);
     
     // Smooth animations on scroll
-    const observerOptions = {
+    const opcionesAparicion = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
     };
     
-    const observer = new IntersectionObserver((entries) => {
+    const observadorAparicion = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
         }
       });
-    }, observerOptions);
+    }, opcionesAparicion);
     
     document.addEventListener('DOMContentLoaded', () => {
       // Enhanced navbar behavior
@@ -679,7 +718,7 @@
       const hamburger = document.querySelector('.hamburger');
       const navMenu = document.querySelector('.nav-menu');
       
-      if (hamburger && navMenu) {
+      if (hamburger && navMenu && !window.__ocNav) {
         hamburger.addEventListener('click', () => {
           hamburger.classList.toggle('active');
           navMenu.classList.toggle('active');
@@ -689,7 +728,7 @@
       // Servicios dropdown
       const dropdownBtn = document.getElementById('servicios-dropdown-btn');
       const dropdownMenu = document.getElementById('servicios-dropdown-menu');
-      if (dropdownBtn && dropdownMenu) {
+      if (dropdownBtn && dropdownMenu && !window.__ocNav) {
         dropdownBtn.addEventListener('click', function(e) {
           e.preventDefault();
           const isOpen = dropdownBtn.getAttribute('aria-expanded') === 'false';
@@ -710,13 +749,13 @@
           card.style.opacity = '0';
           card.style.transform = 'translateY(30px)';
           card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-          observer.observe(card);
+          observadorAparicion.observe(card);
         });
       }, 100);
     });
   </script>
       <script src="/assets/js/script.js"></script>
-      <script src="/assets/js/blog.js?v=encargo-2026b"></script>
+      <script src="/assets/js/blog.js?v=joyeria-2026b"></script>
 </body>
 </html>
 

@@ -1548,14 +1548,28 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(250, 249, 247, 0.98);
-        backdrop-filter: blur(10px);
+        background: #FAF9F7;
         box-shadow: 0 8px 32px rgba(31, 75, 63, 0.15);
         border-radius: 0 0 20px 20px;
         padding: 20px 0;
-        animation: slideDown 0.3s ease-out;
+        flex-wrap: nowrap;
+        max-height: calc(100vh - 81px);
+        max-height: calc(100dvh - 81px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
     }
     
+    /* Con el menú abierto, la cabecera tampoco deja ver la página */
+    .navbar:has(.nav-menu.active) {
+        background: #FAF9F7;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .nav-menu.active > * {
+        flex-shrink: 0;
+    }
+
     .nav-menu.active .nav-link {
         padding: 12px 24px;
         margin: 0;
@@ -1811,6 +1825,36 @@ ul + .storybeat, ol + .storybeat { margin-top: 22px; }
 
     .footer-oficios-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Pie entre 481 y 1024 px: las cuatro columnas no caben al lado de la marca. La marca pasa
+   arriba; debajo, cuatro columnas si hay sitio, dos en tableta y Oficios a todo el ancho en lo más estrecho. */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+    }
+
+    .footer-brand {
+        max-width: 560px;
+    }
+
+    .footer-links {
+        grid-template-columns: auto auto auto auto;
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 860px) {
+    .footer-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 481px) and (max-width: 640px) {
+    .footer-column--oficios {
+        grid-column: 1 / -1;
     }
 }
 
@@ -4728,8 +4772,9 @@ iframe[src*="tally.so"] {
         transition: max-height 0.3s ease-out, padding 0.3s ease-out;
     }
     
+    /* Cabe entero; el que se desplaza es el menú, no el desplegable */
     .dropdown-menu.show {
-        max-height: 400px;
+        max-height: 1200px;
         padding: 12px 0;
     }
     
@@ -4810,3 +4855,8 @@ iframe[src*="tally.so"] {
     .diag3d .hero-media .oc-sello { --sello-w: 96px; left: -14px; bottom: -30px; }
     .about-content .content-section--sello .oc-sello { --sello-w: 80px; top: -18px; right: 0; }
 }
+
+
+/* Marcador visible de dato pendiente de Jose (encargo nov 2026). Ámbar, con borde
+   discontinuo y texto: no depende solo del color. Retirar cuando no quede ninguno. */
+.precio-pendiente{display:inline-block;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:700;color:#8A5A00;background:#FFF4DC;border:1px dashed #C9A227;border-radius:6px;padding:2px 8px;line-height:1.4}
