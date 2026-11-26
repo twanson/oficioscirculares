@@ -4856,6 +4856,15 @@ iframe[src*="tally.so"] {
     .about-content .content-section--sello .oc-sello { --sello-w: 80px; top: -18px; right: 0; }
 }
 
+/* Hero de la home: el subtítulo deja sitio al sello, que no se mueve. En escritorio el texto
+   termina antes de la esquina del sello; en móvil y tableta, un hueco a la derecha de la primera
+   línea, donde cae el sello que cuelga del titular. */
+@media (min-width: 769px) {
+    .hero-v2-content .glass-card > p { max-width: calc(100% - 150px); }
+}
+@media (max-width: 768px) {
+    .hero-v2-content .glass-card > p::before { content: ""; float: right; width: 84px; height: 1.6em; }
+}
 
 /* Marcador visible de dato pendiente de Jose (encargo nov 2026). Ámbar, con borde
    discontinuo y texto: no depende solo del color. Retirar cuando no quede ninguno. */
