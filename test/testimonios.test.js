@@ -50,11 +50,14 @@ test('las fotos de los testimonios existen en public/', () => {
 test('rejilla de Comunidad: con foto primero, pliegue en fila completa y sin hueco al final', () => {
   const lista = t.paraPagina('portada');
   const hoy = t.rejilla(lista);
-  assert.strictEqual(hoy[0].t.id, 'blanca');
-  assert.strictEqual(hoy.filter(c => !c.plegada).length, 5);
-  assert.strictEqual(hoy[9].t.id, 'cl-usuaria-entorno');
-  assert.ok(hoy[9].clases.includes('oc-cierra3-2') && hoy[9].clases.includes('oc-cierra2-2'));
-  const dos = t.rejilla(lista.map(x => x.id === 'cl-hilado' ? { ...x, foto: '/assets/images/x.webp' } : x));
-  assert.deepStrictEqual(dos.slice(0, 2).map(c => c.t.id), ['blanca', 'cl-hilado']);
-  assert.strictEqual(dos.filter(c => !c.plegada).length, 4);
+  // Hoy: dos con foto (Blanca y Olga) + ocho sin foto = 12 casillas, filas completas a 3 y a 2.
+  assert.deepStrictEqual(hoy.slice(0, 2).map(c => c.t.id), ['blanca', 'cl-taller-textil']);
+  assert.strictEqual(hoy.filter(c => !c.plegada).length, 4);
+  assert.ok(hoy.every(c => !c.clases.some(k => k.startsWith('oc-cierra'))));
+  // Con una sola foto (11 casillas) el texto más largo va al final y cierra la fila.
+  const una = t.rejilla(lista.map(x => x.id === 'cl-taller-textil' ? { ...x, foto: null } : x));
+  assert.strictEqual(una[0].t.id, 'blanca');
+  assert.strictEqual(una.filter(c => !c.plegada).length, 5);
+  assert.strictEqual(una[9].t.id, 'cl-usuaria-entorno');
+  assert.ok(una[9].clases.includes('oc-cierra3-2') && una[9].clases.includes('oc-cierra2-2'));
 });
