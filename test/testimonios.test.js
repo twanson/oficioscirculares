@@ -50,12 +50,21 @@ test('las fotos de los testimonios existen en public/', () => {
 test('rejilla de Comunidad: con foto primero, pliegue en fila completa y sin hueco al final', () => {
   const lista = t.paraPagina('portada');
   const hoy = t.rejilla(lista);
-  // Hoy: dos con foto (Blanca y Olga) + ocho sin foto = 12 casillas, filas completas a 3 y a 2.
-  assert.deepStrictEqual(hoy.slice(0, 2).map(c => c.t.id), ['blanca', 'cl-taller-textil']);
-  assert.strictEqual(hoy.filter(c => !c.plegada).length, 4);
-  assert.ok(hoy.every(c => !c.clases.some(k => k.startsWith('oc-cierra'))));
+  // Hoy: tres con foto (Blanca, Olga y Ana) + siete sin foto = 13 casillas.
+  // Plegada a tres columnas se ven las tres fotos; a dos, también Esther y Jorge junto a Ana.
+  assert.deepStrictEqual(hoy.slice(0, 3).map(c => c.t.id), ['blanca', 'cl-taller-textil', 'artesana-textil']);
+  assert.strictEqual(hoy.filter(c => !c.plegada).length, 3);
+  assert.strictEqual(hoy.filter(c => !c.plegada2).length, 5);
+  assert.strictEqual(hoy[9].t.id, 'cl-usuaria-entorno');
+  assert.ok(hoy[9].clases.includes('oc-cierra3-3') && hoy[9].clases.includes('oc-cierra2-2'));
+  // Con dos fotos (12 casillas) cierra a 3 y a 2 sin ensanchar nada.
+  const dos = t.rejilla(lista.map(x => x.id === 'artesana-textil' ? { ...x, foto: null } : x));
+  assert.deepStrictEqual(dos.slice(0, 2).map(c => c.t.id), ['blanca', 'cl-taller-textil']);
+  assert.strictEqual(dos.filter(c => !c.plegada).length, 4);
+  assert.strictEqual(dos.filter(c => !c.plegada2).length, 4);
+  assert.ok(dos.every(c => !c.clases.some(k => k.startsWith('oc-cierra'))));
   // Con una sola foto (11 casillas) el texto más largo va al final y cierra la fila.
-  const una = t.rejilla(lista.map(x => x.id === 'cl-taller-textil' ? { ...x, foto: null } : x));
+  const una = t.rejilla(lista.map(x => (x.id === 'cl-taller-textil' || x.id === 'artesana-textil') ? { ...x, foto: null } : x));
   assert.strictEqual(una[0].t.id, 'blanca');
   assert.strictEqual(una.filter(c => !c.plegada).length, 5);
   assert.strictEqual(una[9].t.id, 'cl-usuaria-entorno');

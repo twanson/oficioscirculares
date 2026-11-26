@@ -164,7 +164,7 @@ Pide permiso para publicar la foto, aparte del permiso de la cita.
 **Rejilla de Comunidad (portada).** La calcula `rejilla()` en `lib/testimonios.js`:
 - Sin foto: nombre, proyecto y cita. No hay recuadro ni sello.
 - Con foto: va delante, con el mismo ancho y dos filas de alto (en móvil, una detrás de otra).
-- Se ven seis casillas (una foto cuenta dos) y «Ver más mensajes» enseña el resto, siempre por fila completa.
+- Se ven al menos seis casillas (una foto cuenta dos) y «Ver más mensajes» enseña el resto, siempre por fila completa. El corte se calcula aparte a tres y a dos columnas (clases `oc-comunidad-mas` y `oc-comunidad-mas2`), porque no siempre cae en la misma tarjeta.
 - Si a tres columnas sobra hueco al final, la cita más larga ocupa ese sitio, ensanchada.
 
 El nombre, el texto y la foto de `/club` y las citas de Conecta Lana escritas en su vista siguen en su plantilla: este campo no las cambia.

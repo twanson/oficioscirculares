@@ -284,7 +284,7 @@
                 </div>
                 <% }) %>
             </div>
-            <% if (rejilla.some(function (c) { return c.plegada; })) { %>
+            <% if (rejilla.some(function (c) { return c.plegada || c.plegada2; })) { %>
             <div class="oc-comunidad-ver"><button type="button" class="btn-ghost" id="comunidad-ver-mas" aria-controls="comunidad-grid" aria-expanded="false" hidden>Ver más mensajes</button></div>
             <% } %>
             <p class="comunidad-v2-disclaimer"><%= testimoniosLib.nota(comunidad) %></p>

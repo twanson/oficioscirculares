@@ -25,7 +25,8 @@
 @media (min-width:981px){.oc-comunidad-grid .oc-cierra3-2{grid-column:span 2}.oc-comunidad-grid .oc-cierra3-3{grid-column:span 3}}
 @media (min-width:601px) and (max-width:980px){.oc-comunidad-grid .oc-cierra2-2{grid-column:span 2}}
 .oc-comunidad-grid .testimonio-role a{color:inherit;text-decoration:underline;text-underline-offset:2px}
-.oc-comunidad-plegada .oc-comunidad-mas{display:none}
+@media (min-width:981px),(max-width:600px){.oc-comunidad-plegada .oc-comunidad-mas{display:none}}
+@media (min-width:601px) and (max-width:980px){.oc-comunidad-plegada .oc-comunidad-mas2{display:none}}
 .oc-comunidad-ver{text-align:center;margin-top:28px}
 .oc-comunidad-ver .btn-ghost{display:inline-flex;align-items:center;padding:12px 26px;border-radius:999px;border:2px solid #023429;background:transparent;color:#023429;font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit}
 .oc-comunidad-ver .btn-ghost:hover{background:#023429;color:#FBF7EF}
