@@ -17,6 +17,9 @@
                         <div class="recurso-visual">
                             <img loading="lazy" src="<%= recurso.cover %>" alt="<%= recurso.title %>"
                                 class="recurso-cover">
+                            <% if (recurso.cover_note) { %>
+                            <p class="recurso-cover-note" style="margin:.4rem 0 0;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#6B6B6B;text-align:right;"><%= recurso.cover_note %></p>
+                            <% } %>
                         </div>
 
                         <% if (recurso.slug==='guia-materiales' ) { %>
@@ -749,6 +752,28 @@
                                                 <p>PDF de 10 páginas: las dos maneras de producir, las seis fichas de modelo, la tabla para elegir, las tres reglas comunes y el apunte legal. Pensado para leer una vez y volver a la ficha de tu modelo cuando lo pongas en marcha.</p>
                                             </div>
                                         </div>
+                                    <% } else if (recurso.slug==='regalos-navidad' ) { %>
+                                        <!-- Contenido específico para la lista de regalos de Navidad -->
+                                        <div class="recurso-content-detail">
+
+                                            <div class="content-section">
+                                                <h2>Qué contiene</h2>
+                                                <ul>
+                                                    <li>Talleres ordenados por oficio: lana y textil, cerámica, cuero, vidrio, esparto, madera, despensa y piezas de autor.</li>
+                                                    <li>De cada uno, qué hace, dónde está y cómo comprarle: web, WhatsApp o mensaje.</li>
+                                                    <li>Fichas destacadas con foto y el regalo que recomienda cada taller.</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <h2>Encarga pronto</h2>
+                                                <p>Un taller no tiene almacén: muchas piezas se hacen por encargo y en diciembre las agendas se llenan.</p>
+                                            </div>
+
+                                            <div class="content-section">
+                                                <p><strong>Ningún taller ha pagado por aparecer.</strong></p>
+                                            </div>
+                                        </div>
                                     <% } else if (recurso.slug==='lana-vs-sinteticos' ) { %>
                                         <!-- Contenido específico para el argumentario Lana vs. sintéticos -->
                                         <div class="recurso-content-detail">
@@ -855,6 +880,9 @@
                                                 <% if (recurso.slug==='trabajar-por-encargo' ) { %>
                                                 <h3>Completa el formulario para descargar la guía</h3>
                                                 <p>Lo descargas al instante, en la página siguiente.</p>
+                                                <% } else if (recurso.slug==='regalos-navidad' ) { %>
+                                                <h3>Descarga la lista</h3>
+                                                <p>Déjanos tu nombre y tu correo y la descargas al instante, en la página siguiente.</p>
                                                 <% } else { %>
                                                 <h3>Completa el formulario para recibir el recurso</h3>
                                                 <p>Descarga inmediata después de completar los datos</p>
@@ -922,6 +950,10 @@
                                                         <p><small>🔒 Tus datos están seguros. Solo los usamos para
                                                                 darte acceso a la guía y, de vez en cuando,
                                                                 enviarte contenido relacionado.</small></p>
+                                                        <% } else if (recurso.slug==='regalos-navidad' ) { %>
+                                                        <p><small>🔒 Tus datos están seguros. Solo los usamos para
+                                                                darte acceso a la lista y, de vez en cuando,
+                                                                enviarte contenido relacionado.</small></p>
                                                         <% } else { %>
                                                         <p><small>🔒 Tus datos están seguros. Solo los usamos para
                                                                 enviarte el recurso y contenido relacionado
@@ -940,6 +972,13 @@
                                                     <%= recurso.cta || 'Descargar la guía' %>
                                                 </a>
                                             </div>
+                                        </section>
+                                        <% } %>
+
+                                        <% if (recurso.slug==='regalos-navidad' ) { %>
+                                        <!-- Para talleres -->
+                                        <section class="recurso-talleres" style="margin-top:2.5rem;border:1px solid #E8E0D5;border-radius:16px;padding:1.5rem 2rem;text-align:center;">
+                                            <p style="margin:0;">¿Tienes un taller y quieres estar en la próxima lista? <a href="https://tally.so/r/nPxWM0?ref=regalos-navidad" target="_blank" rel="noopener" style="color:#934A1C;font-weight:700;">Escríbenos</a>.</p>
                                         </section>
                                         <% } %>
 
