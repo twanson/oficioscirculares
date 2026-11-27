@@ -1,5 +1,26 @@
 [
     {
+        "slug": "regalos-navidad",
+        "title": "Más de 150 talleres donde comprar esta Navidad",
+        "type": "directorio",
+        "summary": "Lo que regales esta Navidad ayuda a decidir qué talleres siguen abiertos en enero. Hemos reunido más de 150 talleres artesanos de toda España para ponértelo fácil.",
+        "tags": [
+            "navidad",
+            "regalos",
+            "talleres artesanos",
+            "comprar artesanía"
+        ],
+        "cover": "/img/recursos/covers/regalos-navidad-cover.jpg",
+        "cover_note": "Imagen ilustrativa",
+        "pdf": "/downloads/regalos-navidad-talleres.pdf",
+        "form_tally_id": "J1zL5d",
+        "cta": "Descargar la lista gratis",
+        "updated_at": "2026-12-01",
+        "listed": true,
+        "publish_at": "2026-12-01T20:30:00+01:00",
+        "related": []
+    },
+    {
         "slug": "trabajar-por-encargo",
         "title": "Trabajar por encargo: seis modelos para tu taller",
         "type": "guia",
